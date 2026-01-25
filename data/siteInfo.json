@@ -1,0 +1,160 @@
+{
+  "site": {
+    "name": "Rocky Mount State Historic Site",
+    "tagline": "Tennessee Starts Here",
+    "established": "1770",
+    "territorialCapital": {
+      "start": 1790,
+      "end": 1792,
+      "description": "First seat of government for the Southwest Territory"
+    }
+  },
+  "location": {
+    "address": {
+      "street": "200 Hyder Hill Road",
+      "city": "Piney Flats",
+      "state": "Tennessee",
+      "zip": "37686",
+      "county": "Sullivan County"
+    },
+    "coordinates": {
+      "lat": 36.4081,
+      "lng": -82.3247
+    },
+    "directions": "Located off US-11E between Johnson City and Bristol. From I-26, take Exit 13 and follow signs to Rocky Mount."
+  },
+  "contact": {
+    "phone": "(423) 538-7396",
+    "email": "info@rockymountmuseum.com",
+    "website": "https://rockymountmuseum.com",
+    "social": {
+      "facebook": "rockymountmuseum",
+      "instagram": "rockymountmuseum"
+    }
+  },
+  "hours": {
+    "regular": {
+      "tuesday": "10:00 AM - 5:00 PM",
+      "wednesday": "10:00 AM - 5:00 PM",
+      "thursday": "10:00 AM - 5:00 PM",
+      "friday": "10:00 AM - 5:00 PM",
+      "saturday": "10:00 AM - 5:00 PM",
+      "sunday": "1:00 PM - 5:00 PM",
+      "monday": "Closed"
+    },
+    "note": "Hours may vary for special events. Last tour begins one hour before closing."
+  },
+  "admission": {
+    "adults": {
+      "price": 8,
+      "label": "Adults"
+    },
+    "seniors": {
+      "price": 7,
+      "label": "Seniors (65+)"
+    },
+    "children": {
+      "price": 5,
+      "label": "Children (5-17)"
+    },
+    "childrenFree": {
+      "price": 0,
+      "label": "Children under 5"
+    },
+    "groups": {
+      "note": "Groups of 10 or more, please call for rates"
+    },
+    "note": "Includes guided living history tour"
+  },
+  "whatToExpect": {
+    "tourDuration": "Approximately 1 hour",
+    "features": [
+      "Guided living history tour with costumed interpreters",
+      "Walk through the historic Cobb House",
+      "Visit the detached kitchen, weaving cabin, and grounds",
+      "Learn about daily life in 1790s frontier Tennessee",
+      "See craft demonstrations (varies by day)"
+    ],
+    "accessibility": "Main house is accessible via ramp. Some outbuildings have uneven terrain.",
+    "recommendations": [
+      "Wear comfortable walking shoes",
+      "Tours are outdoors—dress for weather",
+      "Photography welcome",
+      "Gift shop on site"
+    ]
+  },
+  "nearbyAttractions": [
+    {
+      "name": "Bristol Motor Speedway",
+      "distance": "15 minutes"
+    },
+    {
+      "name": "Downtown Johnson City",
+      "distance": "20 minutes"
+    },
+    {
+      "name": "Sycamore Shoals State Historic Park",
+      "distance": "30 minutes"
+    },
+    {
+      "name": "Downtown Bristol (State Street)",
+      "distance": "20 minutes"
+    }
+  ],
+  "first250": {
+    "program": "First 250",
+    "description": "Join 250 Tennesseans as founding participants in Rocky Mount's America 250 commemoration.",
+    "enrollmentStart": "2026-03-04",
+    "enrollmentEnd": "2026-06-01",
+    "goal": 250,
+    "ceremony": "2026-07-04",
+    "benefits": [
+      "Name read aloud at July 4, 2026 ceremony",
+      "Email updates on America 250 programming",
+      "Recognition as a founding participant"
+    ],
+    "tiers": [
+      {
+        "name": "First 250",
+        "price": 0,
+        "benefits": ["Name read July 4", "Email updates"]
+      },
+      {
+        "name": "Founding Patron",
+        "price": 50,
+        "benefits": ["All above", "Commemorative certificate", "Priority seating July 4"]
+      },
+      {
+        "name": "Founding Benefactor",
+        "price": 250,
+        "benefits": ["All above", "Special dinner invitation", "Permanent recognition"]
+      }
+    ]
+  },
+  "america250": {
+    "year": 2026,
+    "significance": "America's Semiquincentennial (250th anniversary of independence)",
+    "tn230": {
+      "date": "2026-06-01",
+      "significance": "Tennessee's 230th birthday (statehood June 1, 1796)"
+    },
+    "rockymountRole": "Rocky Mount served as the first seat of government for the Southwest Territory from 1790-1792, laying groundwork for Tennessee statehood."
+  },
+  "historicalFigures": {
+    "williamCobb": {
+      "name": "William Cobb",
+      "role": "Original settler",
+      "note": "Settled this land around 1769-1770, six years before the Declaration of Independence"
+    },
+    "williamBlount": {
+      "name": "William Blount",
+      "role": "Governor of the Southwest Territory (1790-1796)",
+      "note": "Signer of the U.S. Constitution, appointed by President Washington, used Rocky Mount as his headquarters"
+    },
+    "andrewJackson": {
+      "name": "Andrew Jackson",
+      "role": "Future President",
+      "note": "Lodged at Rocky Mount for six weeks while awaiting his law license"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "series": {
+    "title": "Rocky Mount Lecture Series",
+    "subtitle": "Tennessee's Founding Story",
+    "description": "Rocky Mount's first-ever lecture series brings scholars and living history interpreters to Northeast Tennessee. Five lectures exploring colonial religion, Revolutionary War heroism, and the birth of Tennessee government.",
+    "year": 2026,
+    "note": "All lectures are free with regular admission. Seating is limited."
+  },
+  "lectures": [
+    {
+      "id": 1,
+      "title": "Colonial Religion on the Frontier",
+      "date": "2026-03-27",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Dr. James P. Byrd",
+        "title": "Professor",
+        "institution": "Vanderbilt University",
+        "bio": "Dr. James P. Byrd is a professor at Vanderbilt Divinity School specializing in American religious history. His research focuses on the intersection of religion, politics, and culture in early America."
+      },
+      "description": "Explore how faith shaped life on the Tennessee frontier. Dr. Byrd examines the role of religion in colonial America and its influence on early settlers who ventured across the Appalachian Mountains.",
+      "topics": [
+        "Religious diversity on the frontier",
+        "The role of churches in frontier communities",
+        "Faith and the Revolutionary spirit"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Powder for Kings Mountain",
+      "date": "2026-04-18",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Lisa Bennett",
+        "title": "Living History Interpreter",
+        "institution": "Sycamore Shoals State Historic Park",
+        "bio": "Lisa Bennett brings Mary Patton to life through first-person interpretation. Her portrayal honors the Revolutionary War heroine who supplied gunpowder to the Overmountain Men before their march to Kings Mountain.",
+        "portraying": "Mary Patton"
+      },
+      "description": "Meet Mary Patton, the woman who supplied 500 pounds of gunpowder to the Overmountain Men. Through first-person interpretation, Lisa Bennett brings this unsung Revolutionary War heroine to life.",
+      "topics": [
+        "Mary Patton's life and legacy",
+        "Gunpowder manufacturing on the frontier",
+        "Women's contributions to the Revolution"
+      ],
+      "format": "First-person interpretation"
+    },
+    {
+      "id": 3,
+      "title": "All In: The Overmountain Men's Gamble",
+      "date": "2026-05-15",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Thomas Bachelor",
+        "title": "Historian & Reenactor",
+        "institution": "Independent Scholar",
+        "bio": "Thomas Bachelor combines academic credentials with authentic reenactor perspective. His research focuses on the military history of the Southern campaigns of the Revolutionary War."
+      },
+      "description": "The 1780 march to Kings Mountain was not inevitable victory—it was a desperate gamble. Thomas Bachelor examines the risks taken by Sullivan County men who left their families unprotected to change the course of the Revolution.",
+      "topics": [
+        "The strategic situation in 1780",
+        "Sullivan County's contribution",
+        "The decision to march"
+      ],
+      "note": "Presented one week before Early Frontier Days"
+    },
+    {
+      "id": 4,
+      "title": "William Blount and the Birth of Tennessee Government",
+      "date": "2026-05-29",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Dr. Caroline H. Whitfield",
+        "title": "Historian",
+        "institution": "Independent Scholar",
+        "bio": "Dr. Caroline H. Whitfield specializes in early Tennessee history and the political development of the Southwest Territory."
+      },
+      "description": "William Blount, signer of the U.S. Constitution, was appointed by President George Washington to govern the Southwest Territory. Learn how he chose Rocky Mount as his headquarters and laid the foundation for Tennessee statehood.",
+      "topics": [
+        "Blount's appointment and arrival",
+        "Governing from Rocky Mount (1790-1792)",
+        "The path to Tennessee statehood"
+      ],
+      "note": "This is Rocky Mount's story—where Tennessee's government began"
+    },
+    {
+      "id": 5,
+      "title": "The Story of the American Flag",
+      "date": "2026-06-13",
+      "time": "11:00 AM",
+      "speaker": {
+        "name": "David Doan",
+        "title": "Flag Historian",
+        "institution": "Independent Scholar",
+        "bio": "David Doan is a flag historian who has spent decades researching the evolution of American flags from the colonial era to the present."
+      },
+      "description": "From the Grand Union to the Stars and Stripes, explore the evolution of the American flag. Presented as part of America 250 Flag Weekend, this lecture precedes the dedication of Rocky Mount's America 250 commemorative flag.",
+      "topics": [
+        "Evolution of American flags",
+        "Flag etiquette and traditions",
+        "The meaning of our national symbol"
+      ],
+      "note": "Part of America 250 Flag Weekend"
+    }
+  ],
+  "additionalProgramming": {
+    "title": "Cherokee Heritage Weekend",
+    "date": "2026-08-22",
+    "endDate": "2026-08-23",
+    "speaker": {
+      "name": "Dr. Daniel Redbird Wolfe",
+      "title": "Cherokee Historian",
+      "bio": "Dr. Daniel Redbird Wolfe provides Cherokee perspective on frontier Tennessee history."
+    },
+    "description": "While not part of the formal lecture series, this weekend event offers extended programming on Cherokee culture and frontier diplomacy.",
+    "note": "This is a weekend festival, not a single lecture"
+  }
+}

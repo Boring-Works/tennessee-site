@@ -2,8 +2,14 @@ import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import EmailSignup from "@/components/EmailSignup";
 import eventsData from "@/data/events.json";
+import enrollmentData from "@/data/enrollment.json";
 
 const featuredEvents = eventsData.events.filter((event) => event.featured);
+
+// Enrollment data from shared source
+const CURRENT_ENROLLED = enrollmentData.currentEnrolled;
+const TOTAL_SPOTS = enrollmentData.totalSpots;
+const PROGRESS_PERCENT = Math.round((CURRENT_ENROLLED / TOTAL_SPOTS) * 100);
 
 export default function Home() {
   return (
@@ -244,12 +250,12 @@ export default function Home() {
               </p>
 
               {/* Enrollment progress */}
-              <div className="gathering-progress" role="progressbar" aria-valuenow={147} aria-valuemin={0} aria-valuemax={250} aria-label="First 250 enrollment progress">
+              <div className="gathering-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS} aria-label="First 250 enrollment progress">
                 <div className="gathering-progress-bar">
-                  <div className="gathering-progress-fill" style={{ width: '59%' }} />
+                  <div className="gathering-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
                 </div>
                 <p className="gathering-progress-label">
-                  <strong>147</strong> of 250 spots claimed
+                  <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} spots claimed
                 </p>
               </div>
             </div>
@@ -320,12 +326,12 @@ export default function Home() {
               </p>
 
               {/* Progress bar */}
-              <div className="decision-progress" role="progressbar" aria-valuenow={147} aria-valuemin={0} aria-valuemax={250}>
+              <div className="decision-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
                 <div className="decision-progress-bar">
-                  <div className="decision-progress-fill" style={{ width: '59%' }} />
+                  <div className="decision-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
                 </div>
                 <p className="decision-progress-label">
-                  <strong>147</strong> of 250 spots claimed
+                  <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} spots claimed
                 </p>
               </div>
 

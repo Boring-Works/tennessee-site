@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import eventsData from "@/data/events.json";
 import lecturesData from "@/data/lectures.json";
+import enrollmentData from "@/data/enrollment.json";
+
+// Enrollment data from shared source
+const CURRENT_ENROLLED = enrollmentData.currentEnrolled;
+const TOTAL_SPOTS = enrollmentData.totalSpots;
+const PROGRESS_PERCENT = Math.round((CURRENT_ENROLLED / TOTAL_SPOTS) * 100);
 
 export const metadata: Metadata = {
   title: "2026 Events Calendar",
@@ -322,12 +328,12 @@ export default function EventsPage() {
 
           <div className="calendar-cta-action">
             {/* Progress indicator */}
-            <div className="calendar-cta-progress" role="progressbar" aria-valuenow={147} aria-valuemin={0} aria-valuemax={250}>
+            <div className="calendar-cta-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
               <div className="calendar-cta-progress-bar">
-                <div className="calendar-cta-progress-fill" style={{ width: "59%" }} />
+                <div className="calendar-cta-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
               </div>
               <p className="calendar-cta-progress-label">
-                <strong>147</strong> of 250 spots claimed
+                <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} spots claimed
               </p>
             </div>
 

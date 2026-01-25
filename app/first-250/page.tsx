@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import EmailSignup from "@/components/EmailSignup";
 import siteInfo from "@/data/siteInfo.json";
+import enrollmentData from "@/data/enrollment.json";
 
 export const metadata: Metadata = {
   title: "First 250 Program",
@@ -15,21 +16,23 @@ export const metadata: Metadata = {
   },
 };
 
-// Current enrollment count (would be dynamic in production)
-const CURRENT_ENROLLED = 147;
-const TOTAL_SPOTS = 250;
+// Enrollment data from shared source
+const CURRENT_ENROLLED = enrollmentData.currentEnrolled;
+const TOTAL_SPOTS = enrollmentData.totalSpots;
 const SPOTS_REMAINING = TOTAL_SPOTS - CURRENT_ENROLLED;
 const PROGRESS_PERCENT = Math.round((CURRENT_ENROLLED / TOTAL_SPOTS) * 100);
 
+// Tier names with emotional framing (with fallbacks for safety)
+const tierFraming: Record<number, { name: string; tagline: string }> = {
+  0: { name: "Participant", tagline: "Be counted" },
+  1: { name: "Patron", tagline: "Be honored" },
+  2: { name: "Founding Family", tagline: "Be remembered forever" },
+};
+
+const defaultFraming = { name: "", tagline: "" };
+
 export default function First250Page() {
   const { first250 } = siteInfo;
-
-  // Tier names with emotional framing
-  const tierFraming = [
-    { name: "Participant", tagline: "Be counted" },
-    { name: "Patron", tagline: "Be honored" },
-    { name: "Founding Family", tagline: "Be remembered forever" },
-  ];
 
   return (
     <>
@@ -167,7 +170,7 @@ export default function First250Page() {
 
           <div className="legacy-tiers-grid">
             {first250.tiers.map((tier, index) => {
-              const framing = tierFraming[index];
+              const framing = tierFraming[index] ?? { name: tier.name, tagline: defaultFraming.tagline };
               const isFeatured = index === 1;
 
               return (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import EmailSignup from "@/components/EmailSignup";
+import VintageGauge from "@/components/VintageGauge";
 import eventsData from "@/data/events.json";
 import enrollmentData from "@/data/enrollment.json";
 
@@ -115,18 +116,18 @@ export default function Home() {
           <blockquote className="blount-blockquote">
             <span className="blount-open-quote" aria-hidden="true">&ldquo;</span>
             <p id="blount-heading" className="blount-text">
-              I have the honor to inform you that I arrived at this place on the 10th instant.
+              Here we have planted the grain of a new civilization, in soil untilled by law.
             </p>
           </blockquote>
 
           {/* Context line */}
           <p className="blount-context">
-            With these words, William Blount established the first government west of the Appalachian Mountains.
+            With these words, the first government west of the Appalachians took root at Rocky Mount.
           </p>
 
           {/* Attribution */}
           <footer className="blount-attribution">
-            <cite className="blount-author">Governor William Blount</cite>
+            <cite className="blount-author signature-text">Wm. Blount</cite>
             <span className="blount-title">First Governor of the Southwest Territory</span>
           </footer>
 
@@ -142,6 +143,98 @@ export default function Home() {
             Explore Rocky Mount&apos;s founding story
             <span aria-hidden="true">→</span>
           </Link>
+        </div>
+      </section>
+
+      {/* ============================================
+          PROMISE VS PROOF - The Two Americas
+          ============================================ */}
+      <section className="ledger-section" aria-labelledby="ledger-heading">
+        <div className="ledger-container">
+          {/* Section header */}
+          <header className="ledger-header">
+            <p className="ledger-eyebrow">The Official Record of Expansion</p>
+            <h2 id="ledger-heading" className="ledger-headline">
+              Two Dates. One Story.
+            </h2>
+            <p className="ledger-intro">
+              Independence was declared in Philadelphia. It was <em>proven</em> on the frontier.
+            </p>
+          </header>
+
+          {/* The two-column comparison */}
+          <div className="ledger-grid">
+            {/* 1776 - The Promise */}
+            <article className="ledger-card ledger-card--promise">
+              <div className="ledger-card-header">
+                <span className="ledger-card-year">1776</span>
+                <span className="ledger-card-label">The Promise</span>
+              </div>
+              <div className="ledger-card-content">
+                <h3 className="ledger-card-location">Philadelphia</h3>
+                <p className="ledger-card-role">The Theory</p>
+                <p className="ledger-card-text">
+                  Fifty-six men signed a document declaring all men are created equal, with unalienable rights to life, liberty, and the pursuit of happiness.
+                </p>
+                <p className="ledger-card-emphasis">
+                  Words on parchment. A promise made.
+                </p>
+              </div>
+              <div className="ledger-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+            </article>
+
+            {/* Divider */}
+            <div className="ledger-divider" aria-hidden="true">
+              <span className="ledger-divider-line" />
+              <span className="ledger-divider-text">vs</span>
+              <span className="ledger-divider-line" />
+            </div>
+
+            {/* 1790 - The Proof */}
+            <article className="ledger-card ledger-card--proof">
+              <div className="ledger-card-header">
+                <span className="ledger-card-year">1790</span>
+                <span className="ledger-card-label">The Proof</span>
+              </div>
+              <div className="ledger-card-content">
+                <h3 className="ledger-card-location">Rocky Mount</h3>
+                <p className="ledger-card-role">The Practice</p>
+                <p className="ledger-card-text">
+                  William Blount arrived at this frontier outpost and established the first functioning government west of the Appalachians—turning philosophy into law.
+                </p>
+                <p className="ledger-card-emphasis">
+                  Action on the frontier. A promise kept.
+                </p>
+              </div>
+              <div className="ledger-card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+            </article>
+          </div>
+
+          {/* Bottom stat bar */}
+          <div className="ledger-stats">
+            <div className="ledger-stat">
+              <span className="ledger-stat-value">600</span>
+              <span className="ledger-stat-label">miles from Philadelphia</span>
+            </div>
+            <div className="ledger-stat-divider" aria-hidden="true" />
+            <div className="ledger-stat">
+              <span className="ledger-stat-value">14</span>
+              <span className="ledger-stat-label">years to prove the promise</span>
+            </div>
+            <div className="ledger-stat-divider" aria-hidden="true" />
+            <div className="ledger-stat">
+              <span className="ledger-stat-value">16th</span>
+              <span className="ledger-stat-label">state to join the Union</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -246,24 +339,26 @@ export default function Home() {
             {/* The ceremony hook */}
             <div className="gathering-hook">
               <p className="gathering-hook-text">
-                <strong>250 names</strong> will be read aloud — yours could be one of them.
+                <strong>250 signatories</strong> will be read aloud — yours could be one of them.
               </p>
 
-              {/* Enrollment progress */}
-              <div className="gathering-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS} aria-label="First 250 enrollment progress">
-                <div className="gathering-progress-bar">
-                  <div className="gathering-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
-                </div>
-                <p className="gathering-progress-label">
-                  <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} spots claimed
-                </p>
+              {/* Enrollment gauge */}
+              <div className="gathering-gauge">
+                <VintageGauge
+                  current={CURRENT_ENROLLED}
+                  total={TOTAL_SPOTS}
+                  label="Registry Status"
+                  showRemaining={false}
+                  size="small"
+                  theme="dark"
+                />
               </div>
             </div>
 
             {/* Dual CTAs */}
             <div className="gathering-cta-group">
               <Link href="/first-250" className="gathering-cta gathering-cta-primary">
-                Join the First 250
+                Claim Your Place
               </Link>
               <Link href="/events#colonial-independence-day" className="gathering-cta gathering-cta-secondary">
                 See Full Event Details
@@ -325,18 +420,19 @@ export default function Home() {
                 Your name, read aloud on America&apos;s 250th birthday at Tennessee&apos;s first capital.
               </p>
 
-              {/* Progress bar */}
-              <div className="decision-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
-                <div className="decision-progress-bar">
-                  <div className="decision-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
-                </div>
-                <p className="decision-progress-label">
-                  <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} spots claimed
-                </p>
+              {/* Vintage gauge */}
+              <div className="decision-gauge">
+                <VintageGauge
+                  current={CURRENT_ENROLLED}
+                  total={TOTAL_SPOTS}
+                  showRemaining={true}
+                  size="small"
+                  theme="dark"
+                />
               </div>
 
               <Link href="/first-250" className="decision-cta decision-cta-primary">
-                Join the First 250
+                Claim Your Place
               </Link>
             </article>
 

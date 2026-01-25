@@ -212,12 +212,13 @@ export default function VisitPage() {
       </section>
 
       {/* ============================================
-          PLAN YOUR VISIT - Practical Info
+          EXPEDITION DATA - Practical Info (Field Briefing Style)
           ============================================ */}
       <section id="plan-your-visit" className="visit-practical" aria-labelledby="practical-heading">
         <div className="visit-practical-inner">
+          <p className="visit-practical-eyebrow">Expedition Data</p>
           <h2 id="practical-heading" className="visit-practical-headline">
-            Plan Your Visit
+            Your Field Briefing
           </h2>
 
           <div className="visit-practical-grid">
@@ -304,9 +305,9 @@ export default function VisitPage() {
             </div>
           </div>
 
-          {/* Before You Arrive */}
+          {/* Before You Arrive - Field Prep */}
           <div className="visit-prepare">
-            <h3 className="visit-prepare-title">Before You Arrive</h3>
+            <h3 className="visit-prepare-title">Field Preparation</h3>
             <ul className="visit-prepare-list">
               {whatToExpect.recommendations.map((rec, index) => (
                 <li key={index} className="visit-prepare-item">
@@ -325,16 +326,17 @@ export default function VisitPage() {
       </section>
 
       {/* ============================================
-          THE JOURNEY - Directions
+          YOUR ROUTE - Directions (Expedition Style)
           ============================================ */}
       <section className="visit-journey" aria-labelledby="journey-heading">
         <div className="visit-journey-inner">
           <header className="visit-journey-header">
+            <p className="visit-journey-eyebrow">Navigation</p>
             <h2 id="journey-heading" className="visit-journey-headline">
-              The Journey
+              Your Route to 1790
             </h2>
             <p className="visit-journey-intro">
-              Rocky Mount is easy to reach from anywhere in the Tri-Cities region.
+              Follow the same paths settlers once traveled. Rocky Mount awaits at the crossroads of history.
             </p>
           </header>
 

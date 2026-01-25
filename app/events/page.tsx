@@ -333,12 +333,12 @@ export default function EventsPage() {
                 <div className="calendar-cta-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
               </div>
               <p className="calendar-cta-progress-label">
-                <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} spots claimed
+                <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} signatories enrolled
               </p>
             </div>
 
             <Link href="/first-250" className="calendar-cta-btn">
-              Reserve Your Spot
+              Claim Your Place
             </Link>
 
             <p className="calendar-cta-deadline">

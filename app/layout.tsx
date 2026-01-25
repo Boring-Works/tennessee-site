@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Playfair_Display, Cormorant_Garamond, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -19,6 +20,13 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-script",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -69,12 +77,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${cormorant.variable} antialiased`}>
+    <html lang="en" className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} antialiased`}>
       <body className="min-h-screen flex flex-col">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
         <Analytics />
+        <ScrollProgress />
         <Navigation />
         <main id="main-content" className="flex-1 pb-20 md:pb-0">{children}</main>
         <Footer />

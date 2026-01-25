@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import EmailSignup from "@/components/EmailSignup";
+import VintageGauge from "@/components/VintageGauge";
 import siteInfo from "@/data/siteInfo.json";
 import enrollmentData from "@/data/enrollment.json";
 
 export const metadata: Metadata = {
-  title: "First 250 Program",
+  title: "The First 250 Registry",
   description:
-    "Join 250 Tennesseans whose names will be read aloud on July 4, 2026 at Rocky Mount—where Tennessee's government began.",
+    "Claim your place among 250 signatories whose names will be read aloud on July 4, 2026 at Rocky Mount—where Tennessee's government began.",
   openGraph: {
-    title: "First 250 Program | Tennessee Starts Here",
+    title: "The First 250 Registry | Tennessee Starts Here",
     description:
-      "Join 250 Tennesseans whose names will be read aloud on July 4, 2026 at Rocky Mount—where Tennessee's government began.",
+      "Claim your place among 250 signatories whose names will be read aloud on July 4, 2026 at Rocky Mount—where Tennessee's government began.",
     url: "https://tennesseestartshere.com/first-250",
   },
 };
@@ -48,8 +49,8 @@ export default function First250Page() {
 
           {/* Main headline */}
           <h1 id="legacy-heading" className="legacy-headline">
-            <span className="legacy-headline-small">Only</span>
-            <span className="legacy-headline-large">250 Names</span>
+            <span className="legacy-headline-small">Limited to</span>
+            <span className="legacy-headline-large">250 Signatories</span>
           </h1>
 
           {/* Emotional hook */}
@@ -57,14 +58,16 @@ export default function First250Page() {
             Your name, read aloud at Tennessee&apos;s first capital, on the day America turns 250.
           </p>
 
-          {/* Progress bar - scarcity signal */}
-          <div className="legacy-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS} aria-label="Enrollment progress">
-            <div className="legacy-progress-bar">
-              <div className="legacy-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
-            </div>
-            <p className="legacy-progress-label">
-              <strong>{CURRENT_ENROLLED}</strong> enrolled · <strong>{SPOTS_REMAINING}</strong> spots remaining
-            </p>
+          {/* Vintage gauge - scarcity signal */}
+          <div className="legacy-gauge-wrapper">
+            <VintageGauge
+              current={CURRENT_ENROLLED}
+              total={TOTAL_SPOTS}
+              label="Registry Capacity"
+              showRemaining={true}
+              size="medium"
+              theme="dark"
+            />
           </div>
 
           {/* Early CTA */}
@@ -101,7 +104,7 @@ export default function First250Page() {
           </div>
 
           <p className="legacy-vision-question">
-            Will your name be one of the 250?
+            Will <span className="signature-text">your name</span> be among the 250?
           </p>
         </div>
       </section>
@@ -154,17 +157,19 @@ export default function First250Page() {
               Choose Your Legacy
             </h2>
             <p className="legacy-tiers-subtitle">
-              Every participant&apos;s name will be read aloud. Choose how you&apos;ll be remembered.
+              Every signatory&apos;s name will be read aloud. Choose how you&apos;ll be remembered.
             </p>
 
-            {/* Repeated progress bar */}
-            <div className="legacy-tiers-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
-              <div className="legacy-tiers-progress-bar">
-                <div className="legacy-tiers-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
-              </div>
-              <p className="legacy-tiers-progress-label">
-                <strong>{SPOTS_REMAINING}</strong> of 250 spots remaining
-              </p>
+            {/* Vintage gauge */}
+            <div className="legacy-tiers-gauge">
+              <VintageGauge
+                current={CURRENT_ENROLLED}
+                total={TOTAL_SPOTS}
+                label="Capacity Status"
+                showRemaining={true}
+                size="small"
+                theme="light"
+              />
             </div>
           </header>
 
@@ -344,18 +349,19 @@ export default function First250Page() {
           ============================================ */}
       <section className="legacy-closing" aria-labelledby="closing-heading">
         <div className="legacy-closing-inner">
-          <p className="legacy-closing-question">250 years of America. 250 names.</p>
+          <p className="legacy-closing-question">250 years of America. 250 signatories.</p>
           <h2 id="closing-heading" className="legacy-closing-headline">
             Will yours be one of them?
           </h2>
 
-          <div className="legacy-closing-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
-            <div className="legacy-closing-progress-bar">
-              <div className="legacy-closing-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
-            </div>
-            <p className="legacy-closing-progress-label">
-              <strong>{SPOTS_REMAINING}</strong> spots remaining
-            </p>
+          <div className="legacy-closing-gauge">
+            <VintageGauge
+              current={CURRENT_ENROLLED}
+              total={TOTAL_SPOTS}
+              showRemaining={true}
+              size="small"
+              theme="dark"
+            />
           </div>
 
           <a href="#choose-your-legacy" className="legacy-closing-cta">

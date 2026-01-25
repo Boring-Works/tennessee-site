@@ -37,15 +37,15 @@ function CountdownUnit({
   isSeconds?: boolean;
 }) {
   return (
-    <div className="text-center">
+    <div className="text-center px-2 md:px-3">
       <div
-        className={`font-serif text-3xl md:text-4xl font-light text-white ${
+        className={`font-serif text-xl md:text-2xl font-light text-white tabular-nums ${
           isSeconds ? "pulse-subtle" : ""
         }`}
       >
         {value.toString().padStart(2, "0")}
       </div>
-      <div className="text-[10px] text-white/80 uppercase tracking-[0.3em] mt-1">
+      <div className="text-[8px] md:text-[9px] text-accent/80 uppercase tracking-[0.2em] mt-1 font-medium">
         {label}
       </div>
     </div>
@@ -53,7 +53,11 @@ function CountdownUnit({
 }
 
 function Separator() {
-  return <span className="text-white/50 text-2xl font-light mx-2" aria-hidden="true">:</span>;
+  return (
+    <span className="text-accent/40 text-base md:text-lg font-light select-none" aria-hidden="true">
+      :
+    </span>
+  );
 }
 
 export default function Countdown() {
@@ -79,14 +83,14 @@ export default function Countdown() {
   if (!timeLeft) {
     return (
       <div className="flex flex-col items-center" aria-label="Countdown loading">
-        <div className="flex items-center justify-center gap-1">
+        <div className="flex items-center justify-center gap-1 py-2 px-3 border border-white/10 bg-white/[0.03]">
           {["Days", "Hrs", "Min", "Sec"].map((label, i) => (
             <div key={label} className="flex items-center">
-              <div className="text-center">
-                <div className="font-serif text-3xl md:text-4xl font-light text-white">
+              <div className="text-center px-2">
+                <div className="font-serif text-xl md:text-2xl font-light text-white">
                   --
                 </div>
-                <div className="text-[10px] text-white/80 uppercase tracking-[0.3em] mt-1">
+                <div className="text-[8px] text-white/80 uppercase tracking-[0.2em] mt-1">
                   {label}
                 </div>
               </div>
@@ -94,7 +98,7 @@ export default function Countdown() {
             </div>
           ))}
         </div>
-        <p className="text-[10px] uppercase tracking-[0.3em] text-white/80 mt-4">
+        <p className="text-[8px] uppercase tracking-[0.15em] text-white/60 mt-2">
           Until America&apos;s 250th
         </p>
       </div>
@@ -120,17 +124,17 @@ export default function Countdown() {
 
   return (
     <div className="flex flex-col items-center" aria-label={`${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} minutes, ${timeLeft.seconds} seconds until America's 250th`}>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center py-2 px-3 md:py-2.5 md:px-4 border border-white/10 bg-white/[0.03] backdrop-blur-sm">
         <CountdownUnit value={timeLeft.days} label="Days" />
         <Separator />
-        <CountdownUnit value={timeLeft.hours} label="Hrs" />
+        <CountdownUnit value={timeLeft.hours} label="Hours" />
         <Separator />
         <CountdownUnit value={timeLeft.minutes} label="Min" />
         <Separator />
         <CountdownUnit value={timeLeft.seconds} label="Sec" isSeconds />
       </div>
-      <p className="text-[10px] uppercase tracking-[0.3em] text-white/80 mt-4">
-        Until America&apos;s 250th
+      <p className="text-[8px] md:text-[9px] uppercase tracking-[0.15em] text-white/60 mt-2 font-medium">
+        Until America&apos;s 250th Birthday
       </p>
     </div>
   );

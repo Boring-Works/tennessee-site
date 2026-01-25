@@ -15,183 +15,353 @@ export const metadata: Metadata = {
   },
 };
 
+// Current enrollment count (would be dynamic in production)
+const CURRENT_ENROLLED = 147;
+const TOTAL_SPOTS = 250;
+const SPOTS_REMAINING = TOTAL_SPOTS - CURRENT_ENROLLED;
+const PROGRESS_PERCENT = Math.round((CURRENT_ENROLLED / TOTAL_SPOTS) * 100);
+
 export default function First250Page() {
   const { first250 } = siteInfo;
 
+  // Tier names with emotional framing
+  const tierFraming = [
+    { name: "Participant", tagline: "Be counted" },
+    { name: "Patron", tagline: "Be honored" },
+    { name: "Founding Family", tagline: "Be remembered forever" },
+  ];
+
   return (
     <>
-      {/* Cinematic Header - BURGUNDY for impact */}
-      <section className="hero-texture bg-burgundy text-white pt-28 pb-20 md:pt-36 md:pb-28">
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <span className="year-badge mb-6 inline-block border-white/50 text-white">
-            America 250
-          </span>
+      {/* ============================================
+          HERO - Scarcity + Emotion
+          ============================================ */}
+      <section className="legacy-hero" aria-labelledby="legacy-heading">
+        <div className="legacy-hero-content">
+          {/* Eyebrow */}
+          <p className="legacy-eyebrow">
+            <time dateTime="2026-07-04">July 4, 2026</time> · America&apos;s 250th Birthday
+          </p>
 
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-bold mb-4 tracking-tight">
-            The First 250
+          {/* Main headline */}
+          <h1 id="legacy-heading" className="legacy-headline">
+            <span className="legacy-headline-small">Only</span>
+            <span className="legacy-headline-large">250 Names</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white font-serif italic mb-8">
-            Be Part of History
+          {/* Emotional hook */}
+          <p className="legacy-hook">
+            Your name, read aloud at Tennessee&apos;s first capital, on the day America turns 250.
           </p>
 
-          <p className="text-lg text-white/90 max-w-2xl mx-auto">
-            {first250.description}
+          {/* Progress bar - scarcity signal */}
+          <div className="legacy-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS} aria-label="Enrollment progress">
+            <div className="legacy-progress-bar">
+              <div className="legacy-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
+            </div>
+            <p className="legacy-progress-label">
+              <strong>{CURRENT_ENROLLED}</strong> enrolled · <strong>{SPOTS_REMAINING}</strong> spots remaining
+            </p>
+          </div>
+
+          {/* Early CTA */}
+          <a href="#choose-your-legacy" className="legacy-hero-cta">
+            Reserve Your Spot
+          </a>
+
+          {/* Deadline reminder */}
+          <p className="legacy-deadline">
+            Enrollment closes <time dateTime="2026-06-01">June 1, 2026</time>
           </p>
         </div>
       </section>
 
-      {/* Timeline Bar */}
-      <section className="bg-accent" aria-label="Program timeline">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-primary">
-            <div className="text-center">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-1">Opens</p>
-              <time dateTime="2026-03-04" className="font-serif font-bold text-lg block">March 4, 2026</time>
-            </div>
-            <span className="hidden md:block text-primary/50" aria-hidden="true">→</span>
-            <div className="text-center">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-1">Closes</p>
-              <time dateTime="2026-06-01" className="font-serif font-bold text-lg block">June 1, 2026</time>
-            </div>
-            <span className="hidden md:block text-primary/50" aria-hidden="true">→</span>
-            <div className="text-center">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-1">Ceremony</p>
-              <time dateTime="2026-07-04" className="font-serif font-bold text-lg block">July 4, 2026</time>
-            </div>
+      {/* ============================================
+          PICTURE THIS - Ceremony Visualization
+          ============================================ */}
+      <section className="legacy-vision" aria-labelledby="vision-heading">
+        <div className="legacy-vision-inner">
+          <h2 id="vision-heading" className="legacy-vision-headline">
+            Picture This
+          </h2>
+
+          <div className="legacy-vision-scene">
+            <p className="legacy-vision-text">
+              It&apos;s <strong>July 4, 2026</strong>. You&apos;re standing on the grounds of Rocky Mount — the same soil where William Blount established Tennessee&apos;s first government 236 years ago.
+            </p>
+            <p className="legacy-vision-text">
+              Around you, 250 Tennesseans have gathered. The American flag flies overhead. A voice begins to read names — and then you hear <em>yours</em>.
+            </p>
+            <p className="legacy-vision-text legacy-vision-text--emphasis">
+              Your name, spoken aloud at a historic site, on the most significant Independence Day in 50 years.
+            </p>
+          </div>
+
+          <p className="legacy-vision-question">
+            Will your name be one of the 250?
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================
+          WHY THIS MATTERS - Historic Significance
+          ============================================ */}
+      <section className="legacy-why" aria-labelledby="why-heading">
+        <div className="legacy-why-inner">
+          <p className="legacy-why-eyebrow">Why This Matters</p>
+          <h2 id="why-heading" className="legacy-why-headline">
+            This Isn&apos;t Just Any Event
+          </h2>
+
+          <div className="legacy-why-grid">
+            <article className="legacy-why-card">
+              <span className="legacy-why-number" aria-hidden="true">1790</span>
+              <h3 className="legacy-why-card-title">The First Capital</h3>
+              <p className="legacy-why-card-text">
+                Rocky Mount was the first seat of government west of the Appalachians. This is where Tennessee&apos;s story began.
+              </p>
+            </article>
+
+            <article className="legacy-why-card">
+              <span className="legacy-why-number" aria-hidden="true">250</span>
+              <h3 className="legacy-why-card-title">A Once-in-Generations Moment</h3>
+              <p className="legacy-why-card-text">
+                America&apos;s 250th birthday happens once. Being part of this commemoration means joining a legacy.
+              </p>
+            </article>
+
+            <article className="legacy-why-card">
+              <span className="legacy-why-number" aria-hidden="true">You</span>
+              <h3 className="legacy-why-card-title">Your Name in History</h3>
+              <p className="legacy-why-card-text">
+                The First 250 participants will be recorded as founding members of this commemoration — forever.
+              </p>
+            </article>
           </div>
         </div>
       </section>
 
-      {/* What You Receive */}
-      <section className="py-20 md:py-28 bg-cream">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="section-decorator">
-              <span>Your Legacy</span>
-            </div>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary">
-              What Participants Receive
+      {/* ============================================
+          CHOOSE YOUR LEGACY - Tiers
+          ============================================ */}
+      <section id="choose-your-legacy" className="legacy-tiers" aria-labelledby="tiers-heading">
+        <div className="legacy-tiers-inner">
+          <header className="legacy-tiers-header">
+            <h2 id="tiers-heading" className="legacy-tiers-headline">
+              Choose Your Legacy
             </h2>
-          </div>
+            <p className="legacy-tiers-subtitle">
+              Every participant&apos;s name will be read aloud. Choose how you&apos;ll be remembered.
+            </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {first250.benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className="text-center"
-              >
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full border-2 border-accent flex items-center justify-center" aria-hidden="true">
-                  <span className="font-serif text-2xl font-bold text-accent">{index + 1}</span>
-                </div>
-                <p className="text-foreground leading-relaxed">{benefit}</p>
+            {/* Repeated progress bar */}
+            <div className="legacy-tiers-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
+              <div className="legacy-tiers-progress-bar">
+                <div className="legacy-tiers-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Participation Tiers */}
-      <section className="py-20 md:py-28 bg-cream-dark">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="section-decorator">
-              <span>Choose Your Level</span>
+              <p className="legacy-tiers-progress-label">
+                <strong>{SPOTS_REMAINING}</strong> of 250 spots remaining
+              </p>
             </div>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary">
-              Participation Tiers
-            </h2>
-          </div>
+          </header>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {first250.tiers.map((tier, index) => (
-              <div
-                key={tier.name}
-                className={`relative rounded-sm overflow-hidden ${
-                  index === 1
-                    ? "bg-primary text-white md:scale-105 md:-my-4 shadow-2xl"
-                    : "bg-white shadow-lg"
-                }`}
-              >
-                {index === 1 && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-accent" />
-                )}
+          <div className="legacy-tiers-grid">
+            {first250.tiers.map((tier, index) => {
+              const framing = tierFraming[index];
+              const isFeatured = index === 1;
 
-                <div className="p-8">
-                  {index === 1 && (
-                    <span className="inline-block px-3 py-1 bg-accent text-primary text-[10px] uppercase tracking-[0.15em] font-bold rounded-sm mb-4">
-                      Most Popular
-                    </span>
+              return (
+                <article
+                  key={tier.name}
+                  className={`legacy-tier ${isFeatured ? "legacy-tier--featured" : ""}`}
+                >
+                  {isFeatured && (
+                    <p className="legacy-tier-badge">Most Popular</p>
                   )}
 
-                  <h3 className={`font-serif text-xl font-bold mb-2 ${index === 1 ? "text-white" : "text-primary"}`}>
-                    {tier.name}
-                  </h3>
+                  <header className="legacy-tier-header">
+                    <p className="legacy-tier-tagline">{framing.tagline}</p>
+                    <h3 className="legacy-tier-name">{framing.name}</h3>
+                    <p className="legacy-tier-price">
+                      {tier.price === 0 ? (
+                        <span className="legacy-tier-price-free">Free</span>
+                      ) : (
+                        <>
+                          <span className="legacy-tier-price-currency">$</span>
+                          <span className="legacy-tier-price-amount">{tier.price}</span>
+                        </>
+                      )}
+                    </p>
+                  </header>
 
-                  <p className={`text-4xl font-serif font-bold mb-8 ${index === 1 ? "text-accent" : "text-secondary"}`}>
-                    {tier.price === 0 ? "Free" : `$${tier.price}`}
-                  </p>
-
-                  <ul className="space-y-4">
-                    {tier.benefits.map((benefit, i) => (
-                      <li
-                        key={i}
-                        className={`flex items-start gap-3 text-sm ${index === 1 ? "text-white" : "text-text-light"}`}
-                      >
-                        <span className="text-accent" aria-hidden="true">✓</span>
-                        {benefit}
-                      </li>
-                    ))}
+                  <ul className="legacy-tier-benefits">
+                    {index === 0 && (
+                      <>
+                        <li className="legacy-tier-benefit legacy-tier-benefit--core">
+                          <svg className="legacy-tier-benefit-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Name read aloud July 4, 2026
+                        </li>
+                        <li className="legacy-tier-benefit">
+                          <svg className="legacy-tier-benefit-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Exclusive program updates
+                        </li>
+                      </>
+                    )}
+                    {index === 1 && (
+                      <>
+                        <li className="legacy-tier-benefit legacy-tier-benefit--inherited">
+                          Everything in Participant, plus:
+                        </li>
+                        <li className="legacy-tier-benefit legacy-tier-benefit--core">
+                          <svg className="legacy-tier-benefit-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Commemorative certificate
+                        </li>
+                        <li className="legacy-tier-benefit">
+                          <svg className="legacy-tier-benefit-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Priority seating at ceremony
+                        </li>
+                      </>
+                    )}
+                    {index === 2 && (
+                      <>
+                        <li className="legacy-tier-benefit legacy-tier-benefit--inherited">
+                          Everything in Patron, plus:
+                        </li>
+                        <li className="legacy-tier-benefit legacy-tier-benefit--core">
+                          <svg className="legacy-tier-benefit-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Founding Family dinner invitation
+                        </li>
+                        <li className="legacy-tier-benefit">
+                          <svg className="legacy-tier-benefit-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Permanent recognition at Rocky Mount
+                        </li>
+                      </>
+                    )}
                   </ul>
-                </div>
-              </div>
-            ))}
+
+                  <div className="legacy-tier-cta-wrapper">
+                    {/* In production, these would link to enrollment forms */}
+                    <button className="legacy-tier-cta" disabled aria-label={`Enroll as ${framing.name} - Coming March 4, 2026`}>
+                      Enrollment Opens March 4
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Email Signup */}
-      <section className="py-20 md:py-28 bg-cream">
-        <div className="max-w-xl mx-auto px-4 text-center">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary mb-4">
-            Get Notified
+      {/* ============================================
+          KEY DATES - Timeline
+          ============================================ */}
+      <section className="legacy-dates" aria-labelledby="dates-heading">
+        <div className="legacy-dates-inner">
+          <h2 id="dates-heading" className="legacy-dates-headline">
+            Key Dates
           </h2>
 
-          <p className="text-lg text-text-light mb-10">
-            Enrollment begins March 4, 2026. Sign up to receive a reminder.
+          <ol className="legacy-dates-timeline">
+            <li className="legacy-dates-item">
+              <time dateTime="2026-03-04" className="legacy-dates-date">
+                <span className="legacy-dates-month">Mar</span>
+                <span className="legacy-dates-day">4</span>
+              </time>
+              <div className="legacy-dates-content">
+                <p className="legacy-dates-label">Enrollment Opens</p>
+                <p className="legacy-dates-desc">Be among the first to reserve your spot</p>
+              </div>
+            </li>
+
+            <li className="legacy-dates-connector" aria-hidden="true" />
+
+            <li className="legacy-dates-item legacy-dates-item--warning">
+              <time dateTime="2026-06-01" className="legacy-dates-date">
+                <span className="legacy-dates-month">Jun</span>
+                <span className="legacy-dates-day">1</span>
+              </time>
+              <div className="legacy-dates-content">
+                <p className="legacy-dates-label">Enrollment Closes</p>
+                <p className="legacy-dates-desc">Final day to join the First 250</p>
+              </div>
+            </li>
+
+            <li className="legacy-dates-connector" aria-hidden="true" />
+
+            <li className="legacy-dates-item legacy-dates-item--highlight">
+              <time dateTime="2026-07-04" className="legacy-dates-date">
+                <span className="legacy-dates-month">Jul</span>
+                <span className="legacy-dates-day">4</span>
+              </time>
+              <div className="legacy-dates-content">
+                <p className="legacy-dates-label">The Ceremony</p>
+                <p className="legacy-dates-desc">Your name read aloud at Rocky Mount</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      {/* ============================================
+          EMAIL SIGNUP - Stay Informed
+          ============================================ */}
+      <section className="legacy-notify" aria-labelledby="notify-heading">
+        <div className="legacy-notify-inner">
+          <h2 id="notify-heading" className="legacy-notify-headline">
+            Get Notified When Enrollment Opens
+          </h2>
+          <p className="legacy-notify-desc">
+            Don&apos;t miss your chance. We&apos;ll email you the moment enrollment begins.
           </p>
 
-          <EmailSignup />
+          <div className="legacy-notify-form">
+            <EmailSignup />
+          </div>
 
-          <p className="text-sm text-text-light mt-6">
-            We&apos;ll only email you about the First 250 program.
+          <p className="legacy-notify-privacy">
+            One email when enrollment opens. No spam.
           </p>
         </div>
       </section>
 
-      {/* The Ceremony */}
-      <section className="hero-texture bg-primary text-white py-24 md:py-32">
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <span className="year-badge mb-6 inline-block">July 4, 2026</span>
-
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
-            The Ceremony
+      {/* ============================================
+          FINAL CTA - Closing
+          ============================================ */}
+      <section className="legacy-closing" aria-labelledby="closing-heading">
+        <div className="legacy-closing-inner">
+          <p className="legacy-closing-question">250 years of America. 250 names.</p>
+          <h2 id="closing-heading" className="legacy-closing-headline">
+            Will yours be one of them?
           </h2>
 
-          <p className="text-xl text-white mb-6 max-w-2xl mx-auto">
-            On America&apos;s 250th birthday, at the place where Tennessee&apos;s government began,
-            we will read aloud the names of all First 250 participants.
-          </p>
+          <div className="legacy-closing-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
+            <div className="legacy-closing-progress-bar">
+              <div className="legacy-closing-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
+            </div>
+            <p className="legacy-closing-progress-label">
+              <strong>{SPOTS_REMAINING}</strong> spots remaining
+            </p>
+          </div>
 
-          <p className="text-white/90 mb-12">
-            Patriotic celebration. Period demonstrations. A commemoration unlike any in Rocky Mount&apos;s history.
-          </p>
+          <a href="#choose-your-legacy" className="legacy-closing-cta">
+            Reserve Your Spot
+          </a>
 
-          <Link
-            href="/events"
-            className="btn-primary inline-block bg-accent text-primary font-semibold px-12 py-4 rounded-sm text-sm uppercase tracking-[0.15em]"
-          >
-            View Event Details
+          <Link href="/events#colonial-independence-day" className="legacy-closing-link">
+            Learn more about Colonial Independence Day
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>

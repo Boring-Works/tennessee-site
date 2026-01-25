@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import EventCard from "@/components/EventCard";
 import eventsData from "@/data/events.json";
 import lecturesData from "@/data/lectures.json";
 
@@ -15,6 +14,34 @@ export const metadata: Metadata = {
     url: "https://tennesseestartshere.com/events",
   },
 };
+
+// Month character lines - the personality of each month
+const monthCharacters: Record<string, string> = {
+  "March 2026": "The journey begins",
+  "April 2026": "Stories come alive",
+  "May 2026": "The frontier awakens",
+  "June 2026": "Tennessee celebrates 230",
+  "July 2026": "America turns 250",
+  "August 2026": "Honoring all who shaped this land",
+  "September 2026": "Descendants gather",
+  "October 2026": "Harvest and haunting",
+  "November 2026": "Traditions begin",
+  "December 2026": "The year closes by candlelight",
+};
+
+// All months in order for the progress bar
+const allMonths = [
+  "March 2026",
+  "April 2026",
+  "May 2026",
+  "June 2026",
+  "July 2026",
+  "August 2026",
+  "September 2026",
+  "October 2026",
+  "November 2026",
+  "December 2026",
+];
 
 function groupEventsByMonth(
   events: typeof eventsData.events
@@ -37,137 +64,297 @@ function groupEventsByMonth(
   return grouped;
 }
 
+function getEventDuration(event: typeof eventsData.events[0]): number {
+  if (!event.endDate) return 1;
+  const start = new Date(event.date + "T12:00:00");
+  const end = new Date(event.endDate + "T12:00:00");
+  return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr + "T12:00:00");
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function formatDateRange(start: string, end?: string | null): string {
+  if (!end) return formatDate(start);
+
+  const startDate = new Date(start + "T12:00:00");
+  const endDate = new Date(end + "T12:00:00");
+
+  if (startDate.getMonth() === endDate.getMonth()) {
+    return `${startDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    })}–${endDate.getDate()}`;
+  }
+
+  return `${formatDate(start)} – ${formatDate(end)}`;
+}
+
 export default function EventsPage() {
   const groupedEvents = groupEventsByMonth(eventsData.events);
   const eventCount = eventsData.events.length;
-  const newEventCount = eventsData.events.filter(e => e.type === "new").length;
+  const newEventCount = eventsData.events.filter((e) => e.type === "new").length;
+  const festivalCount = eventsData.events.filter((e) => e.category === "festival" || e.category === "signature").length;
 
   return (
     <>
-      {/* Moody Header */}
-      <section className="hero-texture bg-primary text-white pt-28 pb-20 md:pt-32 md:pb-24">
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <span className="year-badge mb-6 inline-block">2026</span>
+      {/* ============================================
+          PAGE HEADER - The Commemorative Year
+          ============================================ */}
+      <section className="calendar-header" aria-labelledby="calendar-page-heading">
+        <div className="calendar-header-content">
+          {/* Eyebrow */}
+          <p className="calendar-eyebrow">Rocky Mount State Historic Site</p>
 
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            Events Calendar
+          {/* Main headline */}
+          <h1 id="calendar-page-heading" className="calendar-headline">
+            <span className="calendar-headline-year">2026</span>
+            <span className="calendar-headline-text">The Commemorative Year</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
-            Rocky Mount&apos;s most ambitious programming season. {newEventCount} new events
-            for America 250.
+          {/* Subheadline */}
+          <p className="calendar-subheadline">
+            America&apos;s 250th anniversary. Tennessee&apos;s 230th birthday. Our most ambitious season yet.
           </p>
 
-          {/* Stats */}
-          <div className="flex justify-center gap-12" aria-label="Event statistics">
-            <div className="text-center">
-              <span className="block text-3xl md:text-4xl font-serif font-bold text-accent">{eventCount}</span>
-              <span className="text-xs text-white/80 uppercase tracking-[0.2em]">Events</span>
+          {/* Stats row */}
+          <div className="calendar-stats">
+            <div className="calendar-stat">
+              <span className="calendar-stat-number">{eventCount}</span>
+              <span className="calendar-stat-label">Events</span>
             </div>
-            <div className="text-center">
-              <span className="block text-3xl md:text-4xl font-serif font-bold text-accent">{newEventCount}</span>
-              <span className="text-xs text-white/80 uppercase tracking-[0.2em]">New</span>
+            <div className="calendar-stat-divider" aria-hidden="true" />
+            <div className="calendar-stat">
+              <span className="calendar-stat-number">{newEventCount}</span>
+              <span className="calendar-stat-label">New for 2026</span>
             </div>
-            <div className="text-center">
-              <span className="block text-3xl md:text-4xl font-serif font-bold text-accent">{lecturesData.lectures.length}</span>
-              <span className="text-xs text-white/80 uppercase tracking-[0.2em]">Lectures</span>
+            <div className="calendar-stat-divider" aria-hidden="true" />
+            <div className="calendar-stat">
+              <span className="calendar-stat-number">{lecturesData.lectures.length}</span>
+              <span className="calendar-stat-label">Lectures</span>
+            </div>
+            <div className="calendar-stat-divider" aria-hidden="true" />
+            <div className="calendar-stat">
+              <span className="calendar-stat-number">{festivalCount}</span>
+              <span className="calendar-stat-label">Festivals</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Legend */}
-      <section className="bg-cream border-b border-primary/10" aria-label="Event type legend">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex flex-wrap gap-6 justify-center text-xs uppercase tracking-[0.1em]">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true"></span>
-              <span className="text-foreground">New</span>
+      {/* ============================================
+          YEAR PROGRESS BAR - Sticky Navigation
+          ============================================ */}
+      <nav className="year-progress" aria-label="Navigate by month">
+        <div className="year-progress-inner">
+          <div className="year-progress-track">
+            {allMonths.map((month) => {
+              const hasEvents = groupedEvents[month] && groupedEvents[month].length > 0;
+              const monthId = month.toLowerCase().replace(/\s+/g, "-");
+              const shortMonth = month.split(" ")[0].slice(0, 3);
+
+              return (
+                <a
+                  key={month}
+                  href={hasEvents ? `#${monthId}` : undefined}
+                  className={`year-progress-month ${hasEvents ? "year-progress-month--active" : "year-progress-month--empty"}`}
+                  aria-label={hasEvents ? `Jump to ${month}` : `No events in ${month}`}
+                >
+                  <span className="year-progress-month-dot" aria-hidden="true" />
+                  <span className="year-progress-month-label">{shortMonth}</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
+      {/* ============================================
+          THE LIVING CALENDAR - Month by Month
+          ============================================ */}
+      <section className="living-calendar" aria-labelledby="living-calendar-heading">
+        <h2 id="living-calendar-heading" className="sr-only">2026 Events by Month</h2>
+
+        {Object.entries(groupedEvents).map(([month, events]) => {
+          const monthId = month.toLowerCase().replace(/\s+/g, "-");
+          const character = monthCharacters[month] || "";
+
+          return (
+            <article key={month} id={monthId} className="calendar-month" aria-labelledby={`${monthId}-heading`}>
+              {/* Month header */}
+              <header className="calendar-month-header">
+                <div className="calendar-month-title-group">
+                  <h3 id={`${monthId}-heading`} className="calendar-month-title">
+                    {month.split(" ")[0]}
+                  </h3>
+                  <p className="calendar-month-character">{character}</p>
+                </div>
+                <span className="calendar-month-count">
+                  {events.length} event{events.length !== 1 ? "s" : ""}
+                </span>
+              </header>
+
+              {/* Events grid */}
+              <div className="calendar-month-events">
+                {events.map((event) => {
+                  const duration = getEventDuration(event);
+                  const isMultiDay = duration > 1;
+                  const isLecture = event.category === "lecture";
+                  const isSignature = event.category === "signature";
+                  const isMilestone = event.type === "milestone";
+
+                  // Determine card size class
+                  let sizeClass = "calendar-event--standard";
+                  if (isMultiDay && duration >= 3) {
+                    sizeClass = "calendar-event--large";
+                  } else if (isMultiDay || isSignature) {
+                    sizeClass = "calendar-event--medium";
+                  }
+
+                  // Determine type class
+                  let typeClass = "";
+                  if (isSignature) typeClass = "calendar-event--signature";
+                  else if (isLecture) typeClass = "calendar-event--lecture";
+                  else if (isMilestone) typeClass = "calendar-event--milestone";
+                  else if (event.type === "new") typeClass = "calendar-event--new";
+
+                  return (
+                    <article
+                      key={event.id}
+                      id={event.id}
+                      className={`calendar-event ${sizeClass} ${typeClass}`}
+                    >
+                      {/* Date block */}
+                      <div className="calendar-event-date">
+                        <time dateTime={event.date} className="calendar-event-date-inner">
+                          {isMultiDay ? (
+                            <>
+                              <span className="calendar-event-date-range">
+                                {formatDateRange(event.date, event.endDate)}
+                              </span>
+                              <span className="calendar-event-date-duration">
+                                {duration} days
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <span className="calendar-event-date-month">
+                                {new Date(event.date + "T12:00:00").toLocaleDateString("en-US", { month: "short" })}
+                              </span>
+                              <span className="calendar-event-date-day">
+                                {new Date(event.date + "T12:00:00").getDate()}
+                              </span>
+                            </>
+                          )}
+                        </time>
+                      </div>
+
+                      {/* Content */}
+                      <div className="calendar-event-content">
+                        {/* Badge */}
+                        <span className={`calendar-event-badge calendar-event-badge--${event.type}`}>
+                          {event.type === "new" && "New for 2026"}
+                          {event.type === "enhanced" && "Enhanced"}
+                          {event.type === "recurring" && "Annual Tradition"}
+                          {event.type === "milestone" && "Milestone"}
+                        </span>
+
+                        {/* Title */}
+                        <h4 className="calendar-event-title">{event.title}</h4>
+
+                        {/* Time */}
+                        {event.time && (
+                          <p className="calendar-event-time">{event.time}</p>
+                        )}
+
+                        {/* Speaker (for lectures) */}
+                        {isLecture && "speaker" in event && event.speaker && (
+                          <p className="calendar-event-speaker">
+                            <span className="calendar-event-speaker-name">{event.speaker}</span>
+                            {"speakerTitle" in event && event.speakerTitle && (
+                              <span className="calendar-event-speaker-title">{event.speakerTitle}</span>
+                            )}
+                          </p>
+                        )}
+
+                        {/* Description */}
+                        <p className="calendar-event-desc">{event.description}</p>
+
+                        {/* Signature event CTA */}
+                        {isSignature && event.id === "colonial-independence-day" && (
+                          <div className="calendar-event-cta">
+                            <Link href="/first-250" className="calendar-event-cta-link">
+                              Join the First 250
+                              <span aria-hidden="true">→</span>
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </article>
+          );
+        })}
+      </section>
+
+      {/* ============================================
+          FIRST 250 REMINDER - Contextual CTA
+          ============================================ */}
+      <section className="calendar-cta" aria-labelledby="calendar-cta-heading">
+        <div className="calendar-cta-inner">
+          <div className="calendar-cta-content">
+            <p className="calendar-cta-eyebrow">Colonial Independence Day · July 4, 2026</p>
+            <h2 id="calendar-cta-heading" className="calendar-cta-headline">
+              Be One of 250
+            </h2>
+            <p className="calendar-cta-desc">
+              Your name, read aloud at Tennessee&apos;s first capital on America&apos;s 250th birthday.
+            </p>
+          </div>
+
+          <div className="calendar-cta-action">
+            {/* Progress indicator */}
+            <div className="calendar-cta-progress" role="progressbar" aria-valuenow={147} aria-valuemin={0} aria-valuemax={250}>
+              <div className="calendar-cta-progress-bar">
+                <div className="calendar-cta-progress-fill" style={{ width: "59%" }} />
+              </div>
+              <p className="calendar-cta-progress-label">
+                <strong>147</strong> of 250 spots claimed
+              </p>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-secondary" aria-hidden="true"></span>
-              <span className="text-foreground">Enhanced</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>
-              <span className="text-foreground">Milestone</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-text-light" aria-hidden="true"></span>
-              <span className="text-foreground">Annual</span>
-            </div>
+
+            <Link href="/first-250" className="calendar-cta-btn">
+              Reserve Your Spot
+            </Link>
+
+            <p className="calendar-cta-deadline">
+              Enrollment closes <time dateTime="2026-06-01">June 1, 2026</time>
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Events by Month */}
-      <section className="py-16 md:py-24 bg-cream-dark">
-        <div className="max-w-6xl mx-auto px-4">
-          {Object.entries(groupedEvents).map(([month, events]) => (
-            <div key={month} className="mb-20 last:mb-0">
-              <div className="flex items-center gap-6 mb-10">
-                <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary whitespace-nowrap">
-                  {month}
-                </h2>
-                <div className="flex-1 h-px bg-primary/10" />
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                {events.map((event) => (
-                  <EventCard
-                    key={event.id}
-                    id={event.id}
-                    title={event.title}
-                    date={event.date}
-                    endDate={event.endDate}
-                    time={event.time}
-                    type={event.type as "new" | "enhanced" | "recurring" | "milestone"}
-                    description={event.description}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* First 250 CTA */}
-      <section className="hero-texture bg-burgundy text-white py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <span className="year-badge mb-6 inline-block border-white/30 text-white">
-            July 4, 2026
-          </span>
-
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
-            Join the First 250
+      {/* ============================================
+          CONTACT - Group Visits
+          ============================================ */}
+      <section className="calendar-contact" aria-labelledby="calendar-contact-heading">
+        <div className="calendar-contact-inner">
+          <h2 id="calendar-contact-heading" className="calendar-contact-headline">
+            Planning a Group Visit?
           </h2>
-
-          <p className="text-lg text-white mb-10 max-w-xl mx-auto">
-            Be one of 250 Tennesseans whose names will be read aloud on America&apos;s 250th birthday.
+          <p className="calendar-contact-desc">
+            Group rates for 10+. School programs and private tours available.
           </p>
-
-          <Link
-            href="/first-250"
-            className="btn-primary inline-block bg-white text-burgundy font-semibold px-12 py-4 rounded-sm text-sm uppercase tracking-[0.15em]"
-          >
-            Enroll Now
-          </Link>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section className="py-16 md:py-20 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary mb-4">
-            Questions?
-          </h2>
-          <p className="text-text-light mb-8">
-            Contact us for group rates, special accommodations, or volunteer opportunities.
-          </p>
-          <a
-            href="tel:+14235387396"
-            className="btn-primary inline-block bg-primary text-white font-semibold px-10 py-4 rounded-sm text-sm uppercase tracking-[0.15em]"
-          >
-            Call (423) 538-7396
+          <a href="tel:+14235387396" className="calendar-contact-btn">
+            (423) 538-7396
           </a>
         </div>
       </section>

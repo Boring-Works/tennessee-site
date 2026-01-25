@@ -1,266 +1,487 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import siteInfo from "@/data/siteInfo.json";
 
 export const metadata: Metadata = {
   title: "Plan Your Visit",
   description:
-    "Plan your visit to Rocky Mount State Historic Site. Hours, admission, directions, and what to expect at Tennessee's first seat of government.",
+    "Visit Rocky Mount State Historic Site—Tennessee's first capital. Walk where William Blount and Andrew Jackson walked. Living history tours daily.",
   openGraph: {
     title: "Plan Your Visit | Tennessee Starts Here",
     description:
-      "Plan your visit to Rocky Mount State Historic Site. Hours, admission, directions, and what to expect at Tennessee's first seat of government.",
+      "Visit Rocky Mount State Historic Site—Tennessee's first capital. Walk where William Blount and Andrew Jackson walked. Living history tours daily.",
     url: "https://tennesseestartshere.com/visit",
   },
 };
 
+// Historical figures for the "Who Walked Here" section
+const historicalFigures = [
+  {
+    name: "William Blount",
+    title: "Governor of the Southwest Territory",
+    years: "1790–1796",
+    hook: "Signed the U.S. Constitution. Appointed by George Washington. Made Rocky Mount his headquarters.",
+    highlight: "Constitution Signer",
+  },
+  {
+    name: "Andrew Jackson",
+    title: "Future 7th President",
+    years: "1788",
+    hook: "Lodged at Rocky Mount for six weeks while awaiting his law license. He was 21 years old.",
+    highlight: "Future President",
+  },
+  {
+    name: "William Cobb",
+    title: "Original Settler",
+    years: "c. 1770",
+    hook: "Staked his claim on this land six years before the Declaration of Independence was signed.",
+    highlight: "Pioneer",
+  },
+];
+
+// Tour experience highlights
+const experienceHighlights = [
+  {
+    moment: "Meet Mary Cobb",
+    description: "At the weaving cabin, learn the skills that kept frontier families clothed and warm.",
+  },
+  {
+    moment: "Enter the Cobb House",
+    description: "Walk through the same door William Blount walked through in 1790.",
+  },
+  {
+    moment: "See the Kitchen",
+    description: "Discover how meals were prepared over open hearths—the same way they were 230 years ago.",
+  },
+  {
+    moment: "Watch Demonstrations",
+    description: "Costumed interpreters show blacksmithing, weaving, and frontier crafts (varies by day).",
+  },
+];
+
+// Heritage Trail - nearby historic sites with narrative connection
+const heritageTrail = [
+  {
+    name: "Sycamore Shoals State Historic Park",
+    distance: "30 min",
+    connection: "Where the Overmountain Men gathered before Kings Mountain",
+  },
+  {
+    name: "Downtown Bristol (State Street)",
+    distance: "20 min",
+    connection: "Birthplace of Country Music",
+  },
+  {
+    name: "Downtown Johnson City",
+    distance: "20 min",
+    connection: "Historic downtown with local dining",
+  },
+];
+
 export default function VisitPage() {
-  const { location, hours, admission, whatToExpect, contact, nearbyAttractions } =
-    siteInfo;
+  const { location, hours, admission, whatToExpect, contact } = siteInfo;
 
   return (
     <>
-      {/* Moody Header */}
-      <section className="hero-texture bg-primary text-white pt-28 pb-20 md:pt-32 md:pb-24">
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <span className="year-badge mb-6 inline-block">Est. 1770</span>
+      {/* ============================================
+          HERO - Heritage Significance
+          ============================================ */}
+      <section className="visit-hero" aria-labelledby="visit-heading">
+        <div className="visit-hero-content">
+          {/* Establishment badge */}
+          <p className="visit-hero-badge">
+            <span className="visit-hero-badge-year">Est. 1770</span>
+            <span className="visit-hero-badge-sep" aria-hidden="true">·</span>
+            <span>Tennessee State Historic Site</span>
+          </p>
 
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            Plan Your Visit
+          {/* Main headline */}
+          <h1 id="visit-heading" className="visit-hero-headline">
+            <span className="visit-hero-headline-small">Stand Where</span>
+            <span className="visit-hero-headline-large">Tennessee Began</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Step back in time at Rocky Mount State Historic Site. Our costumed
-            interpreters bring frontier life to vivid reality.
+          {/* Significance statement */}
+          <p className="visit-hero-significance">
+            The first seat of government west of the Appalachian Mountains.
           </p>
-        </div>
-      </section>
 
-      {/* Quick Info Bar */}
-      <section className="bg-accent">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="grid md:grid-cols-3 gap-6 text-primary text-center">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-1">Address</p>
-              <p className="font-serif font-bold">{location.address.street}</p>
-              <p className="text-sm">{location.address.city}, {location.address.state} {location.address.zip}</p>
+          {/* Experience promise */}
+          <p className="visit-hero-promise">
+            History isn&apos;t behind glass here. Costumed interpreters bring 1790 to life on the same grounds where William Blount governed and Andrew Jackson once stayed.
+          </p>
+
+          {/* Quick facts row */}
+          <div className="visit-hero-facts">
+            <div className="visit-hero-fact">
+              <span className="visit-hero-fact-value">~1 hr</span>
+              <span className="visit-hero-fact-label">Tour</span>
             </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-1">Phone</p>
-              <a href={`tel:${contact.phone.replace(/[^0-9]/g, "")}`} className="font-serif font-bold text-lg hover:underline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 rounded-sm">
-                {contact.phone}
-              </a>
+            <div className="visit-hero-fact-divider" aria-hidden="true" />
+            <div className="visit-hero-fact">
+              <span className="visit-hero-fact-value">${admission.adults.price}</span>
+              <span className="visit-hero-fact-label">Adults</span>
             </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-primary/80 mb-1">Tour Duration</p>
-              <p className="font-serif font-bold">{whatToExpect.tourDuration}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="py-16 md:py-24 bg-cream">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Hours & Admission */}
-            <div className="bg-white rounded-sm shadow-lg p-8">
-              <h2 className="font-serif text-2xl font-bold text-primary mb-8">
-                Hours & Admission
-              </h2>
-
-              {/* Hours */}
-              <div className="mb-8">
-                <h3 className="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold mb-4">Hours</h3>
-                <dl className="space-y-3">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <dt>Tuesday - Saturday</dt>
-                    <dd className="font-semibold text-primary">{hours.regular.tuesday}</dd>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <dt>Sunday</dt>
-                    <dd className="font-semibold text-primary">{hours.regular.sunday}</dd>
-                  </div>
-                  <div className="flex justify-between py-2 text-text-light">
-                    <dt>Monday</dt>
-                    <dd>{hours.regular.monday}</dd>
-                  </div>
-                </dl>
-                <p className="text-sm text-text-light mt-4 italic">{hours.note}</p>
-              </div>
-
-              {/* Admission */}
-              <div className="mb-8">
-                <h3 className="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold mb-4">Admission</h3>
-                <dl className="space-y-3">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <dt>{admission.adults.label}</dt>
-                    <dd className="font-serif font-bold text-lg text-secondary">${admission.adults.price}</dd>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <dt>{admission.seniors.label}</dt>
-                    <dd className="font-serif font-bold text-lg text-secondary">${admission.seniors.price}</dd>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <dt>{admission.children.label}</dt>
-                    <dd className="font-serif font-bold text-lg text-secondary">${admission.children.price}</dd>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <dt>{admission.childrenFree.label}</dt>
-                    <dd className="font-serif font-bold text-lg text-accent">Free</dd>
-                  </div>
-                </dl>
-                <p className="text-sm text-text-light mt-4">{admission.groups.note}</p>
-              </div>
-
-              {/* Book Tour */}
-              <a
-                href="https://fareharbor.com/embeds/book/rockymountmuseum/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary block w-full bg-secondary text-white font-semibold py-4 rounded-sm text-center text-sm uppercase tracking-[0.15em]"
-              >
-                Book Your Tour
-              </a>
-            </div>
-
-            {/* Your Experience */}
-            <div>
-              <div className="bg-white rounded-sm shadow-lg p-8 mb-6">
-                <h2 className="font-serif text-2xl font-bold text-primary mb-8">
-                  Your Experience
-                </h2>
-
-                <ul className="space-y-4 mb-8">
-                  {whatToExpect.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="text-accent mt-1">✓</span>
-                      <span className="text-foreground/80">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="bg-cream p-4 rounded-sm border-l-4 border-secondary">
-                  <h3 className="font-semibold text-primary mb-1">Accessibility</h3>
-                  <p className="text-sm text-text-light">{whatToExpect.accessibility}</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-sm shadow-lg p-8">
-                <h3 className="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold mb-4">
-                  Recommendations
-                </h3>
-                <ul className="space-y-3">
-                  {whatToExpect.recommendations.map((rec, index) => (
-                    <li key={index} className="flex items-start gap-3 text-text-light text-sm">
-                      <span className="text-accent">•</span>
-                      {rec}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="visit-hero-fact-divider" aria-hidden="true" />
+            <div className="visit-hero-fact">
+              <span className="visit-hero-fact-value">Tue–Sun</span>
+              <span className="visit-hero-fact-label">Open</span>
             </div>
           </div>
+
+          {/* Primary CTA */}
+          <a
+            href="https://fareharbor.com/embeds/book/rockymountmuseum/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="visit-hero-cta"
+          >
+            Book Your Tour
+          </a>
+
+          {/* Secondary link */}
+          <a href="#plan-your-visit" className="visit-hero-scroll">
+            View hours &amp; admission
+            <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </section>
 
-      {/* Find Us */}
-      <section className="py-16 md:py-24 bg-cream-dark">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="section-decorator">
-              <span>Getting Here</span>
-            </div>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary">
-              Find Us
+      {/* ============================================
+          WHO WALKED HERE - Historical Figures
+          ============================================ */}
+      <section className="visit-figures" aria-labelledby="figures-heading">
+        <div className="visit-figures-inner">
+          <header className="visit-figures-header">
+            <p className="visit-figures-eyebrow">Hallowed Ground</p>
+            <h2 id="figures-heading" className="visit-figures-headline">
+              Who Walked These Grounds
             </h2>
-          </div>
-
-          <div className="bg-white rounded-sm shadow-lg p-8 text-center">
-            <p className="font-serif text-xl font-bold text-primary mb-2">
-              Rocky Mount State Historic Site
+            <p className="visit-figures-intro">
+              Before this was a museum, it was the center of frontier government. These walls remember.
             </p>
-            <p className="text-text-light mb-6">
-              {location.address.street}<br />
-              {location.address.city}, {location.address.state} {location.address.zip}
-            </p>
+          </header>
 
-            <p className="text-text-light mb-8 max-w-xl mx-auto text-sm">
-              {location.directions}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://www.google.com/maps/place/Rocky+Mount+State+Historic+Site/@36.4081,-82.3247,17z"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-block bg-primary text-white font-semibold px-8 py-3 rounded-sm text-sm uppercase tracking-[0.15em]"
-              >
-                View on Maps
-              </a>
-              <a
-                href="https://www.google.com/maps/dir/?api=1&destination=36.4081,-82.3247"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-block bg-accent text-primary font-semibold px-8 py-3 rounded-sm text-sm uppercase tracking-[0.15em]"
-              >
-                Get Directions
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Nearby */}
-      <section className="py-16 md:py-24 bg-cream">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="section-decorator">
-              <span>Make It A Day</span>
-            </div>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary">
-              Nearby Attractions
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {nearbyAttractions.map((attraction) => (
-              <div
-                key={attraction.name}
-                className="bg-white rounded-sm p-6 text-center shadow-md"
-              >
-                <p className="font-serif font-bold text-primary mb-1">{attraction.name}</p>
-                <p className="text-sm text-secondary">{attraction.distance}</p>
-              </div>
+          <div className="visit-figures-grid">
+            {historicalFigures.map((figure) => (
+              <article key={figure.name} className="visit-figure">
+                <span className="visit-figure-highlight">{figure.highlight}</span>
+                <h3 className="visit-figure-name">{figure.name}</h3>
+                <p className="visit-figure-title">
+                  {figure.title}
+                  <span className="visit-figure-years">{figure.years}</span>
+                </p>
+                <p className="visit-figure-hook">{figure.hook}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="hero-texture bg-primary text-white py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
-            Questions?
+      {/* ============================================
+          THE EXPERIENCE - Living History Preview
+          ============================================ */}
+      <section className="visit-experience" aria-labelledby="experience-heading">
+        <div className="visit-experience-inner">
+          <header className="visit-experience-header">
+            <p className="visit-experience-eyebrow">Your Visit</p>
+            <h2 id="experience-heading" className="visit-experience-headline">
+              More Than a Museum
+            </h2>
+            <p className="visit-experience-intro">
+              This isn&apos;t a self-guided walk past dusty displays. It&apos;s a guided journey through living history, led by interpreters in period dress who bring 1790 to life.
+            </p>
+          </header>
+
+          <div className="visit-experience-grid">
+            {experienceHighlights.map((highlight, index) => (
+              <article key={highlight.moment} className="visit-moment">
+                <span className="visit-moment-number" aria-hidden="true">{index + 1}</span>
+                <h3 className="visit-moment-title">{highlight.moment}</h3>
+                <p className="visit-moment-desc">{highlight.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <footer className="visit-experience-footer">
+            <p className="visit-experience-note">
+              Tour duration approximately 1 hour. Last tour begins one hour before closing.
+            </p>
+          </footer>
+        </div>
+      </section>
+
+      {/* ============================================
+          PLAN YOUR VISIT - Practical Info
+          ============================================ */}
+      <section id="plan-your-visit" className="visit-practical" aria-labelledby="practical-heading">
+        <div className="visit-practical-inner">
+          <h2 id="practical-heading" className="visit-practical-headline">
+            Plan Your Visit
           </h2>
-          <p className="text-lg text-white/90 mb-10">
-            Contact us for group rates, special events, or educational programming.
+
+          <div className="visit-practical-grid">
+            {/* Hours Card */}
+            <div className="visit-card">
+              <h3 className="visit-card-title">
+                <svg className="visit-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                Hours
+              </h3>
+              <dl className="visit-hours">
+                <div className="visit-hours-row">
+                  <dt>Tuesday – Saturday</dt>
+                  <dd>{hours.regular.tuesday}</dd>
+                </div>
+                <div className="visit-hours-row">
+                  <dt>Sunday</dt>
+                  <dd>{hours.regular.sunday}</dd>
+                </div>
+                <div className="visit-hours-row visit-hours-row--closed">
+                  <dt>Monday</dt>
+                  <dd>Closed</dd>
+                </div>
+              </dl>
+              <p className="visit-card-note">{hours.note}</p>
+            </div>
+
+            {/* Admission Card */}
+            <div className="visit-card">
+              <h3 className="visit-card-title">
+                <svg className="visit-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <line x1="2" y1="10" x2="22" y2="10" />
+                </svg>
+                Admission
+              </h3>
+              <dl className="visit-admission">
+                <div className="visit-admission-row">
+                  <dt>{admission.adults.label}</dt>
+                  <dd>${admission.adults.price}</dd>
+                </div>
+                <div className="visit-admission-row">
+                  <dt>{admission.seniors.label}</dt>
+                  <dd>${admission.seniors.price}</dd>
+                </div>
+                <div className="visit-admission-row">
+                  <dt>{admission.children.label}</dt>
+                  <dd>${admission.children.price}</dd>
+                </div>
+                <div className="visit-admission-row">
+                  <dt>{admission.childrenFree.label}</dt>
+                  <dd className="visit-admission-free">Free</dd>
+                </div>
+              </dl>
+              <p className="visit-card-note">{admission.note}</p>
+            </div>
+
+            {/* Book Tour Card - Featured */}
+            <div className="visit-card visit-card--featured">
+              <h3 className="visit-card-title">Book Your Tour</h3>
+              <p className="visit-book-desc">
+                Reserve your spot for a guided living history experience.
+              </p>
+              <ul className="visit-book-includes">
+                <li>Guided tour with costumed interpreters</li>
+                <li>Access to all historic buildings</li>
+                <li>Craft demonstrations (varies by day)</li>
+                <li>Gift shop visit</li>
+              </ul>
+              <a
+                href="https://fareharbor.com/embeds/book/rockymountmuseum/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="visit-book-btn"
+              >
+                Book Now
+                <span aria-hidden="true">→</span>
+              </a>
+              <p className="visit-book-note">
+                Walk-ins welcome when space allows
+              </p>
+            </div>
+          </div>
+
+          {/* Before You Arrive */}
+          <div className="visit-prepare">
+            <h3 className="visit-prepare-title">Before You Arrive</h3>
+            <ul className="visit-prepare-list">
+              {whatToExpect.recommendations.map((rec, index) => (
+                <li key={index} className="visit-prepare-item">
+                  <svg className="visit-prepare-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  {rec}
+                </li>
+              ))}
+            </ul>
+            <p className="visit-prepare-accessibility">
+              <strong>Accessibility:</strong> {whatToExpect.accessibility}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          THE JOURNEY - Directions
+          ============================================ */}
+      <section className="visit-journey" aria-labelledby="journey-heading">
+        <div className="visit-journey-inner">
+          <header className="visit-journey-header">
+            <h2 id="journey-heading" className="visit-journey-headline">
+              The Journey
+            </h2>
+            <p className="visit-journey-intro">
+              Rocky Mount is easy to reach from anywhere in the Tri-Cities region.
+            </p>
+          </header>
+
+          <div className="visit-journey-content">
+            {/* Address Card */}
+            <div className="visit-journey-address">
+              <address className="visit-address">
+                <strong>Rocky Mount State Historic Site</strong>
+                <span>{location.address.street}</span>
+                <span>{location.address.city}, {location.address.state} {location.address.zip}</span>
+              </address>
+
+              <p className="visit-journey-directions">
+                {location.directions}
+              </p>
+
+              <div className="visit-journey-actions">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${location.coordinates.lat},${location.coordinates.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="visit-journey-btn visit-journey-btn--primary"
+                >
+                  Get Directions
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a
+                  href={`tel:${contact.phone.replace(/[^0-9]/g, "")}`}
+                  className="visit-journey-btn visit-journey-btn--secondary"
+                >
+                  {contact.phone}
+                </a>
+              </div>
+            </div>
+
+            {/* Distance indicators */}
+            <div className="visit-journey-distances">
+              <p className="visit-journey-distance">
+                <span className="visit-journey-distance-time">20 min</span>
+                <span className="visit-journey-distance-from">from Johnson City</span>
+              </p>
+              <p className="visit-journey-distance">
+                <span className="visit-journey-distance-time">20 min</span>
+                <span className="visit-journey-distance-from">from Bristol</span>
+              </p>
+              <p className="visit-journey-distance">
+                <span className="visit-journey-distance-time">45 min</span>
+                <span className="visit-journey-distance-from">from Knoxville</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          HERITAGE TRAIL - Nearby Historic Sites
+          ============================================ */}
+      <section className="visit-trail" aria-labelledby="trail-heading">
+        <div className="visit-trail-inner">
+          <header className="visit-trail-header">
+            <p className="visit-trail-eyebrow">Make It a Day</p>
+            <h2 id="trail-heading" className="visit-trail-headline">
+              The Heritage Trail
+            </h2>
+            <p className="visit-trail-intro">
+              Rocky Mount is part of a larger story. These nearby sites complete the picture of frontier Tennessee.
+            </p>
+          </header>
+
+          <div className="visit-trail-grid">
+            {heritageTrail.map((site) => (
+              <article key={site.name} className="visit-trail-site">
+                <div className="visit-trail-site-header">
+                  <h3 className="visit-trail-site-name">{site.name}</h3>
+                  <span className="visit-trail-site-distance">{site.distance}</span>
+                </div>
+                <p className="visit-trail-site-connection">{site.connection}</p>
+              </article>
+            ))}
+          </div>
+
+          <p className="visit-trail-cta-text">
+            Visiting from out of town? The Tri-Cities area offers plenty of lodging and dining options.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        </div>
+      </section>
+
+      {/* ============================================
+          CONTACT - Groups & Schools
+          ============================================ */}
+      <section className="visit-groups" aria-labelledby="groups-heading">
+        <div className="visit-groups-inner">
+          <div className="visit-groups-content">
+            <h2 id="groups-heading" className="visit-groups-headline">
+              Bringing a Group?
+            </h2>
+            <p className="visit-groups-desc">
+              School field trips, scout troops, family reunions, and groups of 10+ receive special rates. Educational programs available for all ages.
+            </p>
+          </div>
+
+          <div className="visit-groups-actions">
             <a
               href={`tel:${contact.phone.replace(/[^0-9]/g, "")}`}
-              className="btn-primary inline-block bg-accent text-primary font-semibold px-12 py-4 rounded-sm text-sm uppercase tracking-[0.15em]"
+              className="visit-groups-btn visit-groups-btn--primary"
             >
               Call {contact.phone}
             </a>
             <a
-              href={contact.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost inline-block text-white font-semibold px-12 py-4 rounded-sm text-sm uppercase tracking-[0.15em]"
+              href={`mailto:${contact.email}`}
+              className="visit-groups-btn visit-groups-btn--secondary"
             >
-              Main Website
+              Email Us
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          CLOSING - Emotional CTA
+          ============================================ */}
+      <section className="visit-closing" aria-labelledby="closing-heading">
+        <div className="visit-closing-inner">
+          <p className="visit-closing-lead">
+            Tennessee&apos;s story started here in 1770.
+          </p>
+          <h2 id="closing-heading" className="visit-closing-headline">
+            Come See Where It Began
+          </h2>
+
+          <div className="visit-closing-cta-group">
+            <a
+              href="https://fareharbor.com/embeds/book/rockymountmuseum/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="visit-closing-cta visit-closing-cta--primary"
+            >
+              Book Your Tour
+            </a>
+            <Link href="/events" className="visit-closing-cta visit-closing-cta--secondary">
+              View 2026 Events
+            </Link>
+          </div>
+
+          <p className="visit-closing-tagline">
+            Tennessee starts here. <em>Will you?</em>
+          </p>
         </div>
       </section>
     </>

@@ -2,196 +2,237 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { Menu, X, Feather } from "lucide-react";
+import { WaxSealSVG } from "./WaxSealSVG";
 import styles from "./Header/Header.module.css";
 
-const navLinks = [
-  { href: "/", label: "Home" },
+const NAV_LINKS = [
+  { href: "/", label: "Our Story" },
+  { href: "/first-250", label: "First 250" },
   { href: "/events", label: "Events" },
   { href: "/lectures", label: "Lectures" },
-  { href: "/first-250", label: "First 250" },
   { href: "/almanac", label: "Almanac" },
 ];
 
-// Period-authentic wax seal emblem
-const WaxSeal = () => (
-  <div className={styles["nav-seal"]} aria-hidden="true">
-    <span className={styles["nav-seal-inner"]}>RM</span>
-  </div>
-);
-
-// Period-styled hamburger icon (quill-inspired strokes)
-const MenuIcon = ({ isOpen }: { isOpen: boolean }) => (
-  <svg
-    className={styles["nav-menu-icon"]}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-  >
-    {isOpen ? (
-      <>
-        <path
-          strokeLinecap="round"
-          strokeWidth={1.5}
-          d="M6 18L18 6"
-        />
-        <path
-          strokeLinecap="round"
-          strokeWidth={1.5}
-          d="M6 6l12 12"
-        />
-      </>
-    ) : (
-      <>
-        {/* Quill-inspired strokes with varying widths */}
-        <path
-          strokeLinecap="round"
-          strokeWidth={2}
-          d="M4 6h16"
-          className={`${styles["nav-menu-stroke"]} ${styles["nav-menu-stroke--1"]}`}
-        />
-        <path
-          strokeLinecap="round"
-          strokeWidth={1.5}
-          d="M6 12h12"
-          className={`${styles["nav-menu-stroke"]} ${styles["nav-menu-stroke--2"]}`}
-        />
-        <path
-          strokeLinecap="round"
-          strokeWidth={1}
-          d="M8 18h8"
-          className={`${styles["nav-menu-stroke"]} ${styles["nav-menu-stroke--3"]}`}
-        />
-      </>
-    )}
-  </svg>
-);
-
 export default function Navigation() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const menuRef = useRef<HTMLDivElement>(null);
 
+  // Throttled scroll listener
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
+  // Scroll lock + escape key + focus trap
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+      // Focus first interactive element
+      const firstFocusable = menuRef.current?.querySelector("a, button");
+      if (firstFocusable) (firstFocusable as HTMLElement).focus();
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+
+      // Focus trap
+      if (e.key === "Tab" && mobileMenuOpen && menuRef.current) {
+        const focusables = menuRef.current.querySelectorAll("a, button");
+        const first = focusables[0] as HTMLElement;
+        const last = focusables[focusables.length - 1] as HTMLElement;
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
+  }, [mobileMenuOpen]);
+
+  const isActive = useCallback((href: string) => {
+    if (href === "/") return pathname === "/" || pathname === "/home";
     return pathname.startsWith(href);
-  };
+  }, [pathname]);
+
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
 
   return (
     <>
-      {/* Skip to main content - accessibility (global class) */}
+      {/* Skip link */}
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
 
       <header
-        className={`${styles["site-header"]} ${
-          scrolled
-            ? styles["site-header--scrolled"]
-            : isHome
-            ? styles["site-header--transparent"]
-            : styles["site-header--solid"]
+        className={`${styles.header} ${
+          isScrolled || mobileMenuOpen
+            ? styles["header--scrolled"]
+            : styles["header--transparent"]
         }`}
+        role="banner"
       >
-        {/* Gold top border when scrolled */}
-        <div className={styles["header-gold-border"]} aria-hidden="true" />
+        {/* Tricolor stripe - appears on scroll */}
+        <div
+          className={`${styles.stripe} ${isScrolled ? styles["stripe--visible"] : ""}`}
+          aria-hidden="true"
+        >
+          <span className={styles["stripe--crimson"]} />
+          <span className={styles["stripe--gold"]} />
+          <span className={styles["stripe--federal"]} />
+        </div>
 
-        <nav className={styles["nav-container"]}>
-          <div className={styles["nav-inner"]}>
-            {/* Logo with wax seal and ornate flourishes */}
-            <Link href="/" className={styles["nav-logo"]}>
-              <WaxSeal />
-              <span className={styles["nav-logo-flourish"]} aria-hidden="true">❧</span>
-              <span className={styles["nav-logo-text"]}>Rocky Mount</span>
-              <span className={`${styles["nav-logo-flourish"]} ${styles["nav-logo-flourish--flip"]}`} aria-hidden="true">❧</span>
-              <span className={styles["nav-logo-year"]}>1790</span>
+        <div className={styles.container}>
+          <div className={styles.inner}>
+            {/* Logo */}
+            <Link href="/" className={styles.logo}>
+              <WaxSealSVG
+                className={`${styles.seal} ${isScrolled ? styles["seal--small"] : ""}`}
+                size={isScrolled ? 32 : 40}
+              />
+              <div className={styles["logo-stack"]}>
+                <span className={styles["logo-text"]}>ROCKY MOUNT</span>
+                <div className={`${styles["logo-tagline"]} ${isScrolled ? styles["logo-tagline--hidden"] : ""}`}>
+                  <span className={styles["logo-tagline-dash"]} aria-hidden="true" />
+                  <span className={styles["logo-tagline-text"]}>Tennessee Starts Here</span>
+                </div>
+              </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <ul className={styles["nav-links"]} role="menubar">
-              {navLinks.map((link) => (
-                <li key={link.href} role="none">
-                  <Link
-                    href={link.href}
-                    role="menuitem"
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    className={`${styles["nav-link"]} ${isActive(link.href) ? styles["nav-link--active"] : ""}`}
-                  >
-                    {link.label}
-                    <span className={styles["nav-link-underline"]} aria-hidden="true" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {/* Desktop Nav */}
+            <nav className={styles.nav} aria-label="Main navigation">
+              <ul className={styles["nav-list"]} role="menubar">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href} role="none">
+                    <Link
+                      href={link.href}
+                      role="menuitem"
+                      aria-current={isActive(link.href) ? "page" : undefined}
+                      className={`${styles["nav-link"]} ${
+                        isActive(link.href) ? styles["nav-link--active"] : ""
+                      }`}
+                    >
+                      {link.label}
+                      <span className={styles["nav-link-underline"]} aria-hidden="true" />
+                      <span className={styles["nav-link-glow"]} aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
 
-            {/* CTA Button - Desktop */}
-            <Link href="/visit" className={styles["nav-cta"]}>
-              <span className={styles["nav-cta-seal"]} aria-hidden="true">★</span>
-              <span className={styles["nav-cta-text"]}>Plan Your Visit</span>
-            </Link>
+              {/* Divider */}
+              <span className={styles["nav-divider"]} aria-hidden="true" />
 
-            {/* Mobile Menu Button */}
+              {/* CTA */}
+              <Link href="/first-250" className={styles.cta}>
+                <span className={styles["cta-text"]}>Claim Your Place</span>
+                <Feather className={styles["cta-icon"]} size={14} />
+              </Link>
+            </nav>
+
+            {/* Mobile Toggle */}
             <button
               type="button"
-              className={styles["nav-mobile-toggle"]}
+              className={styles["mobile-toggle"]}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              <MenuIcon isOpen={mobileMenuOpen} />
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
 
-          {/* Decorative bottom rule when scrolled */}
-          <div className={`${styles["nav-bottom-rule"]} ${scrolled ? styles["nav-bottom-rule--visible"] : ""}`} aria-hidden="true">
-            <span className={styles["nav-bottom-rule-line"]} />
-            <span className={styles["nav-bottom-rule-ornament"]}>✦</span>
-            <span className={styles["nav-bottom-rule-line"]} />
+          {/* Decorative bottom rule - appears on scroll */}
+          <div
+            className={`${styles["bottom-rule"]} ${isScrolled ? styles["bottom-rule--visible"] : ""}`}
+            aria-hidden="true"
+          >
+            <span className={styles["bottom-rule-line"]} />
+            <span className={styles["bottom-rule-ornament"]}>✦</span>
+            <span className={styles["bottom-rule-line"]} />
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      <div
+        id="mobile-menu"
+        ref={menuRef}
+        className={`${styles.mobile} ${mobileMenuOpen ? styles["mobile--open"] : ""}`}
+        aria-hidden={!mobileMenuOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
+        {/* Backdrop */}
+        <div
+          className={styles["mobile-backdrop"]}
+          onClick={closeMobileMenu}
+        />
+
+        {/* Drawer */}
+        <div className={styles["mobile-drawer"]}>
+          {/* Watermark */}
+          <div className={styles["mobile-watermark"]} aria-hidden="true">
+            1790
           </div>
 
-          {/* Mobile Navigation */}
-          <nav
-            id="mobile-menu"
-            aria-label="Mobile navigation"
-            className={`${styles["nav-mobile"]} ${mobileMenuOpen ? styles["nav-mobile--open"] : ""}`}
-          >
-            {/* Mobile menu header with seal */}
-            <div className={styles["nav-mobile-header"]}>
-              <div className={styles["nav-mobile-seal"]} aria-hidden="true">
-                <span className={styles["nav-mobile-seal-inner"]}>RM</span>
-              </div>
-              <span className={styles["nav-mobile-tagline"]}>Est. 1770</span>
-            </div>
+          {/* Border inset */}
+          <div className={styles["mobile-border"]} aria-hidden="true" />
 
-            <ul className={styles["nav-mobile-links"]}>
-              {navLinks.map((link, index) => (
+          {/* Content */}
+          <nav className={styles["mobile-nav"]}>
+            <span className={styles["mobile-label"]}>Navigation</span>
+
+            <ul className={styles["mobile-list"]}>
+              {NAV_LINKS.map((link, index) => (
                 <li key={link.href}>
-                  {/* Heritage divider between items */}
-                  {index > 0 && (
-                    <span className={styles["nav-mobile-divider"]} aria-hidden="true">
-                      <span className={styles["nav-mobile-divider-line"]} />
-                      <span className={styles["nav-mobile-divider-star"]}>★</span>
-                      <span className={styles["nav-mobile-divider-line"]} />
-                    </span>
-                  )}
                   <Link
                     href={link.href}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    className={`${styles["nav-mobile-link"]} ${isActive(link.href) ? styles["nav-mobile-link--active"] : ""}`}
-                    onClick={() => setMobileMenuOpen(false)}
+                    className={`${styles["mobile-link"]} ${
+                      isActive(link.href) ? styles["mobile-link--active"] : ""
+                    }`}
+                    onClick={closeMobileMenu}
+                    style={{ transitionDelay: `${100 + index * 50}ms` }}
                   >
-                    <span className={styles["nav-mobile-link-bullet"]} aria-hidden="true">◆</span>
-                    {link.label}
+                    <span className={styles["mobile-link-number"]}>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className={styles["mobile-link-text"]}>{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -199,26 +240,23 @@ export default function Navigation() {
 
             {/* Mobile CTA */}
             <Link
-              href="/visit"
-              className={styles["nav-mobile-cta"]}
-              onClick={() => setMobileMenuOpen(false)}
+              href="/first-250"
+              className={styles["mobile-cta"]}
+              onClick={closeMobileMenu}
             >
-              <span className={styles["nav-mobile-cta-seal"]} aria-hidden="true">★</span>
-              Plan Your Visit
+              <span>Claim Your Place</span>
+              <Feather size={16} />
             </Link>
 
-            {/* Mobile menu footer flourish */}
-            <div className={styles["nav-mobile-footer"]} aria-hidden="true">
-              <span className={styles["nav-mobile-footer-flourish"]}>❧</span>
-              <span className={styles["nav-mobile-footer-text"]}>Where Tennessee Began</span>
-              <span className={`${styles["nav-mobile-footer-flourish"]} ${styles["nav-mobile-footer-flourish--flip"]}`}>❧</span>
+            {/* Footer flourish */}
+            <div className={styles["mobile-footer"]}>
+              <span className={styles["mobile-footer-flourish"]}>❧</span>
+              <span className={styles["mobile-footer-text"]}>Tennessee Starts Here</span>
+              <span className={`${styles["mobile-footer-flourish"]} ${styles["mobile-footer-flourish--flip"]}`}>❧</span>
             </div>
           </nav>
-        </nav>
-
-        {/* Parchment texture overlay when scrolled */}
-        <div className={styles["header-texture"]} aria-hidden="true" />
-      </header>
+        </div>
+      </div>
     </>
   );
 }

@@ -20,8 +20,8 @@ export default function NativePulse({ pulse }: NativePulseProps) {
           {pulse.icon}
         </span>
         <div>
-          <h2 className="font-display text-xl text-almanac-gold">NativePulse</h2>
-          <p className="text-sm text-almanac-parchment/60">Seed Stratification Tracker</p>
+          <h2 className="font-serif text-xl text-almanac-gold">The Seedkeeper's Watch</h2>
+          <p className="text-sm text-almanac-parchment/60">Native Seed Stratification</p>
         </div>
       </div>
 
@@ -48,10 +48,11 @@ export default function NativePulse({ pulse }: NativePulseProps) {
           {pulse.tip}
         </p>
 
-        {/* Seasonal Context */}
+        {/* Heritage Context */}
         <div className="pt-3 border-t border-almanac-gold/10">
           <p className="text-xs text-almanac-parchment/50">
-            Tracking Tennessee native plant cycles for optimal seed starting and garden planning.
+            Tracking Tennessee native plant cycles — the same species settlers relied on
+            for food, medicine, and trade since 1775.
           </p>
         </div>
       </div>

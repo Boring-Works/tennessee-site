@@ -3,6 +3,8 @@
 import './almanac.css'
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
+import { SkyGradient } from '@/components/almanac/SkyGradient'
+import { WeatherAtmosphere } from '@/components/almanac/WeatherAtmosphere'
 import { AlmanacHero } from '@/components/almanac/AlmanacHero'
 import { FrontierSaying } from '@/components/almanac/FrontierSaying'
 import { TaskScores } from '@/components/almanac/TaskScores'
@@ -126,41 +128,45 @@ export default function AlmanacPage() {
 
   if (loading || !location) {
     return (
-      <main className="min-h-screen bg-midnight text-almanac-parchment">
-        <div className="max-w-3xl mx-auto px-4 py-8">
-          <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <div className="animate-pulse text-center">
-              <p className="text-sm uppercase tracking-widest text-gold-leaf mb-4">
-                {retryCount > 0 ? `Retrying (${retryCount}/${MAX_RETRIES})...` : 'Loading...'}
-              </p>
-              <div className="text-[96px] font-sans font-bold leading-none text-almanac-parchment/30">
-                --°
+      <SkyGradient weatherCode={0}>
+        <main className="almanac-content min-h-screen text-almanac-parchment relative z-10">
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <div className="flex flex-col items-center justify-center min-h-[60vh]">
+              <div className="animate-pulse text-center">
+                <p className="text-sm uppercase tracking-widest text-gold-leaf mb-4">
+                  {retryCount > 0 ? `Retrying (${retryCount}/${MAX_RETRIES})...` : 'Loading...'}
+                </p>
+                <div className="text-[96px] font-sans font-bold leading-none text-almanac-parchment/30">
+                  --°
+                </div>
+                <p className="text-xl text-almanac-parchment/30 mt-2">
+                  {retryCount > 0 ? 'Connection interrupted, retrying...' : 'Fetching conditions...'}
+                </p>
               </div>
-              <p className="text-xl text-almanac-parchment/30 mt-2">
-                {retryCount > 0 ? 'Connection interrupted, retrying...' : 'Fetching conditions...'}
-              </p>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </SkyGradient>
     )
   }
 
   if (error || !weather || !taskScores || !moon || !nativePulse) {
     return (
-      <main className="min-h-screen bg-midnight text-almanac-parchment">
-        <div className="max-w-3xl mx-auto px-4 py-8">
-          <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <p className="text-almanac-danger text-center">{error || 'Something went wrong'}</p>
-            <button
-              onClick={() => location && fetchWeather(location)}
-              className="mt-4 px-4 py-2 bg-gold-leaf text-midnight rounded-sm font-semibold hover:bg-gold-leaf/90 transition-colors"
-            >
-              Try Again
-            </button>
+      <SkyGradient weatherCode={0}>
+        <main className="almanac-content min-h-screen text-almanac-parchment relative z-10">
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <div className="flex flex-col items-center justify-center min-h-[60vh]">
+              <p className="text-almanac-danger text-center">{error || 'Something went wrong'}</p>
+              <button
+                onClick={() => location && fetchWeather(location)}
+                className="mt-4 px-4 py-2 bg-gold-leaf text-midnight rounded-sm font-semibold hover:bg-gold-leaf/90 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </SkyGradient>
     )
   }
 
@@ -179,9 +185,11 @@ export default function AlmanacPage() {
   } : null
 
   return (
-    <main className="min-h-screen bg-midnight text-almanac-parchment">
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        {/* Masthead */}
+    <SkyGradient weatherCode={weather.current.weatherCode}>
+      <WeatherAtmosphere weatherCode={weather.current.weatherCode} />
+      <main className="almanac-content min-h-screen text-almanac-parchment relative z-10">
+        <div className="max-w-3xl mx-auto px-4 py-8">
+          {/* Masthead */}
         <header className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide">
@@ -333,7 +341,8 @@ export default function AlmanacPage() {
 
         {/* First-visit Onboarding */}
         <OnboardingModal />
-      </div>
-    </main>
+        </div>
+      </main>
+    </SkyGradient>
   )
 }

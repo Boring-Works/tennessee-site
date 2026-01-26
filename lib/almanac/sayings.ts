@@ -194,3 +194,187 @@ export function getSaying(
   const category = getCategoryFromConditions(weatherCode, temperature, windSpeed, isDay)
   return getDeterministicSaying(category)
 }
+
+// ============================================
+// DUAL-LINE SAYINGS (1775 / 2026 format)
+// ============================================
+
+export interface DualSaying {
+  frontier: string  // 1775 line
+  modern: string    // 2026 line
+}
+
+export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
+  clear_day: [
+    {
+      frontier: "Sky is blue as a whetstone. A fair day for open-air labor.",
+      modern: "Perfect conditions. Get outside and get it done."
+    },
+    {
+      frontier: "High pressure is holding firm. Make hay while the sun shines.",
+      modern: "The weather's cooperating. Knock out the big stuff."
+    },
+    {
+      frontier: "Not a cloud to trouble the eye. The kind of day worth remembering.",
+      modern: "Lock it in—this is a get-ahead day."
+    },
+  ],
+
+  clear_night: [
+    {
+      frontier: "Stars are sharp tonight. Frost may kiss the meadows by dawn.",
+      modern: "Clear and cold. Cover the tender plants before bed."
+    },
+    {
+      frontier: "Moon is bright—a good night to finish the late chores.",
+      modern: "You can see well enough. Wrap up what's left."
+    },
+  ],
+
+  partly_cloudy: [
+    {
+      frontier: "Fair skies with a few travelers. Should hold for the work ahead.",
+      modern: "Clouds are passing through. Stay on task."
+    },
+    {
+      frontier: "The sun plays hide-and-seek. Conditions remain favorable.",
+      modern: "Keep working, but keep watching."
+    },
+  ],
+
+  overcast: [
+    {
+      frontier: "Gray skies pressing low. The rain may hold, but don't wager on it.",
+      modern: "Could go either way. Have a backup plan."
+    },
+    {
+      frontier: "Clouds have drawn the curtain. A day for steady, covered work.",
+      modern: "Good day for the garage, the barn, or the desk."
+    },
+  ],
+
+  fog: [
+    {
+      frontier: "Fog thick as wool in the hollows. Travel slow this morning.",
+      modern: "Headlights on. Take it slow."
+    },
+    {
+      frontier: "Morning fog means the day will warm. Patience.",
+      modern: "Give it an hour. The sun's coming."
+    },
+  ],
+
+  light_rain: [
+    {
+      frontier: "A light soaking coming down. Good for the gardens, poor for the roads.",
+      modern: "The plants are happy. Your commute won't be."
+    },
+    {
+      frontier: "Steady drizzle settling in. Keep to the covered work.",
+      modern: "Not worth getting soaked. Work under a roof."
+    },
+  ],
+
+  heavy_rain: [
+    {
+      frontier: "A gully-washer is upon us. Stay clear of the low fords.",
+      modern: "Turn around, don't drown."
+    },
+    {
+      frontier: "Rain coming down in sheets. This is a day for the hearth.",
+      modern: "Stay home if you can. It's not letting up."
+    },
+  ],
+
+  thunderstorm: [
+    {
+      frontier: "Thunder rolling through the mountains. Seek solid shelter.",
+      modern: "When thunder roars, go indoors."
+    },
+    {
+      frontier: "Storm clouds stacking in the west. The lightning will follow.",
+      modern: "It's coming. Wrap up outdoor work now."
+    },
+  ],
+
+  light_snow: [
+    {
+      frontier: "Snow falling light as cotton. Pretty to watch, easy to manage.",
+      modern: "A dusting. Drive careful, but don't panic."
+    },
+    {
+      frontier: "First flakes of the season. The ground isn't ready to hold it.",
+      modern: "It'll melt. Enjoy it while it lasts."
+    },
+  ],
+
+  heavy_snow: [
+    {
+      frontier: "Snow is piling fast. Check the roof load and stay close.",
+      modern: "This is accumulating. Clear the walks before it sets."
+    },
+    {
+      frontier: "A proper snowstorm settling in. Hunker down.",
+      modern: "Work from home if you can. The roads won't improve."
+    },
+  ],
+
+  freezing: [
+    {
+      frontier: "Bitter cold has arrived. Keep the hearth stoked through the night.",
+      modern: "Set your thermostat. Check on elderly neighbors."
+    },
+    {
+      frontier: "Cold enough to crack stone. Limit your time outside.",
+      modern: "Frostbite weather. Minimize exposure."
+    },
+    {
+      frontier: "The kind of cold that finds every gap. Seal up tight.",
+      modern: "Insulate, insulate, insulate. Your pipes will thank you."
+    },
+  ],
+
+  hot: [
+    {
+      frontier: "Heat is bearing down heavy. Work the early hours, rest at noon.",
+      modern: "Start at sunrise, stop by 10. It's not worth the risk."
+    },
+    {
+      frontier: "Too hot for man or beast to labor. Wait for the evening cool.",
+      modern: "It's unsafe out there. Quit early or don't start."
+    },
+  ],
+
+  windy: [
+    {
+      frontier: "Wind is kicking up something fierce. Secure anything loose.",
+      modern: "Tie it down or lose it."
+    },
+    {
+      frontier: "Strong gusts across the ridges. No day for ladder work.",
+      modern: "Skip the roof work. Not worth the fall risk."
+    },
+  ],
+}
+
+/**
+ * Get a dual-line saying (1775 + 2026) based on conditions
+ */
+export function getDualSaying(
+  weatherCode: number,
+  temperature: number,
+  windSpeed: number,
+  isDay: boolean
+): DualSaying {
+  const category = getCategoryFromConditions(weatherCode, temperature, windSpeed, isDay)
+  const sayings = DUAL_SAYINGS[category]
+
+  // Use same deterministic selection as single sayings
+  const date = new Date()
+  const dayOfYear = getDayOfYear(date)
+  const categoryIndex = Object.keys(DUAL_SAYINGS).indexOf(category)
+  const seed = dayOfYear * 100 + categoryIndex
+  const index = Math.floor(seededRandom(seed) * sayings.length)
+
+  return sayings[index]
+}

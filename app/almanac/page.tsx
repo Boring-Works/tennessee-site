@@ -25,7 +25,7 @@ import {
   type NativePulseResult
 } from '@/lib/almanac/taskScores'
 import { findTodayDailyIndex } from '@/lib/almanac/dateUtils'
-import { getSaying } from '@/lib/almanac/sayings'
+import { getDualSaying, type DualSaying } from '@/lib/almanac/sayings'
 import { getMoonData, isDay } from '@/lib/almanac/moonPhase'
 import { formatLocationName, type GeoLocation } from '@/lib/almanac/geocoding'
 import { loadLocation } from '@/lib/almanac/storage'
@@ -39,7 +39,7 @@ export default function AlmanacPage() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [taskScores, setTaskScores] = useState<TaskScoresType | null>(null)
   const [nativePulse, setNativePulse] = useState<NativePulseResult | null>(null)
-  const [saying, setSaying] = useState<string>('')
+  const [saying, setSaying] = useState<DualSaying | null>(null)
   const [moon, setMoon] = useState<MoonData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -74,13 +74,13 @@ export default function AlmanacPage() {
       setNativePulse(pulse)
 
       const daylight = isDay(new Date(), loc.latitude, loc.longitude)
-      const frontierSaying = getSaying(
+      const dualSaying = getDualSaying(
         weatherData.current.weatherCode,
         weatherData.current.temperature,
         weatherData.current.windSpeed,
         daylight
       )
-      setSaying(frontierSaying)
+      setSaying(dualSaying)
 
       const moonData = getMoonData()
       setMoon(moonData)
@@ -204,7 +204,14 @@ export default function AlmanacPage() {
         />
 
         {/* The Frontier Saying */}
-        <FrontierSaying saying={saying} />
+        {saying && (
+          <FrontierSaying
+            saying={saying.frontier}
+            modernLine={saying.modern}
+            temperature={weather.current.temperature}
+            location={formatLocationName(location)}
+          />
+        )}
 
         {/* Snow Conditions - shows only when snow present */}
         <div className="py-2">

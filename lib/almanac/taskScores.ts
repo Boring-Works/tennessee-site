@@ -1,22 +1,30 @@
 /**
- * Task Score Engine v2.0 — Rocky Mount Almanac
+ * Task Score Engine v3.1 — Rocky Mount Almanac
  * 
- * FACT-CHECKED SOURCES:
- * - Heat Index: NOAA/NWS (https://www.weather.gov/ama/heatindex)
- * - Wind Chill: NWS formula (https://www.weather.gov/safety/cold-wind-chill-chart)
- * - Livestock THI: Penn State Extension, USDA
- * - Paint Cure: Sherwin-Williams, Benjamin Moore guidelines
- * - Soil Temp: UT Extension, USDA planting guides
+ * CRITICAL FIXES:
+ * - Unit conversion: snow_depth now properly converted from meters to inches
+ * - Multiple snow/ice detection methods (not just API snow_depth)
+ * - Frozen ground detection via soil temperature
+ * - Freeze/thaw cycle detection for ice hazards
+ * - Winter conditions as BLOCKING factors, not just penalties
+ * 
+ * SOURCES:
+ * - Heat Index: NOAA/NWS
+ * - Wind Chill: NWS formula
+ * - Livestock THI: Penn State Extension
+ * - Paint Cure: Sherwin-Williams guidelines (50°F min, 5°F dew point spread)
  * - OSHA Heat/Cold: OSHA Technical Manual
  */
 
 import type { TaskScore, TaskScores, WeatherData } from './types'
+import { isSnowCode, isIceCode } from './types'
 
 // ============================================
-// EXTENDED METRICS INTERFACE
+// EXTENDED METRICS
 // ============================================
 
 export interface ExtendedMetrics {
+  // Raw measurements
   temperature: number
   humidity: number
   windSpeed: number
@@ -25,23 +33,29 @@ export interface ExtendedMetrics {
   precipProbability: number
   feelsLike: number
   month: number
-  soilTemperature?: number
+  soilTemperature: number | undefined
+  snowDepth: number  // In inches (converted in weather.ts)
+  
   // Calculated values
   heatIndex: number
   windChill: number
   dewPoint: number
   dewPointSpread: number
+  
+  // Winter condition flags
+  hasSnowOnGround: boolean
+  hasIceRisk: boolean
+  isActivelySnowing: boolean
+  isFrozenGround: boolean
+  isWinterConditions: boolean  // Composite flag
+  winterSeverity: 'none' | 'light' | 'moderate' | 'severe'
+  groundCondition: 'clear' | 'wet' | 'snowy' | 'icy' | 'frozen'
 }
 
 // ============================================
-// SCIENTIFIC CALCULATIONS (VERIFIED)
+// SCIENTIFIC CALCULATIONS
 // ============================================
 
-/**
- * NOAA Heat Index (Rothfusz regression)
- * Source: https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml
- * Only valid when temp >= 80°F
- */
 function calculateHeatIndex(tempF: number, humidity: number): number {
   if (tempF < 80) return tempF
 
@@ -58,11 +72,9 @@ function calculateHeatIndex(tempF: number, humidity: number): number {
     + 0.00085282 * T * R * R
     - 0.00000199 * T * T * R * R
 
-  // Low humidity adjustment (R < 13% and T 80-112°F)
   if (R < 13 && T >= 80 && T <= 112) {
     HI -= ((13 - R) / 4) * Math.sqrt((17 - Math.abs(T - 95)) / 17)
   }
-  // High humidity adjustment (R > 85% and T 80-87°F)
   if (R > 85 && T >= 80 && T <= 87) {
     HI += ((R - 85) / 10) * ((87 - T) / 5)
   }
@@ -70,11 +82,6 @@ function calculateHeatIndex(tempF: number, humidity: number): number {
   return Math.round(HI)
 }
 
-/**
- * NWS Wind Chill Formula
- * Source: https://www.weather.gov/media/epz/wxcalc/windChill.pdf
- * Only valid when temp <= 50°F and wind >= 3 mph
- */
 function calculateWindChill(tempF: number, windMph: number): number {
   if (tempF > 50 || windMph < 3) return tempF
   
@@ -83,11 +90,6 @@ function calculateWindChill(tempF: number, windMph: number): number {
   )
 }
 
-/**
- * Dew Point (Magnus-Tetens approximation)
- * Critical for paint/stain cure decisions
- * Source: https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
- */
 function calculateDewPoint(tempF: number, humidity: number): number {
   const tempC = (tempF - 32) * 5 / 9
   const a = 17.27
@@ -97,17 +99,202 @@ function calculateDewPoint(tempF: number, humidity: number): number {
   return Math.round(dewPointC * 9 / 5 + 32)
 }
 
-/**
- * Temperature-Humidity Index for Livestock
- * Source: Penn State Extension, USDA livestock guides
- * THI = (1.8 × T + 32) − [(0.55 − 0.0055 × RH) × (1.8 × T − 26)]
- * Simplified for Fahrenheit input
- */
 function calculateTHI(tempF: number, humidity: number): number {
-  // Convert to Celsius for formula
   const tempC = (tempF - 32) * 5 / 9
   const THI = (1.8 * tempC + 32) - ((0.55 - 0.0055 * humidity) * (1.8 * tempC - 26))
   return Math.round(THI)
+}
+
+// ============================================
+// WINTER CONDITION DETECTION
+// ============================================
+
+interface WinterAnalysis {
+  hasSnowOnGround: boolean
+  hasIceRisk: boolean
+  isActivelySnowing: boolean
+  isFrozenGround: boolean
+  isWinterConditions: boolean
+  winterSeverity: 'none' | 'light' | 'moderate' | 'severe'
+  groundCondition: 'clear' | 'wet' | 'snowy' | 'icy' | 'frozen'
+  snowDepth: number
+}
+
+function analyzeWinterConditions(weather: WeatherData): WinterAnalysis {
+  const now = new Date()
+  const currentHour = now.getHours()
+  const currentTemp = weather.current.temperature
+  
+  // Get snow depth (already converted to inches in weather.ts)
+  const snowDepth = weather.current.snowDepth ?? 0
+  
+  // Check current weather code
+  const currentCode = weather.current.weatherCode
+  const isActivelySnowing = isSnowCode(currentCode)
+  const isFreezingPrecipNow = isIceCode(currentCode)
+  
+  // Get soil temperature
+  const soilTemp = weather.current.soilTemperature
+  const isFrozenGround = soilTemp !== undefined && soilTemp < 32
+  
+  // ========== ANALYZE RECENT WEATHER HISTORY ==========
+  
+  // Check recent daily temps for freeze/thaw patterns
+  let hadFreezing = false
+  let hadAboveFreezing = false
+  let recentMinTemp = currentTemp
+  let recentMaxTemp = currentTemp
+  let coldDaysCount = 0
+  
+  if (weather.daily.temperatureMin && weather.daily.temperatureMax) {
+    // Look at last 3 days (indices depend on past_days setting)
+    const lookbackDays = Math.min(3, weather.daily.temperatureMin.length)
+    for (let i = 0; i < lookbackDays; i++) {
+      const minT = weather.daily.temperatureMin[i]
+      const maxT = weather.daily.temperatureMax[i]
+      if (minT !== undefined) {
+        recentMinTemp = Math.min(recentMinTemp, minT)
+        if (minT < 32) {
+          hadFreezing = true
+          coldDaysCount++
+        }
+      }
+      if (maxT !== undefined) {
+        recentMaxTemp = Math.max(recentMaxTemp, maxT)
+        if (maxT > 35) hadAboveFreezing = true
+      }
+    }
+  }
+  
+  // Check recent snowfall from daily totals
+  let recentSnowfall = 0
+  if (weather.daily.snowfallSum) {
+    const lookbackDays = Math.min(3, weather.daily.snowfallSum.length)
+    for (let i = 0; i < lookbackDays; i++) {
+      recentSnowfall += weather.daily.snowfallSum[i] || 0
+    }
+  }
+  
+  // Check recent weather codes for snow events
+  let hadRecentSnowCode = false
+  let hadRecentIceCode = false
+  if (weather.hourly.weatherCode) {
+    // Check last 72 hours of weather codes
+    const startIdx = Math.max(0, currentHour - 72)
+    const endIdx = Math.min(weather.hourly.weatherCode.length, currentHour + 1)
+    for (let i = startIdx; i < endIdx; i++) {
+      const code = weather.hourly.weatherCode[i]
+      if (isSnowCode(code)) hadRecentSnowCode = true
+      if (isIceCode(code)) hadRecentIceCode = true
+    }
+  }
+  
+  // ========== DETERMINE SNOW ON GROUND ==========
+  // Multiple detection methods - if ANY are true, there's snow
+  
+  let hasSnowOnGround = false
+  let snowConfidence = 0
+  
+  // Method 1: Direct measurement
+  if (snowDepth >= 0.5) {  // At least half inch
+    hasSnowOnGround = true
+    snowConfidence = Math.min(100, snowDepth * 20)  // More snow = higher confidence
+  }
+  
+  // Method 2: Recent snowfall + cold temps (wouldn't have melted)
+  if (recentSnowfall >= 0.5 && recentMaxTemp < 40) {
+    hasSnowOnGround = true
+    snowConfidence = Math.max(snowConfidence, 80)
+  }
+  
+  // Method 3: Recent snow weather codes + sustained cold
+  if (hadRecentSnowCode && recentMaxTemp < 38 && coldDaysCount >= 2) {
+    hasSnowOnGround = true
+    snowConfidence = Math.max(snowConfidence, 70)
+  }
+  
+  // Method 4: Very cold recent history (prolonged freeze)
+  if (recentMaxTemp < 32 && coldDaysCount >= 2 && hadRecentSnowCode) {
+    hasSnowOnGround = true
+    snowConfidence = Math.max(snowConfidence, 60)
+  }
+  
+  // ========== DETERMINE ICE RISK ==========
+  // Ice forms from: freezing precip, or freeze/thaw cycles
+  
+  let hasIceRisk = false
+  
+  // Method 1: Currently freezing rain/drizzle
+  if (isFreezingPrecipNow) {
+    hasIceRisk = true
+  }
+  
+  // Method 2: Recent freezing precipitation
+  if (hadRecentIceCode) {
+    hasIceRisk = true
+  }
+  
+  // Method 3: Freeze/thaw cycle (most common ice cause)
+  // If it got above freezing then dropped back below, ice forms
+  if (hadFreezing && hadAboveFreezing && currentTemp < 36) {
+    hasIceRisk = true
+  }
+  
+  // Method 4: Snow melting and refreezing
+  if (hasSnowOnGround && recentMaxTemp > 33 && currentTemp < 35) {
+    hasIceRisk = true
+  }
+  
+  // Method 5: Rain on frozen ground
+  if (isFrozenGround && weather.current.precipitation > 0 && currentTemp < 36) {
+    hasIceRisk = true
+  }
+  
+  // ========== DETERMINE WINTER SEVERITY ==========
+  
+  let winterSeverity: 'none' | 'light' | 'moderate' | 'severe' = 'none'
+  
+  if (hasIceRisk) {
+    // Ice is always at least moderate severity
+    winterSeverity = snowDepth > 2 ? 'severe' : 'moderate'
+  } else if (hasSnowOnGround) {
+    if (snowDepth > 4 || (recentSnowfall > 3 && recentMaxTemp < 35)) {
+      winterSeverity = 'severe'
+    } else if (snowDepth > 1 || recentSnowfall > 1) {
+      winterSeverity = 'moderate'
+    } else {
+      winterSeverity = 'light'
+    }
+  } else if (isFrozenGround) {
+    winterSeverity = 'light'
+  }
+  
+  const isWinterConditions = winterSeverity !== 'none'
+  
+  // ========== DETERMINE GROUND CONDITION ==========
+  
+  let groundCondition: 'clear' | 'wet' | 'snowy' | 'icy' | 'frozen' = 'clear'
+  
+  if (hasIceRisk) {
+    groundCondition = 'icy'
+  } else if (hasSnowOnGround) {
+    groundCondition = 'snowy'
+  } else if (isFrozenGround) {
+    groundCondition = 'frozen'
+  } else if (weather.current.precipitation > 0.05 || weather.current.humidity > 90) {
+    groundCondition = 'wet'
+  }
+  
+  return {
+    hasSnowOnGround,
+    hasIceRisk,
+    isActivelySnowing,
+    isFrozenGround,
+    isWinterConditions,
+    winterSeverity,
+    groundCondition,
+    snowDepth,
+  }
 }
 
 // ============================================
@@ -126,6 +313,8 @@ export function buildExtendedMetrics(weather: WeatherData): ExtendedMetrics {
   const windChill = calculateWindChill(temp, windSpeed)
   const dewPoint = calculateDewPoint(temp, humidity)
   
+  const winter = analyzeWinterConditions(weather)
+  
   return {
     temperature: temp,
     humidity: humidity,
@@ -140,6 +329,7 @@ export function buildExtendedMetrics(weather: WeatherData): ExtendedMetrics {
     windChill,
     dewPoint,
     dewPointSpread: temp - dewPoint,
+    ...winter,
   }
 }
 
@@ -160,12 +350,49 @@ function getScoreLabel(score: number): TaskScore['label'] {
 // ============================================
 
 export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
+  // BLOCKING CONDITIONS - Check these first, return immediately
+  
+  if (m.groundCondition === 'icy') {
+    return {
+      score: 1,
+      label: 'Avoid',
+      instruction: "Ice on ground. Dangerous and soil frozen beneath. No gardening possible."
+    }
+  }
+  
+  if (m.hasSnowOnGround) {
+    const snowMsg = m.snowDepth > 0.5 
+      ? `${m.snowDepth.toFixed(1)}" of snow covering ground.`
+      : "Snow cover on ground."
+    return {
+      score: 1,
+      label: 'Avoid',
+      instruction: `${snowMsg} Wait for complete melt and soil to thaw before any garden work.`
+    }
+  }
+  
+  if (m.isFrozenGround) {
+    return {
+      score: 2,
+      label: 'Avoid',
+      instruction: `Soil frozen at ${Math.round(m.soilTemperature!)}°F. Can't dig or plant until thaw.`
+    }
+  }
+  
+  if (m.isActivelySnowing) {
+    return {
+      score: 2,
+      label: 'Avoid',
+      instruction: "Currently snowing. Wait for it to stop and clear."
+    }
+  }
+  
+  // NON-BLOCKING CONDITIONS - Calculate score with penalties
   let score = 10
   let dominantIssue: string = 'none'
   let issueValue: number = 0
 
-  // === SOIL TEMPERATURE (most important for planting) ===
-  // Source: UT Extension planting guides
+  // Soil temperature
   if (m.soilTemperature !== undefined) {
     if (m.soilTemperature < 40) {
       score -= 4
@@ -173,16 +400,14 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
       issueValue = m.soilTemperature
     } else if (m.soilTemperature < 50) {
       score -= 2
-      dominantIssue = 'cool_soil'
-      issueValue = m.soilTemperature
+      if (dominantIssue === 'none') { dominantIssue = 'cool_soil'; issueValue = m.soilTemperature }
     } else if (m.soilTemperature > 85) {
       score -= 2
-      dominantIssue = 'hot_soil'
-      issueValue = m.soilTemperature
+      if (dominantIssue === 'none') dominantIssue = 'hot_soil'
     }
   }
 
-  // === AIR TEMPERATURE ===
+  // Air temperature
   if (m.temperature < 32) {
     score -= 5
     if (dominantIssue === 'none') dominantIssue = 'frost'
@@ -192,12 +417,9 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
   } else if (m.temperature > 95) {
     score -= 4
     if (dominantIssue === 'none') { dominantIssue = 'heat'; issueValue = m.heatIndex }
-  } else if (m.temperature > 85) {
-    score -= 1
-    if (dominantIssue === 'none') { dominantIssue = 'warm'; issueValue = m.temperature }
   }
 
-  // === PRECIPITATION ===
+  // Precipitation
   if (m.precipitation > 0.5) {
     score -= 5
     dominantIssue = 'heavy_rain'
@@ -207,12 +429,9 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
   } else if (m.precipProbability > 70) {
     score -= 2
     if (dominantIssue === 'none') { dominantIssue = 'rain_likely'; issueValue = m.precipProbability }
-  } else if (m.precipProbability > 40) {
-    score -= 1
-    if (dominantIssue === 'none') { dominantIssue = 'rain_possible'; issueValue = m.precipProbability }
   }
 
-  // === WIND ===
+  // Wind
   if (m.windSpeed > 25) {
     score -= 3
     if (dominantIssue === 'none') dominantIssue = 'high_wind'
@@ -221,83 +440,57 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
     if (dominantIssue === 'none') dominantIssue = 'breezy'
   }
 
-  // === GROUND SATURATION ===
-  if (m.humidity > 90 && m.precipitation > 0) {
+  // Wet ground
+  if (m.groundCondition === 'wet') {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'saturated'
   }
 
   score = Math.max(1, Math.min(10, score))
 
-  // === GENERATE INSTRUCTION ===
+  // Generate instruction based on dominant issue
   let instruction: string
-
-  if (score >= 9) {
-    if (m.soilTemperature && m.soilTemperature >= 60 && m.soilTemperature <= 75) {
-      instruction = `Ideal conditions. Soil at ${Math.round(m.soilTemperature)}°F—perfect for most vegetables.`
-    } else {
-      instruction = "Clear skies, mild temps, calm winds. An excellent day in the garden."
-    }
-  } else if (score >= 7) {
-    switch (dominantIssue) {
-      case 'rain_likely':
-      case 'rain_possible':
-        instruction = `Good morning to plant. ${Math.round(issueValue)}% rain chance later—finish by afternoon.`
-        break
-      case 'warm':
-        instruction = `Warm day at ${Math.round(m.temperature)}°F. Water transplants well and work early.`
-        break
-      case 'cool_soil':
-        instruction = `Soil at ${Math.round(issueValue)}°F. Fine for cool-season crops—hold off on tomatoes.`
-        break
-      case 'breezy':
-        instruction = `Winds at ${Math.round(m.windSpeed)} mph. Stake new transplants and water deeply.`
-        break
-      default:
-        instruction = "Good conditions for garden work. A productive day ahead."
-    }
-  } else if (score >= 5) {
-    switch (dominantIssue) {
-      case 'cold_soil':
-        instruction = `Soil only ${Math.round(issueValue)}°F. Too cold for most seeds—try cold frames or wait.`
-        break
-      case 'rain':
-        instruction = "Light rain falling. Stick to covered tasks or wait for a break."
-        break
-      case 'saturated':
-        instruction = "Ground is soggy. Walking the beds will compact wet soil—wait a day."
-        break
-      case 'heat':
-        instruction = `Heat index ${Math.round(issueValue)}°F. Work early morning only. Stay hydrated.`
-        break
-      default:
-        instruction = "Mixed conditions. Light tasks only—save major planting for better weather."
-    }
-  } else if (score >= 3) {
-    switch (dominantIssue) {
-      case 'frost':
-        instruction = "Frost risk tonight. Protect tender plants or keep them covered."
-        break
-      case 'cold':
-        instruction = `Only ${Math.round(m.temperature)}°F outside. Too cold for planting—focus on planning.`
-        break
-      case 'heavy_rain':
-        instruction = "Heavy rain. Gardens are off-limits—soil damage from foot traffic."
-        break
-      case 'high_wind':
-        instruction = `Winds at ${Math.round(m.windSpeed)} mph. Stay inside—transplants would be shredded.`
-        break
-      default:
-        instruction = "Poor conditions. Not a planting day—tend to seedlings under cover."
-    }
-  } else {
-    if (m.temperature < 32) {
-      instruction = `Hard freeze at ${Math.round(m.temperature)}°F. All tender plants must be protected.`
-    } else if (m.precipitation > 0.5) {
-      instruction = "Downpour in progress. The garden will keep—stay dry."
-    } else {
-      instruction = "Conditions unsafe for garden work. Try again tomorrow."
-    }
+  switch (dominantIssue) {
+    case 'cold_soil':
+      instruction = `Soil only ${Math.round(issueValue)}°F. Too cold for most seeds—wait for warmer days.`
+      break
+    case 'cool_soil':
+      instruction = `Soil at ${Math.round(issueValue)}°F. Cool-season crops only—hold off on tomatoes.`
+      break
+    case 'frost':
+      instruction = "Frost risk. Protect tender plants and don't transplant today."
+      break
+    case 'cold':
+      instruction = `Only ${Math.round(m.temperature)}°F. Too cold for outdoor planting.`
+      break
+    case 'heavy_rain':
+      instruction = "Heavy rain. Gardens are off-limits—soil compaction risk."
+      break
+    case 'rain':
+      instruction = "Rain falling. Wait for a break before working the beds."
+      break
+    case 'rain_likely':
+      instruction = `${Math.round(issueValue)}% rain chance. Finish planting early or wait.`
+      break
+    case 'high_wind':
+      instruction = `Winds at ${Math.round(m.windSpeed)} mph. Too windy for transplants.`
+      break
+    case 'saturated':
+      instruction = "Ground is soggy. Walking beds will compact wet soil."
+      break
+    case 'heat':
+      instruction = `Heat index ${Math.round(issueValue)}°F. Work early morning only.`
+      break
+    default:
+      if (score >= 9) {
+        instruction = m.soilTemperature && m.soilTemperature >= 60
+          ? `Ideal conditions. Soil at ${Math.round(m.soilTemperature)}°F—perfect for planting.`
+          : "Excellent conditions for garden work."
+      } else if (score >= 7) {
+        instruction = "Good conditions for gardening."
+      } else {
+        instruction = "Mixed conditions. Light tasks only."
+      }
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -306,128 +499,140 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
 // ============================================
 // OUTDOOR ALERT — Pets, Kids & Livestock
 // ============================================
-// Renamed from "Shepherd's Alert" to be more universal
-// Uses THI for animal safety, Heat Index for human reference
 
 export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
+  const thi = calculateTHI(m.temperature, m.humidity)
+
+  // BLOCKING CONDITIONS
+  
+  if (m.groundCondition === 'icy') {
+    return {
+      score: 3,
+      label: 'Poor',
+      instruction: "ICE ON GROUND. Slip and fall hazard. Very short trips only—watch every step."
+    }
+  }
+  
+  // Calculate score with penalties
   let score = 10
   let dominantIssue: string = 'none'
   
-  const thi = calculateTHI(m.temperature, m.humidity)
+  // Snow penalty (not blocking, but significant)
+  if (m.hasSnowOnGround) {
+    if (m.snowDepth > 4) {
+      score -= 4
+      dominantIssue = 'deep_snow'
+    } else if (m.snowDepth > 1) {
+      score -= 2
+      dominantIssue = 'snow_on_ground'
+    } else {
+      score -= 1
+      dominantIssue = 'light_snow'
+    }
+  }
+  
+  if (m.isActivelySnowing) {
+    score -= 2
+    if (dominantIssue === 'none') dominantIssue = 'snowing'
+  }
 
-  // === HEAT STRESS (THI-based for animals) ===
-  // Source: Penn State Extension livestock heat stress guidelines
-  // THI 72-78: Mild stress, THI 79-88: Moderate, THI 89-98: Severe, THI 99+: Emergency
+  // Heat stress (THI-based)
   if (thi >= 99) {
     score -= 6
     dominantIssue = 'heat_emergency'
   } else if (thi >= 89) {
     score -= 4
-    dominantIssue = 'severe_heat'
+    if (dominantIssue === 'none') dominantIssue = 'severe_heat'
   } else if (thi >= 79) {
     score -= 2
-    dominantIssue = 'moderate_heat'
+    if (dominantIssue === 'none') dominantIssue = 'moderate_heat'
   } else if (thi >= 72) {
     score -= 1
-    dominantIssue = 'mild_heat'
+    if (dominantIssue === 'none') dominantIssue = 'mild_heat'
   }
 
-  // === COLD STRESS ===
+  // Cold stress
   if (m.windChill < 10) {
     score -= 5
     dominantIssue = 'extreme_cold'
   } else if (m.windChill < 20) {
     score -= 3
-    dominantIssue = 'severe_cold'
+    if (dominantIssue === 'none') dominantIssue = 'severe_cold'
   } else if (m.windChill < 32) {
     score -= 2
-    dominantIssue = 'cold'
+    if (dominantIssue === 'none') dominantIssue = 'cold'
   } else if (m.temperature < 40) {
     score -= 1
     if (dominantIssue === 'none') dominantIssue = 'chilly'
   }
 
-  // === FREEZING RAIN (extremely dangerous) ===
-  if (m.temperature >= 28 && m.temperature <= 35 && m.precipitation > 0) {
+  // Freezing rain (extremely dangerous)
+  if (m.temperature >= 28 && m.temperature <= 36 && m.precipitation > 0 && m.hasIceRisk) {
     score -= 4
     dominantIssue = 'freezing_rain'
   }
 
-  // === WET CONDITIONS ===
-  if (m.humidity > 85 && m.precipitation > 0.2) {
-    score -= 2
-    if (dominantIssue === 'none') dominantIssue = 'wet'
-  }
-
-  // === HIGH WIND ===
+  // High wind
   if (m.windSpeed > 35) {
     score -= 3
     if (dominantIssue === 'none') dominantIssue = 'high_wind'
-  } else if (m.windSpeed > 25) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'windy'
   }
 
   score = Math.max(1, Math.min(10, score))
 
-  // === GENERATE INSTRUCTION ===
+  // Generate instruction
   let instruction: string
-
-  if (score >= 9) {
-    instruction = "Safe for extended time outdoors. Pets can play freely—just keep water available."
-  } else if (score >= 7) {
-    switch (dominantIssue) {
-      case 'mild_heat':
-        instruction = `Heat index ${m.heatIndex}°F. Limit strenuous activity. Provide shade and water.`
-        break
-      case 'chilly':
-        instruction = `Cool at ${Math.round(m.temperature)}°F. Short-haired pets may need a coat for long walks.`
-        break
-      default:
-        instruction = "Good conditions for outdoor time. Standard precautions apply."
-    }
-  } else if (score >= 5) {
-    switch (dominantIssue) {
-      case 'moderate_heat':
-        instruction = `Heat stress risk—index at ${m.heatIndex}°F. Short outdoor trips only. Watch for panting.`
-        break
-      case 'cold':
-        instruction = `Wind chill ${m.windChill}°F. Limit time outside. Check paws for ice buildup.`
-        break
-      case 'wet':
-        instruction = "Wet and muddy. Towel off pets promptly—watch for skin issues."
-        break
-      default:
-        instruction = "Marginal conditions. Keep outdoor time brief and supervised."
-    }
-  } else if (score >= 3) {
-    switch (dominantIssue) {
-      case 'severe_heat':
-        instruction = `Dangerous heat—index ${m.heatIndex}°F. Bathroom breaks only. Hot pavement burns paws.`
-        break
-      case 'severe_cold':
-        instruction = `Wind chill ${m.windChill}°F. Frostbite risk in 15-30 minutes. Brief trips only.`
-        break
-      case 'freezing_rain':
-        instruction = "Freezing rain falling. Extremely slippery—stay inside if possible."
-        break
-      case 'high_wind':
-        instruction = `Gusts to ${Math.round(m.windGusts)} mph. Debris hazard. Keep everyone sheltered.`
-        break
-      default:
-        instruction = "Poor conditions. Minimize outdoor exposure for pets and children."
-    }
-  } else {
-    switch (dominantIssue) {
-      case 'heat_emergency':
-        instruction = `HEAT EMERGENCY: Index ${m.heatIndex}°F. No outdoor activity. Heatstroke risk is high.`
-        break
-      case 'extreme_cold':
-        instruction = `EXTREME COLD: Wind chill ${m.windChill}°F. Frostbite in under 10 minutes. Stay inside.`
-        break
-      default:
-        instruction = "Unsafe conditions. Keep all pets and children indoors."
-    }
+  switch (dominantIssue) {
+    case 'deep_snow':
+      instruction = `${m.snowDepth.toFixed(1)}" of snow. Small pets struggle, watch for hidden hazards.`
+      break
+    case 'snow_on_ground':
+      instruction = "Snow on ground. Keep walks moderate, check paws for ice buildup."
+      break
+    case 'light_snow':
+      instruction = "Light snow cover. Watch footing, keep outdoor time reasonable."
+      break
+    case 'snowing':
+      instruction = "Currently snowing. Short outdoor trips OK, don't stay out long."
+      break
+    case 'heat_emergency':
+      instruction = `HEAT EMERGENCY: Index ${m.heatIndex}°F. No outdoor activity. Heatstroke risk.`
+      break
+    case 'severe_heat':
+      instruction = `Dangerous heat—index ${m.heatIndex}°F. Bathroom breaks only. Watch for panting.`
+      break
+    case 'moderate_heat':
+      instruction = `Heat stress risk—index ${m.heatIndex}°F. Keep outdoor time short.`
+      break
+    case 'mild_heat':
+      instruction = `Heat index ${m.heatIndex}°F. Provide shade and water for extended time.`
+      break
+    case 'extreme_cold':
+      instruction = `EXTREME COLD: Wind chill ${m.windChill}°F. Frostbite risk in under 10 minutes.`
+      break
+    case 'severe_cold':
+      instruction = `Wind chill ${m.windChill}°F. Limit to 15 minutes outside.`
+      break
+    case 'cold':
+      instruction = `Wind chill ${m.windChill}°F. Short-haired pets need a coat. Check paws for ice.`
+      break
+    case 'chilly':
+      instruction = `Cool at ${Math.round(m.temperature)}°F. Most pets fine, but limit time for small/thin-coated breeds.`
+      break
+    case 'freezing_rain':
+      instruction = "Freezing rain falling. Extremely slippery. Stay inside."
+      break
+    case 'high_wind':
+      instruction = `Gusts to ${Math.round(m.windGusts)} mph. Debris hazard. Keep sheltered.`
+      break
+    default:
+      if (score >= 9) {
+        instruction = "Safe for extended time outdoors. Enjoy the weather!"
+      } else if (score >= 7) {
+        instruction = "Good conditions for outdoor time."
+      } else {
+        instruction = "Marginal conditions. Keep outdoor time moderate."
+      }
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -438,45 +643,72 @@ export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
 // ============================================
 
 export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
+  // BLOCKING CONDITIONS
+  
+  if (m.groundCondition === 'icy') {
+    return {
+      score: 1,
+      label: 'Avoid',
+      instruction: "ICE ON SURFACES. Ladders deadly, surfaces untreatable. Plan only."
+    }
+  }
+  
+  if (m.hasSnowOnGround) {
+    return {
+      score: 1,
+      label: 'Avoid',
+      instruction: "Snow covering surfaces. No exterior work possible until clear."
+    }
+  }
+  
+  if (m.isActivelySnowing) {
+    return {
+      score: 2,
+      label: 'Avoid',
+      instruction: "Currently snowing. All exterior work postponed."
+    }
+  }
+  
+  if (m.isFrozenGround || m.temperature < 35) {
+    // Check if paint/finishes would fail
+    if (m.temperature < 40) {
+      return {
+        score: 2,
+        label: 'Avoid',
+        instruction: `Only ${Math.round(m.temperature)}°F. Paint won't cure, caulk won't set. Plan and order materials.`
+      }
+    }
+  }
+  
+  // NON-BLOCKING - calculate penalties
   let score = 10
   let dominantIssue: string = 'none'
 
-  // === DEW POINT (critical for paint/stain cure) ===
-  // Source: Sherwin-Williams, Benjamin Moore technical bulletins
-  // Paint fails if dew point is within 5°F of air temp (condensation risk)
+  // Dew point spread (paint won't cure)
   if (m.dewPointSpread < 3) {
     score -= 4
     dominantIssue = 'condensation'
   } else if (m.dewPointSpread < 5) {
     score -= 2
-    dominantIssue = 'dew_risk'
-  } else if (m.dewPointSpread < 8) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'humid'
+    if (dominantIssue === 'none') dominantIssue = 'dew_risk'
   }
 
-  // === HUMIDITY (general moisture issues) ===
+  // Humidity
   if (m.humidity > 85) {
     score -= 3
     if (dominantIssue === 'none') dominantIssue = 'high_humidity'
-  } else if (m.humidity > 70) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'moderate_humidity'
   }
 
-  // === PRECIPITATION ===
+  // Precipitation
   if (m.precipitation > 0.1) {
     score -= 5
     dominantIssue = 'rain'
   } else if (m.precipProbability > 70) {
     score -= 3
     if (dominantIssue === 'none') dominantIssue = 'rain_likely'
-  } else if (m.precipProbability > 40) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'rain_possible'
   }
 
-  // === WIND (ladder safety, overspray) ===
+  // Wind (ladder safety)
   if (m.windGusts > 40) {
     score -= 5
     dominantIssue = 'dangerous_wind'
@@ -486,88 +718,54 @@ export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
   } else if (m.windGusts > 20) {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'gusty'
-  } else if (m.windSpeed > 15) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'breezy'
   }
 
-  // === TEMPERATURE (paint cure requires 50°F+, 24h window) ===
-  // Source: Most latex paints require 50°F min, oil-based 40°F
-  if (m.temperature < 40) {
-    score -= 3
-    if (dominantIssue === 'none') dominantIssue = 'too_cold'
-  } else if (m.temperature < 50) {
+  // Temperature (paint cure)
+  if (m.temperature < 50) {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'cold'
   }
 
   score = Math.max(1, Math.min(10, score))
 
-  // === GENERATE INSTRUCTION ===
+  // Generate instruction
   let instruction: string
-
-  if (score >= 9) {
-    instruction = `Ideal for paint and stain. Dew point spread ${m.dewPointSpread}°F—finishes will cure properly.`
-  } else if (score >= 7) {
-    switch (dominantIssue) {
-      case 'humid':
-      case 'dew_risk':
-        instruction = `Humidity ${m.humidity}%. Apply finishes in warmest hours—avoid after 4pm.`
-        break
-      case 'breezy':
-        instruction = `Winds ${Math.round(m.windSpeed)} mph. Use drop cloths for spray work.`
-        break
-      case 'rain_possible':
-        instruction = `${Math.round(m.precipProbability)}% rain chance. Complete paint work early.`
-        break
-      case 'cold':
-        instruction = `At ${Math.round(m.temperature)}°F, use cold-weather paints only. Check product specs.`
-        break
-      default:
-        instruction = "Good conditions for exterior repairs and finishing work."
-    }
-  } else if (score >= 5) {
-    switch (dominantIssue) {
-      case 'condensation':
-        instruction = `Dew point spread only ${m.dewPointSpread}°F. Paint will fail—do prep work instead.`
-        break
-      case 'high_humidity':
-        instruction = `Humidity ${m.humidity}%. Sealants won't cure. Focus on repairs, not finishes.`
-        break
-      case 'gusty':
-        instruction = `Gusts to ${Math.round(m.windGusts)} mph. No ladder work above 6 feet.`
-        break
-      case 'rain_likely':
-        instruction = "Rain likely. Interior work or covered projects only."
-        break
-      default:
-        instruction = "Marginal conditions. Avoid finish work—focus on prep and planning."
-    }
-  } else if (score >= 3) {
-    switch (dominantIssue) {
-      case 'high_gusts':
-        instruction = `Gusts ${Math.round(m.windGusts)} mph. Ladders are unsafe. Stay grounded.`
-        break
-      case 'rain':
-        instruction = "Rain falling. All exterior work on hold. Good day for planning."
-        break
-      case 'too_cold':
-        instruction = `Only ${Math.round(m.temperature)}°F. Nothing will cure. Plan and order materials.`
-        break
-      default:
-        instruction = "Poor conditions. Best to plan and prep today."
-    }
-  } else {
-    switch (dominantIssue) {
-      case 'dangerous_wind':
-        instruction = `DANGER: Gusts ${Math.round(m.windGusts)} mph. Stay off ladders and away from trees.`
-        break
-      case 'rain':
-        instruction = "Heavy rain. Check for leaks, but otherwise a planning day."
-        break
-      default:
-        instruction = "Unsafe for exterior work. Focus on planning and material orders."
-    }
+  switch (dominantIssue) {
+    case 'condensation':
+      instruction = `Dew point spread only ${m.dewPointSpread}°F. Paint will fail—prep work only.`
+      break
+    case 'dew_risk':
+      instruction = `Humidity ${m.humidity}%. Apply finishes in warmest hours only.`
+      break
+    case 'high_humidity':
+      instruction = `Humidity ${m.humidity}%. Sealants won't cure. Focus on repairs.`
+      break
+    case 'rain':
+      instruction = "Rain falling. All exterior work on hold."
+      break
+    case 'rain_likely':
+      instruction = "Rain likely. Complete work early or postpone."
+      break
+    case 'dangerous_wind':
+      instruction = `DANGER: Gusts ${Math.round(m.windGusts)} mph. Stay off ladders.`
+      break
+    case 'high_gusts':
+      instruction = `Gusts ${Math.round(m.windGusts)} mph. No ladder work today.`
+      break
+    case 'gusty':
+      instruction = `Gusts to ${Math.round(m.windGusts)} mph. No work above 6 feet.`
+      break
+    case 'cold':
+      instruction = `At ${Math.round(m.temperature)}°F, use cold-weather products only.`
+      break
+    default:
+      if (score >= 9) {
+        instruction = `Ideal for exterior work. Dew point spread ${m.dewPointSpread}°F—finishes will cure well.`
+      } else if (score >= 7) {
+        instruction = "Good conditions for exterior repairs."
+      } else {
+        instruction = "Marginal conditions. Focus on prep work."
+      }
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -578,151 +776,154 @@ export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
 // ============================================
 
 export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
+  // BLOCKING CONDITIONS
+  
+  if (m.groundCondition === 'icy') {
+    return {
+      score: 2,
+      label: 'Avoid',
+      instruction: "ICE ON SITE. Equipment slides, workers fall. Limited interior work only."
+    }
+  }
+  
+  // Calculate score with penalties
   let score = 10
   let dominantIssue: string = 'none'
+  
+  // Snow penalties (not always blocking for construction)
+  if (m.hasSnowOnGround) {
+    if (m.snowDepth > 4) {
+      score -= 5
+      dominantIssue = 'deep_snow'
+    } else if (m.snowDepth > 1) {
+      score -= 3
+      dominantIssue = 'snow_on_ground'
+    } else {
+      score -= 1
+      dominantIssue = 'light_snow'
+    }
+  }
+  
+  if (m.isActivelySnowing) {
+    score -= 3
+    if (dominantIssue === 'none') dominantIssue = 'snowing'
+  }
+  
+  if (m.isFrozenGround) {
+    score -= 2
+    if (dominantIssue === 'none') dominantIssue = 'frozen_ground'
+  }
 
-  // === PRECIPITATION ===
+  // Precipitation
   if (m.precipitation > 0.25) {
     score -= 4
-    dominantIssue = 'rain'
+    if (dominantIssue === 'none') dominantIssue = 'rain'
   } else if (m.precipitation > 0.1) {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'light_rain'
-  } else if (m.precipProbability > 80) {
-    score -= 2
-    if (dominantIssue === 'none') dominantIssue = 'rain_imminent'
   }
 
-  // === COLD STRESS (OSHA guidelines) ===
-  // Source: OSHA Cold Stress Guide
+  // Cold stress (OSHA)
   if (m.windChill < 10) {
     score -= 5
     dominantIssue = 'extreme_cold'
   } else if (m.windChill < 20) {
     score -= 3
-    dominantIssue = 'severe_cold'
+    if (dominantIssue === 'none') dominantIssue = 'severe_cold'
   } else if (m.windChill < 32) {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'cold'
-  } else if (m.feelsLike < 40) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'chilly'
   }
 
-  // === HEAT STRESS (OSHA guidelines) ===
-  // Source: OSHA Heat Illness Prevention
+  // Heat stress (OSHA)
   if (m.heatIndex >= 115) {
     score -= 5
     dominantIssue = 'extreme_heat'
   } else if (m.heatIndex >= 103) {
     score -= 4
-    dominantIssue = 'danger_heat'
+    if (dominantIssue === 'none') dominantIssue = 'danger_heat'
   } else if (m.heatIndex >= 91) {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'caution_heat'
-  } else if (m.heatIndex >= 80) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'warm'
   }
 
-  // === WIND (equipment safety) ===
-  // Source: OSHA crane operation guidelines
+  // Wind (equipment safety)
   if (m.windGusts > 45) {
     score -= 5
     dominantIssue = 'dangerous_wind'
   } else if (m.windGusts > 35) {
     score -= 3
     if (dominantIssue === 'none') dominantIssue = 'high_wind'
-  } else if (m.windGusts > 25) {
-    score -= 2
-    if (dominantIssue === 'none') dominantIssue = 'gusty'
-  } else if (m.windSpeed > 20) {
-    score -= 1
-    if (dominantIssue === 'none') dominantIssue = 'breezy'
   }
 
-  // === GROUND CONDITIONS (estimated) ===
+  // Mud season
   const isMudSeason = m.month >= 2 && m.month <= 4 && m.temperature > 35 && m.temperature < 55
-  if (isMudSeason && m.precipitation > 0) {
+  if (isMudSeason && m.groundCondition === 'wet') {
     score -= 2
     if (dominantIssue === 'none') dominantIssue = 'mud'
-  } else if (m.humidity > 90 && m.precipitation > 0.2) {
-    score -= 2
-    if (dominantIssue === 'none') dominantIssue = 'saturated'
   }
 
   score = Math.max(1, Math.min(10, score))
 
-  // === GENERATE INSTRUCTION ===
+  // Generate instruction
   let instruction: string
-
-  if (score >= 9) {
-    instruction = "Prime conditions. Ground firm, weather clear. Full productivity today."
-  } else if (score >= 7) {
-    switch (dominantIssue) {
-      case 'warm':
-        instruction = `Heat index ${m.heatIndex}°F. Schedule breaks and keep water on site.`
-        break
-      case 'chilly':
-        instruction = `Feels like ${Math.round(m.feelsLike)}°F. Dress in layers—it'll warm up.`
-        break
-      case 'breezy':
-        instruction = `Winds ${Math.round(m.windSpeed)} mph. Secure light materials.`
-        break
-      default:
-        instruction = "Good working conditions. Standard safety protocols apply."
-    }
-  } else if (score >= 5) {
-    switch (dominantIssue) {
-      case 'caution_heat':
-        instruction = `Heat index ${m.heatIndex}°F. Water breaks every 20 min. Watch for heat illness.`
-        break
-      case 'cold':
-        instruction = `Wind chill ${m.windChill}°F. Warm-up breaks every hour. Layer up.`
-        break
-      case 'gusty':
-        instruction = `Gusts to ${Math.round(m.windGusts)} mph. No panel work or scaffolding above 20ft.`
-        break
-      case 'light_rain':
-        instruction = "Light rain. Covered work only. Protect exposed materials."
-        break
-      case 'mud':
-        instruction = "Mud season. Avoid heavy equipment on grades—ruts will form."
-        break
-      default:
-        instruction = "Workable with precautions. Expect reduced productivity."
-    }
-  } else if (score >= 3) {
-    switch (dominantIssue) {
-      case 'danger_heat':
-        instruction = `DANGER: Heat index ${m.heatIndex}°F. Early morning work only. Mandatory rest cycles.`
-        break
-      case 'severe_cold':
-        instruction = `Wind chill ${m.windChill}°F. Frostbite risk. Limit exposure to 30-minute intervals.`
-        break
-      case 'high_wind':
-        instruction = `Gusts ${Math.round(m.windGusts)} mph. Cranes grounded. Secure all materials.`
-        break
-      case 'rain':
-        instruction = "Steady rain. Site work suspended. Protect materials and equipment."
-        break
-      default:
-        instruction = "Poor conditions. Consider standing down non-essential work."
-    }
-  } else {
-    switch (dominantIssue) {
-      case 'extreme_heat':
-        instruction = `SITE CLOSED: Heat index ${m.heatIndex}°F. Heat stroke risk too high. Resume tomorrow.`
-        break
-      case 'extreme_cold':
-        instruction = `SITE CLOSED: Wind chill ${m.windChill}°F. Frostbite in under 10 minutes.`
-        break
-      case 'dangerous_wind':
-        instruction = `SITE CLOSED: Gusts ${Math.round(m.windGusts)} mph. Structural collapse risk.`
-        break
-      default:
-        instruction = "Conditions unsafe. All work suspended until weather improves."
-    }
+  switch (dominantIssue) {
+    case 'deep_snow':
+      instruction = `${m.snowDepth.toFixed(1)}" of snow on site. Clear before operations.`
+      break
+    case 'snow_on_ground':
+      instruction = "Snow on ground. Traction issues—proceed with caution."
+      break
+    case 'light_snow':
+      instruction = "Light snow cover. Watch footing, clear work areas."
+      break
+    case 'snowing':
+      instruction = "Currently snowing. Conditions deteriorating. Monitor closely."
+      break
+    case 'frozen_ground':
+      instruction = "Ground is frozen. Good for driving, no excavation possible."
+      break
+    case 'rain':
+      instruction = "Steady rain. Site work suspended. Protect materials."
+      break
+    case 'light_rain':
+      instruction = "Light rain. Covered work only."
+      break
+    case 'extreme_cold':
+      instruction = `SITE CLOSED: Wind chill ${m.windChill}°F. Frostbite in under 10 minutes.`
+      break
+    case 'severe_cold':
+      instruction = `Wind chill ${m.windChill}°F. Limit exposure to 30 minutes. Warm-up breaks required.`
+      break
+    case 'cold':
+      instruction = `Wind chill ${m.windChill}°F. Dress in layers. Warm-up breaks every hour.`
+      break
+    case 'extreme_heat':
+      instruction = `SITE CLOSED: Heat index ${m.heatIndex}°F. Heat stroke risk too high.`
+      break
+    case 'danger_heat':
+      instruction = `DANGER: Heat index ${m.heatIndex}°F. Early morning work only.`
+      break
+    case 'caution_heat':
+      instruction = `Heat index ${m.heatIndex}°F. Mandatory water breaks every 20 minutes.`
+      break
+    case 'dangerous_wind':
+      instruction = `SITE CLOSED: Gusts ${Math.round(m.windGusts)} mph. Crane operations prohibited.`
+      break
+    case 'high_wind':
+      instruction = `Gusts ${Math.round(m.windGusts)} mph. No crane work. Secure materials.`
+      break
+    case 'mud':
+      instruction = "Mud season. Heavy equipment will rut. Limit traffic."
+      break
+    default:
+      if (score >= 9) {
+        instruction = "Good conditions. Full operations."
+      } else if (score >= 7) {
+        instruction = "Workable conditions. Standard safety protocols."
+      } else {
+        instruction = "Reduced productivity expected."
+      }
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -737,7 +938,7 @@ export function calculateAllTaskScores(weather: WeatherData): TaskScores {
 
   return {
     sower: calculateSowerScore(metrics),
-    shepherd: calculateOutdoorScore(metrics), // Using new universal function
+    shepherd: calculateOutdoorScore(metrics),
     keeper: calculateKeeperScore(metrics),
     builder: calculateBuilderScore(metrics),
   }
@@ -802,7 +1003,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
         status: 'Germination Trigger',
         icon: '🌱',
         color: 'text-green-400',
-        tip: 'Warm rain! Perfect conditions for native seed germination.',
+        tip: 'Warm rain! Perfect for native seed germination.',
         progress: 100,
       }
     }
@@ -811,7 +1012,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
         status: 'Germination Trigger',
         icon: '🌧️',
         color: 'text-yellow-400',
-        tip: 'Soil is warming. Awaiting rain to trigger germination.',
+        tip: 'Soil warming. Awaiting rain to trigger germination.',
         progress: 75,
       }
     }
@@ -819,7 +1020,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
       status: 'Germination Trigger',
       icon: '🌤️',
       color: 'text-yellow-400',
-      tip: 'Still cool. Germination will begin when temps rise above 55°F.',
+      tip: 'Still cool. Germination begins when temps rise above 55°F.',
       progress: 50,
     }
   }
@@ -831,7 +1032,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
         status: 'Growing Season',
         icon: '🌻',
         color: 'text-green-500',
-        tip: 'Peak growing season. Native plants establishing root systems.',
+        tip: 'Peak growing season. Natives establishing roots.',
         progress: Math.round(monthProgress),
       }
     }
@@ -840,7 +1041,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
         status: 'Growing Season',
         icon: '☀️',
         color: 'text-amber-500',
-        tip: 'Midsummer growth. Water during dry spells, especially new transplants.',
+        tip: 'Midsummer. Water during dry spells.',
         progress: Math.round(monthProgress),
       }
     }
@@ -848,7 +1049,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
       status: 'Growing Season',
       icon: '🍂',
       color: 'text-orange-500',
-      tip: 'Season winding down. Natives are setting seed for next year.',
+      tip: 'Season ending. Natives setting seed.',
       progress: Math.round(monthProgress),
     }
   }
@@ -857,7 +1058,7 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
     status: 'Dormant',
     icon: '💤',
     color: 'text-gray-400',
-    tip: 'Plants entering dormancy. Collect seeds and prepare for stratification.',
+    tip: 'Dormancy. Collect seeds for stratification.',
     progress: 0,
   }
 }

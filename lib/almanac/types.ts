@@ -17,7 +17,8 @@ export interface CurrentConditions {
   windDirection: number
   windGusts: number
   pressure: number
-  soilTemperature?: number // 6cm depth - for planting decisions
+  soilTemperature?: number
+  snowDepth?: number          // NEW: Current snow depth in inches
 }
 
 export interface HourlyForecast {
@@ -26,6 +27,7 @@ export interface HourlyForecast {
   precipitationProbability: number[]
   precipitation: number[]
   weatherCode: number[]
+  snowfall?: number[]         // NEW: Hourly snowfall in inches
 }
 
 export interface DailyForecast {
@@ -37,6 +39,7 @@ export interface DailyForecast {
   weatherCode: number[]
   sunrise: string[]
   sunset: string[]
+  snowfallSum?: number[]      // NEW: Daily snowfall totals
 }
 
 export interface Location {
@@ -83,7 +86,6 @@ export interface WeatherCodeInfo {
   category: 'clear' | 'cloudy' | 'fog' | 'drizzle' | 'rain' | 'snow' | 'thunderstorm'
 }
 
-// Default fallback for unknown weather codes
 export const DEFAULT_WEATHER: WeatherCodeInfo = {
   condition: 'Unknown',
   icon: 'cloud',
@@ -121,7 +123,20 @@ export const WEATHER_CODES: Record<number, WeatherCodeInfo> = {
   99: { condition: 'Thunderstorm with heavy hail', icon: 'cloud-lightning', category: 'thunderstorm' },
 }
 
-// Safe lookup function with fallback
 export function getWeatherInfo(code: number): WeatherCodeInfo {
   return WEATHER_CODES[code] ?? DEFAULT_WEATHER
+}
+
+// Snow-related weather codes
+export const SNOW_WEATHER_CODES = [71, 73, 75, 77, 85, 86]
+
+// Ice-related weather codes (freezing rain/drizzle)
+export const ICE_WEATHER_CODES = [56, 57, 66, 67]
+
+export function isSnowCode(code: number): boolean {
+  return SNOW_WEATHER_CODES.includes(code)
+}
+
+export function isIceCode(code: number): boolean {
+  return ICE_WEATHER_CODES.includes(code)
 }

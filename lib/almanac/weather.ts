@@ -5,6 +5,10 @@ import type { WeatherData, CurrentConditions, HourlyForecast, DailyForecast, Loc
 export const DEFAULT_LAT = 36.52
 export const DEFAULT_LON = -82.26
 
+// Unit conversion constants
+const METERS_TO_INCHES = 39.3701
+const CM_TO_INCHES = 0.393701
+
 interface OpenMeteoResponse {
   latitude: number
   longitude: number
@@ -20,6 +24,7 @@ interface OpenMeteoResponse {
     wind_gusts_10m: number
     surface_pressure: number
     soil_temperature_6cm?: number
+    snow_depth?: number  // NOTE: Open-Meteo returns this in METERS
   }
   hourly: {
     time: string[]
@@ -27,6 +32,7 @@ interface OpenMeteoResponse {
     precipitation_probability: number[]
     precipitation: number[]
     weather_code: number[]
+    snowfall?: number[]  // In inches (we set precipitation_unit=inch)
   }
   daily: {
     time: string[]
@@ -37,10 +43,17 @@ interface OpenMeteoResponse {
     weather_code: number[]
     sunrise: string[]
     sunset: string[]
+    snowfall_sum?: number[]  // In inches (we set precipitation_unit=inch)
   }
 }
 
 export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
+  // Convert snow_depth from meters to inches
+  // Open-Meteo has no unit option for snow_depth - it's always meters
+  const snowDepthInches = data.current.snow_depth !== undefined 
+    ? data.current.snow_depth * METERS_TO_INCHES 
+    : undefined
+
   const current: CurrentConditions = {
     temperature: data.current.temperature_2m,
     feelsLike: data.current.apparent_temperature,
@@ -52,6 +65,7 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
     windGusts: data.current.wind_gusts_10m,
     pressure: data.current.surface_pressure,
     soilTemperature: data.current.soil_temperature_6cm,
+    snowDepth: snowDepthInches,  // Now in inches
   }
 
   const hourly: HourlyForecast = {
@@ -60,6 +74,7 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
     precipitationProbability: data.hourly.precipitation_probability,
     precipitation: data.hourly.precipitation,
     weatherCode: data.hourly.weather_code,
+    snowfall: data.hourly.snowfall,  // Already in inches (precipitation_unit=inch)
   }
 
   const daily: DailyForecast = {
@@ -71,6 +86,7 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
     weatherCode: data.daily.weather_code,
     sunrise: data.daily.sunrise,
     sunset: data.daily.sunset,
+    snowfallSum: data.daily.snowfall_sum,  // Already in inches
   }
 
   const location: Location = {

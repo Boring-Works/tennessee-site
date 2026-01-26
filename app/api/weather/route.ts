@@ -11,11 +11,10 @@ export async function GET(request: Request) {
   const latParam = searchParams.get('lat')
   const lonParam = searchParams.get('lon')
 
-  // Use defaults if not provided
   const lat = latParam || String(DEFAULT_LAT)
   const lon = lonParam || String(DEFAULT_LON)
 
-  // Validate latitude (must be between -90 and 90)
+  // Validate latitude
   const latNum = parseFloat(lat)
   if (isNaN(latNum) || latNum < -90 || latNum > 90) {
     return NextResponse.json(
@@ -24,7 +23,7 @@ export async function GET(request: Request) {
     )
   }
 
-  // Validate longitude (must be between -180 and 180)
+  // Validate longitude
   const lonNum = parseFloat(lon)
   if (isNaN(lonNum) || lonNum < -180 || lonNum > 180) {
     return NextResponse.json(
@@ -47,12 +46,14 @@ export async function GET(request: Request) {
       'wind_gusts_10m',
       'surface_pressure',
       'soil_temperature_6cm',
+      'snow_depth',           // NEW: Current snow depth on ground
     ].join(','),
     hourly: [
       'temperature_2m',
       'precipitation_probability',
       'precipitation',
       'weather_code',
+      'snowfall',             // NEW: Hourly snowfall
     ].join(','),
     daily: [
       'temperature_2m_max',
@@ -62,12 +63,14 @@ export async function GET(request: Request) {
       'weather_code',
       'sunrise',
       'sunset',
+      'snowfall_sum',         // NEW: Daily snowfall totals
     ].join(','),
     temperature_unit: 'fahrenheit',
     wind_speed_unit: 'mph',
     precipitation_unit: 'inch',
     timezone: 'America/New_York',
     forecast_days: '7',
+    past_days: '2',           // NEW: Get 2 days of history for snow/ice detection
   })
 
   try {

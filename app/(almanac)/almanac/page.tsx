@@ -21,6 +21,8 @@ import AboutModal from '@/components/almanac/AboutModal'
 import StaleDataWarning from '@/components/almanac/StaleDataWarning'
 import OnboardingModal from '@/components/almanac/OnboardingModal'
 import TomorrowPreview from '@/components/almanac/TomorrowPreview'
+import RotatingHook from '@/components/almanac/RotatingHook'
+import PresentedByBlock from '@/components/almanac/PresentedByBlock'
 import { transformWeatherData } from '@/lib/almanac/weather'
 import {
   calculateAllTaskScores,
@@ -186,15 +188,18 @@ export default function AlmanacPage() {
         <div className="max-w-3xl mx-auto px-4 py-8">
           {/* Masthead */}
         <header className="text-center mb-6">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide">
-              The 1775 Almanac
-            </h1>
-            <span className="text-xs text-almanac-gold/70 border border-almanac-gold/30 px-2 py-0.5 rounded-sm font-medium tracking-widest uppercase">
-              Est. 1775
-            </span>
+          <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide uppercase">
+            The 1775 Almanac
+          </h1>
+          <p className="text-sm text-almanac-parchment/70 mt-1 tracking-wide">
+            Rocky Mount State Historic Site
+          </p>
+          <div className="mt-3">
+            <RotatingHook />
           </div>
-          <AboutModal />
+          <div className="mt-2">
+            <AboutModal />
+          </div>
         </header>
 
         {/* Location Picker */}
@@ -297,42 +302,7 @@ export default function AlmanacPage() {
         <WeatherDetails hourly={weather.hourly} daily={weather.daily} />
 
         {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center py-8 border-t border-white/5 mt-8"
-        >
-          <p className="text-sm text-almanac-gold font-serif">
-            From Tennessee's oldest documented farm
-          </p>
-          <p className="text-xs text-almanac-parchment/50 mt-2">
-            Powered by Rocky Mount State Historic Site
-          </p>
-          <p className="text-xs text-almanac-parchment/40 mt-1">
-            Piney Flats, Tennessee
-          </p>
-
-          <div className="mt-6 pt-4 border-t border-white/5">
-            <p className="text-xs text-almanac-parchment/30">
-              Weather data via Open-Meteo • Guidance based on NWS and OSHA resources
-            </p>
-            {lastUpdated && (
-              <p className="text-xs text-almanac-parchment/20 mt-2">
-                Last updated: {lastUpdated.toLocaleTimeString('en-US', {
-                  hour: 'numeric',
-                  minute: '2-digit',
-                  hour12: true
-                })}
-              </p>
-            )}
-            <p className="text-xs text-almanac-parchment/20 mt-4 max-w-md mx-auto leading-relaxed">
-              This almanac is a work in progress — built for information and entertainment,
-              not life-or-death decisions. Always consult official sources for severe weather.
-              The old-timers had instincts; you've got the National Weather Service.
-            </p>
-          </div>
-        </motion.footer>
+        <PresentedByBlock lastUpdated={lastUpdated} />
 
         {/* First-visit Onboarding */}
         <OnboardingModal />

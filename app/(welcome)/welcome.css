@@ -1,18 +1,18 @@
 /* ===========================================
    WELCOME SCREEN STYLES
    Rocky Mount State Historic Site
-   Version 1.2
+   Plan A: The Commemorative Moment
    =========================================== */
 
 /* CSS Custom Properties */
 .welcome-page {
-  --welcome-bg: #0A1628;
-  --text-primary: #F5F1E8;
-  --text-secondary: #A0977D;
+  --welcome-bg: #0a1628;
+  --text-primary: #f5f1e8;
+  --text-secondary: #a0977d;
   --text-muted: rgba(245, 241, 232, 0.5);
-  --gold: #C9A227;
+  --gold: #c9a227;
   --gold-muted: rgba(201, 162, 39, 0.6);
-  --rust: #722F37;
+  --rust: #722f37;
   --card-bg: rgba(255, 255, 255, 0.03);
   --card-border: rgba(201, 162, 39, 0.2);
   --card-hover-border: rgba(201, 162, 39, 0.5);
@@ -24,71 +24,131 @@
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   background: var(--welcome-bg);
-  padding: 2rem 1rem;
 }
 
-/* Content Wrapper */
+/* ===========================================
+   WEATHER HEADER
+   =========================================== */
+
+.weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+}
+
+.weather-header--loading {
+  opacity: 0.6;
+}
+
+.weather-icon {
+  font-size: 1rem;
+}
+
+.weather-text {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: rgba(245, 241, 232, 0.6);
+  letter-spacing: 0.02em;
+}
+
+/* ===========================================
+   CONTENT WRAPPER
+   =========================================== */
+
 .welcome-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
+  padding: 2rem 1rem;
   max-width: 700px;
+  margin: 0 auto;
   width: 100%;
 }
 
 /* ===========================================
-   HEADER: Badges + Seal
+   DUAL COUNTDOWN
    =========================================== */
 
 .welcome-header {
+  margin-bottom: 1rem;
+}
+
+.dual-countdown {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
+  gap: 4rem;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.countdown-label {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--gold-muted);
+  text-transform: uppercase;
+}
+
+.countdown-days {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: rgba(245, 241, 232, 0.7);
 }
 
 @media (max-width: 480px) {
-  .welcome-header {
-    flex-direction: column;
-    gap: 0.75rem;
+  .dual-countdown {
+    gap: 2rem;
   }
-}
 
-/* Commemorative Badges */
-.welcome-badge {
-  font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: clamp(0.55rem, 1.8vw, 0.7rem);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--gold-muted);
+  .countdown-label {
+    font-size: 0.5rem;
+  }
+
+  .countdown-days {
+    font-size: 0.8rem;
+  }
 }
 
 /* ===========================================
    WAX SEAL
    =========================================== */
 
+.seal-container {
+  margin: 1rem 0;
+}
+
 .wax-seal {
   width: 100px;
   height: 100px;
   background: radial-gradient(
     circle at 35% 35%,
-    #B85A62,
-    #722F37 40%,
-    #5A2329 70%,
-    #4A1F24
+    #b85a62,
+    #722f37 40%,
+    #5a2329 70%,
+    #4a1f24
   );
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.5),
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5),
     inset 0 2px 4px rgba(255, 255, 255, 0.15),
     inset 0 -2px 4px rgba(0, 0, 0, 0.2);
   border: 3px solid rgba(201, 162, 39, 0.4);
@@ -99,9 +159,8 @@
   font-family: var(--font-cinzel), 'Cinzel', serif;
   font-size: 1.8rem;
   font-weight: 700;
-  color: #4A1F24;
-  text-shadow:
-    1px 1px 0 rgba(255, 255, 255, 0.1),
+  color: #4a1f24;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1),
     -1px -1px 0 rgba(0, 0, 0, 0.2);
   line-height: 1;
 }
@@ -111,7 +170,7 @@
   font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: #4A1F24;
+  color: #4a1f24;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 2px;
   text-transform: uppercase;
@@ -119,12 +178,12 @@
 
 @media (min-width: 640px) {
   .wax-seal {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
   }
 
   .seal-text {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .seal-date {
@@ -137,7 +196,7 @@
    =========================================== */
 
 .welcome-title-block {
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .welcome-title {
@@ -146,24 +205,85 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   color: var(--text-primary);
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.25rem 0;
 }
 
 .welcome-subtitle {
   font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: clamp(0.65rem, 2.5vw, 0.9rem);
+  font-size: clamp(0.6rem, 2vw, 0.8rem);
   font-weight: 400;
   letter-spacing: 0.35em;
   color: var(--text-secondary);
-  margin: 0 0 0.75rem 0;
+  margin: 0;
+  text-transform: uppercase;
 }
+
+/* ===========================================
+   BRAND STATEMENT
+   =========================================== */
+
+.brand-statement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.25rem 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+.brand-line-left,
+.brand-line-right {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 39, 0.5),
+    rgba(201, 162, 39, 0.5)
+  );
+  max-width: 100px;
+}
+
+.brand-line-right {
+  background: linear-gradient(
+    90deg,
+    rgba(201, 162, 39, 0.5),
+    rgba(201, 162, 39, 0.5),
+    transparent
+  );
+}
+
+.brand-text {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .brand-statement {
+    gap: 0.75rem;
+  }
+
+  .brand-line-left,
+  .brand-line-right {
+    max-width: 40px;
+  }
+}
+
+/* ===========================================
+   LOCATION
+   =========================================== */
 
 .welcome-location {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   font-style: italic;
   color: var(--text-muted);
-  margin: 0;
+  margin: 0 0 2rem 0;
 }
 
 /* ===========================================
@@ -217,10 +337,15 @@
 
 .divider::before,
 .divider::after {
-  content: "";
+  content: '';
   width: 80px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.4), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 39, 0.4),
+    transparent
+  );
 }
 
 .divider-ornament {
@@ -301,40 +426,6 @@
   font-size: 0.85rem;
   font-style: italic;
   color: rgba(245, 241, 232, 0.4);
-}
-
-/* ===========================================
-   WEATHER FOOTER
-   =========================================== */
-
-.weather-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  min-height: 80px; /* Prevent layout shift */
-}
-
-.weather-footer--loading {
-  opacity: 0.6;
-  justify-content: center;
-}
-
-.weather-icon {
-  font-size: 1.2rem;
-  margin-bottom: 0.25rem;
-}
-
-.weather-text {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: 0.85rem;
-  color: rgba(245, 241, 232, 0.45);
-}
-
-.weather-hilo {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: 0.75rem;
-  color: rgba(245, 241, 232, 0.35);
 }
 
 /* ===========================================

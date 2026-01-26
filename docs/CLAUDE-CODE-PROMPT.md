@@ -12,7 +12,7 @@ You're rebranding the existing "Rocky Mount Almanac" as **"The 1775 Almanac"** �
 
 **The critical rule: REBRAND, NOT REDUCE.**
 
-Every existing feature must be preserved. This is a visual/branding update plus five new customer experience components.
+Every existing feature must be preserved. This is a visual/branding update plus four new customer experience components.
 
 ---
 
@@ -20,7 +20,7 @@ Every existing feature must be preserved. This is a visual/branding update plus 
 
 Before writing ANY code, read:
 
-1. `/docs/1775-ALMANAC-BUILD-GUIDE.md` — Complete specification (1,700+ lines)
+1. `/docs/1775-ALMANAC-BUILD-GUIDE.md` — Complete specification
 2. `/docs/ALMANAC_LOGIC.md` — Technical documentation for existing code
 3. `/app/almanac/page.tsx` — Current main page implementation
 4. `/app/globals.css` — Global styles including almanac color variables
@@ -81,7 +81,7 @@ Follow this exact sequence to avoid breaking changes:
    - Add masthead header with "The 1775 Almanac" title
    - Add "Est. 1775" badge
    - Import and place AboutModal
-   - Update footer copy
+   - Update footer copy (including beta disclaimer)
    - **DO NOT remove any existing components**
 
 ### Phase 2: Saying System Upgrade
@@ -112,33 +112,27 @@ Follow this exact sequence to avoid breaking changes:
    - Amber warning with "Refresh" button
    - Reference: Build Guide "Customer Experience Enhancements"
 
-8. **Create `/components/almanac/PantryBanner.tsx`**
-   - Weather-triggered product suggestions
-   - Shows in footer area
-   - Reference: Build Guide "Customer Experience Enhancements"
-
-9. **Create `/components/almanac/OnboardingModal.tsx`**
+8. **Create `/components/almanac/OnboardingModal.tsx`**
    - First-visit only (localStorage check)
    - Explains workability scores
    - Reference: Build Guide "Customer Experience Enhancements"
 
-10. **Create `/components/almanac/ShareButton.tsx`**
+9. **Create `/components/almanac/ShareButton.tsx`**
     - Copies formatted text to clipboard
     - Shows "Copied!" confirmation
     - Reference: Build Guide "Customer Experience Enhancements"
 
-11. **Create `/components/almanac/TomorrowPreview.tsx`**
+10. **Create `/components/almanac/TomorrowPreview.tsx`**
     - Tomorrow's high/low/precip
     - Simple outlook text
     - Reference: Build Guide "Customer Experience Enhancements"
 
 ### Phase 5: Integration
 
-12. **Update `/app/almanac/page.tsx` again**
+11. **Update `/app/almanac/page.tsx` again**
     - Import all new components
     - Add StaleDataWarning after LocationPicker
     - Add TomorrowPreview after FrontierSaying
-    - Add PantryBanner in footer
     - Add OnboardingModal before closing `</main>`
     - Update FrontierSaying to use dual sayings
     - Pass temperature/location to ShareButton via FrontierSaying
@@ -192,7 +186,6 @@ After each phase, confirm:
 ### Files to CREATE:
 - `/components/almanac/AboutModal.tsx`
 - `/components/almanac/StaleDataWarning.tsx`
-- `/components/almanac/PantryBanner.tsx`
 - `/components/almanac/OnboardingModal.tsx`
 - `/components/almanac/ShareButton.tsx`
 - `/components/almanac/TomorrowPreview.tsx`
@@ -265,9 +258,9 @@ The implementation is complete when:
 5. ✅ "The Seedkeeper's Watch" title on NativePulse
 6. ✅ Share button copies text to clipboard
 7. ✅ Tomorrow preview card shows
-8. ✅ Pantry banner shows in appropriate weather
-9. ✅ Stale data warning shows after 15 minutes
-10. ✅ Onboarding modal shows on first visit
+8. ✅ Stale data warning shows after 15 minutes
+9. ✅ Onboarding modal shows on first visit
+10. ✅ Beta disclaimer visible in footer
 11. ✅ ALL existing features still work
 12. ✅ Build passes with no errors
 13. ✅ Mobile responsive layout intact

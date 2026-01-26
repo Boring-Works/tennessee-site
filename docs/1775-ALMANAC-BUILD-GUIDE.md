@@ -1,8 +1,8 @@
 # The 1775 Almanac — Complete Build Guide
 
-> **Version:** 2.0 (Final Spec — Ready for Claude Code)  
+> **Version:** 2.1 (Final Spec — Pantry Removed, Copy Improved)  
 > **Target:** Rebrand + Customer Experience Enhancements  
-> **Effort Estimate:** 3–4 hours  
+> **Effort Estimate:** 2.5–3 hours  
 > **Last Updated:** January 26, 2026
 
 ---
@@ -29,7 +29,6 @@ This is a visual and branding update ONLY. **Every feature from the existing app
 10. [Launch Checklist](#launch-checklist)
 11. [Customer Experience Enhancements](#customer-experience-enhancements-launch-features)
 12. [Future Roadmap](#future-roadmap-v11)
-13. [Rocky Mount Pantry Integration](#rocky-mount-pantry-integration)
 
 ---
 
@@ -96,11 +95,11 @@ This is not a weather app. This is an **intelligence briefing** — practical ut
 
 ### The 1775 Claim (Verified Facts)
 
-The 15-acre parcel acquired by Rocky Mount Historical Association in 2021 is part of **Tennessee's oldest documented farm**, established in 1775 per the Tennessee Century Farms program. The Masengill family has held this land continuously since before the Declaration of Independence.
+The 15-acre parcel acquired by Rocky Mount Historical Association in 2021 is part of **Tennessee's oldest documented farm**, established in 1775 per the Tennessee Century Farms program. The Massengill family has held this land continuously since before the Declaration of Independence.
 
 **Key talking points:**
 - One year before the Declaration of Independence
-- Part of the Masengill Century Farm (Tennessee Century Farms program)
+- Part of the Massengill Century Farm (Tennessee Century Farms program)
 - Now cared for by Rocky Mount Historical Association (separate from THC-owned historic site)
 - Adjacent to Rocky Mount State Historic Site — first Southwest Territory capital (1790–1792)
 
@@ -375,10 +374,7 @@ Replace the existing footer with:
   
   <div className="mt-6 pt-4 border-t border-white/5">
     <p className="text-xs text-almanac-parchment/30">
-      Weather data from Open-Meteo (CC-BY 4.0)
-    </p>
-    <p className="text-xs text-almanac-parchment/30 mt-1">
-      Calculations based on NOAA, NWS, and OSHA guidelines
+      Weather data via Open-Meteo • Guidance based on NWS and OSHA resources
     </p>
     {lastUpdated && (
       <p className="text-xs text-almanac-parchment/20 mt-2">
@@ -389,6 +385,11 @@ Replace the existing footer with:
         })}
       </p>
     )}
+    <p className="text-xs text-almanac-parchment/20 mt-4 max-w-md mx-auto leading-relaxed">
+      This almanac is a work in progress — built for information and entertainment, 
+      not life-or-death decisions. Always consult official sources for severe weather. 
+      The old-timers had instincts; you've got the National Weather Service.
+    </p>
   </div>
 </motion.footer>
 ```
@@ -553,11 +554,11 @@ export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
     },
     {
       frontier: "High pressure is holding firm. Make hay while the sun shines.",
-      modern: "The weather's cooperating. Your to-do list has no excuses."
+      modern: "The weather's cooperating. Knock out the big stuff."
     },
     {
       frontier: "Not a cloud to trouble the eye. The kind of day worth remembering.",
-      modern: "Screenshot weather. Make it count."
+      modern: "Lock it in—this is a get-ahead day."
     },
   ],
 
@@ -575,11 +576,11 @@ export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
   partly_cloudy: [
     {
       frontier: "Fair skies with a few travelers. Should hold for the work ahead.",
-      modern: "Clouds are just passing through. Keep your plans."
+      modern: "Clouds are passing through. Stay on task."
     },
     {
       frontier: "The sun plays hide-and-seek. Conditions remain favorable.",
-      modern: "Don't let a few clouds change your schedule."
+      modern: "Keep working, but keep watching."
     },
   ],
 
@@ -597,7 +598,7 @@ export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
   fog: [
     {
       frontier: "Fog thick as wool in the hollows. Travel slow this morning.",
-      modern: "Low visibility. Leave early or leave late."
+      modern: "Headlights on. Take it slow."
     },
     {
       frontier: "Morning fog means the day will warm. Patience.",
@@ -619,7 +620,7 @@ export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
   heavy_rain: [
     {
       frontier: "A gully-washer is upon us. Stay clear of the low fords.",
-      modern: "Flash flood risk. Don't drive through standing water."
+      modern: "Turn around, don't drown."
     },
     {
       frontier: "Rain coming down in sheets. This is a day for the hearth.",
@@ -630,7 +631,7 @@ export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
   thunderstorm: [
     {
       frontier: "Thunder rolling through the mountains. Seek solid shelter.",
-      modern: "Lightning is no joke. Get inside, stay inside."
+      modern: "When thunder roars, go indoors."
     },
     {
       frontier: "Storm clouds stacking in the west. The lightning will follow.",
@@ -682,14 +683,14 @@ export const DUAL_SAYINGS: Record<SayingCategory, DualSaying[]> = {
     },
     {
       frontier: "Too hot for man or beast to labor. Wait for the evening cool.",
-      modern: "Heat advisory territory. Hydrate or postpone."
+      modern: "It's unsafe out there. Quit early or don't start."
     },
   ],
 
   windy: [
     {
       frontier: "Wind is kicking up something fierce. Secure anything loose.",
-      modern: "Gusts will grab whatever's not tied down. Check the yard."
+      modern: "Tie it down or lose it."
     },
     {
       frontier: "Strong gusts across the ridges. No day for ladder work.",
@@ -844,9 +845,9 @@ export default function AboutModal() {
                     Before Tennessee Was Tennessee
                   </h3>
                   <p className="text-sm text-almanac-parchment/80 leading-relaxed">
-                    In 1775—one year before the Declaration of Independence—the Masengill 
-                    family began working a piece of ground in what would become Sullivan County. 
-                    No state. No nation. Just soil, seasons, and the knowledge to read both.
+                    In 1775—one year before the Declaration of Independence—the Massengill 
+                    family began working ground in what would become Sullivan County. 
+                    No Tennessee yet—just soil, seasons, and the knowledge to read both.
                   </p>
                 </section>
 
@@ -873,7 +874,7 @@ export default function AboutModal() {
                   </p>
                   <p className="text-sm text-almanac-parchment/80 leading-relaxed mt-2">
                     But we do it through a lens that's been focused for two and a half centuries. 
-                    The same ground that taught the Masengills how to survive a frontier winter 
+                    The same ground that taught the Massengills how to survive a frontier winter 
                     is now teaching you when to protect your pipes.
                   </p>
                 </section>
@@ -935,7 +936,7 @@ Built on Tennessee's oldest documented farm. Updated daily. Free.
 
 **Post 2: Heritage Angle**
 ```
-In 1775, the Masengill family started farming this ground — one year before 
+In 1775, the Massengill family started farming this ground — one year before 
 the Declaration of Independence.
 
 250 years later, we're still learning from it.
@@ -1191,110 +1192,7 @@ import StaleDataWarning from '@/components/almanac/StaleDataWarning'
 
 ---
 
-### 2. Pantry Footer Banner (Weather-Triggered)
-
-**Purpose:** Natural, non-intrusive product placement tied to weather conditions.
-
-**Behavior:**
-- Shows contextual Pantry recommendation based on current temperature
-- Links to Rocky Mount Pantry shop
-- Only one message at a time (not overwhelming)
-
-**Component:** `components/almanac/PantryBanner.tsx`
-
-```tsx
-'use client'
-
-import { ShoppingBag } from 'lucide-react'
-
-interface PantryBannerProps {
-  temperature: number
-  weatherCode: number
-}
-
-interface PantryMessage {
-  emoji: string
-  text: string
-  link: string
-}
-
-function getPantryMessage(temp: number, code: number): PantryMessage | null {
-  // Freezing conditions
-  if (temp < 32) {
-    return {
-      emoji: '🍯',
-      text: 'Cold snap tonight. Our fireside preserves pair well with warm biscuits.',
-      link: 'https://rockymountmuseum.com/shop'
-    }
-  }
-  
-  // Cold but not freezing
-  if (temp < 45) {
-    return {
-      emoji: '☕',
-      text: 'Chilly morning. Our heritage hot cocoa will warm you up.',
-      link: 'https://rockymountmuseum.com/shop'
-    }
-  }
-  
-  // Rainy conditions (codes 51-67, 80-82)
-  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) {
-    return {
-      emoji: '🏠',
-      text: 'A day for the hearth. Our blackberry preserves are waiting.',
-      link: 'https://rockymountmuseum.com/shop'
-    }
-  }
-  
-  // Hot conditions
-  if (temp > 88) {
-    return {
-      emoji: '🍋',
-      text: 'Beat the heat with our heritage switchel recipe.',
-      link: 'https://rockymountmuseum.com/shop'
-    }
-  }
-  
-  // Default: don't show banner (nice weather, no pitch needed)
-  return null
-}
-
-export default function PantryBanner({ temperature, weatherCode }: PantryBannerProps) {
-  const message = getPantryMessage(temperature, weatherCode)
-  
-  if (!message) return null
-  
-  return (
-    <div className="mt-6 pt-4 border-t border-almanac-gold/10">
-      <a
-        href={message.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 text-sm text-almanac-parchment/70 hover:text-almanac-gold transition-colors group"
-      >
-        <span>{message.emoji}</span>
-        <span>{message.text}</span>
-        <ShoppingBag className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
-      </a>
-    </div>
-  )
-}
-```
-
-**Integration in page.tsx footer:**
-```tsx
-import PantryBanner from '@/components/almanac/PantryBanner'
-
-// In footer section:
-<PantryBanner 
-  temperature={weather.current.temperature} 
-  weatherCode={weather.current.weatherCode} 
-/>
-```
-
----
-
-### 3. First-Visit Onboarding Modal
+### 2. First-Visit Onboarding Modal
 
 **Purpose:** Help new users understand what the workability scores mean.
 
@@ -1386,19 +1284,19 @@ export default function OnboardingModal() {
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Sprout className="w-4 h-4 text-almanac-success" />
-                  <span>Sower's Score — Planting</span>
+                  <span>Sower's Score — <em>When to plant</em></span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Thermometer className="w-4 h-4 text-almanac-warning" />
-                  <span>Outdoor Alert — Safety</span>
+                  <span>Outdoor Alert — <em>When to protect yourself</em></span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Moon className="w-4 h-4 text-blue-400" />
-                  <span>Keeper's Score — Livestock</span>
+                  <span>Keeper's Score — <em>Livestock & pets</em></span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <HardHat className="w-4 h-4 text-orange-400" />
-                  <span>Builder's Score — Projects</span>
+                  <span>Builder's Score — <em>Projects & repairs</em></span>
                 </div>
               </div>
 
@@ -1651,74 +1549,6 @@ const tomorrowData = todayIndex !== -1 && weather.daily.time[todayIndex + 1] ? {
 
 ---
 
-### Rocky Mount Pantry Integration
-
-The almanac creates natural tie-ins for Rocky Mount Pantry products. Here's how to connect them:
-
-#### Weather-Triggered Product Suggestions
-
-| Weather Condition | Pantry Tie-In | Example Copy |
-|-------------------|---------------|--------------|
-| **Cold snap / Freezing** | Hot cocoa mix, fireside preserves, warming spices | "Cold enough to crack stone. Warm up with our heritage hot cocoa." |
-| **Rainy day** | Comfort foods, biscuit mixes, preserves | "A day for the hearth. Our blackberry preserves pair well with fresh biscuits." |
-| **Clear & beautiful** | Picnic items, trail snacks | "Perfect day for the outdoors. Pack our heritage trail mix." |
-| **Hot & humid** | Refreshing items, lemonade mixes, light preserves | "Beat the heat with our heritage switchel or mint tea." |
-| **Snow day** | Hearty soups, warming spices, hot drinks | "Snowed in? Our soup mixes and cocoa will see you through." |
-| **Fall harvest** | Seasonal preserves, apple butter, pumpkin items | "Harvest season. Our apple butter is ready for your table." |
-| **Spring planting** | Seed packets, garden-related items | "Soil's warming up. Time to plan the garden—and the harvest." |
-
-#### Implementation Options
-
-**Option 1: Footer Banner (Low Effort)**
-Add a small seasonal banner in the footer that rotates based on conditions:
-```tsx
-{temperature < 35 && (
-  <div className="text-xs text-almanac-parchment/60 mt-4">
-    🍯 Cold day? Our <a href="..." className="text-almanac-gold">fireside preserves</a> 
-    pair perfectly with warm biscuits.
-  </div>
-)}
-```
-
-**Option 2: Dedicated "From the Pantry" Card (Medium Effort)**
-A small card that appears based on conditions, linking to the Rocky Mount Pantry shop.
-
-**Option 3: Daily Product Feature (Higher Effort)**
-Integrate with Pantry inventory to show featured seasonal items that match the weather.
-
-#### Pantry Product Categories to Map
-
-| Pantry Category | Best Weather Conditions |
-|-----------------|------------------------|
-| **Preserves & Jams** | Rainy days, cold snaps, any "stay inside" weather |
-| **Hot Drinks** | Cold weather, snow, freezing temps |
-| **Biscuit/Bread Mixes** | Rainy days, cold weather, weekend mornings |
-| **Honey & Syrups** | Universal, but especially cold weather |
-| **Heritage Seeds** | Spring (soil temp 40-60°F), late summer seed-saving |
-| **Spice Blends** | Cooking weather (rain, cold, snow) |
-| **Gift Boxes** | Holiday seasons, gift-giving times |
-
-#### Seasonal Subscription Box Tie-In
-
-The almanac can promote Rocky Mount Pantry's seasonal subscription boxes:
-
-- **Winter Box** — Promoted when cold weather arrives
-- **Spring Box** — Promoted when soil temps rise above 45°F
-- **Summer Box** — Promoted when temps hit 80°F+
-- **Fall Box** — Promoted when first frost approaches
-
-Example integration:
-> "The Seedkeeper's Watch shows cold stratification is complete. Spring is coming.
-> Our Spring Pantry Box ships next week — [Reserve yours →]"
-
-### Email Capture / Notifications
-
-- Daily weather briefing email
-- Frost alert notifications
-- Planting window reminders
-
----
-
 ## Appendix: Color Reference
 
 | Name | Hex | CSS Variable | Usage |
@@ -1764,6 +1594,6 @@ Every component that exists today must exist after the rebrand. This is a reskin
 
 **End of Build Guide**
 
-*Document Version: 1.1 (Corrected)*  
+*Document Version: 2.1*  
 *Created: January 26, 2026*  
 *For: The 1775 Almanac — Sullivan County Launch*

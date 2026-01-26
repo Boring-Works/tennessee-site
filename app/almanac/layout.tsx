@@ -1,35 +1,49 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Rocky Mount Almanac | Weather for Tennessee',
-  description: 'Ad-free weather utility with workability scores for planting, livestock, construction, and property maintenance. Weather for all of Tennessee—from where Tennessee began.',
-  keywords: ['weather', 'Tennessee', 'Sullivan County', 'almanac', 'farming', 'gardening', 'Tri-Cities', 'Rocky Mount'],
+  title: 'The 1775 Almanac | Sullivan County Weather & Wisdom',
+  description: 'Weather and agricultural intelligence for Sullivan County, Tennessee. Workability scores, soil temps, frost alerts, moon phases, and native seed tracking — from Tennessee\'s oldest documented farm, est. 1775.',
+  keywords: [
+    'weather',
+    'Sullivan County',
+    'Tennessee',
+    'almanac',
+    '1775',
+    'Rocky Mount',
+    'farming',
+    'gardening',
+    'planting calendar',
+    'frost dates',
+    'soil temperature',
+    'native plants',
+    'seed starting',
+  ],
   authors: [{ name: 'Rocky Mount State Historic Site' }],
   openGraph: {
-    title: 'Rocky Mount Almanac',
-    description: 'Ad-free weather utility with frontier personality. Task scores tell you what to DO, not just what the weather is.',
+    title: 'The 1775 Almanac',
+    description: 'Sullivan County weather & wisdom from Tennessee\'s oldest documented farm. Free workability scores, soil temps, and planting guidance.',
     type: 'website',
-    siteName: 'Rocky Mount Almanac',
+    siteName: 'The 1775 Almanac',
     locale: 'en_US',
     images: [
       {
-        url: '/og-almanac.png',
+        url: '/og-1775-almanac.png',
         width: 1200,
         height: 630,
-        alt: 'Rocky Mount Almanac - Weather for Tennessee',
+        alt: 'The 1775 Almanac - Sullivan County Weather & Wisdom',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rocky Mount Almanac',
-    description: 'Ad-free weather with frontier personality. From where Tennessee began.',
-    images: ['/og-almanac.png'],
+    title: 'The 1775 Almanac',
+    description: 'Sullivan County weather from Tennessee\'s oldest farm. Est. 1775.',
+    images: ['/og-1775-almanac.png'],
   },
   other: {
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
-    'apple-mobile-web-app-title': 'Almanac',
+    'apple-mobile-web-app-title': '1775 Almanac',
   },
 }
 

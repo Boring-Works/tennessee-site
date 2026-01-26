@@ -16,6 +16,7 @@ import WeatherAlertBanner from '@/components/almanac/WeatherAlertBanner'
 import CurrentConditionsCard from '@/components/almanac/CurrentConditionsCard'
 import SnowConditions from '@/components/almanac/SnowConditions'
 import SunBarometer from '@/components/almanac/SunBarometer'
+import AboutModal from '@/components/almanac/AboutModal'
 import { transformWeatherData } from '@/lib/almanac/weather'
 import {
   calculateAllTaskScores,
@@ -168,6 +169,19 @@ export default function AlmanacPage() {
   return (
     <main className="min-h-screen bg-midnight text-almanac-parchment">
       <div className="max-w-3xl mx-auto px-4 py-8">
+        {/* Masthead */}
+        <header className="text-center mb-6">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide">
+              The 1775 Almanac
+            </h1>
+            <span className="text-xs text-almanac-gold/70 border border-almanac-gold/30 px-2 py-0.5 rounded-sm font-medium tracking-widest uppercase">
+              Est. 1775
+            </span>
+          </div>
+          <AboutModal />
+        </header>
+
         {/* Location Picker */}
         <div className="flex justify-center mb-4">
           <LocationPicker location={location} onLocationChange={handleLocationChange} />
@@ -255,24 +269,35 @@ export default function AlmanacPage() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-center py-8 border-t border-white/5 mt-8"
         >
-          <p className="text-sm text-almanac-gold font-display">
-            Weather for all of Tennessee—from where Tennessee began.
+          <p className="text-sm text-almanac-gold font-serif">
+            From Tennessee's oldest documented farm
           </p>
-          <p className="text-xs text-almanac-parchment/40 mt-3">
-            Rocky Mount State Historic Site • Tennessee 250
+          <p className="text-xs text-almanac-parchment/50 mt-2">
+            Powered by Rocky Mount State Historic Site
           </p>
-          <p className="text-xs text-almanac-parchment/30 mt-2">
-            Weather data from Open-Meteo (CC-BY 4.0) • Calculations based on NOAA/NWS/OSHA guidelines
+          <p className="text-xs text-almanac-parchment/40 mt-1">
+            Piney Flats, Tennessee
           </p>
-          {lastUpdated && (
-            <p className="text-xs text-almanac-parchment/20 mt-2">
-              Last updated: {lastUpdated.toLocaleTimeString('en-US', { 
-                hour: 'numeric', 
-                minute: '2-digit',
-                hour12: true 
-              })}
+
+          <div className="mt-6 pt-4 border-t border-white/5">
+            <p className="text-xs text-almanac-parchment/30">
+              Weather data via Open-Meteo • Guidance based on NWS and OSHA resources
             </p>
-          )}
+            {lastUpdated && (
+              <p className="text-xs text-almanac-parchment/20 mt-2">
+                Last updated: {lastUpdated.toLocaleTimeString('en-US', {
+                  hour: 'numeric',
+                  minute: '2-digit',
+                  hour12: true
+                })}
+              </p>
+            )}
+            <p className="text-xs text-almanac-parchment/20 mt-4 max-w-md mx-auto leading-relaxed">
+              This almanac is a work in progress — built for information and entertainment,
+              not life-or-death decisions. Always consult official sources for severe weather.
+              The old-timers had instincts; you've got the National Weather Service.
+            </p>
+          </div>
         </motion.footer>
       </div>
     </main>

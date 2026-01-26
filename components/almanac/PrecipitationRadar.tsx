@@ -16,6 +16,8 @@ interface RadarFrame {
 
 const RETRY_DELAYS = [1000, 2000, 4000]
 const MAX_RETRIES = 3
+const GRID_SIZE = 3 // 3x3 grid of tiles
+const ZOOM = 8 // Zoom 8 with 3x3 = ~60 mile view (better regional coverage)
 
 export default function PrecipitationRadar({ latitude, longitude }: PrecipitationRadarProps) {
   const [frames, setFrames] = useState<RadarFrame[]>([])
@@ -99,11 +101,19 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
     minute: '2-digit',
   }) : ''
 
-  // ZOOM 9 for local detail (was 6 - too zoomed out)
-  // Zoom 9 = ~2km per tile, good for county-level detail
-  const zoom = 9
-  const tileX = Math.floor((longitude + 180) / 360 * Math.pow(2, zoom))
-  const tileY = Math.floor((1 - Math.log(Math.tan(latitude * Math.PI / 180) + 1 / Math.cos(latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom))
+  // Calculate center tile coordinates
+  const centerTileX = Math.floor((longitude + 180) / 360 * Math.pow(2, ZOOM))
+  const centerTileY = Math.floor((1 - Math.log(Math.tan(latitude * Math.PI / 180) + 1 / Math.cos(latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, ZOOM))
+
+  // Generate 3x3 grid of tile coordinates
+  const tileOffsets = [-1, 0, 1]
+  const tiles = tileOffsets.flatMap(dy => 
+    tileOffsets.map(dx => ({
+      x: centerTileX + dx,
+      y: centerTileY + dy,
+      key: `${dx}-${dy}`
+    }))
+  )
 
   if (loading) {
     return (
@@ -140,8 +150,6 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
     )
   }
 
-  const radarUrl = `https://tilecache.rainviewer.com${frame.path}/256/${zoom}/${tileX}/${tileY}/2/1_1.png`
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -153,7 +161,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Radar className="w-5 h-5 text-almanac-gold" />
-          <span className="text-almanac-gold font-display">Local Radar</span>
+          <span className="text-almanac-gold font-display">Regional Radar</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -171,31 +179,43 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         </div>
       </div>
 
-      {/* Radar Image - larger aspect ratio for better visibility */}
-      <div className="relative aspect-[4/3] bg-almanac-midnight rounded overflow-hidden mb-3">
-        {/* Base map layer */}
-        <img
-          src={`https://tile.openstreetmap.org/${zoom}/${tileX}/${tileY}.png`}
-          alt="Map"
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
-        />
-        {/* Radar overlay */}
-        <img
-          src={radarUrl}
-          alt="Precipitation radar"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* Center marker showing your location */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <MapPin className="w-5 h-5 text-almanac-gold drop-shadow-lg" />
+      {/* 3x3 Radar Grid */}
+      <div className="relative aspect-square bg-almanac-midnight rounded overflow-hidden mb-3">
+        {/* 3x3 Grid Container */}
+        <div className="absolute inset-0 grid grid-cols-3 grid-rows-3">
+          {tiles.map((tile) => (
+            <div key={tile.key} className="relative">
+              {/* Base map tile */}
+              <img
+                src={`https://tile.openstreetmap.org/${ZOOM}/${tile.x}/${tile.y}.png`}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover opacity-50"
+                loading="eager"
+              />
+              {/* Radar overlay tile */}
+              <img
+                src={`https://tilecache.rainviewer.com${frame.path}/256/${ZOOM}/${tile.x}/${tile.y}/2/1_1.png`}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
+              />
+            </div>
+          ))}
         </div>
+        
+        {/* Center marker showing your location */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <MapPin className="w-6 h-6 text-almanac-gold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+        </div>
+        
         {/* Timestamp */}
-        <div className="absolute bottom-2 left-2 bg-almanac-midnight/80 px-2 py-1 rounded text-xs text-almanac-parchment">
+        <div className="absolute bottom-2 left-2 bg-almanac-midnight/90 px-2 py-1 rounded text-xs text-almanac-parchment z-10">
           {timestamp}
         </div>
+        
         {/* Scale indicator */}
-        <div className="absolute bottom-2 right-2 bg-almanac-midnight/80 px-2 py-1 rounded text-xs text-almanac-parchment/60">
-          ~10 mi view
+        <div className="absolute bottom-2 right-2 bg-almanac-midnight/90 px-2 py-1 rounded text-xs text-almanac-parchment/60 z-10">
+          ~60 mi view
         </div>
       </div>
 
@@ -237,7 +257,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
           </span>
         )}
         <a
-          href={`https://www.rainviewer.com/map.html?loc=${latitude},${longitude},10`}
+          href={`https://www.rainviewer.com/map.html?loc=${latitude},${longitude},9`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-xs text-almanac-gold/70 hover:text-almanac-gold transition-colors"

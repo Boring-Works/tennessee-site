@@ -19,20 +19,95 @@ interface Alert {
   day: string
 }
 
+/**
+ * Parse date string to get year, month, day components
+ */
+function getDateComponents(dateString: string): { year: number; month: number; day: number } {
+  const datePart = dateString.split('T')[0]
+  const [year, month, day] = datePart.split('-').map(Number)
+  return { year, month, day }
+}
+
+/**
+ * Check if a date string represents today
+ */
+function isDateToday(dateString: string): boolean {
+  const { year, month, day } = getDateComponents(dateString)
+  const now = new Date()
+  return year === now.getFullYear() && 
+         month === (now.getMonth() + 1) && 
+         day === now.getDate()
+}
+
+/**
+ * Check if a date string represents tomorrow
+ */
+function isDateTomorrow(dateString: string): boolean {
+  const { year, month, day } = getDateComponents(dateString)
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  return year === tomorrow.getFullYear() && 
+         month === (tomorrow.getMonth() + 1) && 
+         day === tomorrow.getDate()
+}
+
+/**
+ * Get weekday name from date string
+ */
+function getWeekdayName(dateString: string): string {
+  const { year, month, day } = getDateComponents(dateString)
+  const date = new Date(year, month - 1, day)
+  return date.toLocaleDateString('en-US', { weekday: 'long' })
+}
+
+/**
+ * Find index of today in the daily array
+ */
+function findTodayIndex(dailyTimes: string[]): number {
+  for (let i = 0; i < dailyTimes.length; i++) {
+    if (isDateToday(dailyTimes[i])) {
+      return i
+    }
+  }
+  // Fallback: find first future date
+  const now = new Date()
+  const todayNum = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate()
+  
+  for (let i = 0; i < dailyTimes.length; i++) {
+    const { year, month, day } = getDateComponents(dailyTimes[i])
+    const dateNum = year * 10000 + month * 100 + day
+    if (dateNum >= todayNum) {
+      return i
+    }
+  }
+  return 0
+}
+
 function analyzeForecasAlerts(daily: DailyForecast, currentTemp: number): Alert[] {
   const alerts: Alert[] = []
-  const now = new Date()
   
-  // Check next 3 days for significant weather
-  for (let i = 0; i < Math.min(3, daily.time.length); i++) {
+  // Find today's index (skip past days)
+  const todayIndex = findTodayIndex(daily.time)
+  
+  // Check next 3 days starting from TODAY
+  for (let offset = 0; offset < 3; offset++) {
+    const i = todayIndex + offset
+    if (i >= daily.time.length) break
+    
     const code = daily.weatherCode[i]
     const precipProb = daily.precipitationProbability[i]
     const minTemp = daily.temperatureMin[i]
-    const maxTemp = daily.temperatureMax[i]
     const snowfall = daily.snowfallSum?.[i] || 0
+    const dateStr = daily.time[i]
     
-    const dayName = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : 
-      new Date(daily.time[i]).toLocaleDateString('en-US', { weekday: 'long' })
+    let dayName: string
+    if (isDateToday(dateStr)) {
+      dayName = 'Today'
+    } else if (isDateTomorrow(dateStr)) {
+      dayName = 'Tomorrow'
+    } else {
+      dayName = getWeekdayName(dateStr)
+    }
     
     // Snow alerts
     if (isSnowCode(code) && precipProb >= 50) {
@@ -79,7 +154,7 @@ function analyzeForecasAlerts(daily: DailyForecast, currentTemp: number): Alert[
         message: `${dayName}: Low of ${Math.round(minTemp)}°F. Protect pipes and pets.`,
         day: dayName,
       })
-    } else if (minTemp <= 20 && i <= 1) {
+    } else if (minTemp <= 20 && offset <= 1) {
       alerts.push({
         type: 'cold',
         severity: 'warning',
@@ -99,7 +174,7 @@ function analyzeForecasAlerts(daily: DailyForecast, currentTemp: number): Alert[
     }
   }
   
-  return Array.from(deduped.values()).slice(0, 3) // Max 3 alerts
+  return Array.from(deduped.values()).slice(0, 3)
 }
 
 const iconMap = {

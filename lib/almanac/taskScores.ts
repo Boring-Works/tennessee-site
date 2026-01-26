@@ -218,7 +218,6 @@ export function buildExtendedMetrics(weather: WeatherData): ExtendedMetrics {
     feelsLike: weather.current.feelsLike,
     month: now.getMonth() + 1,
     soilTemperature: weather.current.soilTemperature,
-    snowDepth: analysis.winter.snowDepth,
     heatIndex: calculateHeatIndex(temp, humidity),
     windChill: calculateWindChill(temp, windSpeed),
     dewPoint: calculateDewPoint(temp, humidity),

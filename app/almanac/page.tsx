@@ -1,7 +1,7 @@
 'use client'
 
 import './almanac.css'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { AlmanacHero } from '@/components/almanac/AlmanacHero'
 import { FrontierSaying } from '@/components/almanac/FrontierSaying'
@@ -32,6 +32,50 @@ import type { WeatherData, TaskScores as TaskScoresType, MoonData } from '@/lib/
 
 const RETRY_DELAYS = [1000, 2000, 4000]
 const MAX_RETRIES = 3
+
+/**
+ * Parse date string to get year, month, day components
+ * Handles both "YYYY-MM-DD" and "YYYY-MM-DDTHH:MM" formats
+ */
+function getDateComponents(dateString: string): { year: number; month: number; day: number } {
+  const datePart = dateString.split('T')[0]
+  const [year, month, day] = datePart.split('-').map(Number)
+  return { year, month, day }
+}
+
+/**
+ * Check if a date string represents today
+ */
+function isDateToday(dateString: string): boolean {
+  const { year, month, day } = getDateComponents(dateString)
+  const now = new Date()
+  return year === now.getFullYear() && 
+         month === (now.getMonth() + 1) && 
+         day === now.getDate()
+}
+
+/**
+ * Find index of today in the daily array
+ */
+function findTodayIndex(dailyTimes: string[]): number {
+  for (let i = 0; i < dailyTimes.length; i++) {
+    if (isDateToday(dailyTimes[i])) {
+      return i
+    }
+  }
+  // Fallback: find first future date
+  const now = new Date()
+  const todayNum = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate()
+  
+  for (let i = 0; i < dailyTimes.length; i++) {
+    const { year, month, day } = getDateComponents(dailyTimes[i])
+    const dateNum = year * 10000 + month * 100 + day
+    if (dateNum >= todayNum) {
+      return i
+    }
+  }
+  return 0
+}
 
 export default function AlmanacPage() {
   const [location, setLocation] = useState<GeoLocation | null>(null)
@@ -114,6 +158,12 @@ export default function AlmanacPage() {
     fetchWeather(newLocation)
   }, [fetchWeather])
 
+  // Find today's index in the daily array (memoized)
+  const todayIndex = useMemo(() => {
+    if (!weather) return 0
+    return findTodayIndex(weather.daily.time)
+  }, [weather])
+
   if (loading || !location) {
     return (
       <main className="min-h-screen bg-midnight text-almanac-parchment">
@@ -154,9 +204,10 @@ export default function AlmanacPage() {
     )
   }
 
-  const tonightsLow = weather.daily.temperatureMin[0] ?? weather.current.temperature
-  const todaySunrise = weather.daily.sunrise[0]
-  const todaySunset = weather.daily.sunset[0]
+  // Use todayIndex to get TODAY's data, not past days
+  const tonightsLow = weather.daily.temperatureMin[todayIndex] ?? weather.current.temperature
+  const todaySunrise = weather.daily.sunrise[todayIndex]
+  const todaySunset = weather.daily.sunset[todayIndex]
 
   return (
     <main className="min-h-screen bg-midnight text-almanac-parchment">

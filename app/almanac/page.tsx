@@ -17,6 +17,9 @@ import CurrentConditionsCard from '@/components/almanac/CurrentConditionsCard'
 import SnowConditions from '@/components/almanac/SnowConditions'
 import SunBarometer from '@/components/almanac/SunBarometer'
 import AboutModal from '@/components/almanac/AboutModal'
+import StaleDataWarning from '@/components/almanac/StaleDataWarning'
+import OnboardingModal from '@/components/almanac/OnboardingModal'
+import TomorrowPreview from '@/components/almanac/TomorrowPreview'
 import { transformWeatherData } from '@/lib/almanac/weather'
 import {
   calculateAllTaskScores,
@@ -166,6 +169,14 @@ export default function AlmanacPage() {
   const todaySunrise = weather.daily.sunrise[todayIndex]
   const todaySunset = weather.daily.sunset[todayIndex]
 
+  // Tomorrow's preview data
+  const tomorrowData = todayIndex !== -1 && weather.daily.time[todayIndex + 1] ? {
+    high: weather.daily.temperatureMax[todayIndex + 1],
+    low: weather.daily.temperatureMin[todayIndex + 1],
+    precipChance: weather.daily.precipitationProbability?.[todayIndex + 1] || 0,
+    weatherCode: weather.daily.weatherCode[todayIndex + 1]
+  } : null
+
   return (
     <main className="min-h-screen bg-midnight text-almanac-parchment">
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -186,6 +197,13 @@ export default function AlmanacPage() {
         <div className="flex justify-center mb-4">
           <LocationPicker location={location} onLocationChange={handleLocationChange} />
         </div>
+
+        {/* Stale Data Warning */}
+        <StaleDataWarning
+          lastUpdated={lastUpdated}
+          onRefresh={() => location && fetchWeather(location)}
+          isLoading={loading}
+        />
 
         {/* Weather Alert Banner - TOP PRIORITY */}
         <WeatherAlertBanner 
@@ -212,6 +230,9 @@ export default function AlmanacPage() {
             location={formatLocationName(location)}
           />
         )}
+
+        {/* Tomorrow Preview */}
+        <TomorrowPreview tomorrow={tomorrowData} />
 
         {/* Snow Conditions - shows only when snow present */}
         <div className="py-2">
@@ -306,6 +327,9 @@ export default function AlmanacPage() {
             </p>
           </div>
         </motion.footer>
+
+        {/* First-visit Onboarding */}
+        <OnboardingModal />
       </div>
     </main>
   )

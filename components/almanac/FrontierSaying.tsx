@@ -1,5 +1,7 @@
 'use client'
 
+import ShareButton from './ShareButton'
+
 interface FrontierSayingProps {
   saying: string
   modernLine?: string
@@ -46,6 +48,18 @@ export function FrontierSaying({ saying, modernLine, temperature, location }: Fr
           </p>
         </div>
       </div>
+
+      {/* Share Button */}
+      {temperature !== undefined && location && (
+        <div className="text-center">
+          <ShareButton
+            frontierLine={saying}
+            modernLine={modernLine}
+            temperature={temperature}
+            location={location}
+          />
+        </div>
+      )}
     </div>
   )
 }

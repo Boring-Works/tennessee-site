@@ -12,7 +12,7 @@ export const metadata = {
     title: 'Rocky Mount State Historic Site | Tennessee Starts Here',
     description:
       'Where Tennessee began. Celebrating America 250 and Tennessee 230 in 2026.',
-    images: [{ url: '/og-image.svg', width: 1200, height: 630 }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {

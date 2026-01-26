@@ -45,8 +45,7 @@ export const metadata: Metadata = {
       "Where Tennessee's government began. Join us for America 250 and Tennessee 230 programming at Rocky Mount State Historic Site in Piney Flats, TN.",
     url: "https://tennesseestartshere.com",
     siteName: "Tennessee Starts Here",
-    // PRE-LAUNCH: Replace og-image.svg with a real 1200x630 JPG
-    images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "en_US",
     type: "website",
   },
@@ -55,20 +54,20 @@ export const metadata: Metadata = {
     title: "Tennessee Starts Here | Rocky Mount State Historic Site",
     description:
       "Where Tennessee's government began. Join us for America 250 and Tennessee 230 programming at Rocky Mount State Historic Site in Piney Flats, TN.",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
-  // PRE-LAUNCH: Replace SVG favicons with PNG versions
-  // Use https://realfavicongenerator.net/ to generate from a source image
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon.svg", sizes: "180x180", type: "image/svg+xml" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };

@@ -50,11 +50,21 @@ export function MoonPhase({ moon }: MoonPhaseProps) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full card-hover"
     >
       {/* Moon visual */}
       <div className="text-center mb-3">
-        <span className="text-5xl">{moon.emoji}</span>
+        <motion.span
+          className="inline-block text-5xl"
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 120,
+            ease: "linear",
+            repeat: Infinity,
+          }}
+        >
+          {moon.emoji}
+        </motion.span>
       </div>
       
       {/* Phase name and illumination */}

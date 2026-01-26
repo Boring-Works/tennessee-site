@@ -45,13 +45,24 @@ export function AlmanacHero({
 
       {/* Temperature with Icon */}
       <div className="flex items-center justify-center gap-4">
-        <div className="relative">
+        <motion.div
+          className="relative"
+          animate={{
+            y: [0, -3, 0],
+            rotate: [0, 2, 0, -2, 0]
+          }}
+          transition={{
+            duration: 8,
+            ease: "easeInOut",
+            repeat: Infinity,
+          }}
+        >
           <WeatherIcon className="w-16 h-16 text-almanac-gold" />
           {/* Snow/Ice indicator */}
           {(isSnowing || isIcy) && (
             <Snowflake className="w-6 h-6 text-blue-400 absolute -top-1 -right-1 animate-pulse" />
           )}
-        </div>
+        </motion.div>
         <div className="text-[96px] font-sans font-bold leading-none text-almanac-parchment">
           {Math.round(temperature)}°
         </div>

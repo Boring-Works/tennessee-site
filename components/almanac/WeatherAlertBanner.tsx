@@ -171,7 +171,7 @@ export default function WeatherAlertBanner({ daily, currentTemp }: WeatherAlertB
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-0.5">
                   {alert.severity === 'danger' ? (
-                    <AlertTriangle className={`w-5 h-5 ${colors.icon}`} />
+                    <AlertTriangle className={`w-5 h-5 ${colors.icon} animate-alert-pulse`} />
                   ) : (
                     <Icon className={`w-5 h-5 ${colors.icon}`} />
                   )}

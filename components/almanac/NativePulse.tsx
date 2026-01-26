@@ -13,7 +13,7 @@ export default function NativePulse({ pulse }: NativePulseProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-6"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-6 card-hover"
     >
       <div className="flex items-center gap-3 mb-4">
         <span className="text-3xl" role="img" aria-label={pulse.status}>

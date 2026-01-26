@@ -113,7 +113,7 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             '--dust-delay': p.delay,
             '--dust-duration': p.duration,
             '--dust-size': p.size,
-            '--dust-opacity': isPartlyCloudy ? 0.06 : 0.08,
+            '--dust-opacity': isPartlyCloudy ? 0.10 : 0.15,
           } as React.CSSProperties}
         />
       ))}
@@ -173,7 +173,7 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             '--snow-delay': p.delay,
             '--snow-duration': p.duration,
             '--snow-size': p.size,
-            '--snow-opacity': 0.2,
+            '--snow-opacity': 0.30,
           } as React.CSSProperties}
         />
       ))}

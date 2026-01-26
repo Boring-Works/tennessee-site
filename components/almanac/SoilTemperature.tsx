@@ -126,7 +126,7 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className={`rounded-lg p-4 border ${bgColor}`}
+      className={`rounded-lg p-4 border card-hover ${bgColor}`}
       role="region"
       aria-label={`Soil temperature: ${Math.round(temperature)} degrees Fahrenheit, ${status}`}
     >

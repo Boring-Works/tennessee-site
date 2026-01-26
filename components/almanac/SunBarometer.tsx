@@ -89,7 +89,7 @@ export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, win
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 card-hover"
     >
       <div className="grid grid-cols-2 gap-4">
         {/* Sun Times */}

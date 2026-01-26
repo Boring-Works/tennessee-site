@@ -2,6 +2,7 @@
 
 import type { TaskScore } from '@/lib/almanac/types'
 import { InfoButton, WorkabilityExplainer } from './ScoreExplainer'
+import { useCountUp } from '@/lib/almanac/useCountUp'
 
 interface TaskScoresProps {
   sower: TaskScore
@@ -52,18 +53,22 @@ function ScoreCard({
   title,
   subtitle,
   score,
+  index,
 }: {
   scoreKey: string
   title: string
   subtitle: string
   score: TaskScore
+  index: number
 }) {
   const isCritical = isCriticalScore(score.score)
   const cardStyle = getCardStyle(score.score)
+  // Staggered count-up animation: each card starts 100ms after the previous
+  const animatedScore = useCountUp(score.score, { duration: 600, delay: index * 100 })
 
   return (
     <div
-      className={`rounded-sm p-4 border transition-all ${cardStyle}`}
+      className={`rounded-sm p-4 border transition-all card-hover ${cardStyle}`}
       role="article"
       aria-label={`${title}: ${score.score} out of 10, ${score.label}`}
     >
@@ -79,7 +84,7 @@ function ScoreCard({
           <span
             className={`text-3xl font-sans font-bold ${SCORE_COLORS[score.label]} ${isCritical ? 'animate-pulse' : ''}`}
           >
-            {score.score}
+            {animatedScore}
           </span>
           <span className="text-almanac-parchment/50 text-sm">/10</span>
         </div>
@@ -125,13 +130,14 @@ export function TaskScores({ sower, shepherd, keeper, builder }: TaskScoresProps
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-        {SCORE_CARDS.map(({ key, title, subtitle }) => (
+        {SCORE_CARDS.map(({ key, title, subtitle }, index) => (
           <ScoreCard
             key={key}
             scoreKey={key}
             title={title}
             subtitle={subtitle}
             score={scores[key]}
+            index={index}
           />
         ))}
       </div>

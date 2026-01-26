@@ -47,7 +47,7 @@ export default function CurrentConditionsCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 card-hover"
     >
       <h3 className="text-sm font-medium text-almanac-gold mb-3">Current Conditions</h3>
       

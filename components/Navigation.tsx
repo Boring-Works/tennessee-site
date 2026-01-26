@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { href: "/first-250", label: "First 250" },
   { href: "/events", label: "Events" },
   { href: "/lectures", label: "Lectures" },
-  { href: "/almanac", label: "Almanac" },
+  { href: "/visit", label: "Visit" },
 ];
 
 export default function Navigation() {
@@ -158,7 +158,7 @@ export default function Navigation() {
 
               {/* CTA */}
               <Link href="/first-250" className={styles.cta}>
-                <span className={styles["cta-text"]}>Claim Your Place</span>
+                <span className={styles["cta-text"]}>Join First 250</span>
                 <Feather className={styles["cta-icon"]} size={14} />
               </Link>
             </nav>
@@ -244,7 +244,7 @@ export default function Navigation() {
               className={styles["mobile-cta"]}
               onClick={closeMobileMenu}
             >
-              <span>Claim Your Place</span>
+              <span>Join First 250</span>
               <Feather size={16} />
             </Link>
 

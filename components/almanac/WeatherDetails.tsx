@@ -86,9 +86,9 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
             const HourIcon = getWeatherIcon(weatherCode)
             const isSnow = isSnowCode(weatherCode)
             const isIce = isIceCode(weatherCode)
-            const hasSnowfall = snowfall && snowfall > 0
-            const hasHighWind = windGust && windGust > 30
-            const hasHighUV = uv && uv > 7
+            const hasSnowfall = (snowfall ?? 0) > 0
+            const hasHighWind = (windGust ?? 0) > 30
+            const hasHighUV = (uv ?? 0) > 7
 
             const isDangerous = (isSnow || isIce) && precipProb > 50
             const isWindy = hasHighWind
@@ -184,8 +184,8 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
             const isIce = isIceCode(daily.weatherCode[actualIndex])
             const alertLevel = getDayAlertLevel(daily.weatherCode[actualIndex], precipProb, minTemp)
             const cardStyle = getAlertStyle(alertLevel)
-            const hasSnowfall = snowfall && snowfall > 0
-            const hasHighWind = gustMax && gustMax > 40
+            const hasSnowfall = (snowfall ?? 0) > 0
+            const hasHighWind = (gustMax ?? 0) > 40
 
             return (
               <div
@@ -216,8 +216,8 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                     'text-almanac-parchment/70'
                   }`}>
                     {weather.condition}
-                    {hasSnowfall && snowfall >= 1 && (
-                      <span className="ml-1 text-blue-400">({snowfall.toFixed(1)}")</span>
+                    {hasSnowfall && (snowfall ?? 0) >= 1 && (
+                      <span className="ml-1 text-blue-400">({snowfall!.toFixed(1)}")</span>
                     )}
                   </span>
                   
@@ -238,7 +238,7 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                   </span>
                 </div>
                 
-                {(hasHighWind || (uvMax && uvMax > 7) || (hasSnowfall && snowfall >= 2)) && (
+                {(hasHighWind || (uvMax !== undefined && uvMax > 7) || (hasSnowfall && (snowfall ?? 0) >= 2)) && (
                   <div className="flex items-center gap-4 mt-2 pt-2 border-t border-white/5 text-xs text-almanac-parchment/50">
                     {hasHighWind && gustMax && (
                       <span className="flex items-center gap-1">
@@ -246,16 +246,16 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                         Gusts to {Math.round(gustMax)} mph
                       </span>
                     )}
-                    {uvMax && uvMax > 7 && (
+                    {uvMax !== undefined && uvMax > 7 && (
                       <span className="flex items-center gap-1">
                         <Sun className="w-3 h-3 text-orange-400" />
                         UV {getUVDescription(uvMax).level}
                       </span>
                     )}
-                    {hasSnowfall && snowfall && snowfall >= 2 && (
+                    {hasSnowfall && (snowfall ?? 0) >= 2 && (
                       <span className="flex items-center gap-1 text-blue-300">
                         <Snowflake className="w-3 h-3" />
-                        {snowfall.toFixed(1)}" accumulation
+                        {snowfall!.toFixed(1)}" accumulation
                       </span>
                     )}
                   </div>

@@ -7,7 +7,7 @@ interface WeatherAtmosphereProps {
   weatherCode: number
 }
 
-type ParticleType = 'dust' | 'fog' | 'drizzle' | 'rain' | 'snow' | 'storm'
+type ParticleType = 'dust' | 'fog' | 'drizzle' | 'rain' | 'snow' | 'storm' | 'overcast'
 
 interface Particle {
   id: number
@@ -23,7 +23,7 @@ interface Particle {
 // Determine particle type from weather code
 function getParticleType(code: number): ParticleType {
   if (code === 0) return 'dust'
-  if (code >= 1 && code <= 3) return 'dust' // Partly cloudy - reduced dust
+  if (code >= 1 && code <= 3) return 'overcast' // Cloudy - slow cloud shadows
   if (code >= 45 && code <= 48) return 'fog'
   if (code >= 51 && code <= 57) return 'drizzle'
   if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return 'rain'
@@ -67,15 +67,26 @@ function generateFogWisps(count: number): Particle[] {
 
 export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
   const particleType = getParticleType(weatherCode)
-  const isPartlyCloudy = weatherCode >= 1 && weatherCode <= 3
 
   // Memoize particles to prevent regeneration on re-render
   const particles = useMemo(() => {
     switch (particleType) {
       case 'dust':
-        // Clear: 15-20, Partly cloudy: 8-10
-        const dustCount = isPartlyCloudy ? 8 + Math.floor(Math.random() * 3) : 15 + Math.floor(Math.random() * 6)
+        // Clear weather: 15-20 dust motes
+        const dustCount = 15 + Math.floor(Math.random() * 6)
         return generateParticles(dustCount, 18, 7, 2, 2)
+
+      case 'overcast':
+        // Slow-drifting cloud shadows
+        return Array.from({ length: 4 }, (_, i): Particle => ({
+          id: i,
+          left: '0%',
+          top: `${10 + Math.random() * 60}%`,
+          delay: `${Math.random() * 20}s`,
+          duration: `${45 + Math.random() * 20}s`,  // Very slow: 45-65 seconds
+          width: `${300 + Math.random() * 300}px`,  // Large shapes
+          opacity: 0.03 + Math.random() * 0.02,     // Very subtle: 3-5%
+        }))
 
       case 'fog':
         return generateFogWisps(4)
@@ -95,7 +106,7 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
       default:
         return []
     }
-  }, [particleType, isPartlyCloudy])
+  }, [particleType])
 
   // Lightning flash for storms - separate from particles
   const showLightning = particleType === 'storm'
@@ -113,7 +124,22 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             '--dust-delay': p.delay,
             '--dust-duration': p.duration,
             '--dust-size': p.size,
-            '--dust-opacity': isPartlyCloudy ? 0.10 : 0.15,
+            '--dust-opacity': 0.15,
+          } as React.CSSProperties}
+        />
+      ))}
+
+      {/* Overcast - slow cloud shadows */}
+      {particleType === 'overcast' && particles.map((p) => (
+        <div
+          key={p.id}
+          className="cloud-shadow"
+          style={{
+            top: p.top,
+            '--cloud-delay': p.delay,
+            '--cloud-duration': p.duration,
+            '--cloud-width': p.width,
+            '--cloud-opacity': p.opacity,
           } as React.CSSProperties}
         />
       ))}

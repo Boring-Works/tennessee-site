@@ -12,15 +12,19 @@ interface AlmanacHeroProps {
   location: string
   windSpeed?: number
   humidity?: number
+  todayHigh?: number
+  todayLow?: number
 }
 
-export function AlmanacHero({ 
-  temperature, 
-  feelsLike, 
-  weatherCode, 
+export function AlmanacHero({
+  temperature,
+  feelsLike,
+  weatherCode,
   location,
   windSpeed,
   humidity,
+  todayHigh,
+  todayLow,
 }: AlmanacHeroProps) {
   const weather = getWeatherInfo(weatherCode)
   const WeatherIcon = getWeatherIcon(weatherCode)
@@ -66,6 +70,15 @@ export function AlmanacHero({
       <p className="text-sm text-almanac-parchment/50 mt-1">
         Feels like {Math.round(feelsLike)}°
       </p>
+
+      {/* Today's High/Low */}
+      {(todayHigh !== undefined || todayLow !== undefined) && (
+        <p className="text-sm text-almanac-parchment/40 mt-1">
+          {todayHigh !== undefined && <>H: {Math.round(todayHigh)}°</>}
+          {todayHigh !== undefined && todayLow !== undefined && ' / '}
+          {todayLow !== undefined && <>L: {Math.round(todayLow)}°</>}
+        </p>
+      )}
 
       {/* Additional stats */}
       {(windSpeed !== undefined || humidity !== undefined) && (

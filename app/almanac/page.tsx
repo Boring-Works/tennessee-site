@@ -165,7 +165,8 @@ export default function AlmanacPage() {
   }
 
   // Use todayIndex to get TODAY's data, not past days
-  const tonightsLow = weather.daily.temperatureMin[todayIndex] ?? weather.current.temperature
+  const todayHigh = weather.daily.temperatureMax[todayIndex]
+  const todayLow = weather.daily.temperatureMin[todayIndex]
   const todaySunrise = weather.daily.sunrise[todayIndex]
   const todaySunset = weather.daily.sunset[todayIndex]
 
@@ -219,6 +220,8 @@ export default function AlmanacPage() {
           location={formatLocationName(location)}
           windSpeed={weather.current.windSpeed}
           humidity={weather.current.humidity}
+          todayHigh={todayHigh}
+          todayLow={todayLow}
         />
 
         {/* The Frontier Saying */}

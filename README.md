@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tennessee Starts Here
 
-## Getting Started
+Rocky Mount State Historic Site - The first capital of the Southwest Territory, est. 1770.
 
-First, run the development server:
+**Live Site:** https://tennessee-starts-here.vercel.app
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4, CSS Modules
+- **Language:** TypeScript
+- **Deployment:** Vercel (auto-deploy from GitHub)
+
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Run production build locally
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment Workflow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses **GitHub + Vercel** for continuous deployment:
 
-## Learn More
+| Action | Result |
+|--------|--------|
+| Push to `main` | Auto-deploys to **production** |
+| Push to other branches | Creates **preview deployment** |
+| Open a PR | Preview URL added to PR comments |
 
-To learn more about Next.js, take a look at the following resources:
+### Standard Workflow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# 1. Make changes locally
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 2. Commit your changes
+git add .
+git commit -m "feat: description of changes"
 
-## Deploy on Vercel
+# 3. Push to GitHub (auto-deploys to Vercel)
+git push origin main
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Manual Deploy (if needed)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Deploy to production manually
+vercel --prod
+
+# Deploy preview
+vercel
+```
+
+## Project Structure
+
+```
+app/
+├── (welcome)/       # Splash/landing page (/)
+├── (main)/          # Main site pages (/home, /events, /visit, etc.)
+└── (almanac)/       # The 1775 Almanac (/almanac)
+
+components/
+├── welcome/         # Welcome screen components
+├── Header/          # Navigation styles
+└── ...              # Shared components
+
+lib/
+└── almanac/         # Almanac business logic
+
+docs/
+└── *.md             # Build guides and documentation
+```
+
+## Links
+
+- **GitHub:** https://github.com/getboring/tennessee-starts-here
+- **Vercel Dashboard:** https://vercel.com/maxtorborings-projects/tennessee-starts-here
+- **Production:** https://tennessee-starts-here.vercel.app

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { WEATHER_CODES } from '@/lib/almanac/types'
+import { getWeatherInfo } from '@/lib/almanac/types'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
 
 interface AlmanacHeroProps {
@@ -12,7 +12,7 @@ interface AlmanacHeroProps {
 }
 
 export function AlmanacHero({ temperature, feelsLike, weatherCode, location }: AlmanacHeroProps) {
-  const weather = WEATHER_CODES[weatherCode] || WEATHER_CODES[0]
+  const weather = getWeatherInfo(weatherCode)
   const WeatherIcon = getWeatherIcon(weatherCode)
 
   return (

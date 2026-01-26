@@ -10,6 +10,58 @@ export interface NativePulseResult {
   progress: number // 0-100 for visual progress bar
 }
 
+// NOAA Heat Index calculation (Fahrenheit)
+// Only applies when temperature >= 80°F
+function calculateHeatIndex(tempF: number, humidity: number): number {
+  if (tempF < 80) return tempF
+
+  const T = tempF
+  const R = humidity
+
+  // Rothfusz regression equation (NOAA)
+  let heatIndex = -42.379
+    + 2.04901523 * T
+    + 10.14333127 * R
+    - 0.22475541 * T * R
+    - 0.00683783 * T * T
+    - 0.05481717 * R * R
+    + 0.00122874 * T * T * R
+    + 0.00085282 * T * R * R
+    - 0.00000199 * T * T * R * R
+
+  // Adjustments for extreme conditions
+  if (R < 13 && T >= 80 && T <= 112) {
+    heatIndex -= ((13 - R) / 4) * Math.sqrt((17 - Math.abs(T - 95)) / 17)
+  } else if (R > 85 && T >= 80 && T <= 87) {
+    heatIndex += ((R - 85) / 10) * ((87 - T) / 5)
+  }
+
+  return Math.round(heatIndex)
+}
+
+// Calculate stratification progress for NativePulse (Dec 1 - Feb 28/29)
+function calculateStratificationProgress(date: Date): number {
+  const month = date.getMonth() + 1  // 1-12
+  const day = date.getDate()
+  const year = date.getFullYear()
+  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
+  const seasonLength = isLeapYear ? 91 : 90
+
+  let daysIntoSeason: number
+
+  if (month === 12) {
+    daysIntoSeason = day  // Dec 1 = day 1, Dec 31 = day 31
+  } else if (month === 1) {
+    daysIntoSeason = 31 + day  // Jan 1 = day 32, Jan 31 = day 62
+  } else if (month === 2) {
+    daysIntoSeason = 62 + day  // Feb 1 = day 63, Feb 28/29 = day 90/91
+  } else {
+    return 0  // Outside stratification season
+  }
+
+  return Math.min(100, Math.round((daysIntoSeason / seasonLength) * 100))
+}
+
 function getScoreLabel(score: number): TaskScore['label'] {
   if (score >= 9) return 'Perfect'
   if (score >= 7) return 'Good'
@@ -65,11 +117,11 @@ export function calculateShepherdScore(metrics: WeatherMetrics): TaskScore {
   let score = 10
   const { temperature, humidity, windSpeed, precipitation, feelsLike } = metrics
 
-  // Heat Stress Index
-  const heatIndex = temperature + humidity
-  if (heatIndex > 160) score -= 5
-  else if (heatIndex > 140) score -= 3
-  else if (heatIndex > 120) score -= 1
+  // Heat Stress using NOAA Heat Index (for livestock welfare)
+  const heatIndex = calculateHeatIndex(temperature, humidity)
+  if (heatIndex >= 105) score -= 5      // Danger: heat stress likely
+  else if (heatIndex >= 90) score -= 3  // Caution: monitor livestock closely
+  else if (heatIndex >= 80) score -= 1  // Watch: provide shade and water
 
   // Cold Stress
   if (temperature < 32 && precipitation > 0) score -= 4
@@ -233,13 +285,13 @@ export function calculateAllTaskScores(weather: WeatherData): TaskScores {
 // NativePulse - Seed Stratification Tracker for Tennessee Native Plants
 export function calculateNativePulse(metrics: WeatherMetrics): NativePulseResult {
   const { temperature, precipitation, month } = metrics
+  const now = new Date()
+  const progress = calculateStratificationProgress(now)
 
   // Active Stratification: Dec-Feb, temp 28-40°F
   // Seeds need cold moist stratification
   if (month >= 12 || month <= 2) {
     if (temperature >= 28 && temperature <= 40) {
-      const daysIntoSeason = month === 12 ? 0 : (month * 30)
-      const progress = Math.min(100, Math.round((daysIntoSeason / 90) * 100))
       return {
         status: 'Active Stratification',
         icon: '❄️',
@@ -248,7 +300,7 @@ export function calculateNativePulse(metrics: WeatherMetrics): NativePulseResult
         progress,
       }
     }
-    // Too cold or too warm
+    // Too cold or too warm - still show actual progress
     return {
       status: 'Active Stratification',
       icon: '❄️',
@@ -256,7 +308,7 @@ export function calculateNativePulse(metrics: WeatherMetrics): NativePulseResult
       tip: temperature < 28
         ? 'Hard freeze—cover seed beds or move containers to shelter.'
         : 'Warm spell may interrupt stratification. Monitor closely.',
-      progress: 50,
+      progress,
     }
   }
 

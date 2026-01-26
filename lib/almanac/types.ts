@@ -83,6 +83,13 @@ export interface WeatherCodeInfo {
   category: 'clear' | 'cloudy' | 'fog' | 'drizzle' | 'rain' | 'snow' | 'thunderstorm'
 }
 
+// Default fallback for unknown weather codes
+export const DEFAULT_WEATHER: WeatherCodeInfo = {
+  condition: 'Unknown',
+  icon: 'cloud',
+  category: 'cloudy',
+}
+
 export const WEATHER_CODES: Record<number, WeatherCodeInfo> = {
   0: { condition: 'Clear sky', icon: 'sun', category: 'clear' },
   1: { condition: 'Mainly clear', icon: 'sun', category: 'clear' },
@@ -112,4 +119,9 @@ export const WEATHER_CODES: Record<number, WeatherCodeInfo> = {
   95: { condition: 'Thunderstorm', icon: 'cloud-lightning', category: 'thunderstorm' },
   96: { condition: 'Thunderstorm with slight hail', icon: 'cloud-lightning', category: 'thunderstorm' },
   99: { condition: 'Thunderstorm with heavy hail', icon: 'cloud-lightning', category: 'thunderstorm' },
+}
+
+// Safe lookup function with fallback
+export function getWeatherInfo(code: number): WeatherCodeInfo {
+  return WEATHER_CODES[code] ?? DEFAULT_WEATHER
 }

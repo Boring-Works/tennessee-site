@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import type { HourlyForecast, DailyForecast } from '@/lib/almanac/types'
-import { WEATHER_CODES } from '@/lib/almanac/types'
+import { getWeatherInfo } from '@/lib/almanac/types'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
 
 interface WeatherDetailsProps {
@@ -11,10 +11,11 @@ interface WeatherDetailsProps {
 }
 
 export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
-  // Get next 12 hours
+  // Get next 12 hours with bounds checking
   const now = new Date()
   const currentHour = now.getHours()
-  const next12Hours = hourly.time.slice(currentHour, currentHour + 12)
+  const availableHours = Math.min(12, hourly.time.length - currentHour)
+  const next12Hours = hourly.time.slice(currentHour, currentHour + availableHours)
 
   return (
     <section className="py-8">
@@ -28,6 +29,13 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
         <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide">
           {next12Hours.map((time, i) => {
             const idx = currentHour + i
+            // Bounds check for array access
+            const temp = hourly.temperature[idx]
+            const precipProb = hourly.precipitationProbability[idx]
+            const weatherCode = hourly.weatherCode[idx]
+
+            if (temp === undefined) return null
+
             const hour = new Date(time).getHours()
             const displayHour =
               hour === 0
@@ -37,7 +45,7 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                 : hour === 12
                 ? '12p'
                 : `${hour - 12}p`
-            const HourIcon = getWeatherIcon(hourly.weatherCode[idx])
+            const HourIcon = getWeatherIcon(weatherCode)
 
             return (
               <div
@@ -47,10 +55,10 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                 <p className="text-xs text-almanac-parchment/50">{displayHour}</p>
                 <HourIcon className="w-5 h-5 text-almanac-gold/80 mx-auto my-1" />
                 <p className="text-lg font-sans font-bold text-almanac-parchment">
-                  {Math.round(hourly.temperature[idx])}°
+                  {Math.round(temp)}°
                 </p>
                 <p className="text-xs text-almanac-parchment/50">
-                  {hourly.precipitationProbability[idx]}%
+                  {precipProb ?? 0}%
                 </p>
               </div>
             )
@@ -72,7 +80,7 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
               i === 0
                 ? 'Today'
                 : date.toLocaleDateString('en-US', { weekday: 'short' })
-            const weather = WEATHER_CODES[daily.weatherCode[i]] || WEATHER_CODES[0]
+            const weather = getWeatherInfo(daily.weatherCode[i])
             const DayIcon = getWeatherIcon(daily.weatherCode[i])
 
             return (

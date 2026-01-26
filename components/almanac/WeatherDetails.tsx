@@ -10,6 +10,15 @@ interface WeatherDetailsProps {
   daily: DailyForecast
 }
 
+/**
+ * Parse ISO date string (YYYY-MM-DD) as local date, not UTC
+ * Fixes timezone bug where "2026-01-25" becomes Jan 24 in EST
+ */
+function parseLocalDate(dateString: string): Date {
+  const [year, month, day] = dateString.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
 export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
   // Get next 12 hours with bounds checking
   const now = new Date()
@@ -75,7 +84,8 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
         <h3 className="font-serif text-xl text-gold-leaf mb-4 mt-8">7-Day Outlook</h3>
         <div className="space-y-2">
           {daily.time.map((time, i) => {
-            const date = new Date(time)
+            // Use parseLocalDate to avoid UTC timezone shift
+            const date = parseLocalDate(time)
             const dayName =
               i === 0
                 ? 'Today'

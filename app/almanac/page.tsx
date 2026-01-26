@@ -12,7 +12,7 @@ import NativePulse from '@/components/almanac/NativePulse'
 import LocationPicker from '@/components/almanac/LocationPicker'
 import SoilTemperature from '@/components/almanac/SoilTemperature'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
-import FrostAlert from '@/components/almanac/FrostAlert'
+// FrostAlert removed - no alert backend planned
 import { transformWeatherData } from '@/lib/almanac/weather'
 import { calculateAllTaskScores, calculateNativePulse, type NativePulseResult } from '@/lib/almanac/taskScores'
 import { getSaying } from '@/lib/almanac/sayings'
@@ -179,13 +179,6 @@ export default function AlmanacPage() {
           feelsLike={weather.current.feelsLike}
           weatherCode={weather.current.weatherCode}
           location={formatLocationName(location)}
-        />
-
-        {/* Frost Alert (if applicable) */}
-        <FrostAlert
-          temperature={weather.current.temperature}
-          minTemperature={weather.daily.temperatureMin[0]}
-          feelsLike={weather.current.feelsLike}
         />
 
         {/* The Frontier Saying (The 10% Joy) */}

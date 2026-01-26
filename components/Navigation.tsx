@@ -83,7 +83,8 @@ export default function Navigation() {
 
   const isActive = useCallback((href: string) => {
     if (href === "/") return pathname === "/" || pathname === "/home";
-    return pathname.startsWith(href);
+    // Exact match or starts with href followed by /
+    return pathname === href || pathname.startsWith(href + "/");
   }, [pathname]);
 
   const closeMobileMenu = useCallback(() => {
@@ -223,6 +224,7 @@ export default function Navigation() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    aria-current={isActive(link.href) ? "page" : undefined}
                     className={`${styles["mobile-link"]} ${
                       isActive(link.href) ? styles["mobile-link--active"] : ""
                     }`}

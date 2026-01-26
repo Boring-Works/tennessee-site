@@ -1,0 +1,21 @@
+/* Almanac-specific styles - extends main globals.css */
+/* Note: Tailwind is imported in globals.css, no need to import again */
+
+@theme inline {
+  --color-almanac-midnight: #0A1128;
+  --color-almanac-gold: #C5A059;
+  --color-almanac-parchment: #F4ECD8;
+  --color-almanac-success: #4A7C59;
+  --color-almanac-warning: #D4A84B;
+  --color-almanac-danger: #8B3A3A;
+}
+
+/* Scrollbar hiding for horizontal scroll areas */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

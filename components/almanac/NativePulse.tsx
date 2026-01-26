@@ -1,0 +1,60 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import type { NativePulseResult } from '@/lib/almanac/taskScores'
+
+interface NativePulseProps {
+  pulse: NativePulseResult
+}
+
+export default function NativePulse({ pulse }: NativePulseProps) {
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-6"
+    >
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-3xl" role="img" aria-label={pulse.status}>
+          {pulse.icon}
+        </span>
+        <div>
+          <h2 className="font-display text-xl text-almanac-gold">NativePulse</h2>
+          <p className="text-sm text-almanac-parchment/60">Seed Stratification Tracker</p>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        {/* Status Badge */}
+        <div className="flex items-center gap-2">
+          <span className={`text-lg font-medium ${pulse.color}`}>
+            {pulse.status}
+          </span>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="relative h-2 bg-almanac-midnight rounded-full overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${pulse.progress}%` }}
+            transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
+            className="absolute h-full bg-gradient-to-r from-almanac-gold/60 to-almanac-gold rounded-full"
+          />
+        </div>
+
+        {/* Tip */}
+        <p className="text-almanac-parchment/80 text-sm leading-relaxed">
+          {pulse.tip}
+        </p>
+
+        {/* Seasonal Context */}
+        <div className="pt-3 border-t border-almanac-gold/10">
+          <p className="text-xs text-almanac-parchment/50">
+            Tracking Tennessee native plant cycles for optimal seed starting and garden planning.
+          </p>
+        </div>
+      </div>
+    </motion.section>
+  )
+}

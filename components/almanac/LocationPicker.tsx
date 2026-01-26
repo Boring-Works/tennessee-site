@@ -1,0 +1,169 @@
+'use client'
+
+import { useState, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MapPin, Pencil, Loader2, AlertCircle, X, RotateCcw } from 'lucide-react'
+import { searchLocation, formatLocationName, DEFAULT_LOCATION, type GeoLocation } from '@/lib/almanac/geocoding'
+import { saveLocation, clearLocation } from '@/lib/almanac/storage'
+
+interface LocationPickerProps {
+  location: GeoLocation
+  onLocationChange: (location: GeoLocation) => void
+}
+
+export default function LocationPicker({ location, onLocationChange }: LocationPickerProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleSearch = useCallback(async () => {
+    if (!query.trim()) return
+
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const result = await searchLocation(query)
+      if (result) {
+        saveLocation(result)
+        onLocationChange(result)
+        setIsOpen(false)
+        setQuery('')
+      } else {
+        setError('Location not found. Try a city name or zip code.')
+      }
+    } catch {
+      setError('Search failed. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [query, onLocationChange])
+
+  const handleReset = useCallback(() => {
+    clearLocation()
+    onLocationChange(DEFAULT_LOCATION)
+    setIsOpen(false)
+    setQuery('')
+  }, [onLocationChange])
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+    if (e.key === 'Escape') {
+      setIsOpen(false)
+    }
+  }
+
+  return (
+    <>
+      {/* Location Display Button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="flex items-center gap-2 text-almanac-parchment/80 hover:text-almanac-gold transition-colors group"
+      >
+        <MapPin className="w-4 h-4" />
+        <span className="text-sm">{formatLocationName(location)}</span>
+        <Pencil className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+      </button>
+
+      {/* Modal Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black/60 z-40"
+            />
+
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 p-6"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="font-display text-xl text-almanac-gold">Change Location</h3>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="text-almanac-parchment/60 hover:text-almanac-parchment transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Search Input */}
+              <div className="relative mb-4">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Enter city or zip code..."
+                  className="w-full bg-almanac-midnight/50 border border-almanac-gold/20 rounded-lg px-4 py-3 text-almanac-parchment placeholder:text-almanac-parchment/40 focus:outline-none focus:border-almanac-gold/50 transition-colors"
+                  autoFocus
+                />
+              </div>
+
+              {/* Error Message */}
+              <AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="flex items-center gap-2 text-red-400 text-sm mb-4"
+                  >
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{error}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Actions */}
+              <div className="flex gap-3">
+                <button
+                  onClick={handleSearch}
+                  disabled={isLoading || !query.trim()}
+                  className="flex-1 flex items-center justify-center gap-2 bg-almanac-gold text-almanac-midnight font-medium py-3 rounded-lg hover:bg-almanac-gold/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Searching...</span>
+                    </>
+                  ) : (
+                    <span>Search</span>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleReset}
+                  title="Reset to Sullivan County"
+                  className="flex items-center justify-center gap-2 px-4 py-3 border border-almanac-gold/30 text-almanac-parchment/80 rounded-lg hover:border-almanac-gold/50 hover:text-almanac-parchment transition-colors"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Current Location */}
+              <div className="mt-6 pt-4 border-t border-almanac-gold/10">
+                <p className="text-xs text-almanac-parchment/50">
+                  Current: {formatLocationName(location)}
+                </p>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}

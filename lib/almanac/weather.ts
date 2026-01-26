@@ -1,9 +1,6 @@
-// Weather data fetching and transformation
+// Weather data transformation
+// Note: DEFAULT_LOCATION is defined in geocoding.ts as the single source of truth
 import type { WeatherData, CurrentConditions, HourlyForecast, DailyForecast, Location } from './types'
-
-// Sullivan County, TN (Rocky Mount location)
-export const DEFAULT_LAT = 36.52
-export const DEFAULT_LON = -82.26
 
 // Unit conversion constants
 const METERS_TO_INCHES = 39.3701
@@ -150,16 +147,5 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
   return { current, hourly, daily, location }
 }
 
-export async function fetchWeatherData(
-  lat: number = DEFAULT_LAT,
-  lon: number = DEFAULT_LON
-): Promise<WeatherData> {
-  const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch weather data')
-  }
-
-  const data = await response.json()
-  return transformWeatherData(data)
-}
+// Note: Weather fetching is done directly in page.tsx using the /api/weather endpoint
+// The transformWeatherData function is used to process the API response

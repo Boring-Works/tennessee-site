@@ -37,10 +37,4 @@ export function getWeatherIcon(weatherCode: number): LucideIcon {
   return Sun
 }
 
-/**
- * Get the weather condition text for a weather code
- */
-export function getWeatherCondition(weatherCode: number): string {
-  const info = WEATHER_CODES[weatherCode]
-  return info?.condition || 'Unknown'
-}
+// Note: For weather condition text, use getWeatherInfo(code).condition from types.ts

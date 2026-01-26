@@ -90,16 +90,8 @@ export interface MoonData {
   emoji: string
 }
 
-export interface WeatherMetrics {
-  temperature: number
-  humidity: number
-  windSpeed: number
-  windGusts: number
-  precipitation: number
-  precipProbability: number
-  feelsLike: number
-  month: number
-}
+// Note: ExtendedMetrics in taskScores.ts is used for score calculations
+// It includes all WeatherMetrics fields plus winter/forecast analysis
 
 // WMO Weather codes mapping
 export interface WeatherCodeInfo {

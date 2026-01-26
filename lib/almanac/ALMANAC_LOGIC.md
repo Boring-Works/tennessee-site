@@ -1,7 +1,7 @@
 # Rocky Mount Almanac — Technical Logic Document
 
-**Version:** 3.5
-**Last Updated:** January 27, 2026  
+**Version:** 3.6
+**Last Updated:** January 26, 2026  
 **Location:** Sullivan County, Tennessee (36.52°N, 82.26°W, ~1,500 ft elevation)  
 **Site:** Rocky Mount State Historic Site — First Southwest Territory Capital (1790-1792)
 
@@ -29,12 +29,14 @@
 
 The Rocky Mount Almanac is a heritage-informed weather decision tool designed for the Southern Appalachian context. It translates meteorological data into actionable guidance for four primary user personas:
 
-| Score | Name | Target User | Primary Concerns |
-|-------|------|-------------|------------------|
-| **Sower's Index** | Gardening & Planting | Home gardeners, small farmers | Soil temp, frost, precipitation, workable ground |
-| **Shepherd's Watch** | Outdoor Safety | Pet owners, parents, livestock managers | Heat stress, cold exposure, ice hazards |
-| **Keeper's Gauge** | Property Maintenance | Homeowners, painters, handymen | Paint cure conditions, ladder safety, dew point |
-| **Builder's Grade** | Construction | Contractors, site managers | Concrete curing, OSHA compliance, crane operations |
+| Score | Internal Key | UI Display Name | Target User | Primary Concerns |
+|-------|--------------|-----------------|-------------|------------------|
+| **Sower's Index** | `sower` | Sower's Index | Home gardeners, small farmers | Soil temp, frost, precipitation, workable ground |
+| **Outdoor Alert** | `shepherd` | Outdoor Alert | Pet owners, parents, livestock managers | Heat stress, cold exposure, ice hazards |
+| **Keeper's Gauge** | `keeper` | Keeper's Gauge | Homeowners, painters, handymen | Paint cure conditions, ladder safety, dew point |
+| **Builder's Grade** | `builder` | Builder's Grade | Contractors, site managers | Concrete curing, OSHA compliance, crane operations |
+
+> **Note:** The second score is internally named "shepherd" (for Shepherd's Watch) but displays as "Outdoor Alert" in the UI for broader appeal.
 
 ### Design Philosophy
 
@@ -60,6 +62,7 @@ This is not a generic weather app. It's calibrated for:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      /api/weather/route.ts                          │
 │  • Fetches from Open-Meteo with past_days=2, forecast_days=7        │
+│  • Uses DEFAULT_LOCATION from geocoding.ts                          │
 │  • Returns raw JSON (no transformation at API layer)                │
 └─────────────────────────────────────────────────────────────────────┘
                                    │
@@ -78,6 +81,7 @@ This is not a generic weather app. It's calibrated for:
 │  • buildExtendedMetrics() — calculates derived values               │
 │  • analyzeConditions() — winter/forecast analysis                   │
 │  • calculate[Sower|Outdoor|Keeper|Builder]Score()                   │
+│  • Re-exports dateUtils functions for UI convenience                │
 └─────────────────────────────────────────────────────────────────────┘
                                    │
                                    ▼
@@ -85,10 +89,29 @@ This is not a generic weather app. It's calibrated for:
 │                      UI Components                                   │
 │  • CurrentConditionsCard.tsx — current weather display              │
 │  • WeatherDetails.tsx — hourly/daily forecasts                      │
-│  • WeatherAlertBanner.tsx — storm warnings                          │
-│  • TaskScoreCard.tsx — the four score gauges                        │
+│  • WeatherAlertBanner.tsx — storm warnings (uses dateUtils)         │
+│  • TaskScores.tsx — the four score gauges                           │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+### File Organization
+
+| File | Purpose | Key Exports |
+|------|---------|-------------|
+| `geocoding.ts` | **Single source of truth for DEFAULT_LOCATION** | `DEFAULT_LOCATION`, `searchLocation`, `formatLocationName` |
+| `dateUtils.ts` | All date/time utilities | `findTodayDailyIndex`, `findTodayHourlyIndex`, `getEasternHour`, `isDateToday`, etc. |
+| `types.ts` | TypeScript interfaces | `WeatherData`, `TaskScore`, `MoonData`, `isSnowCode`, `isIceCode` |
+| `weather.ts` | API response transformation | `transformWeatherData` |
+| `taskScores.ts` | Score calculation engine | `calculateAllTaskScores`, `buildExtendedMetrics`, `calculateNativePulse` |
+| `storage.ts` | localStorage persistence | `saveLocation`, `loadLocation`, `clearLocation` |
+| `moonPhase.ts` | Moon calculations | `getMoonData`, `isDay` |
+| `sayings.ts` | Frontier sayings | `getSaying` |
+| `weatherIcons.tsx` | Weather code → icon mapping | `getWeatherIcon` |
+
+**Import Guidelines:**
+- For default location: `import { DEFAULT_LOCATION } from '@/lib/almanac/geocoding'`
+- For date utilities: `import { ... } from '@/lib/almanac/dateUtils'`
+- For weather codes: `import { isSnowCode, isIceCode, getWeatherInfo } from '@/lib/almanac/types'`
 
 ### API Request Parameters
 
@@ -938,6 +961,17 @@ const conditions = {
 ---
 
 ## Changelog
+
+### v3.6 (January 26, 2026)
+- **CODE CLEANUP:** Comprehensive codebase audit and consolidation
+  - WeatherAlertBanner.tsx now imports from dateUtils (removed 60 lines of duplicate code)
+  - Fixed typo: `analyzeForecasAlerts` → `analyzeForecastAlerts`
+  - Removed dead code: `fetchWeatherData` from weather.ts, `getWeatherCondition` from weatherIcons.tsx
+  - Removed unused `WeatherMetrics` interface from types.ts
+  - Consolidated DEFAULT_LOCATION: now single source of truth in geocoding.ts
+  - route.ts imports DEFAULT_LOCATION instead of defining own constants
+- **DOCUMENTATION:** Added File Organization table and Import Guidelines
+- **CLARIFICATION:** Added note that "Outdoor Alert" UI name maps to internal `shepherd` key
 
 ### v3.5 (January 27, 2026)
 - **CRITICAL FIX:** Added `getEasternHour()` to fix timezone bug for non-ET users

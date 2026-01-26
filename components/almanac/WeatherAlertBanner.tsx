@@ -5,6 +5,12 @@ import { AlertTriangle, Snowflake, CloudRain, Thermometer, X } from 'lucide-reac
 import { useState } from 'react'
 import type { DailyForecast } from '@/lib/almanac/types'
 import { isSnowCode, isIceCode } from '@/lib/almanac/types'
+import {
+  isDateToday,
+  isDateTomorrow,
+  getWeekdayName,
+  findTodayDailyIndex
+} from '@/lib/almanac/dateUtils'
 
 interface WeatherAlertBannerProps {
   daily: DailyForecast
@@ -19,75 +25,11 @@ interface Alert {
   day: string
 }
 
-/**
- * Parse date string to get year, month, day components
- */
-function getDateComponents(dateString: string): { year: number; month: number; day: number } {
-  const datePart = dateString.split('T')[0]
-  const [year, month, day] = datePart.split('-').map(Number)
-  return { year, month, day }
-}
-
-/**
- * Check if a date string represents today
- */
-function isDateToday(dateString: string): boolean {
-  const { year, month, day } = getDateComponents(dateString)
-  const now = new Date()
-  return year === now.getFullYear() && 
-         month === (now.getMonth() + 1) && 
-         day === now.getDate()
-}
-
-/**
- * Check if a date string represents tomorrow
- */
-function isDateTomorrow(dateString: string): boolean {
-  const { year, month, day } = getDateComponents(dateString)
-  const tomorrow = new Date()
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  return year === tomorrow.getFullYear() && 
-         month === (tomorrow.getMonth() + 1) && 
-         day === tomorrow.getDate()
-}
-
-/**
- * Get weekday name from date string
- */
-function getWeekdayName(dateString: string): string {
-  const { year, month, day } = getDateComponents(dateString)
-  const date = new Date(year, month - 1, day)
-  return date.toLocaleDateString('en-US', { weekday: 'long' })
-}
-
-/**
- * Find index of today in the daily array
- */
-function findTodayIndex(dailyTimes: string[]): number {
-  for (let i = 0; i < dailyTimes.length; i++) {
-    if (isDateToday(dailyTimes[i])) {
-      return i
-    }
-  }
-  // Fallback: find first future date
-  const now = new Date()
-  const todayNum = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate()
-  
-  for (let i = 0; i < dailyTimes.length; i++) {
-    const { year, month, day } = getDateComponents(dailyTimes[i])
-    const dateNum = year * 10000 + month * 100 + day
-    if (dateNum >= todayNum) {
-      return i
-    }
-  }
-  return 0
-}
-
-function analyzeForecasAlerts(daily: DailyForecast, currentTemp: number): Alert[] {
+function analyzeForecastAlerts(daily: DailyForecast, currentTemp: number): Alert[] {
   const alerts: Alert[] = []
   
-  // Find today's index (skip past days)
-  const todayIndex = findTodayIndex(daily.time)
+  // Find today's index (skip past days) - uses centralized dateUtils
+  const todayIndex = findTodayDailyIndex(daily.time)
   
   // Check next 3 days starting from TODAY
   for (let offset = 0; offset < 3; offset++) {
@@ -106,7 +48,7 @@ function analyzeForecasAlerts(daily: DailyForecast, currentTemp: number): Alert[
     } else if (isDateTomorrow(dateStr)) {
       dayName = 'Tomorrow'
     } else {
-      dayName = getWeekdayName(dateStr)
+      dayName = getWeekdayName(dateStr, 'long')
     }
     
     // Snow alerts
@@ -201,7 +143,7 @@ const colorMap = {
 export default function WeatherAlertBanner({ daily, currentTemp }: WeatherAlertBannerProps) {
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   
-  const alerts = analyzeForecasAlerts(daily, currentTemp)
+  const alerts = analyzeForecastAlerts(daily, currentTemp)
   const visibleAlerts = alerts.filter(a => !dismissed.has(a.type))
   
   if (visibleAlerts.length === 0) return null

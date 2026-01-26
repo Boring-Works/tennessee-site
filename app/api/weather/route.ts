@@ -1,18 +1,16 @@
 import { NextResponse } from 'next/server'
+import { DEFAULT_LOCATION } from '@/lib/almanac/geocoding'
 
 const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast'
-
-// Sullivan County, TN (Rocky Mount location)
-const DEFAULT_LAT = 36.52
-const DEFAULT_LON = -82.26
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const latParam = searchParams.get('lat')
   const lonParam = searchParams.get('lon')
 
-  const lat = latParam || String(DEFAULT_LAT)
-  const lon = lonParam || String(DEFAULT_LON)
+  // Use DEFAULT_LOCATION from geocoding.ts as single source of truth
+  const lat = latParam || String(DEFAULT_LOCATION.latitude)
+  const lon = lonParam || String(DEFAULT_LOCATION.longitude)
 
   // Validate latitude
   const latNum = parseFloat(lat)

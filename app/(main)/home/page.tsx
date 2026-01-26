@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main id="main-content">
+    <>
       {/* THE 1790 WATERMARK - Parallax depth effect */}
       <div className={styles["watermark-1790"]} aria-hidden="true">
         1790
@@ -193,6 +193,6 @@ export default function Home() {
           THE HOMECOMING - Final Section
           ============================================ */}
       <HomecomingSection />
-    </main>
+    </>
   );
 }

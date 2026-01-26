@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/og-1775-almanac.png',
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'The 1775 Almanac - Sullivan County Weather & Wisdom',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The 1775 Almanac',
     description: 'Sullivan County weather from Tennessee\'s oldest farm. Est. 1775.',
-    images: ['/og-1775-almanac.png'],
+    images: ['/og-image.svg'],
   },
   other: {
     'apple-mobile-web-app-capable': 'yes',

@@ -11,9 +11,6 @@ export default function MainLayout({
 }>) {
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
       <Analytics />
       <ScrollProgress />
       <Navigation />

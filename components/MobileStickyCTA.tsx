@@ -8,8 +8,8 @@ export default function MobileStickyCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
 
-  // Don't show on First 250 page (they're already there)
-  const hideOnPages = ["/first-250"];
+  // Don't show on Visit page (they're already there)
+  const hideOnPages = ["/visit"];
   const shouldHide = hideOnPages.some((page) => pathname.startsWith(page));
 
   useEffect(() => {
@@ -45,10 +45,10 @@ export default function MobileStickyCTA() {
             2026 Events
           </Link>
           <Link
-            href="/first-250"
+            href="/visit"
             className="flex-1 bg-accent text-primary text-center py-3 rounded-sm font-semibold text-sm hover:bg-accent/90 transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            Join First 250
+            Plan Your Visit
           </Link>
         </div>
       </nav>

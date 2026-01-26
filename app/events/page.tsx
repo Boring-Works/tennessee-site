@@ -2,12 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import eventsData from "@/data/events.json";
 import lecturesData from "@/data/lectures.json";
-import enrollmentData from "@/data/enrollment.json";
-
-// Enrollment data from shared source
-const CURRENT_ENROLLED = enrollmentData.currentEnrolled;
-const TOTAL_SPOTS = enrollmentData.totalSpots;
-const PROGRESS_PERCENT = Math.round((CURRENT_ENROLLED / TOTAL_SPOTS) * 100);
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "2026 Events Calendar",
@@ -113,42 +108,42 @@ export default function EventsPage() {
       {/* ============================================
           PAGE HEADER - The Commemorative Year
           ============================================ */}
-      <section className="calendar-header" aria-labelledby="calendar-page-heading">
-        <div className="calendar-header-content">
+      <section className={styles["calendar-header"]} aria-labelledby="calendar-page-heading">
+        <div className={styles["calendar-header-content"]}>
           {/* Eyebrow */}
-          <p className="calendar-eyebrow">Rocky Mount State Historic Site</p>
+          <p className={styles["calendar-eyebrow"]}>Rocky Mount State Historic Site</p>
 
           {/* Main headline */}
-          <h1 id="calendar-page-heading" className="calendar-headline">
-            <span className="calendar-headline-year">2026</span>
-            <span className="calendar-headline-text">The Commemorative Year</span>
+          <h1 id="calendar-page-heading" className={styles["calendar-headline"]}>
+            <span className={styles["calendar-headline-year"]}>2026</span>
+            <span className={styles["calendar-headline-text"]}>The Commemorative Year</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="calendar-subheadline">
+          <p className={styles["calendar-subheadline"]}>
             America&apos;s 250th anniversary. Tennessee&apos;s 230th birthday. Our most ambitious season yet.
           </p>
 
           {/* Stats row */}
-          <div className="calendar-stats">
-            <div className="calendar-stat">
-              <span className="calendar-stat-number">{eventCount}</span>
-              <span className="calendar-stat-label">Events</span>
+          <div className={styles["calendar-stats"]}>
+            <div className={styles["calendar-stat"]}>
+              <span className={styles["calendar-stat-number"]}>{eventCount}</span>
+              <span className={styles["calendar-stat-label"]}>Events</span>
             </div>
-            <div className="calendar-stat-divider" aria-hidden="true" />
-            <div className="calendar-stat">
-              <span className="calendar-stat-number">{newEventCount}</span>
-              <span className="calendar-stat-label">New for 2026</span>
+            <div className={styles["calendar-stat-divider"]} aria-hidden="true" />
+            <div className={styles["calendar-stat"]}>
+              <span className={styles["calendar-stat-number"]}>{newEventCount}</span>
+              <span className={styles["calendar-stat-label"]}>New for 2026</span>
             </div>
-            <div className="calendar-stat-divider" aria-hidden="true" />
-            <div className="calendar-stat">
-              <span className="calendar-stat-number">{lecturesData.lectures.length}</span>
-              <span className="calendar-stat-label">Lectures</span>
+            <div className={styles["calendar-stat-divider"]} aria-hidden="true" />
+            <div className={styles["calendar-stat"]}>
+              <span className={styles["calendar-stat-number"]}>{lecturesData.lectures.length}</span>
+              <span className={styles["calendar-stat-label"]}>Lectures</span>
             </div>
-            <div className="calendar-stat-divider" aria-hidden="true" />
-            <div className="calendar-stat">
-              <span className="calendar-stat-number">{festivalCount}</span>
-              <span className="calendar-stat-label">Festivals</span>
+            <div className={styles["calendar-stat-divider"]} aria-hidden="true" />
+            <div className={styles["calendar-stat"]}>
+              <span className={styles["calendar-stat-number"]}>{festivalCount}</span>
+              <span className={styles["calendar-stat-label"]}>Festivals</span>
             </div>
           </div>
         </div>
@@ -157,9 +152,9 @@ export default function EventsPage() {
       {/* ============================================
           YEAR PROGRESS BAR - Sticky Navigation
           ============================================ */}
-      <nav className="year-progress" aria-label="Navigate by month">
-        <div className="year-progress-inner">
-          <div className="year-progress-track">
+      <nav className={styles["year-progress"]} aria-label="Navigate by month">
+        <div className={styles["year-progress-inner"]}>
+          <div className={styles["year-progress-track"]}>
             {allMonths.map((month) => {
               const hasEvents = groupedEvents[month] && groupedEvents[month].length > 0;
               const monthId = month.toLowerCase().replace(/\s+/g, "-");
@@ -169,11 +164,11 @@ export default function EventsPage() {
                 <a
                   key={month}
                   href={hasEvents ? `#${monthId}` : undefined}
-                  className={`year-progress-month ${hasEvents ? "year-progress-month--active" : "year-progress-month--empty"}`}
+                  className={`${styles["year-progress-month"]} ${hasEvents ? styles["year-progress-month--active"] : styles["year-progress-month--empty"]}`}
                   aria-label={hasEvents ? `Jump to ${month}` : `No events in ${month}`}
                 >
-                  <span className="year-progress-month-dot" aria-hidden="true" />
-                  <span className="year-progress-month-label">{shortMonth}</span>
+                  <span className={styles["year-progress-month-dot"]} aria-hidden="true" />
+                  <span className={styles["year-progress-month-label"]}>{shortMonth}</span>
                 </a>
               );
             })}
@@ -184,7 +179,7 @@ export default function EventsPage() {
       {/* ============================================
           THE LIVING CALENDAR - Month by Month
           ============================================ */}
-      <section className="living-calendar" aria-labelledby="living-calendar-heading">
+      <section className={styles["living-calendar"]} aria-labelledby="living-calendar-heading">
         <h2 id="living-calendar-heading" className="sr-only">2026 Events by Month</h2>
 
         {Object.entries(groupedEvents).map(([month, events]) => {
@@ -192,22 +187,22 @@ export default function EventsPage() {
           const character = monthCharacters[month] || "";
 
           return (
-            <article key={month} id={monthId} className="calendar-month" aria-labelledby={`${monthId}-heading`}>
+            <article key={month} id={monthId} className={styles["calendar-month"]} aria-labelledby={`${monthId}-heading`}>
               {/* Month header */}
-              <header className="calendar-month-header">
-                <div className="calendar-month-title-group">
-                  <h3 id={`${monthId}-heading`} className="calendar-month-title">
+              <header className={styles["calendar-month-header"]}>
+                <div className={styles["calendar-month-title-group"]}>
+                  <h3 id={`${monthId}-heading`} className={styles["calendar-month-title"]}>
                     {month.split(" ")[0]}
                   </h3>
-                  <p className="calendar-month-character">{character}</p>
+                  <p className={styles["calendar-month-character"]}>{character}</p>
                 </div>
-                <span className="calendar-month-count">
+                <span className={styles["calendar-month-count"]}>
                   {events.length} event{events.length !== 1 ? "s" : ""}
                 </span>
               </header>
 
               {/* Events grid */}
-              <div className="calendar-month-events">
+              <div className={styles["calendar-month-events"]}>
                 {events.map((event) => {
                   const duration = getEventDuration(event);
                   const isMultiDay = duration > 1;
@@ -216,44 +211,44 @@ export default function EventsPage() {
                   const isMilestone = event.type === "milestone";
 
                   // Determine card size class
-                  let sizeClass = "calendar-event--standard";
+                  let sizeClass = styles["calendar-event--standard"];
                   if (isMultiDay && duration >= 3) {
-                    sizeClass = "calendar-event--large";
+                    sizeClass = styles["calendar-event--large"];
                   } else if (isMultiDay || isSignature) {
-                    sizeClass = "calendar-event--medium";
+                    sizeClass = styles["calendar-event--medium"];
                   }
 
                   // Determine type class
                   let typeClass = "";
-                  if (isSignature) typeClass = "calendar-event--signature";
-                  else if (isLecture) typeClass = "calendar-event--lecture";
-                  else if (isMilestone) typeClass = "calendar-event--milestone";
-                  else if (event.type === "new") typeClass = "calendar-event--new";
+                  if (isSignature) typeClass = styles["calendar-event--signature"];
+                  else if (isLecture) typeClass = styles["calendar-event--lecture"];
+                  else if (isMilestone) typeClass = styles["calendar-event--milestone"];
+                  else if (event.type === "new") typeClass = styles["calendar-event--new"];
 
                   return (
                     <article
                       key={event.id}
                       id={event.id}
-                      className={`calendar-event ${sizeClass} ${typeClass}`}
+                      className={`${styles["calendar-event"]} ${sizeClass} ${typeClass}`}
                     >
                       {/* Date block */}
-                      <div className="calendar-event-date">
-                        <time dateTime={event.date} className="calendar-event-date-inner">
+                      <div className={styles["calendar-event-date"]}>
+                        <time dateTime={event.date} className={styles["calendar-event-date-inner"]}>
                           {isMultiDay ? (
                             <>
-                              <span className="calendar-event-date-range">
+                              <span className={styles["calendar-event-date-range"]}>
                                 {formatDateRange(event.date, event.endDate)}
                               </span>
-                              <span className="calendar-event-date-duration">
+                              <span className={styles["calendar-event-date-duration"]}>
                                 {duration} days
                               </span>
                             </>
                           ) : (
                             <>
-                              <span className="calendar-event-date-month">
+                              <span className={styles["calendar-event-date-month"]}>
                                 {new Date(event.date + "T12:00:00").toLocaleDateString("en-US", { month: "short" })}
                               </span>
-                              <span className="calendar-event-date-day">
+                              <span className={styles["calendar-event-date-day"]}>
                                 {new Date(event.date + "T12:00:00").getDate()}
                               </span>
                             </>
@@ -262,9 +257,9 @@ export default function EventsPage() {
                       </div>
 
                       {/* Content */}
-                      <div className="calendar-event-content">
+                      <div className={styles["calendar-event-content"]}>
                         {/* Badge */}
-                        <span className={`calendar-event-badge calendar-event-badge--${event.type}`}>
+                        <span className={`${styles["calendar-event-badge"]} ${styles[`calendar-event-badge--${event.type}`]}`}>
                           {event.type === "new" && "New for 2026"}
                           {event.type === "enhanced" && "Enhanced"}
                           {event.type === "recurring" && "Annual Tradition"}
@@ -272,34 +267,33 @@ export default function EventsPage() {
                         </span>
 
                         {/* Title */}
-                        <h4 className="calendar-event-title">{event.title}</h4>
+                        <h4 className={styles["calendar-event-title"]}>{event.title}</h4>
 
                         {/* Time */}
                         {event.time && (
-                          <p className="calendar-event-time">{event.time}</p>
+                          <p className={styles["calendar-event-time"]}>{event.time}</p>
                         )}
 
                         {/* Speaker (for lectures) */}
                         {isLecture && "speaker" in event && event.speaker && (
-                          <p className="calendar-event-speaker">
-                            <span className="calendar-event-speaker-name">{event.speaker}</span>
+                          <p className={styles["calendar-event-speaker"]}>
+                            <span className={styles["calendar-event-speaker-name"]}>{event.speaker}</span>
                             {"speakerTitle" in event && event.speakerTitle && (
-                              <span className="calendar-event-speaker-title">{event.speakerTitle}</span>
+                              <span className={styles["calendar-event-speaker-title"]}>{event.speakerTitle}</span>
                             )}
                           </p>
                         )}
 
                         {/* Description */}
-                        <p className="calendar-event-desc">{event.description}</p>
+                        <p className={styles["calendar-event-desc"]}>{event.description}</p>
 
-                        {/* Signature event CTA */}
+                        {/* Subtle link for July 4 signature event - softened from hard CTA */}
                         {isSignature && event.id === "colonial-independence-day" && (
-                          <div className="calendar-event-cta">
-                            <Link href="/first-250" className="calendar-event-cta-link">
-                              Join the First 250
-                              <span aria-hidden="true">→</span>
+                          <p className={styles["calendar-event-note"]}>
+                            <Link href="/first-250" className={styles["calendar-event-note-link"]}>
+                              Learn about the First 250 Registry
                             </Link>
-                          </div>
+                          </p>
                         )}
                       </div>
                     </article>
@@ -312,37 +306,26 @@ export default function EventsPage() {
       </section>
 
       {/* ============================================
-          FIRST 250 REMINDER - Contextual CTA
+          VISIT CTA - See It In Person
           ============================================ */}
-      <section className="calendar-cta" aria-labelledby="calendar-cta-heading">
-        <div className="calendar-cta-inner">
-          <div className="calendar-cta-content">
-            <p className="calendar-cta-eyebrow">Colonial Independence Day · July 4, 2026</p>
-            <h2 id="calendar-cta-heading" className="calendar-cta-headline">
-              Be One of 250
+      <section className={styles["calendar-cta"]} aria-labelledby="calendar-cta-heading">
+        <div className={styles["calendar-cta-inner"]}>
+          <div className={styles["calendar-cta-content"]}>
+            <p className={styles["calendar-cta-eyebrow"]}>Experience History</p>
+            <h2 id="calendar-cta-heading" className={styles["calendar-cta-headline"]}>
+              See Where Tennessee Began
             </h2>
-            <p className="calendar-cta-desc">
-              Your name, read aloud at Tennessee&apos;s first capital on America&apos;s 250th birthday.
+            <p className={styles["calendar-cta-desc"]}>
+              Walk the same grounds as William Blount and Andrew Jackson. Living history tours daily.
             </p>
           </div>
 
-          <div className="calendar-cta-action">
-            {/* Progress indicator */}
-            <div className="calendar-cta-progress" role="progressbar" aria-valuenow={CURRENT_ENROLLED} aria-valuemin={0} aria-valuemax={TOTAL_SPOTS}>
-              <div className="calendar-cta-progress-bar">
-                <div className="calendar-cta-progress-fill" style={{ width: `${PROGRESS_PERCENT}%` }} />
-              </div>
-              <p className="calendar-cta-progress-label">
-                <strong>{CURRENT_ENROLLED}</strong> of {TOTAL_SPOTS} signatories enrolled
-              </p>
-            </div>
-
-            <Link href="/first-250" className="calendar-cta-btn">
-              Claim Your Place
+          <div className={styles["calendar-cta-action"]}>
+            <Link href="/visit" className={styles["calendar-cta-btn"]}>
+              Plan Your Visit
             </Link>
-
-            <p className="calendar-cta-deadline">
-              Enrollment closes <time dateTime="2026-06-01">June 1, 2026</time>
+            <p className={styles["calendar-cta-hours"]}>
+              Open Tue–Sat 10am–5pm, Sun 1pm–5pm
             </p>
           </div>
         </div>
@@ -351,15 +334,15 @@ export default function EventsPage() {
       {/* ============================================
           CONTACT - Group Visits
           ============================================ */}
-      <section className="calendar-contact" aria-labelledby="calendar-contact-heading">
-        <div className="calendar-contact-inner">
-          <h2 id="calendar-contact-heading" className="calendar-contact-headline">
+      <section className={styles["calendar-contact"]} aria-labelledby="calendar-contact-heading">
+        <div className={styles["calendar-contact-inner"]}>
+          <h2 id="calendar-contact-heading" className={styles["calendar-contact-headline"]}>
             Planning a Group Visit?
           </h2>
-          <p className="calendar-contact-desc">
+          <p className={styles["calendar-contact-desc"]}>
             Group rates for 10+. School programs and private tours available.
           </p>
-          <a href="tel:+14235387396" className="calendar-contact-btn">
+          <a href="tel:+14235387396" className={styles["calendar-contact-btn"]}>
             (423) 538-7396
           </a>
         </div>

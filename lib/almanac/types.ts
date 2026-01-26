@@ -18,28 +18,50 @@ export interface CurrentConditions {
   windGusts: number
   pressure: number
   soilTemperature?: number
-  snowDepth?: number          // NEW: Current snow depth in inches
+  snowDepth?: number
+  cloudCover?: number        // NEW: 0-100%
+  visibility?: number        // NEW: in meters
+  dewPoint?: number          // NEW: in °F
+  uvIndex?: number           // NEW: 0-11+
+  isDay?: boolean            // NEW: true if daytime
 }
 
 export interface HourlyForecast {
   time: string[]
   temperature: number[]
+  feelsLike?: number[]       // NEW
   precipitationProbability: number[]
   precipitation: number[]
   weatherCode: number[]
-  snowfall?: number[]         // NEW: Hourly snowfall in inches
+  snowfall?: number[]
+  snowDepth?: number[]       // NEW: running snow depth
+  cloudCover?: number[]      // NEW
+  visibility?: number[]      // NEW
+  windSpeed?: number[]       // NEW
+  windGusts?: number[]       // NEW
+  dewPoint?: number[]        // NEW
+  uvIndex?: number[]         // NEW
+  freezingLevel?: number[]   // NEW: altitude in meters where temp = 32°F
 }
 
 export interface DailyForecast {
   time: string[]
   temperatureMax: number[]
   temperatureMin: number[]
+  feelsLikeMax?: number[]    // NEW
+  feelsLikeMin?: number[]    // NEW
   precipitationSum: number[]
   precipitationProbability: number[]
+  precipitationHours?: number[]  // NEW
   weatherCode: number[]
   sunrise: string[]
   sunset: string[]
-  snowfallSum?: number[]      // NEW: Daily snowfall totals
+  daylightDuration?: number[]   // NEW: seconds of daylight
+  snowfallSum?: number[]
+  windSpeedMax?: number[]       // NEW
+  windGustsMax?: number[]       // NEW
+  windDirectionDominant?: number[]  // NEW
+  uvIndexMax?: number[]         // NEW
 }
 
 export interface Location {
@@ -139,4 +161,24 @@ export function isSnowCode(code: number): boolean {
 
 export function isIceCode(code: number): boolean {
   return ICE_WEATHER_CODES.includes(code)
+}
+
+// Visibility descriptions
+export function getVisibilityDescription(meters: number): string {
+  const miles = meters / 1609.34
+  if (miles < 0.25) return 'Near zero visibility'
+  if (miles < 0.5) return 'Very poor visibility'
+  if (miles < 1) return 'Poor visibility'
+  if (miles < 3) return 'Moderate visibility'
+  if (miles < 6) return 'Good visibility'
+  return 'Excellent visibility'
+}
+
+// UV Index descriptions
+export function getUVDescription(uv: number): { level: string; advice: string; color: string } {
+  if (uv <= 2) return { level: 'Low', advice: 'No protection needed', color: 'text-green-400' }
+  if (uv <= 5) return { level: 'Moderate', advice: 'Seek shade midday', color: 'text-yellow-400' }
+  if (uv <= 7) return { level: 'High', advice: 'Protection required', color: 'text-orange-400' }
+  if (uv <= 10) return { level: 'Very High', advice: 'Extra protection', color: 'text-red-400' }
+  return { level: 'Extreme', advice: 'Avoid sun exposure', color: 'text-purple-400' }
 }

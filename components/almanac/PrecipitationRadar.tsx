@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Radar, Play, Pause, ExternalLink } from 'lucide-react'
+import { Radar, Play, Pause, ExternalLink, MapPin } from 'lucide-react'
 
 interface PrecipitationRadarProps {
   latitude: number
@@ -20,6 +20,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   // Fetch radar data from RainViewer API
   useEffect(() => {
@@ -31,10 +32,11 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
 
         const data = await response.json()
         const radarFrames = data.radar?.past || []
-        const recentFrames = radarFrames.slice(-6) // Last 6 frames (30 min)
+        const recentFrames = radarFrames.slice(-8) // Last 8 frames (40 min)
 
         setFrames(recentFrames)
         setCurrentFrame(recentFrames.length - 1)
+        setLastUpdated(new Date())
         setError(null)
       } catch (err) {
         console.error('Radar fetch error:', err)
@@ -45,8 +47,8 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
     }
 
     fetchRadarData()
-    // Refresh every 10 minutes
-    const interval = setInterval(fetchRadarData, 600000)
+    // Refresh every 5 minutes
+    const interval = setInterval(fetchRadarData, 300000)
     return () => clearInterval(interval)
   }, [])
 
@@ -56,7 +58,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
 
     const interval = setInterval(() => {
       setCurrentFrame((prev) => (prev + 1) % frames.length)
-    }, 500)
+    }, 600)
 
     return () => clearInterval(interval)
   }, [isPlaying, frames.length])
@@ -67,8 +69,9 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
     minute: '2-digit',
   }) : ''
 
-  // Calculate tile coordinates for the location
-  const zoom = 6
+  // ZOOM 9 for local detail (was 6 - too zoomed out)
+  // Zoom 9 = ~2km per tile, good for county-level detail
+  const zoom = 9
   const tileX = Math.floor((longitude + 180) / 360 * Math.pow(2, zoom))
   const tileY = Math.floor((1 - Math.log(Math.tan(latitude * Math.PI / 180) + 1 / Math.cos(latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom))
 
@@ -83,6 +86,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
           <Radar className="w-5 h-5 text-almanac-gold animate-pulse" />
           <span className="text-almanac-parchment/60 text-sm">Loading radar...</span>
         </div>
+        <div className="aspect-square bg-almanac-midnight/50 rounded animate-pulse" />
       </motion.div>
     )
   }
@@ -117,7 +121,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Radar className="w-5 h-5 text-almanac-gold" />
-          <span className="text-almanac-gold font-display">Precipitation Radar</span>
+          <span className="text-almanac-gold font-display">Local Radar</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -135,13 +139,13 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         </div>
       </div>
 
-      {/* Radar Image */}
-      <div className="relative aspect-square bg-almanac-midnight rounded overflow-hidden mb-3">
-        {/* Base map layer - using OpenStreetMap tiles */}
+      {/* Radar Image - larger aspect ratio for better visibility */}
+      <div className="relative aspect-[4/3] bg-almanac-midnight rounded overflow-hidden mb-3">
+        {/* Base map layer */}
         <img
           src={`https://tile.openstreetmap.org/${zoom}/${tileX}/${tileY}.png`}
           alt="Map"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
         />
         {/* Radar overlay */}
         <img
@@ -149,9 +153,17 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
           alt="Precipitation radar"
           className="absolute inset-0 w-full h-full object-cover"
         />
+        {/* Center marker showing your location */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <MapPin className="w-5 h-5 text-almanac-gold drop-shadow-lg" />
+        </div>
         {/* Timestamp */}
         <div className="absolute bottom-2 left-2 bg-almanac-midnight/80 px-2 py-1 rounded text-xs text-almanac-parchment">
           {timestamp}
+        </div>
+        {/* Scale indicator */}
+        <div className="absolute bottom-2 right-2 bg-almanac-midnight/80 px-2 py-1 rounded text-xs text-almanac-parchment/60">
+          ~10 mi view
         </div>
       </div>
 
@@ -165,35 +177,43 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
               setCurrentFrame(idx)
             }}
             className={`flex-1 h-1.5 rounded-full transition-colors ${
-              idx === currentFrame ? 'bg-almanac-gold' : 'bg-almanac-gold/20'
+              idx === currentFrame ? 'bg-almanac-gold' : 'bg-almanac-gold/20 hover:bg-almanac-gold/40'
             }`}
+            aria-label={`Frame ${idx + 1} of ${frames.length}`}
           />
         ))}
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-between text-xs text-almanac-parchment/50">
+      <div className="flex items-center justify-between text-xs text-almanac-parchment/50 mb-3">
         <span>Light</span>
         <div className="flex gap-0.5">
-          <div className="w-4 h-2 rounded-sm bg-green-500/70" />
-          <div className="w-4 h-2 rounded-sm bg-yellow-500/70" />
-          <div className="w-4 h-2 rounded-sm bg-orange-500/70" />
-          <div className="w-4 h-2 rounded-sm bg-red-500/70" />
-          <div className="w-4 h-2 rounded-sm bg-purple-500/70" />
+          <div className="w-6 h-2 rounded-sm bg-green-500/70" title="Light rain" />
+          <div className="w-6 h-2 rounded-sm bg-yellow-500/70" title="Moderate rain" />
+          <div className="w-6 h-2 rounded-sm bg-orange-500/70" title="Heavy rain" />
+          <div className="w-6 h-2 rounded-sm bg-red-500/70" title="Intense" />
+          <div className="w-6 h-2 rounded-sm bg-purple-500/70" title="Extreme" />
         </div>
         <span>Heavy</span>
       </div>
 
-      {/* External Link */}
-      <a
-        href={`https://www.rainviewer.com/map.html?loc=${latitude},${longitude},8`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-1 mt-3 text-xs text-almanac-gold/70 hover:text-almanac-gold transition-colors"
-      >
-        <span>Full radar view</span>
-        <ExternalLink className="w-3 h-3" />
-      </a>
+      {/* Last Updated + External Link */}
+      <div className="flex items-center justify-between">
+        {lastUpdated && (
+          <span className="text-xs text-almanac-parchment/40">
+            Updated {lastUpdated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+          </span>
+        )}
+        <a
+          href={`https://www.rainviewer.com/map.html?loc=${latitude},${longitude},10`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-xs text-almanac-gold/70 hover:text-almanac-gold transition-colors"
+        >
+          <span>Full radar</span>
+          <ExternalLink className="w-3 h-3" />
+        </a>
+      </div>
     </motion.div>
   )
 }

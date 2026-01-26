@@ -7,7 +7,6 @@ export const DEFAULT_LON = -82.26
 
 // Unit conversion constants
 const METERS_TO_INCHES = 39.3701
-const CM_TO_INCHES = 0.393701
 
 interface OpenMeteoResponse {
   latitude: number
@@ -24,32 +23,53 @@ interface OpenMeteoResponse {
     wind_gusts_10m: number
     surface_pressure: number
     soil_temperature_6cm?: number
-    snow_depth?: number  // NOTE: Open-Meteo returns this in METERS
+    snow_depth?: number       // Always in METERS from API
+    cloud_cover?: number
+    visibility?: number       // In meters
+    dew_point_2m?: number
+    uv_index?: number
+    is_day?: number          // 0 or 1
   }
   hourly: {
     time: string[]
     temperature_2m: number[]
+    apparent_temperature?: number[]
     precipitation_probability: number[]
     precipitation: number[]
     weather_code: number[]
-    snowfall?: number[]  // In inches (we set precipitation_unit=inch)
+    snowfall?: number[]
+    snow_depth?: number[]
+    cloud_cover?: number[]
+    visibility?: number[]
+    wind_speed_10m?: number[]
+    wind_gusts_10m?: number[]
+    dew_point_2m?: number[]
+    uv_index?: number[]
+    freezing_level_height?: number[]
   }
   daily: {
     time: string[]
     temperature_2m_max: number[]
     temperature_2m_min: number[]
+    apparent_temperature_max?: number[]
+    apparent_temperature_min?: number[]
     precipitation_sum: number[]
     precipitation_probability_max: number[]
+    precipitation_hours?: number[]
     weather_code: number[]
     sunrise: string[]
     sunset: string[]
-    snowfall_sum?: number[]  // In inches (we set precipitation_unit=inch)
+    daylight_duration?: number[]
+    snowfall_sum?: number[]
+    wind_speed_10m_max?: number[]
+    wind_gusts_10m_max?: number[]
+    wind_direction_10m_dominant?: number[]
+    uv_index_max?: number[]
   }
 }
 
 export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
   // Convert snow_depth from meters to inches
-  // Open-Meteo has no unit option for snow_depth - it's always meters
   const snowDepthInches = data.current.snow_depth !== undefined 
     ? data.current.snow_depth * METERS_TO_INCHES 
     : undefined
@@ -65,28 +85,53 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
     windGusts: data.current.wind_gusts_10m,
     pressure: data.current.surface_pressure,
     soilTemperature: data.current.soil_temperature_6cm,
-    snowDepth: snowDepthInches,  // Now in inches
+    snowDepth: snowDepthInches,
+    cloudCover: data.current.cloud_cover,
+    visibility: data.current.visibility,
+    dewPoint: data.current.dew_point_2m,
+    uvIndex: data.current.uv_index,
+    isDay: data.current.is_day === 1,
   }
+
+  // Convert hourly snow_depth from meters to inches
+  const hourlySnowDepth = data.hourly.snow_depth?.map(d => d * METERS_TO_INCHES)
 
   const hourly: HourlyForecast = {
     time: data.hourly.time,
     temperature: data.hourly.temperature_2m,
+    feelsLike: data.hourly.apparent_temperature,
     precipitationProbability: data.hourly.precipitation_probability,
     precipitation: data.hourly.precipitation,
     weatherCode: data.hourly.weather_code,
-    snowfall: data.hourly.snowfall,  // Already in inches (precipitation_unit=inch)
+    snowfall: data.hourly.snowfall,
+    snowDepth: hourlySnowDepth,
+    cloudCover: data.hourly.cloud_cover,
+    visibility: data.hourly.visibility,
+    windSpeed: data.hourly.wind_speed_10m,
+    windGusts: data.hourly.wind_gusts_10m,
+    dewPoint: data.hourly.dew_point_2m,
+    uvIndex: data.hourly.uv_index,
+    freezingLevel: data.hourly.freezing_level_height,
   }
 
   const daily: DailyForecast = {
     time: data.daily.time,
     temperatureMax: data.daily.temperature_2m_max,
     temperatureMin: data.daily.temperature_2m_min,
+    feelsLikeMax: data.daily.apparent_temperature_max,
+    feelsLikeMin: data.daily.apparent_temperature_min,
     precipitationSum: data.daily.precipitation_sum,
     precipitationProbability: data.daily.precipitation_probability_max,
+    precipitationHours: data.daily.precipitation_hours,
     weatherCode: data.daily.weather_code,
     sunrise: data.daily.sunrise,
     sunset: data.daily.sunset,
-    snowfallSum: data.daily.snowfall_sum,  // Already in inches
+    daylightDuration: data.daily.daylight_duration,
+    snowfallSum: data.daily.snowfall_sum,
+    windSpeedMax: data.daily.wind_speed_10m_max,
+    windGustsMax: data.daily.wind_gusts_10m_max,
+    windDirectionDominant: data.daily.wind_direction_10m_dominant,
+    uvIndexMax: data.daily.uv_index_max,
   }
 
   const location: Location = {

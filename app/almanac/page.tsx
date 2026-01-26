@@ -12,6 +12,11 @@ import NativePulse from '@/components/almanac/NativePulse'
 import LocationPicker from '@/components/almanac/LocationPicker'
 import SoilTemperature from '@/components/almanac/SoilTemperature'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
+import FrostAlert from '@/components/almanac/FrostAlert'
+import WeatherAlertBanner from '@/components/almanac/WeatherAlertBanner'
+import CurrentConditionsCard from '@/components/almanac/CurrentConditionsCard'
+import SnowConditions from '@/components/almanac/SnowConditions'
+import SunBarometer from '@/components/almanac/SunBarometer'
 import { transformWeatherData } from '@/lib/almanac/weather'
 import { 
   calculateAllTaskScores, 
@@ -25,7 +30,6 @@ import { formatLocationName, type GeoLocation } from '@/lib/almanac/geocoding'
 import { loadLocation } from '@/lib/almanac/storage'
 import type { WeatherData, TaskScores as TaskScoresType, MoonData } from '@/lib/almanac/types'
 
-// Retry delays in milliseconds (exponential backoff: 1s, 2s, 4s)
 const RETRY_DELAYS = [1000, 2000, 4000]
 const MAX_RETRIES = 3
 
@@ -39,6 +43,7 @@ export default function AlmanacPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [retryCount, setRetryCount] = useState(0)
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   const fetchWeather = useCallback(async (loc: GeoLocation, attempt = 0) => {
     try {
@@ -53,7 +58,6 @@ export default function AlmanacPage() {
 
       const data = await response.json()
 
-      // Check for API error response
       if (data.error) {
         throw new Error(data.error)
       }
@@ -61,18 +65,13 @@ export default function AlmanacPage() {
       const weatherData = transformWeatherData(data)
       setWeather(weatherData)
 
-      // Build extended metrics (includes calculated values like heat index, dew point)
       const metrics = buildExtendedMetrics(weatherData)
-
-      // Calculate task scores (uses full weather data internally)
       const scores = calculateAllTaskScores(weatherData)
       setTaskScores(scores)
 
-      // Calculate NativePulse (uses extended metrics)
       const pulse = calculateNativePulse(metrics)
       setNativePulse(pulse)
 
-      // Get frontier saying
       const daylight = isDay(new Date(), loc.latitude, loc.longitude)
       const frontierSaying = getSaying(
         weatherData.current.weatherCode,
@@ -82,23 +81,21 @@ export default function AlmanacPage() {
       )
       setSaying(frontierSaying)
 
-      // Get moon data
       const moonData = getMoonData()
       setMoon(moonData)
 
+      setLastUpdated(new Date())
       setError(null)
       setRetryCount(0)
     } catch (err) {
       console.error('Weather fetch error:', err)
 
-      // Retry with exponential backoff
       if (attempt < MAX_RETRIES - 1) {
         const delay = RETRY_DELAYS[attempt] || RETRY_DELAYS[RETRY_DELAYS.length - 1]
         await new Promise(resolve => setTimeout(resolve, delay))
         return fetchWeather(loc, attempt + 1)
       }
 
-      // All retries exhausted
       setError('Unable to load weather data after multiple attempts. Please try again.')
       setRetryCount(0)
     } finally {
@@ -106,14 +103,12 @@ export default function AlmanacPage() {
     }
   }, [])
 
-  // Load saved location and fetch weather on mount
   useEffect(() => {
     const savedLocation = loadLocation()
     setLocation(savedLocation)
     fetchWeather(savedLocation)
   }, [fetchWeather])
 
-  // Handle location change
   const handleLocationChange = useCallback((newLocation: GeoLocation) => {
     setLocation(newLocation)
     fetchWeather(newLocation)
@@ -159,6 +154,10 @@ export default function AlmanacPage() {
     )
   }
 
+  const tonightsLow = weather.daily.temperatureMin[0] ?? weather.current.temperature
+  const todaySunrise = weather.daily.sunrise[0]
+  const todaySunset = weather.daily.sunset[0]
+
   return (
     <main className="min-h-screen bg-midnight text-almanac-parchment">
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -167,18 +166,57 @@ export default function AlmanacPage() {
           <LocationPicker location={location} onLocationChange={handleLocationChange} />
         </div>
 
+        {/* Weather Alert Banner - TOP PRIORITY */}
+        <WeatherAlertBanner 
+          daily={weather.daily} 
+          currentTemp={weather.current.temperature}
+        />
+
         {/* Hero: Temperature + Conditions */}
         <AlmanacHero
           temperature={weather.current.temperature}
           feelsLike={weather.current.feelsLike}
           weatherCode={weather.current.weatherCode}
           location={formatLocationName(location)}
+          windSpeed={weather.current.windSpeed}
+          humidity={weather.current.humidity}
         />
 
-        {/* The Frontier Saying (The 10% Joy) */}
+        {/* The Frontier Saying */}
         <FrontierSaying saying={saying} />
 
-        {/* Task Scores (The 90% Utility) */}
+        {/* Snow Conditions - shows only when snow present */}
+        <div className="py-2">
+          <SnowConditions
+            snowDepth={weather.current.snowDepth}
+            currentTemp={weather.current.temperature}
+            weatherCode={weather.current.weatherCode}
+          />
+        </div>
+
+        {/* Current Conditions Detail Card */}
+        <div className="py-2">
+          <CurrentConditionsCard
+            cloudCover={weather.current.cloudCover}
+            visibility={weather.current.visibility}
+            dewPoint={weather.current.dewPoint}
+            uvIndex={weather.current.uvIndex}
+            pressure={weather.current.pressure}
+            snowDepth={weather.current.snowDepth}
+            windGusts={weather.current.windGusts}
+          />
+        </div>
+
+        {/* Frost Alert - shows when relevant */}
+        <div className="py-2">
+          <FrostAlert 
+            temperature={weather.current.temperature}
+            minTemperature={tonightsLow}
+            feelsLike={weather.current.feelsLike}
+          />
+        </div>
+
+        {/* Task Scores - Main Utility */}
         <TaskScores
           sower={taskScores.sower}
           shepherd={taskScores.shepherd}
@@ -186,28 +224,26 @@ export default function AlmanacPage() {
           builder={taskScores.builder}
         />
 
-        {/* NativePulse - Seed Stratification Tracker */}
+        {/* NativePulse - Seed Stratification */}
         <div className="py-6">
           <NativePulse pulse={nativePulse} />
         </div>
 
-        {/* Soil Temperature */}
-        <div className="pb-6">
+        {/* Two-column: Soil Temp + Sun/Barometer */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-6">
           <SoilTemperature temperature={weather.current.soilTemperature} />
+          <SunBarometer
+            sunrise={todaySunrise}
+            sunset={todaySunset}
+            pressure={weather.current.pressure}
+            windSpeed={weather.current.windSpeed}
+            windDirection={weather.current.windDirection}
+          />
         </div>
 
-        {/* Moon Phase */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex justify-center py-6"
-        >
+        {/* Two-column: Moon + Radar */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
           <MoonPhase moon={moon} />
-        </motion.div>
-
-        {/* Precipitation Radar */}
-        <div className="py-6">
           <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
         </div>
 
@@ -230,6 +266,15 @@ export default function AlmanacPage() {
           <p className="text-xs text-almanac-parchment/30 mt-2">
             Weather data from Open-Meteo (CC-BY 4.0) • Calculations based on NOAA/NWS/OSHA guidelines
           </p>
+          {lastUpdated && (
+            <p className="text-xs text-almanac-parchment/20 mt-2">
+              Last updated: {lastUpdated.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+              })}
+            </p>
+          )}
         </motion.footer>
       </div>
     </main>

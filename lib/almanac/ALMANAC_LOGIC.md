@@ -1,6 +1,6 @@
 # Rocky Mount Almanac — Technical Logic Document
 
-**Version:** 3.6
+**Version:** 3.7
 **Last Updated:** January 26, 2026  
 **Location:** Sullivan County, Tennessee (36.52°N, 82.26°W, ~1,500 ft elevation)  
 **Site:** Rocky Mount State Historic Site — First Southwest Territory Capital (1790-1792)
@@ -961,6 +961,12 @@ const conditions = {
 ---
 
 ## Changelog
+
+### v3.7 (January 26, 2026)
+- **ROBUSTNESS:** SunBarometer now displays pressure in inHg (was hPa) to match CurrentConditionsCard
+- **ROBUSTNESS:** PrecipitationRadar now has exponential backoff retry logic (3 retries with 1s/2s/4s delays)
+- **ROBUSTNESS:** LocationPicker now shows user feedback when localStorage fails (toast notification)
+- **CLEANUP:** All edge cases now handled gracefully with user-visible feedback
 
 ### v3.6 (January 26, 2026)
 - **CODE CLEANUP:** Comprehensive codebase audit and consolidation

@@ -72,36 +72,41 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
   const particles = useMemo(() => {
     switch (particleType) {
       case 'dust':
-        // Clear weather: 15-20 dust motes
-        const dustCount = 15 + Math.floor(Math.random() * 6)
-        return generateParticles(dustCount, 18, 7, 2, 2)
+        // Clear weather: floating dust motes in sunlight
+        // Sparse, slow, barely visible - like dust in a sunbeam
+        const dustCount = 12 + Math.floor(Math.random() * 5)  // 12-16 particles
+        return generateParticles(dustCount, 25, 10, 2, 2)  // 25-35s, very slow drift
 
       case 'overcast':
-        // Slow-drifting cloud shadows
-        return Array.from({ length: 4 }, (_, i): Particle => ({
+        // Slow-drifting cloud shadows - gentle, barely noticeable
+        return Array.from({ length: 5 }, (_, i): Particle => ({
           id: i,
-          left: '0%',
-          top: `${10 + Math.random() * 60}%`,
-          delay: `${Math.random() * 20}s`,
-          duration: `${45 + Math.random() * 20}s`,  // Very slow: 45-65 seconds
-          width: `${300 + Math.random() * 300}px`,  // Large shapes
-          opacity: 0.03 + Math.random() * 0.02,     // Very subtle: 3-5%
+          left: `${-10 + i * 25}%`,  // Spread across: -10%, 15%, 40%, 65%, 90%
+          top: `${10 + Math.random() * 70}%`,  // Random vertical spread
+          delay: `${i * 8}s`,  // Staggered start: 0s, 8s, 16s, 24s, 32s
+          duration: `${50 + Math.random() * 20}s`,  // Slow: 50-70 seconds
+          width: `${500 + Math.random() * 300}px`,  // Large: 500-800px
+          opacity: 0.08 + Math.random() * 0.04,  // Subtle: 8-12%
         }))
 
       case 'fog':
         return generateFogWisps(4)
 
       case 'drizzle':
-        return generateParticles(35, 1.5, 0.5)
+        // Light rain: thin, sparse, gentle
+        return generateParticles(25, 2.0, 0.8)  // 25 drops, 2-2.8s fall
 
       case 'rain':
-        return generateParticles(60, 0.8, 0.4)
+        // Steady rain: more drops, faster fall
+        return generateParticles(45, 1.2, 0.5)  // 45 drops, 1.2-1.7s fall
 
       case 'snow':
-        return generateParticles(30, 4, 2, 3, 2)
+        // Snowfall: gentle drift with wobble
+        return generateParticles(25, 6, 3, 3, 2)  // 25 flakes, 6-9s fall, 3-5px
 
       case 'storm':
-        return generateParticles(65, 0.7, 0.3)
+        // Heavy rain: dense, fast
+        return generateParticles(55, 0.9, 0.4)  // 55 drops, 0.9-1.3s fall
 
       default:
         return []
@@ -124,7 +129,7 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             '--dust-delay': p.delay,
             '--dust-duration': p.duration,
             '--dust-size': p.size,
-            '--dust-opacity': 0.15,
+            '--dust-opacity': 0.08,  // Very subtle
           } as React.CSSProperties}
         />
       ))}
@@ -168,8 +173,8 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             left: p.left,
             '--rain-delay': p.delay,
             '--rain-duration': p.duration,
-            '--rain-height': '15px',
-            '--rain-opacity': 0.1,
+            '--rain-height': '12px',
+            '--rain-opacity': 0.08,  // Light drizzle
           } as React.CSSProperties}
         />
       ))}
@@ -183,8 +188,8 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             left: p.left,
             '--rain-delay': p.delay,
             '--rain-duration': p.duration,
-            '--rain-height': '25px',
-            '--rain-opacity': 0.15,
+            '--rain-height': '20px',
+            '--rain-opacity': 0.12,  // Steady rain
           } as React.CSSProperties}
         />
       ))}
@@ -199,7 +204,7 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             '--snow-delay': p.delay,
             '--snow-duration': p.duration,
             '--snow-size': p.size,
-            '--snow-opacity': 0.30,
+            '--snow-opacity': 0.20,  // Visible but soft
           } as React.CSSProperties}
         />
       ))}
@@ -215,23 +220,24 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
                 left: p.left,
                 '--rain-delay': p.delay,
                 '--rain-duration': p.duration,
-                '--rain-height': '25px',
-                '--rain-opacity': 0.15,
+                '--rain-height': '22px',
+                '--rain-opacity': 0.14,
               } as React.CSSProperties}
             />
           ))}
+          {/* Distant lightning - very subtle flashes */}
           <div
             className="lightning-flash"
             style={{
-              '--flash-duration': '12s',
-              '--flash-delay': `${5 + Math.random() * 5}s`,
+              '--flash-duration': '15s',
+              '--flash-delay': `${6 + Math.random() * 6}s`,
             } as React.CSSProperties}
           />
           <div
             className="lightning-flash"
             style={{
-              '--flash-duration': '15s',
-              '--flash-delay': `${10 + Math.random() * 8}s`,
+              '--flash-duration': '20s',
+              '--flash-delay': `${12 + Math.random() * 10}s`,
             } as React.CSSProperties}
           />
         </>

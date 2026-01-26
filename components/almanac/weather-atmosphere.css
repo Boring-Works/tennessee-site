@@ -61,14 +61,17 @@
   0%, 100% {
     transform: translate(0, 0);
   }
-  25% {
-    transform: translate(10px, -15px);
+  20% {
+    transform: translate(8px, -10px);
   }
-  50% {
-    transform: translate(-5px, 10px);
+  40% {
+    transform: translate(-3px, 5px);
   }
-  75% {
-    transform: translate(15px, 5px);
+  60% {
+    transform: translate(12px, -5px);
+  }
+  80% {
+    transform: translate(-6px, 8px);
   }
 }
 
@@ -116,20 +119,21 @@
 .cloud-shadow {
   position: absolute;
   width: var(--cloud-width, 400px);
-  height: 100px;
+  height: 150px;
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 0, 0, var(--cloud-opacity, 0.04)) 0%,
-    transparent 70%
+    rgba(245, 241, 232, var(--cloud-opacity, 0.50)) 0%,
+    rgba(245, 241, 232, calc(var(--cloud-opacity, 0.50) * 0.5)) 40%,
+    transparent 80%
   );
-  filter: blur(40px);
+  filter: blur(20px);
   animation: cloud-drift var(--cloud-duration, 50s) linear infinite;
   animation-delay: var(--cloud-delay, 0s);
 }
 
 @keyframes cloud-drift {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-20%);
     opacity: 0;
   }
   10% {
@@ -228,23 +232,26 @@
     transform: translateY(-20px) translateX(0);
     opacity: 0;
   }
-  10% {
+  5% {
     opacity: 1;
   }
-  25% {
-    transform: translateY(25vh) translateX(10px);
+  20% {
+    transform: translateY(20vh) translateX(8px);
   }
-  50% {
-    transform: translateY(50vh) translateX(-5px);
+  40% {
+    transform: translateY(40vh) translateX(-4px);
   }
-  75% {
-    transform: translateY(75vh) translateX(15px);
+  60% {
+    transform: translateY(60vh) translateX(10px);
   }
-  90% {
+  80% {
+    transform: translateY(80vh) translateX(-6px);
+  }
+  95% {
     opacity: 1;
   }
   100% {
-    transform: translateY(100vh) translateX(-10px);
+    transform: translateY(100vh) translateX(3px);
     opacity: 0;
   }
 }
@@ -265,14 +272,14 @@
 }
 
 @keyframes lightning-flash {
-  0%, 91%, 93%, 95%, 97%, 100% {
+  0%, 94%, 96%, 98%, 100% {
     opacity: 0;
   }
-  92%, 94% {
-    opacity: 1;
+  95% {
+    opacity: 0.6;
   }
-  96% {
-    opacity: 0.5;
+  97% {
+    opacity: 0.3;
   }
 }
 

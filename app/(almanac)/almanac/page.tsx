@@ -180,9 +180,9 @@ export default function AlmanacPage() {
   } : null
 
   return (
-    <>
+    <div className="min-h-screen bg-midnight">
       <WeatherAtmosphere weatherCode={weather.current.weatherCode} />
-      <main className="min-h-screen bg-midnight text-almanac-parchment relative z-10">
+      <main className="min-h-screen text-almanac-parchment relative z-10">
         <div className="max-w-3xl mx-auto px-4 py-8">
           {/* Masthead */}
         <header className="text-center mb-6">
@@ -338,6 +338,6 @@ export default function AlmanacPage() {
         <OnboardingModal />
         </div>
       </main>
-    </>
+    </div>
   )
 }

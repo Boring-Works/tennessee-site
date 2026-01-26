@@ -148,6 +148,42 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
   ],
 }
 
+/**
+ * Generate a seeded random number based on date
+ * Same date = same "random" number (deterministic)
+ */
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
+
+/**
+ * Get day of year (1-366) for seeding
+ */
+function getDayOfYear(date: Date): number {
+  const start = new Date(date.getFullYear(), 0, 0)
+  const diff = date.getTime() - start.getTime()
+  const oneDay = 1000 * 60 * 60 * 24
+  return Math.floor(diff / oneDay)
+}
+
+/**
+ * Get a saying deterministically based on category and date
+ * Same day + same category = same saying
+ */
+export function getDeterministicSaying(category: SayingCategory, date: Date = new Date()): string {
+  const sayings = FRONTIER_SAYINGS[category]
+  const dayOfYear = getDayOfYear(date)
+  // Combine day and category for unique seed per category per day
+  const categoryIndex = Object.keys(FRONTIER_SAYINGS).indexOf(category)
+  const seed = dayOfYear * 100 + categoryIndex
+  const index = Math.floor(seededRandom(seed) * sayings.length)
+  return sayings[index]
+}
+
+/**
+ * @deprecated Use getDeterministicSaying instead for consistent UX
+ */
 export function getRandomSaying(category: SayingCategory): string {
   const sayings = FRONTIER_SAYINGS[category]
   const index = Math.floor(Math.random() * sayings.length)
@@ -161,5 +197,5 @@ export function getSaying(
   isDay: boolean
 ): string {
   const category = getCategoryFromConditions(weatherCode, temperature, windSpeed, isDay)
-  return getRandomSaying(category)
+  return getDeterministicSaying(category)
 }

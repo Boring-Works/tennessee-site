@@ -51,8 +51,32 @@ function getSoilStatus(temp: number): { status: string; color: string; tip: stri
 }
 
 export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
+  // Show unavailable message instead of hiding component
   if (temperature === undefined) {
-    return null
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.35 }}
+        className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
+        role="region"
+        aria-label="Soil temperature"
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-almanac-gold/10">
+            <Sprout className="w-6 h-6 text-almanac-gold/50" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm text-almanac-parchment/50">
+              Soil Temperature
+            </p>
+            <p className="text-xs text-almanac-parchment/40">
+              Data unavailable for this location
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    )
   }
 
   const { status, color, tip } = getSoilStatus(temperature)
@@ -63,6 +87,8 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
       className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
+      role="region"
+      aria-label={`Soil temperature: ${Math.round(temperature)} degrees Fahrenheit, ${status}`}
     >
       <div className="flex items-center gap-3">
         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-almanac-gold/10">

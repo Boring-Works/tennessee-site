@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Radar, RefreshCw, ExternalLink } from 'lucide-react'
+import { Radar, Play, Pause, ExternalLink } from 'lucide-react'
 
 interface PrecipitationRadarProps {
   latitude: number
@@ -123,9 +123,14 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
           <button
             onClick={() => setIsPlaying(!isPlaying)}
             className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 transition-colors"
-            title={isPlaying ? 'Pause' : 'Play animation'}
+            title={isPlaying ? 'Pause animation' : 'Play animation'}
+            aria-label={isPlaying ? 'Pause radar animation' : 'Play radar animation'}
           >
-            <RefreshCw className={`w-4 h-4 text-almanac-gold ${isPlaying ? 'animate-spin' : ''}`} />
+            {isPlaying ? (
+              <Pause className="w-4 h-4 text-almanac-gold" />
+            ) : (
+              <Play className="w-4 h-4 text-almanac-gold" />
+            )}
           </button>
         </div>
       </div>

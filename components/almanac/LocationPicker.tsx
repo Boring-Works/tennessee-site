@@ -62,10 +62,11 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
       <button
         onClick={() => setIsOpen(true)}
         className="flex items-center gap-2 text-almanac-parchment/80 hover:text-almanac-gold transition-colors group"
+        aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
       >
-        <MapPin className="w-4 h-4" />
+        <MapPin className="w-4 h-4" aria-hidden="true" />
         <span className="text-sm">{formatLocationName(location)}</span>
-        <Pencil className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Pencil className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
       </button>
 
       {/* Modal Overlay */}
@@ -79,6 +80,7 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
               className="fixed inset-0 bg-black/60 z-40"
+              aria-hidden="true"
             />
 
             {/* Modal */}
@@ -88,21 +90,31 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 p-6"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="location-picker-title"
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-display text-xl text-almanac-gold">Change Location</h3>
+                <h3 id="location-picker-title" className="font-display text-xl text-almanac-gold">
+                  Change Location
+                </h3>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-almanac-parchment/60 hover:text-almanac-parchment transition-colors"
+                  aria-label="Close location picker"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
               {/* Search Input */}
               <div className="relative mb-4">
+                <label htmlFor="location-search" className="sr-only">
+                  Search for a city or zip code
+                </label>
                 <input
+                  id="location-search"
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -110,6 +122,7 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
                   placeholder="Enter city or zip code..."
                   className="w-full bg-almanac-midnight/50 border border-almanac-gold/20 rounded-lg px-4 py-3 text-almanac-parchment placeholder:text-almanac-parchment/40 focus:outline-none focus:border-almanac-gold/50 transition-colors"
                   autoFocus
+                  aria-describedby={error ? 'location-error' : undefined}
                 />
               </div>
 
@@ -121,8 +134,10 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     className="flex items-center gap-2 text-red-400 text-sm mb-4"
+                    id="location-error"
+                    role="alert"
                   >
-                    <AlertCircle className="w-4 h-4" />
+                    <AlertCircle className="w-4 h-4" aria-hidden="true" />
                     <span>{error}</span>
                   </motion.div>
                 )}
@@ -134,10 +149,11 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
                   onClick={handleSearch}
                   disabled={isLoading || !query.trim()}
                   className="flex-1 flex items-center justify-center gap-2 bg-almanac-gold text-almanac-midnight font-medium py-3 rounded-lg hover:bg-almanac-gold/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-busy={isLoading}
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                       <span>Searching...</span>
                     </>
                   ) : (
@@ -148,9 +164,10 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
                 <button
                   onClick={handleReset}
                   title="Reset to Sullivan County"
+                  aria-label="Reset to Sullivan County, Tennessee"
                   className="flex items-center justify-center gap-2 px-4 py-3 border border-almanac-gold/30 text-almanac-parchment/80 rounded-lg hover:border-almanac-gold/50 hover:text-almanac-parchment transition-colors"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-4 h-4" aria-hidden="true" />
                 </button>
               </div>
 

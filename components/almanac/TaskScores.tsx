@@ -17,6 +17,29 @@ const SCORE_COLORS: Record<TaskScore['label'], string> = {
   Avoid: 'text-almanac-danger',
 }
 
+// Determine if score is critical (1-3) and needs visual urgency
+function isCriticalScore(score: number): boolean {
+  return score <= 3
+}
+
+// Get card styling based on score urgency
+function getCardStyle(score: number): string {
+  if (score <= 2) {
+    // Danger: scores 1-2
+    return 'bg-red-900/20 border-red-500/40 shadow-lg shadow-red-900/20'
+  }
+  if (score <= 3) {
+    // Warning: score 3
+    return 'bg-orange-900/15 border-orange-500/30'
+  }
+  if (score >= 9) {
+    // Excellent: scores 9-10
+    return 'bg-green-900/10 border-green-500/20'
+  }
+  // Normal
+  return 'bg-white/5 border-white/10'
+}
+
 function ScoreCard({
   title,
   subtitle,
@@ -26,20 +49,34 @@ function ScoreCard({
   subtitle: string
   score: TaskScore
 }) {
+  const isCritical = isCriticalScore(score.score)
+  const cardStyle = getCardStyle(score.score)
+
   return (
-    <div className="bg-white/5 border border-white/10 rounded-sm p-4">
+    <div
+      className={`rounded-sm p-4 border transition-all ${cardStyle}`}
+      role="article"
+      aria-label={`${title}: ${score.score} out of 10, ${score.label}`}
+    >
       <div className="flex justify-between items-start mb-3">
         <div>
           <h3 className="font-serif text-lg text-gold-leaf">{title}</h3>
           <p className="text-xs text-almanac-parchment/50">{subtitle}</p>
         </div>
         <div className="text-right">
-          <span className={`text-3xl font-sans font-bold ${SCORE_COLORS[score.label]}`}>
+          <span
+            className={`text-3xl font-sans font-bold ${SCORE_COLORS[score.label]} ${isCritical ? 'animate-pulse' : ''}`}
+          >
             {score.score}
           </span>
           <span className="text-almanac-parchment/50 text-sm">/10</span>
         </div>
       </div>
+      {isCritical && (
+        <p className="text-xs text-red-400 mb-2 font-medium">
+          ⚠ Conditions unfavorable
+        </p>
+      )}
       <p className="font-serif-elegant italic text-sm text-almanac-parchment/70 leading-relaxed">
         {score.instruction}
       </p>

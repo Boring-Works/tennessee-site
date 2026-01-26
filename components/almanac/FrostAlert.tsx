@@ -77,6 +77,8 @@ export default function FrostAlert({ temperature, minTemperature, feelsLike }: F
 
   const Icon = risk === 'none' ? Thermometer : AlertTriangle
 
+  const alertLevel = risk === 'danger' ? 'assertive' : risk === 'warning' ? 'polite' : 'polite'
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -91,11 +93,14 @@ export default function FrostAlert({ temperature, minTemperature, feelsLike }: F
           ? 'bg-yellow-900/20 border-yellow-500/30'
           : 'bg-almanac-midnight/80 border-almanac-gold/20'
       }`}
+      role="alert"
+      aria-live={alertLevel}
+      aria-label={`Frost alert: ${risk === 'danger' ? 'Freeze Warning' : risk === 'warning' ? 'Frost Warning' : risk === 'watch' ? 'Frost Watch' : 'No Frost Risk'}`}
     >
       {/* Alert Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <Icon className={`w-5 h-5 ${color}`} />
+          <Icon className={`w-5 h-5 ${color}`} aria-hidden="true" />
           <div>
             <h3 className={`font-medium ${color}`}>
               {risk === 'danger' && 'Freeze Warning'}
@@ -112,9 +117,10 @@ export default function FrostAlert({ temperature, minTemperature, feelsLike }: F
           <button
             onClick={() => setShowSignup(!showSignup)}
             className="p-2 rounded-full bg-almanac-gold/10 hover:bg-almanac-gold/20 transition-colors"
-            title="Get frost alerts"
+            aria-label={showSignup ? 'Close frost alert signup' : 'Sign up for frost alerts'}
+            aria-expanded={showSignup}
           >
-            <Bell className="w-4 h-4 text-almanac-gold" />
+            <Bell className="w-4 h-4 text-almanac-gold" aria-hidden="true" />
           </button>
         )}
       </div>
@@ -149,27 +155,31 @@ export default function FrostAlert({ temperature, minTemperature, feelsLike }: F
             className="mt-4 pt-4 border-t border-white/10"
           >
             {!submitted ? (
-              <form onSubmit={handleSignup}>
+              <form onSubmit={handleSignup} aria-label="Frost alert email signup">
                 <div className="flex items-center gap-2 mb-3">
-                  <Mail className="w-4 h-4 text-almanac-gold" />
-                  <span className="text-sm text-almanac-parchment">
+                  <Mail className="w-4 h-4 text-almanac-gold" aria-hidden="true" />
+                  <span className="text-sm text-almanac-parchment" id="frost-signup-label">
                     Get frost alerts by email
                   </span>
                   <button
                     type="button"
                     onClick={() => setShowSignup(false)}
                     className="ml-auto text-almanac-parchment/50 hover:text-almanac-parchment"
+                    aria-label="Close signup form"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4" aria-hidden="true" />
                   </button>
                 </div>
                 <div className="flex gap-2">
+                  <label htmlFor="frost-email" className="sr-only">Email address</label>
                   <input
+                    id="frost-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     required
+                    aria-describedby="frost-signup-label"
                     className="flex-1 bg-almanac-midnight border border-almanac-gold/20 rounded px-3 py-2 text-sm text-almanac-parchment placeholder:text-almanac-parchment/30 focus:outline-none focus:border-almanac-gold/50"
                   />
                   <button

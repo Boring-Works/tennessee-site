@@ -21,22 +21,24 @@
 
 import type { TaskScore, TaskScores, WeatherData } from './types'
 import { isSnowCode, isIceCode } from './types'
-import { 
-  findTodayDailyIndex, 
+import {
+  findTodayDailyIndex,
   findTodayHourlyIndex,
   isDateToday,
-  getDateComponents 
+  getDateComponents,
+  getEasternHour
 } from './dateUtils'
 
 // Re-export date utilities for UI components
-export { 
-  findTodayDailyIndex, 
+export {
+  findTodayDailyIndex,
   findTodayHourlyIndex,
   isDateToday,
   isDateTomorrow,
   getWeekdayName,
   getDayDisplayName,
-  getDateComponents 
+  getDateComponents,
+  getEasternHour
 } from './dateUtils'
 
 // ============================================
@@ -155,7 +157,8 @@ function analyzeConditions(weather: WeatherData): {
   }
 } {
   const now = new Date()
-  const currentHour = now.getHours()
+  // CRITICAL: Use Eastern Time hour since API data is in America/New_York timezone
+  const currentHour = getEasternHour()
   const currentTemp = weather.current.temperature
   const snowDepth = weather.current.snowDepth ?? 0
   const currentCode = weather.current.weatherCode
@@ -278,13 +281,14 @@ function analyzeConditions(weather: WeatherData): {
 
 export function buildExtendedMetrics(weather: WeatherData): ExtendedMetrics {
   const now = new Date()
-  const currentHour = now.getHours()
+  // CRITICAL: Use Eastern Time hour since API data is in America/New_York timezone
+  const currentHour = getEasternHour()
   const temp = weather.current.temperature
   const humidity = weather.current.humidity
   const windSpeed = weather.current.windSpeed
-  
+
   const analysis = analyzeConditions(weather)
-  
+
   // CRITICAL: Find today's starting index in hourly array
   const todayHourlyStart = findTodayHourlyIndex(weather.hourly.time)
   const currentHourlyIdx = todayHourlyStart + currentHour

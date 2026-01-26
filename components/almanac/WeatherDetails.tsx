@@ -4,77 +4,19 @@ import { motion } from 'framer-motion'
 import type { HourlyForecast, DailyForecast } from '@/lib/almanac/types'
 import { getWeatherInfo, isSnowCode, isIceCode, getUVDescription } from '@/lib/almanac/types'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
+import {
+  isDateToday,
+  isDateTomorrow,
+  getWeekdayName,
+  findTodayDailyIndex,
+  findTodayHourlyIndex,
+  getEasternHour
+} from '@/lib/almanac/dateUtils'
 import { Snowflake, AlertTriangle, Wind, Sun } from 'lucide-react'
 
 interface WeatherDetailsProps {
   hourly: HourlyForecast
   daily: DailyForecast
-}
-
-/**
- * Parse date string to get just year, month, day components
- * Handles both "YYYY-MM-DD" and "YYYY-MM-DDTHH:MM" formats
- */
-function getDateComponents(dateString: string): { year: number; month: number; day: number } {
-  // Take only the date part (before any T)
-  const datePart = dateString.split('T')[0]
-  const [year, month, day] = datePart.split('-').map(Number)
-  return { year, month, day }
-}
-
-/**
- * Check if a date string represents today
- */
-function isDateToday(dateString: string): boolean {
-  const { year, month, day } = getDateComponents(dateString)
-  const now = new Date()
-  return year === now.getFullYear() && 
-         month === (now.getMonth() + 1) && 
-         day === now.getDate()
-}
-
-/**
- * Check if a date string represents tomorrow
- */
-function isDateTomorrow(dateString: string): boolean {
-  const { year, month, day } = getDateComponents(dateString)
-  const tomorrow = new Date()
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  return year === tomorrow.getFullYear() && 
-         month === (tomorrow.getMonth() + 1) && 
-         day === tomorrow.getDate()
-}
-
-/**
- * Get weekday name from date string
- */
-function getWeekdayName(dateString: string): string {
-  const { year, month, day } = getDateComponents(dateString)
-  const date = new Date(year, month - 1, day)
-  return date.toLocaleDateString('en-US', { weekday: 'short' })
-}
-
-/**
- * Find index of today in the daily array
- */
-function findTodayIndex(dailyTimes: string[]): number {
-  for (let i = 0; i < dailyTimes.length; i++) {
-    if (isDateToday(dailyTimes[i])) {
-      return i
-    }
-  }
-  // Fallback: if today not found, try to find the first future date
-  const now = new Date()
-  const todayNum = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate()
-  
-  for (let i = 0; i < dailyTimes.length; i++) {
-    const { year, month, day } = getDateComponents(dailyTimes[i])
-    const dateNum = year * 10000 + month * 100 + day
-    if (dateNum >= todayNum) {
-      return i
-    }
-  }
-  return 0
 }
 
 function getDayAlertLevel(
@@ -103,24 +45,18 @@ function getAlertStyle(level: 'danger' | 'warning' | 'normal'): string {
 }
 
 export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
-  const now = new Date()
-  const currentHour = now.getHours()
-  
-  // Find today in the hourly array
-  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
-  let hourlyStartIndex = 0
-  for (let i = 0; i < hourly.time.length; i++) {
-    if (hourly.time[i].startsWith(todayStr)) {
-      hourlyStartIndex = i + currentHour
-      break
-    }
-  }
-  
-  const availableHours = Math.min(24, hourly.time.length - hourlyStartIndex)
+  // CRITICAL: Use Eastern Time since API data is in America/New_York timezone
+  const currentHour = getEasternHour()
+
+  // Find today's starting index in the hourly array using centralized utility
+  const todayHourlyStart = findTodayHourlyIndex(hourly.time)
+  const hourlyStartIndex = todayHourlyStart + currentHour
+
+  const availableHours = Math.min(24, Math.max(0, hourly.time.length - hourlyStartIndex))
   const next24Hours = hourly.time.slice(hourlyStartIndex, hourlyStartIndex + availableHours)
 
-  // Find today's index in the daily array (skip past days)
-  const todayIndex = findTodayIndex(daily.time)
+  // Find today's index in the daily array using centralized utility
+  const todayIndex = findTodayDailyIndex(daily.time)
   const futureDays = daily.time.slice(todayIndex, todayIndex + 7)
 
   return (

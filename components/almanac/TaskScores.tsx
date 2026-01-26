@@ -1,6 +1,7 @@
 'use client'
 
 import type { TaskScore } from '@/lib/almanac/types'
+import { InfoButton, WorkabilityExplainer } from './ScoreExplainer'
 
 interface TaskScoresProps {
   sower: TaskScore
@@ -17,34 +18,42 @@ const SCORE_COLORS: Record<TaskScore['label'], string> = {
   Avoid: 'text-almanac-danger',
 }
 
-// Determine if score is critical (1-3) and needs visual urgency
 function isCriticalScore(score: number): boolean {
   return score <= 3
 }
 
-// Get card styling based on score urgency
 function getCardStyle(score: number): string {
   if (score <= 2) {
-    // Danger: scores 1-2
     return 'bg-red-900/20 border-red-500/40 shadow-lg shadow-red-900/20'
   }
   if (score <= 3) {
-    // Warning: score 3
     return 'bg-orange-900/15 border-orange-500/30'
   }
   if (score >= 9) {
-    // Excellent: scores 9-10
     return 'bg-green-900/10 border-green-500/20'
   }
-  // Normal
   return 'bg-white/5 border-white/10'
 }
 
+// Score card configuration - note "shepherd" key maps to "Outdoor Alert" display
+const SCORE_CARDS: {
+  key: 'sower' | 'shepherd' | 'keeper' | 'builder'
+  title: string
+  subtitle: string
+}[] = [
+  { key: 'sower', title: "Sower's Index", subtitle: "Gardening & Planting" },
+  { key: 'shepherd', title: "Outdoor Alert", subtitle: "Pets, Kids & Livestock" },
+  { key: 'keeper', title: "Keeper's Gauge", subtitle: "Property Maintenance" },
+  { key: 'builder', title: "Builder's Grade", subtitle: "Construction & Heavy Work" },
+]
+
 function ScoreCard({
+  scoreKey,
   title,
   subtitle,
   score,
 }: {
+  scoreKey: string
   title: string
   subtitle: string
   score: TaskScore
@@ -59,9 +68,12 @@ function ScoreCard({
       aria-label={`${title}: ${score.score} out of 10, ${score.label}`}
     >
       <div className="flex justify-between items-start mb-3">
-        <div>
-          <h3 className="font-serif text-lg text-gold-leaf">{title}</h3>
-          <p className="text-xs text-almanac-parchment/50">{subtitle}</p>
+        <div className="flex items-start gap-2">
+          <div>
+            <h3 className="font-serif text-lg text-gold-leaf">{title}</h3>
+            <p className="text-xs text-almanac-parchment/50">{subtitle}</p>
+          </div>
+          <InfoButton scoreKey={scoreKey} />
         </div>
         <div className="text-right">
           <span
@@ -72,12 +84,28 @@ function ScoreCard({
           <span className="text-almanac-parchment/50 text-sm">/10</span>
         </div>
       </div>
-      {isCritical && (
-        <p className="text-xs text-red-400 mb-2 font-medium">
-          ⚠ Conditions unfavorable
-        </p>
-      )}
-      <p className="font-serif-elegant italic text-sm text-almanac-parchment/70 leading-relaxed">
+      
+      {/* Label badge */}
+      <div className="flex items-center gap-2 mb-2">
+        <span className={`text-xs font-medium px-2 py-0.5 rounded ${
+          score.label === 'Perfect' || score.label === 'Good' 
+            ? 'bg-green-900/30 text-green-400'
+            : score.label === 'Fair'
+            ? 'bg-yellow-900/30 text-yellow-400'
+            : score.label === 'Poor'
+            ? 'bg-orange-900/30 text-orange-400'
+            : 'bg-red-900/30 text-red-400'
+        }`}>
+          {score.label}
+        </span>
+        {isCritical && (
+          <span className="text-xs text-red-400 font-medium">
+            ⚠ Unfavorable
+          </span>
+        )}
+      </div>
+
+      <p className="text-sm text-almanac-parchment/70 leading-relaxed">
         {score.instruction}
       </p>
     </div>
@@ -85,32 +113,27 @@ function ScoreCard({
 }
 
 export function TaskScores({ sower, shepherd, keeper, builder }: TaskScoresProps) {
+  const scores = { sower, shepherd, keeper, builder }
+
   return (
     <section className="py-8">
-      <h2 className="font-serif text-2xl text-gold-leaf text-center mb-6">
-        Today's Workability
-      </h2>
+      <div className="flex items-center justify-center gap-3 mb-6">
+        <h2 className="font-serif text-2xl text-gold-leaf text-center">
+          Today's Workability
+        </h2>
+        <WorkabilityExplainer />
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-        <ScoreCard
-          title="Sower's Index"
-          subtitle="Planting & Gardening"
-          score={sower}
-        />
-        <ScoreCard
-          title="Shepherd's Alert"
-          subtitle="Livestock Care"
-          score={shepherd}
-        />
-        <ScoreCard
-          title="Keeper's Gauge"
-          subtitle="Property Maintenance"
-          score={keeper}
-        />
-        <ScoreCard
-          title="Builder's Grade"
-          subtitle="Construction & Heavy Work"
-          score={builder}
-        />
+        {SCORE_CARDS.map(({ key, title, subtitle }) => (
+          <ScoreCard
+            key={key}
+            scoreKey={key}
+            title={title}
+            subtitle={subtitle}
+            score={scores[key]}
+          />
+        ))}
       </div>
     </section>
   )

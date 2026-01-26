@@ -58,15 +58,15 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
 
   return (
     <>
-      {/* Location Display Button */}
+      {/* Location Display Button - Made prominent so users can find it */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 text-almanac-parchment/80 hover:text-almanac-gold transition-colors group"
+        className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-almanac-gold/30 rounded-lg text-almanac-parchment hover:bg-white/10 hover:border-almanac-gold/50 hover:text-almanac-gold transition-all group"
         aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
       >
-        <MapPin className="w-4 h-4" aria-hidden="true" />
-        <span className="text-sm">{formatLocationName(location)}</span>
-        <Pencil className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+        <MapPin className="w-4 h-4 text-almanac-gold" aria-hidden="true" />
+        <span className="text-sm font-medium">{formatLocationName(location)}</span>
+        <Pencil className="w-3 h-3 text-almanac-gold/70 group-hover:text-almanac-gold transition-colors" aria-hidden="true" />
       </button>
 
       {/* Modal Overlay */}

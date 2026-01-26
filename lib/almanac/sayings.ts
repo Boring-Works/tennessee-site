@@ -1,4 +1,5 @@
 // Frontier Sayings Engine - The 10% Joy
+// Updated: Statewide-friendly language (no local references)
 
 type SayingCategory =
   | 'clear_day'
@@ -46,7 +47,7 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
   clear_day: [
     "Sky is blue as a whetstone. A fair day for open-air labor.",
     "High pressure is holding firm. Make hay while the sun shines.",
-    "Clear skies over Sullivan County. A fine day for the journey.",
+    "Clear skies across Tennessee. A fine day for the journey.",
     "The sun is generous today. Put it to good use.",
     "Not a cloud to trouble the eye. The kind of day worth remembering.",
   ],
@@ -55,7 +56,7 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
     "Stars are sharp tonight. Frost may kiss the meadows by dawn.",
     "Moon is bright—a good night to finish the late chores.",
     "Clear skies after dark. Tomorrow promises fair weather.",
-    "The heavens are open tonight. Check the livestock before bed.",
+    "The heavens are open tonight. Check on things before bed.",
     "A still, clear night. The cold will settle in the hollows.",
   ],
 
@@ -76,11 +77,11 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
   ],
 
   fog: [
-    "Fog thick as wool in the hollows. Travel slow on the Stage Road.",
+    "Fog thick as wool in the hollows. Travel slow this morning.",
     "The valley is socked in. Give it time to lift.",
     "Morning fog means the day will warm. Patience.",
-    "Can't see the barn from the house. Keep the bell ringing.",
-    "Fog rising off the Holston. The sun will burn it clear by mid-morning.",
+    "Can't see the barn from the house. Give it an hour.",
+    "Fog rising off the river. The sun will burn it clear by mid-morning.",
   ],
 
   light_rain: [
@@ -88,21 +89,21 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
     "Steady drizzle settling in. Keep to the covered work.",
     "Rain enough to wet, not enough to flood. Mind your footing.",
     "The sky is weeping gently. No urgency, but stay prepared.",
-    "Light rain on the valley. The creeks will stay in their banks.",
+    "Light rain across the region. The creeks will stay in their banks.",
   ],
 
   heavy_rain: [
     "A gully-washer is upon us. Stay clear of the low fords.",
     "Rain coming down in sheets. This is a day for the hearth.",
     "The creeks are rising fast. Check your stores and wait.",
-    "Driving rain across Sullivan County. No fit day for travel.",
+    "Driving rain across the county. No fit day for travel.",
     "Heavy rains are flooding the fields. Tomorrow we assess the damage.",
   ],
 
   thunderstorm: [
     "Thunder rolling through the mountains. Seek solid shelter.",
     "Storm clouds stacking in the west. The lightning will follow.",
-    "A tempest is building. Get the livestock under cover.",
+    "A tempest is building. Best to be under cover.",
     "Black clouds and rumbling. Best to pause and let it pass.",
     "Thunder over the ridgeline. Not a day to be caught in the open.",
   ],
@@ -119,14 +120,14 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
     "Snow is piling fast. Check the roof load and stay close.",
     "A proper snowstorm settling in. Hunker down.",
     "Heavy snow burying the valley. This will last days.",
-    "The white is coming thick. Make sure the animals have water.",
+    "The white is coming thick. Make sure everyone has water.",
     "Deep snow by morning. Save your strength for the digging out.",
   ],
 
   freezing: [
     "Bitter cold has arrived. Keep the hearth stoked through the night.",
     "Ice in the water bucket this morning. Dress in layers.",
-    "A hard freeze is upon us. Check the pipes and the livestock.",
+    "A hard freeze is upon us. Check the pipes and the pets.",
     "Cold enough to crack stone. Limit your time outside.",
     "The kind of cold that finds every gap. Seal up tight.",
   ],
@@ -136,7 +137,7 @@ export const FRONTIER_SAYINGS: Record<SayingCategory, string[]> = {
     "Sweltering in the valley. Keep water close and shade closer.",
     "Too hot for man or beast to labor. Wait for the evening cool.",
     "The air itself is tired. Pace yourself.",
-    "Heat shimmering off the fields. This is not a day to push.",
+    "Heat shimmering off the pavement. This is not a day to push.",
   ],
 
   windy: [
@@ -182,14 +183,8 @@ export function getDeterministicSaying(category: SayingCategory, date: Date = ne
 }
 
 /**
- * @deprecated Use getDeterministicSaying instead for consistent UX
+ * Main entry point - get a saying based on current conditions
  */
-export function getRandomSaying(category: SayingCategory): string {
-  const sayings = FRONTIER_SAYINGS[category]
-  const index = Math.floor(Math.random() * sayings.length)
-  return sayings[index]
-}
-
 export function getSaying(
   weatherCode: number,
   temperature: number,

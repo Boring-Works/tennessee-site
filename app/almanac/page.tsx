@@ -12,14 +12,18 @@ import NativePulse from '@/components/almanac/NativePulse'
 import LocationPicker from '@/components/almanac/LocationPicker'
 import SoilTemperature from '@/components/almanac/SoilTemperature'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
-// FrostAlert removed - no alert backend planned
 import { transformWeatherData } from '@/lib/almanac/weather'
-import { calculateAllTaskScores, calculateNativePulse, type NativePulseResult } from '@/lib/almanac/taskScores'
+import { 
+  calculateAllTaskScores, 
+  calculateNativePulse, 
+  buildExtendedMetrics,
+  type NativePulseResult 
+} from '@/lib/almanac/taskScores'
 import { getSaying } from '@/lib/almanac/sayings'
 import { getMoonData, isDay } from '@/lib/almanac/moonPhase'
 import { formatLocationName, type GeoLocation } from '@/lib/almanac/geocoding'
 import { loadLocation } from '@/lib/almanac/storage'
-import type { WeatherData, TaskScores as TaskScoresType, MoonData, WeatherMetrics } from '@/lib/almanac/types'
+import type { WeatherData, TaskScores as TaskScoresType, MoonData } from '@/lib/almanac/types'
 
 // Retry delays in milliseconds (exponential backoff: 1s, 2s, 4s)
 const RETRY_DELAYS = [1000, 2000, 4000]
@@ -57,24 +61,14 @@ export default function AlmanacPage() {
       const weatherData = transformWeatherData(data)
       setWeather(weatherData)
 
-      // Calculate task scores
-      const now = new Date()
-      const currentHour = now.getHours()
-      const metrics: WeatherMetrics = {
-        temperature: weatherData.current.temperature,
-        humidity: weatherData.current.humidity,
-        windSpeed: weatherData.current.windSpeed,
-        windGusts: weatherData.current.windGusts,
-        precipitation: weatherData.current.precipitation,
-        precipProbability: weatherData.hourly.precipitationProbability[currentHour] || 0,
-        feelsLike: weatherData.current.feelsLike,
-        month: now.getMonth() + 1,
-      }
+      // Build extended metrics (includes calculated values like heat index, dew point)
+      const metrics = buildExtendedMetrics(weatherData)
 
+      // Calculate task scores (uses full weather data internally)
       const scores = calculateAllTaskScores(weatherData)
       setTaskScores(scores)
 
-      // Calculate NativePulse
+      // Calculate NativePulse (uses extended metrics)
       const pulse = calculateNativePulse(metrics)
       setNativePulse(pulse)
 
@@ -220,7 +214,7 @@ export default function AlmanacPage() {
         {/* Hourly + Daily Details */}
         <WeatherDetails hourly={weather.hourly} daily={weather.daily} />
 
-        {/* Footer with Tennessee 250 Branding */}
+        {/* Footer */}
         <motion.footer
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -234,7 +228,7 @@ export default function AlmanacPage() {
             Rocky Mount State Historic Site • Tennessee 250
           </p>
           <p className="text-xs text-almanac-parchment/30 mt-2">
-            Weather data from Open-Meteo (CC-BY 4.0)
+            Weather data from Open-Meteo (CC-BY 4.0) • Calculations based on NOAA/NWS/OSHA guidelines
           </p>
         </motion.footer>
       </div>

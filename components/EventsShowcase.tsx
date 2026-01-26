@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import eventsData from "@/data/events.json";
-import styles from "@/app/page.module.css";
+import styles from "@/app/(main)/home/page.module.css";
 
 // Period-authentic engraving-style icons for categories
 const LecternIcon = () => (

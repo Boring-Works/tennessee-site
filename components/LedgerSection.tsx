@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "@/app/page.module.css";
+import styles from "@/app/(main)/home/page.module.css";
 
 // Period-authentic engraving-style icons
 const QuillInkwellIcon = () => (

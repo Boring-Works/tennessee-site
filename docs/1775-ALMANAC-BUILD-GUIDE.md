@@ -1,8 +1,8 @@
 # The 1775 Almanac — Complete Build Guide
 
-> **Version:** 1.2 (Fact-Checked + Pantry Integration)  
-> **Target:** Rebrand Only — All Features Preserved  
-> **Effort Estimate:** 1.5–2 days  
+> **Version:** 2.0 (Final Spec — Ready for Claude Code)  
+> **Target:** Rebrand + Customer Experience Enhancements  
+> **Effort Estimate:** 3–4 hours  
 > **Last Updated:** January 26, 2026
 
 ---
@@ -27,7 +27,9 @@ This is a visual and branding update ONLY. **Every feature from the existing app
 8. [Marketing Copy](#marketing-copy)
 9. [Testing Checklist](#testing-checklist)
 10. [Launch Checklist](#launch-checklist)
-11. [Future Roadmap (v1.1)](#future-roadmap-v11)
+11. [Customer Experience Enhancements](#customer-experience-enhancements-launch-features)
+12. [Future Roadmap](#future-roadmap-v11)
+13. [Rocky Mount Pantry Integration](#rocky-mount-pantry-integration)
 
 ---
 
@@ -1087,6 +1089,567 @@ Full implementation of Path C / Statesman-Farmer vision:
 - Integrate with planting calendar
 - Add native plant recommendations by season
 - Connect to Rocky Mount's heritage seed program (if applicable)
+
+---
+
+## Customer Experience Enhancements (Launch Features)
+
+These five enhancements ship with the 1775 rebrand. They're low-risk, use existing data, and require no new APIs.
+
+### 1. Data Staleness Warning
+
+**Purpose:** Prevent users from making decisions on old weather data.
+
+**Behavior:**
+- After 15 minutes since last fetch, show amber warning banner
+- After 30 minutes, show more urgent warning
+- Includes "Refresh Now" button that triggers re-fetch
+
+**Component:** `components/almanac/StaleDataWarning.tsx`
+
+```tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { AlertCircle, RefreshCw } from 'lucide-react'
+
+interface StaleDataWarningProps {
+  lastUpdated: Date | null
+  onRefresh: () => void
+  isLoading: boolean
+}
+
+export default function StaleDataWarning({ lastUpdated, onRefresh, isLoading }: StaleDataWarningProps) {
+  const [minutesOld, setMinutesOld] = useState(0)
+
+  useEffect(() => {
+    if (!lastUpdated) return
+
+    const updateAge = () => {
+      const age = Math.floor((Date.now() - lastUpdated.getTime()) / 60000)
+      setMinutesOld(age)
+    }
+
+    updateAge()
+    const interval = setInterval(updateAge, 30000) // Check every 30 seconds
+    return () => clearInterval(interval)
+  }, [lastUpdated])
+
+  // Don't show if data is fresh (< 15 min)
+  if (!lastUpdated || minutesOld < 15) return null
+
+  const isUrgent = minutesOld >= 30
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        className={`flex items-center justify-between gap-3 px-4 py-3 rounded-lg mb-4 ${
+          isUrgent 
+            ? 'bg-almanac-danger/20 border border-almanac-danger/30' 
+            : 'bg-almanac-warning/20 border border-almanac-warning/30'
+        }`}
+      >
+        <div className="flex items-center gap-2">
+          <AlertCircle className={`w-4 h-4 ${isUrgent ? 'text-almanac-danger' : 'text-almanac-warning'}`} />
+          <span className={`text-sm ${isUrgent ? 'text-almanac-danger' : 'text-almanac-warning'}`}>
+            Data is {minutesOld} minutes old
+          </span>
+        </div>
+        <button
+          onClick={onRefresh}
+          disabled={isLoading}
+          className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded transition-colors ${
+            isUrgent
+              ? 'bg-almanac-danger/30 text-almanac-parchment hover:bg-almanac-danger/40'
+              : 'bg-almanac-warning/30 text-almanac-parchment hover:bg-almanac-warning/40'
+          } disabled:opacity-50`}
+        >
+          <RefreshCw className={`w-3 h-3 ${isLoading ? 'animate-spin' : ''}`} />
+          {isLoading ? 'Refreshing...' : 'Refresh'}
+        </button>
+      </motion.div>
+    </AnimatePresence>
+  )
+}
+```
+
+**Integration in page.tsx:**
+```tsx
+import StaleDataWarning from '@/components/almanac/StaleDataWarning'
+
+// In JSX, after LocationPicker:
+<StaleDataWarning 
+  lastUpdated={lastUpdated} 
+  onRefresh={() => location && fetchWeather(location)} 
+  isLoading={loading}
+/>
+```
+
+---
+
+### 2. Pantry Footer Banner (Weather-Triggered)
+
+**Purpose:** Natural, non-intrusive product placement tied to weather conditions.
+
+**Behavior:**
+- Shows contextual Pantry recommendation based on current temperature
+- Links to Rocky Mount Pantry shop
+- Only one message at a time (not overwhelming)
+
+**Component:** `components/almanac/PantryBanner.tsx`
+
+```tsx
+'use client'
+
+import { ShoppingBag } from 'lucide-react'
+
+interface PantryBannerProps {
+  temperature: number
+  weatherCode: number
+}
+
+interface PantryMessage {
+  emoji: string
+  text: string
+  link: string
+}
+
+function getPantryMessage(temp: number, code: number): PantryMessage | null {
+  // Freezing conditions
+  if (temp < 32) {
+    return {
+      emoji: '🍯',
+      text: 'Cold snap tonight. Our fireside preserves pair well with warm biscuits.',
+      link: 'https://rockymountmuseum.com/shop'
+    }
+  }
+  
+  // Cold but not freezing
+  if (temp < 45) {
+    return {
+      emoji: '☕',
+      text: 'Chilly morning. Our heritage hot cocoa will warm you up.',
+      link: 'https://rockymountmuseum.com/shop'
+    }
+  }
+  
+  // Rainy conditions (codes 51-67, 80-82)
+  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) {
+    return {
+      emoji: '🏠',
+      text: 'A day for the hearth. Our blackberry preserves are waiting.',
+      link: 'https://rockymountmuseum.com/shop'
+    }
+  }
+  
+  // Hot conditions
+  if (temp > 88) {
+    return {
+      emoji: '🍋',
+      text: 'Beat the heat with our heritage switchel recipe.',
+      link: 'https://rockymountmuseum.com/shop'
+    }
+  }
+  
+  // Default: don't show banner (nice weather, no pitch needed)
+  return null
+}
+
+export default function PantryBanner({ temperature, weatherCode }: PantryBannerProps) {
+  const message = getPantryMessage(temperature, weatherCode)
+  
+  if (!message) return null
+  
+  return (
+    <div className="mt-6 pt-4 border-t border-almanac-gold/10">
+      <a
+        href={message.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 text-sm text-almanac-parchment/70 hover:text-almanac-gold transition-colors group"
+      >
+        <span>{message.emoji}</span>
+        <span>{message.text}</span>
+        <ShoppingBag className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
+      </a>
+    </div>
+  )
+}
+```
+
+**Integration in page.tsx footer:**
+```tsx
+import PantryBanner from '@/components/almanac/PantryBanner'
+
+// In footer section:
+<PantryBanner 
+  temperature={weather.current.temperature} 
+  weatherCode={weather.current.weatherCode} 
+/>
+```
+
+---
+
+### 3. First-Visit Onboarding Modal
+
+**Purpose:** Help new users understand what the workability scores mean.
+
+**Behavior:**
+- Shows once on first visit (stored in localStorage)
+- Dismissable with "Got it" button or clicking outside
+- Explains the core value proposition in 5 seconds
+
+**Component:** `components/almanac/OnboardingModal.tsx`
+
+```tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { X, Sprout, HardHat, Thermometer, Moon } from 'lucide-react'
+
+const STORAGE_KEY = 'almanac-onboarding-seen'
+
+export default function OnboardingModal() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    // Check if user has seen onboarding
+    const hasSeen = localStorage.getItem(STORAGE_KEY)
+    if (!hasSeen) {
+      // Small delay so page loads first
+      const timer = setTimeout(() => setIsOpen(true), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  const handleDismiss = () => {
+    localStorage.setItem(STORAGE_KEY, 'true')
+    setIsOpen(false)
+  }
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleDismiss}
+            className="fixed inset-0 bg-black/70 z-50"
+          />
+
+          {/* Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:w-full bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden"
+          >
+            {/* Close button */}
+            <button
+              onClick={handleDismiss}
+              className="absolute top-3 right-3 text-almanac-parchment/40 hover:text-almanac-parchment transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="p-6">
+              {/* Header */}
+              <div className="text-center mb-6">
+                <h2 className="font-serif text-xl text-almanac-gold mb-2">
+                  Welcome to The 1775 Almanac
+                </h2>
+                <p className="text-sm text-almanac-parchment/70">
+                  Weather intelligence from Tennessee's oldest farm
+                </p>
+              </div>
+
+              {/* Key insight */}
+              <div className="bg-white/5 rounded-lg p-4 mb-6">
+                <p className="text-center text-almanac-parchment/90">
+                  <strong className="text-almanac-gold">The scores tell you what to DO</strong>
+                  <br />
+                  <span className="text-sm">Not just what the weather is.</span>
+                </p>
+              </div>
+
+              {/* Score preview */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
+                  <Sprout className="w-4 h-4 text-almanac-success" />
+                  <span>Sower's Score — Planting</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
+                  <Thermometer className="w-4 h-4 text-almanac-warning" />
+                  <span>Outdoor Alert — Safety</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
+                  <Moon className="w-4 h-4 text-blue-400" />
+                  <span>Keeper's Score — Livestock</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
+                  <HardHat className="w-4 h-4 text-orange-400" />
+                  <span>Builder's Score — Projects</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-center text-almanac-parchment/50 mb-6">
+                Tap any score to see how it's calculated.
+              </p>
+
+              {/* CTA */}
+              <button
+                onClick={handleDismiss}
+                className="w-full py-3 bg-almanac-gold text-almanac-midnight font-medium rounded-lg hover:bg-almanac-gold/90 transition-colors"
+              >
+                Got it — Show me the weather
+              </button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  )
+}
+```
+
+**Integration in page.tsx:**
+```tsx
+import OnboardingModal from '@/components/almanac/OnboardingModal'
+
+// At end of JSX, before closing </main>:
+<OnboardingModal />
+```
+
+---
+
+### 4. Share Button (Copy Text)
+
+**Purpose:** Let users share today's proverb and conditions.
+
+**Behavior:**
+- Copies formatted text to clipboard
+- Shows brief "Copied!" confirmation
+- Non-intrusive placement below the proverb
+
+**Component:** `components/almanac/ShareButton.tsx`
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Share2, Check } from 'lucide-react'
+
+interface ShareButtonProps {
+  frontierLine: string
+  modernLine?: string
+  temperature: number
+  location: string
+}
+
+export default function ShareButton({ frontierLine, modernLine, temperature, location }: ShareButtonProps) {
+  const [copied, setCopied] = useState(false)
+
+  const handleShare = async () => {
+    const today = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      month: 'long', 
+      day: 'numeric' 
+    })
+    
+    const text = modernLine
+      ? `📜 Today's Briefing from The 1775 Almanac\n${today} • ${location}\n\n1775: "${frontierLine}"\n2026: "${modernLine}"\n\n🌡️ Currently ${Math.round(temperature)}°F\n\n🔗 tennessee-starts-here.vercel.app/almanac`
+      : `📜 Today's Briefing from The 1775 Almanac\n${today} • ${location}\n\n"${frontierLine}"\n\n🌡️ Currently ${Math.round(temperature)}°F\n\n🔗 tennessee-starts-here.vercel.app/almanac`
+
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+
+  return (
+    <button
+      onClick={handleShare}
+      className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/40 hover:text-almanac-gold transition-colors mt-3"
+      aria-label="Share today's briefing"
+    >
+      {copied ? (
+        <>
+          <Check className="w-3.5 h-3.5" />
+          <span>Copied!</span>
+        </>
+      ) : (
+        <>
+          <Share2 className="w-3.5 h-3.5" />
+          <span>Share today's briefing</span>
+        </>
+      )}
+    </button>
+  )
+}
+```
+
+**Integration in FrontierSaying.tsx:**
+```tsx
+import ShareButton from '@/components/almanac/ShareButton'
+
+// Add props for share functionality:
+interface FrontierSayingProps {
+  saying: string
+  modernLine?: string
+  temperature?: number
+  location?: string
+}
+
+// At bottom of component, after the proverb:
+{temperature !== undefined && location && (
+  <div className="text-center">
+    <ShareButton 
+      frontierLine={saying} 
+      modernLine={modernLine}
+      temperature={temperature}
+      location={location}
+    />
+  </div>
+)}
+```
+
+---
+
+### 5. Tomorrow Preview Card
+
+**Purpose:** Help users plan tomorrow's work today.
+
+**Behavior:**
+- Shows tomorrow's high/low, precipitation chance
+- Calculates and shows top workability score for tomorrow
+- Compact, non-intrusive placement
+
+**Component:** `components/almanac/TomorrowPreview.tsx`
+
+```tsx
+'use client'
+
+import { motion } from 'framer-motion'
+import { Calendar, Droplets, ThermometerSun, ThermometerSnowflake } from 'lucide-react'
+
+interface TomorrowData {
+  high: number
+  low: number
+  precipChance: number
+  weatherCode: number
+}
+
+interface TomorrowPreviewProps {
+  tomorrow: TomorrowData | null
+}
+
+function getWeatherEmoji(code: number): string {
+  if ([0, 1].includes(code)) return '☀️'
+  if ([2, 3].includes(code)) return '⛅'
+  if ([45, 48].includes(code)) return '🌫️'
+  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return '🌧️'
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️'
+  if ([95, 96, 99].includes(code)) return '⛈️'
+  return '🌤️'
+}
+
+function getTomorrowOutlook(data: TomorrowData): { text: string; color: string } {
+  if (data.precipChance > 60) {
+    return { text: 'Rain likely — plan indoor work', color: 'text-blue-400' }
+  }
+  if (data.high > 90) {
+    return { text: 'Hot — work early or late', color: 'text-orange-400' }
+  }
+  if (data.low < 32) {
+    return { text: 'Frost risk — protect plants', color: 'text-cyan-400' }
+  }
+  if (data.precipChance < 20 && data.high > 50 && data.high < 85) {
+    return { text: 'Good conditions expected', color: 'text-almanac-success' }
+  }
+  return { text: 'Fair conditions expected', color: 'text-almanac-parchment/70' }
+}
+
+export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
+  if (!tomorrow) return null
+
+  const outlook = getTomorrowOutlook(tomorrow)
+  const emoji = getWeatherEmoji(tomorrow.weatherCode)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3 }}
+      className="bg-white/5 border border-white/10 rounded-lg p-4 mt-6"
+    >
+      <div className="flex items-center gap-2 mb-3">
+        <Calendar className="w-4 h-4 text-almanac-gold" />
+        <h3 className="text-sm font-medium text-almanac-gold">Tomorrow at a Glance</h3>
+      </div>
+
+      <div className="flex items-center justify-between">
+        {/* Weather summary */}
+        <div className="flex items-center gap-4">
+          <span className="text-2xl">{emoji}</span>
+          <div className="flex items-center gap-3 text-sm">
+            <span className="flex items-center gap-1 text-almanac-parchment/80">
+              <ThermometerSun className="w-3.5 h-3.5 text-orange-400" />
+              {Math.round(tomorrow.high)}°
+            </span>
+            <span className="flex items-center gap-1 text-almanac-parchment/60">
+              <ThermometerSnowflake className="w-3.5 h-3.5 text-blue-400" />
+              {Math.round(tomorrow.low)}°
+            </span>
+            {tomorrow.precipChance > 0 && (
+              <span className="flex items-center gap-1 text-almanac-parchment/60">
+                <Droplets className="w-3.5 h-3.5 text-blue-400" />
+                {tomorrow.precipChance}%
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Outlook */}
+        <p className={`text-xs ${outlook.color}`}>
+          {outlook.text}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+```
+
+**Integration in page.tsx:**
+```tsx
+import TomorrowPreview from '@/components/almanac/TomorrowPreview'
+
+// After the FrontierSaying, compute tomorrow's data:
+const todayIndex = findTodayDailyIndex(weather.daily.time)
+const tomorrowData = todayIndex !== -1 && weather.daily.time[todayIndex + 1] ? {
+  high: weather.daily.temperatureMax[todayIndex + 1],
+  low: weather.daily.temperatureMin[todayIndex + 1],
+  precipChance: weather.daily.precipitationProbabilityMax[todayIndex + 1] || 0,
+  weatherCode: weather.daily.weatherCode[todayIndex + 1]
+} : null
+
+// In JSX, after FrontierSaying:
+<TomorrowPreview tomorrow={tomorrowData} />
+```
+
+---
 
 ### Rocky Mount Pantry Integration
 

@@ -21,6 +21,10 @@ import { formatLocationName, type GeoLocation } from '@/lib/almanac/geocoding'
 import { loadLocation } from '@/lib/almanac/storage'
 import type { WeatherData, TaskScores as TaskScoresType, MoonData, WeatherMetrics } from '@/lib/almanac/types'
 
+// Retry delays in milliseconds (exponential backoff: 1s, 2s, 4s)
+const RETRY_DELAYS = [1000, 2000, 4000]
+const MAX_RETRIES = 3
+
 export default function AlmanacPage() {
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [weather, setWeather] = useState<WeatherData | null>(null)
@@ -30,10 +34,13 @@ export default function AlmanacPage() {
   const [moon, setMoon] = useState<MoonData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [retryCount, setRetryCount] = useState(0)
 
-  const fetchWeather = useCallback(async (loc: GeoLocation) => {
+  const fetchWeather = useCallback(async (loc: GeoLocation, attempt = 0) => {
     try {
       setLoading(true)
+      setRetryCount(attempt)
+
       const response = await fetch(`/api/weather?lat=${loc.latitude}&lon=${loc.longitude}`)
 
       if (!response.ok) {
@@ -41,6 +48,12 @@ export default function AlmanacPage() {
       }
 
       const data = await response.json()
+
+      // Check for API error response
+      if (data.error) {
+        throw new Error(data.error)
+      }
+
       const weatherData = transformWeatherData(data)
       setWeather(weatherData)
 
@@ -80,9 +93,20 @@ export default function AlmanacPage() {
       setMoon(moonData)
 
       setError(null)
+      setRetryCount(0)
     } catch (err) {
       console.error('Weather fetch error:', err)
-      setError('Unable to load weather data. Please try again.')
+
+      // Retry with exponential backoff
+      if (attempt < MAX_RETRIES - 1) {
+        const delay = RETRY_DELAYS[attempt] || RETRY_DELAYS[RETRY_DELAYS.length - 1]
+        await new Promise(resolve => setTimeout(resolve, delay))
+        return fetchWeather(loc, attempt + 1)
+      }
+
+      // All retries exhausted
+      setError('Unable to load weather data after multiple attempts. Please try again.')
+      setRetryCount(0)
     } finally {
       setLoading(false)
     }
@@ -108,13 +132,13 @@ export default function AlmanacPage() {
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <div className="animate-pulse text-center">
               <p className="text-sm uppercase tracking-widest text-gold-leaf mb-4">
-                Loading...
+                {retryCount > 0 ? `Retrying (${retryCount}/${MAX_RETRIES})...` : 'Loading...'}
               </p>
               <div className="text-[96px] font-sans font-bold leading-none text-almanac-parchment/30">
                 --°
               </div>
               <p className="text-xl text-almanac-parchment/30 mt-2">
-                Fetching conditions...
+                {retryCount > 0 ? 'Connection interrupted, retrying...' : 'Fetching conditions...'}
               </p>
             </div>
           </div>

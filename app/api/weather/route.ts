@@ -8,8 +8,30 @@ const DEFAULT_LON = -82.26
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const lat = searchParams.get('lat') || String(DEFAULT_LAT)
-  const lon = searchParams.get('lon') || String(DEFAULT_LON)
+  const latParam = searchParams.get('lat')
+  const lonParam = searchParams.get('lon')
+
+  // Use defaults if not provided
+  const lat = latParam || String(DEFAULT_LAT)
+  const lon = lonParam || String(DEFAULT_LON)
+
+  // Validate latitude (must be between -90 and 90)
+  const latNum = parseFloat(lat)
+  if (isNaN(latNum) || latNum < -90 || latNum > 90) {
+    return NextResponse.json(
+      { error: 'Invalid latitude. Must be between -90 and 90.' },
+      { status: 400 }
+    )
+  }
+
+  // Validate longitude (must be between -180 and 180)
+  const lonNum = parseFloat(lon)
+  if (isNaN(lonNum) || lonNum < -180 || lonNum > 180) {
+    return NextResponse.json(
+      { error: 'Invalid longitude. Must be between -180 and 180.' },
+      { status: 400 }
+    )
+  }
 
   const params = new URLSearchParams({
     latitude: lat,

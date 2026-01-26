@@ -5,14 +5,22 @@ const STORAGE_KEY = 'almanac-location'
 
 /**
  * Save user's chosen location to localStorage
+ * @returns true if save succeeded, false if storage quota exceeded or other error
  */
-export function saveLocation(location: GeoLocation): void {
-  if (typeof window === 'undefined') return
+export function saveLocation(location: GeoLocation): boolean {
+  if (typeof window === 'undefined') return false
 
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(location))
+    return true
   } catch (error) {
-    console.error('Failed to save location:', error)
+    // Handle QuotaExceededError and other storage errors
+    if (error instanceof DOMException && error.name === 'QuotaExceededError') {
+      console.warn('localStorage quota exceeded. Location not saved.')
+    } else {
+      console.error('Failed to save location:', error)
+    }
+    return false
   }
 }
 
@@ -37,13 +45,16 @@ export function loadLocation(): GeoLocation {
 
 /**
  * Clear saved location (reset to default)
+ * @returns true if clear succeeded, false on error
  */
-export function clearLocation(): void {
-  if (typeof window === 'undefined') return
+export function clearLocation(): boolean {
+  if (typeof window === 'undefined') return false
 
   try {
     localStorage.removeItem(STORAGE_KEY)
+    return true
   } catch (error) {
     console.error('Failed to clear location:', error)
+    return false
   }
 }

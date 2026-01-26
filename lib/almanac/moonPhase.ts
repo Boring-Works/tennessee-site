@@ -15,13 +15,21 @@ const MOON_PHASES = [
 
 export function getMoonData(date: Date = new Date()): MoonData {
   const illumination = SunCalc.getMoonIllumination(date)
-  const phase = illumination.phase
 
-  // Find phase name and emoji
+  // Defensive bounds check: clamp phase to 0-1 range
+  const rawPhase = illumination.phase
+  const phase = Math.max(0, Math.min(1, isNaN(rawPhase) ? 0 : rawPhase))
+
+  // Clamp illumination fraction as well
+  const rawFraction = illumination.fraction
+  const fraction = Math.max(0, Math.min(1, isNaN(rawFraction) ? 0 : rawFraction))
+
+  // Find phase name and emoji (handle wrap-around at 0.9375 for new moon)
   let phaseName = 'New Moon'
   let emoji = '🌑'
 
   for (const p of MOON_PHASES) {
+    // Check if phase falls within this range (last entry handles 0.8125-1.0)
     if (phase >= p.min && phase < p.max) {
       phaseName = p.name
       emoji = p.emoji
@@ -29,7 +37,7 @@ export function getMoonData(date: Date = new Date()): MoonData {
     }
   }
 
-  // Handle wrap-around for new moon
+  // Phase values very close to 1 should show as "New Moon" (lunar cycle wrap-around)
   if (phase >= 0.9375) {
     phaseName = 'New Moon'
     emoji = '🌑'
@@ -37,7 +45,7 @@ export function getMoonData(date: Date = new Date()): MoonData {
 
   return {
     phase,
-    illumination: illumination.fraction,
+    illumination: fraction,
     phaseName,
     emoji,
   }

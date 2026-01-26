@@ -21,6 +21,9 @@ export const DEFAULT_LOCATION: GeoLocation = {
   timezone: 'America/New_York',
 }
 
+// Maximum query length to prevent abuse
+const MAX_QUERY_LENGTH = 100
+
 /**
  * Search for a location by name or zip code
  * Works for any US location, optimized for Tennessee
@@ -28,7 +31,12 @@ export const DEFAULT_LOCATION: GeoLocation = {
 export async function searchLocation(query: string): Promise<GeoLocation | null> {
   const cleanQuery = query.trim()
 
+  // Validate query
   if (!cleanQuery) return null
+  if (cleanQuery.length > MAX_QUERY_LENGTH) {
+    console.warn('Geocoding query too long, truncating')
+    return searchLocation(cleanQuery.slice(0, MAX_QUERY_LENGTH))
+  }
 
   try {
     const params = new URLSearchParams({

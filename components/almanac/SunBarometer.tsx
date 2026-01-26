@@ -112,7 +112,7 @@ export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, win
           </div>
         </div>
 
-        {/* Barometer */}
+        {/* Barometer - displayed in inHg for US audience (standard: 29.92") */}
         <div>
           <h4 className="text-xs text-almanac-gold font-medium uppercase tracking-wide mb-3">
             Barometer
@@ -120,9 +120,9 @@ export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, win
           <div className="flex items-center gap-2 mb-1">
             <Gauge className="w-4 h-4 text-almanac-parchment/60" />
             <span className="text-lg font-bold text-almanac-parchment">
-              {Math.round(pressure)}
+              {(pressure / 33.864).toFixed(2)}
             </span>
-            <span className="text-xs text-almanac-parchment/50">hPa</span>
+            <span className="text-xs text-almanac-parchment/50">inHg</span>
             <TrendIcon className={`w-4 h-4 ${trendColor}`} />
           </div>
           <p className="text-xs text-almanac-parchment/60 leading-relaxed">

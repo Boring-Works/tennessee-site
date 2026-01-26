@@ -16,17 +16,23 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
   const [query, setQuery] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [storageWarning, setStorageWarning] = useState(false)
 
   const handleSearch = useCallback(async () => {
     if (!query.trim()) return
 
     setIsLoading(true)
     setError(null)
+    setStorageWarning(false)
 
     try {
       const result = await searchLocation(query)
       if (result) {
-        saveLocation(result)
+        const saved = saveLocation(result)
+        if (!saved) {
+          // Storage failed but we can still use the location for this session
+          setStorageWarning(true)
+        }
         onLocationChange(result)
         setIsOpen(false)
         setQuery('')
@@ -43,6 +49,7 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
   const handleReset = useCallback(() => {
     clearLocation()
     onLocationChange(DEFAULT_LOCATION)
+    setStorageWarning(false)
     setIsOpen(false)
     setQuery('')
   }, [onLocationChange])
@@ -58,6 +65,28 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
 
   return (
     <>
+      {/* Storage Warning - shown when localStorage fails */}
+      <AnimatePresence>
+        {storageWarning && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-amber-900/90 border border-amber-500/50 text-amber-200 px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow-lg"
+          >
+            <AlertCircle className="w-4 h-4" />
+            <span>Location won't persist after refresh (storage full)</span>
+            <button
+              onClick={() => setStorageWarning(false)}
+              className="ml-2 hover:text-white transition-colors"
+              aria-label="Dismiss warning"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Location Display Button - Made prominent so users can find it */}
       <button
         onClick={() => setIsOpen(true)}

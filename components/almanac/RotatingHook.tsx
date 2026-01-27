@@ -1,15 +1,11 @@
-'use client'
-
-import { useMemo } from 'react'
-
 const hooks = [
-  "From Sullivan County — where Tennessee began",
+  'From Sullivan County — where Tennessee began',
   "Weather wisdom from the Southwest Territory's first capitol",
-  "250 years of reading these skies",
+  '250 years of reading these skies',
   "Sullivan County's gift to Tennessee",
-  "What the frontier knew about these mountains",
+  'What the frontier knew about these mountains',
   "Built where Tennessee's government started",
-  "Modern intelligence, ancestral wisdom"
+  'Modern intelligence, ancestral wisdom',
 ]
 
 function getDayOfYear(): number {
@@ -21,14 +17,8 @@ function getDayOfYear(): number {
 }
 
 export default function RotatingHook() {
-  const hook = useMemo(() => {
-    const dayOfYear = getDayOfYear()
-    return hooks[dayOfYear % hooks.length]
-  }, [])
+  const dayOfYear = getDayOfYear()
+  const hook = hooks[dayOfYear % hooks.length]
 
-  return (
-    <p className="text-sm text-almanac-parchment/60 italic font-serif tracking-wide">
-      {hook}
-    </p>
-  )
+  return <p className="text-sm text-almanac-parchment/60 italic font-serif tracking-wide">{hook}</p>
 }

@@ -231,8 +231,9 @@ export default function AlmanacPage() {
 
           {/* === BENTO GRID: Desktop 12-col, Mobile stacked === */}
           <div className="flex flex-col gap-4 lg:grid lg:grid-cols-12 lg:gap-4">
-            {/* Row 1: Hero (4) | Sparkline (5) | AQI (3) */}
-            <div className="lg:col-span-4 lg:row-span-2">
+            {/* === ROW 1-2: Hero Block === */}
+            {/* Hero: Dominant, spans 2 rows */}
+            <div className="lg:col-span-5 lg:row-span-2">
               <AlmanacHero
                 temperature={weather.current.temperature}
                 feelsLike={weather.current.feelsLike}
@@ -245,21 +246,23 @@ export default function AlmanacPage() {
               />
             </div>
 
-            <div className="lg:col-span-5 lg:row-span-2">
-              <HourlySparkline hourly={weather.hourly} />
+            {/* Tomorrow Preview */}
+            <div className="lg:col-span-4">
+              <TomorrowPreview tomorrow={tomorrowData} />
             </div>
 
+            {/* Air Quality */}
             <div className="lg:col-span-3">
               <AirQualityCard lat={location.latitude} lon={location.longitude} />
             </div>
 
-            {/* Row 1 continued: Tomorrow Preview on desktop fits in AQI column area */}
-            <div className="lg:col-span-3">
-              <TomorrowPreview tomorrow={tomorrowData} />
+            {/* Burn Day */}
+            <div className="lg:col-span-4">
+              <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
             </div>
 
-            {/* Row 2: Proverb + Burn Day */}
-            <div className="lg:col-span-8">
+            {/* Proverb - compact on desktop */}
+            <div className="lg:col-span-3">
               {saying && (
                 <FrontierSaying
                   saying={saying.frontier}
@@ -270,12 +273,44 @@ export default function AlmanacPage() {
               )}
             </div>
 
-            <div className="lg:col-span-4">
-              <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
+            {/* === ROW 3: Workability Scores - THE FEATURE === */}
+            <div className="lg:col-span-12">
+              <TaskScores
+                sower={taskScores.sower}
+                shepherd={taskScores.shepherd}
+                keeper={taskScores.keeper}
+                builder={taskScores.builder}
+              />
             </div>
 
-            {/* Row 3: Current Conditions + Snow (if present) */}
+            {/* === ROW 4: Forecast Strip === */}
+            {/* Hourly Sparkline - wider for readability */}
             <div className="lg:col-span-8">
+              <HourlySparkline hourly={weather.hourly} />
+            </div>
+
+            {/* Radar - visual, compact */}
+            <div className="lg:col-span-4">
+              <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
+            </div>
+
+            {/* === ROW 5: 7-Day + Native Pulse === */}
+            <div className="lg:col-span-8">
+              <WeatherDetails daily={weather.daily} />
+            </div>
+
+            <div className="lg:col-span-4">
+              <NativePulse pulse={nativePulse} />
+            </div>
+
+            {/* === ROW 6: Details Row === */}
+            {/* Moon - small */}
+            <div className="lg:col-span-3">
+              <MoonPhase moon={moon} />
+            </div>
+
+            {/* Current Conditions - medium */}
+            <div className="lg:col-span-5">
               <CurrentConditionsCard
                 cloudCover={weather.current.cloudCover}
                 visibility={weather.current.visibility}
@@ -287,31 +322,9 @@ export default function AlmanacPage() {
               />
             </div>
 
+            {/* Soil + Sun/Barometer */}
             <div className="lg:col-span-4">
-              <SnowConditions
-                snowDepth={weather.current.snowDepth}
-                currentTemp={weather.current.temperature}
-                weatherCode={weather.current.weatherCode}
-              />
-            </div>
-
-            {/* Row 4: Workability Scores - Full Width */}
-            <div className="lg:col-span-12">
-              <TaskScores
-                sower={taskScores.sower}
-                shepherd={taskScores.shepherd}
-                keeper={taskScores.keeper}
-                builder={taskScores.builder}
-              />
-            </div>
-
-            {/* Row 5: Native Pulse + Soil Temp */}
-            <div className="lg:col-span-6">
-              <NativePulse pulse={nativePulse} />
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+              <div className="space-y-4">
                 <SoilTemperature temperature={weather.current.soilTemperature} />
                 <SunBarometer
                   sunrise={todaySunrise}
@@ -323,19 +336,16 @@ export default function AlmanacPage() {
               </div>
             </div>
 
-            {/* Row 6: Moon + Radar */}
-            <div className="lg:col-span-4">
-              <MoonPhase moon={moon} />
-            </div>
-
-            <div className="lg:col-span-8">
-              <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
-            </div>
-
-            {/* Row 7: 7-Day Outlook - Full Width */}
-            <div className="lg:col-span-12">
-              <WeatherDetails daily={weather.daily} />
-            </div>
+            {/* Snow - only renders when snow present, full width when it does */}
+            {weather.current.snowDepth && weather.current.snowDepth > 0 && (
+              <div className="lg:col-span-12">
+                <SnowConditions
+                  snowDepth={weather.current.snowDepth}
+                  currentTemp={weather.current.temperature}
+                  weatherCode={weather.current.weatherCode}
+                />
+              </div>
+            )}
           </div>
 
           {/* Footer - Outside Grid */}

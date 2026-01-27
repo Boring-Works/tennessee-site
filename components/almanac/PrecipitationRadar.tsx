@@ -163,7 +163,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-3">

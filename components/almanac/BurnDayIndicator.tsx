@@ -68,7 +68,7 @@ export default function BurnDayIndicator({ lat, lon }: BurnDayIndicatorProps) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.2 }}
-      className={`p-3 rounded-lg border ${
+      className={`p-3 rounded-lg border h-full ${
         isSafeToBurn ? 'bg-green-900/30 border-green-500/50' : 'bg-red-900/30 border-red-500/50'
       }`}
       role="status"

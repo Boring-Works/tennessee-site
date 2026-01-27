@@ -41,12 +41,10 @@ export function AlmanacHero({
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-center py-12"
+      className="text-center py-8 h-full flex flex-col justify-center bg-white/5 border border-white/10 rounded-lg"
     >
       {/* Location */}
-      <p className="text-sm uppercase tracking-widest text-gold-leaf mb-4">
-        {location}
-      </p>
+      <p className="text-sm uppercase tracking-widest text-gold-leaf mb-4">{location}</p>
 
       {/* Temperature with Icon */}
       <div className="flex items-center justify-center gap-4">
@@ -54,11 +52,11 @@ export function AlmanacHero({
           className="relative"
           animate={{
             y: [0, -3, 0],
-            rotate: [0, 2, 0, -2, 0]
+            rotate: [0, 2, 0, -2, 0],
           }}
           transition={{
             duration: 8,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeat: Infinity,
           }}
         >
@@ -74,18 +72,16 @@ export function AlmanacHero({
       </div>
 
       {/* Condition */}
-      <p className={`text-xl mt-2 ${
-        isSnowing ? 'text-blue-300' : 
-        isIcy ? 'text-cyan-300' : 
-        'text-almanac-parchment/70'
-      }`}>
+      <p
+        className={`text-xl mt-2 ${
+          isSnowing ? 'text-blue-300' : isIcy ? 'text-cyan-300' : 'text-almanac-parchment/70'
+        }`}
+      >
         {weather.condition}
       </p>
 
       {/* Feels Like */}
-      <p className="text-sm text-almanac-parchment/50 mt-1">
-        Feels like {Math.round(feelsLike)}°
-      </p>
+      <p className="text-sm text-almanac-parchment/50 mt-1">Feels like {Math.round(feelsLike)}°</p>
 
       {/* Today's High/Low */}
       {(todayHigh !== undefined || todayLow !== undefined) && (

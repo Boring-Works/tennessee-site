@@ -26,13 +26,20 @@ function getWeatherEmoji(code: number): string {
 
 function getWeatherIcon(type: string): string {
   switch (type) {
-    case 'clear': return '☀️'
-    case 'partlyCloudy': return '⛅'
-    case 'foggy': return '🌫️'
-    case 'rainy': return '🌧️'
-    case 'snowy': return '❄️'
-    case 'stormy': return '⛈️'
-    default: return '🌤️'
+    case 'clear':
+      return '☀️'
+    case 'partlyCloudy':
+      return '⛅'
+    case 'foggy':
+      return '🌫️'
+    case 'rainy':
+      return '🌧️'
+    case 'snowy':
+      return '❄️'
+    case 'stormy':
+      return '⛈️'
+    default:
+      return '🌤️'
   }
 }
 
@@ -64,7 +71,7 @@ export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-white/5 border border-white/10 rounded-lg p-4 mt-6"
+      className="bg-white/5 border border-white/10 rounded-lg p-4 h-full"
     >
       <div className="flex items-center gap-2 mb-3">
         <Calendar className="w-4 h-4 text-almanac-gold" />
@@ -94,9 +101,7 @@ export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
         </div>
 
         {/* Outlook */}
-        <p className={`text-xs ${outlook.color}`}>
-          {outlook.text}
-        </p>
+        <p className={`text-xs ${outlook.color}`}>{outlook.text}</p>
       </div>
     </motion.div>
   )

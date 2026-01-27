@@ -1,15 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  Sun, 
-  Eye, 
-  Cloud, 
-  Droplets, 
-  Wind,
-  Snowflake,
-  Gauge
-} from 'lucide-react'
+import { Sun, Eye, Cloud, Droplets, Wind, Snowflake, Gauge } from 'lucide-react'
 import { getVisibilityDescription, getUVDescription } from '@/lib/almanac/types'
 
 interface CurrentConditionsCardProps {
@@ -36,9 +28,12 @@ export default function CurrentConditionsCard({
   const visibilityMiles = visibility !== undefined ? (visibility / 1609.34).toFixed(1) : null
 
   // Only show if we have data
-  const hasData = cloudCover !== undefined || visibility !== undefined || 
-                  dewPoint !== undefined || uvIndex !== undefined || 
-                  snowDepth !== undefined
+  const hasData =
+    cloudCover !== undefined ||
+    visibility !== undefined ||
+    dewPoint !== undefined ||
+    uvIndex !== undefined ||
+    snowDepth !== undefined
 
   if (!hasData) return null
 
@@ -47,10 +42,10 @@ export default function CurrentConditionsCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 card-hover"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full card-hover"
     >
       <h3 className="text-sm font-medium text-almanac-gold mb-3">Current Conditions</h3>
-      
+
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {/* Snow Depth - Priority if present */}
         {snowDepth !== undefined && snowDepth > 0 && (
@@ -90,7 +85,9 @@ export default function CurrentConditionsCard({
           <div className="flex items-center gap-2">
             <Cloud className="w-4 h-4 text-almanac-parchment/60" />
             <div>
-              <p className="text-sm font-medium text-almanac-parchment">{Math.round(cloudCover)}%</p>
+              <p className="text-sm font-medium text-almanac-parchment">
+                {Math.round(cloudCover)}%
+              </p>
               <p className="text-xs text-almanac-parchment/50">Cloud cover</p>
             </div>
           </div>
@@ -112,7 +109,9 @@ export default function CurrentConditionsCard({
           <div className="flex items-center gap-2">
             <Wind className="w-4 h-4 text-almanac-parchment/60" />
             <div>
-              <p className="text-sm font-medium text-almanac-parchment">{Math.round(windGusts)} mph</p>
+              <p className="text-sm font-medium text-almanac-parchment">
+                {Math.round(windGusts)} mph
+              </p>
               <p className="text-xs text-almanac-parchment/50">Gusts</p>
             </div>
           </div>
@@ -123,7 +122,9 @@ export default function CurrentConditionsCard({
           <div className="flex items-center gap-2">
             <Gauge className="w-4 h-4 text-almanac-parchment/60" />
             <div>
-              <p className="text-sm font-medium text-almanac-parchment">{(pressure / 33.864).toFixed(2)}&quot;</p>
+              <p className="text-sm font-medium text-almanac-parchment">
+                {(pressure / 33.864).toFixed(2)}&quot;
+              </p>
               <p className="text-xs text-almanac-parchment/50">Barometer</p>
             </div>
           </div>

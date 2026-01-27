@@ -50,7 +50,7 @@ export function WeatherDetails({ daily }: WeatherDetailsProps) {
   const futureDays = daily.time.slice(todayIndex, todayIndex + 7)
 
   return (
-    <section className="py-4">
+    <section className="py-4 h-full">
       {/* 7-Day Outlook */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

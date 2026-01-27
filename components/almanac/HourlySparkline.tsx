@@ -134,7 +134,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.1 }}
-      className="p-4 rounded-lg bg-white/5 border border-white/10"
+      className="p-4 rounded-lg bg-white/5 border border-white/10 h-full"
     >
       {/* Header with toggle */}
       <div className="flex items-center justify-between mb-3">

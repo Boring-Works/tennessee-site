@@ -13,7 +13,7 @@ export default function NativePulse({ pulse }: NativePulseProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-6 card-hover"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-6 h-full card-hover"
     >
       <div className="flex items-center gap-3 mb-4">
         <span className="text-3xl" role="img" aria-label={pulse.status}>
@@ -28,9 +28,7 @@ export default function NativePulse({ pulse }: NativePulseProps) {
       <div className="space-y-4">
         {/* Status Badge */}
         <div className="flex items-center gap-2">
-          <span className={`text-lg font-medium ${pulse.color}`}>
-            {pulse.status}
-          </span>
+          <span className={`text-lg font-medium ${pulse.color}`}>{pulse.status}</span>
         </div>
 
         {/* Progress Bar */}
@@ -44,15 +42,13 @@ export default function NativePulse({ pulse }: NativePulseProps) {
         </div>
 
         {/* Tip */}
-        <p className="text-almanac-parchment/80 text-sm leading-relaxed">
-          {pulse.tip}
-        </p>
+        <p className="text-almanac-parchment/80 text-sm leading-relaxed">{pulse.tip}</p>
 
         {/* Heritage Context */}
         <div className="pt-3 border-t border-almanac-gold/10">
           <p className="text-xs text-almanac-parchment/50">
-            Tracking Tennessee native plant cycles — the same species settlers relied on
-            for food, medicine, and trade since 1775.
+            Tracking Tennessee native plant cycles — the same species settlers relied on for food,
+            medicine, and trade since 1775.
           </p>
         </div>
       </div>

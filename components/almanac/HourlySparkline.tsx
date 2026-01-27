@@ -10,9 +10,9 @@ interface HourlySparklineProps {
 
 type TimeRange = '12H' | '24H' | '48H'
 
-// Chart dimensions
+// Chart dimensions - taller to fill space
 const WIDTH = 320
-const HEIGHT = 120
+const HEIGHT = 160
 const PADDING = { top: 20, right: 10, bottom: 30, left: 35 }
 const CHART_WIDTH = WIDTH - PADDING.left - PADDING.right
 const CHART_HEIGHT = HEIGHT - PADDING.top - PADDING.bottom
@@ -95,6 +95,12 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
       time: times[i],
     }))
 
+    // Summary stats for the period
+    const periodHigh = Math.round(Math.max(...temps))
+    const periodLow = Math.round(Math.min(...temps))
+    const maxPrecip = Math.max(...precip)
+    const avgPrecip = Math.round(precip.reduce((a, b) => a + b, 0) / precip.length)
+
     return {
       times,
       temps,
@@ -107,6 +113,10 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
       freezingY,
       showFreezingLine,
       dataPoints,
+      periodHigh,
+      periodLow,
+      maxPrecip,
+      avgPrecip,
     }
   }, [hourly, range])
 
@@ -137,7 +147,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
       className="p-4 rounded-lg bg-white/5 border border-white/10 h-full"
     >
       {/* Header with toggle */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-2">
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
           Hourly Forecast
         </h3>
@@ -156,6 +166,21 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Period summary stats */}
+      <div className="flex items-center justify-between text-xs text-almanac-parchment/60 mb-2 px-1">
+        <div className="flex items-center gap-3">
+          <span>
+            <span className="text-red-400">H:</span> {chartData.periodHigh}°
+          </span>
+          <span>
+            <span className="text-blue-400">L:</span> {chartData.periodLow}°
+          </span>
+        </div>
+        {chartData.maxPrecip > 0 && (
+          <span className="text-blue-400">{chartData.maxPrecip}% rain chance</span>
+        )}
       </div>
 
       {/* SVG Chart */}

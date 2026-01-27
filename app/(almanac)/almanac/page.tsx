@@ -183,6 +183,10 @@ export default function AlmanacPage() {
   const todaySunrise = weather.daily.sunrise[todayIndex]
   const todaySunset = weather.daily.sunset[todayIndex]
 
+  // Pressure trend - currently defaulting to steady
+  // TODO: Add hourly pressure to API if available for trend calculation
+  const pressureTrend: 'rising' | 'falling' | 'steady' = 'steady'
+
   // Tomorrow's preview data
   const tomorrowData =
     todayIndex !== -1 && weather.daily.time[todayIndex + 1]
@@ -244,9 +248,15 @@ export default function AlmanacPage() {
               weatherCode={weather.current.weatherCode}
               location={formatLocationName(location)}
               windSpeed={weather.current.windSpeed}
+              windDirection={weather.current.windDirection}
               humidity={weather.current.humidity}
               todayHigh={todayHigh}
               todayLow={todayLow}
+              sunrise={todaySunrise}
+              sunset={todaySunset}
+              pressure={weather.current.pressure}
+              pressureTrend={pressureTrend}
+              uvIndex={weather.current.uvIndex}
             />
 
             {/* Tomorrow Preview */}
@@ -367,9 +377,15 @@ export default function AlmanacPage() {
                 weatherCode={weather.current.weatherCode}
                 location={formatLocationName(location)}
                 windSpeed={weather.current.windSpeed}
+                windDirection={weather.current.windDirection}
                 humidity={weather.current.humidity}
                 todayHigh={todayHigh}
                 todayLow={todayLow}
+                sunrise={todaySunrise}
+                sunset={todaySunset}
+                pressure={weather.current.pressure}
+                pressureTrend={pressureTrend}
+                uvIndex={weather.current.uvIndex}
               />
             </div>
 

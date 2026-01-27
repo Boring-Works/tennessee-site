@@ -296,6 +296,7 @@
   display: flex;
   flex-direction: column;
   background: var(--primary);
+  overflow-x: hidden;
 }
 
 /* Background layer */
@@ -339,7 +340,6 @@
   padding-top: 100px;
   padding-bottom: 2rem;
   width: 100%;
-  overflow: visible;
 }
 
 /* Hero Grid - 60/40 Split */
@@ -348,23 +348,26 @@
   grid-template-columns: 1fr;
   gap: 2rem;
   width: 100%;
-  max-width: 80rem;
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   box-sizing: border-box;
 }
 
 @media (min-width: 1024px) {
   .hero-grid {
     grid-template-columns: 3fr 2fr;
-    gap: 3rem;
+    gap: 4rem;
     align-items: center;
+    padding: 0 3rem;
   }
 }
 
 /* LEFT COLUMN - Brand (60%) */
 .hero-brand {
   text-align: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -391,7 +394,7 @@
 
 .hero-headline {
   font-family: var(--font-serif), serif;
-  font-size: clamp(3rem, 10vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 700;
   color: #ffffff;
   line-height: 0.9;
@@ -520,6 +523,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
 }
 
 /* Hero Footer */

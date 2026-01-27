@@ -96,7 +96,7 @@ export default function AirQualityCard({ lat, lon, onAqiChange }: AirQualityCard
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`p-4 rounded-lg border h-full ${bgColors[data.level]}`}
+      className={`p-4 rounded-lg border ${bgColors[data.level]}`}
       role="region"
       aria-label={`Air Quality: ${aqiInfo.label}`}
     >

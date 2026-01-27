@@ -409,17 +409,17 @@ export default function AlmanacPage() {
             {/* ========== ROW 3: QUICK CONTEXT (Secondary but important) ========== */}
 
             {/* Tomorrow Preview */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 self-start">
               <TomorrowPreview tomorrow={tomorrowData} />
             </div>
 
             {/* Burn Day */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 self-start">
               <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
             </div>
 
             {/* Air Quality */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 self-start">
               <AirQualityCard
                 lat={location.latitude}
                 lon={location.longitude}
@@ -428,7 +428,7 @@ export default function AlmanacPage() {
             </div>
 
             {/* Frontier Proverb */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 self-start">
               {saying && (
                 <FrontierSaying
                   saying={saying.frontier}

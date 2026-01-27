@@ -13,7 +13,7 @@ export function FrontierSaying({ saying, modernLine, temperature, location }: Fr
   // If no modern line provided, display as single saying (backward compatible)
   if (!modernLine) {
     return (
-      <div className="bg-white/5 border border-white/10 rounded-sm p-6 h-full">
+      <div className="bg-white/5 border border-white/10 rounded-sm p-6 ">
         <p className="font-serif-elegant italic text-xl text-almanac-parchment/90 leading-relaxed text-center">
           &quot;{saying}&quot;
         </p>
@@ -23,7 +23,7 @@ export function FrontierSaying({ saying, modernLine, temperature, location }: Fr
 
   // Dual-line format: 1775 wisdom + 2026 application
   return (
-    <div className="bg-white/5 border border-white/10 rounded-sm p-6 h-full">
+    <div className="bg-white/5 border border-white/10 rounded-sm p-6 ">
       <p className="text-xs text-almanac-gold/50 text-center mb-3 font-medium tracking-widest uppercase">
         The Daily Proverb
       </p>

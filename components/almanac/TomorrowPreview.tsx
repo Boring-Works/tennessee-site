@@ -71,7 +71,7 @@ export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-white/5 border border-white/10 rounded-lg p-4 h-full"
+      className="bg-white/5 border border-white/10 rounded-lg p-4"
     >
       <div className="flex items-center gap-2 mb-3">
         <Calendar className="w-4 h-4 text-almanac-gold" />

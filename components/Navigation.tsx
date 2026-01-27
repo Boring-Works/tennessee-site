@@ -9,10 +9,10 @@ import styles from "./Header/Header.module.css";
 
 const NAV_LINKS = [
   { href: "/", label: "Our Story" },
-  { href: "/first-250", label: "First 250" },
   { href: "/events", label: "Events" },
   { href: "/lectures", label: "Lectures" },
   { href: "/visit", label: "Visit" },
+  { href: "/almanac", label: "Almanac" },
 ];
 
 export default function Navigation() {
@@ -158,8 +158,8 @@ export default function Navigation() {
               <span className={styles["nav-divider"]} aria-hidden="true" />
 
               {/* CTA */}
-              <Link href="/first-250" className={styles.cta}>
-                <span className={styles["cta-text"]}>Join First 250</span>
+              <Link href="/visit" className={styles.cta}>
+                <span className={styles["cta-text"]}>Plan Your Visit</span>
                 <Feather className={styles["cta-icon"]} size={14} />
               </Link>
             </nav>
@@ -242,11 +242,11 @@ export default function Navigation() {
 
             {/* Mobile CTA */}
             <Link
-              href="/first-250"
+              href="/visit"
               className={styles["mobile-cta"]}
               onClick={closeMobileMenu}
             >
-              <span>Join First 250</span>
+              <span>Plan Your Visit</span>
               <Feather size={16} />
             </Link>
 

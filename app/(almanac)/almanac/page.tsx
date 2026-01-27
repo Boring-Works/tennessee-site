@@ -356,21 +356,21 @@ export default function AlmanacPage() {
 
           {/* ============================================================
               DESKTOP LAYOUT: 12-column Bento Grid
-              "Zero-scroll hero" philosophy - most important info visible immediately
+              "Essentials first, wisdom second" philosophy
 
-              ROW 1-2: [Hero 4 cols, 2 rows] [Sparkline 5 cols, 2 rows] [Farmer's Memory 3 cols, 2 rows]
-              ROW 3:   [Tomorrow 3] [Burn 3] [AQI 3] [Proverb 3]
-              ROW 4:   [Workability Scores 12 cols]
-              ROW 5:   [Planting Intelligence 5] [7-Day Forecast 7]
-              ROW 6:   [Moon 3] [Current Conditions 5] [Sun/Barometer 4]
-              ROW 7:   [Environmental Watch 7] [Native Pulse 5]
-              ROW 8:   [Radar 12 cols]
+              ROW 1: [Hero 4] [Sparkline 5] [Quick Stats 3] - Weather essentials
+              ROW 2: [Farmer's Memory 6] [Daily Proverb 6] - Heritage wisdom row
+              ROW 3: [Workability Scores 12 cols]
+              ROW 4: [Planting Intelligence 5] [7-Day Forecast 7]
+              ROW 5: [Moon 3] [Current Conditions 5] [Sun/Barometer 4]
+              ROW 6: [Environmental Watch 7] [Native Pulse 5]
+              ROW 7: [Radar 12 cols]
               ============================================================ */}
           <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
-            {/* ========== ROW 1-2: HERO BLOCK (Zero Scroll - Everything Important) ========== */}
+            {/* ========== ROW 1: WEATHER ESSENTIALS ========== */}
 
-            {/* Hero - Dominant temperature display, spans 2 rows */}
-            <div className="lg:col-span-4 lg:row-span-2">
+            {/* Hero - Dominant temperature display */}
+            <div className="lg:col-span-4">
               <AlmanacHero
                 temperature={weather.current.temperature}
                 feelsLike={weather.current.feelsLike}
@@ -389,13 +389,26 @@ export default function AlmanacPage() {
               />
             </div>
 
-            {/* Hourly Sparkline - Shows trend, spans 2 rows */}
-            <div className="lg:col-span-5 lg:row-span-2">
+            {/* Hourly Sparkline - Temperature trend */}
+            <div className="lg:col-span-5">
               <HourlySparkline hourly={weather.hourly} />
             </div>
 
-            {/* Farmer's Memory - Heritage feature, spans 2 rows */}
-            <div className="lg:col-span-3 lg:row-span-2">
+            {/* Quick Stats Stack - Tomorrow, Burn, AQI */}
+            <div className="lg:col-span-3 flex flex-col gap-3">
+              <TomorrowPreview tomorrow={tomorrowData} />
+              <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
+              <AirQualityCard
+                lat={location.latitude}
+                lon={location.longitude}
+                onAqiChange={setAqi}
+              />
+            </div>
+
+            {/* ========== ROW 2: HERITAGE WISDOM (Full width) ========== */}
+
+            {/* Farmer's Memory */}
+            <div className="lg:col-span-6">
               <FarmerMemory
                 temperature={weather.current.temperature}
                 humidity={weather.current.humidity}
@@ -406,29 +419,8 @@ export default function AlmanacPage() {
               />
             </div>
 
-            {/* ========== ROW 3: QUICK CONTEXT (Secondary but important) ========== */}
-
-            {/* Tomorrow Preview */}
-            <div className="lg:col-span-3 self-start">
-              <TomorrowPreview tomorrow={tomorrowData} />
-            </div>
-
-            {/* Burn Day */}
-            <div className="lg:col-span-3 self-start">
-              <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
-            </div>
-
-            {/* Air Quality */}
-            <div className="lg:col-span-3 self-start">
-              <AirQualityCard
-                lat={location.latitude}
-                lon={location.longitude}
-                onAqiChange={setAqi}
-              />
-            </div>
-
-            {/* Frontier Proverb */}
-            <div className="lg:col-span-3 self-start">
+            {/* Daily Proverb */}
+            <div className="lg:col-span-6">
               {saying && (
                 <FrontierSaying
                   saying={saying.frontier}

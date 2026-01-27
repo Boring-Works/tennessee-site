@@ -13,7 +13,7 @@ export function FrontierSaying({ saying, modernLine, temperature, location }: Fr
   // If no modern line provided, display as single saying (backward compatible)
   if (!modernLine) {
     return (
-      <div className="bg-white/5 border border-white/10 rounded-sm p-6 ">
+      <div className="bg-white/5 border border-white/10 rounded-sm p-6 h-full">
         <p className="font-serif-elegant italic text-xl text-almanac-parchment/90 leading-relaxed text-center">
           &quot;{saying}&quot;
         </p>

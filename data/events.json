@@ -10,6 +10,8 @@
       "category": "digital",
       "description": "Launch Rocky Mount's commemorative year with a video unveiling America 250 programming. First 250 community enrollment begins—be among the first Tennesseans to join the celebration.",
       "ticketUrl": null,
+      "ticketPrice": 0,
+      "ticketLabel": "Free Event",
       "featured": true
     },
     {
@@ -24,6 +26,8 @@
       "speakerTitle": "Vanderbilt University",
       "description": "Explore how faith shaped life on the Tennessee frontier. Dr. Byrd examines the role of religion in colonial America and its influence on early settlers.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
       "featured": false
     },
     {
@@ -38,6 +42,8 @@
       "speakerTitle": "Living History Interpreter",
       "description": "Meet Mary Patton, the woman who supplied gunpowder to the Overmountain Men. Lisa Bennett brings this Revolutionary War heroine to life through first-person interpretation.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
       "featured": false
     },
     {
@@ -50,6 +56,9 @@
       "category": "festival",
       "description": "Experience sheep shearing, wool processing, and colonial gardening techniques. This year featuring special America 250 interpretation connecting frontier agriculture to the Revolutionary era.",
       "ticketUrl": null,
+      "ticketPrice": 20,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per day",
       "featured": false
     },
     {
@@ -64,6 +73,8 @@
       "speakerTitle": "Historian & Reenactor",
       "description": "The 1780 march to Kings Mountain was a desperate gamble—not inevitable victory. Thomas Bachelor examines the risks taken by Sullivan County men who changed the course of the Revolution.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
       "featured": false
     },
     {
@@ -76,6 +87,9 @@
       "category": "festival",
       "description": "Three days celebrating frontier life and Revolutionary-era trade. Living history demonstrations, period vendors, militia encampments, and authentic colonial crafts. In partnership with the Overmountain Victory Trail Association.",
       "ticketUrl": null,
+      "ticketPrice": 20,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per day",
       "featured": true
     },
     {
@@ -90,6 +104,8 @@
       "speakerTitle": "Historian",
       "description": "William Blount, Constitution signer, was appointed by George Washington to govern the Southwest Territory. Learn how he chose Rocky Mount as his headquarters and laid the foundation for Tennessee statehood.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
       "featured": false
     },
     {
@@ -102,6 +118,8 @@
       "category": "digital",
       "description": "On June 1, 1796, Tennessee became the 16th state. Today we celebrate 230 years of statehood. This is also the FINAL DAY to enroll in the First 250 program.",
       "ticketUrl": null,
+      "ticketPrice": 0,
+      "ticketLabel": "Free Event",
       "featured": false
     },
     {
@@ -116,6 +134,8 @@
       "speakerTitle": "Flag Historian",
       "description": "From the Grand Union to the Stars and Stripes, explore the evolution of the American flag. Presented as part of America 250 Flag Weekend.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
       "featured": false
     },
     {
@@ -128,6 +148,9 @@
       "category": "festival",
       "description": "Celebrate Tennessee's 230th birthday and Flag Day at Rocky Mount. Featuring the America 250 flag dedication ceremony, flag history lecture, and the Betsy Ross Sip & Sew social event.",
       "ticketUrl": null,
+      "ticketPrice": 20,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per day",
       "featured": true
     },
     {
@@ -140,6 +163,8 @@
       "category": "signature",
       "description": "America's 250th birthday at the place where Tennessee's government began. The signature event of our commemorative year featuring the First 250 ceremony—where enrolled participants' names will be read aloud—period demonstrations, and patriotic celebration.",
       "ticketUrl": null,
+      "ticketPrice": 25,
+      "ticketLabel": "Event Tickets",
       "featured": true
     },
     {
@@ -154,6 +179,9 @@
       "speakerTitle": "Cherokee Historian",
       "description": "Explore the Cherokee perspective on frontier Tennessee. Dr. Daniel Redbird Wolfe leads programming examining Cherokee culture, frontier diplomacy, and the complex relationships between settlers and native peoples.",
       "ticketUrl": null,
+      "ticketPrice": 20,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per day",
       "featured": false
     },
     {
@@ -166,6 +194,9 @@
       "category": "signature",
       "description": "A first-ever gathering of descendants of Tennessee's founding families. Friday events for registered descendants only; Saturday and Sunday open to the public. Oral history recordings, genealogy resources, and celebration of Tennessee's pioneer heritage.",
       "ticketUrl": null,
+      "ticketPrice": 20,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per day",
       "featured": true
     },
     {
@@ -178,6 +209,9 @@
       "category": "festival",
       "description": "Celebrate the autumn harvest with demonstrations of colonial food preservation, apple butter making, and period crafts. This year featuring special America 250 interpretation.",
       "ticketUrl": null,
+      "ticketPrice": 20,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per day",
       "featured": false
     },
     {
@@ -190,6 +224,9 @@
       "category": "seasonal",
       "description": "Experience Rocky Mount after dark. Spooky tales from Tennessee's frontier past, candlelit tours, and seasonal treats. Thursday through Saturday evenings.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per person",
       "featured": false
     },
     {
@@ -202,6 +239,9 @@
       "category": "seasonal",
       "description": "Discover how frontier families celebrated the holidays. Period decorations, traditional crafts, and warm hospitality. Wednesday through Saturday during November.",
       "ticketUrl": null,
+      "ticketPrice": 15,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per person",
       "featured": false
     },
     {
@@ -214,6 +254,9 @@
       "category": "seasonal",
       "description": "Rocky Mount by candlelight. Experience the magic of a colonial Christmas with carolers, warm cider, and the glow of candles throughout the historic site. Friday and Saturday evenings in December.",
       "ticketUrl": null,
+      "ticketPrice": 18,
+      "ticketLabel": "Event Tickets",
+      "ticketNote": "per person",
       "featured": false
     }
   ]

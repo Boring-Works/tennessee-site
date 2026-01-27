@@ -19,7 +19,7 @@
 }
 
 .calendar-header::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -131,6 +131,104 @@
 @media (min-width: 640px) {
   .calendar-stat-divider {
     display: block;
+  }
+}
+
+/* Pricing Clarification Note */
+.calendar-pricing-note {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--accent);
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Coming Up Next - Urgent Callout */
+.calendar-next-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(10, 22, 40, 0.95);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.calendar-next-event:hover {
+  background: rgba(10, 22, 40, 1);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(201, 162, 39, 0.15);
+}
+
+.calendar-next-event-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.calendar-next-event-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .calendar-next-event-title {
+    font-size: 1.5rem;
+  }
+}
+
+.calendar-next-event-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.calendar-next-event-date {
+  font-weight: 500;
+}
+
+.calendar-next-event-divider {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.calendar-next-event-days {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.calendar-next-event-arrow {
+  font-size: 1.25rem;
+  color: var(--accent);
+  animation: bounceDown 1.5s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar-next-event-arrow {
+    animation: none;
   }
 }
 
@@ -557,10 +655,126 @@
   margin: 0;
 }
 
+/* Event Ticket Pricing */
+.calendar-event-price {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0.5rem 0 0 0;
+}
+
+.calendar-event-price-free {
+  font-style: italic;
+  color: var(--secondary);
+}
+
+.calendar-event-price-label {
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.calendar-event-price-amount {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.calendar-event-price-note {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+/* Event CTA Section */
 .calendar-event-cta {
-  margin-top: 0.5rem;
-  padding-top: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.875rem;
   border-top: 1px solid rgba(10, 22, 40, 0.1);
+}
+
+/* Get Tickets Button */
+.calendar-event-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: var(--accent);
+  color: var(--primary);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  min-height: 48px;
+}
+
+.calendar-event-cta-btn:hover {
+  background: #b8922a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+}
+
+.calendar-event-cta-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Secondary button for free events */
+.calendar-event-cta-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: transparent;
+  color: var(--secondary);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--secondary);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  min-height: 48px;
+}
+
+.calendar-event-cta-btn-secondary:hover {
+  background: var(--secondary);
+  color: white;
+}
+
+/* Disabled state for online events */
+.calendar-event-cta-btn-disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: rgba(10, 22, 40, 0.05);
+  color: var(--text-light);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  min-height: 48px;
+}
+
+@media (min-width: 640px) {
+  .calendar-event-cta-btn,
+  .calendar-event-cta-btn-secondary,
+  .calendar-event-cta-btn-disabled {
+    width: auto;
+    min-height: auto;
+    padding: 0.625rem 1rem;
+  }
 }
 
 .calendar-event-cta-link {
@@ -618,7 +832,7 @@
 }
 
 .calendar-cta::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -744,7 +958,7 @@
 }
 
 .calendar-cta-btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -787,6 +1001,29 @@
   font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.7);
   margin-top: 0.75rem;
+}
+
+/* Regular Admission Pricing */
+.calendar-cta-admission {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.calendar-cta-admission-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 0.5rem 0;
+}
+
+.calendar-cta-admission-prices {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
 }
 
 /* Calendar Contact Section */
@@ -841,4 +1078,3 @@
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
-

@@ -25,12 +25,7 @@
   flex: 1;
   max-width: 120px;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(201, 162, 39, 0.4) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.4) 50%, transparent 100%);
 }
 
 .footer-border-flourish {
@@ -154,12 +149,7 @@
   height: 56px;
   margin: 0 auto 1rem;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%,
-      #9b3b3b 0%,
-      var(--burgundy) 40%,
-      #5a1f24 100%
-    );
+  background: radial-gradient(circle at 30% 30%, #9b3b3b 0%, var(--burgundy) 40%, #5a1f24 100%);
   box-shadow:
     inset 2px 2px 4px rgba(255, 255, 255, 0.2),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
@@ -585,6 +575,83 @@
 .footer-hours-row--closed dd {
   color: rgba(255, 255, 255, 0.4);
   font-style: italic;
+}
+
+/* Free admission highlight */
+.footer-hours-row--free dd {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Get Directions Link */
+.footer-directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: rgba(201, 162, 39, 0.1);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-directions:hover {
+  background: rgba(201, 162, 39, 0.2);
+  border-color: rgba(201, 162, 39, 0.5);
+  transform: translateY(-1px);
+}
+
+.footer-directions-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.footer-directions-arrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.footer-directions:hover .footer-directions-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Admission section */
+.footer-admission {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(201, 162, 39, 0.15);
+}
+
+/* Accessibility note */
+.footer-accessibility {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(201, 162, 39, 0.15);
+  font-size: 0.7rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+}
+
+.footer-accessibility-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--accent);
+  opacity: 0.7;
 }
 
 /* Enhanced America 250 Badge */

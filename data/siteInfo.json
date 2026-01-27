@@ -46,20 +46,20 @@
   },
   "admission": {
     "adults": {
-      "price": 8,
+      "price": 12,
       "label": "Adults"
     },
     "seniors": {
-      "price": 7,
+      "price": 10,
       "label": "Seniors (65+)"
     },
     "children": {
-      "price": 5,
-      "label": "Children (5-17)"
+      "price": 8,
+      "label": "Children (6-17)"
     },
     "childrenFree": {
       "price": 0,
-      "label": "Children under 5"
+      "label": "Children under 6"
     },
     "groups": {
       "note": "Groups of 10 or more, please call for rates"

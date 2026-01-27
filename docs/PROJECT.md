@@ -348,10 +348,10 @@ Piney Flats, TN 37686
 
 ### Admission
 
-- Adults: $8
-- Seniors (65+): $7
-- Children (5-17): $5
-- Children under 5: Free
+- Adults: $12
+- Seniors (65+): $10
+- Children (6-17): $8
+- Children under 6: Free
 - Groups (10+): Call for rates
 
 ### Google Maps Embed

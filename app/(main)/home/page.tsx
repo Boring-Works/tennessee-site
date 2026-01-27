@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import SmartCommemorativeCard from '@/components/SmartCommemorativeCard'
+import HeroSection from '@/components/HeroSection'
 import ExperiencePreview from '@/components/ExperiencePreview'
 import HomecomingSection from '@/components/HomecomingSection'
+import FinalCTA from '@/components/FinalCTA'
 import styles from './page.module.css'
 
 // Dynamic imports for below-fold components (code splitting)
@@ -43,100 +44,10 @@ const StorySection = dynamic(() => import('@/components/StorySection'), {
 export default function Home() {
   return (
     <>
-      {/* THE 1790 WATERMARK - Parallax depth effect */}
-      <div className={styles['watermark-1790']} aria-hidden="true">
-        1790
-      </div>
-
       {/* ============================================
-          HERO SECTION - 60/40 Split Layout
+          HERO SECTION
           ============================================ */}
-      <section className={styles['hero']} aria-labelledby="hero-heading">
-        {/* Background layers */}
-        <div className={styles['hero-bg']} />
-        <div className={styles['hero-overlay']} />
-
-        {/* Content Grid */}
-        <div className={styles['hero-content']}>
-          <div className={styles['hero-grid']}>
-            {/* LEFT COLUMN - 60% - Brand */}
-            <div className={styles['hero-brand']}>
-              <p
-                className={`${styles['hero-eyebrow']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.1s' } as React.CSSProperties}
-              >
-                Tennessee State Historic Site
-              </p>
-
-              <h1
-                id="hero-heading"
-                className={`${styles['hero-headline']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.2s' } as React.CSSProperties}
-              >
-                TENNESSEE
-              </h1>
-
-              <p
-                className={`${styles['hero-subhead']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.3s' } as React.CSSProperties}
-              >
-                starts here
-              </p>
-
-              <div
-                className={`${styles['hero-divider']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.4s' } as React.CSSProperties}
-              />
-
-              <p
-                className={`${styles['hero-tagline']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.5s' } as React.CSSProperties}
-              >
-                The first capital of the Southwest Territory · Est. 1770
-              </p>
-
-              <p
-                className={`${styles['hero-location']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.6s' } as React.CSSProperties}
-              >
-                <span className={styles['hero-location-icon']}>📍</span>
-                Piney Flats, Tennessee
-              </p>
-
-              <div
-                className={`${styles['hero-ctas']} ${styles['hero-animate']}`}
-                style={{ '--delay': '0.7s' } as React.CSSProperties}
-              >
-                <Link href="/visit" className={styles['hero-cta-primary']}>
-                  <span className={styles['hero-cta-icon']}>★</span>
-                  Plan Your Visit
-                </Link>
-                <Link href="/events" className={styles['hero-cta-secondary']}>
-                  Explore Events
-                </Link>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN - 40% - Card */}
-            <div
-              className={`${styles['hero-card-wrapper']} ${styles['hero-animate']}`}
-              style={{ '--delay': '0.5s' } as React.CSSProperties}
-            >
-              <SmartCommemorativeCard />
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className={styles['hero-footer']}>
-          <p
-            className={styles['hero-animate']}
-            style={{ '--delay': '0.9s' } as React.CSSProperties}
-          >
-            Part of the America 250 National Commemoration
-          </p>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* ============================================
           THE BLOUNT LETTER - Archival Document
@@ -285,6 +196,11 @@ export default function Home() {
           THE HOMECOMING - Final Section
           ============================================ */}
       <HomecomingSection />
+
+      {/* ============================================
+          FINAL CTA - Conversion Close
+          ============================================ */}
+      <FinalCTA />
     </>
   )
 }

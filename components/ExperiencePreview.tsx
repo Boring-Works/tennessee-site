@@ -1,19 +1,26 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import styles from "@/app/(main)/home/page.module.css";
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import styles from '@/app/(main)/home/page.module.css'
 
 interface ExperienceMoment {
-  numeral: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
+  numeral: string
+  title: string
+  description: string
+  icon: React.ReactNode
 }
 
 // Period-authentic engraving-style SVG icons
 const GroundsIcon = () => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     {/* Classical building/capitol */}
     <path d="M8 52h48M12 52V32M52 32v20" />
     <path d="M12 32h40" />
@@ -22,12 +29,23 @@ const GroundsIcon = () => (
     <circle cx="32" cy="16" r="2" />
     {/* Ground line details */}
     <path d="M4 56h56" strokeWidth="1" opacity="0.5" />
-    <path d="M6 54c2-1 4-1 6 0s4 1 6 0 4-1 6 0 4 1 6 0 4-1 6 0 4 1 6 0 4-1 6 0 4 1 6 0" strokeWidth="1" opacity="0.3" />
+    <path
+      d="M6 54c2-1 4-1 6 0s4 1 6 0 4-1 6 0 4 1 6 0 4-1 6 0 4 1 6 0 4-1 6 0 4 1 6 0"
+      strokeWidth="1"
+      opacity="0.3"
+    />
   </svg>
-);
+)
 
 const SettlersIcon = () => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     {/* Colonial figure with tricorn hat */}
     <ellipse cx="32" cy="18" rx="8" ry="9" />
     <path d="M24 14c-4-2-6 0-8 2h0c2 4 6 4 8 2" />
@@ -41,10 +59,17 @@ const SettlersIcon = () => (
     <circle cx="32" cy="38" r="1" fill="currentColor" />
     <circle cx="32" cy="44" r="1" fill="currentColor" />
   </svg>
-);
+)
 
 const BuildingsIcon = () => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     {/* Log cabin */}
     <path d="M8 32l24-16 24 16" />
     <path d="M12 32v22h40V32" />
@@ -63,10 +88,17 @@ const BuildingsIcon = () => (
     <path d="M12 44h14M38 44h14" strokeWidth="1" opacity="0.5" />
     <path d="M12 50h14M38 50h14" strokeWidth="1" opacity="0.5" />
   </svg>
-);
+)
 
 const ScrollIcon = () => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     {/* Scroll/document */}
     <path d="M16 8c-4 0-6 2-6 6v36c0 4 2 6 6 6" />
     <path d="M16 8h32c4 0 6 2 6 6v28c0 4-2 6-6 6H20" />
@@ -81,121 +113,193 @@ const ScrollIcon = () => (
     {/* Quill accent */}
     <path d="M44 44l6-6c2-2 4-1 4 1l-8 8c-1 1-3 0-2-3z" strokeWidth="1" />
   </svg>
-);
+)
 
 const experiences: ExperienceMoment[] = [
   {
-    numeral: "I",
+    numeral: 'I',
     icon: <GroundsIcon />,
-    title: "Walk Historic Grounds",
-    description: "The same soil where Governor Blount established Tennessee's first government in 1790."
+    title: 'Walk Historic Grounds',
+    description:
+      "The same soil where Governor Blount established Tennessee's first government in 1790.",
   },
   {
-    numeral: "II",
+    numeral: 'II',
     icon: <SettlersIcon />,
-    title: "Meet the Settlers",
-    description: "Costumed interpreters bring 1790s frontier life to vivid reality."
+    title: 'Meet the Settlers',
+    description: 'Costumed interpreters bring 1790s frontier life to vivid reality.',
   },
   {
-    numeral: "III",
+    numeral: 'III',
     icon: <BuildingsIcon />,
-    title: "Enter the Past",
-    description: "Original buildings from the territorial period, preserved and interpreted."
+    title: 'Enter the Past',
+    description: 'Original buildings from the territorial period, preserved and interpreted.',
   },
   {
-    numeral: "IV",
+    numeral: 'IV',
     icon: <ScrollIcon />,
-    title: "Hear the Story",
-    description: "Guided tours reveal how Tennessee's government began at this frontier outpost."
-  }
-];
+    title: 'Hear the Story',
+    description: "Guided tours reveal how Tennessee's government began at this frontier outpost.",
+  },
+]
 
 export default function ExperiencePreview() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
+          setIsVisible(true)
+          observer.disconnect()
         }
       },
       { threshold: 0.2 }
-    );
+    )
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+      observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section
       ref={sectionRef}
-      className={styles["experience-section"]}
+      className={styles['experience-section']}
       aria-labelledby="experience-heading"
     >
-      <div className={styles["experience-container"]}>
+      <div className={styles['experience-container']}>
         {/* Decorative header with bracket flourishes */}
-        <header className={styles["experience-header"]}>
-          <p className={styles["experience-eyebrow"]}>The Living History Experience</p>
+        <header className={styles['experience-header']}>
+          <p className={styles['experience-eyebrow']}>The Living History Experience</p>
 
           {/* Headline with decorative brackets */}
-          <div className={styles["experience-headline-wrapper"]}>
-            <span className={`${styles["experience-bracket"]} ${styles["experience-bracket--left"]}`} aria-hidden="true">[</span>
-            <h2 id="experience-heading" className={styles["experience-headline"]}>
+          <div className={styles['experience-headline-wrapper']}>
+            <span
+              className={`${styles['experience-bracket']} ${styles['experience-bracket--left']}`}
+              aria-hidden="true"
+            >
+              [
+            </span>
+            <h2 id="experience-heading" className={styles['experience-headline']}>
               Step Into 1790
             </h2>
-            <span className={`${styles["experience-bracket"]} ${styles["experience-bracket--right"]}`} aria-hidden="true">]</span>
+            <span
+              className={`${styles['experience-bracket']} ${styles['experience-bracket--right']}`}
+              aria-hidden="true"
+            >
+              ]
+            </span>
           </div>
 
-          <p className={styles["experience-intro"]}>
+          <p className={styles['experience-intro']}>
             More than a museum. Rocky Mount is a living window into the birth of Tennessee.
           </p>
 
+          {/* Audience tags */}
+          <div className={styles['experience-audience']} aria-label="Perfect for">
+            <span className={styles['experience-audience-tag']}>Perfect for families</span>
+            <span className={styles['experience-audience-divider']} aria-hidden="true">
+              •
+            </span>
+            <span className={styles['experience-audience-tag']}>History enthusiasts</span>
+            <span className={styles['experience-audience-divider']} aria-hidden="true">
+              •
+            </span>
+            <span className={styles['experience-audience-tag']}>School groups</span>
+          </div>
+
           {/* Decorative rule */}
-          <div className={styles["experience-rule"]} aria-hidden="true">
-            <span className={styles["experience-rule-line"]} />
-            <span className={styles["experience-rule-ornament"]}>✦</span>
-            <span className={styles["experience-rule-line"]} />
+          <div className={styles['experience-rule']} aria-hidden="true">
+            <span className={styles['experience-rule-line']} />
+            <span className={styles['experience-rule-ornament']}>✦</span>
+            <span className={styles['experience-rule-line']} />
+          </div>
+
+          {/* Visitor Testimonial with Staff Photo */}
+          <div className={styles['experience-testimonial-wrapper']}>
+            {/* Staff Photo */}
+            <figure className={styles['experience-testimonial-photo']}>
+              <div className={styles['experience-testimonial-photo-frame']}>
+                {/* Placeholder silhouette - replace with actual image */}
+                <svg
+                  className={styles['experience-testimonial-photo-placeholder']}
+                  viewBox="0 0 80 80"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  {/* Colonial figure silhouette */}
+                  <circle cx="40" cy="28" r="14" opacity="0.3" />
+                  <path d="M20 75c0-16 9-25 20-25s20 9 20 25" opacity="0.25" />
+                  {/* Tricorn hat suggestion */}
+                  <path
+                    d="M26 22c0-4 6-10 14-10s14 6 14 10c0 2-4 3-14 3s-14-1-14-3z"
+                    opacity="0.2"
+                  />
+                </svg>
+              </div>
+              <figcaption className={styles['experience-testimonial-photo-caption']}>
+                Meet our 1790 settlers
+              </figcaption>
+            </figure>
+
+            {/* Testimonial Content */}
+            <blockquote className={styles['experience-testimonial']}>
+              <div className={styles['experience-testimonial-stars']} aria-label="5 out of 5 stars">
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <p className={styles['experience-testimonial-quote']}>
+                &ldquo;The kids were mesmerized — it felt like stepping back in time. The costumed
+                interpreters really brought 1790 to life.&rdquo;
+              </p>
+              <footer className={styles['experience-testimonial-attribution']}>
+                — Sarah M., Nashville
+              </footer>
+            </blockquote>
           </div>
         </header>
 
         {/* Staggered card grid */}
-        <div className={`${styles["experience-grid"]} ${isVisible ? styles["experience-grid--visible"] : ''}`}>
+        <div
+          className={`${styles['experience-grid']} ${isVisible ? styles['experience-grid--visible'] : ''}`}
+        >
           {experiences.map((exp, i) => (
             <article
               key={i}
-              className={styles["experience-card"]}
+              className={styles['experience-card']}
               style={{ '--card-index': i } as React.CSSProperties}
             >
               {/* Corner curl effect */}
-              <span className={styles["experience-card-curl"]} aria-hidden="true" />
+              <span className={styles['experience-card-curl']} aria-hidden="true" />
 
               {/* Numeral marker */}
-              <span className={styles["experience-numeral"]} aria-hidden="true">{exp.numeral}</span>
+              <span className={styles['experience-numeral']} aria-hidden="true">
+                {exp.numeral}
+              </span>
 
               {/* Engraving-style icon */}
-              <span className={styles["experience-icon"]} aria-hidden="true">
+              <span className={styles['experience-icon']} aria-hidden="true">
                 {exp.icon}
               </span>
 
-              <h3 className={styles["experience-title"]}>{exp.title}</h3>
-              <p className={styles["experience-desc"]}>{exp.description}</p>
+              <h3 className={styles['experience-title']}>{exp.title}</h3>
+              <p className={styles['experience-desc']}>{exp.description}</p>
             </article>
           ))}
         </div>
 
-        <footer className={styles["experience-footer"]}>
-          <Link href="/visit" className={styles["experience-cta"]}>
-            <span className={styles["experience-cta-text"]}>Plan Your Visit</span>
-            <span className={styles["experience-cta-arrow"]} aria-hidden="true">→</span>
+        <footer className={styles['experience-footer']}>
+          <Link href="/visit" className={styles['experience-cta']}>
+            <span className={styles['experience-cta-text']}>Plan Your Visit</span>
+            <span className={styles['experience-cta-arrow']} aria-hidden="true">
+              →
+            </span>
           </Link>
         </footer>
       </div>
     </section>
-  );
+  )
 }

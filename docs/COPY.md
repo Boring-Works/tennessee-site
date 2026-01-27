@@ -1,334 +1,195 @@
-# Tennessee Starts Here - Website Copy
+# Rocky Mount Brand Guide
 
-Pre-written content for each page. Use exactly as provided.
+> **Master Source of Truth v4.0** — Director's Final Version, January 2026
 
----
-
-## HOME PAGE
-
-### Hero Section
-
-**Headline:**
-```
-Tennessee Starts Here
-```
-
-**Subheadline:**
-```
-The story of Tennessee doesn't begin with statehood.
-It begins six years before America itself.
-```
-
-**Call to Action:**
-```
-Explore 2026 Events
-```
+This document provides brand guidelines for all Rocky Mount marketing copy. For the actual copy constants used in code, see `lib/copy/`.
 
 ---
 
-### The Story (Brief Overview)
+## Source of Truth
 
-```
-In 1770, William Cobb and his family settled this land—six years before the Declaration of Independence was signed.
+**Code Constants:** `lib/copy/` (TypeScript)
 
-Two decades later, President George Washington appointed William Blount to govern the Southwest Territory. Blount chose Rocky Mount as his headquarters, making this the first seat of government for what would become Tennessee.
+- `brand.ts` — Brand identifiers, hooks, CTAs, STOP/START dictionary
+- `narratives.ts` — Three-tier messaging framework, staff scripts
+- `metadata.ts` — SEO content for all pages
+- `index.ts` — Public API
 
-From 1790 to 1792, the business of a nation was conducted here—treaties negotiated, laws enacted, and the foundation laid for the 16th state.
+**Usage in Components:**
 
-Tennessee starts here. And in 2026, we celebrate 250 years of American independence at the place where Tennessee's story began.
+```typescript
+import { HOOKS, BUTTONS, MYSTERY_NARRATIVE } from '@/lib/copy'
+
+// Use constants directly
+<p>{HOOKS.primaryCTA}</p>  // "Stand where they stood."
+<button>{BUTTONS.primary}</button>  // "Plan Your Visit"
 ```
 
 ---
 
-### First 250 Callout
+## Core Brand Identity
 
-**Headline:**
-```
-Join the First 250
-```
+| Element             | Value                              |
+| ------------------- | ---------------------------------- |
+| **Name**            | Rocky Mount State Historic Site    |
+| **Tagline**         | Tennessee Starts Here              |
+| **Governance Line** | Where Tennessee's government began |
+| **Established**     | 1770                               |
+| **Location**        | Piney Flats, Tennessee             |
 
-**Body:**
-```
-Be one of 250 Tennesseans whose names will be read aloud on July 4, 2026—America's 250th birthday—at the site where Tennessee's government began.
+### Elevator Pitch
 
-Enrollment closes June 1, 2026.
-```
-
-**Button:**
-```
-Enroll Now
-```
+> Rocky Mount is where Tennessee's government began. The ground is the artifact. The house is the proof. Stand where they stood.
 
 ---
 
-### Featured Events Preview
+## Three-Tier Messaging Framework
 
-**Section Title:**
-```
-2026: A Year of History
-```
+### Tier 1: MYSTERY (Curiosity)
 
-**Intro:**
-```
-Rocky Mount has created entirely new programming for America's Semiquincentennial. Six new events, five lectures, and our first-ever community commemoration.
-```
+**Use for:** Permanent brand, all audiences, website default
 
----
+**Hook:** "Before there was a Tennessee, there was this ground."
 
-## EVENTS PAGE
+**Narrative Timeline:**
 
-### Page Header
+1. In 1770, the Cobbs settled this ground.
+2. In 1780, they armed the Revolution.
+3. In 1790, Governor Blount made it the seat of federal power.
 
-**Title:**
-```
-2026 Events Calendar
-```
+### Tier 2: SCARCITY (Urgency)
 
-**Intro:**
-```
-Rocky Mount's most ambitious programming season ever. New events created specifically for America 250 and Tennessee 230, alongside enhanced versions of beloved traditions.
-```
+**Use for:** 2026 campaign, ads, email, ticket conversion
+**Expires:** December 31, 2026
 
----
+**Hook:** "For 18 months, this ground was the capital of everything west of the mountains."
 
-### Event Type Legend
+### Tier 3: AUTHORITY (Prestige)
 
-```
-⭐ NEW — Created for America 250
-🔄 ENHANCED — Classic events with America 250 interpretation
-📅 RECURRING — Seasonal favorites
-```
+**Use for:** Grants, press, THC presentations, academic contexts
+
+**Hook:** "The first federal seat of government under the Constitution, west of the Appalachians."
 
 ---
 
-## LECTURES PAGE
+## Approved Hooks & CTAs
 
-### Page Header
-
-**Title:**
-```
-Rocky Mount Lecture Series
-```
-
-**Subtitle:**
-```
-Tennessee's Founding Story
-```
-
-**Intro:**
-```
-Rocky Mount's first-ever lecture series brings scholars, living history interpreters, and expert historians to Northeast Tennessee. Five lectures exploring colonial religion, Revolutionary War heroism, and the birth of Tennessee government.
-
-All lectures are free with regular admission. Seating is limited.
-```
+| Name                    | Copy                                                                                         | Usage                   |
+| ----------------------- | -------------------------------------------------------------------------------------------- | ----------------------- |
+| **Welcome Hook**        | Before there was a Tennessee, there was this ground.                                         | Welcome screen, splash  |
+| **Primary CTA**         | Stand where they stood.                                                                      | All CTAs, closing       |
+| **Governance**          | Where Tennessee's government began.                                                          | Subheads, meta          |
+| **Fame Bridge**         | Governor Blount governed here. Andrew Jackson lodged here. The State started here.           | Tours, visit page       |
+| **Contrast Line**       | This is not where they gathered. This is not where they farmed. This is where they governed. | Hero differentiation    |
+| **Defense Line**        | The buildings evolved. The ground endures.                                                   | FAQ, building questions |
+| **Sycamore Separation** | The Army gathered at the Shoals. The State started here.                                     | Competitor positioning  |
+| **Closing Tagline**     | Tennessee starts here. Will you?                                                             | All page closings       |
 
 ---
 
-### Series Overview
+## STOP / START Dictionary
 
-```
-From March through June 2026, join us for in-depth explorations of the people and events that shaped Tennessee's founding. Each lecture offers a unique window into frontier life, the Revolutionary War, and the political foundations of our state.
-```
+When editing copy, replace STOP phrases with START phrases:
 
----
-
-## FIRST 250 PAGE
-
-### Page Header
-
-**Title:**
-```
-The First 250
-```
-
-**Subtitle:**
-```
-Be Part of History
-```
+| STOP (Never Use)                   | START (Use Instead)                                       |
+| ---------------------------------- | --------------------------------------------------------- |
+| The Cobb Mansion                   | The Cobb House                                            |
+| 256 years you can walk through     | The buildings evolved. The ground endures.                |
+| 235 years                          | The buildings evolved. The ground endures.                |
+| America's first western capital    | First Constitutional federal ground west of the mountains |
+| Where the frontier became a nation | Where Tennessee's government began                        |
+| They gathered there...             | The Army gathered at the Shoals.                          |
+| Frontier Cabin                     | The Cobb Family Residence                                 |
+| Pop-up capital                     | The 18-month capital                                      |
+| Dynasty                            | Legacy / Lineage                                          |
+| Walk the halls                     | Stand where they stood                                    |
+| Hallowed Ground                    | Capital Grounds                                           |
+| These walls remember               | The ground endures                                        |
 
 ---
 
-### Main Content
+## Button Labels
 
-**What It Is:**
-```
-The First 250 is Rocky Mount's community commemoration for America's 250th anniversary. We're inviting 250 Tennesseans to enroll as founding participants in this historic celebration.
-
-On July 4, 2026—America's Semiquincentennial—every enrolled participant's name will be read aloud at the site where Tennessee's government began.
-
-This is your chance to be part of history.
-```
-
-**Enrollment Period:**
-```
-March 4 - June 1, 2026
-```
-
-**What You Receive:**
-```
-• Your name read aloud at the July 4, 2026 ceremony
-• Email updates on America 250 programming
-• Recognition as a founding participant in Rocky Mount's commemoration
-```
+| Context        | Label                  |
+| -------------- | ---------------------- |
+| Primary CTA    | Plan Your Visit        |
+| Secondary CTA  | Join the First 250     |
+| Booking        | Book Your Tour         |
+| Events         | Explore 2026 Events    |
+| Welcome Screen | Stand Where They Stood |
 
 ---
 
-### Premium Tiers
+## Visual Directive
 
-**Founding Patron — $50:**
-```
-Everything above, plus:
-• Commemorative certificate
-• Priority seating at July 4 ceremony
-```
+**Principle:** Ground First. House Second.
 
-**Founding Benefactor — $250:**
-```
-Everything above, plus:
-• Invitation to special dinner
-• Permanent recognition at Rocky Mount
-```
+Hero images should use low-angle shots emphasizing ground, feet, and landscape. The Cobb House appears in background, not foreground.
 
 ---
 
-### Enrollment Form Header
+## Staff Scripts
 
-```
-Enroll in the First 250
+### Sycamore Shoals Differentiation
 
-Join 250 Tennesseans as founding participants in Rocky Mount's America 250 commemoration.
-```
+> "No, the soldiers gathered at Sycamore Shoals—that was the muster point. Rocky Mount was the operational headquarters. The Army gathered at the Shoals. The State started here."
 
----
+### Friendly Rivalry Tone
 
-## VISIT PAGE
+> "They provided the muscle; we provided the mind. We are the other half of the origin story—complementary, not competing."
 
-### Page Header
+### Fame Bridge (Tours)
 
-**Title:**
-```
-Plan Your Visit
-```
+> "Governor Blount governed here. Andrew Jackson lodged here. The State started here."
 
-**Intro:**
-```
-Step back in time at Rocky Mount State Historic Site. Our costumed interpreters bring frontier life to vivid reality as you explore the grounds where Tennessee's government began.
-```
+### Building Age FAQ
+
+> "The Cobb House was built in the 1820s by the grandson. It stands as proof the family didn't just survive—they thrived. Three generations. One ground."
 
 ---
 
-### What to Expect
+## Historical Accuracy
 
-**Section Title:**
-```
-Your Experience
-```
+### Verified Claims (Safe to Use)
 
-**Content:**
-```
-Every visit to Rocky Mount includes a guided living history tour led by costumed interpreters who bring the 1790s to life.
+| Claim                                                            | Source                                  |
+| ---------------------------------------------------------------- | --------------------------------------- |
+| First seat of government for the Southwest Territory (1790-1792) | Tennessee Encyclopedia, primary sources |
+| Site settled by William Cobb around 1769-1770                    | Historical documentation                |
+| Governor William Blount administered territorial government here | Primary sources, Blount correspondence  |
+| Cobb family supplied the Overmountain Men                        | Historical accounts                     |
+| Andrew Jackson lodged here six weeks                             | Historical accounts                     |
+| William Blount signed the U.S. Constitution                      | Historical fact                         |
 
-Walk through the Cobb House—home to the family who settled this land and later hosted Governor William Blount. Visit the detached kitchen, weaving cabin, and outbuildings. Learn how frontier families lived, worked, and shaped the future of Tennessee.
+### Inaccurate Claims (Never Use)
 
-Tour Duration: Approximately 1 hour
-```
-
----
-
-### Visitor Tips
-
-```
-• Wear comfortable walking shoes—tours include outdoor areas
-• Dress for the weather—much of the tour is outdoors
-• Photography is welcome
-• Gift shop on site
-• Last tour begins one hour before closing
-```
+| Incorrect                            | Why                                                                    |
+| ------------------------------------ | ---------------------------------------------------------------------- |
+| Tennessee's first capital            | Knoxville was first STATE capital (1796). Rocky Mount was TERRITORIAL. |
+| First territorial capital in America | Marietta, Ohio was first (1788)                                        |
+| Buildings date to 1770               | UT dendrochronology dates current structures to 1826-1830              |
+| George Washington visited            | No documentation                                                       |
 
 ---
 
-### Accessibility
+## Adding/Editing Copy
 
-```
-The main house is accessible via ramp. Some outbuildings and grounds have uneven terrain. Please call ahead if you have specific accessibility needs.
-```
-
----
-
-## FOOTER
-
-### Tagline
-
-```
-Rocky Mount State Historic Site
-Where Tennessee Began
-```
-
-### Contact Block
-
-```
-200 Hyder Hill Road
-Piney Flats, TN 37686
-(423) 538-7396
-```
-
-### Links
-
-```
-Visit | Events | Lectures | First 250
-```
-
-### Copyright
-
-```
-© 2026 Rocky Mount Historical Association
-Operated by the nonprofit Rocky Mount Historical Association
-```
+1. **For code changes:** Edit `lib/copy/*.ts` files
+2. **For content review:** Reference this guide
+3. **Run STOP phrase audit:**
+   ```bash
+   grep -rn "Walk the halls\|Cobb Mansion\|Hallowed Ground" --include="*.tsx" --include="*.ts"
+   ```
+4. **Verify build:** `npm run build`
 
 ---
 
-## META DESCRIPTIONS (for SEO)
+## Related Documentation
 
-### Home
-```
-Where Tennessee's government began. Join us for America 250 and Tennessee 230 programming at Rocky Mount State Historic Site in Piney Flats, TN.
-```
-
-### Events
-```
-2026 events calendar at Rocky Mount State Historic Site. New programming for America's 250th anniversary and Tennessee's 230th birthday.
-```
-
-### Lectures
-```
-Rocky Mount's first lecture series featuring scholars on colonial religion, the Overmountain Men, and the birth of Tennessee government.
-```
-
-### First 250
-```
-Join 250 Tennesseans whose names will be read aloud on July 4, 2026 at Rocky Mount—where Tennessee's government began.
-```
-
-### Visit
-```
-Plan your visit to Rocky Mount State Historic Site. Hours, admission, directions, and what to expect at Tennessee's first seat of government.
-```
+- `docs/STYLE-GUIDE.md` — Visual design system
+- `docs/PROJECT.md` — Technical specification
+- `lib/copy/brand.ts` — Full STOP/START dictionary in code
 
 ---
 
-## 404 PAGE
-
-**Headline:**
-```
-Page Not Found
-```
-
-**Body:**
-```
-The page you're looking for doesn't exist—but Tennessee's history does. Head back to explore where it all began.
-```
-
-**Button:**
-```
-Return Home
-```
+_Last updated: January 2026_

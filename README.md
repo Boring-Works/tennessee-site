@@ -1,15 +1,34 @@
 # Tennessee Starts Here
 
-Rocky Mount State Historic Site - The first capital of the Southwest Territory, est. 1770.
+Rocky Mount State Historic Site — Where Tennessee's government began. Est. 1770.
 
-**Live Site:** https://tennessee-starts-here.vercel.app
+**Live Site:** https://tennesseestartshere.com
+
+---
+
+## What This Is
+
+A commemorative website for Rocky Mount State Historic Site's America 250 / Tennessee 230 programming. This is a **unified package** containing:
+
+| Feature            | Route                              | Description                                     |
+| ------------------ | ---------------------------------- | ----------------------------------------------- |
+| **Welcome Screen** | `/`                                | Cinematic splash page with weather + brand hook |
+| **Main Website**   | `/home`, `/visit`, `/events`, etc. | Marketing pages for the historic site           |
+| **1775 Almanac**   | `/almanac`                         | Period-themed weather utility for Tennessee     |
+
+Everything deploys together. One codebase, one build, one deployment.
+
+---
 
 ## Tech Stack
 
 - **Framework:** Next.js 16 (App Router)
 - **Styling:** Tailwind CSS v4, CSS Modules
-- **Language:** TypeScript
+- **Language:** TypeScript (strict mode)
 - **Deployment:** Vercel (auto-deploy from GitHub)
+- **Weather APIs:** Open-Meteo, RainViewer, NWS Alerts
+
+---
 
 ## Development
 
@@ -29,13 +48,77 @@ npm run start
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-### Code Quality
+---
 
-This project enforces code quality with automated tooling:
+## Project Structure
 
-- **Pre-commit hooks** - ESLint and Prettier run automatically on staged files
-- **No console statements** - Use `logger` from `lib/logger.ts` instead
-- **TypeScript strict mode** - Full type safety
+```
+app/
+├── (welcome)/           # Splash screen (/)
+├── (main)/              # Main site pages
+│   ├── home/            # Homepage
+│   ├── visit/           # Visit info
+│   ├── events/          # Events calendar
+│   ├── first-250/       # First 250 program
+│   └── lectures/        # Lecture series
+├── almanac/             # Weather utility
+└── api/                 # API routes
+
+lib/
+├── copy/                # Brand copy constants (source of truth)
+├── almanac/             # Weather business logic
+└── logger.ts            # Dev-only logging
+
+components/
+├── welcome/             # Welcome screen components
+├── almanac/             # Weather components
+└── ...                  # Shared components
+
+docs/
+├── COPY.md              # Brand guide
+├── ALMANAC.md           # Weather feature docs
+├── PROJECT.md           # Technical spec
+└── STYLE-GUIDE.md       # Design system
+```
+
+---
+
+## Key Systems
+
+### Brand Copy (`lib/copy/`)
+
+All marketing copy is centralized in TypeScript:
+
+```typescript
+import { HOOKS, BUTTONS, MYSTERY_NARRATIVE } from '@/lib/copy'
+
+// Components use constants directly
+<p>{HOOKS.primaryCTA}</p>  // "Stand where they stood."
+```
+
+See `docs/COPY.md` for brand guidelines.
+
+### Weather Almanac (`lib/almanac/`)
+
+Farmer-focused weather utility with:
+
+- Task scores (Sower, Shepherd, Keeper, Builder)
+- Period-appropriate sayings
+- Moon phase calculations
+- Frost alerts
+- Precipitation radar
+
+See `docs/ALMANAC.md` for technical details.
+
+---
+
+## Code Quality
+
+This project enforces quality with automated tooling:
+
+- **Pre-commit hooks** — ESLint and Prettier run on staged files
+- **No console statements** — Use `logger` from `lib/logger.ts`
+- **TypeScript strict mode** — Full type safety
 
 ```typescript
 // Instead of console.log, use:
@@ -47,15 +130,17 @@ logger.error('Something failed', error)
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for full guidelines.
 
-## Deployment Workflow
+---
 
-This project uses **GitHub + Vercel** for continuous deployment:
+## Deployment
 
 | Action                 | Result                           |
 | ---------------------- | -------------------------------- |
 | Push to `main`         | Auto-deploys to **production**   |
 | Push to other branches | Creates **preview deployment**   |
 | Open a PR              | Preview URL added to PR comments |
+
+Everything deploys together as one package.
 
 ### Standard Workflow
 
@@ -71,38 +156,27 @@ git commit -m "feat: description of changes"
 git push origin main
 ```
 
-### Manual Deploy (if needed)
+---
 
-```bash
-# Deploy to production manually
-vercel --prod
+## Documentation
 
-# Deploy preview
-vercel
-```
+| Document              | Purpose                        |
+| --------------------- | ------------------------------ |
+| `CLAUDE.md`           | AI assistant instructions      |
+| `docs/COPY.md`        | Brand guide & messaging        |
+| `docs/ALMANAC.md`     | Weather feature technical docs |
+| `docs/PROJECT.md`     | Technical specification        |
+| `docs/STYLE-GUIDE.md` | Visual design system           |
+| `CONTRIBUTING.md`     | Coding standards               |
 
-## Project Structure
-
-```
-app/
-├── (welcome)/       # Splash/landing page (/)
-├── (main)/          # Main site pages (/home, /events, /visit, etc.)
-└── (almanac)/       # The 1775 Almanac (/almanac)
-
-components/
-├── welcome/         # Welcome screen components
-├── Header/          # Navigation styles
-└── ...              # Shared components
-
-lib/
-└── almanac/         # Almanac business logic
-
-docs/
-└── *.md             # Build guides and documentation
-```
+---
 
 ## Links
 
 - **GitHub:** https://github.com/getboring/tennessee-starts-here
 - **Vercel Dashboard:** https://vercel.com/maxtorborings-projects/tennessee-starts-here
-- **Production:** https://tennessee-starts-here.vercel.app
+- **Production:** https://tennesseestartshere.com
+
+---
+
+_Where Tennessee's government began. Stand where they stood._

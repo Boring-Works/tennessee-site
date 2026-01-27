@@ -323,8 +323,8 @@ export default function AlmanacPage() {
             <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
           </div>
 
-          {/* Hourly + Daily Details */}
-          <WeatherDetails hourly={weather.hourly} daily={weather.daily} />
+          {/* 7-Day Outlook */}
+          <WeatherDetails daily={weather.daily} />
 
           {/* Footer */}
           <PresentedByBlock lastUpdated={lastUpdated} />

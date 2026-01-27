@@ -1,4 +1,20 @@
-// Moon Phase and Sun calculations using SunCalc
+/**
+ * Moon Phase and Sun calculations
+ *
+ * Uses SunCalc library (https://github.com/mourner/suncalc)
+ * SunCalc implements astronomical algorithms from:
+ * - "Astronomical Algorithms" by Jean Meeus (1991)
+ * - US Naval Observatory data
+ *
+ * Moon phase is a value from 0 to 1:
+ * - 0.00 = New Moon
+ * - 0.25 = First Quarter
+ * - 0.50 = Full Moon
+ * - 0.75 = Last Quarter
+ * - 1.00 = New Moon (cycle complete)
+ *
+ * Phase ranges below divide the lunar cycle into 8 equal segments (0.125 each)
+ */
 import SunCalc from 'suncalc'
 import type { MoonData } from './types'
 
@@ -58,11 +74,7 @@ export interface SunData {
   goldenHourEnd: Date
 }
 
-export function getSunData(
-  date: Date,
-  latitude: number,
-  longitude: number
-): SunData {
+export function getSunData(date: Date, latitude: number, longitude: number): SunData {
   const times = SunCalc.getTimes(date, latitude, longitude)
 
   return {
@@ -73,11 +85,7 @@ export function getSunData(
   }
 }
 
-export function isDay(
-  date: Date,
-  latitude: number,
-  longitude: number
-): boolean {
+export function isDay(date: Date, latitude: number, longitude: number): boolean {
   const sun = getSunData(date, latitude, longitude)
   return date >= sun.sunrise && date <= sun.sunset
 }

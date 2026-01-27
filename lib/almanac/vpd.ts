@@ -40,11 +40,10 @@ export function calculateVPD(tempF: number, humidity: number): number {
 /**
  * Get VPD level and recommendations
  * Based on general plant guidelines:
- * - < 0.4 kPa: Too low (risk of mold/disease)
- * - 0.4 - 0.8 kPa: Propagation/seedlings
- * - 0.8 - 1.2 kPa: Optimal for vegetative growth
- * - 1.2 - 1.6 kPa: Late veg/flowering
- * - > 1.6 kPa: Stress zone
+ * - < 0.4 kPa: Low - risk of mold/disease, poor transpiration
+ * - 0.4 - 1.2 kPa: Optimal - good for most vegetative growth
+ * - 1.2 - 1.6 kPa: High - plants transpiring rapidly, need more water
+ * - > 1.6 kPa: Danger - plant stress, wilting likely
  */
 export function getVPDLevel(vpd: number): {
   level: VPDLevel

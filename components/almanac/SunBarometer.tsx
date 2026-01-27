@@ -1,19 +1,45 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sunrise, Sunset, Gauge, TrendingUp, TrendingDown, Minus, Wind, Compass } from 'lucide-react'
+import {
+  Sunrise,
+  Sunset,
+  Gauge,
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  Wind,
+  Compass,
+} from 'lucide-react'
 
 interface SunBarometerProps {
   sunrise: string
   sunset: string
-  pressure: number  // hPa/mbar
+  pressure: number // hPa/mbar
   windSpeed: number
   windDirection: number
 }
 
 // Convert degrees to cardinal direction
 function getWindDirection(degrees: number): string {
-  const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
+  const directions = [
+    'N',
+    'NNE',
+    'NE',
+    'ENE',
+    'E',
+    'ESE',
+    'SE',
+    'SSE',
+    'S',
+    'SSW',
+    'SW',
+    'WSW',
+    'W',
+    'WNW',
+    'NW',
+    'NNW',
+  ]
   const index = Math.round(degrees / 22.5) % 16
   return directions[index]
 }
@@ -28,7 +54,7 @@ function getPressureForecast(pressure: number): {
   // High pressure (>1020) = fair weather
   // Low pressure (<1000) = stormy
   // Very low (<980) = severe storms
-  
+
   if (pressure >= 1020) {
     return {
       trend: 'rising',
@@ -77,19 +103,30 @@ function getDaylightHours(sunrise: string, sunset: string): string {
   return `${hours}h ${minutes}m`
 }
 
-export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, windDirection }: SunBarometerProps) {
+export default function SunBarometer({
+  sunrise,
+  sunset,
+  pressure,
+  windSpeed,
+  windDirection,
+}: SunBarometerProps) {
   const { trend, forecast, icon: TrendIcon } = getPressureForecast(pressure)
   const windDir = getWindDirection(windDirection)
   const daylight = getDaylightHours(sunrise, sunset)
 
-  const trendColor = trend === 'rising' ? 'text-green-400' : trend === 'falling' ? 'text-orange-400' : 'text-almanac-parchment/60'
+  const trendColor =
+    trend === 'rising'
+      ? 'text-green-400'
+      : trend === 'falling'
+        ? 'text-orange-400'
+        : 'text-almanac-parchment/60'
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 card-hover"
+      className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full card-hover"
     >
       <div className="grid grid-cols-2 gap-4">
         {/* Sun Times */}
@@ -106,9 +143,7 @@ export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, win
               <Sunset className="w-4 h-4 text-orange-400" />
               <span className="text-sm text-almanac-parchment">{formatTime(sunset)}</span>
             </div>
-            <div className="text-xs text-almanac-parchment/50 mt-1">
-              {daylight} of daylight
-            </div>
+            <div className="text-xs text-almanac-parchment/50 mt-1">{daylight} of daylight</div>
           </div>
         </div>
 
@@ -125,9 +160,7 @@ export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, win
             <span className="text-xs text-almanac-parchment/50">inHg</span>
             <TrendIcon className={`w-4 h-4 ${trendColor}`} />
           </div>
-          <p className="text-xs text-almanac-parchment/60 leading-relaxed">
-            {forecast}
-          </p>
+          <p className="text-xs text-almanac-parchment/60 leading-relaxed">{forecast}</p>
         </div>
       </div>
 
@@ -136,9 +169,7 @@ export default function SunBarometer({ sunrise, sunset, pressure, windSpeed, win
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Wind className="w-4 h-4 text-almanac-parchment/60" />
-            <span className="text-sm text-almanac-parchment">
-              {Math.round(windSpeed)} mph
-            </span>
+            <span className="text-sm text-almanac-parchment">{Math.round(windSpeed)} mph</span>
           </div>
           <div className="flex items-center gap-1 text-sm text-almanac-parchment/60">
             <Compass className="w-4 h-4" />

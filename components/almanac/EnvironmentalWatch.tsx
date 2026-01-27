@@ -15,7 +15,7 @@ export default function EnvironmentalWatch({ lat, lon }: EnvironmentalWatchProps
   const [isExpanded, setIsExpanded] = useState(true)
 
   return (
-    <section className="space-y-4" role="region" aria-label="Environmental monitoring">
+    <section className="space-y-4 h-full" role="region" aria-label="Environmental monitoring">
       {/* Section Header - Clickable to collapse on mobile */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}

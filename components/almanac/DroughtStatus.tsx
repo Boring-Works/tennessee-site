@@ -10,7 +10,7 @@ export default function DroughtStatus() {
   // Don't render if no drought
   if (droughtData.level === 'None') {
     return (
-      <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+      <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 h-full">
         <div className="flex items-center gap-2 mb-2">
           <Droplet className="w-4 h-4 text-almanac-gold" />
           <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
@@ -29,7 +29,7 @@ export default function DroughtStatus() {
   }
 
   return (
-    <div className={`p-4 rounded-lg border ${levelInfo.bgColor} border-white/10`}>
+    <div className={`p-4 rounded-lg border h-full ${levelInfo.bgColor} border-white/10`}>
       <div className="flex items-center gap-2 mb-3">
         <Droplet className="w-4 h-4 text-almanac-gold" />
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">

@@ -8,7 +8,7 @@ interface SoilTemperatureProps {
 }
 
 // Matches taskScores.ts logic exactly
-function getSoilStatus(temp: number): { 
+function getSoilStatus(temp: number): {
   status: string
   color: string
   bgColor: string
@@ -101,7 +101,7 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
+        className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full"
         role="region"
         aria-label="Soil temperature"
       >
@@ -126,7 +126,7 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className={`rounded-lg p-4 border card-hover ${bgColor}`}
+      className={`rounded-lg p-4 border h-full card-hover ${bgColor}`}
       role="region"
       aria-label={`Soil temperature: ${Math.round(temperature)} degrees Fahrenheit, ${status}`}
     >
@@ -139,27 +139,21 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
             <span className="text-2xl font-bold text-almanac-parchment">
               {Math.round(temperature)}°F
             </span>
-            <span className={`text-sm font-medium ${color}`}>
-              {status}
-            </span>
+            <span className={`text-sm font-medium ${color}`}>{status}</span>
           </div>
-          <p className="text-xs text-almanac-parchment/60">
-            Soil Temperature (6&quot; depth)
-          </p>
+          <p className="text-xs text-almanac-parchment/60">Soil Temperature (6&quot; depth)</p>
         </div>
       </div>
-      
-      <p className="text-sm text-almanac-parchment/70 mt-3">
-        {tip}
-      </p>
+
+      <p className="text-sm text-almanac-parchment/70 mt-3">{tip}</p>
 
       {/* Plantable crops list */}
       {plantable.length > 0 && (
         <div className="mt-3 pt-3 border-t border-white/10">
           <p className="text-xs text-almanac-parchment/50 mb-2">Can plant now:</p>
           <div className="flex flex-wrap gap-1">
-            {plantable.map(crop => (
-              <span 
+            {plantable.map((crop) => (
+              <span
                 key={crop}
                 className="text-xs px-2 py-0.5 rounded bg-white/5 text-almanac-parchment/70"
               >

@@ -24,7 +24,7 @@ export default function SpringIndex() {
         : `Spring is ~${phenology.anomalyDays} days late`
 
   return (
-    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+    <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full">
       <div className="flex items-center gap-2 mb-3">
         <Leaf className="w-4 h-4 text-almanac-gold" />
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">

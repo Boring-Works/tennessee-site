@@ -1,4 +1,16 @@
-// Location search using Open-Meteo Geocoding API
+/**
+ * Location Search using Open-Meteo Geocoding API
+ *
+ * API Documentation: https://open-meteo.com/en/docs/geocoding-api
+ *
+ * Features:
+ * - Free tier with no API key required
+ * - Returns coordinates, timezone, and administrative regions
+ * - Supports city names, zip codes, and partial matches
+ *
+ * Default location: Sullivan County, TN (Rocky Mount State Historic Site)
+ * Coordinates: 36.52°N, 82.26°W
+ */
 import { logger } from '@/lib/logger'
 
 export interface GeoLocation {

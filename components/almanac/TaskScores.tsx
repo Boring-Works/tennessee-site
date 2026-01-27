@@ -128,7 +128,7 @@ export function TaskScores({ sower, shepherd, keeper, builder, aqi }: TaskScores
         <WorkabilityExplainer />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-2xl lg:max-w-none mx-auto">
         {SCORE_CARDS.map(({ key, title, subtitle }, index) => (
           <ScoreCard
             key={key}

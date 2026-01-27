@@ -1,10 +1,32 @@
-// Weather data transformation
-// Note: DEFAULT_LOCATION is defined in geocoding.ts as the single source of truth
-import type { WeatherData, CurrentConditions, HourlyForecast, DailyForecast, Location } from './types'
+/**
+ * Weather Data Transformation
+ *
+ * Transforms Open-Meteo API responses into our internal WeatherData format.
+ *
+ * API Documentation: https://open-meteo.com/en/docs
+ *
+ * Unit conversions:
+ * - Snow depth: meters → inches (multiply by 39.3701)
+ * - Snowfall: centimeters → inches (multiply by 0.393701)
+ * - Visibility: meters (no conversion needed)
+ * - Pressure: hPa (hectopascals, same as millibars)
+ *
+ * Temperature units: API configured to return Fahrenheit
+ * Wind units: API configured to return mph
+ *
+ * Note: DEFAULT_LOCATION is defined in geocoding.ts as the single source of truth
+ */
+import type {
+  WeatherData,
+  CurrentConditions,
+  HourlyForecast,
+  DailyForecast,
+  Location,
+} from './types'
 
 // Unit conversion constants
 const METERS_TO_INCHES = 39.3701
-const CM_TO_INCHES = 0.393701  // 1 cm = 0.393701 inches
+const CM_TO_INCHES = 0.393701 // 1 cm = 0.393701 inches
 
 interface OpenMeteoResponse {
   latitude: number
@@ -21,12 +43,12 @@ interface OpenMeteoResponse {
     wind_gusts_10m: number
     surface_pressure: number
     soil_temperature_6cm?: number
-    snow_depth?: number       // Always in METERS from API
+    snow_depth?: number // Always in METERS from API
     cloud_cover?: number
-    visibility?: number       // In meters
+    visibility?: number // In meters
     dew_point_2m?: number
     uv_index?: number
-    is_day?: number          // 0 or 1
+    is_day?: number // 0 or 1
   }
   hourly: {
     time: string[]
@@ -35,8 +57,8 @@ interface OpenMeteoResponse {
     precipitation_probability: number[]
     precipitation: number[]
     weather_code: number[]
-    snowfall?: number[]       // In CENTIMETERS from API
-    snow_depth?: number[]     // In METERS from API
+    snowfall?: number[] // In CENTIMETERS from API
+    snow_depth?: number[] // In METERS from API
     cloud_cover?: number[]
     visibility?: number[]
     wind_speed_10m?: number[]
@@ -58,7 +80,7 @@ interface OpenMeteoResponse {
     sunrise: string[]
     sunset: string[]
     daylight_duration?: number[]
-    snowfall_sum?: number[]   // In CENTIMETERS from API
+    snowfall_sum?: number[] // In CENTIMETERS from API
     wind_speed_10m_max?: number[]
     wind_gusts_10m_max?: number[]
     wind_direction_10m_dominant?: number[]
@@ -68,9 +90,8 @@ interface OpenMeteoResponse {
 
 export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
   // Convert snow_depth from meters to inches
-  const snowDepthInches = data.current.snow_depth !== undefined 
-    ? data.current.snow_depth * METERS_TO_INCHES 
-    : undefined
+  const snowDepthInches =
+    data.current.snow_depth !== undefined ? data.current.snow_depth * METERS_TO_INCHES : undefined
 
   const current: CurrentConditions = {
     temperature: data.current.temperature_2m,
@@ -92,10 +113,10 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
   }
 
   // Convert hourly snow_depth from meters to inches
-  const hourlySnowDepth = data.hourly.snow_depth?.map(d => d * METERS_TO_INCHES)
-  
+  const hourlySnowDepth = data.hourly.snow_depth?.map((d) => d * METERS_TO_INCHES)
+
   // Convert hourly snowfall from centimeters to inches
-  const hourlySnowfall = data.hourly.snowfall?.map(s => s * CM_TO_INCHES)
+  const hourlySnowfall = data.hourly.snowfall?.map((s) => s * CM_TO_INCHES)
 
   const hourly: HourlyForecast = {
     time: data.hourly.time,
@@ -104,7 +125,7 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
     precipitationProbability: data.hourly.precipitation_probability,
     precipitation: data.hourly.precipitation,
     weatherCode: data.hourly.weather_code,
-    snowfall: hourlySnowfall,  // Now in inches
+    snowfall: hourlySnowfall, // Now in inches
     snowDepth: hourlySnowDepth,
     cloudCover: data.hourly.cloud_cover,
     visibility: data.hourly.visibility,
@@ -116,7 +137,7 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
   }
 
   // Convert daily snowfall_sum from centimeters to inches
-  const dailySnowfall = data.daily.snowfall_sum?.map(s => s * CM_TO_INCHES)
+  const dailySnowfall = data.daily.snowfall_sum?.map((s) => s * CM_TO_INCHES)
 
   const daily: DailyForecast = {
     time: data.daily.time,
@@ -131,7 +152,7 @@ export function transformWeatherData(data: OpenMeteoResponse): WeatherData {
     sunrise: data.daily.sunrise,
     sunset: data.daily.sunset,
     daylightDuration: data.daily.daylight_duration,
-    snowfallSum: dailySnowfall,  // Now in inches
+    snowfallSum: dailySnowfall, // Now in inches
     windSpeedMax: data.daily.wind_speed_10m_max,
     windGustsMax: data.daily.wind_gusts_10m_max,
     windDirectionDominant: data.daily.wind_direction_10m_dominant,

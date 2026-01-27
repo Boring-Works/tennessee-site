@@ -1,4 +1,19 @@
-// Almanac TypeScript interfaces
+/**
+ * Almanac TypeScript interfaces and constants
+ *
+ * Weather codes follow WMO (World Meteorological Organization) standard:
+ * https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM
+ *
+ * Code ranges:
+ * - 0-3: Clear to cloudy
+ * - 45-48: Fog
+ * - 51-57: Drizzle
+ * - 61-67: Rain
+ * - 71-77: Snow
+ * - 80-82: Showers
+ * - 85-86: Snow showers
+ * - 95-99: Thunderstorms
+ */
 
 export interface WeatherData {
   current: CurrentConditions
@@ -284,6 +299,11 @@ export function getAQILevel(aqi: number): {
 }
 
 // Lightning Types
+// Alert thresholds based on NOAA/NWS safety guidelines:
+// - DANGER (≤10 mi): Within typical lightning strike range
+// - WARNING (≤20 mi): Storm approaching, prepare for shelter
+// - WATCH (≤50 mi): Storms in area, monitor conditions
+// See lightning.ts for full source documentation
 export interface LightningStrike {
   lat: number
   lon: number

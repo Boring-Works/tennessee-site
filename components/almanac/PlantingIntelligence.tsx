@@ -27,7 +27,11 @@ export default function PlantingIntelligence({
   tempLow,
 }: PlantingIntelligenceProps) {
   return (
-    <section className="space-y-4" role="region" aria-label="Planting intelligence dashboard">
+    <section
+      className="space-y-4 h-full"
+      role="region"
+      aria-label="Planting intelligence dashboard"
+    >
       {/* Section Header */}
       <div className="flex items-center gap-2">
         <Leaf className="w-5 h-5 text-almanac-gold" />

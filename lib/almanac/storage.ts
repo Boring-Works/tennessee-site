@@ -1,4 +1,17 @@
-// localStorage persistence for user location
+/**
+ * Browser Storage for User Preferences
+ *
+ * Persists user's chosen location to localStorage for return visits.
+ * Falls back to DEFAULT_LOCATION if nothing saved or on error.
+ *
+ * Storage key: 'almanac-location'
+ * Format: JSON-serialized GeoLocation object
+ *
+ * Error handling:
+ * - QuotaExceededError: Logged, returns false
+ * - Parse errors: Logged, returns default
+ * - SSR (no window): Returns default gracefully
+ */
 import { logger } from '@/lib/logger'
 import { GeoLocation, DEFAULT_LOCATION } from './geocoding'
 

@@ -35,7 +35,7 @@ export default function FarmerMemory({
 
   return (
     <section
-      className="rounded-sm border border-white/10 overflow-hidden"
+      className="rounded-sm border border-white/10 overflow-hidden h-full"
       aria-label="Farmer's Memory - Historical Weather Intelligence"
     >
       {/* Gold gradient header */}

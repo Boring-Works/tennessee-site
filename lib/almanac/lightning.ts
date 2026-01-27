@@ -1,3 +1,27 @@
+/**
+ * Lightning Strike Detection and Safety Alerts
+ *
+ * Data source: Blitzortung.org community lightning detection network
+ * API: https://map.blitzortung.org/GEOjson/GEOjson_strikes_1.json (last hour)
+ *
+ * Safety thresholds based on NOAA/NWS guidelines:
+ * - Lightning can strike 10-15 miles from the storm (NOAA)
+ * - "If you can hear thunder, you are within striking distance" (NWS)
+ * - 30/30 Rule: Seek shelter when flash-to-bang is 30 sec (~6 miles)
+ *
+ * Our alert levels (conservative for outdoor worker safety):
+ * - DANGER (≤10 mi): Immediate shelter required - within typical strike range
+ * - WARNING (≤20 mi): Prepare to seek shelter - storm approaching
+ * - WATCH (≤50 mi): Monitor conditions - storms in the area
+ *
+ * Sources:
+ * - https://www.weather.gov/safety/lightning-safety
+ * - https://www.noaa.gov/jetstream/lightning/lightning-safety
+ * - National Severe Storms Laboratory: 6-8 mile "safe" distance
+ *
+ * Distance calculation: Haversine formula (great-circle distance)
+ * Earth radius: 3959 miles (mean radius)
+ */
 import type { LightningStrike, LightningData, LightningAlertLevel } from './types'
 
 /**

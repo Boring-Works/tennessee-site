@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Radar, Play, Pause, ExternalLink, MapPin } from 'lucide-react'
 import { logger } from '@/lib/logger'
@@ -194,18 +195,22 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
           {tiles.map((tile) => (
             <div key={tile.key} className="relative">
               {/* Base map tile */}
-              <img
+              <Image
                 src={`https://tile.openstreetmap.org/${ZOOM}/${tile.x}/${tile.y}.png`}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover opacity-50"
-                loading="eager"
+                fill
+                sizes="(max-width: 768px) 33vw, 100px"
+                className="object-cover opacity-50"
+                priority
               />
               {/* Radar overlay tile */}
-              <img
+              <Image
                 src={`https://tilecache.rainviewer.com${frame.path}/256/${ZOOM}/${tile.x}/${tile.y}/2/1_1.png`}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="eager"
+                fill
+                sizes="(max-width: 768px) 33vw, 100px"
+                className="object-cover"
+                priority
               />
             </div>
           ))}

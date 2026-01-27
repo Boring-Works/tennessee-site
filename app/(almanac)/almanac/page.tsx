@@ -11,6 +11,7 @@ import { MoonPhase } from '@/components/almanac/MoonPhase'
 import NativePulse from '@/components/almanac/NativePulse'
 import LocationPicker from '@/components/almanac/LocationPicker'
 import PlantingIntelligence from '@/components/almanac/PlantingIntelligence'
+import EnvironmentalWatch from '@/components/almanac/EnvironmentalWatch'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
 import NWSAlertBanner from '@/components/almanac/NWSAlertBanner'
 import BurnDayIndicator from '@/components/almanac/BurnDayIndicator'
@@ -342,6 +343,11 @@ export default function AlmanacPage() {
                 tempHigh={todayHigh}
                 tempLow={todayLow}
               />
+            </div>
+
+            {/* === ROW 8: Environmental Watch === */}
+            <div className="lg:col-span-12">
+              <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
             </div>
 
             {/* Snow - only renders when snow present, full width when it does */}

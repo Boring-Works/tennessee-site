@@ -293,10 +293,11 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   display: flex;
   flex-direction: column;
   background: var(--primary);
-  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scroll, allow vertical if needed */
 }
 
 /* Background layer - Deep archival darkness with warm undertones */
@@ -381,6 +382,8 @@
 .hero-brand {
   text-align: center;
   width: 100%;
+  min-width: 0; /* Allow grid item to shrink below content size */
+  overflow: hidden; /* Prevent text overflow in grid/flex layouts */
 }
 
 @media (min-width: 1024px) {

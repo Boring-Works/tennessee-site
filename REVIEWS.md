@@ -98,7 +98,7 @@ None found. Security posture is solid:
 
 ---
 
-## Production Readiness: 87/100 🟢
+## Production Readiness: 92/100 🟢
 
 | Severity | Count | Impact |
 | -------- | ----- | ------ |
@@ -106,26 +106,62 @@ None found. Security posture is solid:
 | HIGH     | 0     | -0     |
 | MEDIUM   | 1     | -3     |
 
-**Total Deductions:** -13 from 100
+**Total Deductions:** -8 from 100
+
+**Phase 5 Improvements:**
+
+- AQI-based score adjustment for Outdoor Alert
+- Enhanced PWA manifest with shortcuts
+- Complete CSS design system variables
+- Accessibility improvements (focus rings, skip links)
 
 ---
 
 ## TODO Later
 
 - [ ] **Rate limiting** - Add basic rate limiting to API routes via Vercel KV, Upstash, or IP-based limiting
+- [ ] **Maskable icons** - Create icon-maskable-192.png and icon-maskable-512.png for PWA
 
 ---
 
 ## Files Changed This Review
+
+### Initial Audit Fixes
 
 - Deleted: `components/almanac/WeatherAlertBanner.tsx`
 - Modified: `components/almanac/RotatingHook.tsx` (converted to RSC)
 - Modified: `components/almanac/PrecipitationRadar.tsx` (next/image)
 - Modified: `components/almanac/HourlySparkline.tsx` (Tailwind classes)
 - Modified: `components/almanac/PresentedByBlock.tsx` (CSS animation)
-- Modified: `app/(almanac)/almanac/almanac.css` (fade-in keyframes)
 - Modified: `next.config.ts` (remotePatterns)
 - Created: `app/(almanac)/error.tsx`
 - Created: `app/(main)/error.tsx`
 - Created: `app/(welcome)/error.tsx`
+
+### Phase 3: Planting Intelligence
+
+- Created: `lib/almanac/vpd.ts`
+- Created: `components/almanac/VPDGauge.tsx`
+- Created: `components/almanac/FrostCountdown.tsx`
+- Created: `components/almanac/GDDTracker.tsx`
+- Created: `components/almanac/PlantingIntelligence.tsx`
+
+### Phase 4: Environmental Watch
+
+- Created: `app/api/stream-levels/route.ts`
+- Created: `lib/almanac/drought.ts`
+- Created: `lib/almanac/phenology.ts`
+- Created: `components/almanac/CreekWatch.tsx`
+- Created: `components/almanac/DroughtStatus.tsx`
+- Created: `components/almanac/SpringIndex.tsx`
+- Created: `components/almanac/EnvironmentalWatch.tsx`
+
+### Phase 5: Polish
+
+- Modified: `lib/almanac/taskScores.ts` (AQI adjustment function)
+- Modified: `components/almanac/TaskScores.tsx` (AQI integration)
+- Modified: `components/almanac/AirQualityCard.tsx` (onAqiChange callback)
+- Modified: `app/manifest.ts` (enhanced PWA manifest)
+- Modified: `app/(almanac)/almanac/almanac.css` (complete design system)
+- Modified: `app/(almanac)/almanac/page.tsx` (AQI state integration)
 - Created: `REVIEWS.md`

@@ -9,9 +9,11 @@ import { getAQILevel } from '@/lib/almanac/types'
 interface AirQualityCardProps {
   lat: number
   lon: number
+  /** Callback when AQI value is loaded */
+  onAqiChange?: (aqi: number | null) => void
 }
 
-export default function AirQualityCard({ lat, lon }: AirQualityCardProps) {
+export default function AirQualityCard({ lat, lon, onAqiChange }: AirQualityCardProps) {
   const [data, setData] = useState<AirQualityData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -24,20 +26,24 @@ export default function AirQualityCard({ lat, lon }: AirQualityCardProps) {
       if (result.error && !result.aqi) {
         setError(result.error)
         setData(null)
+        onAqiChange?.(null)
       } else if (result.aqi !== null) {
         setData(result)
         setError(null)
+        onAqiChange?.(result.aqi)
       } else {
         setData(null)
         setError('No air quality data available')
+        onAqiChange?.(null)
       }
     } catch {
       setError('Failed to load air quality data')
       setData(null)
+      onAqiChange?.(null)
     } finally {
       setLoading(false)
     }
-  }, [lat, lon])
+  }, [lat, lon, onAqiChange])
 
   useEffect(() => {
     fetchAirQuality()

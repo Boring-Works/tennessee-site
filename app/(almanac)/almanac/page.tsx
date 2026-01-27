@@ -56,6 +56,7 @@ export default function AlmanacPage() {
   const [error, setError] = useState<string | null>(null)
   const [retryCount, setRetryCount] = useState(0)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  const [aqi, setAqi] = useState<number | null>(null)
 
   const fetchWeather = useCallback(async (loc: GeoLocation, attempt = 0) => {
     try {
@@ -254,7 +255,11 @@ export default function AlmanacPage() {
 
             {/* Air Quality */}
             <div className="lg:col-span-3">
-              <AirQualityCard lat={location.latitude} lon={location.longitude} />
+              <AirQualityCard
+                lat={location.latitude}
+                lon={location.longitude}
+                onAqiChange={setAqi}
+              />
             </div>
 
             {/* Burn Day */}
@@ -281,6 +286,7 @@ export default function AlmanacPage() {
                 shepherd={taskScores.shepherd}
                 keeper={taskScores.keeper}
                 builder={taskScores.builder}
+                aqi={aqi}
               />
             </div>
 

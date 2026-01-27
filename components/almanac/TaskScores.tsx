@@ -3,12 +3,15 @@
 import type { TaskScore } from '@/lib/almanac/types'
 import { InfoButton, WorkabilityExplainer } from './ScoreExplainer'
 import { useCountUp } from '@/lib/almanac/useCountUp'
+import { adjustScoreForAQI } from '@/lib/almanac/taskScores'
 
 interface TaskScoresProps {
   sower: TaskScore
   shepherd: TaskScore
   keeper: TaskScore
   builder: TaskScore
+  /** AQI value to adjust Outdoor Alert score (optional) */
+  aqi?: number | null
 }
 
 const SCORE_COLORS: Record<TaskScore['label'], string> = {
@@ -42,10 +45,10 @@ const SCORE_CARDS: {
   title: string
   subtitle: string
 }[] = [
-  { key: 'sower', title: "Sower's Index", subtitle: "Gardening & Planting" },
-  { key: 'shepherd', title: "Outdoor Alert", subtitle: "Pets, Kids & Livestock" },
-  { key: 'keeper', title: "Keeper's Gauge", subtitle: "Property Maintenance" },
-  { key: 'builder', title: "Builder's Grade", subtitle: "Construction & Heavy Work" },
+  { key: 'sower', title: "Sower's Index", subtitle: 'Gardening & Planting' },
+  { key: 'shepherd', title: 'Outdoor Alert', subtitle: 'Pets, Kids & Livestock' },
+  { key: 'keeper', title: "Keeper's Gauge", subtitle: 'Property Maintenance' },
+  { key: 'builder', title: "Builder's Grade", subtitle: 'Construction & Heavy Work' },
 ]
 
 function ScoreCard({
@@ -89,46 +92,42 @@ function ScoreCard({
           <span className="text-almanac-parchment/50 text-sm">/10</span>
         </div>
       </div>
-      
+
       {/* Label badge */}
       <div className="flex items-center gap-2 mb-2">
-        <span className={`text-xs font-medium px-2 py-0.5 rounded ${
-          score.label === 'Perfect' || score.label === 'Good' 
-            ? 'bg-green-900/30 text-green-400'
-            : score.label === 'Fair'
-            ? 'bg-yellow-900/30 text-yellow-400'
-            : score.label === 'Poor'
-            ? 'bg-orange-900/30 text-orange-400'
-            : 'bg-red-900/30 text-red-400'
-        }`}>
+        <span
+          className={`text-xs font-medium px-2 py-0.5 rounded ${
+            score.label === 'Perfect' || score.label === 'Good'
+              ? 'bg-green-900/30 text-green-400'
+              : score.label === 'Fair'
+                ? 'bg-yellow-900/30 text-yellow-400'
+                : score.label === 'Poor'
+                  ? 'bg-orange-900/30 text-orange-400'
+                  : 'bg-red-900/30 text-red-400'
+          }`}
+        >
           {score.label}
         </span>
-        {isCritical && (
-          <span className="text-xs text-red-400 font-medium">
-            ⚠ Unfavorable
-          </span>
-        )}
+        {isCritical && <span className="text-xs text-red-400 font-medium">⚠ Unfavorable</span>}
       </div>
 
-      <p className="text-sm text-almanac-parchment/70 leading-relaxed">
-        {score.instruction}
-      </p>
+      <p className="text-sm text-almanac-parchment/70 leading-relaxed">{score.instruction}</p>
     </div>
   )
 }
 
-export function TaskScores({ sower, shepherd, keeper, builder }: TaskScoresProps) {
-  const scores = { sower, shepherd, keeper, builder }
+export function TaskScores({ sower, shepherd, keeper, builder, aqi }: TaskScoresProps) {
+  // Apply AQI adjustment to Outdoor Alert (shepherd) score
+  const adjustedShepherd = adjustScoreForAQI(shepherd, aqi ?? null)
+  const scores = { sower, shepherd: adjustedShepherd, keeper, builder }
 
   return (
     <section className="py-8">
       <div className="flex items-center justify-center gap-3 mb-6">
-        <h2 className="font-serif text-2xl text-gold-leaf text-center">
-          Today&apos;s Workability
-        </h2>
+        <h2 className="font-serif text-2xl text-gold-leaf text-center">Today&apos;s Workability</h2>
         <WorkabilityExplainer />
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
         {SCORE_CARDS.map(({ key, title, subtitle }, index) => (
           <ScoreCard

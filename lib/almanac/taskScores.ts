@@ -1,16 +1,16 @@
 /**
  * Task Score Engine v3.4 — Rocky Mount Almanac
- * 
+ *
  * FIXES in v3.4:
  * - Uses centralized dateUtils for consistent date handling
  * - Exports date utilities for use by UI components
- * 
+ *
  * FIXES in v3.3:
  * - CRITICAL: Forecast analysis now finds today's index (accounts for past_days=2)
  * - CRITICAL: precipProbability now reads from correct hourly index
  * - Hourly weather code analysis uses correct time window
  * - All date comparisons use consistent helper functions
- * 
+ *
  * Previous fixes (v3.2):
  * - Floating point display (Math.round everywhere)
  * - Keeper's Gauge: temperature check BEFORE dew point
@@ -21,11 +21,7 @@
 
 import type { TaskScore, TaskScores, WeatherData } from './types'
 import { isSnowCode, isIceCode } from './types'
-import {
-  findTodayDailyIndex,
-  findTodayHourlyIndex,
-  getEasternHour
-} from './dateUtils'
+import { findTodayDailyIndex, findTodayHourlyIndex, getEasternHour } from './dateUtils'
 
 // Re-export date utilities for UI components
 export {
@@ -36,7 +32,7 @@ export {
   getWeekdayName,
   getDayDisplayName,
   getDateComponents,
-  getEasternHour
+  getEasternHour,
 } from './dateUtils'
 
 // ============================================
@@ -54,13 +50,13 @@ export interface ExtendedMetrics {
   month: number
   soilTemperature: number | undefined
   snowDepth: number
-  
+
   // Calculated
   heatIndex: number
   windChill: number
   dewPoint: number
   dewPointSpread: number
-  
+
   // Winter flags
   hasSnowOnGround: boolean
   hasIceRisk: boolean
@@ -69,7 +65,7 @@ export interface ExtendedMetrics {
   isWinterConditions: boolean
   winterSeverity: 'none' | 'light' | 'moderate' | 'severe'
   groundCondition: 'clear' | 'wet' | 'snowy' | 'icy' | 'frozen'
-  
+
   // Forecast awareness
   snowInForecast: boolean
   heavyPrecipSoon: boolean
@@ -86,17 +82,25 @@ export interface ExtendedMetrics {
  */
 function calculateHeatIndex(tempF: number, humidity: number): number {
   if (tempF < 80) return tempF
-  const T = tempF, R = humidity
-  let HI = -42.379 + 2.04901523*T + 10.14333127*R - 0.22475541*T*R 
-    - 0.00683783*T*T - 0.05481717*R*R + 0.00122874*T*T*R 
-    + 0.00085282*T*R*R - 0.00000199*T*T*R*R
+  const T = tempF,
+    R = humidity
+  let HI =
+    -42.379 +
+    2.04901523 * T +
+    10.14333127 * R -
+    0.22475541 * T * R -
+    0.00683783 * T * T -
+    0.05481717 * R * R +
+    0.00122874 * T * T * R +
+    0.00085282 * T * R * R -
+    0.00000199 * T * T * R * R
   // Low humidity adjustment
   if (R < 13 && T >= 80 && T <= 112) {
-    HI -= ((13-R)/4) * Math.sqrt((17-Math.abs(T-95))/17)
+    HI -= ((13 - R) / 4) * Math.sqrt((17 - Math.abs(T - 95)) / 17)
   }
   // High humidity adjustment
   if (R > 85 && T >= 80 && T <= 87) {
-    HI += ((R-85)/10) * ((87-T)/5)
+    HI += ((R - 85) / 10) * ((87 - T) / 5)
   }
   return Math.round(HI)
 }
@@ -109,7 +113,10 @@ function calculateWindChill(tempF: number, windMph: number): number {
   // Wind chill only applies below 50°F with wind >= 3 mph
   if (tempF > 50 || windMph < 3) return Math.round(tempF)
   return Math.round(
-    35.74 + 0.6215*tempF - 35.75*Math.pow(windMph, 0.16) + 0.4275*tempF*Math.pow(windMph, 0.16)
+    35.74 +
+      0.6215 * tempF -
+      35.75 * Math.pow(windMph, 0.16) +
+      0.4275 * tempF * Math.pow(windMph, 0.16)
   )
 }
 
@@ -118,10 +125,10 @@ function calculateWindChill(tempF: number, windMph: number): number {
  * Using Sonntag 1990 constants: a=17.27, b=237.7
  */
 function calculateDewPoint(tempF: number, humidity: number): number {
-  const tempC = (tempF - 32) * 5/9
-  const alpha = (17.27 * tempC)/(237.7 + tempC) + Math.log(humidity/100)
-  const dewPointC = (237.7 * alpha)/(17.27 - alpha)
-  return Math.round(dewPointC * 9/5 + 32)
+  const tempC = ((tempF - 32) * 5) / 9
+  const alpha = (17.27 * tempC) / (237.7 + tempC) + Math.log(humidity / 100)
+  const dewPointC = (237.7 * alpha) / (17.27 - alpha)
+  return Math.round((dewPointC * 9) / 5 + 32)
 }
 
 /**
@@ -129,8 +136,8 @@ function calculateDewPoint(tempF: number, humidity: number): number {
  * Standard agricultural formula
  */
 function calculateTHI(tempF: number, humidity: number): number {
-  const tempC = (tempF - 32) * 5/9
-  return Math.round((1.8*tempC + 32) - ((0.55 - 0.0055*humidity) * (1.8*tempC - 26)))
+  const tempC = ((tempF - 32) * 5) / 9
+  return Math.round(1.8 * tempC + 32 - (0.55 - 0.0055 * humidity) * (1.8 * tempC - 26))
 }
 
 // ============================================
@@ -166,14 +173,18 @@ function analyzeConditions(weather: WeatherData): {
 
   // CRITICAL: Find today's index in daily array (accounts for past_days=2)
   const todayDailyIdx = findTodayDailyIndex(weather.daily.time)
-  
+
   // CRITICAL: Find today's starting index in hourly array
   const todayHourlyStart = findTodayHourlyIndex(weather.hourly.time)
 
   // Recent history analysis - look at today and previous 2 days
-  let hadFreezing = false, hadAboveFreezing = false, coldDaysCount = 0
-  let recentMinTemp = currentTemp, recentMaxTemp = currentTemp, recentSnowfall = 0
-  
+  let hadFreezing = false,
+    hadAboveFreezing = false,
+    coldDaysCount = 0
+  let recentMinTemp = currentTemp,
+    recentMaxTemp = currentTemp,
+    recentSnowfall = 0
+
   if (weather.daily.temperatureMin && weather.daily.temperatureMax) {
     // Look at past 3 days INCLUDING today (indices todayDailyIdx-2 to todayDailyIdx)
     const startIdx = Math.max(0, todayDailyIdx - 2)
@@ -181,17 +192,20 @@ function analyzeConditions(weather: WeatherData): {
     for (let i = startIdx; i < endIdx && i < weather.daily.temperatureMin.length; i++) {
       const minT = weather.daily.temperatureMin[i]
       const maxT = weather.daily.temperatureMax[i]
-      if (minT !== undefined) { 
+      if (minT !== undefined) {
         recentMinTemp = Math.min(recentMinTemp, minT)
-        if (minT < 32) { hadFreezing = true; coldDaysCount++ }
+        if (minT < 32) {
+          hadFreezing = true
+          coldDaysCount++
+        }
       }
-      if (maxT !== undefined) { 
+      if (maxT !== undefined) {
         recentMaxTemp = Math.max(recentMaxTemp, maxT)
         if (maxT > 35) hadAboveFreezing = true
       }
     }
   }
-  
+
   if (weather.daily.snowfallSum) {
     // Sum snowfall from past 3 days
     const startIdx = Math.max(0, todayDailyIdx - 2)
@@ -202,31 +216,36 @@ function analyzeConditions(weather: WeatherData): {
   }
 
   // Check recent hourly weather codes (last 72 hours from current time)
-  let hadRecentSnowCode = false, hadRecentIceCode = false
+  let hadRecentSnowCode = false,
+    hadRecentIceCode = false
   if (weather.hourly.weatherCode) {
     const currentHourlyIdx = todayHourlyStart + currentHour
     const startIdx = Math.max(0, currentHourlyIdx - 72)
     const endIdx = Math.min(weather.hourly.weatherCode.length, currentHourlyIdx + 1)
     const codes = weather.hourly.weatherCode.slice(startIdx, endIdx)
-    hadRecentSnowCode = codes.some(c => isSnowCode(c))
-    hadRecentIceCode = codes.some(c => isIceCode(c))
+    hadRecentSnowCode = codes.some((c) => isSnowCode(c))
+    hadRecentIceCode = codes.some((c) => isIceCode(c))
   }
 
   // Snow detection logic
-  const hasSnowOnGround = snowDepth >= 0.5
-    || (recentSnowfall >= 0.5 && recentMaxTemp < 40)
-    || (hadRecentSnowCode && recentMaxTemp < 38 && coldDaysCount >= 2)
+  const hasSnowOnGround =
+    snowDepth >= 0.5 ||
+    (recentSnowfall >= 0.5 && recentMaxTemp < 40) ||
+    (hadRecentSnowCode && recentMaxTemp < 38 && coldDaysCount >= 2)
 
   // Ice detection logic
-  const hasIceRisk = isFreezingPrecipNow || hadRecentIceCode
-    || (hadFreezing && hadAboveFreezing && currentTemp < 36)
-    || (hasSnowOnGround && recentMaxTemp > 33 && currentTemp < 35)
-    || (isFrozenGround && weather.current.precipitation > 0 && currentTemp < 36)
+  const hasIceRisk =
+    isFreezingPrecipNow ||
+    hadRecentIceCode ||
+    (hadFreezing && hadAboveFreezing && currentTemp < 36) ||
+    (hasSnowOnGround && recentMaxTemp > 33 && currentTemp < 35) ||
+    (isFrozenGround && weather.current.precipitation > 0 && currentTemp < 36)
 
   // Winter severity classification
   let winterSeverity: 'none' | 'light' | 'moderate' | 'severe' = 'none'
   if (hasIceRisk) winterSeverity = snowDepth > 2 ? 'severe' : 'moderate'
-  else if (hasSnowOnGround) winterSeverity = snowDepth > 4 ? 'severe' : snowDepth > 1 ? 'moderate' : 'light'
+  else if (hasSnowOnGround)
+    winterSeverity = snowDepth > 4 ? 'severe' : snowDepth > 1 ? 'moderate' : 'light'
   else if (isFrozenGround) winterSeverity = 'light'
 
   // Ground condition classification
@@ -234,7 +253,8 @@ function analyzeConditions(weather: WeatherData): {
   if (hasIceRisk) groundCondition = 'icy'
   else if (hasSnowOnGround) groundCondition = 'snowy'
   else if (isFrozenGround) groundCondition = 'frozen'
-  else if (weather.current.precipitation > 0.05 || weather.current.humidity > 90) groundCondition = 'wet'
+  else if (weather.current.precipitation > 0.05 || weather.current.humidity > 90)
+    groundCondition = 'wet'
 
   // === FORECAST ANALYSIS (starts from today's index) ===
   let snowInForecast = false
@@ -246,17 +266,17 @@ function analyzeConditions(weather: WeatherData): {
     for (let offset = 0; offset < 3; offset++) {
       const i = todayDailyIdx + offset
       if (i >= weather.daily.weatherCode.length) break
-      
+
       const code = weather.daily.weatherCode[i]
       const prob = weather.daily.precipitationProbability[i]
-      
+
       if (isSnowCode(code) && prob > 50) {
         snowInForecast = true
-        if (offset === 0) forecastWarning = "Snow expected today"
-        else if (offset === 1) forecastWarning = forecastWarning || "Snow in forecast tomorrow"
-        else if (offset === 2) forecastWarning = forecastWarning || "Snow coming in 2 days"
+        if (offset === 0) forecastWarning = 'Snow expected today'
+        else if (offset === 1) forecastWarning = forecastWarning || 'Snow in forecast tomorrow'
+        else if (offset === 2) forecastWarning = forecastWarning || 'Snow coming in 2 days'
       }
-      
+
       if (prob > 70 && offset <= 1) {
         heavyPrecipSoon = true
       }
@@ -265,10 +285,16 @@ function analyzeConditions(weather: WeatherData): {
 
   return {
     winter: {
-      hasSnowOnGround, hasIceRisk, isActivelySnowing, isFrozenGround,
-      isWinterConditions: winterSeverity !== 'none', winterSeverity, groundCondition, snowDepth
+      hasSnowOnGround,
+      hasIceRisk,
+      isActivelySnowing,
+      isFrozenGround,
+      isWinterConditions: winterSeverity !== 'none',
+      winterSeverity,
+      groundCondition,
+      snowDepth,
     },
-    forecast: { snowInForecast, heavyPrecipSoon, forecastWarning }
+    forecast: { snowInForecast, heavyPrecipSoon, forecastWarning },
   }
 }
 
@@ -289,12 +315,13 @@ export function buildExtendedMetrics(weather: WeatherData): ExtendedMetrics {
   // CRITICAL: Find today's starting index in hourly array
   const todayHourlyStart = findTodayHourlyIndex(weather.hourly.time)
   const currentHourlyIdx = todayHourlyStart + currentHour
-  
+
   // Get precip probability for current hour (with bounds check)
-  const precipProbability = currentHourlyIdx < weather.hourly.precipitationProbability.length
-    ? weather.hourly.precipitationProbability[currentHourlyIdx] || 0
-    : 0
-  
+  const precipProbability =
+    currentHourlyIdx < weather.hourly.precipitationProbability.length
+      ? weather.hourly.precipitationProbability[currentHourlyIdx] || 0
+      : 0
+
   return {
     temperature: temp,
     humidity,
@@ -329,22 +356,31 @@ function getScoreLabel(score: number): TaskScore['label'] {
 export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
   // BLOCKING: Ice/snow/frozen
   if (m.groundCondition === 'icy') {
-    return { score: 1, label: 'Avoid', instruction: "Ice on ground. No gardening possible." }
+    return { score: 1, label: 'Avoid', instruction: 'Ice on ground. No gardening possible.' }
   }
   if (m.hasSnowOnGround) {
-    return { score: 1, label: 'Avoid', instruction: m.snowDepth > 0.5 
-      ? `${m.snowDepth.toFixed(1)}" of snow. Wait for complete melt.`
-      : "Snow on ground. Wait for it to clear." }
+    return {
+      score: 1,
+      label: 'Avoid',
+      instruction:
+        m.snowDepth > 0.5
+          ? `${m.snowDepth.toFixed(1)}" of snow. Wait for complete melt.`
+          : 'Snow on ground. Wait for it to clear.',
+    }
   }
   if (m.isFrozenGround) {
-    return { score: 2, label: 'Avoid', instruction: `Soil frozen at ${Math.round(m.soilTemperature!)}°F. Can't work ground.` }
+    return {
+      score: 2,
+      label: 'Avoid',
+      instruction: `Soil frozen at ${Math.round(m.soilTemperature!)}°F. Can't work ground.`,
+    }
   }
   if (m.isActivelySnowing) {
-    return { score: 2, label: 'Avoid', instruction: "Currently snowing. Wait for it to stop." }
+    return { score: 2, label: 'Avoid', instruction: 'Currently snowing. Wait for it to stop.' }
   }
 
   let score = 10
-  let instruction = ""
+  let instruction = ''
 
   // Soil temperature thresholds based on agricultural guidelines
   // Cool-season crops: peas 40°F, lettuce 40°F, spinach 45°F
@@ -372,7 +408,7 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
   // Air temperature
   if (m.temperature < 32) {
     score -= 4
-    instruction = instruction || "Frost conditions. Protect tender plants."
+    instruction = instruction || 'Frost conditions. Protect tender plants.'
   } else if (m.temperature < 40) {
     score -= 2
     instruction = instruction || `Only ${Math.round(m.temperature)}°F. Cool-season work only.`
@@ -384,10 +420,10 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
   // Precipitation
   if (m.precipitation > 0.5) {
     score -= 5
-    instruction = "Heavy rain. Stay out of garden beds."
+    instruction = 'Heavy rain. Stay out of garden beds.'
   } else if (m.precipitation > 0.1) {
     score -= 3
-    instruction = instruction || "Rain falling. Wait for a break."
+    instruction = instruction || 'Rain falling. Wait for a break.'
   } else if (m.precipProbability > 70) {
     score -= 2
     instruction = instruction || `${Math.round(m.precipProbability)}% rain chance. Finish early.`
@@ -404,20 +440,23 @@ export function calculateSowerScore(m: ExtendedMetrics): TaskScore {
   // Wet ground
   if (m.groundCondition === 'wet') {
     score -= 2
-    instruction = instruction || "Soil is soggy. Wait to avoid compaction."
+    instruction = instruction || 'Soil is soggy. Wait to avoid compaction.'
   }
 
   // Forecast warning
-  if (m.forecastWarning && !instruction.includes("snow")) {
+  if (m.forecastWarning && !instruction.includes('snow')) {
     instruction = instruction + ` ${m.forecastWarning}—plan accordingly.`
   }
 
   score = Math.max(1, Math.min(10, score))
-  
+
   if (!instruction) {
-    instruction = score >= 9 ? "Excellent conditions for planting!" 
-      : score >= 7 ? "Good gardening day."
-      : "Mixed conditions. Light tasks only."
+    instruction =
+      score >= 9
+        ? 'Excellent conditions for planting!'
+        : score >= 7
+          ? 'Good gardening day.'
+          : 'Mixed conditions. Light tasks only.'
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -432,11 +471,15 @@ export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
 
   // ICE is dangerous for walking
   if (m.groundCondition === 'icy') {
-    return { score: 3, label: 'Poor', instruction: "ICE ON GROUND. Slip hazard—very short trips only." }
+    return {
+      score: 3,
+      label: 'Poor',
+      instruction: 'ICE ON GROUND. Slip hazard—very short trips only.',
+    }
   }
 
   let score = 10
-  let instruction = ""
+  let instruction = ''
 
   // Snow: not blocking, but affects score
   if (m.hasSnowOnGround) {
@@ -445,13 +488,13 @@ export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
       instruction = `${m.snowDepth.toFixed(0)}" snow. Small dogs struggle. Keep trips short.`
     } else if (m.snowDepth > 1) {
       score -= 1
-      instruction = "Snow on ground. Check paws after walks."
+      instruction = 'Snow on ground. Check paws after walks.'
     }
   }
 
   if (m.isActivelySnowing) {
     score -= 1
-    instruction = instruction || "Snowing. Shorter walks recommended."
+    instruction = instruction || 'Snowing. Shorter walks recommended.'
   }
 
   // Heat stress (THI thresholds from livestock research)
@@ -481,13 +524,14 @@ export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
     instruction = instruction || `Wind chill ${m.windChill}°F. Coats for short-haired breeds.`
   } else if (m.windChill < 32) {
     score -= 1
-    instruction = instruction || `Chilly at ${m.windChill}°F. Most dogs fine, watch small/thin-coated breeds.`
+    instruction =
+      instruction || `Chilly at ${m.windChill}°F. Most dogs fine, watch small/thin-coated breeds.`
   }
 
   // Freezing rain
   if (m.hasIceRisk && m.precipitation > 0) {
     score -= 4
-    instruction = "Freezing rain. Stay inside."
+    instruction = 'Freezing rain. Stay inside.'
   }
 
   // Wind
@@ -497,11 +541,14 @@ export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
   }
 
   score = Math.max(1, Math.min(10, score))
-  
+
   if (!instruction) {
-    instruction = score >= 9 ? "Great conditions for outdoor time!"
-      : score >= 7 ? "Good for walks and outdoor play."
-      : "Keep outdoor time moderate."
+    instruction =
+      score >= 9
+        ? 'Great conditions for outdoor time!'
+        : score >= 7
+          ? 'Good for walks and outdoor play.'
+          : 'Keep outdoor time moderate.'
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -514,17 +561,21 @@ export function calculateOutdoorScore(m: ExtendedMetrics): TaskScore {
 export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
   // BLOCKING: Snow/ice
   if (m.groundCondition === 'icy') {
-    return { score: 1, label: 'Avoid', instruction: "ICE ON SURFACES. Ladders deadly. Indoor planning only." }
+    return {
+      score: 1,
+      label: 'Avoid',
+      instruction: 'ICE ON SURFACES. Ladders deadly. Indoor planning only.',
+    }
   }
   if (m.hasSnowOnGround) {
-    return { score: 1, label: 'Avoid', instruction: "Snow covering surfaces. No exterior work." }
+    return { score: 1, label: 'Avoid', instruction: 'Snow covering surfaces. No exterior work.' }
   }
   if (m.isActivelySnowing) {
-    return { score: 2, label: 'Avoid', instruction: "Snowing. Exterior work postponed." }
+    return { score: 2, label: 'Avoid', instruction: 'Snowing. Exterior work postponed.' }
   }
 
   let score = 10
-  let instruction = ""
+  let instruction = ''
 
   // TEMPERATURE FIRST (paint needs 50°F+, most products need 40°F+)
   if (m.temperature < 35) {
@@ -543,10 +594,12 @@ export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
   if (m.temperature >= 50) {
     if (m.dewPointSpread < 3) {
       score -= 4
-      instruction = instruction || `Dew point spread ${m.dewPointSpread}°F (needs 5°F+). Paint will fail.`
+      instruction =
+        instruction || `Dew point spread ${m.dewPointSpread}°F (needs 5°F+). Paint will fail.`
     } else if (m.dewPointSpread < 5) {
       score -= 2
-      instruction = instruction || `Humidity risk—dew point spread ${m.dewPointSpread}°F. Work midday only.`
+      instruction =
+        instruction || `Humidity risk—dew point spread ${m.dewPointSpread}°F. Work midday only.`
     } else if (m.humidity > 85) {
       score -= 2
       instruction = instruction || `Humidity ${Math.round(m.humidity)}%. Extended cure times.`
@@ -556,7 +609,7 @@ export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
   // Precipitation
   if (m.precipitation > 0.1) {
     score -= 5
-    instruction = "Rain falling. All exterior work on hold."
+    instruction = 'Rain falling. All exterior work on hold.'
   } else if (m.precipProbability > 70) {
     score -= 3
     instruction = instruction || `${Math.round(m.precipProbability)}% rain chance. Finish early.`
@@ -582,9 +635,12 @@ export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
   score = Math.max(1, Math.min(10, score))
 
   if (!instruction) {
-    instruction = score >= 9 ? `Ideal—${m.dewPointSpread}°F dew point spread. Finishes will cure well.`
-      : score >= 7 ? "Good for exterior repairs."
-      : "Mixed conditions. Prep work only."
+    instruction =
+      score >= 9
+        ? `Ideal—${m.dewPointSpread}°F dew point spread. Finishes will cure well.`
+        : score >= 7
+          ? 'Good for exterior repairs.'
+          : 'Mixed conditions. Prep work only.'
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -597,11 +653,15 @@ export function calculateKeeperScore(m: ExtendedMetrics): TaskScore {
 export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
   // BLOCKING: Ice
   if (m.groundCondition === 'icy') {
-    return { score: 2, label: 'Avoid', instruction: "ICE ON SITE. Equipment slides. Limited interior work only." }
+    return {
+      score: 2,
+      label: 'Avoid',
+      instruction: 'ICE ON SITE. Equipment slides. Limited interior work only.',
+    }
   }
 
   let score = 10
-  let instruction = ""
+  let instruction = ''
 
   // Snow
   if (m.hasSnowOnGround) {
@@ -610,16 +670,16 @@ export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
       instruction = `${m.snowDepth.toFixed(0)}" snow. Clear before operations.`
     } else if (m.snowDepth > 1) {
       score -= 3
-      instruction = "Snow on site. Traction issues—careful with equipment."
+      instruction = 'Snow on site. Traction issues—careful with equipment.'
     } else {
       score -= 1
-      instruction = "Light snow. Clear work areas."
+      instruction = 'Light snow. Clear work areas.'
     }
   }
 
   if (m.isActivelySnowing) {
     score -= 2
-    instruction = instruction || "Snowing. Conditions deteriorating."
+    instruction = instruction || 'Snowing. Conditions deteriorating.'
   }
 
   // Cold thresholds based on construction reality
@@ -637,7 +697,8 @@ export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
     instruction = `Wind chill ${m.windChill}°F. Concrete won't cure. Warm-up breaks required.`
   } else if (m.temperature < 40) {
     score -= 2
-    instruction = instruction || `At ${Math.round(m.temperature)}°F—concrete needs additives/blankets.`
+    instruction =
+      instruction || `At ${Math.round(m.temperature)}°F—concrete needs additives/blankets.`
   }
 
   // Heat (OSHA heat illness prevention)
@@ -655,10 +716,10 @@ export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
   // Precipitation
   if (m.precipitation > 0.25) {
     score -= 4
-    instruction = instruction || "Rain. Site work suspended."
+    instruction = instruction || 'Rain. Site work suspended.'
   } else if (m.precipitation > 0.1) {
     score -= 2
-    instruction = instruction || "Light rain. Covered work only."
+    instruction = instruction || 'Light rain. Covered work only.'
   }
 
   // Wind (crane operations typically limited at 30-45 mph)
@@ -673,7 +734,7 @@ export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
   // Frozen ground (limits excavation)
   if (m.isFrozenGround) {
     score -= 2
-    instruction = instruction || "Ground frozen. No excavation possible."
+    instruction = instruction || 'Ground frozen. No excavation possible.'
   }
 
   // Forecast
@@ -684,9 +745,12 @@ export function calculateBuilderScore(m: ExtendedMetrics): TaskScore {
   score = Math.max(1, Math.min(10, score))
 
   if (!instruction) {
-    instruction = score >= 9 ? "Full operations. Good conditions."
-      : score >= 7 ? "Standard operations with safety protocols."
-      : "Reduced productivity expected."
+    instruction =
+      score >= 9
+        ? 'Full operations. Good conditions.'
+        : score >= 7
+          ? 'Standard operations with safety protocols.'
+          : 'Reduced productivity expected.'
   }
 
   return { score, label: getScoreLabel(score), instruction }
@@ -707,6 +771,60 @@ export function calculateAllTaskScores(weather: WeatherData): TaskScores {
 }
 
 // ============================================
+// AQI SCORE ADJUSTMENT
+// ============================================
+
+/**
+ * Adjust a TaskScore based on Air Quality Index
+ *
+ * AQI thresholds:
+ * - ≤50 (Good): No change
+ * - ≤100 (Moderate): No change
+ * - ≤150 (Unhealthy for Sensitive): Cap at 6
+ * - ≤200 (Unhealthy): Cap at 4
+ * - >200 (Very Unhealthy/Hazardous): Cap at 2
+ *
+ * @param score - Original TaskScore
+ * @param aqi - Air Quality Index value
+ * @returns Adjusted TaskScore with updated instruction if AQI affected it
+ */
+export function adjustScoreForAQI(score: TaskScore, aqi: number | null): TaskScore {
+  if (aqi === null || aqi <= 100) {
+    return score
+  }
+
+  let maxScore: number
+  let aqiWarning: string
+
+  if (aqi <= 150) {
+    maxScore = 6
+    aqiWarning = 'AQI unhealthy for sensitive groups.'
+  } else if (aqi <= 200) {
+    maxScore = 4
+    aqiWarning = 'AQI unhealthy. Limit outdoor time.'
+  } else {
+    maxScore = 2
+    aqiWarning = 'AQI hazardous. Avoid outdoor activity.'
+  }
+
+  if (score.score <= maxScore) {
+    // Score already below cap, just add AQI note
+    return {
+      ...score,
+      instruction: `${score.instruction} ${aqiWarning}`,
+    }
+  }
+
+  // Cap the score
+  const cappedScore = maxScore
+  return {
+    score: cappedScore,
+    label: getScoreLabel(cappedScore),
+    instruction: `${aqiWarning} Score capped from ${score.score} due to air quality.`,
+  }
+}
+
+// ============================================
 // NATIVE PULSE — Seed Stratification
 // ============================================
 
@@ -723,15 +841,15 @@ function calculateStratificationProgress(date: Date): number {
   const day = date.getDate()
   const year = date.getFullYear()
   // Leap year calculation (Gregorian)
-  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
-  const seasonLength = isLeapYear ? 91 : 90  // Dec 1 - Feb 28/29
-  
+  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+  const seasonLength = isLeapYear ? 91 : 90 // Dec 1 - Feb 28/29
+
   let daysIntoSeason: number
   if (month === 12) daysIntoSeason = day
   else if (month === 1) daysIntoSeason = 31 + day
   else if (month === 2) daysIntoSeason = 62 + day
   else return 0
-  
+
   return Math.min(100, Math.round((daysIntoSeason / seasonLength) * 100))
 }
 
@@ -742,40 +860,43 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
   // Winter stratification period (Dec-Feb)
   if (month >= 12 || month <= 2) {
     if (temperature >= 28 && temperature <= 40) {
-      return { 
-        status: 'Active Stratification', 
-        icon: '❄️', 
+      return {
+        status: 'Active Stratification',
+        icon: '❄️',
         color: 'text-blue-400',
-        tip: 'Cold moist stratification in progress. Native seeds breaking dormancy.', 
-        progress 
+        tip: 'Cold moist stratification in progress. Native seeds breaking dormancy.',
+        progress,
       }
     }
-    return { 
-      status: 'Active Stratification', 
-      icon: '❄️', 
+    return {
+      status: 'Active Stratification',
+      icon: '❄️',
       color: 'text-blue-400',
-      tip: temperature < 28 ? 'Hard freeze—protect seed beds.' : 'Warm spell may interrupt stratification.', 
-      progress 
+      tip:
+        temperature < 28
+          ? 'Hard freeze—protect seed beds.'
+          : 'Warm spell may interrupt stratification.',
+      progress,
     }
   }
 
   // Spring germination trigger (Mar-Apr)
   if (month === 3 || month === 4) {
     if (temperature > 55 && precipitation > 0) {
-      return { 
-        status: 'Germination Trigger', 
-        icon: '🌱', 
+      return {
+        status: 'Germination Trigger',
+        icon: '🌱',
         color: 'text-green-400',
-        tip: 'Warm rain! Perfect for native germination.', 
-        progress: 100 
+        tip: 'Warm rain! Perfect for native germination.',
+        progress: 100,
       }
     }
-    return { 
-      status: 'Germination Trigger', 
-      icon: '🌤️', 
+    return {
+      status: 'Germination Trigger',
+      icon: '🌤️',
       color: 'text-yellow-400',
-      tip: temperature > 55 ? 'Soil warming. Awaiting rain.' : 'Still cool. Wait for 55°F+.', 
-      progress: temperature > 55 ? 75 : 50 
+      tip: temperature > 55 ? 'Soil warming. Awaiting rain.' : 'Still cool. Wait for 55°F+.',
+      progress: temperature > 55 ? 75 : 50,
     }
   }
 
@@ -783,38 +904,38 @@ export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResul
   if (month >= 5 && month <= 10) {
     const monthProgress = Math.round(((month - 5) / 6) * 100)
     if (month <= 6) {
-      return { 
-        status: 'Growing Season', 
-        icon: '🌻', 
-        color: 'text-green-500', 
-        tip: 'Peak growing season.', 
-        progress: monthProgress 
+      return {
+        status: 'Growing Season',
+        icon: '🌻',
+        color: 'text-green-500',
+        tip: 'Peak growing season.',
+        progress: monthProgress,
       }
     }
     if (month <= 8) {
-      return { 
-        status: 'Growing Season', 
-        icon: '☀️', 
-        color: 'text-amber-500', 
-        tip: 'Midsummer. Water during dry spells.', 
-        progress: monthProgress 
+      return {
+        status: 'Growing Season',
+        icon: '☀️',
+        color: 'text-amber-500',
+        tip: 'Midsummer. Water during dry spells.',
+        progress: monthProgress,
       }
     }
-    return { 
-      status: 'Growing Season', 
-      icon: '🍂', 
-      color: 'text-orange-500', 
-      tip: 'Season ending. Seeds setting.', 
-      progress: monthProgress 
+    return {
+      status: 'Growing Season',
+      icon: '🍂',
+      color: 'text-orange-500',
+      tip: 'Season ending. Seeds setting.',
+      progress: monthProgress,
     }
   }
 
   // November dormancy
-  return { 
-    status: 'Dormant', 
-    icon: '💤', 
-    color: 'text-gray-400', 
-    tip: 'Dormancy. Collect seeds.', 
-    progress: 0 
+  return {
+    status: 'Dormant',
+    icon: '💤',
+    color: 'text-gray-400',
+    tip: 'Dormancy. Collect seeds.',
+    progress: 0,
   }
 }

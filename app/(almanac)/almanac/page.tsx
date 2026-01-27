@@ -12,7 +12,11 @@ import NativePulse from '@/components/almanac/NativePulse'
 import LocationPicker from '@/components/almanac/LocationPicker'
 import SoilTemperature from '@/components/almanac/SoilTemperature'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
-import WeatherAlertBanner from '@/components/almanac/WeatherAlertBanner'
+import NWSAlertBanner from '@/components/almanac/NWSAlertBanner'
+import BurnDayIndicator from '@/components/almanac/BurnDayIndicator'
+import LightningWatch from '@/components/almanac/LightningWatch'
+import AirQualityCard from '@/components/almanac/AirQualityCard'
+import HourlySparkline from '@/components/almanac/HourlySparkline'
 import CurrentConditionsCard from '@/components/almanac/CurrentConditionsCard'
 import SnowConditions from '@/components/almanac/SnowConditions'
 import SunBarometer from '@/components/almanac/SunBarometer'
@@ -192,6 +196,12 @@ export default function AlmanacPage() {
       <WeatherAtmosphere weatherCode={weather.current.weatherCode} />
       <main className="min-h-screen text-almanac-parchment relative z-10">
         <div className="max-w-3xl mx-auto px-4 py-8">
+          {/* NWS Alerts - ABOVE HEADER for maximum visibility */}
+          <NWSAlertBanner lat={location.latitude} lon={location.longitude} />
+
+          {/* Lightning Watch - only shows if strikes within 50 miles */}
+          <LightningWatch lat={location.latitude} lon={location.longitude} />
+
           {/* Masthead */}
           <header className="text-center mb-6">
             <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide uppercase">
@@ -220,9 +230,6 @@ export default function AlmanacPage() {
             isLoading={loading}
           />
 
-          {/* Weather Alert Banner - TOP PRIORITY */}
-          <WeatherAlertBanner daily={weather.daily} currentTemp={weather.current.temperature} />
-
           {/* Hero: Temperature + Conditions */}
           <AlmanacHero
             temperature={weather.current.temperature}
@@ -247,6 +254,11 @@ export default function AlmanacPage() {
 
           {/* Tomorrow Preview */}
           <TomorrowPreview tomorrow={tomorrowData} />
+
+          {/* Burn Day Indicator - Fire Weather Status */}
+          <div className="py-2">
+            <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
+          </div>
 
           {/* Snow Conditions - shows only when snow present */}
           <div className="py-2">
@@ -277,6 +289,16 @@ export default function AlmanacPage() {
             keeper={taskScores.keeper}
             builder={taskScores.builder}
           />
+
+          {/* Air Quality Card */}
+          <div className="py-4">
+            <AirQualityCard lat={location.latitude} lon={location.longitude} />
+          </div>
+
+          {/* Hourly Sparkline - Visual forecast */}
+          <div className="py-4">
+            <HourlySparkline hourly={weather.hourly} />
+          </div>
 
           {/* NativePulse - Seed Stratification */}
           <div className="py-6">

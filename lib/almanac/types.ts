@@ -19,49 +19,49 @@ export interface CurrentConditions {
   pressure: number
   soilTemperature?: number
   snowDepth?: number
-  cloudCover?: number        // NEW: 0-100%
-  visibility?: number        // NEW: in meters
-  dewPoint?: number          // NEW: in °F
-  uvIndex?: number           // NEW: 0-11+
-  isDay?: boolean            // NEW: true if daytime
+  cloudCover?: number // NEW: 0-100%
+  visibility?: number // NEW: in meters
+  dewPoint?: number // NEW: in °F
+  uvIndex?: number // NEW: 0-11+
+  isDay?: boolean // NEW: true if daytime
 }
 
 export interface HourlyForecast {
   time: string[]
   temperature: number[]
-  feelsLike?: number[]       // NEW
+  feelsLike?: number[] // NEW
   precipitationProbability: number[]
   precipitation: number[]
   weatherCode: number[]
   snowfall?: number[]
-  snowDepth?: number[]       // NEW: running snow depth
-  cloudCover?: number[]      // NEW
-  visibility?: number[]      // NEW
-  windSpeed?: number[]       // NEW
-  windGusts?: number[]       // NEW
-  dewPoint?: number[]        // NEW
-  uvIndex?: number[]         // NEW
-  freezingLevel?: number[]   // NEW: altitude in meters where temp = 32°F
+  snowDepth?: number[] // NEW: running snow depth
+  cloudCover?: number[] // NEW
+  visibility?: number[] // NEW
+  windSpeed?: number[] // NEW
+  windGusts?: number[] // NEW
+  dewPoint?: number[] // NEW
+  uvIndex?: number[] // NEW
+  freezingLevel?: number[] // NEW: altitude in meters where temp = 32°F
 }
 
 export interface DailyForecast {
   time: string[]
   temperatureMax: number[]
   temperatureMin: number[]
-  feelsLikeMax?: number[]    // NEW
-  feelsLikeMin?: number[]    // NEW
+  feelsLikeMax?: number[] // NEW
+  feelsLikeMin?: number[] // NEW
   precipitationSum: number[]
   precipitationProbability: number[]
-  precipitationHours?: number[]  // NEW
+  precipitationHours?: number[] // NEW
   weatherCode: number[]
   sunrise: string[]
   sunset: string[]
-  daylightDuration?: number[]   // NEW: seconds of daylight
+  daylightDuration?: number[] // NEW: seconds of daylight
   snowfallSum?: number[]
-  windSpeedMax?: number[]       // NEW
-  windGustsMax?: number[]       // NEW
-  windDirectionDominant?: number[]  // NEW
-  uvIndexMax?: number[]         // NEW
+  windSpeedMax?: number[] // NEW
+  windGustsMax?: number[] // NEW
+  windDirectionDominant?: number[] // NEW
+  uvIndexMax?: number[] // NEW
 }
 
 export interface Location {
@@ -133,8 +133,16 @@ export const WEATHER_CODES: Record<number, WeatherCodeInfo> = {
   85: { condition: 'Slight snow showers', icon: 'snowflake', category: 'snow' },
   86: { condition: 'Heavy snow showers', icon: 'snowflake', category: 'snow' },
   95: { condition: 'Thunderstorm', icon: 'cloud-lightning', category: 'thunderstorm' },
-  96: { condition: 'Thunderstorm with slight hail', icon: 'cloud-lightning', category: 'thunderstorm' },
-  99: { condition: 'Thunderstorm with heavy hail', icon: 'cloud-lightning', category: 'thunderstorm' },
+  96: {
+    condition: 'Thunderstorm with slight hail',
+    icon: 'cloud-lightning',
+    category: 'thunderstorm',
+  },
+  99: {
+    condition: 'Thunderstorm with heavy hail',
+    icon: 'cloud-lightning',
+    category: 'thunderstorm',
+  },
 }
 
 export function getWeatherInfo(code: number): WeatherCodeInfo {
@@ -174,3 +182,217 @@ export function getUVDescription(uv: number): { level: string; advice: string; c
   if (uv <= 10) return { level: 'Very High', advice: 'Extra protection', color: 'text-red-400' }
   return { level: 'Extreme', advice: 'Avoid sun exposure', color: 'text-purple-400' }
 }
+
+// ============================================================================
+// Environmental Data Types (NWS, AQI, Lightning, Stream, Drought, Phenology)
+// ============================================================================
+
+// NWS Alert Types
+export type AlertSeverity = 'Minor' | 'Moderate' | 'Severe' | 'Extreme'
+export type AlertUrgency = 'Immediate' | 'Expected' | 'Future' | 'Past' | 'Unknown'
+
+export interface NWSAlert {
+  id: string
+  event: string
+  severity: AlertSeverity
+  urgency: AlertUrgency
+  headline: string
+  description: string
+  instruction: string | null
+  onset: string
+  expires: string
+  areaDesc: string
+}
+
+export interface NWSAlertsResponse {
+  alerts: NWSAlert[]
+  hasFireWeatherAlert: boolean
+  error?: string
+}
+
+// Air Quality Types
+export type AQILevel =
+  | 'good'
+  | 'moderate'
+  | 'sensitive'
+  | 'unhealthy'
+  | 'very-unhealthy'
+  | 'hazardous'
+
+export interface AirQualityData {
+  aqi: number
+  level: AQILevel
+  dominantPollutant: string
+  stationName: string
+  timestamp: string
+}
+
+export function getAQILevel(aqi: number): {
+  level: AQILevel
+  label: string
+  emoji: string
+  color: string
+  guidance: string
+} {
+  if (aqi <= 50)
+    return {
+      level: 'good',
+      label: 'Good',
+      emoji: '😊',
+      color: 'text-green-400',
+      guidance: 'Good for outdoor work',
+    }
+  if (aqi <= 100)
+    return {
+      level: 'moderate',
+      label: 'Moderate',
+      emoji: '😐',
+      color: 'text-yellow-400',
+      guidance: 'Acceptable for most',
+    }
+  if (aqi <= 150)
+    return {
+      level: 'sensitive',
+      label: 'Unhealthy for Sensitive',
+      emoji: '😷',
+      color: 'text-orange-400',
+      guidance: 'Sensitive groups limit prolonged exertion',
+    }
+  if (aqi <= 200)
+    return {
+      level: 'unhealthy',
+      label: 'Unhealthy',
+      emoji: '🤢',
+      color: 'text-red-400',
+      guidance: 'Limit outdoor activity',
+    }
+  if (aqi <= 300)
+    return {
+      level: 'very-unhealthy',
+      label: 'Very Unhealthy',
+      emoji: '☠️',
+      color: 'text-purple-400',
+      guidance: 'Avoid outdoor activity',
+    }
+  return {
+    level: 'hazardous',
+    label: 'Hazardous',
+    emoji: '💀',
+    color: 'text-rose-900',
+    guidance: 'Stay indoors',
+  }
+}
+
+// Lightning Types
+export interface LightningStrike {
+  lat: number
+  lon: number
+  timestamp: number
+  distanceMiles: number
+}
+
+export type LightningAlertLevel = 'danger' | 'warning' | 'watch' | null
+
+export interface LightningData {
+  strikes: LightningStrike[]
+  nearestMiles: number | null
+  alertLevel: LightningAlertLevel
+  strikeCount: number
+}
+
+export function getLightningAlertLevel(nearestMiles: number | null): {
+  level: LightningAlertLevel
+  label: string
+  color: string
+  message: string
+} {
+  if (nearestMiles === null) return { level: null, label: '', color: '', message: '' }
+  if (nearestMiles <= 10)
+    return {
+      level: 'danger',
+      label: 'DANGER',
+      color: 'text-red-400',
+      message: 'SEEK SHELTER IMMEDIATELY',
+    }
+  if (nearestMiles <= 20)
+    return {
+      level: 'warning',
+      label: 'WARNING',
+      color: 'text-orange-400',
+      message: 'Prepare to seek shelter',
+    }
+  if (nearestMiles <= 50)
+    return {
+      level: 'watch',
+      label: 'WATCH',
+      color: 'text-yellow-400',
+      message: 'Storms in area, monitor',
+    }
+  return { level: null, label: '', color: '', message: '' }
+}
+
+// Stream/Creek Types
+export type StreamStatus = 'flood' | 'high' | 'normal' | 'low' | 'drought'
+
+export interface StreamData {
+  siteName: string
+  siteCode: string
+  gageHeight: number | null
+  streamflow: number | null
+  status: StreamStatus
+  percentile: number
+  distanceMiles: number
+}
+
+export function getStreamStatus(percentile: number): {
+  status: StreamStatus
+  label: string
+  color: string
+} {
+  if (percentile >= 90) return { status: 'flood', label: 'Flood Stage', color: 'text-red-400' }
+  if (percentile >= 75) return { status: 'high', label: 'Above Normal', color: 'text-orange-400' }
+  if (percentile >= 25) return { status: 'normal', label: 'Normal', color: 'text-green-400' }
+  if (percentile >= 10) return { status: 'low', label: 'Below Normal', color: 'text-yellow-400' }
+  return { status: 'drought', label: 'Much Below Normal', color: 'text-amber-700' }
+}
+
+// Phenology Types
+export type SpringStatus = 'dormant' | 'approaching' | 'spring' | 'summer'
+
+export interface PhenologyData {
+  springStatus: SpringStatus
+  daysToFirstLeaf: number | null
+  daysToFirstBloom: number | null
+  anomaly: 'early' | 'on-schedule' | 'late'
+  anomalyDays: number
+}
+
+// Drought Types
+export type DroughtLevel = 'None' | 'D0' | 'D1' | 'D2' | 'D3' | 'D4'
+
+export interface DroughtData {
+  level: DroughtLevel
+  label: string
+  percentArea: number
+  lastUpdated: string
+}
+
+export function getDroughtInfo(level: DroughtLevel): { label: string; color: string } {
+  const info: Record<DroughtLevel, { label: string; color: string }> = {
+    None: { label: 'No Drought', color: 'text-green-400' },
+    D0: { label: 'Abnormally Dry', color: 'text-yellow-400' },
+    D1: { label: 'Moderate Drought', color: 'text-orange-400' },
+    D2: { label: 'Severe Drought', color: 'text-red-400' },
+    D3: { label: 'Extreme Drought', color: 'text-red-600' },
+    D4: { label: 'Exceptional Drought', color: 'text-rose-900' },
+  }
+  return info[level]
+}
+
+// Fire Weather Events for Burn Day
+export const FIRE_WEATHER_EVENTS = [
+  'Red Flag Warning',
+  'Fire Weather Watch',
+  'Extreme Fire Danger',
+  'Fire Warning',
+]

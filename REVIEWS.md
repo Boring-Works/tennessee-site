@@ -165,3 +165,10 @@ None found. Security posture is solid:
 - Modified: `app/(almanac)/almanac/almanac.css` (complete design system)
 - Modified: `app/(almanac)/almanac/page.tsx` (AQI state integration)
 - Created: `REVIEWS.md`
+
+### Farmer's Memory Feature
+
+- Created: `lib/almanac/farmerMemory.ts` (historical data, pattern matching, proverb validation)
+- Created: `components/almanac/FarmerMemory.tsx` (gold gradient header, This Day data, patterns)
+- Modified: `lib/almanac/types.ts` (PatternMatch, HistoricalDay, ValidatedProverb types)
+- Modified: `app/(almanac)/almanac/page.tsx` (FarmerMemory integration)

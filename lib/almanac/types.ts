@@ -396,3 +396,40 @@ export const FIRE_WEATHER_EVENTS = [
   'Extreme Fire Danger',
   'Fire Warning',
 ]
+
+// ============================================================================
+// Farmer's Memory Types
+// ============================================================================
+
+// Pattern matching - correlates current conditions to historical outcomes
+export interface PatternMatch {
+  description: string
+  probability: number // 0-100
+  sampleSize: number
+  conditions: string // e.g., "Cold front + high pressure"
+}
+
+// Historical data for "This Day in Weather"
+export interface HistoricalDay {
+  date: string // MM-DD format
+  avgHigh: number
+  avgLow: number
+  recordHigh: { value: number; year: number }
+  recordLow: { value: number; year: number }
+  avgPrecip: number // inches
+}
+
+// Proverb validation against historical data
+export interface ValidatedProverb {
+  text: string
+  correlation: number // 0-100 accuracy percentage
+  sampleSize: number
+  explanation: string
+}
+
+// Complete Farmer's Memory data structure
+export interface FarmerMemoryData {
+  patternMatch: PatternMatch | null
+  thisDay: HistoricalDay
+  validatedProverb: ValidatedProverb | null
+}

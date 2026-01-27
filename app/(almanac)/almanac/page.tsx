@@ -9,6 +9,7 @@ import { TaskScores } from '@/components/almanac/TaskScores'
 import { WeatherDetails } from '@/components/almanac/WeatherDetails'
 import { MoonPhase } from '@/components/almanac/MoonPhase'
 import NativePulse from '@/components/almanac/NativePulse'
+import FarmerMemory from '@/components/almanac/FarmerMemory'
 import LocationPicker from '@/components/almanac/LocationPicker'
 import PlantingIntelligence from '@/components/almanac/PlantingIntelligence'
 import EnvironmentalWatch from '@/components/almanac/EnvironmentalWatch'
@@ -309,6 +310,21 @@ export default function AlmanacPage() {
             <div className="lg:col-span-4">
               <NativePulse pulse={nativePulse} />
             </div>
+
+            {/* === ROW 5.5: Farmer's Memory === */}
+            <div className="lg:col-span-8">
+              <FarmerMemory
+                temperature={weather.current.temperature}
+                humidity={weather.current.humidity}
+                pressure={weather.current.pressure}
+                windSpeed={weather.current.windSpeed}
+                todayHigh={todayHigh}
+                todayLow={todayLow}
+              />
+            </div>
+
+            {/* Empty 4 cols for balance on desktop */}
+            <div className="hidden lg:block lg:col-span-4" />
 
             {/* === ROW 6: Details Row === */}
             {/* Moon - small */}

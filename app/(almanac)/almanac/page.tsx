@@ -10,7 +10,7 @@ import { WeatherDetails } from '@/components/almanac/WeatherDetails'
 import { MoonPhase } from '@/components/almanac/MoonPhase'
 import NativePulse from '@/components/almanac/NativePulse'
 import LocationPicker from '@/components/almanac/LocationPicker'
-import SoilTemperature from '@/components/almanac/SoilTemperature'
+import PlantingIntelligence from '@/components/almanac/PlantingIntelligence'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
 import NWSAlertBanner from '@/components/almanac/NWSAlertBanner'
 import BurnDayIndicator from '@/components/almanac/BurnDayIndicator'
@@ -322,18 +322,26 @@ export default function AlmanacPage() {
               />
             </div>
 
-            {/* Soil + Sun/Barometer */}
+            {/* Sun/Barometer */}
             <div className="lg:col-span-4">
-              <div className="space-y-4">
-                <SoilTemperature temperature={weather.current.soilTemperature} />
-                <SunBarometer
-                  sunrise={todaySunrise}
-                  sunset={todaySunset}
-                  pressure={weather.current.pressure}
-                  windSpeed={weather.current.windSpeed}
-                  windDirection={weather.current.windDirection}
-                />
-              </div>
+              <SunBarometer
+                sunrise={todaySunrise}
+                sunset={todaySunset}
+                pressure={weather.current.pressure}
+                windSpeed={weather.current.windSpeed}
+                windDirection={weather.current.windDirection}
+              />
+            </div>
+
+            {/* === ROW 7: Planting Intelligence === */}
+            <div className="lg:col-span-12">
+              <PlantingIntelligence
+                temperature={weather.current.temperature}
+                humidity={weather.current.humidity}
+                soilTemperature={weather.current.soilTemperature}
+                tempHigh={todayHigh}
+                tempLow={todayLow}
+              />
             </div>
 
             {/* Snow - only renders when snow present, full width when it does */}

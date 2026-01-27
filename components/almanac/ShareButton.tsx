@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Share2, Check } from 'lucide-react'
+import { logger } from '@/lib/logger'
 
 interface ShareButtonProps {
   frontierLine: string
@@ -10,14 +11,19 @@ interface ShareButtonProps {
   location: string
 }
 
-export default function ShareButton({ frontierLine, modernLine, temperature, location }: ShareButtonProps) {
+export default function ShareButton({
+  frontierLine,
+  modernLine,
+  temperature,
+  location,
+}: ShareButtonProps) {
   const [copied, setCopied] = useState(false)
 
   const handleShare = async () => {
     const today = new Date().toLocaleDateString('en-US', {
       weekday: 'long',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     })
 
     const text = modernLine
@@ -29,7 +35,7 @@ export default function ShareButton({ frontierLine, modernLine, temperature, loc
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
-      console.error('Failed to copy:', err)
+      logger.error('Failed to copy:', err)
     }
   }
 

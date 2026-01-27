@@ -1,18 +1,19 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useEffect } from "react";
+import Link from 'next/link'
+import { useEffect } from 'react'
+import { logger } from '@/lib/logger'
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  reset: () => void
 }) {
   useEffect(() => {
-    console.error(error);
-  }, [error]);
+    logger.error('Application error:', error)
+  }, [error])
 
   return (
     <div className="flex-1 flex items-center justify-center py-20 bg-cream">
@@ -40,5 +41,5 @@ export default function Error({
         </div>
       </div>
     </div>
-  );
+  )
 }

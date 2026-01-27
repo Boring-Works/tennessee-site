@@ -1,4 +1,5 @@
 // localStorage persistence for user location
+import { logger } from '@/lib/logger'
 import { GeoLocation, DEFAULT_LOCATION } from './geocoding'
 
 const STORAGE_KEY = 'almanac-location'
@@ -16,9 +17,9 @@ export function saveLocation(location: GeoLocation): boolean {
   } catch (error) {
     // Handle QuotaExceededError and other storage errors
     if (error instanceof DOMException && error.name === 'QuotaExceededError') {
-      console.warn('localStorage quota exceeded. Location not saved.')
+      logger.warn('localStorage quota exceeded. Location not saved.')
     } else {
-      console.error('Failed to save location:', error)
+      logger.error('Failed to save location:', error)
     }
     return false
   }
@@ -37,7 +38,7 @@ export function loadLocation(): GeoLocation {
       return JSON.parse(saved)
     }
   } catch (error) {
-    console.error('Failed to load location:', error)
+    logger.error('Failed to load location:', error)
   }
 
   return DEFAULT_LOCATION
@@ -54,7 +55,7 @@ export function clearLocation(): boolean {
     localStorage.removeItem(STORAGE_KEY)
     return true
   } catch (error) {
-    console.error('Failed to clear location:', error)
+    logger.error('Failed to clear location:', error)
     return false
   }
 }

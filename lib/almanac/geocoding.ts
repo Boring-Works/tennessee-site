@@ -1,4 +1,5 @@
 // Location search using Open-Meteo Geocoding API
+import { logger } from '@/lib/logger'
 
 export interface GeoLocation {
   name: string
@@ -34,7 +35,7 @@ export async function searchLocation(query: string): Promise<GeoLocation | null>
   // Validate query
   if (!cleanQuery) return null
   if (cleanQuery.length > MAX_QUERY_LENGTH) {
-    console.warn('Geocoding query too long, truncating')
+    logger.warn('Geocoding query too long, truncating')
     return searchLocation(cleanQuery.slice(0, MAX_QUERY_LENGTH))
   }
 
@@ -75,7 +76,7 @@ export async function searchLocation(query: string): Promise<GeoLocation | null>
       timezone: result.timezone,
     }
   } catch (error) {
-    console.error('Geocoding error:', error)
+    logger.error('Geocoding error:', error)
     return null
   }
 }

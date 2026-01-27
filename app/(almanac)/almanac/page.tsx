@@ -27,13 +27,14 @@ import {
   calculateAllTaskScores,
   calculateNativePulse,
   buildExtendedMetrics,
-  type NativePulseResult
+  type NativePulseResult,
 } from '@/lib/almanac/taskScores'
 import { findTodayDailyIndex } from '@/lib/almanac/dateUtils'
 import { getDualSaying, type DualSaying } from '@/lib/almanac/sayings'
 import { getMoonData, isDay } from '@/lib/almanac/moonPhase'
 import { formatLocationName, type GeoLocation } from '@/lib/almanac/geocoding'
 import { loadLocation } from '@/lib/almanac/storage'
+import { logger } from '@/lib/logger'
 import type { WeatherData, TaskScores as TaskScoresType, MoonData } from '@/lib/almanac/types'
 
 const RETRY_DELAYS = [1000, 2000, 4000]
@@ -94,11 +95,11 @@ export default function AlmanacPage() {
       setError(null)
       setRetryCount(0)
     } catch (err) {
-      console.error('Weather fetch error:', err)
+      logger.error('Weather fetch error:', err)
 
       if (attempt < MAX_RETRIES - 1) {
         const delay = RETRY_DELAYS[attempt] || RETRY_DELAYS[RETRY_DELAYS.length - 1]
-        await new Promise(resolve => setTimeout(resolve, delay))
+        await new Promise((resolve) => setTimeout(resolve, delay))
         return fetchWeather(loc, attempt + 1)
       }
 
@@ -115,10 +116,13 @@ export default function AlmanacPage() {
     fetchWeather(savedLocation)
   }, [fetchWeather])
 
-  const handleLocationChange = useCallback((newLocation: GeoLocation) => {
-    setLocation(newLocation)
-    fetchWeather(newLocation)
-  }, [fetchWeather])
+  const handleLocationChange = useCallback(
+    (newLocation: GeoLocation) => {
+      setLocation(newLocation)
+      fetchWeather(newLocation)
+    },
+    [fetchWeather]
+  )
 
   // Find today's index in the daily array (memoized) - uses centralized utility
   const todayIndex = useMemo(() => {
@@ -173,12 +177,15 @@ export default function AlmanacPage() {
   const todaySunset = weather.daily.sunset[todayIndex]
 
   // Tomorrow's preview data
-  const tomorrowData = todayIndex !== -1 && weather.daily.time[todayIndex + 1] ? {
-    high: weather.daily.temperatureMax[todayIndex + 1],
-    low: weather.daily.temperatureMin[todayIndex + 1],
-    precipChance: weather.daily.precipitationProbability?.[todayIndex + 1] || 0,
-    weatherCode: weather.daily.weatherCode[todayIndex + 1]
-  } : null
+  const tomorrowData =
+    todayIndex !== -1 && weather.daily.time[todayIndex + 1]
+      ? {
+          high: weather.daily.temperatureMax[todayIndex + 1],
+          low: weather.daily.temperatureMin[todayIndex + 1],
+          precipChance: weather.daily.precipitationProbability?.[todayIndex + 1] || 0,
+          weatherCode: weather.daily.weatherCode[todayIndex + 1],
+        }
+      : null
 
   return (
     <div className="min-h-screen bg-midnight">
@@ -186,125 +193,122 @@ export default function AlmanacPage() {
       <main className="min-h-screen text-almanac-parchment relative z-10">
         <div className="max-w-3xl mx-auto px-4 py-8">
           {/* Masthead */}
-        <header className="text-center mb-6">
-          <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide uppercase">
-            The 1775 Almanac
-          </h1>
-          <p className="text-sm text-almanac-parchment/70 mt-1 tracking-wide">
-            Rocky Mount State Historic Site
-          </p>
-          <div className="mt-3">
-            <RotatingHook />
+          <header className="text-center mb-6">
+            <h1 className="font-serif text-2xl md:text-3xl text-almanac-gold tracking-wide uppercase">
+              The 1775 Almanac
+            </h1>
+            <p className="text-sm text-almanac-parchment/70 mt-1 tracking-wide">
+              Rocky Mount State Historic Site
+            </p>
+            <div className="mt-3">
+              <RotatingHook />
+            </div>
+            <div className="mt-2">
+              <AboutModal />
+            </div>
+          </header>
+
+          {/* Location Picker */}
+          <div className="flex justify-center mb-4">
+            <LocationPicker location={location} onLocationChange={handleLocationChange} />
           </div>
-          <div className="mt-2">
-            <AboutModal />
-          </div>
-        </header>
 
-        {/* Location Picker */}
-        <div className="flex justify-center mb-4">
-          <LocationPicker location={location} onLocationChange={handleLocationChange} />
-        </div>
+          {/* Stale Data Warning */}
+          <StaleDataWarning
+            lastUpdated={lastUpdated}
+            onRefresh={() => location && fetchWeather(location)}
+            isLoading={loading}
+          />
 
-        {/* Stale Data Warning */}
-        <StaleDataWarning
-          lastUpdated={lastUpdated}
-          onRefresh={() => location && fetchWeather(location)}
-          isLoading={loading}
-        />
+          {/* Weather Alert Banner - TOP PRIORITY */}
+          <WeatherAlertBanner daily={weather.daily} currentTemp={weather.current.temperature} />
 
-        {/* Weather Alert Banner - TOP PRIORITY */}
-        <WeatherAlertBanner 
-          daily={weather.daily} 
-          currentTemp={weather.current.temperature}
-        />
-
-        {/* Hero: Temperature + Conditions */}
-        <AlmanacHero
-          temperature={weather.current.temperature}
-          feelsLike={weather.current.feelsLike}
-          weatherCode={weather.current.weatherCode}
-          location={formatLocationName(location)}
-          windSpeed={weather.current.windSpeed}
-          humidity={weather.current.humidity}
-          todayHigh={todayHigh}
-          todayLow={todayLow}
-        />
-
-        {/* The Frontier Saying */}
-        {saying && (
-          <FrontierSaying
-            saying={saying.frontier}
-            modernLine={saying.modern}
+          {/* Hero: Temperature + Conditions */}
+          <AlmanacHero
             temperature={weather.current.temperature}
-            location={formatLocationName(location)}
-          />
-        )}
-
-        {/* Tomorrow Preview */}
-        <TomorrowPreview tomorrow={tomorrowData} />
-
-        {/* Snow Conditions - shows only when snow present */}
-        <div className="py-2">
-          <SnowConditions
-            snowDepth={weather.current.snowDepth}
-            currentTemp={weather.current.temperature}
+            feelsLike={weather.current.feelsLike}
             weatherCode={weather.current.weatherCode}
-          />
-        </div>
-
-        {/* Current Conditions Detail Card */}
-        <div className="py-2">
-          <CurrentConditionsCard
-            cloudCover={weather.current.cloudCover}
-            visibility={weather.current.visibility}
-            dewPoint={weather.current.dewPoint}
-            uvIndex={weather.current.uvIndex}
-            pressure={weather.current.pressure}
-            snowDepth={weather.current.snowDepth}
-            windGusts={weather.current.windGusts}
-          />
-        </div>
-
-        {/* Task Scores - Main Utility */}
-        <TaskScores
-          sower={taskScores.sower}
-          shepherd={taskScores.shepherd}
-          keeper={taskScores.keeper}
-          builder={taskScores.builder}
-        />
-
-        {/* NativePulse - Seed Stratification */}
-        <div className="py-6">
-          <NativePulse pulse={nativePulse} />
-        </div>
-
-        {/* Two-column: Soil Temp + Sun/Barometer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-6">
-          <SoilTemperature temperature={weather.current.soilTemperature} />
-          <SunBarometer
-            sunrise={todaySunrise}
-            sunset={todaySunset}
-            pressure={weather.current.pressure}
+            location={formatLocationName(location)}
             windSpeed={weather.current.windSpeed}
-            windDirection={weather.current.windDirection}
+            humidity={weather.current.humidity}
+            todayHigh={todayHigh}
+            todayLow={todayLow}
           />
-        </div>
 
-        {/* Two-column: Moon + Radar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
-          <MoonPhase moon={moon} />
-          <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
-        </div>
+          {/* The Frontier Saying */}
+          {saying && (
+            <FrontierSaying
+              saying={saying.frontier}
+              modernLine={saying.modern}
+              temperature={weather.current.temperature}
+              location={formatLocationName(location)}
+            />
+          )}
 
-        {/* Hourly + Daily Details */}
-        <WeatherDetails hourly={weather.hourly} daily={weather.daily} />
+          {/* Tomorrow Preview */}
+          <TomorrowPreview tomorrow={tomorrowData} />
 
-        {/* Footer */}
-        <PresentedByBlock lastUpdated={lastUpdated} />
+          {/* Snow Conditions - shows only when snow present */}
+          <div className="py-2">
+            <SnowConditions
+              snowDepth={weather.current.snowDepth}
+              currentTemp={weather.current.temperature}
+              weatherCode={weather.current.weatherCode}
+            />
+          </div>
 
-        {/* First-visit Onboarding */}
-        <OnboardingModal />
+          {/* Current Conditions Detail Card */}
+          <div className="py-2">
+            <CurrentConditionsCard
+              cloudCover={weather.current.cloudCover}
+              visibility={weather.current.visibility}
+              dewPoint={weather.current.dewPoint}
+              uvIndex={weather.current.uvIndex}
+              pressure={weather.current.pressure}
+              snowDepth={weather.current.snowDepth}
+              windGusts={weather.current.windGusts}
+            />
+          </div>
+
+          {/* Task Scores - Main Utility */}
+          <TaskScores
+            sower={taskScores.sower}
+            shepherd={taskScores.shepherd}
+            keeper={taskScores.keeper}
+            builder={taskScores.builder}
+          />
+
+          {/* NativePulse - Seed Stratification */}
+          <div className="py-6">
+            <NativePulse pulse={nativePulse} />
+          </div>
+
+          {/* Two-column: Soil Temp + Sun/Barometer */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-6">
+            <SoilTemperature temperature={weather.current.soilTemperature} />
+            <SunBarometer
+              sunrise={todaySunrise}
+              sunset={todaySunset}
+              pressure={weather.current.pressure}
+              windSpeed={weather.current.windSpeed}
+              windDirection={weather.current.windDirection}
+            />
+          </div>
+
+          {/* Two-column: Moon + Radar */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
+            <MoonPhase moon={moon} />
+            <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
+          </div>
+
+          {/* Hourly + Daily Details */}
+          <WeatherDetails hourly={weather.hourly} daily={weather.daily} />
+
+          {/* Footer */}
+          <PresentedByBlock lastUpdated={lastUpdated} />
+
+          {/* First-visit Onboarding */}
+          <OnboardingModal />
         </div>
       </main>
     </div>

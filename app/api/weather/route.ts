@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { DEFAULT_LOCATION } from '@/lib/almanac/geocoding'
+import { logger } from '@/lib/logger'
 
 const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast'
 
@@ -108,10 +109,7 @@ export async function GET(request: Request) {
     const data = await res.json()
     return NextResponse.json(data)
   } catch (error) {
-    console.error('Weather fetch error:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch weather data' },
-      { status: 500 }
-    )
+    logger.error('Weather fetch error:', error)
+    return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 })
   }
 }

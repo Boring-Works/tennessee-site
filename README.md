@@ -14,7 +14,7 @@ Rocky Mount State Historic Site - The first capital of the Southwest Territory, 
 ## Development
 
 ```bash
-# Install dependencies
+# Install dependencies (also sets up git hooks)
 npm install
 
 # Run development server
@@ -29,15 +29,33 @@ npm run start
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
+### Code Quality
+
+This project enforces code quality with automated tooling:
+
+- **Pre-commit hooks** - ESLint and Prettier run automatically on staged files
+- **No console statements** - Use `logger` from `lib/logger.ts` instead
+- **TypeScript strict mode** - Full type safety
+
+```typescript
+// Instead of console.log, use:
+import { logger } from '@/lib/logger'
+
+logger.debug('Development info', { data })
+logger.error('Something failed', error)
+```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for full guidelines.
+
 ## Deployment Workflow
 
 This project uses **GitHub + Vercel** for continuous deployment:
 
-| Action | Result |
-|--------|--------|
-| Push to `main` | Auto-deploys to **production** |
-| Push to other branches | Creates **preview deployment** |
-| Open a PR | Preview URL added to PR comments |
+| Action                 | Result                           |
+| ---------------------- | -------------------------------- |
+| Push to `main`         | Auto-deploys to **production**   |
+| Push to other branches | Creates **preview deployment**   |
+| Open a PR              | Preview URL added to PR comments |
 
 ### Standard Workflow
 

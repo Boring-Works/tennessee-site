@@ -171,7 +171,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
             y1={chartData.freezingY}
             x2={WIDTH - PADDING.right}
             y2={chartData.freezingY}
-            stroke="#60a5fa"
+            className="stroke-blue-400"
             strokeWidth="1"
             strokeDasharray="4 4"
             opacity={0.5}
@@ -186,7 +186,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
             y={HEIGHT - PADDING.bottom - bar.height}
             width={6}
             height={bar.height}
-            fill="#60a5fa"
+            className="fill-blue-400"
             opacity={0.3}
           />
         ))}
@@ -195,7 +195,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         <path
           d={chartData.linePath}
           fill="none"
-          stroke="#d4a84b"
+          className="stroke-almanac-gold"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -216,7 +216,9 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         ))}
 
         {/* Hover point */}
-        {hoveredInfo && <circle cx={hoveredInfo.x} cy={hoveredInfo.y} r={4} fill="#d4a84b" />}
+        {hoveredInfo && (
+          <circle cx={hoveredInfo.x} cy={hoveredInfo.y} r={4} className="fill-almanac-gold" />
+        )}
 
         {/* Y-axis labels */}
         <text
@@ -289,13 +291,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         </div>
         {chartData.showFreezingLine && (
           <div className="flex items-center gap-1">
-            <div
-              className="w-3 h-0.5 bg-blue-400/50 rounded"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(90deg, #60a5fa 0 2px, transparent 2px 4px)',
-              }}
-            />
+            <div className="w-3 h-0.5 border-t-2 border-dashed border-blue-400/50" />
             <span>Freezing</span>
           </div>
         )}

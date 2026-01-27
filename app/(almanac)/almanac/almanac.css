@@ -2,12 +2,12 @@
 /* Note: Tailwind is imported in globals.css, no need to import again */
 
 @theme inline {
-  --color-almanac-midnight: #0A1128;
-  --color-almanac-gold: #C5A059;
-  --color-almanac-parchment: #F4ECD8;
-  --color-almanac-success: #4A7C59;
-  --color-almanac-warning: #D4A84B;
-  --color-almanac-danger: #8B3A3A;
+  --color-almanac-midnight: #0a1128;
+  --color-almanac-gold: #c5a059;
+  --color-almanac-parchment: #f4ecd8;
+  --color-almanac-success: #4a7c59;
+  --color-almanac-warning: #d4a84b;
+  --color-almanac-danger: #8b3a3a;
 }
 
 /* Scrollbar hiding for horizontal scroll areas */
@@ -30,7 +30,8 @@
 }
 
 @keyframes alert-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0));
   }
@@ -46,7 +47,9 @@
    =========================================== */
 
 .card-hover {
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
 }
 
 .card-hover:hover {
@@ -54,10 +57,32 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* ===========================================
+   FADE IN ANIMATION
+   Delayed fade for footer elements
+   =========================================== */
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out 0.5s both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .animate-alert-pulse {
     animation: none;
+  }
+  .animate-fade-in {
+    animation: none;
+    opacity: 1;
   }
   .card-hover:hover {
     transform: none;

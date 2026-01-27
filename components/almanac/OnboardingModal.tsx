@@ -61,7 +61,7 @@ export default function OnboardingModal() {
                   Welcome to The 1775 Almanac
                 </h2>
                 <p className="text-sm text-almanac-parchment/70">
-                  Weather intelligence from Tennessee's oldest farm
+                  Weather intelligence from Tennessee&apos;s oldest farm
                 </p>
               </div>
 
@@ -78,7 +78,7 @@ export default function OnboardingModal() {
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Sprout className="w-4 h-4 text-almanac-success" />
-                  <span>Sower's Score — <em>When to plant</em></span>
+                  <span>Sower&apos;s Score — <em>When to plant</em></span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Thermometer className="w-4 h-4 text-almanac-warning" />
@@ -86,16 +86,16 @@ export default function OnboardingModal() {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Moon className="w-4 h-4 text-blue-400" />
-                  <span>Keeper's Score — <em>Livestock & pets</em></span>
+                  <span>Keeper&apos;s Score — <em>Livestock &amp; pets</em></span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <HardHat className="w-4 h-4 text-orange-400" />
-                  <span>Builder's Score — <em>Projects & repairs</em></span>
+                  <span>Builder&apos;s Score — <em>Projects &amp; repairs</em></span>
                 </div>
               </div>
 
               <p className="text-xs text-center text-almanac-parchment/50 mb-6">
-                Tap any score to see how it's calculated.
+                Tap any score to see how it&apos;s calculated.
               </p>
 
               {/* CTA */}

@@ -14,7 +14,7 @@ import {
 
 interface WeatherAlertBannerProps {
   daily: DailyForecast
-  currentTemp: number
+  currentTemp?: number // Optional - reserved for future use
 }
 
 interface Alert {
@@ -25,7 +25,7 @@ interface Alert {
   day: string
 }
 
-function analyzeForecastAlerts(daily: DailyForecast, currentTemp: number): Alert[] {
+function analyzeForecastAlerts(daily: DailyForecast): Alert[] {
   const alerts: Alert[] = []
   
   // Find today's index (skip past days) - uses centralized dateUtils
@@ -140,10 +140,10 @@ const colorMap = {
   },
 }
 
-export default function WeatherAlertBanner({ daily, currentTemp }: WeatherAlertBannerProps) {
+export default function WeatherAlertBanner({ daily }: WeatherAlertBannerProps) {
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   
-  const alerts = analyzeForecastAlerts(daily, currentTemp)
+  const alerts = analyzeForecastAlerts(daily)
   const visibleAlerts = alerts.filter(a => !dismissed.has(a.type))
   
   if (visibleAlerts.length === 0) return null

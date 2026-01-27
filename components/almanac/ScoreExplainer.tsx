@@ -218,7 +218,7 @@ function ScoreModal({ explanation, onClose }: ScoreModalProps) {
 
           {/* Who It's For */}
           <div>
-            <h3 className="text-sm font-semibold text-almanac-gold mb-2">Who It's For</h3>
+            <h3 className="text-sm font-semibold text-almanac-gold mb-2">Who It&apos;s For</h3>
             <ul className="space-y-1">
               {explanation.whoItsFor.map((item, i) => (
                 <li key={i} className="text-sm text-almanac-parchment/70 flex items-start gap-2">
@@ -313,7 +313,7 @@ export function WorkabilityExplainer() {
               className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:w-full bg-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden"
             >
               <div className="flex items-start justify-between p-4 border-b border-almanac-gold/20">
-                <h2 className="font-serif text-xl text-gold-leaf">Today's Workability</h2>
+                <h2 className="font-serif text-xl text-gold-leaf">Today&apos;s Workability</h2>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
@@ -324,7 +324,7 @@ export function WorkabilityExplainer() {
 
               <div className="p-4 space-y-4">
                 <p className="text-almanac-parchment/80 leading-relaxed">
-                  Workability scores rate today's weather conditions for different outdoor activities on a scale of 1-10.
+                  Workability scores rate today&apos;s weather conditions for different outdoor activities on a scale of 1-10.
                 </p>
 
                 <p className="text-almanac-parchment/70 text-sm leading-relaxed">
@@ -332,7 +332,7 @@ export function WorkabilityExplainer() {
                 </p>
 
                 <p className="text-almanac-parchment/70 text-sm leading-relaxed">
-                  Tap the <Info className="w-3.5 h-3.5 inline text-almanac-gold/60" /> icon on any score card to learn exactly what it measures and who it's designed for.
+                  Tap the <Info className="w-3.5 h-3.5 inline text-almanac-gold/60" /> icon on any score card to learn exactly what it measures and who it&apos;s designed for.
                 </p>
 
                 <div className="pt-3 border-t border-almanac-gold/10">

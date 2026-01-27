@@ -144,7 +144,7 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
             </span>
           </div>
           <p className="text-xs text-almanac-parchment/60">
-            Soil Temperature (6" depth)
+            Soil Temperature (6&quot; depth)
           </p>
         </div>
       </div>

@@ -21,8 +21,6 @@ export const metadata: Metadata = {
 // Enrollment data from shared source
 const CURRENT_ENROLLED = enrollmentData.currentEnrolled;
 const TOTAL_SPOTS = enrollmentData.totalSpots;
-const SPOTS_REMAINING = TOTAL_SPOTS - CURRENT_ENROLLED;
-const PROGRESS_PERCENT = Math.round((CURRENT_ENROLLED / TOTAL_SPOTS) * 100);
 
 // Tier names with emotional framing (with fallbacks for safety)
 const tierFraming: Record<number, { name: string; tagline: string }> = {

@@ -47,7 +47,7 @@ export default function ShareButton({ frontierLine, modernLine, temperature, loc
       ) : (
         <>
           <Share2 className="w-3.5 h-3.5" />
-          <span>Share today's briefing</span>
+          <span>Share today&apos;s briefing</span>
         </>
       )}
     </button>

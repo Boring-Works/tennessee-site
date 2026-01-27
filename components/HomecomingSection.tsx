@@ -124,7 +124,7 @@ export default function HomecomingSection() {
 
           <div className={styles["homecoming-map-content"]}>
             <p className={styles["homecoming-location-name"]}>Rocky Mount State Historic Site</p>
-            <p className={styles["homecoming-location-coords"]}>36°26'N · 82°18'W</p>
+            <p className={styles["homecoming-location-coords"]}>36°26&apos;N · 82°18&apos;W</p>
             <p className={styles["homecoming-location-distances"]}>
               30 min from Johnson City · 45 min from Knoxville
             </p>

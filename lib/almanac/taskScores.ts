@@ -24,8 +24,6 @@ import { isSnowCode, isIceCode } from './types'
 import {
   findTodayDailyIndex,
   findTodayHourlyIndex,
-  isDateToday,
-  getDateComponents,
   getEasternHour
 } from './dateUtils'
 
@@ -156,7 +154,6 @@ function analyzeConditions(weather: WeatherData): {
     forecastWarning: string | null
   }
 } {
-  const now = new Date()
   // CRITICAL: Use Eastern Time hour since API data is in America/New_York timezone
   const currentHour = getEasternHour()
   const currentTemp = weather.current.temperature
@@ -216,12 +213,12 @@ function analyzeConditions(weather: WeatherData): {
   }
 
   // Snow detection logic
-  let hasSnowOnGround = snowDepth >= 0.5 
+  const hasSnowOnGround = snowDepth >= 0.5
     || (recentSnowfall >= 0.5 && recentMaxTemp < 40)
     || (hadRecentSnowCode && recentMaxTemp < 38 && coldDaysCount >= 2)
 
   // Ice detection logic
-  let hasIceRisk = isFreezingPrecipNow || hadRecentIceCode
+  const hasIceRisk = isFreezingPrecipNow || hadRecentIceCode
     || (hadFreezing && hadAboveFreezing && currentTemp < 36)
     || (hasSnowOnGround && recentMaxTemp > 33 && currentTemp < 35)
     || (isFrozenGround && weather.current.precipitation > 0 && currentTemp < 36)

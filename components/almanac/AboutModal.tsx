@@ -70,8 +70,8 @@ export default function AboutModal() {
                 <section>
                   <p className="text-sm text-almanac-parchment/80 leading-relaxed">
                     That farm is still here. Part of it is now cared for by <strong className="text-almanac-gold">Rocky Mount
-                    State Historic Site</strong>—where Tennessee's territorial government operated
-                    from 1790 to 1792. Tennessee's oldest documented farm. The first capital
+                    State Historic Site</strong>—where Tennessee&apos;s territorial government operated
+                    from 1790 to 1792. Tennessee&apos;s oldest documented farm. The first capital
                     of what became the sixteenth state.
                   </p>
                 </section>
@@ -81,7 +81,7 @@ export default function AboutModal() {
                     Modern Tools, Ancestral Wisdom
                   </h3>
                   <p className="text-sm text-almanac-parchment/80 leading-relaxed">
-                    The 1775 Almanac isn't a history lesson. It's a daily briefing.
+                    The 1775 Almanac isn&apos;t a history lesson. It&apos;s a daily briefing.
                   </p>
                   <p className="text-sm text-almanac-parchment/80 leading-relaxed mt-2">
                     We pull real-time weather data, soil temperatures, frost probabilities,
@@ -89,7 +89,7 @@ export default function AboutModal() {
                     to plant, when to harvest, when to stay inside.
                   </p>
                   <p className="text-sm text-almanac-parchment/80 leading-relaxed mt-2">
-                    But we do it through a lens that's been focused for two and a half centuries.
+                    But we do it through a lens that&apos;s been focused for two and a half centuries.
                     The same ground that taught the Massengills how to survive a frontier winter
                     is now teaching you when to protect your pipes.
                   </p>
@@ -97,12 +97,12 @@ export default function AboutModal() {
 
                 <section>
                   <h3 className="text-sm font-semibold text-almanac-gold mb-2">
-                    What You'll Find Here
+                    What You&apos;ll Find Here
                   </h3>
                   <ul className="text-sm text-almanac-parchment/70 space-y-1">
-                    <li>• <strong>Workability Scores</strong> — Know if today's good for planting, outdoor work, or staying in</li>
+                    <li>• <strong>Workability Scores</strong> — Know if today&apos;s good for planting, outdoor work, or staying in</li>
                     <li>• <strong>Soil Temperature</strong> — Real-time data for planting decisions</li>
-                    <li>• <strong>The Seedkeeper's Watch</strong> — Native seed stratification tracking</li>
+                    <li>• <strong>The Seedkeeper&apos;s Watch</strong> — Native seed stratification tracking</li>
                     <li>• <strong>Moon Phases</strong> — Traditional planting guidance by the moon</li>
                     <li>• <strong>The Daily Proverb</strong> — Frontier wisdom meets modern life</li>
                     <li>• <strong>Forecasts & Radar</strong> — Hourly, daily, and 7-day outlooks</li>
@@ -112,7 +112,7 @@ export default function AboutModal() {
                 <section className="pt-4 border-t border-almanac-gold/10">
                   <p className="text-xs text-almanac-parchment/50 leading-relaxed">
                     The 1775 Almanac is powered by Rocky Mount State Historic Site in Piney Flats,
-                    Tennessee—adjacent to Tennessee's oldest documented farm and the first capital of
+                    Tennessee—adjacent to Tennessee&apos;s oldest documented farm and the first capital of
                     the Southwest Territory.
                   </p>
                   <a

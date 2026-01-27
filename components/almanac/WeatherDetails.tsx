@@ -217,7 +217,7 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                   }`}>
                     {weather.condition}
                     {hasSnowfall && (snowfall ?? 0) >= 1 && (
-                      <span className="ml-1 text-blue-400">({snowfall!.toFixed(1)}")</span>
+                      <span className="ml-1 text-blue-400">({snowfall!.toFixed(1)}&quot;)</span>
                     )}
                   </span>
                   
@@ -255,7 +255,7 @@ export function WeatherDetails({ hourly, daily }: WeatherDetailsProps) {
                     {hasSnowfall && (snowfall ?? 0) >= 2 && (
                       <span className="flex items-center gap-1 text-blue-300">
                         <Snowflake className="w-3 h-3" />
-                        {snowfall!.toFixed(1)}" accumulation
+                        {snowfall!.toFixed(1)}&quot; accumulation
                       </span>
                     )}
                   </div>

@@ -124,7 +124,7 @@ export function TaskScores({ sower, shepherd, keeper, builder }: TaskScoresProps
     <section className="py-8">
       <div className="flex items-center justify-center gap-3 mb-6">
         <h2 className="font-serif text-2xl text-gold-leaf text-center">
-          Today's Workability
+          Today&apos;s Workability
         </h2>
         <WorkabilityExplainer />
       </div>

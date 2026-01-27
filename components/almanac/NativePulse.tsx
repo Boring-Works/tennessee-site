@@ -20,7 +20,7 @@ export default function NativePulse({ pulse }: NativePulseProps) {
           {pulse.icon}
         </span>
         <div>
-          <h2 className="font-serif text-xl text-almanac-gold">The Seedkeeper's Watch</h2>
+          <h2 className="font-serif text-xl text-almanac-gold">The Seedkeeper&apos;s Watch</h2>
           <p className="text-sm text-almanac-parchment/60">Native Seed Stratification</p>
         </div>
       </div>

@@ -2,7 +2,6 @@
 
 import './almanac.css'
 import { useState, useEffect, useCallback, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { WeatherAtmosphere } from '@/components/almanac/WeatherAtmosphere'
 import { AlmanacHero } from '@/components/almanac/AlmanacHero'
 import { FrontierSaying } from '@/components/almanac/FrontierSaying'

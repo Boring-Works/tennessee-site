@@ -57,7 +57,7 @@ export default function CurrentConditionsCard({
           <div className="flex items-center gap-2 bg-blue-900/20 rounded p-2 col-span-2 sm:col-span-3">
             <Snowflake className="w-5 h-5 text-blue-400" />
             <div>
-              <p className="text-lg font-bold text-blue-300">{snowDepth.toFixed(1)}"</p>
+              <p className="text-lg font-bold text-blue-300">{snowDepth.toFixed(1)}&quot;</p>
               <p className="text-xs text-almanac-parchment/50">Snow on ground</p>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function CurrentConditionsCard({
           <div className="flex items-center gap-2">
             <Gauge className="w-4 h-4 text-almanac-parchment/60" />
             <div>
-              <p className="text-sm font-medium text-almanac-parchment">{(pressure / 33.864).toFixed(2)}"</p>
+              <p className="text-sm font-medium text-almanac-parchment">{(pressure / 33.864).toFixed(2)}&quot;</p>
               <p className="text-xs text-almanac-parchment/50">Barometer</p>
             </div>
           </div>

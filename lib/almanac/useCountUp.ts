@@ -21,8 +21,8 @@ export function useCountUp(
   const frameRef = useRef<number | null>(null)
 
   useEffect(() => {
-    // Reset on target change
-    setCount(0)
+    // Reset on target change - defer to avoid sync setState in effect
+    queueMicrotask(() => setCount(0))
     startTimeRef.current = null
 
     // Ease-out cubic: decelerates smoothly

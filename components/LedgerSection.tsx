@@ -157,7 +157,7 @@ export default function LedgerSection() {
 
             <div className={styles["ledger-card-content"]}>
               <h3 className={styles["ledger-card-location"]}>Philadelphia</h3>
-              <p className={styles["ledger-card-coords"]}>39°57'N · 75°10'W</p>
+              <p className={styles["ledger-card-coords"]}>39°57&apos;N · 75°10&apos;W</p>
               <p className={styles["ledger-card-role"]}>The Theory</p>
               <p className={styles["ledger-card-text"]}>
                 Fifty-six men signed a document declaring all men are created equal, with unalienable rights to life, liberty, and the pursuit of happiness.
@@ -210,7 +210,7 @@ export default function LedgerSection() {
 
             <div className={styles["ledger-card-content"]}>
               <h3 className={styles["ledger-card-location"]}>Rocky Mount</h3>
-              <p className={styles["ledger-card-coords"]}>36°26'N · 82°18'W</p>
+              <p className={styles["ledger-card-coords"]}>36°26&apos;N · 82°18&apos;W</p>
               <p className={styles["ledger-card-role"]}>The Practice</p>
               <p className={styles["ledger-card-text"]}>
                 William Blount arrived at this frontier outpost and established the first functioning government west of the Appalachians—turning philosophy into law.

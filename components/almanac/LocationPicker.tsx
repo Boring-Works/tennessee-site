@@ -75,7 +75,7 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
             className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-amber-900/90 border border-amber-500/50 text-amber-200 px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow-lg"
           >
             <AlertCircle className="w-4 h-4" />
-            <span>Location won't persist after refresh (storage full)</span>
+            <span>Location won&apos;t persist after refresh (storage full)</span>
             <button
               onClick={() => setStorageWarning(false)}
               className="ml-2 hover:text-white transition-colors"

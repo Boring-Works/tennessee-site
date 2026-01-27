@@ -1,5 +1,9 @@
 'use client'
 
+// This component intentionally uses Math.random for visual particle effects
+// The randomness is memoized and only regenerates when weather code changes
+/* eslint-disable react-hooks/purity */
+
 import { useMemo } from 'react'
 import './weather-atmosphere.css'
 
@@ -113,8 +117,11 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
     }
   }, [particleType])
 
-  // Lightning flash for storms - separate from particles
-  const showLightning = particleType === 'storm'
+  // Lightning flash delays - memoized for stability
+  const lightningDelays = useMemo(() => ({
+    flash1: `${6 + Math.random() * 6}s`,
+    flash2: `${12 + Math.random() * 10}s`,
+  }), [])
 
   return (
     <div className="weather-atmosphere" aria-hidden="true">
@@ -230,14 +237,14 @@ export function WeatherAtmosphere({ weatherCode }: WeatherAtmosphereProps) {
             className="lightning-flash"
             style={{
               '--flash-duration': '15s',
-              '--flash-delay': `${6 + Math.random() * 6}s`,
+              '--flash-delay': lightningDelays.flash1,
             } as React.CSSProperties}
           />
           <div
             className="lightning-flash"
             style={{
               '--flash-duration': '20s',
-              '--flash-delay': `${12 + Math.random() * 10}s`,
+              '--flash-delay': lightningDelays.flash2,
             } as React.CSSProperties}
           />
         </>

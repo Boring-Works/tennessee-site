@@ -1,5 +1,9 @@
 'use client'
 
+// getWeatherIcon returns a reference to an existing Lucide component, not a new component
+// The linter incorrectly flags this as "component creation during render"
+/* eslint-disable react-hooks/static-components */
+
 import { motion } from 'framer-motion'
 import { getWeatherInfo, isSnowCode, isIceCode } from '@/lib/almanac/types'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
@@ -27,7 +31,8 @@ export function AlmanacHero({
   todayLow,
 }: AlmanacHeroProps) {
   const weather = getWeatherInfo(weatherCode)
-  const WeatherIcon = getWeatherIcon(weatherCode)
+  // Get icon component - this is a stable reference lookup, not component creation
+  const Icon = getWeatherIcon(weatherCode)
   const isSnowing = isSnowCode(weatherCode)
   const isIcy = isIceCode(weatherCode)
 
@@ -57,7 +62,7 @@ export function AlmanacHero({
             repeat: Infinity,
           }}
         >
-          <WeatherIcon className="w-16 h-16 text-almanac-gold" />
+          <Icon className="w-16 h-16 text-almanac-gold" />
           {/* Snow/Ice indicator */}
           {(isSnowing || isIcy) && (
             <Snowflake className="w-6 h-6 text-blue-400 absolute -top-1 -right-1 animate-pulse" />

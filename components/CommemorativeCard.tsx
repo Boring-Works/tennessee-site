@@ -1,16 +1,18 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styles from './CommemorativeCard.module.css'
 
 export default function CommemorativeCard() {
-  const [mounted, setMounted] = useState(false)
   const [daysToTN230, setDaysToTN230] = useState(0)
   const [daysToUSA250, setDaysToUSA250] = useState(0)
+  const [mounted, setMounted] = useState(false)
+  const mountedRef = useRef(false)
 
   useEffect(() => {
-    setMounted(true)
+    // Use ref to track mount status without triggering re-render cascade
+    mountedRef.current = true
 
     const calculateDays = () => {
       const now = new Date()
@@ -22,6 +24,13 @@ export default function CommemorativeCard() {
     }
 
     calculateDays()
+
+    // Defer mount state update to avoid sync setState in effect
+    queueMicrotask(() => {
+      if (mountedRef.current) {
+        setMounted(true)
+      }
+    })
 
     // Calculate ms until next midnight
     const now = new Date()
@@ -35,7 +44,10 @@ export default function CommemorativeCard() {
       return () => clearInterval(interval)
     }, msUntilMidnight)
 
-    return () => clearTimeout(timeout)
+    return () => {
+      mountedRef.current = false
+      clearTimeout(timeout)
+    }
   }, [])
 
   return (

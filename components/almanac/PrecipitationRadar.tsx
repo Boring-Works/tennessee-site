@@ -16,7 +16,6 @@ interface RadarFrame {
 
 const RETRY_DELAYS = [1000, 2000, 4000]
 const MAX_RETRIES = 3
-const GRID_SIZE = 3 // 3x3 grid of tiles
 const ZOOM = 8 // Zoom 8 with 3x3 = ~60 mile view (better regional coverage)
 
 export default function PrecipitationRadar({ latitude, longitude }: PrecipitationRadarProps) {

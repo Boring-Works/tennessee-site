@@ -114,7 +114,7 @@ export default function SnowConditions({ snowDepth, currentTemp, weatherCode }: 
           <div className="flex items-center gap-4 mb-2">
             <div className="flex items-center gap-1 text-almanac-parchment">
               <Ruler className="w-4 h-4 text-almanac-parchment/50" />
-              <span className="text-lg font-bold">{snowDepth.toFixed(1)}"</span>
+              <span className="text-lg font-bold">{snowDepth.toFixed(1)}&quot;</span>
               <span className="text-sm text-almanac-parchment/50">on ground</span>
             </div>
             {currentTemp > 32 && snowDepth > 0 && (
@@ -135,7 +135,7 @@ export default function SnowConditions({ snowDepth, currentTemp, weatherCode }: 
       {/* Visual depth indicator */}
       <div className="mt-3 pt-3 border-t border-white/10">
         <div className="flex items-center gap-2 text-xs text-almanac-parchment/40">
-          <span>0"</span>
+          <span>0&quot;</span>
           <div className="flex-1 h-2 bg-almanac-midnight rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
@@ -144,7 +144,7 @@ export default function SnowConditions({ snowDepth, currentTemp, weatherCode }: 
               className="h-full bg-gradient-to-r from-blue-500/60 to-blue-400 rounded-full"
             />
           </div>
-          <span>12"+</span>
+          <span>12&quot;+</span>
         </div>
       </div>
     </motion.div>

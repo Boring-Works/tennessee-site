@@ -41,7 +41,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         setLoading(true)
         if (attempt > 0) setRetryCount(attempt)
 
-        const response = await fetch('https://api.rainviewer.com/public/weather-maps.json')
+        const response = await fetch('/api/precipitation-radar')
         if (!response.ok) throw new Error('Failed to fetch radar data')
 
         const data = await response.json()

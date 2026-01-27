@@ -1,6 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { getConditionText, getWeatherIcon } from '@/lib/weather-helpers/weatherUtils'
 
 interface WeatherData {
   temp: number
@@ -16,9 +18,7 @@ export function WeatherHeader() {
     const lat = 36.4539
     const lon = -82.3109
 
-    fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America/New_York`
-    )
+    fetch(`/api/weather?lat=${lat}&lon=${lon}`)
       .then((res) => {
         if (!res.ok) throw new Error('Weather fetch failed')
         return res.json()
@@ -40,44 +40,34 @@ export function WeatherHeader() {
   // Don't render anything while loading or on error
   if (loading || !weather) {
     return (
-      <div className="weather-header weather-header--loading">
-        <span className="weather-text">Sullivan County, Tennessee</span>
-      </div>
+      <Link
+        href="/almanac"
+        className="weather-header weather-header--loading"
+        aria-label="View The 1775 Almanac - Current weather for Sullivan County"
+      >
+        <span className="weather-content">
+          <span className="weather-text">Sullivan County, Tennessee</span>
+        </span>
+        <span className="weather-cta">The 1775 Almanac &rarr;</span>
+      </Link>
     )
   }
 
   return (
-    <div className="weather-header">
-      <span className="weather-icon" aria-hidden="true">
-        {weather.icon}
+    <Link
+      href="/almanac"
+      className="weather-header"
+      aria-label="View The 1775 Almanac - Current weather for Sullivan County"
+    >
+      <span className="weather-content">
+        <span className="weather-icon" aria-hidden="true">
+          {weather.icon}
+        </span>
+        <span className="weather-text">
+          Sullivan County, Tennessee &middot; {weather.temp}&deg;F &middot; {weather.condition}
+        </span>
       </span>
-      <span className="weather-text">
-        Sullivan County, Tennessee · {weather.temp}°F · {weather.condition}
-      </span>
-    </div>
+      <span className="weather-cta">The 1775 Almanac &rarr;</span>
+    </Link>
   )
-}
-
-function getConditionText(code: number): string {
-  if (code === 0) return 'Clear'
-  if (code <= 3) return 'Partly Cloudy'
-  if (code <= 49) return 'Foggy'
-  if (code <= 59) return 'Drizzle'
-  if (code <= 69) return 'Rainy'
-  if (code <= 79) return 'Snowy'
-  if (code <= 82) return 'Showers'
-  if (code <= 99) return 'Stormy'
-  return 'Fair'
-}
-
-function getWeatherIcon(code: number): string {
-  if (code === 0) return '☀️'
-  if (code <= 3) return '⛅'
-  if (code <= 49) return '🌫️'
-  if (code <= 59) return '🌦️'
-  if (code <= 69) return '🌧️'
-  if (code <= 79) return '🌨️'
-  if (code <= 82) return '🌧️'
-  if (code <= 99) return '⛈️'
-  return '🌤️'
 }

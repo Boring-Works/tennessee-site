@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { AirQualityData, AQILevel } from '@/lib/almanac/types'
+import { logger } from '@/lib/logger'
 
 // AQICN API response type
 interface AQICNResponse {
@@ -73,6 +74,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Missing lat/lon parameters' }, { status: 400 })
   }
 
+  // Parse and validate coordinates
+  const latNum = parseFloat(lat)
+  const lonNum = parseFloat(lon)
+  if (isNaN(latNum) || isNaN(lonNum)) {
+    return NextResponse.json({ error: 'Invalid coordinates' }, { status: 400 })
+  }
+
+  // Round coordinates to 2 decimal places for cache efficiency
+  const latRounded = Math.round(latNum * 100) / 100
+  const lonRounded = Math.round(lonNum * 100) / 100
+
   const apiKey = process.env.AQICN_API_KEY
 
   if (!apiKey) {
@@ -81,7 +93,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // AQICN geo-based feed endpoint
-    const url = `https://api.waqi.info/feed/geo:${lat};${lon}/?token=${apiKey}`
+    const url = `https://api.waqi.info/feed/geo:${latRounded};${lonRounded}/?token=${apiKey}`
 
     const response = await fetch(url, {
       headers: {
@@ -109,8 +121,13 @@ export async function GET(request: NextRequest) {
       timestamp: data.data.time.iso,
     }
 
-    return NextResponse.json(airQuality)
+    return NextResponse.json(airQuality, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=600',
+      },
+    })
   } catch (error) {
+    logger.error('Air quality fetch error:', error)
     // Return null data on error - component should handle gracefully
     return NextResponse.json(
       {
@@ -121,7 +138,12 @@ export async function GET(request: NextRequest) {
         timestamp: null,
         error: error instanceof Error ? error.message : 'Failed to fetch air quality data',
       },
-      { status: 200 } // Return 200 so component can handle gracefully
+      {
+        status: 200, // Return 200 so component can handle gracefully
+        headers: {
+          'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=600',
+        },
+      }
     )
   }
 }

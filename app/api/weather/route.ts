@@ -31,9 +31,13 @@ export async function GET(request: Request) {
     )
   }
 
+  // Round coordinates to 2 decimal places for cache efficiency
+  const latRounded = Math.round(latNum * 100) / 100
+  const lonRounded = Math.round(lonNum * 100) / 100
+
   const params = new URLSearchParams({
-    latitude: lat,
-    longitude: lon,
+    latitude: String(latRounded),
+    longitude: String(lonRounded),
     // CURRENT: Expanded for maximum utility
     current: [
       'temperature_2m',
@@ -107,7 +111,11 @@ export async function GET(request: Request) {
     }
 
     const data = await res.json()
-    return NextResponse.json(data)
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+      },
+    })
   } catch (error) {
     logger.error('Weather fetch error:', error)
     return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 })

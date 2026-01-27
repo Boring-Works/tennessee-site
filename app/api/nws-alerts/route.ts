@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { logger } from '@/lib/logger'
 
 // NWS Alert severity levels
 type AlertSeverity = 'Minor' | 'Moderate' | 'Severe' | 'Extreme'
@@ -57,9 +58,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Missing lat/lon parameters' }, { status: 400 })
   }
 
+  // Parse and validate coordinates
+  const latNum = parseFloat(lat)
+  const lonNum = parseFloat(lon)
+  if (isNaN(latNum) || isNaN(lonNum)) {
+    return NextResponse.json({ error: 'Invalid coordinates' }, { status: 400 })
+  }
+
+  // Round coordinates to 2 decimal places for cache efficiency
+  const latRounded = Math.round(latNum * 100) / 100
+  const lonRounded = Math.round(lonNum * 100) / 100
+
   try {
     const response = await fetch(
-      `https://api.weather.gov/alerts?point=${lat},${lon}&status=actual`,
+      `https://api.weather.gov/alerts?point=${latRounded},${lonRounded}&status=actual`,
       {
         headers: {
           'User-Agent': '1775Almanac/1.0 (contact@rockymounthistory.org)',
@@ -72,7 +84,14 @@ export async function GET(request: NextRequest) {
     if (!response.ok) {
       // NWS API sometimes returns 404 for areas with no alerts
       if (response.status === 404) {
-        return NextResponse.json({ alerts: [], hasFireWeatherAlert: false })
+        return NextResponse.json(
+          { alerts: [], hasFireWeatherAlert: false },
+          {
+            headers: {
+              'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+            },
+          }
+        )
       }
       throw new Error(`NWS API returned ${response.status}`)
     }
@@ -115,17 +134,32 @@ export async function GET(request: NextRequest) {
       FIRE_WEATHER_EVENTS.includes(alert.event)
     )
 
-    return NextResponse.json({
-      alerts: activeAlerts,
-      hasFireWeatherAlert,
-    })
-  } catch {
+    return NextResponse.json(
+      {
+        alerts: activeAlerts,
+        hasFireWeatherAlert,
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+        },
+      }
+    )
+  } catch (error) {
+    logger.error('NWS alerts fetch error:', error)
     // Return empty alerts instead of failing
     // This ensures the app still works even if NWS is down
-    return NextResponse.json({
-      alerts: [],
-      hasFireWeatherAlert: false,
-      error: 'Failed to fetch alerts',
-    })
+    return NextResponse.json(
+      {
+        alerts: [],
+        hasFireWeatherAlert: false,
+        error: 'Failed to fetch alerts',
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+        },
+      }
+    )
   }
 }

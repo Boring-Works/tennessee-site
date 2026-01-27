@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { logger } from '@/lib/logger'
 
 // USGS Water Services API
 // Documentation: https://waterservices.usgs.gov/rest/IV-Service.html
@@ -172,24 +173,47 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid coordinates' }, { status: 400 })
   }
 
+  // Round coordinates to 2 decimal places for cache efficiency
+  const latRounded = Math.round(lat * 100) / 100
+  const lonRounded = Math.round(lon * 100) / 100
+
   // Find nearest station
-  const nearest = findNearestStation(lat, lon)
+  const nearest = findNearestStation(latRounded, lonRounded)
 
   if (!nearest) {
-    return NextResponse.json({
-      data: null,
-      message: 'No USGS stations found within 50 miles',
-    })
+    return NextResponse.json(
+      {
+        data: null,
+        message: 'No USGS stations found within 50 miles',
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=600',
+        },
+      }
+    )
   }
 
   // Fetch current readings
-  const reading = await fetchUSGSData(nearest.station.siteCode)
+  let reading: USGSReading | null = null
+  try {
+    reading = await fetchUSGSData(nearest.station.siteCode)
+  } catch (error) {
+    logger.error('Stream levels fetch error:', error)
+  }
 
   if (!reading) {
-    return NextResponse.json({
-      data: null,
-      message: 'Unable to fetch stream data',
-    })
+    return NextResponse.json(
+      {
+        data: null,
+        message: 'Unable to fetch stream data',
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=600',
+        },
+      }
+    )
   }
 
   // Determine stream status based on typical ranges
@@ -218,16 +242,23 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.json({
-    data: {
-      siteName: reading.siteName || nearest.station.siteName,
-      siteCode: reading.siteCode,
-      gageHeight: reading.gageHeight,
-      streamflow: reading.streamflow,
-      status,
-      percentile,
-      distanceMiles: Math.round(nearest.distance * 10) / 10,
-      timestamp: reading.timestamp,
+  return NextResponse.json(
+    {
+      data: {
+        siteName: reading.siteName || nearest.station.siteName,
+        siteCode: reading.siteCode,
+        gageHeight: reading.gageHeight,
+        streamflow: reading.streamflow,
+        status,
+        percentile,
+        distanceMiles: Math.round(nearest.distance * 10) / 10,
+        timestamp: reading.timestamp,
+      },
     },
-  })
+    {
+      headers: {
+        'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=600',
+      },
+    }
+  )
 }

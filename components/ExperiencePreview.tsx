@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import styles from '@/app/(main)/home/page.module.css'
+import { BUTTONS } from '@/lib/copy'
 
 interface ExperienceMoment {
   numeral: string
@@ -119,9 +120,9 @@ const experiences: ExperienceMoment[] = [
   {
     numeral: 'I',
     icon: <GroundsIcon />,
-    title: 'Walk Historic Grounds',
+    title: 'Stand on Historic Ground',
     description:
-      "The same soil where Governor Blount established Tennessee's first government in 1790.",
+      "The same ground where Governor Blount established Tennessee's government in 1790.",
   },
   {
     numeral: 'II',
@@ -293,7 +294,7 @@ export default function ExperiencePreview() {
 
         <footer className={styles['experience-footer']}>
           <Link href="/visit" className={styles['experience-cta']}>
-            <span className={styles['experience-cta-text']}>Plan Your Visit</span>
+            <span className={styles['experience-cta-text']}>{BUTTONS.primary}</span>
             <span className={styles['experience-cta-arrow']} aria-hidden="true">
               →
             </span>

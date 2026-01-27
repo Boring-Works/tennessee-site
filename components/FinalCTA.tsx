@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HOOKS, BUTTONS } from '@/lib/copy'
 
 export default function FinalCTA() {
   return (
@@ -41,7 +42,7 @@ export default function FinalCTA() {
 
           {/* Subheading */}
           <p className="font-serif-elegant text-lg md:text-xl italic text-white/60 mb-8">
-            Walk the halls where Tennessee was born
+            {HOOKS.primaryCTA}
           </p>
 
           {/* Primary CTA - matching hero button */}
@@ -52,12 +53,12 @@ export default function FinalCTA() {
             <span className="text-xl transition-transform duration-300 group-hover:scale-110">
               ★
             </span>
-            Plan Your Visit
+            {BUTTONS.primary}
           </Link>
 
           {/* Closing tagline */}
           <p className="mt-10 font-serif-elegant text-base md:text-lg italic text-accent/80">
-            Tennessee starts here. Will you?
+            {HOOKS.closingTagline}
           </p>
 
           {/* Decorative bottom flourish */}

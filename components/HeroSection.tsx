@@ -2,8 +2,11 @@
 
 import Link from 'next/link'
 import SmartCommemorativeCard from './SmartCommemorativeCard'
+import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
 
 export default function HeroSection() {
+  const { hero } = MYSTERY_NARRATIVE
+
   return (
     <section className="relative min-h-[90vh] bg-primary flex flex-col overflow-hidden">
       {/* Background with gradient */}
@@ -43,7 +46,7 @@ export default function HeroSection() {
               <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 border border-accent/30 rounded-sm opacity-0 animate-[fadeUp_0.6s_ease-out_0.05s_forwards]">
                 <span className="text-base">🇺🇸</span>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
-                  Official America 250 Site
+                  {hero.badge}
                 </span>
               </div>
 
@@ -54,24 +57,38 @@ export default function HeroSection() {
 
               {/* Main Headline */}
               <h1 className="font-serif text-[clamp(3rem,10vw,5rem)] font-bold text-white leading-[1.1] tracking-tight mb-3 opacity-0 animate-[fadeUp_0.6s_ease-out_0.2s_forwards]">
-                TENNESSEE
+                {hero.headline}
               </h1>
 
               {/* Subhead */}
               <p className="font-serif-elegant text-[clamp(1.5rem,4vw,2.5rem)] italic text-accent leading-tight mb-6 opacity-0 animate-[fadeUp_0.6s_ease-out_0.3s_forwards]">
-                starts here
+                {hero.subhead}
               </p>
 
               {/* Divider */}
               <div className="w-[120px] h-[2px] bg-accent/50 mx-auto lg:mx-0 mb-6 opacity-0 animate-[fadeUp_0.6s_ease-out_0.35s_forwards]" />
 
-              {/* Tagline - Experiential Language */}
-              <p className="font-serif-elegant text-base md:text-lg italic text-white/60 mb-2 opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
-                Walk the halls where Tennessee was born — 235 years of living history
+              {/* Narrative Timeline */}
+              <div className="space-y-2 mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
+                {hero.timeline.map((line, i) => (
+                  <p key={i} className="font-serif-elegant text-sm md:text-base text-white/70">
+                    {line}
+                  </p>
+                ))}
+              </div>
+
+              {/* Contrast Line */}
+              <p className="font-serif-elegant text-base md:text-lg italic text-white/80 mb-3 border-l-2 border-accent/60 pl-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.45s_forwards]">
+                {hero.contrast}
+              </p>
+
+              {/* Bridge */}
+              <p className="text-sm text-white/60 mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.48s_forwards]">
+                {hero.bridge}
               </p>
 
               {/* Location - Higher contrast + driving context */}
-              <p className="text-sm text-white/60 mb-4 flex items-center justify-center lg:justify-start gap-1.5 opacity-0 animate-[fadeUp_0.6s_ease-out_0.45s_forwards]">
+              <p className="text-sm text-white/60 mb-4 flex items-center justify-center lg:justify-start gap-1.5 opacity-0 animate-[fadeUp_0.6s_ease-out_0.5s_forwards]">
                 <svg className="w-3.5 h-3.5 text-white/50" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
@@ -83,7 +100,7 @@ export default function HeroSection() {
               </p>
 
               {/* Social Proof Line */}
-              <p className="text-sm text-white/50 mb-8 flex items-center justify-center lg:justify-start gap-2 opacity-0 animate-[fadeUp_0.6s_ease-out_0.48s_forwards]">
+              <p className="text-sm text-white/50 mb-8 flex items-center justify-center lg:justify-start gap-2 opacity-0 animate-[fadeUp_0.6s_ease-out_0.52s_forwards]">
                 <span className="text-accent">★★★★★</span>
                 <span>TripAdvisor</span>
                 <span className="text-white/30">·</span>
@@ -93,7 +110,7 @@ export default function HeroSection() {
               </p>
 
               {/* CTAs - Specific and benefit-oriented */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start opacity-0 animate-[fadeUp_0.6s_ease-out_0.5s_forwards]">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start opacity-0 animate-[fadeUp_0.6s_ease-out_0.55s_forwards]">
                 <Link
                   href="/visit"
                   className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-8 py-4 text-[14px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)]"
@@ -101,18 +118,23 @@ export default function HeroSection() {
                   <span className="text-base transition-transform duration-300 group-hover:scale-110">
                     ★
                   </span>
-                  See Hours & Admission
+                  {BUTTONS.primary}
                   <span className="text-primary/70 font-medium normal-case tracking-normal">
                     — Free Parking
                   </span>
                 </Link>
                 <Link
-                  href="/events"
+                  href="/first-250"
                   className="inline-flex items-center justify-center border-2 border-white/25 text-white px-8 py-4 text-[14px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:border-white/50 hover:bg-white/5 hover:-translate-y-0.5"
                 >
-                  Explore 2026 Events
+                  {BUTTONS.secondary}
                 </Link>
               </div>
+
+              {/* Stand where they stood CTA line */}
+              <p className="mt-6 text-sm font-serif-elegant italic text-accent/80 opacity-0 animate-[fadeUp_0.6s_ease-out_0.6s_forwards]">
+                {HOOKS.primaryCTA}
+              </p>
             </div>
 
             {/* RIGHT COLUMN (40%) - Commemorative Card */}

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import styles from '@/app/(main)/home/page.module.css'
+import { HOOKS } from '@/lib/copy'
 
 // Frontier horizon silhouette
 const HorizonSilhouette = () => (
@@ -134,12 +135,11 @@ export default function HomecomingSection() {
           This Is Where It Started
         </h2>
 
-        {/* Experiential hook */}
+        {/* Experiential hook - Fame Bridge */}
         <p
           className={`${styles['homecoming-hook']} ${isVisible ? styles['homecoming-hook--visible'] : ''}`}
         >
-          Walk the same grounds as William Blount. Meet costumed interpreters living as 1790
-          settlers. Stand where Tennessee&apos;s government first convened.
+          {HOOKS.fameBridge} Meet costumed interpreters living as 1790 settlers.
         </p>
 
         {/* Vintage map location card */}
@@ -190,9 +190,7 @@ export default function HomecomingSection() {
             className={`${styles['homecoming-signpost-plank']} ${styles['homecoming-signpost-plank--hours']}`}
           >
             <span className={styles['homecoming-signpost-label']}>Hours</span>
-            <span className={styles['homecoming-signpost-value']}>
-              Tue–Sat 10am–5pm · Sun 1pm–5pm
-            </span>
+            <span className={styles['homecoming-signpost-value']}>Wed–Sat 10am–5pm</span>
           </div>
           <div className={styles['homecoming-signpost-post']} aria-hidden="true" />
           <div
@@ -221,8 +219,12 @@ export default function HomecomingSection() {
         <p
           className={`${styles['homecoming-closing']} ${showTagline ? styles['homecoming-closing--visible'] : ''}`}
         >
-          <span className={styles['homecoming-closing-main']}>Tennessee starts here.</span>
-          <em className={styles['homecoming-closing-question']}>Will you?</em>
+          <span className={styles['homecoming-closing-main']}>
+            {HOOKS.closingTagline.split('.')[0]}.
+          </span>
+          <em className={styles['homecoming-closing-question']}>
+            {HOOKS.closingTagline.split('.')[1]?.trim()}
+          </em>
         </p>
       </div>
     </section>

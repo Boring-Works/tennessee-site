@@ -221,8 +221,15 @@ export default function VisitPage() {
           {/* Quick facts row */}
           <div className={styles['visit-hero-facts']}>
             <div className={styles['visit-hero-fact']}>
-              <span className={styles['visit-hero-fact-value']}>~1 hr</span>
-              <span className={styles['visit-hero-fact-label']}>Tour</span>
+              <span className={styles['visit-hero-fact-value']}>Wed–Sat</span>
+              <span className={styles['visit-hero-fact-label']}>11am–4:30pm</span>
+            </div>
+            <div className={styles['visit-hero-fact-divider']} aria-hidden="true">
+              <span className={styles['visit-hero-fact-star']}>★</span>
+            </div>
+            <div className={styles['visit-hero-fact']}>
+              <span className={styles['visit-hero-fact-value']}>Hourly</span>
+              <span className={styles['visit-hero-fact-label']}>Tours</span>
             </div>
             <div className={styles['visit-hero-fact-divider']} aria-hidden="true">
               <span className={styles['visit-hero-fact-star']}>★</span>
@@ -231,14 +238,12 @@ export default function VisitPage() {
               <span className={styles['visit-hero-fact-value']}>${admission.adults.price}</span>
               <span className={styles['visit-hero-fact-label']}>Adults</span>
             </div>
-            <div className={styles['visit-hero-fact-divider']} aria-hidden="true">
-              <span className={styles['visit-hero-fact-star']}>★</span>
-            </div>
-            <div className={styles['visit-hero-fact']}>
-              <span className={styles['visit-hero-fact-value']}>Wed–Sat</span>
-              <span className={styles['visit-hero-fact-label']}>Open</span>
-            </div>
           </div>
+
+          {/* Season note */}
+          <p className={styles['visit-hero-season']}>
+            Season opens March · See <Link href="/events">events</Link> for specific dates
+          </p>
 
           {/* Primary CTA with wax seal */}
           <a

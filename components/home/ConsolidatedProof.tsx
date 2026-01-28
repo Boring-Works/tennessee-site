@@ -22,18 +22,21 @@ const figures = [
     title: 'Constitution Signer',
     role: 'Governor 1790-1792',
     quote: 'Commissioned by Washington to govern the frontier.',
+    badge: null,
   },
   {
     name: 'Andrew Jackson',
     title: 'Future President',
     role: 'Lodged here 1788',
     quote: 'Six weeks at age 21, studying law.',
+    badge: '7th President',
   },
   {
     name: 'The Cobb Family',
     title: 'Three Generations',
     role: 'Settled ~1770',
     quote: 'Supplied the Revolution.',
+    badge: null,
   },
 ]
 
@@ -76,9 +79,16 @@ export function ConsolidatedProof() {
               <div
                 key={figure.name}
                 ref={cardRefs[index]}
-                className={`bg-white p-8 border border-secondary/10 fade-in-up ${cardsVisible[index] ? 'visible' : ''}`}
+                className={`bg-white p-8 border border-secondary/10 fade-in-up relative ${cardsVisible[index] ? 'visible' : ''}`}
                 style={{ transitionDelay: `${index * 0.1}s` }}
               >
+                {/* Recognition badge */}
+                {figure.badge && (
+                  <div className="absolute top-4 right-4 bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+                    {figure.badge}
+                  </div>
+                )}
+
                 {/* Wax seal decoration */}
                 <div className="w-12 h-12 rounded-full bg-burgundy/10 flex items-center justify-center mb-6">
                   <span className="text-burgundy text-xl">✦</span>
@@ -246,9 +256,32 @@ export function ConsolidatedProof() {
             The Record Is Clear
           </p>
 
+          {/* Visual timeline bar */}
+          <div
+            className={`max-w-2xl mx-auto mb-8 fade-in-up stagger-1 ${distinctionVisible ? 'visible' : ''}`}
+          >
+            <div className="relative h-3 bg-secondary/10 rounded-full overflow-hidden">
+              <div
+                className="absolute left-0 top-0 h-full bg-accent rounded-full"
+                style={{ width: '8%' }}
+                title="Rocky Mount: 1790-1792"
+              />
+              <div
+                className="absolute top-0 h-full bg-secondary/30 rounded-r-full"
+                style={{ left: '8%', width: '92%' }}
+                title="Knoxville: 1792-1817"
+              />
+            </div>
+            <div className="flex justify-between text-xs text-text-light mt-2">
+              <span>1790</span>
+              <span>1796 (Statehood)</span>
+              <span>1817</span>
+            </div>
+          </div>
+
           {/* Timeline comparison */}
           <div
-            className={`space-y-4 mb-10 fade-in-up stagger-1 ${distinctionVisible ? 'visible' : ''}`}
+            className={`space-y-4 mb-10 fade-in-up stagger-2 ${distinctionVisible ? 'visible' : ''}`}
           >
             <div className="inline-flex items-center gap-4 text-left">
               <span className="text-accent font-serif font-bold text-lg w-28 text-right shrink-0">

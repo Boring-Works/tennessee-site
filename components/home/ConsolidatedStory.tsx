@@ -32,9 +32,9 @@ const timelineData = [
 ]
 
 const contrastLines = [
-  { text: 'This is not where they gathered.', highlight: false },
-  { text: 'This is not where they farmed.', highlight: false },
-  { text: 'This is where they governed.', highlight: true },
+  { text: 'This is not where they gathered.', highlight: false, emphasis: false },
+  { text: 'This is not where they farmed.', highlight: false, emphasis: false },
+  { text: 'This is where they governed.', highlight: true, emphasis: true },
 ]
 
 export function ConsolidatedStory() {
@@ -94,6 +94,12 @@ export function ConsolidatedStory() {
             className={`font-serif-elegant text-[clamp(1.5rem,4vw,2.25rem)] text-white/90 leading-relaxed italic fade-in-up stagger-2 ${questionVisible ? 'visible' : ''}`}
           >
             Could American democracy survive beyond the Appalachians?
+          </p>
+
+          <p
+            className={`text-sm text-white/50 mt-4 fade-in-up stagger-2 ${questionVisible ? 'visible' : ''}`}
+          >
+            600 miles from Philadelphia. Three weeks by horse.
           </p>
 
           <div
@@ -170,9 +176,15 @@ export function ConsolidatedStory() {
               <p
                 key={index}
                 ref={contrastRefs[index]}
-                className={`font-serif-elegant text-[clamp(1.5rem,4vw,2.5rem)] leading-relaxed reveal-line ${
+                className={`font-serif-elegant leading-relaxed reveal-line ${
                   contrastVisible[index] ? 'visible' : ''
-                } ${line.highlight ? 'text-accent italic font-semibold' : 'text-white/70'}`}
+                } ${
+                  line.emphasis
+                    ? 'text-[clamp(1.75rem,5vw,3rem)] text-accent italic font-semibold mt-2'
+                    : line.highlight
+                      ? 'text-[clamp(1.5rem,4vw,2.5rem)] text-accent italic font-semibold'
+                      : 'text-[clamp(1.5rem,4vw,2.5rem)] text-white/70'
+                }`}
                 style={{ transitionDelay: `${index * 0.15}s` }}
               >
                 {line.text}

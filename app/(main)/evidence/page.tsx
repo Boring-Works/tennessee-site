@@ -296,22 +296,14 @@ export default function EvidencePage() {
             <TimelineEvent
               date="May 28, 1790"
               event="Hugh Williamson recommends Blount to Washington"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0277"
+              sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0268"
             />
-            <TimelineEvent
-              date="Jun 7, 1790"
-              event="Washington nominates Blount as Governor"
-              sourceUrl="https://founders.archives.gov/"
-            />
-            <TimelineEvent
-              date="Jun 8, 1790"
-              event="Senate confirms Blount's appointment"
-              sourceUrl="https://founders.archives.gov/"
-            />
+            <TimelineEvent date="Jun 7, 1790" event="Washington nominates Blount as Governor" />
+            <TimelineEvent date="Jun 8, 1790" event="Senate confirms Blount's appointment" />
             <TimelineEvent
               date="Aug 13, 1790"
               event="Washington asks Knox: 'Where ought the Governor to reside?'"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-06-02-0135"
+              sourceUrl="https://founders.archives.gov/documents/Washington/05-06-02-0076"
             />
             <TimelineEvent
               date="Oct 11, 1790"
@@ -326,7 +318,7 @@ export default function EvidencePage() {
             <TimelineEvent
               date="Jul 2, 1791"
               event="Treaty of Holston signed with Cherokee Nation"
-              sourceUrl="https://digitreaties.org/"
+              sourceUrl="https://avalon.law.yale.edu/18th_century/chr1791.asp"
             />
             <TimelineEvent
               date="Nov 5, 1791"
@@ -336,12 +328,12 @@ export default function EvidencePage() {
             <TimelineEvent
               date="Nov 11, 1791"
               event="Washington proclaims Treaty of Holston as law"
-              sourceUrl="https://founders.archives.gov/"
+              sourceUrl="https://founders.archives.gov/documents/Washington/05-09-02-0100"
             />
             <TimelineEvent
               date="Late 1791"
               event="Blount family arrives in territory"
-              sourceUrl="https://blountmansion.org/"
+              sourceUrl="https://www.blountmansion.org/"
             />
             <TimelineEvent
               date="Early 1792"
@@ -351,7 +343,7 @@ export default function EvidencePage() {
             <TimelineEvent
               date="Jun 1, 1796"
               event="Tennessee admitted to the Union as 16th state"
-              sourceUrl="https://tennesseeencyclopedia.net/"
+              sourceUrl="https://tennesseeencyclopedia.net/entries/statehood/"
             />
           </div>
         </div>

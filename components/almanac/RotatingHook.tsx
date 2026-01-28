@@ -1,6 +1,6 @@
 const hooks = [
   'From Sullivan County — where Tennessee began',
-  "Weather wisdom from the Southwest Territory's first capitol",
+  "Weather wisdom from the Southwest Territory's capital",
   '250 years of reading these skies',
   "Sullivan County's gift to Tennessee",
   'What the frontier knew about these mountains',

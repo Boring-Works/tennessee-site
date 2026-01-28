@@ -238,7 +238,7 @@ The capital that made a state.
 1790. Governor Blount—one of 39 men who signed the Constitution—
 governed from this ground.
 
-Treaties were negotiated. Letters went to Washington.
+Letters went to Washington. A territory was governed.
 A state was born.
 
 Then the capital moved. The moment passed. The ground remained.
@@ -279,6 +279,12 @@ Different lines for different contexts. All historically accurate.
 | **Grants / Academic**             | The first federal seat of government established under the U.S. Constitution west of the Appalachians. | Grants, academic, Marietta defense |
 | **Lineage**                       | One Family. One Ground. 256 Years.                                                                     | Heritage marketing                 |
 | **Emotional**                     | The ground remembers. Come walk it.                                                                    | Social media, emotional appeals    |
+| **The Experiment** _(NEW)_        | Could American democracy extend beyond the Appalachians? Rocky Mount provided the answer.              | Website, intellectual appeal       |
+| **The Implementation** _(NEW)_    | A man who helped create the Constitution would now implement it on the frontier.                       | Blount positioning, tours          |
+| **The Distinction** _(NEW)_       | First territorial capital (1790-92). Knoxville became first state capital (1796).                      | FAQ, clarification                 |
+| **America 250: First Federal**    | First federal capital beyond the original thirteen states.                                             | America 250 campaign, grants       |
+| **America 250: Proving Ground**   | The proving ground for territorial governance.                                                         | America 250 campaign, grants       |
+| **America 250: Bridge**           | The bridge between democratic ideals and westward expansion.                                           | America 250 campaign, grants       |
 
 ---
 
@@ -324,21 +330,31 @@ Each element serves a specific strategic function:
 
 All claims below have been fact-checked against primary and secondary sources.
 
-| Claim                                                                                | Status         | Source                                                               |
-| ------------------------------------------------------------------------------------ | -------------- | -------------------------------------------------------------------- |
-| Cobb family settled this land ~1770                                                  | **VERIFIED**   | TN Encyclopedia                                                      |
-| Cobbs supplied Overmountain Men (gunpowder, horses, blankets, food)                  | **VERIFIED**   | Rocky Mount records                                                  |
-| Five Cobb men answered Sevier's call (William, William Jr., Pharaoh, Jerry, Arthur)  | **VERIFIED**   | Rocky Mount records                                                  |
-| Blount governed from this site Oct 1790 - early 1792                                 | **VERIFIED**   | Territorial records                                                  |
-| Blount signed U.S. Constitution (one of 39 signers, 1787)                            | **VERIFIED**   | Constitutional records                                               |
-| Blount corresponded with President Washington                                        | **VERIFIED**   | Correspondence records                                               |
-| First capital of the Southwest Territory                                             | **VERIFIED**   | Territorial records                                                  |
-| Capital operated for approximately 16 months                                         | **VERIFIED**   | Territorial records                                                  |
-| Andrew Jackson lodged here (six weeks in 1788)                                       | **VERIFIED**   | Rocky Mount, TN Encyclopedia                                         |
-| 15-acre acquisition = part of TN's oldest documented farm (Century Farms, est. 1775) | **VERIFIED**   | TN Century Farms                                                     |
-| Current building dates to 1827-1830                                                  | **VERIFIED**   | UT Dendrochronology (Grissino-Mayer & van de Gevel, 2007)            |
-| First territorial capital under U.S. Constitution                                    | **DEFENSIBLE** | Constitutional analysis—Marietta was under Articles of Confederation |
-| Michael Massengill (Cobb's grandson) built the current house                         | **VERIFIED**   | UT Dendrochronology study                                            |
+| Claim                                                                                             | Status         | Source                                                               |
+| ------------------------------------------------------------------------------------------------- | -------------- | -------------------------------------------------------------------- |
+| Cobb family settled this land ~1770                                                               | **VERIFIED**   | TN Encyclopedia                                                      |
+| Cobbs supplied Overmountain Men (gunpowder, horses, blankets, food)                               | **VERIFIED**   | Rocky Mount records                                                  |
+| Five Cobb men answered Sevier's call (William, William Jr., Pharaoh, Jerry, Arthur)               | **VERIFIED**   | Rocky Mount records                                                  |
+| Blount governed from this site Oct 1790 - early 1792                                              | **VERIFIED**   | Territorial records                                                  |
+| Blount signed U.S. Constitution (one of 39 signers, 1787)                                         | **VERIFIED**   | Constitutional records                                               |
+| Blount corresponded with President Washington                                                     | **VERIFIED**   | Correspondence records                                               |
+| First capital of the Southwest Territory                                                          | **VERIFIED**   | Territorial records                                                  |
+| Capital operated for approximately 16 months                                                      | **VERIFIED**   | Territorial records                                                  |
+| Andrew Jackson lodged here (six weeks in 1788)                                                    | **VERIFIED**   | Rocky Mount, TN Encyclopedia                                         |
+| 15-acre acquisition = part of TN's oldest documented farm (Century Farms, est. 1775)              | **VERIFIED**   | TN Century Farms                                                     |
+| Current building dates to 1827-1830                                                               | **VERIFIED**   | UT Dendrochronology (Grissino-Mayer & van de Gevel, 2007)            |
+| First territorial capital under U.S. Constitution                                                 | **DEFENSIBLE** | Constitutional analysis—Marietta was under Articles of Confederation |
+| Michael Massengill (Cobb's grandson) built the current house                                      | **VERIFIED**   | UT Dendrochronology study                                            |
+| North Carolina ceded 43,000 square miles to federal government (Dec 22, 1789)                     | **VERIFIED**   | Tennessee Encyclopedia                                               |
+| 1791 census recorded 35,691 territorial residents                                                 | **VERIFIED**   | Tennessee Encyclopedia                                               |
+| 7 counties organized across 2 districts (Washington + Mero)                                       | **VERIFIED**   | Tennessee Encyclopedia                                               |
+| Washington District: 4 counties (Washington, Sullivan, Greene, Hawkins)                           | **VERIFIED**   | Tennessee Encyclopedia                                               |
+| Mero District: 3 counties (Davidson, Sumner, Tennessee)                                           | **VERIFIED**   | Tennessee Encyclopedia                                               |
+| Blount visited Washington at Mount Vernon (Sept 18, 1790)                                         | **VERIFIED**   | Wikipedia, Founders Online                                           |
+| Blount took oath before Justice Iredell (Sept 20, 1790)                                           | **VERIFIED**   | Wikipedia, Constitutional records                                    |
+| Blount owned ~1 million acres in the territory (up to 2.5M by mid-1790s)                          | **VERIFIED**   | North Carolina History, TN Encyclopedia                              |
+| Sullivan County is ancestral Cherokee homeland                                                    | **VERIFIED**   | Tennessee Encyclopedia - Sullivan County                             |
+| Rocky Mount was first territorial capital; Knoxville was second territorial + first state capital | **VERIFIED**   | Tennessee Encyclopedia                                               |
 
 ---
 
@@ -505,6 +521,20 @@ Photography must match brand hierarchy. If we say "Stand where they stood" next 
 
 ---
 
+## Indigenous Acknowledgment
+
+**Use on website footer or dedicated section:**
+
+> We acknowledge with respect that this valley was—and remains—ancestral homeland to the Cherokee and other Indigenous peoples, whose stewardship and stories continue today.
+
+**Extended version (for interpretive materials):**
+
+> The land that became Rocky Mount is part of the ancestral homeland of the Cherokee people. Before European settlement, this region was shaped by Indigenous stewardship for thousands of years. The establishment of the Southwest Territory and subsequent treaties—including the Treaty of Holston (1791)—carried profound consequences for the Cherokee Nation and neighboring peoples. Their perspectives remain an active part of our ongoing research and interpretation.
+
+**Note:** The Treaty of Holston was negotiated at White's Fort (Knoxville), not Rocky Mount. Blount conducted diplomatic correspondence from Rocky Mount, but formal treaty negotiations occurred elsewhere.
+
+---
+
 ## The First 250 Campaign
 
 **Goal:** Drive urgency and membership enrollment using the Tennessee 230 / America 250 anniversaries.
@@ -562,17 +592,44 @@ Photography must match brand hierarchy. If we say "Stand where they stood" next 
 
 ## Historical Timeline
 
+### Founding Era
+
+| Year      | Event                                                      |
+| --------- | ---------------------------------------------------------- |
+| **~1770** | Cobb family settles this ground                            |
+| **1775**  | Farm established (Century Farms documentation)             |
+| **1780**  | Cobbs supply Overmountain Men for Kings Mountain           |
+| **1787**  | William Blount signs the U.S. Constitution in Philadelphia |
+| **1788**  | Andrew Jackson lodges at Rocky Mount for six weeks         |
+
+### Path to Territorial Government (1789-1790)
+
+| Date             | Event                                                              |
+| ---------------- | ------------------------------------------------------------------ |
+| **Dec 22, 1789** | NC Cession Act: North Carolina cedes 43,000 square miles to U.S.   |
+| **Apr 2, 1790**  | Congress formally accepts North Carolina's land cession            |
+| **May 26, 1790** | Congress passes Southwest Ordinance, creating the territory        |
+| **Jun 8, 1790**  | Washington commissions Blount as Governor                          |
+| **Sep 18, 1790** | Blount visits President Washington at Mount Vernon                 |
+| **Sep 20, 1790** | Blount takes oath before Supreme Court Justice James Iredell       |
+| **Oct 10, 1790** | Blount arrives at William Cobb's home, Rocky Mount                 |
+| **Oct 23, 1790** | Blount proclaims territorial government operational at Rocky Mount |
+
+### Capital Period (1790-1792)
+
+| Year         | Event                                                                  |
+| ------------ | ---------------------------------------------------------------------- |
+| **1791**     | Census records 35,691 residents; 7 counties across 2 districts         |
+| **1791**     | Treaty of Holston negotiated with Cherokee (at White's Fort/Knoxville) |
+| **Feb 1792** | Capital relocates to Knoxville (approximate date)                      |
+
+### Post-Capital Era
+
 | Year        | Event                                                                            |
 | ----------- | -------------------------------------------------------------------------------- |
-| **1770**    | Cobb family settles this ground                                                  |
-| **1775**    | Farm established (Century Farms documentation)                                   |
-| **1780**    | Cobbs supply Overmountain Men for Kings Mountain                                 |
-| **1787**    | William Blount signs the U.S. Constitution in Philadelphia                       |
-| **1788**    | Andrew Jackson lodges at Rocky Mount for six weeks                               |
-| **1790-92** | Governor Blount governs from these capital grounds (~16 months)                  |
-| **1791**    | Treaty of Holston negotiated with Cherokee (at White's Fort/Knoxville)           |
 | **1796**    | Southwest Territory becomes State of Tennessee; Knoxville is first state capital |
 | **1827-30** | Massengill (Cobb's grandson) builds the house that stands today                  |
+| **1962**    | Site opens to public as state historic site                                      |
 | **2026**    | Tennessee 230 + America 250 commemorations                                       |
 
 ---
@@ -591,10 +648,11 @@ We are no longer selling "old logs." We are selling the **Constitutional Ground*
 
 ## Document History
 
-| Version | Date         | Changes                                                |
-| ------- | ------------ | ------------------------------------------------------ |
-| v4.0    | January 2026 | Director's Final Version (DOCX + JSX)                  |
-| v5.0    | January 2026 | Consolidated master, fact-checked, corrections applied |
+| Version | Date         | Changes                                                                       |
+| ------- | ------------ | ----------------------------------------------------------------------------- |
+| v4.0    | January 2026 | Director's Final Version (DOCX + JSX)                                         |
+| v5.0    | January 2026 | Consolidated master, fact-checked, corrections applied                        |
+| v5.1    | January 2026 | Added new verified claims, America 250 positioning, Indigenous acknowledgment |
 
 ### Corrections in v5.0
 
@@ -603,8 +661,25 @@ We are no longer selling "old logs." We are selling the **Constitutional Ground*
 3. **Added verified sources** for all historical claims
 4. **Added "Claims to Avoid" section** with specific problem explanations
 
+### Additions in v5.1
+
+1. **New verified claims added:** NC Cession details (43,000 sq mi), 1791 census (35,691 residents), district organization, Blount's journey dates (Mount Vernon visit, oath), land ownership
+2. **New taglines:** "The Experiment," "The Implementation," "The Distinction," America 250 positioning phrases
+3. **Indigenous Acknowledgment section:** Cherokee ancestral homeland language for website/interpretive use
+4. **Enhanced Historical Timeline:** Detailed dates for Path to Territorial Government (Dec 1789 - Oct 1790)
+5. **Fixed Plan C copy:** Removed "Treaties were negotiated" (contradicts Claims to Avoid)
+6. **Clarification:** Rocky Mount was first territorial capital; Knoxville was second territorial + first state capital
+
+### Sources for v5.1 Additions
+
+- [Tennessee Encyclopedia - Southwest Territory](https://tennesseeencyclopedia.net/entries/southwest-territory/)
+- [Tennessee Encyclopedia - Sullivan County](https://tennesseeencyclopedia.net/entries/sullivan-county/)
+- [Wikipedia - William Blount](https://en.wikipedia.org/wiki/William_Blount)
+- [North Carolina History - William Blount](https://northcarolinahistory.org/encyclopedia/william-blount-1749-1800/)
+- [Founders Online - National Archives](https://founders.archives.gov/)
+
 ---
 
 _Rocky Mount State Historic Site_
-_Master Source of Truth | Version 5.0 | January 2026_
+_Master Source of Truth | Version 5.1 | January 2026_
 _Fact-Checked | Brand-Aligned | Implementation-Ready_

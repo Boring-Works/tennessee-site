@@ -151,7 +151,7 @@ export default function Footer() {
               <span className={styles['footer-title-sub']}>State Historic Site</span>
             </h3>
 
-            <p className={styles['footer-tagline']}>Where Tennessee Began</p>
+            <p className={styles['footer-tagline']}>Where Tennessee&apos;s government began.</p>
 
             <address className={styles['footer-address']}>
               <CompassIcon />

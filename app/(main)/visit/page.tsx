@@ -411,13 +411,17 @@ export default function VisitPage() {
               </h3>
               <dl className={styles['visit-hours']}>
                 <div className={styles['visit-hours-row']}>
-                  <dt>Wednesday – Saturday</dt>
-                  <dd>{hours.regular.wednesday}</dd>
+                  <dt>Tuesday – Saturday</dt>
+                  <dd>{hours.regular.tuesday}</dd>
+                </div>
+                <div className={styles['visit-hours-row']}>
+                  <dt>Sunday</dt>
+                  <dd>{hours.regular.sunday}</dd>
                 </div>
                 <div
                   className={`${styles['visit-hours-row']} ${styles['visit-hours-row--closed']}`}
                 >
-                  <dt>Sunday – Tuesday</dt>
+                  <dt>Monday</dt>
                   <dd>Closed</dd>
                 </div>
               </dl>

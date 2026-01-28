@@ -93,7 +93,7 @@ export const HOOKS = {
     'The first federal seat of government established under the U.S. Constitution west of the Appalachians.',
 
   // Scarcity (2026 only)
-  scarcityLine: 'The 18-month capital that made a state.',
+  scarcityLine: 'The capital that made a state.',
 
   // Closing tagline
   closingTagline: 'Tennessee starts here. Will you?',
@@ -122,7 +122,7 @@ export const STOP_START = {
   'Where the frontier became a nation': "Where Tennessee's government began",
   'They gathered there...': 'The Army gathered at the Shoals.',
   'Frontier Cabin': 'The Cobb Family Residence',
-  'Pop-up capital': 'The 18-month capital',
+  'Pop-up capital': 'The capital that made a state',
   Dynasty: 'Legacy / Lineage',
   'Walk the halls': 'Stand where they stood',
   'Hallowed Ground': 'Capital Grounds',

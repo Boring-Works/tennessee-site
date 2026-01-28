@@ -134,7 +134,7 @@ const experiences: ExperienceMoment[] = [
     numeral: 'III',
     icon: <BuildingsIcon />,
     title: 'Enter the Past',
-    description: 'Original buildings from the territorial period, preserved and interpreted.',
+    description: "Historic structures on the ground where Tennessee's government began.",
   },
   {
     numeral: 'IV',

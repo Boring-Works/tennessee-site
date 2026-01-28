@@ -24,7 +24,8 @@ export const MYSTERY_NARRATIVE = {
     ],
     contrast:
       'This is not where they gathered. This is not where they farmed. This is where they governed.',
-    bridge: 'For 18 months, this was the seat of power for everything that would become Tennessee.',
+    bridge:
+      'For approximately 16 months, this was the seat of power for everything that would become Tennessee.',
     cta: 'Stand where they stood.',
   },
 } as const
@@ -36,16 +37,16 @@ export const MYSTERY_NARRATIVE = {
  */
 export const SCARCITY_NARRATIVE = {
   welcome: {
-    hook: 'For 18 months, this ground was the capital of everything west of the mountains.',
+    hook: 'For approximately 16 months, this ground was the capital of everything west of the mountains.',
     subhook: 'Then the moment passed. The ground remained.',
   },
   hero: {
     badge: 'Tennessee 230 · America 250',
     headline: 'ROCKY MOUNT',
-    subhead: 'The 18-month capital that made a state.',
+    subhead: 'The capital that made a state.',
     timeline: [
       '1790. Governor Blount—one of 39 men who signed the Constitution—governed from this ground.',
-      'Treaties were negotiated. Letters went to Washington.',
+      'Letters went to Washington. A territory was governed.',
       'A state was born.',
     ],
     bridge: 'Then the capital moved. The moment passed. The ground remained.',
@@ -69,7 +70,7 @@ export const AUTHORITY_NARRATIVE = {
     timeline: [
       'In 1787, William Blount signed the U.S. Constitution in Philadelphia.',
       'In 1790, President Washington sent him here to govern the frontier.',
-      'From this ground, he negotiated treaties, corresponded with Washington, and conducted the federal business that would become Tennessee.',
+      'From this ground, he corresponded with Washington and conducted the federal business that would become Tennessee.',
     ],
     bridge: 'The buildings have evolved. The ground endures.',
     cta: 'Stand where they stood.',

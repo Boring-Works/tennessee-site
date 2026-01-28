@@ -1,6 +1,6 @@
 'use client'
 
-import { Thermometer, Bug } from 'lucide-react'
+import { Thermometer, Bug, Snowflake } from 'lucide-react'
 import { InfoPopup } from './InfoPopup'
 import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
@@ -15,12 +15,27 @@ interface GDDTrackerProps {
 
 // Pest emergence thresholds (base 50°F unless noted)
 const PEST_THRESHOLDS = [
-  { name: 'Codling Moth (1st gen)', gdd: 250, icon: '🦋' },
-  { name: 'Apple Maggot', gdd: 900, icon: '🪰', baseTemp: 43 },
-  { name: 'Japanese Beetle', gdd: 970, icon: '🪲' },
-  { name: 'Squash Vine Borer', gdd: 900, icon: '🐛' },
-  { name: 'Tomato Hornworm', gdd: 1200, icon: '🐛' },
+  { name: 'Codling Moth (1st gen)', gdd: 250, icon: '?' },
+  { name: 'Apple Maggot', gdd: 900, icon: '?', baseTemp: 43 },
+  { name: 'Japanese Beetle', gdd: 970, icon: '?' },
+  { name: 'Squash Vine Borer', gdd: 900, icon: '?' },
+  { name: 'Tomato Hornworm', gdd: 1200, icon: '?' },
 ]
+
+/**
+ * Calculate days until March 1st (start of GDD accumulation)
+ */
+function getDaysUntilSpring(): number {
+  const now = new Date()
+  const year = now.getFullYear()
+  // March 1st of current year or next year if already past
+  let march1 = new Date(year, 2, 1) // Month is 0-indexed, so 2 = March
+  if (now >= march1) {
+    march1 = new Date(year + 1, 2, 1)
+  }
+  const diffMs = march1.getTime() - now.getTime()
+  return Math.ceil(diffMs / (1000 * 60 * 60 * 24))
+}
 
 /**
  * Estimate accumulated GDD based on day of year
@@ -48,6 +63,16 @@ function estimateAccumulatedGDD(): number {
 }
 
 /**
+ * Check if we're in dormant season (before March)
+ */
+function isDormantSeason(): boolean {
+  const now = new Date()
+  const startOfYear = new Date(now.getFullYear(), 0, 1)
+  const dayOfYear = Math.floor((now.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24))
+  return dayOfYear < 60
+}
+
+/**
  * Calculate today's GDD contribution
  */
 function calculateDailyGDD(tempHigh: number, tempLow: number, baseTemp: number): number {
@@ -59,6 +84,8 @@ function calculateDailyGDD(tempHigh: number, tempLow: number, baseTemp: number):
 export default function GDDTracker({ tempHigh, tempLow, baseTemp = 50 }: GDDTrackerProps) {
   const dailyGDD = calculateDailyGDD(tempHigh, tempLow, baseTemp)
   const accumulatedGDD = estimateAccumulatedGDD()
+  const dormant = isDormantSeason()
+  const daysUntilSpring = getDaysUntilSpring()
 
   // Find pests that are about to emerge or recently emerged
   const relevantPests = PEST_THRESHOLDS.filter(
@@ -77,21 +104,37 @@ export default function GDDTracker({ tempHigh, tempLow, baseTemp = 50 }: GDDTrac
         <span className="text-xs text-almanac-parchment/40 ml-auto">Base {baseTemp}°F</span>
       </div>
 
-      {/* Accumulated GDD */}
-      <div className="text-center mb-3">
-        <div className="text-3xl font-bold text-almanac-gold">{Math.round(accumulatedGDD)}</div>
-        <div className="text-xs text-almanac-parchment/50">accumulated this season</div>
-      </div>
+      {/* Dormant Season Display */}
+      {dormant ? (
+        <div className="text-center mb-3">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Snowflake className="w-5 h-5 text-blue-400" />
+            <span className="text-lg font-medium text-blue-300">Dormant Season</span>
+          </div>
+          <div className="text-sm text-almanac-parchment/60">
+            GDD tracking begins in ~{daysUntilSpring} days
+          </div>
+          <div className="text-xs text-almanac-parchment/40 mt-1">March 1st start</div>
+        </div>
+      ) : (
+        <>
+          {/* Accumulated GDD */}
+          <div className="text-center mb-3">
+            <div className="text-3xl font-bold text-almanac-gold">{Math.round(accumulatedGDD)}</div>
+            <div className="text-xs text-almanac-parchment/50">accumulated this season</div>
+          </div>
 
-      {/* Today's contribution */}
-      <div className="flex items-center justify-center gap-1 mb-4 px-2 py-1 bg-white/5 rounded">
-        <span className="text-xs text-almanac-parchment/60">Today:</span>
-        <span className="text-sm font-medium text-almanac-parchment">+{dailyGDD}</span>
-        <span className="text-xs text-almanac-parchment/40">GDD</span>
-      </div>
+          {/* Today's contribution */}
+          <div className="flex items-center justify-center gap-1 mb-4 px-2 py-1 bg-white/5 rounded">
+            <span className="text-xs text-almanac-parchment/60">Today:</span>
+            <span className="text-sm font-medium text-almanac-parchment">+{dailyGDD}</span>
+            <span className="text-xs text-almanac-parchment/40">GDD</span>
+          </div>
+        </>
+      )}
 
-      {/* Pest alerts */}
-      {relevantPests.length > 0 && (
+      {/* Pest alerts - only show during active season */}
+      {!dormant && relevantPests.length > 0 && (
         <div className="space-y-2 mb-3">
           {relevantPests.map((pest) => (
             <div
@@ -107,8 +150,8 @@ export default function GDDTracker({ tempHigh, tempLow, baseTemp = 50 }: GDDTrac
         </div>
       )}
 
-      {/* Next threshold */}
-      {nextPest && relevantPests.length === 0 && (
+      {/* Next threshold - only show during active season */}
+      {!dormant && nextPest && relevantPests.length === 0 && (
         <div className="text-center text-xs text-almanac-parchment/50">
           <span className="block">Next: {nextPest.name}</span>
           <span className="text-almanac-parchment/40">
@@ -117,8 +160,8 @@ export default function GDDTracker({ tempHigh, tempLow, baseTemp = 50 }: GDDTrac
         </div>
       )}
 
-      {/* No more thresholds */}
-      {!nextPest && relevantPests.length === 0 && (
+      {/* No more thresholds - only show during active season */}
+      {!dormant && !nextPest && relevantPests.length === 0 && (
         <div className="text-center text-xs text-almanac-parchment/50">
           All tracked pest thresholds passed
         </div>

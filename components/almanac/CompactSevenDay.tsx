@@ -14,7 +14,7 @@ import { getWeatherInfo } from '@/lib/almanac/types'
 // ============================================
 
 export interface DayForecast {
-  day: string // "M", "T", "W", etc.
+  day: string // "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"
   dayFull?: string // "Monday", "Tuesday", etc.
   date?: string // "Jan 28"
   high: number

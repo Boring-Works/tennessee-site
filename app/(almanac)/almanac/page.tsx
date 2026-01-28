@@ -6,7 +6,6 @@ import { WeatherAtmosphere } from '@/components/almanac/WeatherAtmosphere'
 import { AlmanacHero } from '@/components/almanac/AlmanacHero'
 import { FrontierSaying } from '@/components/almanac/FrontierSaying'
 import { TaskScores } from '@/components/almanac/TaskScores'
-import { WeatherDetails } from '@/components/almanac/WeatherDetails'
 import { MoonPhase } from '@/components/almanac/MoonPhase'
 import NativePulse from '@/components/almanac/NativePulse'
 import FarmerMemory from '@/components/almanac/FarmerMemory'
@@ -143,7 +142,7 @@ export default function AlmanacPage() {
   // Build extended forecast with all available days
   const compactDays: DayForecast[] = useMemo(() => {
     if (!weather) return []
-    const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+    const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
     const dayNamesFull = [
       'Sunday',
       'Monday',
@@ -392,11 +391,8 @@ export default function AlmanacPage() {
             {/* Environmental Watch */}
             <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
 
-            {/* 7-Day Forecast (full details) */}
-            <WeatherDetails daily={weather.daily} />
-
             {/* Snow (conditional) */}
-            {weather.current.snowDepth && weather.current.snowDepth > 0 && (
+            {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
               <SnowConditions
                 snowDepth={weather.current.snowDepth}
                 currentTemp={weather.current.temperature}
@@ -419,8 +415,8 @@ export default function AlmanacPage() {
               ROW 5: [SunBarometer 4] [Radar 8]
 
               SECTION 3 - FOR WORKING FARMERS:
-              ROW 6: [Planting Intelligence 5] [7-Day Forecast 7]
-              ROW 7: [Farmer's Memory 6] [Native Pulse 6]
+              ROW 6: [Planting Intelligence 6] [Farmer's Memory 6]
+              ROW 7: [Native Pulse 6] (available space)
               ROW 8: [Environmental Watch 12 cols]
               ============================================================ */}
           <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
@@ -546,7 +542,7 @@ export default function AlmanacPage() {
               className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
             >
               {/* Planting Intelligence */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-6">
                 <PlantingIntelligence
                   temperature={weather.current.temperature}
                   humidity={weather.current.humidity}
@@ -554,11 +550,6 @@ export default function AlmanacPage() {
                   tempHigh={todayHigh}
                   tempLow={todayLow}
                 />
-              </div>
-
-              {/* 7-Day Forecast */}
-              <div className="lg:col-span-7">
-                <WeatherDetails daily={weather.daily} />
               </div>
 
               {/* Farmer's Memory */}
@@ -584,7 +575,7 @@ export default function AlmanacPage() {
               </div>
 
               {/* Snow (Conditional) */}
-              {weather.current.snowDepth && weather.current.snowDepth > 0 && (
+              {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
                 <div className="lg:col-span-12">
                   <SnowConditions
                     snowDepth={weather.current.snowDepth}

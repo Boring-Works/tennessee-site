@@ -192,7 +192,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
       </div>
 
       {/* 3x3 Radar Grid */}
-      <div className="relative aspect-square bg-almanac-midnight rounded overflow-hidden mb-3">
+      <div className="relative aspect-[4/3] bg-almanac-midnight rounded overflow-hidden mb-2">
         {/* 3x3 Grid Container */}
         <div className="absolute inset-0 grid grid-cols-3 grid-rows-3">
           {tiles.map((tile) => (

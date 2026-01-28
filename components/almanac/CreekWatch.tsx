@@ -120,8 +120,8 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
   const StatusIcon = statusInfo.icon
 
   return (
-    <div className={`p-4 rounded-lg border h-full ${statusInfo.bgColor}`}>
-      <div className="flex items-center gap-2 mb-3">
+    <div className={`p-3 rounded-lg border ${statusInfo.bgColor}`}>
+      <div className="flex items-center gap-2 mb-2">
         <Waves className="w-4 h-4 text-almanac-gold" />
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
           Creek Watch
@@ -133,15 +133,15 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
       </div>
 
       {/* Station Name */}
-      <p className="text-xs text-almanac-parchment/60 text-center mb-3 line-clamp-1">
+      <p className="text-xs text-almanac-parchment/60 text-center mb-2 line-clamp-1">
         {streamData.siteName}
       </p>
 
       {/* Gage Height */}
-      <div className="flex items-center justify-center gap-3 mb-3">
+      <div className="flex items-center justify-center gap-3 mb-2">
         {streamData.gageHeight !== null && (
           <div className="text-center">
-            <div className="text-2xl font-bold text-almanac-parchment">
+            <div className="text-xl font-bold text-almanac-parchment">
               {streamData.gageHeight.toFixed(1)}
               <span className="text-sm font-normal text-almanac-parchment/50"> ft</span>
             </div>
@@ -151,7 +151,7 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
 
         {streamData.streamflow !== null && (
           <div className="text-center border-l border-white/10 pl-3">
-            <div className="text-lg font-bold text-almanac-parchment">
+            <div className="text-base font-bold text-almanac-parchment">
               {streamData.streamflow.toLocaleString()}
               <span className="text-xs font-normal text-almanac-parchment/50"> cfs</span>
             </div>
@@ -161,12 +161,11 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
       </div>
 
       {/* Status */}
-      <div className="flex items-center justify-center gap-2 mb-2">
+      <div className="flex items-center justify-center gap-2">
         <StatusIcon className={`w-4 h-4 ${statusInfo.color}`} />
         <span className={`text-sm font-medium ${statusInfo.color}`}>{statusInfo.label}</span>
+        <span className="text-xs text-almanac-parchment/50">— {statusInfo.description}</span>
       </div>
-
-      <p className="text-xs text-almanac-parchment/60 text-center">{statusInfo.description}</p>
     </div>
   )
 }

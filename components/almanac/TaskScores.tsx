@@ -73,15 +73,15 @@ function ScoreCard({
 
   return (
     <div
-      className={`rounded-sm border transition-all card-hover ${cardStyle} ${compact ? 'p-2 lg:p-3' : 'p-3 lg:p-4'}`}
+      className={`rounded-sm border transition-all card-hover ${cardStyle} ${compact ? 'p-2' : 'p-2.5 lg:p-3'}`}
       role="article"
       aria-label={`${title}: ${score.score} out of 10, ${score.label}`}
     >
-      <div className={`flex justify-between items-start ${compact ? 'mb-1' : 'mb-2'}`}>
+      <div className={`flex justify-between items-start ${compact ? 'mb-1' : 'mb-1.5'}`}>
         <div className="flex items-start gap-1">
           <div>
             <h3
-              className={`font-serif text-gold-leaf ${compact ? 'text-sm' : 'text-base lg:text-lg'}`}
+              className={`font-serif text-gold-leaf ${compact ? 'text-sm' : 'text-sm lg:text-base'}`}
             >
               {title}
             </h3>
@@ -91,7 +91,7 @@ function ScoreCard({
         </div>
         <div className="text-right">
           <span
-            className={`font-sans font-bold ${SCORE_COLORS[score.label]} ${isCritical ? 'animate-pulse' : ''} ${compact ? 'text-xl lg:text-2xl' : 'text-2xl lg:text-3xl'}`}
+            className={`font-sans font-bold ${SCORE_COLORS[score.label]} ${isCritical ? 'animate-pulse' : ''} ${compact ? 'text-xl lg:text-2xl' : 'text-xl lg:text-2xl'}`}
           >
             {animatedScore}
           </span>
@@ -100,7 +100,7 @@ function ScoreCard({
       </div>
 
       {/* Label badge */}
-      <div className={`flex items-center gap-1 flex-wrap ${compact ? 'mb-1' : 'mb-2'}`}>
+      <div className={`flex items-center gap-1 flex-wrap ${compact ? 'mb-1' : 'mb-1.5'}`}>
         <span
           className={`text-[10px] lg:text-xs font-medium px-1.5 py-0.5 rounded ${
             score.label === 'Perfect' || score.label === 'Good'
@@ -115,7 +115,7 @@ function ScoreCard({
           {score.label}
         </span>
         {isCritical && (
-          <span className="text-[10px] lg:text-xs text-red-400 font-medium">⚠ Unfavorable</span>
+          <span className="text-[10px] lg:text-xs text-red-400 font-medium">Unfavorable</span>
         )}
       </div>
 
@@ -141,8 +141,8 @@ export function TaskScores({
   const scores = { sower, shepherd: adjustedShepherd, keeper, builder }
 
   return (
-    <section className={compact ? 'py-2' : 'py-4 lg:py-6'}>
-      <div className={`flex items-center justify-center gap-3 ${compact ? 'mb-3' : 'mb-4'}`}>
+    <section className={compact ? 'py-2' : 'py-3 lg:py-4'}>
+      <div className={`flex items-center justify-center gap-3 ${compact ? 'mb-2' : 'mb-3'}`}>
         <h2
           className={`font-serif text-gold-leaf text-center ${compact ? 'text-lg' : 'text-xl lg:text-2xl'}`}
         >

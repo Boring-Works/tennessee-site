@@ -45,12 +45,9 @@ export function AlmanacHero({
   const isIcy = isIceCode(weatherCode)
 
   return (
-    <section className="animate-fade-in-up text-center py-5 lg:py-6 h-full flex flex-col justify-center bg-white/5 border border-white/10 rounded-lg px-4">
-      {/* Location */}
-      <p className="text-xs uppercase tracking-widest text-gold-leaf mb-3">{location}</p>
-
+    <section className="animate-fade-in-up text-center py-3 lg:py-4 h-full flex flex-col justify-center bg-white/5 border border-white/10 rounded-lg px-4">
       {/* Temperature with Icon */}
-      <div className="flex items-center justify-center gap-4 mb-2">
+      <div className="flex items-center justify-center gap-3 mb-1">
         <div className="relative animate-bob">
           <Icon className="w-14 h-14 lg:w-16 lg:h-16 text-almanac-gold" />
           {(isSnowing || isIcy) && (
@@ -72,11 +69,11 @@ export function AlmanacHero({
       </p>
 
       {/* Feels Like */}
-      <p className="text-sm text-almanac-parchment/60 mt-2">Feels like {Math.round(feelsLike)}°</p>
+      <p className="text-sm text-almanac-parchment/60 mt-1">Feels like {Math.round(feelsLike)}°</p>
 
       {/* High / Low */}
       {(todayHigh !== undefined || todayLow !== undefined) && (
-        <div className="flex items-center justify-center gap-3 mt-2 text-sm">
+        <div className="flex items-center justify-center gap-3 mt-1 text-sm">
           <span className="text-almanac-parchment/70">
             H:{' '}
             <span className="text-almanac-parchment font-medium">
@@ -93,7 +90,7 @@ export function AlmanacHero({
 
       {/* Wind & Humidity */}
       {(windSpeed !== undefined || humidity !== undefined) && (
-        <div className="flex items-center justify-center gap-4 mt-3 text-sm text-almanac-parchment/60">
+        <div className="flex items-center justify-center gap-4 mt-2 text-sm text-almanac-parchment/60">
           {windSpeed !== undefined && (
             <div className="flex items-center gap-1.5">
               <Wind className="w-4 h-4" />

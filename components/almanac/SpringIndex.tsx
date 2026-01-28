@@ -79,7 +79,7 @@ export default function SpringIndex() {
             ? 'bg-green-500/20 text-green-400'
             : phenology.anomaly === 'late'
               ? 'bg-orange-500/20 text-orange-400'
-              : 'bg-white/5 text-almanac-parchment/60'
+              : 'bg-blue-500/20 text-blue-300'
         }`}
       >
         {anomalyText}

@@ -78,30 +78,34 @@ export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
         <h3 className="text-sm font-medium text-almanac-gold">Tomorrow at a Glance</h3>
       </div>
 
-      <div className="flex items-center justify-between">
-        {/* Weather summary */}
-        <div className="flex items-center gap-4">
+      <div className="space-y-2">
+        {/* Temperature row */}
+        <div className="flex items-center gap-3">
           <span className="text-2xl">{emoji}</span>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="flex items-center gap-1 text-almanac-parchment/80">
-              <ThermometerSun className="w-3.5 h-3.5 text-orange-400" />
-              {Math.round(tomorrow.high)}°
+          <div className="flex items-center gap-4 text-sm">
+            <span className="flex items-center gap-1.5 text-almanac-parchment">
+              <ThermometerSun className="w-4 h-4 text-orange-400" />
+              <span className="text-almanac-parchment/50 text-xs">H</span>
+              <span className="font-medium">{Math.round(tomorrow.high)}°</span>
             </span>
-            <span className="flex items-center gap-1 text-almanac-parchment/60">
-              <ThermometerSnowflake className="w-3.5 h-3.5 text-blue-400" />
-              {Math.round(tomorrow.low)}°
+            <span className="flex items-center gap-1.5 text-almanac-parchment">
+              <ThermometerSnowflake className="w-4 h-4 text-blue-400" />
+              <span className="text-almanac-parchment/50 text-xs">L</span>
+              <span className="font-medium">{Math.round(tomorrow.low)}°</span>
             </span>
-            {tomorrow.precipChance > 0 && (
-              <span className="flex items-center gap-1 text-almanac-parchment/60">
-                <Droplets className="w-3.5 h-3.5 text-blue-400" />
-                {tomorrow.precipChance}%
-              </span>
-            )}
           </div>
         </div>
 
-        {/* Outlook */}
-        <p className={`text-xs ${outlook.color}`}>{outlook.text}</p>
+        {/* Precipitation row */}
+        {tomorrow.precipChance > 0 && (
+          <div className="flex items-center gap-2 text-sm text-almanac-parchment/70 pl-9">
+            <Droplets className="w-4 h-4 text-blue-400" />
+            <span>{tomorrow.precipChance}% chance of precipitation</span>
+          </div>
+        )}
+
+        {/* Outlook row */}
+        <div className={`text-sm font-medium pl-9 ${outlook.color}`}>{outlook.text}</div>
       </div>
     </motion.div>
   )

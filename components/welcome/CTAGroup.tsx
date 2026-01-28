@@ -19,13 +19,7 @@ export function CTAGroup({
   return (
     <div className={styles.ctaGroup}>
       <Link href={primaryHref} className={styles.primaryCTA}>
-        <span className={styles.ctaOrnament} aria-hidden="true">
-          ✦
-        </span>
         {primaryText}
-        <span className={styles.ctaOrnament} aria-hidden="true">
-          ✦
-        </span>
       </Link>
       <Link href={secondaryHref} className={styles.secondaryLink}>
         {secondaryText} <span aria-hidden="true">→</span>

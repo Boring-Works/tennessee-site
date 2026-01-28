@@ -201,7 +201,7 @@ export default function Footer() {
 
             <p className={styles['footer-established']}>
               <span className={styles['footer-established-line']} aria-hidden="true" />
-              Est. 1770
+              Capital 1790–1792
               <span className={styles['footer-established-line']} aria-hidden="true" />
             </p>
           </div>

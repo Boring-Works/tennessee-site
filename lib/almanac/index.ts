@@ -173,3 +173,27 @@ export { saveLocation, loadLocation, clearLocation } from './storage'
 // Hooks
 // ============================================================================
 export { useCountUp } from './useCountUp'
+
+// ============================================================================
+// Info Content
+// ============================================================================
+export type { InfoContent } from './infoContent'
+export { INFO_CONTENT } from './infoContent'
+
+// ============================================================================
+// Precipitation Timing
+// ============================================================================
+export type {
+  RadarFrame,
+  RainViewerData,
+  PrecipitationType,
+  PrecipitationStatus,
+} from './precipitationTiming'
+
+export {
+  latLonToTilePixel,
+  sampleRadarPixel,
+  analyzePrecipitation,
+  sampleRadarTileClient,
+  analyzePrecipitationClient,
+} from './precipitationTiming'

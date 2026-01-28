@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Radar, Play, Pause, ExternalLink, MapPin } from 'lucide-react'
 import { logger } from '@/lib/logger'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface PrecipitationRadarProps {
   latitude: number
@@ -171,6 +173,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         <div className="flex items-center gap-2">
           <Radar className="w-5 h-5 text-almanac-gold" />
           <span className="text-almanac-gold font-display">Regional Radar</span>
+          <InfoPopup content={INFO_CONTENT.radar} iconSize="sm" />
         </div>
         <div className="flex items-center gap-2">
           <button

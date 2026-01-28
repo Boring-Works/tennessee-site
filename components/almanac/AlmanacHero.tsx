@@ -4,7 +4,6 @@
 // The linter incorrectly flags this as "component creation during render"
 /* eslint-disable react-hooks/static-components */
 
-import { motion } from 'framer-motion'
 import { getWeatherInfo, isSnowCode, isIceCode } from '@/lib/almanac/types'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
 import {
@@ -86,35 +85,19 @@ export function AlmanacHero({
     pressureTrend === 'rising' ? ArrowUp : pressureTrend === 'falling' ? ArrowDown : Minus
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="text-center py-8 h-full flex flex-col justify-center bg-white/5 border border-white/10 rounded-lg"
-    >
+    <section className="animate-fade-in-up text-center py-8 h-full flex flex-col justify-center bg-white/5 border border-white/10 rounded-lg">
       {/* Location */}
       <p className="text-sm uppercase tracking-widest text-gold-leaf mb-4">{location}</p>
 
       {/* Temperature with Icon */}
       <div className="flex items-center justify-center gap-4">
-        <motion.div
-          className="relative"
-          animate={{
-            y: [0, -3, 0],
-            rotate: [0, 2, 0, -2, 0],
-          }}
-          transition={{
-            duration: 8,
-            ease: 'easeInOut',
-            repeat: Infinity,
-          }}
-        >
+        <div className="relative animate-bob">
           <Icon className="w-16 h-16 text-almanac-gold" />
           {/* Snow/Ice indicator */}
           {(isSnowing || isIcy) && (
             <Snowflake className="w-6 h-6 text-blue-400 absolute -top-1 -right-1 animate-pulse" />
           )}
-        </motion.div>
+        </div>
         <div className="text-[96px] font-sans font-bold leading-none text-almanac-parchment">
           {Math.round(temperature)}°
         </div>
@@ -217,6 +200,6 @@ export function AlmanacHero({
           </div>
         </>
       )}
-    </motion.section>
+    </section>
   )
 }

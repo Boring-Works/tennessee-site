@@ -2,6 +2,8 @@
 
 import { TrendingUp, TrendingDown, History, BookOpen, BarChart3 } from 'lucide-react'
 import { getFarmerMemoryData, getTemperatureAnomaly } from '@/lib/almanac/farmerMemory'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface FarmerMemoryProps {
   temperature: number
@@ -40,9 +42,12 @@ export default function FarmerMemory({
     >
       {/* Gold gradient header */}
       <div className="bg-gradient-to-r from-almanac-gold/20 to-almanac-gold/5 px-4 py-3 border-b border-white/10">
-        <div className="flex items-center gap-2">
-          <History className="w-5 h-5 text-gold-leaf" aria-hidden="true" />
-          <h2 className="font-serif text-lg text-gold-leaf">Farmer&apos;s Memory</h2>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <History className="w-5 h-5 text-gold-leaf" aria-hidden="true" />
+            <h2 className="font-serif text-lg text-gold-leaf">Farmer&apos;s Memory</h2>
+          </div>
+          <InfoPopup content={INFO_CONTENT.farmerMemory} iconSize="sm" />
         </div>
         <p className="text-xs text-almanac-parchment/60 mt-1">
           Historical patterns &amp; folk wisdom validated by data

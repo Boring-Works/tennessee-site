@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { Sprout, Snowflake, Sun, Thermometer } from 'lucide-react'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface SoilTemperatureProps {
   temperature: number | undefined
@@ -135,11 +137,14 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
           <Icon className={`w-6 h-6 ${color}`} />
         </div>
         <div className="flex-1">
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-almanac-parchment">
-              {Math.round(temperature)}°F
-            </span>
-            <span className={`text-sm font-medium ${color}`}>{status}</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-almanac-parchment">
+                {Math.round(temperature)}°F
+              </span>
+              <span className={`text-sm font-medium ${color}`}>{status}</span>
+            </div>
+            <InfoPopup content={INFO_CONTENT.soilTemp} iconSize="sm" />
           </div>
           <p className="text-xs text-almanac-parchment/60">Soil Temperature (6&quot; depth)</p>
         </div>

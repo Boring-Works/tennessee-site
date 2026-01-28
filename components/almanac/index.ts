@@ -14,6 +14,13 @@ export { WeatherDetails } from './WeatherDetails'
 export { default as HourlySparkline } from './HourlySparkline'
 export { default as TomorrowPreview } from './TomorrowPreview'
 export { WeatherAtmosphere } from './WeatherAtmosphere'
+export { CompactSevenDay, type DayForecast } from './CompactSevenDay'
+
+// ============================================================================
+// Layout & UI Elements
+// ============================================================================
+export { SectionDivider } from './SectionDivider'
+export { InfoPopup, type InfoContent } from './InfoPopup'
 
 // ============================================================================
 // Task Scores
@@ -72,3 +79,8 @@ export { default as AboutModal } from './AboutModal'
 export { default as ShareButton } from './ShareButton'
 export { default as StaleDataWarning } from './StaleDataWarning'
 export { default as PresentedByBlock } from './PresentedByBlock'
+
+// ============================================================================
+// Info Content (re-exported from lib/almanac for convenience)
+// ============================================================================
+export { INFO_CONTENT, type InfoContent as InfoContentData } from '@/lib/almanac/infoContent'

@@ -1,6 +1,8 @@
 'use client'
 
 import { Thermometer, Bug } from 'lucide-react'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface GDDTrackerProps {
   /** Today's high temperature in °F */
@@ -71,6 +73,7 @@ export default function GDDTracker({ tempHigh, tempLow, baseTemp = 50 }: GDDTrac
       <div className="flex items-center gap-2 mb-3">
         <Thermometer className="w-4 h-4 text-almanac-gold" />
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">GDD</h3>
+        <InfoPopup content={INFO_CONTENT.gdd} iconSize="sm" />
         <span className="text-xs text-almanac-parchment/40 ml-auto">Base {baseTemp}°F</span>
       </div>
 

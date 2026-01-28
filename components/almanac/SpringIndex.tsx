@@ -2,6 +2,8 @@
 
 import { Leaf, Flower2, Snowflake, Sun } from 'lucide-react'
 import { getPhenologyData, getSpringStatusInfo } from '@/lib/almanac/phenology'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 const statusIcons = {
   dormant: Snowflake,
@@ -25,11 +27,14 @@ export default function SpringIndex() {
 
   return (
     <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full">
-      <div className="flex items-center gap-2 mb-3">
-        <Leaf className="w-4 h-4 text-almanac-gold" />
-        <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
-          Spring Index
-        </h3>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Leaf className="w-4 h-4 text-almanac-gold" />
+          <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
+            Spring Index
+          </h3>
+        </div>
+        <InfoPopup content={INFO_CONTENT.springIndex} iconSize="sm" />
       </div>
 
       {/* Status */}

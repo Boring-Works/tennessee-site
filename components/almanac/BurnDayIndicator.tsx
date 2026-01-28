@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Flame, ShieldCheck, ShieldAlert } from 'lucide-react'
 import type { NWSAlertsResponse } from '@/lib/almanac/types'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface BurnDayIndicatorProps {
   lat: number
@@ -86,14 +88,17 @@ export default function BurnDayIndicator({ lat, lon }: BurnDayIndicatorProps) {
 
         {/* Content */}
         <div className="flex-1">
-          <div className="flex items-center gap-2">
-            {/* Icon - Triple encoding part 2 (emoji) */}
-            <Flame
-              size={16}
-              className={isSafeToBurn ? 'text-green-400' : 'text-red-400'}
-              aria-hidden="true"
-            />
-            <span className="font-medium text-sm text-almanac-parchment">BURN DAY STATUS</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {/* Icon - Triple encoding part 2 (emoji) */}
+              <Flame
+                size={16}
+                className={isSafeToBurn ? 'text-green-400' : 'text-red-400'}
+                aria-hidden="true"
+              />
+              <span className="font-medium text-sm text-almanac-parchment">BURN DAY STATUS</span>
+            </div>
+            <InfoPopup content={INFO_CONTENT.burnDay} iconSize="sm" />
           </div>
 
           {/* Status message - Triple encoding part 3 (text) */}

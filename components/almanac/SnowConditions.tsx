@@ -2,14 +2,19 @@
 
 import { motion } from 'framer-motion'
 import { Snowflake, Ruler, TrendingDown, AlertTriangle } from 'lucide-react'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface SnowConditionsProps {
-  snowDepth: number | undefined  // inches
+  snowDepth: number | undefined // inches
   currentTemp: number
   weatherCode: number
 }
 
-function getSnowStatus(depth: number, temp: number): {
+function getSnowStatus(
+  depth: number,
+  temp: number
+): {
   status: string
   severity: 'light' | 'moderate' | 'heavy' | 'extreme'
   color: string
@@ -72,7 +77,11 @@ function getSnowStatus(depth: number, temp: number): {
   }
 }
 
-export default function SnowConditions({ snowDepth, currentTemp, weatherCode }: SnowConditionsProps) {
+export default function SnowConditions({
+  snowDepth,
+  currentTemp,
+  weatherCode,
+}: SnowConditionsProps) {
   // Don't show if no snow
   if (snowDepth === undefined || snowDepth < 0.1) {
     return null
@@ -93,21 +102,26 @@ export default function SnowConditions({ snowDepth, currentTemp, weatherCode }: 
       <div className="flex items-start gap-3">
         {/* Icon */}
         <div className="flex-shrink-0">
-          <div className={`p-2 rounded-full bg-white/10 ${isActivelySnowing ? 'animate-pulse' : ''}`}>
+          <div
+            className={`p-2 rounded-full bg-white/10 ${isActivelySnowing ? 'animate-pulse' : ''}`}
+          >
             <Snowflake className={`w-6 h-6 ${color}`} />
           </div>
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className={`font-medium ${color}`}>
-              {status}
-              {isActivelySnowing && <span className="ml-2 text-sm">(Snowing Now)</span>}
-            </h3>
-            {severity === 'heavy' || severity === 'extreme' ? (
-              <AlertTriangle className="w-4 h-4 text-orange-400" />
-            ) : null}
+          <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center gap-2">
+              <h3 className={`font-medium ${color}`}>
+                {status}
+                {isActivelySnowing && <span className="ml-2 text-sm">(Snowing Now)</span>}
+              </h3>
+              {severity === 'heavy' || severity === 'extreme' ? (
+                <AlertTriangle className="w-4 h-4 text-orange-400" />
+              ) : null}
+            </div>
+            <InfoPopup content={INFO_CONTENT.snow} iconSize="sm" />
           </div>
 
           {/* Snow depth measurement */}
@@ -126,9 +140,7 @@ export default function SnowConditions({ snowDepth, currentTemp, weatherCode }: 
           </div>
 
           {/* Tip */}
-          <p className="text-sm text-almanac-parchment/70">
-            {tip}
-          </p>
+          <p className="text-sm text-almanac-parchment/70">{tip}</p>
         </div>
       </div>
 

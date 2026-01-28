@@ -11,6 +11,8 @@ import {
   Wind,
   Compass,
 } from 'lucide-react'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface SunBarometerProps {
   sunrise: string
@@ -128,6 +130,11 @@ export default function SunBarometer({
       transition={{ duration: 0.5, delay: 0.35 }}
       className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full card-hover"
     >
+      {/* Info button in top-right corner */}
+      <div className="flex justify-end mb-2">
+        <InfoPopup content={INFO_CONTENT.sunBarometer} iconSize="sm" />
+      </div>
+
       <div className="grid grid-cols-2 gap-4">
         {/* Sun Times */}
         <div>

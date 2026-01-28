@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { Waves, AlertTriangle, TrendingUp, TrendingDown, Minus } from 'lucide-react'
 import type { StreamData, StreamStatus } from '@/lib/almanac/types'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface CreekWatchProps {
   lat: number
@@ -124,6 +126,7 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
           Creek Watch
         </h3>
+        <InfoPopup content={INFO_CONTENT.creekWatch} iconSize="sm" />
         <span className="text-xs text-almanac-parchment/40 ml-auto">
           {streamData.distanceMiles} mi away
         </span>

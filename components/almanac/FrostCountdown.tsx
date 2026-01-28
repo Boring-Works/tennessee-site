@@ -1,6 +1,8 @@
 'use client'
 
 import { Snowflake, ThermometerSnowflake, Check } from 'lucide-react'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 // Future: Allow custom frost dates per location
 // interface FrostCountdownProps {
@@ -181,11 +183,14 @@ export default function FrostCountdown() {
 
   return (
     <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full">
-      <div className="flex items-center gap-2 mb-3">
-        <ThermometerSnowflake className="w-4 h-4 text-almanac-gold" />
-        <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
-          Frost Dates
-        </h3>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <ThermometerSnowflake className="w-4 h-4 text-almanac-gold" />
+          <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
+            Frost Dates
+          </h3>
+        </div>
+        <InfoPopup content={INFO_CONTENT.frostCountdown} iconSize="sm" />
       </div>
 
       <div className="flex flex-col items-center">{renderContent()}</div>

@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { Wind } from 'lucide-react'
 import type { AirQualityData } from '@/lib/almanac/types'
 import { getAQILevel } from '@/lib/almanac/types'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface AirQualityCardProps {
   lat: number
@@ -101,11 +103,14 @@ export default function AirQualityCard({ lat, lon, onAqiChange }: AirQualityCard
       aria-label={`Air Quality: ${aqiInfo.label}`}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 mb-3">
-        <Wind size={18} className={textColors[data.level]} aria-hidden="true" />
-        <span className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
-          Air Quality
-        </span>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Wind size={18} className={textColors[data.level]} aria-hidden="true" />
+          <span className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
+            Air Quality
+          </span>
+        </div>
+        <InfoPopup content={INFO_CONTENT.airQuality} iconSize="sm" />
       </div>
 
       {/* AQI Display - Triple encoding: number + color + emoji */}

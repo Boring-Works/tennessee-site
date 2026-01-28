@@ -1,11 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --primary: #0a1628;
   --primary-dark: #050d18;
   --secondary: #8b4513;
   --accent: #c9a227;
-  --burgundy: #722F37;
+  --burgundy: #722f37;
   --background: #faf8f5;
   --foreground: #1a1a1a;
   --text-light: #525252;
@@ -16,12 +16,12 @@
   --text-on-dark-muted: rgba(255, 255, 255, 0.7);
   --text-on-dark-subtle: rgba(255, 255, 255, 0.6);
   /* Almanac colors */
-  --midnight: #0A1128;
-  --gold-leaf: #C5A059;
-  --almanac-parchment: #F4ECD8;
-  --almanac-success: #4A7C59;
-  --almanac-warning: #D4A84B;
-  --almanac-danger: #8B3A3A;
+  --midnight: #0a1128;
+  --gold-leaf: #c5a059;
+  --almanac-parchment: #f4ecd8;
+  --almanac-success: #4a7c59;
+  --almanac-warning: #d4a84b;
+  --almanac-danger: #8b3a3a;
 }
 
 @theme inline {
@@ -35,10 +35,10 @@
   --color-text-light: var(--text-light);
   --color-cream: var(--cream);
   --color-cream-dark: var(--cream-dark);
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
-  --font-serif-elegant: var(--font-cormorant), Georgia, "Times New Roman", serif;
-  --font-script: var(--font-script), "Brush Script MT", cursive;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-serif-elegant: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-script: var(--font-script), 'Brush Script MT', cursive;
   /* Almanac theme colors */
   --color-midnight: var(--midnight);
   --color-gold-leaf: var(--gold-leaf);
@@ -72,7 +72,6 @@
   top: 0;
   outline: none;
 }
-
 
 /* ============================================
    SHARED SECTION DIVIDERS
@@ -149,7 +148,12 @@
    ============================================ */
 
 @media print {
-  nav, footer, .no-print, .mobile-sticky-cta, .watermark-1790, .scroll-indicator {
+  nav,
+  footer,
+  .no-print,
+  .mobile-sticky-cta,
+  .watermark-1790,
+  .scroll-indicator {
     display: none !important;
   }
 
@@ -162,4 +166,37 @@
     text-decoration: none;
     color: black;
   }
+}
+
+/* ============================================
+   ALMANAC ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+.animate-bob {
+  animation: bob 8s ease-in-out infinite;
 }

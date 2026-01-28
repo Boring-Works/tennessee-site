@@ -2,6 +2,8 @@
 
 import type { MoonData } from '@/lib/almanac/types'
 import { motion } from 'framer-motion'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface MoonPhaseProps {
   moon: MoonData
@@ -10,7 +12,7 @@ interface MoonPhaseProps {
 // Traditional planting by the moon guidance
 function getMoonGuidance(phaseName: string): { activity: string; tip: string } {
   const phase = phaseName.toLowerCase()
-  
+
   if (phase.includes('new')) {
     return {
       activity: 'Plant leafy crops',
@@ -29,7 +31,11 @@ function getMoonGuidance(phaseName: string): { activity: string; tip: string } {
       tip: 'Best for harvesting, canning, and preserving. Sap is high in plants.',
     }
   }
-  if (phase.includes('last quarter') || phase.includes('waning') || phase.includes('third quarter')) {
+  if (
+    phase.includes('last quarter') ||
+    phase.includes('waning') ||
+    phase.includes('third quarter')
+  ) {
     return {
       activity: 'Plant root crops',
       tip: 'Best for potatoes, carrots, beets, onions—crops that grow underground.',
@@ -46,7 +52,7 @@ export function MoonPhase({ moon }: MoonPhaseProps) {
   const guidance = getMoonGuidance(moon.phaseName)
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.4 }}
@@ -59,28 +65,29 @@ export function MoonPhase({ moon }: MoonPhaseProps) {
           animate={{ rotate: 360 }}
           transition={{
             duration: 120,
-            ease: "linear",
+            ease: 'linear',
             repeat: Infinity,
           }}
         >
           {moon.emoji}
         </motion.span>
       </div>
-      
+
       {/* Phase name and illumination */}
-      <div className="text-center mb-4">
+      <div className="text-center mb-4 relative">
+        <div className="absolute top-0 right-0">
+          <InfoPopup content={INFO_CONTENT.moonPhase} iconSize="sm" />
+        </div>
         <p className="font-serif text-lg text-gold-leaf">{moon.phaseName}</p>
         <p className="text-sm text-almanac-parchment/50">{illuminationPercent}% illuminated</p>
       </div>
-      
+
       {/* Planting guidance */}
       <div className="border-t border-white/10 pt-3">
         <p className="text-xs text-almanac-gold font-medium uppercase tracking-wide mb-1">
           {guidance.activity}
         </p>
-        <p className="text-xs text-almanac-parchment/60 leading-relaxed">
-          {guidance.tip}
-        </p>
+        <p className="text-xs text-almanac-parchment/60 leading-relaxed">{guidance.tip}</p>
       </div>
     </motion.div>
   )

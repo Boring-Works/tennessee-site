@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import type { NativePulseResult } from '@/lib/almanac/taskScores'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface NativePulseProps {
   pulse: NativePulseResult
@@ -15,14 +17,17 @@ export default function NativePulse({ pulse }: NativePulseProps) {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-6 h-full card-hover"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-3xl" role="img" aria-label={pulse.status}>
-          {pulse.icon}
-        </span>
-        <div>
-          <h2 className="font-serif text-xl text-almanac-gold">The Seedkeeper&apos;s Watch</h2>
-          <p className="text-sm text-almanac-parchment/60">Native Seed Stratification</p>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl" role="img" aria-label={pulse.status}>
+            {pulse.icon}
+          </span>
+          <div>
+            <h2 className="font-serif text-xl text-almanac-gold">The Seedkeeper&apos;s Watch</h2>
+            <p className="text-sm text-almanac-parchment/60">Native Seed Stratification</p>
+          </div>
         </div>
+        <InfoPopup content={INFO_CONTENT.nativePulse} iconSize="sm" />
       </div>
 
       <div className="space-y-4">

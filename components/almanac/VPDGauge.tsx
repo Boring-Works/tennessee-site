@@ -2,6 +2,8 @@
 
 import { Droplets } from 'lucide-react'
 import { calculateVPD, getVPDLevel } from '@/lib/almanac/vpd'
+import { InfoPopup } from './InfoPopup'
+import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 
 interface VPDGaugeProps {
   temperature: number // °F
@@ -47,9 +49,14 @@ export default function VPDGauge({ temperature, humidity }: VPDGaugeProps) {
 
   return (
     <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full">
-      <div className="flex items-center gap-2 mb-3">
-        <Droplets className="w-4 h-4 text-almanac-gold" />
-        <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">VPD</h3>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Droplets className="w-4 h-4 text-almanac-gold" />
+          <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
+            VPD
+          </h3>
+        </div>
+        <InfoPopup content={INFO_CONTENT.vpd} iconSize="sm" />
       </div>
 
       <div className="flex flex-col items-center">

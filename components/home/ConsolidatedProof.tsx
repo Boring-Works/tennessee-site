@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { useScrollReveal, useStaggeredReveal } from '@/hooks/useScrollReveal'
-import styles from '@/app/(main)/home/page.module.css'
 
 /**
  * ConsolidatedProof Section - ENHANCED VISUAL DESIGN
@@ -294,117 +293,348 @@ export function ConsolidatedProof() {
         </div>
       </div>
 
-      {/* === PART 2: BLOUNT LETTER === */}
+      {/* === PART 2: THE CORRESPONDENCE === */}
+      {/* Washington asked. Rocky Mount was the answer. */}
       <section
         ref={letterRef}
-        className={`${styles['blount-section']} ${letterVisible ? 'visible' : ''}`}
-        aria-labelledby="blount-heading"
+        className="relative py-20 md:py-28 overflow-hidden"
+        aria-labelledby="correspondence-heading"
       >
-        <div className={styles['blount-document']}>
-          <div
-            className={`${styles['blount-fold']} ${styles['blount-fold--horizontal']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-fold']} ${styles['blount-fold--vertical']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--top']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--bottom']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--left']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--right']}`}
-            aria-hidden="true"
-          />
+        {/* Background with parchment texture */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, #0d1f35 0%, #0a1628 50%, #050d18 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+          aria-hidden="true"
+        />
 
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          {/* Section header */}
           <div
-            className={`${styles['blount-rule']} ${styles['blount-rule-top']}`}
-            aria-hidden="true"
+            className={`text-center mb-14 transition-all duration-700 ${letterVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--left']}`}>
-              ❧
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--center']}`}>
-              ✦
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--right']}`}>
-              ❧
-            </span>
-          </div>
-
-          <header className={styles['blount-header']}>
-            <p className={styles['blount-recipient']}>Letter to President George Washington</p>
-            <p className={styles['blount-dateline']}>
-              <span>Rocky Mount</span>
-              <span className={styles['blount-dateline-sep']} aria-hidden="true">
-                ·
-              </span>
-              <time dateTime="1790-10-20">October 20, 1790</time>
-            </p>
-          </header>
-
-          <blockquote className={styles['blount-blockquote']}>
-            <p
-              id="blount-heading"
-              className={`${styles['blount-text']} ${styles['blount-text--dropcap']}`}
-            >
-              <span className={styles['blount-dropcap']} aria-hidden="true">
-                I
-              </span>
-              <span className={styles['blount-text-body']}>
-                am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at
-                this place.
-              </span>
-            </p>
-          </blockquote>
-
-          <p className={styles['blount-context']}>
-            Glass windows were rare on the frontier. Rocky Mount was no rough cabin—it was where
-            federal power took root.
-          </p>
-
-          <footer className={styles['blount-attribution']}>
-            <div className={styles['blount-seal']} aria-hidden="true">
-              <span className={styles['blount-seal-inner']}>SW</span>
+            <div className="flex items-center justify-center gap-4 mb-6" aria-hidden="true">
+              <span className="w-12 h-px bg-accent/30" />
+              <span className="text-accent/60 text-sm">📜</span>
+              <span className="w-12 h-px bg-accent/30" />
             </div>
-            <cite className={`${styles['blount-author']} signature-text`}>Wm. Blount</cite>
-            <span className={styles['blount-title']}>
-              First Governor of the Southwest Territory
-            </span>
-          </footer>
-
-          <div
-            className={`${styles['blount-rule']} ${styles['blount-rule-bottom']}`}
-            aria-hidden="true"
-          >
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--left']}`}>
-              ❧
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--center']}`}>
-              ✦
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--right']}`}>
-              ❧
-            </span>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-accent/60 mb-3">
+              The Primary Sources
+            </p>
+            <h2 id="correspondence-heading" className="font-serif text-2xl md:text-3xl text-white">
+              The Correspondence
+            </h2>
+            <p className="font-serif-elegant text-lg text-white/50 italic mt-2">
+              Washington asked. Rocky Mount was the answer.
+            </p>
           </div>
 
-          <Link href="/lectures" className={styles['blount-cta']}>
-            Explore Rocky Mount&apos;s founding story
-            <span aria-hidden="true">→</span>
-          </Link>
+          {/* The Two Letters */}
+          <div
+            className={`grid md:grid-cols-2 gap-8 md:gap-6 mb-8 transition-all duration-1000 ${letterVisible ? 'opacity-100' : 'opacity-0'}`}
+          >
+            {/* WASHINGTON'S QUESTION */}
+            <div
+              className="relative group"
+              style={{
+                transitionDelay: '0.2s',
+                transform: letterVisible ? 'translateX(0)' : 'translateX(-20px)',
+                transition: 'transform 0.7s ease, opacity 0.7s ease',
+              }}
+            >
+              <div
+                className="relative bg-white/[0.03] border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+                style={{
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)',
+                }}
+              >
+                {/* Corner accents */}
+                <span className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/20" />
+                <span className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/20" />
+                <span className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/20" />
+                <span className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/20" />
+
+                {/* US Seal watermark */}
+                <div className="absolute top-4 right-4 w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
+                  <span className="text-white/20 text-lg">⚑</span>
+                </div>
+
+                {/* Label */}
+                <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6">
+                  The Question
+                </p>
+
+                {/* Quote */}
+                <blockquote className="mb-6">
+                  <p className="font-serif-elegant text-xl md:text-2xl italic text-white/90 leading-relaxed">
+                    &ldquo;Where ought the Governor to reside?&rdquo;
+                  </p>
+                </blockquote>
+
+                {/* Attribution */}
+                <footer>
+                  <cite className="not-italic">
+                    <span className="block font-serif text-white/80 font-medium">
+                      George Washington
+                    </span>
+                    <span className="block text-sm text-white/50">
+                      to Secretary of War Henry Knox
+                    </span>
+                  </cite>
+                  <time
+                    dateTime="1790-08-13"
+                    className="block text-sm text-accent/70 mt-2 font-medium"
+                  >
+                    August 13, 1790
+                  </time>
+                </footer>
+
+                {/* Source link */}
+                <a
+                  href="https://founders.archives.gov/documents/Washington/05-06-02-0135"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-6 text-xs text-white/40 hover:text-accent transition-colors group/link"
+                >
+                  <span className="underline underline-offset-2">View on Founders Online</span>
+                  <span className="transition-transform group-hover/link:translate-x-0.5">→</span>
+                </a>
+              </div>
+            </div>
+
+            {/* BLOUNT'S ANSWER */}
+            <div
+              className="relative group"
+              style={{
+                transitionDelay: '0.4s',
+                transform: letterVisible ? 'translateX(0)' : 'translateX(20px)',
+                transition: 'transform 0.7s ease, opacity 0.7s ease',
+              }}
+            >
+              <div
+                className="relative bg-white/[0.03] border-2 border-accent/40 p-8 transition-all duration-300 hover:border-accent/60 hover:bg-white/[0.05]"
+                style={{
+                  boxShadow:
+                    'inset 0 1px 0 rgba(201, 162, 39, 0.1), 0 0 40px rgba(201, 162, 39, 0.05)',
+                }}
+              >
+                {/* Corner accents - gold */}
+                <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-accent/50" />
+                <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-accent/50" />
+                <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-accent/50" />
+                <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-accent/50" />
+
+                {/* SW Territory seal */}
+                <div
+                  className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse at 30% 30%, rgba(139, 69, 19, 0.8) 0%, rgba(100, 30, 22, 0.9) 50%, rgba(80, 20, 15, 1) 100%)',
+                    boxShadow:
+                      '0 2px 8px rgba(139, 69, 19, 0.4), inset -1px -1px 3px rgba(0, 0, 0, 0.3), inset 1px 1px 3px rgba(255, 200, 150, 0.15)',
+                  }}
+                >
+                  <span
+                    className="font-serif text-[10px] font-bold"
+                    style={{ color: 'rgba(255, 220, 180, 0.8)' }}
+                  >
+                    SW
+                  </span>
+                </div>
+
+                {/* Label */}
+                <p className="text-[10px] uppercase tracking-[0.3em] text-accent/80 mb-6">
+                  The Answer
+                </p>
+
+                {/* Quote with drop cap */}
+                <blockquote className="mb-6">
+                  <p className="font-serif-elegant text-lg md:text-xl italic text-white/90 leading-relaxed">
+                    <span
+                      className="float-left text-5xl font-serif text-accent mr-2 -mt-1"
+                      style={{
+                        lineHeight: '0.8',
+                        textShadow: '0 0 20px rgba(201, 162, 39, 0.3)',
+                      }}
+                    >
+                      I
+                    </span>
+                    am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc.,
+                    at this place.
+                  </p>
+                </blockquote>
+
+                {/* Attribution */}
+                <footer>
+                  <cite className="not-italic">
+                    <span className="block font-serif text-accent font-medium">William Blount</span>
+                    <span className="block text-sm text-white/50">
+                      First Governor of the Southwest Territory
+                    </span>
+                  </cite>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="text-sm text-white/60">Rocky Mount</span>
+                    <span className="text-white/30">·</span>
+                    <time dateTime="1790-10-20" className="text-sm text-accent/70 font-medium">
+                      October 20, 1790
+                    </time>
+                  </div>
+                </footer>
+
+                {/* Source link */}
+                <a
+                  href="https://tennesseeencyclopedia.net/entries/rocky-mount/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-6 text-xs text-white/40 hover:text-accent transition-colors group/link"
+                >
+                  <span className="underline underline-offset-2">
+                    View on Tennessee Encyclopedia
+                  </span>
+                  <span className="transition-transform group-hover/link:translate-x-0.5">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline connector - "67 Days Later" */}
+          <div
+            className={`flex items-center justify-center gap-4 mb-10 transition-all duration-700 ${letterVisible ? 'opacity-100' : 'opacity-0'}`}
+            style={{ transitionDelay: '0.6s' }}
+          >
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-white/20 max-w-32" />
+            <div className="px-5 py-2 bg-white/5 border border-white/10 rounded-full">
+              <span className="text-sm text-white/60">
+                <span className="text-accent font-semibold">67 days</span> later
+              </span>
+            </div>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/20 to-white/20 max-w-32" />
+          </div>
+
+          {/* WHY THIS MATTERS - Educational Panel */}
+          <div
+            className={`relative max-w-3xl mx-auto mb-12 transition-all duration-700 ${letterVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ transitionDelay: '0.8s' }}
+          >
+            <div
+              className="relative p-8 md:p-10 border border-accent/30 rounded"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%)',
+              }}
+            >
+              {/* Info icon */}
+              <div className="absolute -top-4 left-8 px-3 py-1 bg-primary flex items-center gap-2">
+                <span className="text-accent">ⓘ</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-accent/80 font-medium">
+                  Why This Matters
+                </span>
+              </div>
+
+              <div className="mt-2 space-y-4">
+                <p className="font-serif text-lg text-white/90 leading-relaxed">
+                  <span className="text-accent font-semibold">Glass windows</span> were a luxury on
+                  the 1790 frontier.
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  Most settlers had oiled paper or wooden shutters. Blount&apos;s casual mention of
+                  glass windows, a fireplace, and other amenities (&ldquo;etc., etc.&rdquo;) sent a
+                  clear message to President Washington:
+                </p>
+                <p className="font-serif-elegant text-xl text-accent/90 italic text-center py-4">
+                  &ldquo;This is no rough cabin—this is a proper seat of government.&rdquo;
+                </p>
+                <p className="text-white/60 text-sm">
+                  Rocky Mount was chosen because it offered the infrastructure federal governance
+                  required: a substantial house, established roads, and proximity to settlements
+                  across the territory.
+                </p>
+              </div>
+
+              {/* Quick facts */}
+              <div className="grid sm:grid-cols-3 gap-4 mt-8 pt-6 border-t border-white/10">
+                <div className="text-center">
+                  <span className="text-2xl font-bold text-accent">1 of 39</span>
+                  <p className="text-xs text-white/50 mt-1">Constitution signers</p>
+                </div>
+                <div className="text-center">
+                  <span className="text-2xl font-bold text-accent">~16 mo</span>
+                  <p className="text-xs text-white/50 mt-1">Capital duration</p>
+                </div>
+                <div className="text-center">
+                  <span className="text-2xl font-bold text-accent">600 mi</span>
+                  <p className="text-xs text-white/50 mt-1">from Philadelphia</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Source verification banner */}
+          <div
+            className={`max-w-2xl mx-auto mb-10 transition-all duration-700 ${letterVisible ? 'opacity-100' : 'opacity-0'}`}
+            style={{ transitionDelay: '1s' }}
+          >
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-white/5 border border-white/10 rounded">
+              <span className="text-white/40 text-sm">📚 Sources verified from:</span>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <a
+                  href="https://founders.archives.gov/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-white/60 hover:text-accent transition-colors underline underline-offset-2"
+                >
+                  Founders Online
+                </a>
+                <span className="text-white/20">·</span>
+                <a
+                  href="https://tennesseeencyclopedia.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-white/60 hover:text-accent transition-colors underline underline-offset-2"
+                >
+                  Tennessee Encyclopedia
+                </a>
+                <span className="text-white/20">·</span>
+                <span className="text-sm text-white/40">Blount Papers</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Evidence Room CTA */}
+          <div
+            className={`text-center transition-all duration-700 ${letterVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={{ transitionDelay: '1.2s' }}
+          >
+            <Link
+              href="/evidence"
+              className="group inline-flex flex-col items-center gap-2 px-8 py-5 bg-white/5 border border-accent/30 rounded transition-all duration-300 hover:bg-accent/10 hover:border-accent/50"
+            >
+              <span className="text-sm font-bold uppercase tracking-[0.15em] text-accent flex items-center gap-2">
+                <span>📜</span>
+                <span>Explore the Evidence Room</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+              <span className="text-xs text-white/50">
+                See all verified primary sources—every quote sourced, every claim documented.
+              </span>
+            </Link>
+
+            {/* Bottom flourish */}
+            <div className="flex items-center justify-center gap-3 mt-10" aria-hidden="true">
+              <span className="text-accent/30 text-sm">❧</span>
+              <span className="w-12 h-px bg-accent/20" />
+              <span className="text-accent/40 text-xs">✦</span>
+              <span className="w-12 h-px bg-accent/20" />
+              <span className="text-accent/30 text-sm">❧</span>
+            </div>
+          </div>
         </div>
       </section>
 

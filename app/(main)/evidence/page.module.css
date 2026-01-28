@@ -281,6 +281,59 @@
 }
 
 /* ============================================
+   CONTEXT PANEL - Expandable document info
+   ============================================ */
+
+.contextPanel {
+  margin-top: 1rem;
+}
+
+.contextToggle {
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--evidence-sepia);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.contextToggle:hover {
+  color: var(--primary);
+}
+
+.contextContent {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.2s ease,
+    margin 0.3s ease;
+  margin-top: 0;
+}
+
+.contextContentOpen {
+  max-height: 12rem;
+  opacity: 1;
+  margin-top: 0.75rem;
+}
+
+.contextText {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.875rem;
+  color: var(--evidence-sepia);
+  line-height: 1.75;
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(201, 162, 39, 0.25);
+}
+
+/* ============================================
    TREATY SIGNERS SECTION - Dignified, respectful
    ============================================ */
 
@@ -990,7 +1043,7 @@
   }
 
   .sourcesGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
 

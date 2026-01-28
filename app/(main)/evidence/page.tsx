@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
+import { ContextPanel } from './ContextPanel'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -205,6 +206,12 @@ export default function EvidencePage() {
             sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
             featured
           />
+          <ContextPanel>
+            Blount wrote this letter on October 20, 1790, nine days after arriving. The &ldquo;Glass
+            Windows&rdquo; detail wasn&apos;t idle observation—on the frontier, most settlers used
+            oiled paper or wooden shutters. Glass windows signaled that Rocky Mount was a proper
+            seat of government, not a crude outpost.
+          </ContextPanel>
         </div>
       </section>
 
@@ -222,6 +229,12 @@ export default function EvidencePage() {
             context={PRIMARY_QUOTES.washingtonsQuestion.context}
             sourceUrl="https://founders.archives.gov/documents/Washington/05-06-02-0135"
           />
+          <ContextPanel>
+            Washington posed this question to Secretary of War Henry Knox on August 13, 1790. The
+            answer would determine where federal authority took root west of the Appalachians. Knox
+            pointed to the Holston settlements—and William Cobb&apos;s home became that seat of
+            power.
+          </ContextPanel>
         </div>
       </section>
 
@@ -239,6 +252,12 @@ export default function EvidencePage() {
             context="Hugh Williamson's endorsement persuaded Washington that Blount was uniquely qualified to unite factional divisions."
             sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0277"
           />
+          <ContextPanel>
+            Hugh Williamson wrote this recommendation on May 28, 1790. The western territory was
+            torn by factional disputes between settlers and speculators. Williamson argued only
+            Blount commanded enough respect from both sides. Washington agreed—Blount was nominated
+            within two weeks.
+          </ContextPanel>
         </div>
       </section>
 
@@ -256,6 +275,11 @@ export default function EvidencePage() {
             context="Washington's proclamation made the Treaty of Holston—negotiated by Blount during the Rocky Mount capital period—binding federal law."
             sourceUrl="https://founders.archives.gov/"
           />
+          <ContextPanel>
+            This proclamation, signed November 11, 1791, made the Treaty of Holston binding federal
+            law. Countersigned by Secretary of State Thomas Jefferson, it required all U.S. officers
+            to enforce the terms Blount had negotiated with 40 Cherokee chiefs that July.
+          </ContextPanel>
         </div>
       </section>
 
@@ -319,8 +343,16 @@ export default function EvidencePage() {
               event="Hugh Williamson recommends Blount to Washington"
               sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0268"
             />
-            <TimelineEvent date="Jun 7, 1790" event="Washington nominates Blount as Governor" />
-            <TimelineEvent date="Jun 8, 1790" event="Senate confirms Blount's appointment" />
+            <TimelineEvent
+              date="Jun 7, 1790"
+              event="Washington nominates Blount as Governor"
+              sourceUrl="https://founders.archives.gov/documents/Jefferson/01-17-02-0062"
+            />
+            <TimelineEvent
+              date="Jun 8, 1790"
+              event="Senate confirms Blount's appointment"
+              sourceUrl="https://founders.archives.gov/documents/Jefferson/01-17-02-0062"
+            />
             <TimelineEvent
               date="Aug 13, 1790"
               event="Washington asks Knox: 'Where ought the Governor to reside?'"
@@ -405,6 +437,32 @@ export default function EvidencePage() {
               <p className={styles.sourceCardDescription}>
                 Scholarly reference for Tennessee history, including Rocky Mount and Southwest
                 Territory articles.
+              </p>
+            </a>
+
+            <a
+              href="https://avalon.law.yale.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.sourceCard}
+            >
+              <h3 className={styles.sourceCardTitle}>Avalon Project</h3>
+              <p className={styles.sourceCardDescription}>
+                Yale Law School&apos;s digital archive of treaties, legal documents, and diplomatic
+                papers from the founding era.
+              </p>
+            </a>
+
+            <a
+              href="https://wardepartmentpapers.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.sourceCard}
+            >
+              <h3 className={styles.sourceCardTitle}>Papers of the War Department</h3>
+              <p className={styles.sourceCardDescription}>
+                Reconstructed federal records from 1784–1800, recovered after the 1800 Washington
+                fire destroyed the originals.
               </p>
             </a>
 

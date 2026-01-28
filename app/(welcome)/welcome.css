@@ -111,7 +111,7 @@
 
 .countdown-label {
   font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: 0.55rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   color: var(--gold-muted);
@@ -131,11 +131,11 @@
   }
 
   .countdown-label {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
 
   .countdown-days {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -177,7 +177,7 @@
 
 .seal-date {
   font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: #4a1f24;
@@ -371,6 +371,7 @@
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   padding: 1.25rem 1rem;
+  min-height: 48px;
   text-decoration: none;
   transition: all 0.3s ease;
 }

@@ -213,22 +213,18 @@ export default function EvidencePage() {
             <a href="#blount-letter" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>📜</span>
               <span className={styles.heroNavName}>Letters</span>
-              <span className={styles.heroNavCount}>4 documents</span>
             </a>
             <a href="#treaty-signers" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>🤝</span>
               <span className={styles.heroNavName}>Treaty Signers</span>
-              <span className={styles.heroNavCount}>40 Cherokee leaders</span>
             </a>
             <a href="#timeline" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>📅</span>
               <span className={styles.heroNavName}>Timeline</span>
-              <span className={styles.heroNavCount}>12 key dates</span>
             </a>
             <a href="#sources" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>📚</span>
               <span className={styles.heroNavName}>Sources</span>
-              <span className={styles.heroNavCount}>6 repositories</span>
             </a>
           </div>
 

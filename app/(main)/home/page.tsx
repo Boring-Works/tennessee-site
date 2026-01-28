@@ -163,7 +163,7 @@ export default function Home() {
               <span className={styles['blount-dateline-sep']} aria-hidden="true">
                 ·
               </span>
-              <time dateTime="1790-10-10">October 10, 1790</time>
+              <time dateTime="1790-10-20">October 20, 1790</time>
             </p>
           </header>
 

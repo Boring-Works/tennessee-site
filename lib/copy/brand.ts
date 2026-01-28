@@ -61,6 +61,45 @@ export const TIERS = {
 /**
  * Approved Hooks & CTAs
  */
+/**
+ * Primary Source Quotes
+ * Verified from MASTER_CATALOG.md - use with citations
+ */
+export const PRIMARY_QUOTES = {
+  // THE hero quote - use prominently
+  glassWindows: {
+    text: 'I am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at this place.',
+    attribution: 'William Blount, October 20, 1790',
+    source: 'Tennessee Encyclopedia, citing Blount Papers',
+    context: 'Letter describing his arrival at Rocky Mount',
+  },
+  // Full arrival quote
+  glassWindowsFull: {
+    text: "At William Cobb's Washington County... On the 11th instant, I arrived in this country, and was received with every mark of attention and gladness that I could have wished. I am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at this place.",
+    attribution: 'William Blount, October 20, 1790',
+    source: 'Tennessee Encyclopedia, citing Blount Papers',
+  },
+  // Why Blount was chosen
+  williamsonRecommendation: {
+    text: 'there is not any other Man who possesses the Esteem and Confidence of both Parties so fully as Mr Blount',
+    attribution: 'Hugh Williamson to George Washington, May 28, 1790',
+    source: 'Founders Online',
+  },
+  // Washington's question that Rocky Mount answered
+  washingtonsQuestion: {
+    text: 'Where ought the Governor to reside?',
+    attribution: 'George Washington to Henry Knox, August 13, 1790',
+    source: 'Founders Online',
+    context: 'The answer was Rocky Mount',
+  },
+  // Treaty authority
+  treatyProclamation: {
+    text: 'I do hereby enjoin and require all officers of the United States, civil and military...to govern themselves according to the said treaty, as they will answer the contrary at their peril.',
+    attribution: 'George Washington, November 11, 1791',
+    source: 'Founders Online, War Department Papers',
+  },
+} as const
+
 export const HOOKS = {
   // Welcome/Mystery hook
   welcomeHook: 'Before there was a Tennessee, there was this ground.',

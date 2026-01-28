@@ -358,6 +358,58 @@ All claims below have been fact-checked against primary and secondary sources.
 
 ---
 
+## Key Quotable Passages (Primary Sources)
+
+These quotes are verified from primary source documents and should be featured prominently.
+
+### TIER 1: Hero Quote — Blount's "Glass Windows" Letter (October 20, 1790)
+
+> "At William Cobb's Washington County... On the 11th instant, I arrived in this country, and was received with every mark of attention and gladness that I could have wished. I am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at this place."
+
+**Source:** Tennessee Encyclopedia, citing Blount Papers
+**Significance:** THE definitive primary source proving Blount was at Rocky Mount. The "glass windows" detail demonstrates Rocky Mount's relative sophistication on the frontier.
+**Use:** Homepage hero, interpretive signage, all marketing materials
+
+---
+
+### TIER 2: Supporting Quotes
+
+**Blount Accepting Appointment (July 7, 1790)**
+
+> "...a very perfect Sense of the Honor...with a firm Determination to perform the duties of it to the best of Abilities"
+
+**Source:** Founders Online, Jefferson to Blount annotation
+**Use:** Commission/appointment narrative
+
+---
+
+**Williamson Recommending Blount (May 28, 1790)**
+
+> "there is not any other Man who possesses the Esteem and Confidence of both Parties so fully as Mr Blount"
+
+**Source:** Founders Online, Williamson to Washington
+**Use:** "Why Blount?" content, State of Franklin healing narrative
+
+---
+
+**Washington's Question (August 13, 1790)**
+
+> "Where ought the Governor to reside?"
+
+**Source:** Founders Online, Washington to Knox
+**Use:** Timeline, governance narrative — the answer was Rocky Mount
+
+---
+
+**Washington's Treaty Proclamation (November 11, 1791)**
+
+> "I do hereby enjoin and require all officers of the United States, civil and military...to govern themselves according to the said treaty, as they will answer the contrary at their peril."
+
+**Source:** Founders Online, War Department Papers
+**Use:** Treaty content, presidential authority
+
+---
+
 ## Claims to Avoid
 
 | Claim                                         | Problem                                                               |
@@ -609,19 +661,24 @@ Photography must match brand hierarchy. If we say "Stand where they stood" next 
 | **Dec 22, 1789** | NC Cession Act: North Carolina cedes 43,000 square miles to U.S.   |
 | **Apr 2, 1790**  | Congress formally accepts North Carolina's land cession            |
 | **May 26, 1790** | Congress passes Southwest Ordinance, creating the territory        |
-| **Jun 8, 1790**  | Washington commissions Blount as Governor                          |
+| **Jun 7, 1790**  | Washington nominates Blount as Governor                            |
+| **Jun 8, 1790**  | Senate confirms Blount                                             |
 | **Sep 18, 1790** | Blount visits President Washington at Mount Vernon                 |
 | **Sep 20, 1790** | Blount takes oath before Supreme Court Justice James Iredell       |
-| **Oct 10, 1790** | Blount arrives at William Cobb's home, Rocky Mount                 |
+| **Oct 11, 1790** | Blount arrives at William Cobb's home, Rocky Mount                 |
+| **Oct 20, 1790** | Blount writes "Glass Windows" letter describing Rocky Mount        |
 | **Oct 23, 1790** | Blount proclaims territorial government operational at Rocky Mount |
 
 ### Capital Period (1790-1792)
 
-| Year         | Event                                                                  |
-| ------------ | ---------------------------------------------------------------------- |
-| **1791**     | Census records 35,691 residents; 7 counties across 2 districts         |
-| **1791**     | Treaty of Holston negotiated with Cherokee (at White's Fort/Knoxville) |
-| **Feb 1792** | Capital relocates to Knoxville (approximate date)                      |
+| Date             | Event                                                             |
+| ---------------- | ----------------------------------------------------------------- |
+| **1791**         | Census records 35,691 residents; 7 counties across 2 districts    |
+| **Jul 2, 1791**  | Treaty of Holston signed (at White's Fort/Knoxville)              |
+| **Nov 5, 1791**  | Knoxville Gazette publishes first issue (first TN newspaper)      |
+| **Nov 11, 1791** | Washington proclaims Treaty of Holston as binding law             |
+| **Late 1791**    | Blount family arrives in territory (delayed by carriage accident) |
+| **Early 1792**   | Capital relocates to Knoxville                                    |
 
 ### Post-Capital Era
 

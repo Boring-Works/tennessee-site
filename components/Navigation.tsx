@@ -217,18 +217,8 @@ export default function Navigation() {
 
         {/* Drawer */}
         <div className={styles['mobile-drawer']}>
-          {/* Watermark */}
-          <div className={styles['mobile-watermark']} aria-hidden="true">
-            1790
-          </div>
-
-          {/* Border inset */}
-          <div className={styles['mobile-border']} aria-hidden="true" />
-
           {/* Content */}
           <nav className={styles['mobile-nav']}>
-            <span className={styles['mobile-label']}>Navigation</span>
-
             <ul className={styles['mobile-list']}>
               {NAV_LINKS.map((link, index) => (
                 <li key={link.href}>
@@ -241,30 +231,22 @@ export default function Navigation() {
                     onClick={closeMobileMenu}
                     style={{ transitionDelay: `${100 + index * 50}ms` }}
                   >
-                    <span className={styles['mobile-link-number']}>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
                     <span className={styles['mobile-link-text']}>{link.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
 
+            {/* Separator */}
+            <div className={styles['mobile-separator']} aria-hidden="true" />
+
             {/* Mobile CTA - Primary */}
             <Link href="/visit" className={styles['mobile-cta']} onClick={closeMobileMenu}>
               <span>Plan Your Visit</span>
             </Link>
 
-            {/* Footer flourish */}
-            <div className={styles['mobile-footer']}>
-              <span className={styles['mobile-footer-flourish']}>❧</span>
-              <span className={styles['mobile-footer-text']}>Tennessee Starts Here</span>
-              <span
-                className={`${styles['mobile-footer-flourish']} ${styles['mobile-footer-flourish--flip']}`}
-              >
-                ❧
-              </span>
-            </div>
+            {/* Tagline - plain text, no flourishes */}
+            <p className={styles['mobile-tagline']}>Tennessee starts here</p>
           </nav>
         </div>
       </div>

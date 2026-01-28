@@ -1,95 +1,99 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Menu, X, Feather } from "lucide-react";
-import { WaxSealSVG } from "./WaxSealSVG";
-import styles from "./Header/Header.module.css";
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { Menu, X, Feather } from 'lucide-react'
+import { WaxSealSVG } from './WaxSealSVG'
+import styles from './Header/Header.module.css'
 
 const NAV_LINKS = [
-  { href: "/", label: "Our Story" },
-  { href: "/events", label: "Events" },
-  { href: "/lectures", label: "Lectures" },
-  { href: "/visit", label: "Visit" },
-  { href: "/almanac", label: "Almanac" },
-];
+  { href: '/', label: 'Our Story' },
+  { href: '/evidence', label: 'Evidence' },
+  { href: '/events', label: 'Events' },
+  { href: '/lectures', label: 'Lectures' },
+  { href: '/visit', label: 'Visit' },
+  { href: '/almanac', label: 'Almanac' },
+]
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const menuRef = useRef<HTMLDivElement>(null)
 
   // Throttled scroll listener
   useEffect(() => {
-    let ticking = false;
+    let ticking = false
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 20);
-          ticking = false;
-        });
-        ticking = true;
+          setIsScrolled(window.scrollY > 20)
+          ticking = false
+        })
+        ticking = true
       }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Scroll lock + escape key + focus trap
   useEffect(() => {
     if (mobileMenuOpen) {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = `${scrollbarWidth}px`
 
       // Focus first interactive element
-      const firstFocusable = menuRef.current?.querySelector("a, button");
-      if (firstFocusable) (firstFocusable as HTMLElement).focus();
+      const firstFocusable = menuRef.current?.querySelector('a, button')
+      if (firstFocusable) (firstFocusable as HTMLElement).focus()
     } else {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && mobileMenuOpen) {
-        setMobileMenuOpen(false);
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false)
       }
 
       // Focus trap
-      if (e.key === "Tab" && mobileMenuOpen && menuRef.current) {
-        const focusables = menuRef.current.querySelectorAll("a, button");
-        const first = focusables[0] as HTMLElement;
-        const last = focusables[focusables.length - 1] as HTMLElement;
+      if (e.key === 'Tab' && mobileMenuOpen && menuRef.current) {
+        const focusables = menuRef.current.querySelectorAll('a, button')
+        const first = focusables[0] as HTMLElement
+        const last = focusables[focusables.length - 1] as HTMLElement
 
         if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
+          e.preventDefault()
+          last.focus()
         } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
+          e.preventDefault()
+          first.focus()
         }
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown)
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
-  }, [mobileMenuOpen]);
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
+    }
+  }, [mobileMenuOpen])
 
-  const isActive = useCallback((href: string) => {
-    if (href === "/") return pathname === "/" || pathname === "/home";
-    // Exact match or starts with href followed by /
-    return pathname === href || pathname.startsWith(href + "/");
-  }, [pathname]);
+  const isActive = useCallback(
+    (href: string) => {
+      if (href === '/') return pathname === '/' || pathname === '/home'
+      // Exact match or starts with href followed by /
+      return pathname === href || pathname.startsWith(href + '/')
+    },
+    [pathname]
+  )
 
   const closeMobileMenu = useCallback(() => {
-    setMobileMenuOpen(false);
-  }, []);
+    setMobileMenuOpen(false)
+  }, [])
 
   return (
     <>
@@ -100,20 +104,18 @@ export default function Navigation() {
 
       <header
         className={`${styles.header} ${
-          isScrolled || mobileMenuOpen
-            ? styles["header--scrolled"]
-            : styles["header--transparent"]
+          isScrolled || mobileMenuOpen ? styles['header--scrolled'] : styles['header--transparent']
         }`}
         role="banner"
       >
         {/* Tricolor stripe - appears on scroll */}
         <div
-          className={`${styles.stripe} ${isScrolled ? styles["stripe--visible"] : ""}`}
+          className={`${styles.stripe} ${isScrolled ? styles['stripe--visible'] : ''}`}
           aria-hidden="true"
         >
-          <span className={styles["stripe--crimson"]} />
-          <span className={styles["stripe--gold"]} />
-          <span className={styles["stripe--federal"]} />
+          <span className={styles['stripe--crimson']} />
+          <span className={styles['stripe--gold']} />
+          <span className={styles['stripe--federal']} />
         </div>
 
         <div className={styles.container}>
@@ -121,57 +123,59 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/" className={styles.logo}>
               <WaxSealSVG
-                className={`${styles.seal} ${isScrolled ? styles["seal--small"] : ""}`}
+                className={`${styles.seal} ${isScrolled ? styles['seal--small'] : ''}`}
                 size={isScrolled ? 32 : 40}
               />
-              <div className={styles["logo-stack"]}>
-                <span className={styles["logo-text"]}>ROCKY MOUNT</span>
-                <div className={`${styles["logo-tagline"]} ${isScrolled ? styles["logo-tagline--hidden"] : ""}`}>
-                  <span className={styles["logo-tagline-dash"]} aria-hidden="true" />
-                  <span className={styles["logo-tagline-text"]}>Tennessee Starts Here</span>
+              <div className={styles['logo-stack']}>
+                <span className={styles['logo-text']}>ROCKY MOUNT</span>
+                <div
+                  className={`${styles['logo-tagline']} ${isScrolled ? styles['logo-tagline--hidden'] : ''}`}
+                >
+                  <span className={styles['logo-tagline-dash']} aria-hidden="true" />
+                  <span className={styles['logo-tagline-text']}>Tennessee Starts Here</span>
                 </div>
               </div>
             </Link>
 
             {/* Desktop Nav */}
             <nav className={styles.nav} aria-label="Main navigation">
-              <ul className={styles["nav-list"]} role="menubar">
+              <ul className={styles['nav-list']} role="menubar">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href} role="none">
                     <Link
                       href={link.href}
                       role="menuitem"
-                      aria-current={isActive(link.href) ? "page" : undefined}
-                      className={`${styles["nav-link"]} ${
-                        isActive(link.href) ? styles["nav-link--active"] : ""
+                      aria-current={isActive(link.href) ? 'page' : undefined}
+                      className={`${styles['nav-link']} ${
+                        isActive(link.href) ? styles['nav-link--active'] : ''
                       }`}
                     >
                       {link.label}
-                      <span className={styles["nav-link-underline"]} aria-hidden="true" />
-                      <span className={styles["nav-link-glow"]} aria-hidden="true" />
+                      <span className={styles['nav-link-underline']} aria-hidden="true" />
+                      <span className={styles['nav-link-glow']} aria-hidden="true" />
                     </Link>
                   </li>
                 ))}
               </ul>
 
               {/* Divider */}
-              <span className={styles["nav-divider"]} aria-hidden="true" />
+              <span className={styles['nav-divider']} aria-hidden="true" />
 
               {/* CTA */}
               <Link href="/visit" className={styles.cta}>
-                <span className={styles["cta-text"]}>Plan Your Visit</span>
-                <Feather className={styles["cta-icon"]} size={14} />
+                <span className={styles['cta-text']}>Plan Your Visit</span>
+                <Feather className={styles['cta-icon']} size={14} />
               </Link>
             </nav>
 
             {/* Mobile Toggle */}
             <button
               type="button"
-              className={styles["mobile-toggle"]}
+              className={styles['mobile-toggle']}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -179,12 +183,12 @@ export default function Navigation() {
 
           {/* Decorative bottom rule - appears on scroll */}
           <div
-            className={`${styles["bottom-rule"]} ${isScrolled ? styles["bottom-rule--visible"] : ""}`}
+            className={`${styles['bottom-rule']} ${isScrolled ? styles['bottom-rule--visible'] : ''}`}
             aria-hidden="true"
           >
-            <span className={styles["bottom-rule-line"]} />
-            <span className={styles["bottom-rule-ornament"]}>✦</span>
-            <span className={styles["bottom-rule-line"]} />
+            <span className={styles['bottom-rule-line']} />
+            <span className={styles['bottom-rule-ornament']}>✦</span>
+            <span className={styles['bottom-rule-line']} />
           </div>
         </div>
       </header>
@@ -193,72 +197,69 @@ export default function Navigation() {
       <div
         id="mobile-menu"
         ref={menuRef}
-        className={`${styles.mobile} ${mobileMenuOpen ? styles["mobile--open"] : ""}`}
+        className={`${styles.mobile} ${mobileMenuOpen ? styles['mobile--open'] : ''}`}
         aria-hidden={!mobileMenuOpen}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
       >
         {/* Backdrop */}
-        <div
-          className={styles["mobile-backdrop"]}
-          onClick={closeMobileMenu}
-        />
+        <div className={styles['mobile-backdrop']} onClick={closeMobileMenu} />
 
         {/* Drawer */}
-        <div className={styles["mobile-drawer"]}>
+        <div className={styles['mobile-drawer']}>
           {/* Watermark */}
-          <div className={styles["mobile-watermark"]} aria-hidden="true">
+          <div className={styles['mobile-watermark']} aria-hidden="true">
             1790
           </div>
 
           {/* Border inset */}
-          <div className={styles["mobile-border"]} aria-hidden="true" />
+          <div className={styles['mobile-border']} aria-hidden="true" />
 
           {/* Content */}
-          <nav className={styles["mobile-nav"]}>
-            <span className={styles["mobile-label"]}>Navigation</span>
+          <nav className={styles['mobile-nav']}>
+            <span className={styles['mobile-label']}>Navigation</span>
 
-            <ul className={styles["mobile-list"]}>
+            <ul className={styles['mobile-list']}>
               {NAV_LINKS.map((link, index) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    className={`${styles["mobile-link"]} ${
-                      isActive(link.href) ? styles["mobile-link--active"] : ""
+                    aria-current={isActive(link.href) ? 'page' : undefined}
+                    className={`${styles['mobile-link']} ${
+                      isActive(link.href) ? styles['mobile-link--active'] : ''
                     }`}
                     onClick={closeMobileMenu}
                     style={{ transitionDelay: `${100 + index * 50}ms` }}
                   >
-                    <span className={styles["mobile-link-number"]}>
-                      {String(index + 1).padStart(2, "0")}
+                    <span className={styles['mobile-link-number']}>
+                      {String(index + 1).padStart(2, '0')}
                     </span>
-                    <span className={styles["mobile-link-text"]}>{link.label}</span>
+                    <span className={styles['mobile-link-text']}>{link.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
 
             {/* Mobile CTA */}
-            <Link
-              href="/visit"
-              className={styles["mobile-cta"]}
-              onClick={closeMobileMenu}
-            >
+            <Link href="/visit" className={styles['mobile-cta']} onClick={closeMobileMenu}>
               <span>Plan Your Visit</span>
               <Feather size={16} />
             </Link>
 
             {/* Footer flourish */}
-            <div className={styles["mobile-footer"]}>
-              <span className={styles["mobile-footer-flourish"]}>❧</span>
-              <span className={styles["mobile-footer-text"]}>Tennessee Starts Here</span>
-              <span className={`${styles["mobile-footer-flourish"]} ${styles["mobile-footer-flourish--flip"]}`}>❧</span>
+            <div className={styles['mobile-footer']}>
+              <span className={styles['mobile-footer-flourish']}>❧</span>
+              <span className={styles['mobile-footer-text']}>Tennessee Starts Here</span>
+              <span
+                className={`${styles['mobile-footer-flourish']} ${styles['mobile-footer-flourish--flip']}`}
+              >
+                ❧
+              </span>
             </div>
           </nav>
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,0 +1,236 @@
+/* Educators Page Styles */
+
+.hero {
+  background: var(--color-primary);
+  color: var(--color-cream);
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.subhead {
+  font-size: 1.125rem;
+  color: var(--color-cream-dark);
+  margin-bottom: 2rem;
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.cta-primary:hover {
+  background: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+/* Stats Bar */
+.stats {
+  background: var(--color-secondary);
+  padding: 1.5rem;
+}
+
+.stats-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-cream);
+}
+
+.stats-icon {
+  font-size: 1.25rem;
+}
+
+.stats-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Programs */
+.programs {
+  padding: 4rem 1.5rem;
+  background: var(--color-cream);
+}
+
+.programs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.programs-headline {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.program-card {
+  background: white;
+  border: 1px solid var(--color-secondary);
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.program-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.program-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.program-meta {
+  font-size: 0.875rem;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.program-divider {
+  margin: 0 0.5rem;
+}
+
+.program-desc {
+  font-size: 0.9375rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Booking */
+.booking {
+  padding: 4rem 1.5rem;
+  background: var(--color-primary);
+  text-align: center;
+}
+
+.booking-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.booking-headline {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--color-cream);
+  margin-bottom: 1.5rem;
+}
+
+.booking-contact {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-cream-dark);
+}
+
+.booking-contact a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Funding */
+.funding {
+  padding: 3rem 1.5rem;
+  background: var(--color-cream);
+}
+
+.funding-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.funding-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.funding-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #333;
+  line-height: 1.8;
+}
+
+.funding-list strong {
+  color: var(--color-primary);
+}
+
+/* Resources */
+.resources {
+  padding: 3rem 1.5rem;
+  background: white;
+  border-top: 1px solid var(--color-cream-dark);
+}
+
+.resources-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.resources-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.resources-coming {
+  font-size: 1rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.resources-email {
+  font-size: 0.875rem;
+  color: #666;
+}

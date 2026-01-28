@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Menu, X, Feather } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { WaxSealSVG } from './WaxSealSVG'
 import styles from './Header/Header.module.css'
 
@@ -132,8 +132,7 @@ export default function Navigation() {
                 <div
                   className={`${styles['logo-tagline']} ${isScrolled ? styles['logo-tagline--hidden'] : ''}`}
                 >
-                  <span className={styles['logo-tagline-dash']} aria-hidden="true" />
-                  <span className={styles['logo-tagline-text']}>Tennessee Starts Here</span>
+                  <span className={styles['logo-tagline-text']}>Tennessee starts here</span>
                 </div>
               </div>
             </Link>
@@ -167,10 +166,9 @@ export default function Navigation() {
                 <span className={styles['cta-text']}>{EDUCATOR_LINK.label}</span>
               </Link>
 
-              {/* CTA */}
+              {/* CTA - Primary */}
               <Link href="/visit" className={styles.cta}>
                 <span className={styles['cta-text']}>Plan Your Visit</span>
-                <Feather className={styles['cta-icon']} size={14} />
               </Link>
             </nav>
 
@@ -252,10 +250,9 @@ export default function Navigation() {
               ))}
             </ul>
 
-            {/* Mobile CTA */}
+            {/* Mobile CTA - Primary */}
             <Link href="/visit" className={styles['mobile-cta']} onClick={closeMobileMenu}>
               <span>Plan Your Visit</span>
-              <Feather size={16} />
             </Link>
 
             {/* Footer flourish */}

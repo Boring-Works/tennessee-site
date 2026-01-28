@@ -297,6 +297,87 @@
   color: var(--library-brown-light);
 }
 
+/* === Excerpts List (for multi-passage documents) === */
+.excerptsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.excerptCard {
+  background: var(--library-cream);
+  border: 1px solid var(--library-rule);
+  border-left: 3px solid var(--library-gold-muted);
+  border-radius: 0 2px 2px 0;
+  padding: 1.25rem 1.5rem;
+}
+
+.excerptText {
+  font-family: var(--library-serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--library-brown);
+  line-height: 1.65;
+  margin: 0 0 0.75rem 0;
+}
+
+.excerptContext {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--library-gold-muted);
+  margin: 0;
+}
+
+/* === Metadata Subtext (for titles/locations) === */
+.metadataSubtext {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--library-brown-muted);
+  font-style: italic;
+  margin-top: 0.125rem;
+}
+
+/* === People Mentioned === */
+.peopleMentioned {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.peopleMentioned li {
+  font-family: var(--library-serif);
+  font-size: 0.9375rem;
+  color: var(--library-brown);
+  background: var(--library-cream-dark);
+  padding: 0.375rem 0.75rem;
+  border-radius: 2px;
+  border: 1px solid var(--library-rule);
+}
+
+/* === Interpretive Notes === */
+.interpretiveSection {
+  background: var(--library-cream-dark);
+  border: 1px solid var(--library-rule);
+  border-radius: 2px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.interpretiveNotes {
+  font-family: var(--library-serif);
+  font-size: 0.9375rem;
+  color: var(--library-brown-light);
+  line-height: 1.65;
+  font-style: italic;
+  margin: 0;
+}
+
 /* === Document Text === */
 .documentText {
   font-family: var(--library-serif);

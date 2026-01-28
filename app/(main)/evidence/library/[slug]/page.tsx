@@ -69,6 +69,21 @@ export default async function DocumentPage({ params }: { params: Promise<{ slug:
             </blockquote>
           )}
 
+          {/* Multiple Excerpts (for multi-passage documents) */}
+          {doc.excerpts && doc.excerpts.length > 0 && (
+            <section className="documentSection">
+              <h2 className="sectionLabel">Key Passages</h2>
+              <div className="excerptsList">
+                {doc.excerpts.map((excerpt, i) => (
+                  <div key={i} className="excerptCard">
+                    <blockquote className="excerptText">&ldquo;{excerpt.text}&rdquo;</blockquote>
+                    <p className="excerptContext">{excerpt.context}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Why This Matters */}
           <section className="documentSection">
             <h2 className="sectionLabel">Why This Matters</h2>
@@ -133,13 +148,29 @@ export default async function DocumentPage({ params }: { params: Promise<{ slug:
                 {doc.author && (
                   <div className="metadataRow">
                     <span className="metadataLabel">Author</span>
-                    <span className="metadataValue">{doc.author}</span>
+                    <span className="metadataValue">
+                      {doc.author}
+                      {doc.authorTitle && (
+                        <span className="metadataSubtext">{doc.authorTitle}</span>
+                      )}
+                    </span>
                   </div>
                 )}
                 {doc.recipient && (
                   <div className="metadataRow">
                     <span className="metadataLabel">Recipient</span>
-                    <span className="metadataValue">{doc.recipient}</span>
+                    <span className="metadataValue">
+                      {doc.recipient}
+                      {doc.recipientLocation && (
+                        <span className="metadataSubtext">{doc.recipientLocation}</span>
+                      )}
+                    </span>
+                  </div>
+                )}
+                {doc.location && (
+                  <div className="metadataRow">
+                    <span className="metadataLabel">Written From</span>
+                    <span className="metadataValue">{doc.location}</span>
                   </div>
                 )}
                 <div className="metadataRow">
@@ -178,6 +209,26 @@ export default async function DocumentPage({ params }: { params: Promise<{ slug:
               </div>
             </div>
           </section>
+
+          {/* People Mentioned */}
+          {doc.peopleMentioned && doc.peopleMentioned.length > 0 && (
+            <section className="documentSection">
+              <h2 className="sectionLabel">People Mentioned</h2>
+              <ul className="peopleMentioned">
+                {doc.peopleMentioned.map((person) => (
+                  <li key={person}>{person}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Interpretive Notes (for curators/researchers) */}
+          {doc.interpretiveNotes && (
+            <section className="documentSection interpretiveSection">
+              <h2 className="sectionLabel">Interpretive Notes</h2>
+              <p className="interpretiveNotes">{doc.interpretiveNotes}</p>
+            </section>
+          )}
 
           {/* Related Documents */}
           {doc.relatedDocuments && doc.relatedDocuments.length > 0 && (

@@ -137,6 +137,10 @@ export const documents: HistoricalDocument[] = [
       '"George Washington to Henry Knox, 13 August 1790." Founders Online, National Archives, The Papers of George Washington, Presidential Series, Vol. 6. https://tennesseestartshere.com/evidence/library/washington-to-knox-1790',
     relatedDocuments: [
       { slug: 'jefferson-to-blount-1790', title: 'Jefferson to Blount (August 1, 1790)' },
+      {
+        slug: 'blount-to-jg-blount-1790-10-20',
+        title: 'Blount to John Gray Blount (October 20, 1790)',
+      },
       { slug: 'treaty-of-holston-1791', title: 'Treaty of Holston (July 2, 1791)' },
     ],
   },
@@ -252,7 +256,10 @@ export const documents: HistoricalDocument[] = [
   <li><strong>June 8, 1790:</strong> Senate confirms the appointment</li>
   <li><strong>July 7, 1790:</strong> Blount accepts the commission</li>
   <li><strong>August 1, 1790:</strong> Jefferson transmits this letter with governing documents</li>
+  <li><strong>September 18, 1790:</strong> Blount visits Washington at Mount Vernon to receive instructions</li>
+  <li><strong>September 20, 1790:</strong> Blount sworn in by Supreme Court Justice James Iredell</li>
   <li><strong>October 11, 1790:</strong> Blount arrives at Rocky Mount</li>
+  <li><strong>October 20, 1790:</strong> Blount writes the "Glass Windows" letter describing his accommodations</li>
 </ul>`,
     sources: [
       {
@@ -264,8 +271,89 @@ export const documents: HistoricalDocument[] = [
       '"Thomas Jefferson to William Blount, 1 August 1790." Founders Online, National Archives. https://tennesseestartshere.com/evidence/library/jefferson-to-blount-1790',
     relatedDocuments: [
       { slug: 'washington-to-knox-1790', title: 'Washington to Knox (August 13, 1790)' },
+      {
+        slug: 'blount-to-jg-blount-1790-10-20',
+        title: 'Blount to John Gray Blount (October 20, 1790)',
+      },
       { slug: 'treaty-of-holston-1791', title: 'Treaty of Holston (July 2, 1791)' },
     ],
+  },
+
+  // ============================================
+  // BLOUNT TO JOHN GRAY BLOUNT - "GLASS WINDOWS" LETTER
+  // ============================================
+  {
+    slug: 'blount-to-jg-blount-1790-10-20',
+    title: 'William Blount to John Gray Blount',
+    date: '1790-10-20',
+    dateDisplay: 'October 20, 1790',
+    location: 'Rocky Mount, Southwest Territory',
+    category: 'territorial',
+    badge: 'Territorial',
+    author: 'William Blount',
+    authorTitle: 'Governor, Territory of the United States South of the River Ohio',
+    recipient: 'John Gray Blount',
+    recipientLocation: 'Washington, North Carolina',
+    keyQuote:
+      'I am very well accommodated with a Room with Glass Windows, Fire Place &c &c at this place.',
+    keyQuoteAttribution: 'William Blount, October 20, 1790',
+    excerpts: [
+      {
+        text: 'On the 11th instant, I arrived in this country, and was received with every mark of attention and gladness that I could have wished.',
+        context: 'Arrival and reception — source for October 11, 1790 arrival date',
+      },
+      {
+        text: 'I am very well accommodated with a Room with Glass Windows, Fire Place &c &c at this place.',
+        context: 'Accommodations at the Cobb house — material culture evidence',
+      },
+      {
+        text: 'Farrowgood went on as I am informed with the Guard not finding it quite safe to proceed with his Treasure before the profound peace prevails with all the northern Indians.',
+        context: 'Security situation — George Farragut and military convoy',
+      },
+    ],
+    whyThisMatters:
+      "Written nine days after establishing the territorial capital, this letter captures three dimensions of Rocky Mount in October 1790: the warm reception from settlers weary of the Franklin chaos, the unexpected refinement of the Cobb house with its rare glass windows, and the dangerous conditions beyond its walls—a military convoy carrying government funds stalled because the roads weren't safe. The letter also documents George Farragut, a Minorcan immigrant serving as muster-master, whose son David would become America's first Admiral.",
+    content: `<p>This letter from Governor William Blount to his half-brother and business partner John Gray Blount in North Carolina provides the most detailed first-hand account of Rocky Mount as the territorial capital.</p>
+
+<h3>The Arrival (October 11, 1790)</h3>
+
+<p>Blount reports arriving "on the 11th instant" and being "received with every mark of attention and gladness." This warm reception contrasted sharply with the chaos of the recently-collapsed State of Franklin. The settlers welcomed federal authority and the stability it promised.</p>
+
+<h3>The Accommodations</h3>
+
+<p>The famous passage about "Glass Windows" and "Fire Place" reveals the exceptional quality of William Cobb's house. On the frontier, glass windows were a rare luxury—fragile panes had to be transported by packhorse over the Unaka Mountains. The "&c &c" implies additional amenities (desk, rug, fine furnishings) that Blount considered beneath enumeration.</p>
+
+<h3>The Security Situation</h3>
+
+<p>Blount mentions "Farrowgood" (George Farragut) traveling with a military "Guard" and "Treasure"—likely specie for militia pay or land purchases. Farragut found it "not quite safe to proceed" due to threats from "northern Indians" (likely Shawnee or Chickamauga factions). This reveals the dangerous conditions surrounding the new seat of government.</p>
+
+<h3>About George Farragut</h3>
+
+<p>Jorge Farragut Mesquida (1755–1817), anglicized as George Farragut, was a Minorcan immigrant who served in the Revolutionary War. By 1790 he was serving as muster-master of the territorial militia under Blount. His son, David Glasgow Farragut, would become America's first Admiral, famous for "Damn the torpedoes, full speed ahead!" at the Battle of Mobile Bay (1864).</p>
+
+<h3>The Letter's Preservation</h3>
+
+<p>This letter was preserved because it was sent to John Gray Blount, William's half-brother and business partner who managed the family's mercantile operations from Washington, North Carolina. It was filed as part of the Blount brothers' business records, not merely as family correspondence.</p>`,
+    sources: [
+      {
+        name: 'Original Manuscript: State Archives of North Carolina, John Gray Blount Papers, PC.193',
+        url: 'https://digital.ncdcr.gov/Documents/Detail/john-gray-blount-1752-1833-papers-1706-1900/372318',
+      },
+      {
+        name: 'Published Transcription: Keith, Alice Barnwell, ed. The John Gray Blount Papers, Vol. II (1790-1795). Raleigh: State Department of Archives and History, 1959. pp. 127-128',
+        url: 'https://archive.org/details/johngrayblountpa02blou',
+      },
+    ],
+    citation:
+      '"William Blount to John Gray Blount, 20 October 1790." State Archives of North Carolina, John Gray Blount Papers, PC.193. Published in Keith, Alice Barnwell, ed. The John Gray Blount Papers, Vol. II (1790-1795). Raleigh: State Department of Archives and History, 1959. pp. 127-128. https://tennesseestartshere.com/evidence/library/blount-to-jg-blount-1790-10-20',
+    relatedDocuments: [
+      { slug: 'jefferson-to-blount-1790', title: 'Jefferson to Blount (August 1, 1790)' },
+      { slug: 'washington-to-knox-1790', title: 'Washington to Knox (August 13, 1790)' },
+      { slug: 'treaty-of-holston-1791', title: 'Treaty of Holston (July 2, 1791)' },
+    ],
+    peopleMentioned: ['George Farragut', 'John Seagrove', 'William Cobb', 'Mary Grainger Blount'],
+    interpretiveNotes:
+      'Blount spells Farragut as "Farrowgood"—phonetic rendering of the Minorcan pronunciation. The "&c &c" implies additional amenities (desk, rug, etc.) that Blount considered beneath enumeration. "Molsey" in the letter refers to Mary Grainger Blount, William\'s wife who remained in North Carolina.',
   },
 
   // ============================================

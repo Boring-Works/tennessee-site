@@ -68,16 +68,18 @@ export const TIERS = {
 export const PRIMARY_QUOTES = {
   // THE hero quote - use prominently
   glassWindows: {
-    text: 'I am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at this place.',
+    text: 'I am very well accommodated with a Room with Glass Windows, Fire Place &c &c at this place.',
     attribution: 'William Blount, October 20, 1790',
-    source: 'Tennessee Encyclopedia, citing Blount Papers',
-    context: 'Letter describing his arrival at Rocky Mount',
+    source:
+      'State Archives of North Carolina, John Gray Blount Papers, PC.193. Published in Keith, ed., The John Gray Blount Papers, Vol. II (1959), pp. 127-128',
+    context: 'Letter to his half-brother describing accommodations at Rocky Mount',
   },
   // Full arrival quote
   glassWindowsFull: {
-    text: "At William Cobb's Washington County... On the 11th instant, I arrived in this country, and was received with every mark of attention and gladness that I could have wished. I am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at this place.",
-    attribution: 'William Blount, October 20, 1790',
-    source: 'Tennessee Encyclopedia, citing Blount Papers',
+    text: 'On the 11th instant, I arrived in this country, and was received with every mark of attention and gladness that I could have wished. I am very well accommodated with a Room with Glass Windows, Fire Place &c &c at this place.',
+    attribution: 'William Blount to John Gray Blount, October 20, 1790',
+    source:
+      'State Archives of North Carolina, John Gray Blount Papers, PC.193. Keith, ed., The John Gray Blount Papers, Vol. II (1959), pp. 127-128',
   },
   // Why Blount was chosen
   williamsonRecommendation: {

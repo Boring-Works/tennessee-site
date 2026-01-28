@@ -92,6 +92,9 @@ export default function Navigation() {
     [pathname]
   )
 
+  // Pages with light backgrounds need dark header
+  const isLightBackgroundPage = pathname.startsWith('/evidence/library')
+
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false)
   }, [])
@@ -105,13 +108,15 @@ export default function Navigation() {
 
       <header
         className={`${styles.header} ${
-          isScrolled || mobileMenuOpen ? styles['header--scrolled'] : styles['header--transparent']
+          isScrolled || mobileMenuOpen || isLightBackgroundPage
+            ? styles['header--scrolled']
+            : styles['header--transparent']
         }`}
         role="banner"
       >
-        {/* Tricolor stripe - appears on scroll */}
+        {/* Tricolor stripe - appears on scroll or light backgrounds */}
         <div
-          className={`${styles.stripe} ${isScrolled ? styles['stripe--visible'] : ''}`}
+          className={`${styles.stripe} ${isScrolled || isLightBackgroundPage ? styles['stripe--visible'] : ''}`}
           aria-hidden="true"
         >
           <span className={styles['stripe--crimson']} />

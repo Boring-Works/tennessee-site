@@ -71,6 +71,16 @@
   display: none;
 }
 
+/* Sidebar column - hidden on mobile */
+.sidebarColumn {
+  display: none;
+}
+
+/* Main content - full width on mobile */
+.mainContent {
+  width: 100%;
+}
+
 .cardCatalogHeader {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid rgba(201, 162, 39, 0.2);
@@ -103,6 +113,20 @@
 .cardCatalogLink:hover {
   background: rgba(201, 162, 39, 0.08);
   border-left-color: var(--brass);
+}
+
+.cardCatalogLinkActive {
+  background: rgba(201, 162, 39, 0.12);
+  border-left-color: var(--brass);
+}
+
+.cardCatalogLinkActive .cardCatalogCode {
+  color: var(--brass);
+}
+
+.cardCatalogLinkActive .cardCatalogLabel {
+  color: var(--wood-dark);
+  font-weight: 500;
 }
 
 .cardCatalogCode {
@@ -1461,13 +1485,31 @@
    ============================================ */
 
 @media (min-width: 1024px) {
-  /* Card Catalog - fixed sidebar on desktop */
+  /* Page layout for sticky sidebar */
+  .evidencePage {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* Sidebar column - visible on desktop */
+  .sidebarColumn {
+    display: block;
+    flex-shrink: 0;
+    width: 15rem;
+    padding-left: 1.5rem;
+    padding-top: 6rem;
+  }
+
+  .mainContent {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Card Catalog - sticky sidebar on desktop */
   .cardCatalog {
     display: block;
-    position: fixed;
-    left: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
+    position: sticky;
+    top: 6rem;
     z-index: 100;
     background: var(--paper-texture), var(--cream-light);
     border: 1px solid rgba(201, 162, 39, 0.15);
@@ -1477,6 +1519,9 @@
       0 8px 32px rgba(42, 31, 26, 0.06);
     width: 12rem;
     padding: 0;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    align-self: flex-start;
   }
 
   .hero {
@@ -1552,8 +1597,12 @@
 
 @media (min-width: 1280px) {
   .cardCatalog {
-    left: 2rem;
     width: 13rem;
+  }
+
+  .sidebarColumn {
+    width: 16rem;
+    padding-left: 2rem;
   }
 
   .container {
@@ -1575,8 +1624,8 @@
    ============================================ */
 
 @media (min-width: 1536px) {
-  .cardCatalog {
-    left: calc((100vw - 50rem) / 2 - 15rem);
+  .sidebarColumn {
+    width: 18rem;
   }
 }
 

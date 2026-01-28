@@ -396,28 +396,25 @@ export default function AlmanacPage() {
 
           {/* ============================================================
               DESKTOP LAYOUT: 12-column Bento Grid
-              "Essentials first, wisdom second" philosophy
-              Organized in 3 sections with aria-labels for accessibility
+              Goal: Answer 7 questions without scrolling
 
-              SECTION 1 - GLANCEABLE:
-              ROW 1: [Hero 4] [Sparkline 5] [Quick Stats 3] - Weather essentials
+              SECTION 1 - GLANCEABLE (above the fold):
+              ROW 1: [Hero 4] [PrecipTiming + Sparkline 5] [Tomorrow + Burn 3]
+              ROW 2: [Workability Scores 12 cols] - THE KEY FEATURE
+              ROW 3: [CompactSevenDay 12 cols]
 
               SECTION 2 - TODAY'S DETAILS:
-              ROW 2: [Farmer's Memory 6] [Daily Proverb 6] - Heritage wisdom row
-              ROW 3: [Workability Scores 12 cols]
-              ROW 4: [Moon 3] [Current Conditions 5] [Sun/Barometer 4]
+              ROW 4: [Proverb 6] [AQI + Moon + Conditions 6]
+              ROW 5: [SunBarometer 4] [Radar 8]
 
               SECTION 3 - FOR WORKING FARMERS:
-              ROW 5: [Planting Intelligence 5] [7-Day Forecast 7]
-              ROW 6: [Environmental Watch 7] [Native Pulse 5]
-              ROW 7: [Radar 12 cols]
+              ROW 6: [Planting Intelligence 5] [7-Day Forecast 7]
+              ROW 7: [Farmer's Memory 6] [Native Pulse 6]
+              ROW 8: [Environmental Watch 12 cols]
               ============================================================ */}
           <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
-            {/* ========== SECTION 1: GLANCEABLE ========== */}
-            <section
-              aria-label="Glanceable Weather"
-              className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
-            >
+            {/* ========== SECTION 1: GLANCEABLE (Above the Fold) ========== */}
+            <section aria-label="At a Glance" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
               {/* Hero - Dominant temperature display */}
               <div className="lg:col-span-4">
                 <AlmanacHero
@@ -438,7 +435,7 @@ export default function AlmanacPage() {
                 />
               </div>
 
-              {/* Hourly Sparkline - Temperature trend */}
+              {/* PrecipTiming + Hourly Sparkline */}
               <div className="lg:col-span-5 flex flex-col gap-3">
                 <PrecipitationTiming
                   lat={location.latitude}
@@ -450,15 +447,26 @@ export default function AlmanacPage() {
                 <HourlySparkline hourly={weather.hourly} />
               </div>
 
-              {/* Quick Stats Stack - Tomorrow, Burn, AQI */}
+              {/* Tomorrow + Burn Day */}
               <div className="lg:col-span-3 flex flex-col gap-3">
                 <TomorrowPreview tomorrow={tomorrowData} />
                 <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
-                <AirQualityCard
-                  lat={location.latitude}
-                  lon={location.longitude}
-                  onAqiChange={setAqi}
+              </div>
+
+              {/* Workability Scores - THE KEY FEATURE - must be above fold */}
+              <div className="lg:col-span-12">
+                <TaskScores
+                  sower={taskScores.sower}
+                  shepherd={taskScores.shepherd}
+                  keeper={taskScores.keeper}
+                  builder={taskScores.builder}
+                  aqi={aqi}
                 />
+              </div>
+
+              {/* Compact 7-Day Overview */}
+              <div className="lg:col-span-12">
+                <CompactSevenDay days={compactDays} />
               </div>
             </section>
 
@@ -471,18 +479,6 @@ export default function AlmanacPage() {
               aria-label="Today's Details"
               className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
             >
-              {/* Farmer's Memory */}
-              <div className="lg:col-span-6">
-                <FarmerMemory
-                  temperature={weather.current.temperature}
-                  humidity={weather.current.humidity}
-                  pressure={weather.current.pressure}
-                  windSpeed={weather.current.windSpeed}
-                  todayHigh={todayHigh}
-                  todayLow={todayLow}
-                />
-              </div>
-
               {/* Daily Proverb */}
               <div className="lg:col-span-6">
                 {saying && (
@@ -495,33 +491,25 @@ export default function AlmanacPage() {
                 )}
               </div>
 
-              {/* Workability Scores */}
-              <div className="lg:col-span-12">
-                <TaskScores
-                  sower={taskScores.sower}
-                  shepherd={taskScores.shepherd}
-                  keeper={taskScores.keeper}
-                  builder={taskScores.builder}
-                  aqi={aqi}
+              {/* AQI + Moon + Current Conditions stack */}
+              <div className="lg:col-span-6 flex flex-col gap-3">
+                <AirQualityCard
+                  lat={location.latitude}
+                  lon={location.longitude}
+                  onAqiChange={setAqi}
                 />
-              </div>
-
-              {/* Moon Phase */}
-              <div className="lg:col-span-3">
-                <MoonPhase moon={moon} />
-              </div>
-
-              {/* Current Conditions */}
-              <div className="lg:col-span-5">
-                <CurrentConditionsCard
-                  cloudCover={weather.current.cloudCover}
-                  visibility={weather.current.visibility}
-                  dewPoint={weather.current.dewPoint}
-                  uvIndex={weather.current.uvIndex}
-                  pressure={weather.current.pressure}
-                  snowDepth={weather.current.snowDepth}
-                  windGusts={weather.current.windGusts}
-                />
+                <div className="grid grid-cols-2 gap-3">
+                  <MoonPhase moon={moon} />
+                  <CurrentConditionsCard
+                    cloudCover={weather.current.cloudCover}
+                    visibility={weather.current.visibility}
+                    dewPoint={weather.current.dewPoint}
+                    uvIndex={weather.current.uvIndex}
+                    pressure={weather.current.pressure}
+                    snowDepth={weather.current.snowDepth}
+                    windGusts={weather.current.windGusts}
+                  />
+                </div>
               </div>
 
               {/* Sun/Barometer */}
@@ -533,6 +521,11 @@ export default function AlmanacPage() {
                   windSpeed={weather.current.windSpeed}
                   windDirection={weather.current.windDirection}
                 />
+              </div>
+
+              {/* Radar */}
+              <div className="lg:col-span-8">
+                <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
               </div>
             </section>
 
@@ -561,19 +554,26 @@ export default function AlmanacPage() {
                 <WeatherDetails daily={weather.daily} />
               </div>
 
-              {/* Environmental Watch */}
-              <div className="lg:col-span-7">
-                <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+              {/* Farmer's Memory */}
+              <div className="lg:col-span-6">
+                <FarmerMemory
+                  temperature={weather.current.temperature}
+                  humidity={weather.current.humidity}
+                  pressure={weather.current.pressure}
+                  windSpeed={weather.current.windSpeed}
+                  todayHigh={todayHigh}
+                  todayLow={todayLow}
+                />
               </div>
 
               {/* Native Pulse */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-6">
                 <NativePulse pulse={nativePulse} />
               </div>
 
-              {/* Radar */}
+              {/* Environmental Watch */}
               <div className="lg:col-span-12">
-                <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
+                <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
               </div>
 
               {/* Snow (Conditional) */}

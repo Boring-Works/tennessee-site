@@ -1259,46 +1259,46 @@
 
 .visit-hero-corner {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   pointer-events: none;
-  opacity: 0.25;
+  opacity: 0.12;
   z-index: 2;
 }
 
 .visit-hero-corner--tl {
   top: 1.5rem;
   left: 1.5rem;
-  border-top: 2px solid var(--accent);
-  border-left: 2px solid var(--accent);
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
 }
 
 .visit-hero-corner--tr {
   top: 1.5rem;
   right: 1.5rem;
-  border-top: 2px solid var(--accent);
-  border-right: 2px solid var(--accent);
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
 }
 
 .visit-hero-corner--bl {
   bottom: 1.5rem;
   left: 1.5rem;
-  border-bottom: 2px solid var(--accent);
-  border-left: 2px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
 }
 
 .visit-hero-corner--br {
   bottom: 1.5rem;
   right: 1.5rem;
-  border-bottom: 2px solid var(--accent);
-  border-right: 2px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
 }
 
 @media (min-width: 768px) {
   .visit-hero-corner {
-    width: 60px;
-    height: 60px;
-    opacity: 0.3;
+    width: 40px;
+    height: 40px;
+    opacity: 0.15;
   }
 
   .visit-hero-corner--tl,
@@ -1339,7 +1339,7 @@
 .visit-hero-rule-ornament {
   color: var(--accent);
   font-size: 0.5rem;
-  opacity: 0.8;
+  opacity: 0.4;
 }
 
 .visit-hero-mid-rule {
@@ -1350,8 +1350,8 @@
 
 .visit-hero-mid-rule-flourish {
   color: var(--accent);
-  font-size: 0.875rem;
-  opacity: 0.5;
+  font-size: 0.75rem;
+  opacity: 0.3;
 }
 
 .visit-hero-fact-star {

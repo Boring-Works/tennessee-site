@@ -2,6 +2,7 @@
 export { ConsolidatedStory } from './ConsolidatedStory'
 export { ConsolidatedProof } from './ConsolidatedProof'
 export { ConsolidatedExperience } from './ConsolidatedExperience'
+export { AudienceRouter } from './AudienceRouter'
 export { Commemorative2026 } from './Commemorative2026'
 export { PlanYourVisit } from './PlanYourVisit'
 export { ConsolidatedClose } from './ConsolidatedClose'

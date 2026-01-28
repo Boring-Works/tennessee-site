@@ -3,6 +3,7 @@ import {
   ConsolidatedStory,
   ConsolidatedProof,
   ConsolidatedExperience,
+  AudienceRouter,
   Commemorative2026,
   PlanYourVisit,
   ConsolidatedClose,
@@ -70,6 +71,18 @@ export default function Home() {
           - Visit info (hours, admission, location)
           ============================================ */}
       <ConsolidatedExperience />
+
+      {/* ============================================
+          SECTION 4.5: AUDIENCE ROUTER
+          Quick navigation for different visitor types
+
+          StoryBrand Layer 1: Customer Journey routing
+          - Educators → /educators
+          - Groups → /groups
+          - Full Story → /our-story
+          - Support → /support
+          ============================================ */}
+      <AudienceRouter />
 
       {/* ============================================
           SECTION 5: 2026 CAMPAIGN

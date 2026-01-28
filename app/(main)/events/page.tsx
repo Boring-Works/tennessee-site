@@ -96,25 +96,36 @@ function formatDateRange(start: string, end?: string | null): string {
   return `${formatDate(start)} – ${formatDate(end)}`
 }
 
-// Get next upcoming event
-function getNextUpcomingEvent() {
+// Get next 3 upcoming events
+function getUpcomingEvents(count: number = 3) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
+
+  const upcoming: { event: (typeof eventsData.events)[0]; daysAway: number }[] = []
 
   for (const event of eventsData.events) {
     const eventDate = new Date(event.date + 'T12:00:00')
     if (eventDate >= today) {
       const diffTime = eventDate.getTime() - today.getTime()
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-      return { event, daysAway: diffDays }
+      upcoming.push({ event, daysAway: diffDays })
+      if (upcoming.length >= count) break
     }
   }
-  return null
+
+  return upcoming
+}
+
+// Format price for display
+function formatPrice(event: (typeof eventsData.events)[0]): string {
+  if (!event.requiresTicket) return 'Free'
+  if (event.ticketUrl) return 'Ticketed'
+  return 'Ticketed'
 }
 
 export default function EventsPage() {
   const groupedEvents = groupEventsByMonth(eventsData.events)
-  const nextEvent = getNextUpcomingEvent()
+  const upcomingEvents = getUpcomingEvents(3)
 
   return (
     <>
@@ -144,31 +155,31 @@ export default function EventsPage() {
           {/* Decorative divider */}
           <div className={styles['calendar-divider']} aria-hidden="true" />
 
-          {/* Coming Up Next - Enhanced with description */}
-          {nextEvent && (
-            <a href={`#${nextEvent.event.id}`} className={styles['calendar-next-event']}>
-              <span className={styles['calendar-next-event-label']}>Coming Up</span>
-              <span className={styles['calendar-next-event-title']}>{nextEvent.event.title}</span>
-              <span className={styles['calendar-next-event-desc']}>
-                {nextEvent.event.description}
-              </span>
-              <span className={styles['calendar-next-event-meta']}>
-                <span className={styles['calendar-next-event-date']}>
-                  {formatDate(nextEvent.event.date)}
-                </span>
-                <span className={styles['calendar-next-event-divider']}>·</span>
-                <span className={styles['calendar-next-event-days']}>
-                  {nextEvent.daysAway === 0
-                    ? 'Today!'
-                    : nextEvent.daysAway === 1
-                      ? 'Tomorrow!'
-                      : `${nextEvent.daysAway} days`}
-                </span>
-              </span>
-              <span className={styles['calendar-next-event-arrow']} aria-hidden="true">
-                ↓
-              </span>
-            </a>
+          {/* Coming Up - Featured Strip with 3 events */}
+          {upcomingEvents.length > 0 && (
+            <div className={styles['coming-up']}>
+              <h2 className={styles['coming-up-label']}>Coming Up</h2>
+              <div className={styles['coming-up-grid']}>
+                {upcomingEvents.map((item, index) => (
+                  <a
+                    key={item.event.id}
+                    href={`#${item.event.id}`}
+                    className={`${styles['coming-up-card']} ${index === 0 ? styles['coming-up-card--next'] : ''}`}
+                  >
+                    {index === 0 && <span className={styles['coming-up-card-badge']}>Next</span>}
+                    <span className={styles['coming-up-card-title']}>{item.event.title}</span>
+                    <span className={styles['coming-up-card-meta']}>
+                      <span className={styles['coming-up-card-date']}>
+                        {formatDate(item.event.date)}
+                      </span>
+                      <span className={styles['coming-up-card-price']}>
+                        {formatPrice(item.event)}
+                      </span>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
           )}
 
           {/* Ticket note - clearer language */}

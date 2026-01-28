@@ -200,6 +200,113 @@
   }
 }
 
+/* Coming Up - Featured Strip (3 events) */
+.coming-up {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.coming-up-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.coming-up-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .coming-up-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+.coming-up-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(10, 22, 40, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.coming-up-card:hover {
+  background: rgba(10, 22, 40, 1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.coming-up-card--next {
+  background: rgba(10, 22, 40, 0.95);
+  border: 2px solid var(--accent);
+}
+
+.coming-up-card--next:hover {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(201, 162, 39, 0.15);
+}
+
+.coming-up-card-badge {
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  padding: 0.125rem 0.5rem;
+  background: var(--accent);
+  color: var(--primary);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.coming-up-card-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+@media (min-width: 640px) {
+  .coming-up-card-title {
+    font-size: 1.125rem;
+  }
+}
+
+.coming-up-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.coming-up-card-date {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.coming-up-card-price {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .calendar-next-event,
   .calendar-next-event-arrow,

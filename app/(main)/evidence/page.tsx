@@ -18,9 +18,58 @@ const SOURCE_LINKS = {
   foundersOnline: 'https://founders.archives.gov/',
   tennesseeEncyclopedia: 'https://tennesseeencyclopedia.net/',
   digiTreaties: 'https://digitreaties.org/',
+  digiTreatiesHolston: 'https://digitreaties.org/treaties/treaty/88697242/',
   nationalArchives: 'https://www.archives.gov/',
   blountMansion: 'https://blountmansion.org/',
 } as const
+
+// Treaty of Holston signatories - Cherokee leaders
+const TREATY_SIGNERS = [
+  {
+    cherokeeName: 'Squollecuttah',
+    englishName: 'Hanging Maw',
+    role: 'Principal Chief of the Overhill Cherokee',
+  },
+  {
+    cherokeeName: 'Nenetooyah',
+    englishName: 'Bloody Fellow',
+    role: 'War chief, given name "Clear Sky" by President Washington',
+  },
+  {
+    cherokeeName: 'Kunoskeskie',
+    englishName: 'John Watts',
+    role: 'Succeeded Dragging Canoe as head of the war council',
+  },
+  {
+    cherokeeName: 'Chuquilatague',
+    englishName: 'Doublehead',
+    role: 'One of the most feared warriors of the Cherokee-American wars',
+  },
+  {
+    cherokeeName: 'Enoleh',
+    englishName: 'Black Fox',
+    role: 'Later served as Principal Chief, 1801–1811',
+  },
+] as const
+
+// Signer card component
+function SignerCard({
+  cherokeeName,
+  englishName,
+  role,
+}: {
+  cherokeeName: string
+  englishName: string
+  role: string
+}) {
+  return (
+    <div className={styles.signerCard}>
+      <p className={styles.signerCherokeeName}>{cherokeeName}</p>
+      <p className={styles.signerEnglishName}>{englishName}</p>
+      <p className={styles.signerRole}>{role}</p>
+    </div>
+  )
+}
 
 // Quote card component
 function QuoteCard({
@@ -186,6 +235,52 @@ export default function EvidencePage() {
             context="Washington's proclamation made the Treaty of Holston—negotiated by Blount during the Rocky Mount capital period—binding federal law."
             sourceUrl="https://founders.archives.gov/"
           />
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* Treaty Signers Section */}
+      <section className={styles.signersSection}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Those Who Signed</h2>
+          <p className={styles.sectionSubtitle}>
+            Forty Cherokee leaders put their names to the Treaty of Holston
+          </p>
+
+          <div className={styles.signersIntro}>
+            <p>
+              On July 2, 1791, after weeks of negotiation at White&apos;s Fort, these leaders signed
+              on behalf of the Cherokee Nation. Their names are preserved in the treaty record.
+            </p>
+          </div>
+
+          <div className={styles.signersList}>
+            {TREATY_SIGNERS.map((signer) => (
+              <SignerCard
+                key={signer.cherokeeName}
+                cherokeeName={signer.cherokeeName}
+                englishName={signer.englishName}
+                role={signer.role}
+              />
+            ))}
+          </div>
+
+          <div className={styles.signersFooter}>
+            <a
+              href={SOURCE_LINKS.digiTreatiesHolston}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.signersLink}
+            >
+              View all 40 signatories at DigiTreaties →
+            </a>
+
+            <p className={styles.signersDescendants}>
+              The Cherokee Nation, Eastern Band of Cherokee Indians, and United Keetoowah Band carry
+              these names forward today.
+            </p>
+          </div>
         </div>
       </section>
 

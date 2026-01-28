@@ -345,24 +345,36 @@ export function ConsolidatedExperience() {
             </p>
           </div>
 
-          {/* Fame Bridge */}
-          <p className="text-center font-serif-elegant text-lg md:text-xl text-primary/80 italic mb-10">
-            {HOOKS.fameBridge} Meet costumed interpreters living as 1790 settlers.
-          </p>
+          {/* Fame Bridge with Testimonial */}
+          <div className="bg-cream-dark rounded-lg p-6 mb-10">
+            <p className="text-center font-serif-elegant text-lg md:text-xl text-primary/80 italic mb-4">
+              {HOOKS.fameBridge} Meet costumed interpreters living as 1790 settlers.
+            </p>
+            <div className="flex items-center justify-center gap-2 text-sm">
+              <span className="text-accent">★★★★★</span>
+              <span className="text-text-light">
+                &ldquo;The kids were mesmerized — it felt like stepping back in time.&rdquo;
+              </span>
+              <span className="text-text-light/60">— Sarah M.</span>
+            </div>
+          </div>
 
           {/* Quick info row */}
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             <div className="text-center p-4 bg-cream rounded">
               <p className="text-sm text-secondary/60 uppercase tracking-wider mb-1">Hours</p>
               <p className="font-serif text-primary">Wed–Sat 10am–5pm</p>
+              <p className="text-xs text-accent mt-1">Guided tours every hour</p>
             </div>
             <div className="text-center p-4 bg-cream rounded">
               <p className="text-sm text-secondary/60 uppercase tracking-wider mb-1">Admission</p>
               <p className="font-serif text-primary">Adults $12 · Seniors $10 · Children $8</p>
+              <p className="text-xs text-text-light mt-1">Under 6 free</p>
             </div>
             <div className="text-center p-4 bg-cream rounded">
               <p className="text-sm text-secondary/60 uppercase tracking-wider mb-1">Duration</p>
               <p className="font-serif text-primary">Plan 2–3 hours</p>
+              <p className="text-xs text-text-light mt-1">Comfortable walking shoes recommended</p>
             </div>
           </div>
 

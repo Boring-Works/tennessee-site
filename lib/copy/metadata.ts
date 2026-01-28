@@ -58,6 +58,14 @@ export const PAGE_METADATA = {
     ogDescription:
       'Be part of history. Your name will be read aloud on the capital grounds, July 4, 2026.',
   },
+  evidence: {
+    title: 'The Evidence Room',
+    description:
+      "Primary source documents from Rocky Mount's history. Verified quotes from Founders Online, Tennessee Encyclopedia, and the National Archives.",
+    ogTitle: 'The Evidence Room | Tennessee Starts Here',
+    ogDescription:
+      "Primary source documents proving Rocky Mount was where Tennessee's government began.",
+  },
 } as const
 
 /**

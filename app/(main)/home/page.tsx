@@ -167,25 +167,26 @@ export default function Home() {
             </p>
           </header>
 
-          {/* The quote with drop cap */}
+          {/* The quote with drop cap - Verified from Tennessee Encyclopedia */}
           <blockquote className={styles['blount-blockquote']}>
             <p
               id="blount-heading"
               className={`${styles['blount-text']} ${styles['blount-text--dropcap']}`}
             >
               <span className={styles['blount-dropcap']} aria-hidden="true">
-                H
+                I
               </span>
               <span className={styles['blount-text-body']}>
-                ere we have planted the grain of a new civilization, in soil untilled by law.
+                am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at
+                this place.
               </span>
             </p>
           </blockquote>
 
           {/* Context line */}
           <p className={styles['blount-context']}>
-            With these words, the first government west of the Appalachians took root at Rocky
-            Mount.
+            Glass windows were rare on the frontier. Rocky Mount was no rough cabin—it was where
+            federal power took root.
           </p>
 
           {/* Attribution with wax seal */}

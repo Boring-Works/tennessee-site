@@ -7,7 +7,7 @@
  */
 
 // Brand constants
-export { BRAND, TIERS, HOOKS, BUTTONS, STOP_START, VISUAL_DIRECTIVE } from './brand'
+export { BRAND, TIERS, HOOKS, BUTTONS, STOP_START, VISUAL_DIRECTIVE, PRIMARY_QUOTES } from './brand'
 
 // Narrative content
 export {

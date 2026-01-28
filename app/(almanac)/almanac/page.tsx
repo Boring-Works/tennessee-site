@@ -433,13 +433,18 @@ export default function AlmanacPage() {
                 <HourlySparkline hourly={weather.hourly} />
               </div>
 
-              {/* Tomorrow + Burn Day */}
-              <div className="lg:col-span-3 flex flex-col gap-3">
+              {/* Tomorrow + Burn Day - stretch to fill */}
+              <div className="lg:col-span-3 flex flex-col gap-3 justify-between">
                 <TomorrowPreview tomorrow={tomorrowData} />
                 <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
               </div>
 
-              {/* Workability Scores - THE KEY FEATURE - must be above fold */}
+              {/* Compact 7-Day Overview - HIGH PRIORITY */}
+              <div className="lg:col-span-12">
+                <CompactSevenDay days={compactDays} />
+              </div>
+
+              {/* Workability Scores */}
               <div className="lg:col-span-12">
                 <TaskScores
                   sower={taskScores.sower}
@@ -449,11 +454,6 @@ export default function AlmanacPage() {
                   aqi={aqi}
                   compact
                 />
-              </div>
-
-              {/* Compact 7-Day Overview */}
-              <div className="lg:col-span-12">
-                <CompactSevenDay days={compactDays} />
               </div>
             </section>
 

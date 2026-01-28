@@ -1,8 +1,5 @@
 import HeroSection from '@/components/HeroSection'
 import {
-  ConsolidatedStory,
-  ConsolidatedProof,
-  ConsolidatedExperience,
   AudienceRouter,
   Commemorative2026,
   PlanYourVisit,
@@ -10,70 +7,29 @@ import {
 } from '@/components/home'
 
 /**
- * Homepage - 7-Section Consolidated Structure
+ * Homepage - StoryBrand Layer 1: Customer Journey Router
  *
- * Condensed from 17 sections to 7 dense, high-impact sections
- * without losing any content or context.
+ * Lightweight landing page that routes visitors to their needs.
+ * Full narrative content lives on /our-story (Layer 2).
  *
- * Section 1: Hero (unchanged)
- * Section 2: The Story (MysteryHook + ExperimentSection + ScrollTimeline + ContrastStatement)
- * Section 3: The Proof (ProofSection + DistinctionSection + Blount Letter)
- * Section 4: The Experience (ExperiencePreview + GroundStatement + HomecomingSection)
- * Section 5: 2026 Campaign (CampaignSection + EventsShowcase + LedgerSection)
- * Section 6: Plan Your Visit (elevated position, unchanged content)
- * Section 7: Close (IndigenousAcknowledgment + FinalCTA)
+ * Section 1: Hero - Emotional hook, primary CTA
+ * Section 2: Audience Router - Quick paths for different visitors
+ * Section 3: 2026 Campaign - Commemorative messaging
+ * Section 4: Plan Your Visit - Conversion-focused info
+ * Section 5: Close - Final CTA
  */
 
 export default function Home() {
   return (
     <>
       {/* ============================================
-          SECTION 1: HERO (Simplified - Above the Fold)
+          SECTION 1: HERO
+          Above the fold emotional hook with primary CTA
           ============================================ */}
       <HeroSection />
 
       {/* ============================================
-          SECTION 2: THE STORY
-          Combines: MysteryHook + ExperimentSection +
-          ScrollTimeline + ContrastStatement
-
-          Content preserved:
-          - "Before there was a Tennessee..."
-          - "Could democracy survive beyond the Appalachians?"
-          - 1770/1780/1790 timeline with details
-          - "This is where they governed."
-          ============================================ */}
-      <ConsolidatedStory />
-
-      {/* ============================================
-          SECTION 3: THE PROOF
-          Combines: ProofSection + DistinctionSection +
-          Blount Letter
-
-          Content preserved:
-          - Blount, Jackson, Cobbs cards with quotes
-          - Blount letter ("glass windows" quote)
-          - 1790-1792 vs 1792-1817 distinction
-          - "The State started here."
-          ============================================ */}
-      <ConsolidatedProof />
-
-      {/* ============================================
-          SECTION 4: THE EXPERIENCE
-          Combines: ExperiencePreview + GroundStatement +
-          HomecomingSection (visit info)
-
-          Content preserved:
-          - "Step Into 1790" experience preview
-          - All 4 experience moments
-          - Testimonial
-          - "The buildings evolved. The ground endures."
-          - Visit info (hours, admission, location)
-          ============================================ */}
-      <ConsolidatedExperience />
-
-      {/* ============================================
-          SECTION 4.5: AUDIENCE ROUTER
+          SECTION 2: AUDIENCE ROUTER
           Quick navigation for different visitor types
 
           StoryBrand Layer 1: Customer Journey routing
@@ -85,25 +41,22 @@ export default function Home() {
       <AudienceRouter />
 
       {/* ============================================
-          SECTION 5: 2026 CAMPAIGN
-          Combines: CampaignSection + EventsShowcase +
-          LedgerSection
+          SECTION 3: 2026 CAMPAIGN
+          Commemorative messaging for America 250
 
-          Content preserved:
+          Content:
           - "Tennessee 230 / America 250"
           - First 250 enrollment CTA
           - Event categories and counts
           - Featured upcoming event
-          - Promise vs Proof comparison
-          - Stats (600 miles, 14 years, 16th state)
           ============================================ */}
       <Commemorative2026 />
 
       {/* ============================================
-          SECTION 6: PLAN YOUR VISIT
-          Elevated position for clear conversion
+          SECTION 4: PLAN YOUR VISIT
+          Conversion-focused visit information
 
-          Content preserved:
+          Content:
           - Location, hours, admission
           - TripAdvisor social proof
           - Dual CTAs
@@ -111,10 +64,10 @@ export default function Home() {
       <PlanYourVisit />
 
       {/* ============================================
-          SECTION 7: CLOSE
-          Combines: IndigenousAcknowledgment + FinalCTA
+          SECTION 5: CLOSE
+          Final CTA with Indigenous acknowledgment
 
-          Content preserved:
+          Content:
           - Indigenous acknowledgment (respectful)
           - Final CTA with closing tagline
           - "Tennessee starts here. Will you?"

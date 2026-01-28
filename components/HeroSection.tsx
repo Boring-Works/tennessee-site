@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import SmartCommemorativeCard from './SmartCommemorativeCard'
 import { MYSTERY_NARRATIVE, BUTTONS } from '@/lib/copy'
 
@@ -9,17 +10,27 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen bg-primary flex flex-col overflow-hidden">
-      {/* Background with gradient */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(ellipse 80% 50% at 30% 80%, rgba(139, 69, 19, 0.12) 0%, transparent 50%),
-            linear-gradient(175deg, #050d18 0%, #0a1628 40%, #0d1f35 100%)
-          `,
-        }}
-        aria-hidden="true"
-      />
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-cobb-house.jpg"
+          alt="The historic Cobb House at Rocky Mount State Historic Site"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        {/* Dark overlay for text readability */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              linear-gradient(to right, rgba(5, 13, 24, 0.92) 0%, rgba(5, 13, 24, 0.75) 50%, rgba(5, 13, 24, 0.6) 100%),
+              linear-gradient(to bottom, rgba(5, 13, 24, 0.3) 0%, rgba(5, 13, 24, 0.5) 100%)
+            `,
+          }}
+        />
+      </div>
 
       {/* Subtle noise texture overlay */}
       <div
@@ -50,9 +61,9 @@ export default function HeroSection() {
                 </span>
               </div>
 
-              {/* Eyebrow */}
-              <p className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-3 font-medium opacity-0 animate-[fadeUp_0.6s_ease-out_0.1s_forwards]">
-                Tennessee 230 · America 250
+              {/* Eyebrow - Strengthened Value Prop */}
+              <p className="text-[11px] uppercase tracking-[0.3em] text-accent/80 mb-3 font-medium opacity-0 animate-[fadeUp_0.6s_ease-out_0.1s_forwards]">
+                First Constitutional Federal Seat West of the Appalachians
               </p>
 
               {/* Main Headline */}
@@ -61,9 +72,19 @@ export default function HeroSection() {
               </h1>
 
               {/* Subhead */}
-              <p className="font-serif-elegant text-[clamp(1.25rem,3vw,1.75rem)] text-white/80 leading-relaxed mb-8 opacity-0 animate-[fadeUp_0.6s_ease-out_0.3s_forwards]">
+              <p className="font-serif-elegant text-[clamp(1.25rem,3vw,1.75rem)] text-white/90 leading-relaxed mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.3s_forwards]">
                 {hero.subhead}
               </p>
+
+              {/* Social Proof */}
+              <div className="flex items-center justify-center lg:justify-start gap-4 mb-8 opacity-0 animate-[fadeUp_0.6s_ease-out_0.35s_forwards]">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-accent text-sm">★★★★★</span>
+                  <span className="text-white/50 text-xs">TripAdvisor</span>
+                </div>
+                <span className="text-white/20">·</span>
+                <span className="text-white/60 text-xs">50,000+ visitors annually</span>
+              </div>
 
               {/* Single Primary CTA */}
               <div className="opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">

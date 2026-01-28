@@ -266,7 +266,7 @@ export function Commemorative2026() {
                     <span className="text-accent/40">
                       <QuillIcon />
                     </span>
-                    <p className="font-serif-elegant text-lg text-white/70 italic">{text}</p>
+                    <p className="font-serif-elegant text-lg text-white/80 italic">{text}</p>
                   </div>
                 ))}
               </div>
@@ -320,7 +320,7 @@ export function Commemorative2026() {
               <p className="font-serif text-xl md:text-2xl text-white/90 mb-2">
                 Be one of the <span className="text-accent font-semibold">First 250</span>.
               </p>
-              <p className="text-sm text-white/50 mb-6 italic">
+              <p className="text-sm text-white/60 mb-6 italic">
                 Your name will be read aloud on the capital grounds, July 4, 2026.
               </p>
 
@@ -334,7 +334,7 @@ export function Commemorative2026() {
                 <span>Join the First 250</span>
               </Link>
 
-              <p className="text-xs text-white/30 mt-4">
+              <p className="text-xs text-white/50 mt-4">
                 Enrollment closes June 1, 2026 · Charter member benefits included
               </p>
             </div>
@@ -368,7 +368,7 @@ export function Commemorative2026() {
                   The Commemorative Year
                 </p>
               </div>
-              <p className="text-white/50 text-sm">
+              <p className="text-white/60 text-sm">
                 <span className="text-accent font-semibold">{eventCount}</span> events celebrating
                 America&apos;s 250th and Tennessee&apos;s 230th
               </p>
@@ -468,6 +468,11 @@ export function Commemorative2026() {
             </div>
 
             {/* Stats ribbon */}
+            <div className="text-center mb-6">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-accent/60">
+                The 2026 Program
+              </p>
+            </div>
             <div className="flex items-center justify-center gap-8 text-center mb-10">
               <div className="group">
                 <span
@@ -481,7 +486,7 @@ export function Commemorative2026() {
                 >
                   {animatedEventCount}
                 </span>
-                <span className="text-xs text-white/40 uppercase tracking-wider">Events</span>
+                <span className="text-xs text-white/50 uppercase tracking-wider">Events</span>
               </div>
               <span className="text-accent/30 text-lg">◆</span>
               <div className="group">
@@ -496,7 +501,7 @@ export function Commemorative2026() {
                 >
                   10
                 </span>
-                <span className="text-xs text-white/40 uppercase tracking-wider">Months</span>
+                <span className="text-xs text-white/50 uppercase tracking-wider">Months</span>
               </div>
               <span className="text-accent/30 text-lg">◆</span>
               <div className="group">
@@ -511,7 +516,7 @@ export function Commemorative2026() {
                 >
                   1
                 </span>
-                <span className="text-xs text-white/40 uppercase tracking-wider">Capital</span>
+                <span className="text-xs text-white/50 uppercase tracking-wider">Capital</span>
               </div>
             </div>
 

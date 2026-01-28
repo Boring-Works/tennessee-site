@@ -5,12 +5,16 @@
   --evidence-parchment: #f5f0e6;
   --evidence-ink: #1a1a1a;
   --evidence-sepia: #8b7355;
+  --evidence-burgundy: #722f37;
 }
 
-/* Hero Section */
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
 .hero {
   background: linear-gradient(135deg, var(--primary) 0%, #0a1628 100%);
-  padding: calc(var(--space-16) + 80px) var(--space-4) var(--space-16);
+  padding: 140px 1rem 4rem;
   text-align: center;
   border-bottom: 3px solid var(--evidence-gold);
   position: relative;
@@ -36,12 +40,26 @@
 
 .heroBadge {
   font-family: var(--font-serif);
-  font-size: var(--text-xs);
+  font-size: 0.6875rem;
   color: var(--evidence-gold);
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  margin-bottom: var(--space-4);
-  display: inline-block;
+  letter-spacing: 0.35em;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.heroBadge::before,
+.heroBadge::after {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--evidence-gold));
+}
+
+.heroBadge::after {
+  background: linear-gradient(90deg, var(--evidence-gold), transparent);
 }
 
 .heroTitle {
@@ -49,69 +67,101 @@
   font-size: clamp(2rem, 8vw, 4rem);
   color: var(--evidence-parchment);
   font-weight: 400;
-  margin-bottom: var(--space-4);
+  margin-bottom: 1rem;
   font-style: italic;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .heroSubtitle {
-  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
+  font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
   color: var(--evidence-parchment);
   opacity: 0.85;
-  line-height: 1.7;
+  line-height: 1.8;
   max-width: 36rem;
   margin: 0 auto;
 }
 
-/* Container */
+/* ============================================
+   CONTAINER
+   ============================================ */
+
 .container {
   max-width: 48rem;
   margin: 0 auto;
-  padding: 0 var(--space-4);
+  padding: 0 1rem;
 }
 
-/* Section Styles */
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+
 .section,
 .featuredSection,
 .timelineSection,
 .sourcesSection {
-  padding: var(--space-10) var(--space-4);
-  background: var(--surface);
+  padding: 3rem 1rem;
+  background: var(--cream);
+  position: relative;
 }
 
 .featuredSection {
-  background: linear-gradient(180deg, var(--surface) 0%, #f8f6f2 100%);
+  background: linear-gradient(180deg, var(--cream) 0%, #f8f6f2 100%);
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.timelineSection {
+  background: linear-gradient(180deg, #f8f6f2 0%, var(--cream) 100%);
+}
+
+.sourcesSection {
+  background: var(--cream);
 }
 
 .sectionTitle {
   font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--primary);
   text-align: center;
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .sectionSubtitle {
-  font-size: clamp(0.875rem, 2.5vw, 1rem);
-  color: var(--text-muted);
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+  color: var(--evidence-sepia);
   text-align: center;
-  margin-bottom: var(--space-6);
+  margin-bottom: 2rem;
+  font-style: italic;
 }
 
-/* Quote Card */
+/* ============================================
+   QUOTE CARD - Regular (lighter, simpler)
+   ============================================ */
+
 .quoteCard {
   background: white;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-5);
-  margin-bottom: var(--space-4);
+  border-radius: 2px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
+/* ============================================
+   QUOTE CARD - Featured (prominent, elevated)
+   ============================================ */
+
 .quoteCardFeatured {
-  background: linear-gradient(135deg, #fffef8 0%, #fff 100%);
-  border: 2px solid var(--evidence-gold);
-  padding: var(--space-6);
+  background: linear-gradient(145deg, #fffefb 0%, #faf8f3 50%, #f8f5ee 100%);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  padding: 1.5rem;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 8px 32px rgba(201, 162, 39, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .quoteCardFeatured::before {
@@ -120,56 +170,71 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: var(--evidence-gold);
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--evidence-gold), rgba(201, 162, 39, 0.4));
+  border-radius: 2px 2px 0 0;
 }
 
+/* Quote text - clean padding */
 .quoteText {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   color: var(--evidence-ink);
   line-height: 1.8;
-  margin-bottom: var(--space-4);
+  margin-bottom: 1rem;
   position: relative;
-  padding: var(--space-2) 0 var(--space-2) var(--space-6);
-  border-left: 3px solid var(--evidence-gold);
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
 }
 
 .quoteCardFeatured .quoteText {
   font-size: clamp(1.05rem, 3vw, 1.25rem);
-  padding: var(--space-3) 0 var(--space-3) var(--space-8);
+  padding: 1.5rem 0.75rem 0.75rem 0.75rem;
 }
 
-/* Quote marks - positioned inside the text flow for mobile */
+/* Quote marks - subtle decorative elements positioned absolutely */
 .quoteOpen,
 .quoteClose {
-  font-size: 2rem;
+  position: absolute;
+  font-size: 3rem;
   color: var(--evidence-gold);
-  opacity: 0.5;
+  opacity: 0.15;
   font-family: Georgia, serif;
   line-height: 1;
-  display: inline;
-  vertical-align: top;
+  pointer-events: none;
+  user-select: none;
 }
 
 .quoteOpen {
-  margin-right: 0.15em;
+  top: -0.1em;
+  left: -0.15em;
 }
 
 .quoteClose {
-  margin-left: 0.1em;
+  bottom: -0.5em;
+  right: 0;
 }
 
+/* Featured quote marks - slightly larger and even more subtle */
 .quoteCardFeatured .quoteOpen,
 .quoteCardFeatured .quoteClose {
-  font-size: 2.5rem;
+  font-size: 4rem;
+  opacity: 0.12;
+}
+
+.quoteCardFeatured .quoteOpen {
+  top: 0;
+  left: 0;
+}
+
+.quoteCardFeatured .quoteClose {
+  bottom: -0.4em;
+  right: 0.1em;
 }
 
 .quoteFooter {
   border-top: 1px solid var(--border);
-  padding-top: var(--space-4);
-  margin-top: var(--space-2);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .quoteAttribution {
@@ -177,37 +242,37 @@
   font-style: italic;
   color: var(--primary);
   display: block;
-  margin-bottom: var(--space-1);
+  margin-bottom: 0.25rem;
   font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .quoteSource {
-  font-size: var(--text-sm);
+  font-size: 0.8125rem;
   color: var(--text-muted);
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
 }
 
 .quoteContext {
-  font-size: var(--text-sm);
+  font-size: 0.8125rem;
   color: var(--evidence-sepia);
   font-style: italic;
-  margin-bottom: var(--space-3);
-  padding: var(--space-3);
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
   background: #f8f6f2;
-  border-left: 3px solid var(--evidence-gold);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: 2px;
+  line-height: 1.6;
 }
 
 .sourceLink {
-  font-size: var(--text-sm);
+  font-size: 0.8125rem;
   color: var(--primary);
   text-decoration: none;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 0.25rem;
   transition: color 0.2s ease;
-  padding: var(--space-2) 0;
+  padding: 0.5rem 0;
 }
 
 .sourceLink:hover {
@@ -215,246 +280,364 @@
   text-decoration: underline;
 }
 
-/* Section Divider */
+/* ============================================
+   SECTION DIVIDER - Enhanced with flourishes
+   ============================================ */
+
 .sectionDivider {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-3);
-  padding: var(--space-3) 0;
-  background: var(--surface);
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  background: var(--cream);
 }
 
 .dividerLine {
-  width: 3rem;
+  width: 3.5rem;
   height: 1px;
-  background: var(--evidence-gold);
-  opacity: 0.3;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.4), transparent);
 }
 
 .dividerOrnament {
   color: var(--evidence-gold);
-  font-size: var(--text-base);
-  opacity: 0.5;
+  font-size: 0.625rem;
+  opacity: 0.6;
 }
 
-/* Timeline */
+/* ============================================
+   TIMELINE - Enhanced for mobile & desktop
+   ============================================ */
+
 .timeline {
   position: relative;
-  padding-left: var(--space-6);
-  margin-top: var(--space-4);
+  padding-left: 2rem;
+  margin-top: 1.5rem;
 }
 
+/* Timeline vertical line */
 .timeline::before {
   content: '';
   position: absolute;
-  left: 4px;
-  top: 0;
-  bottom: 0;
+  left: 5px;
+  top: 0.5rem;
+  bottom: 0.5rem;
   width: 2px;
   background: linear-gradient(
     180deg,
     var(--evidence-gold) 0%,
-    var(--primary) 50%,
+    var(--primary) 30%,
+    var(--primary) 70%,
     var(--evidence-gold) 100%
   );
+  border-radius: 1px;
 }
 
 .timelineEvent {
   position: relative;
-  padding-bottom: var(--space-5);
-  padding-left: var(--space-4);
+  padding-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.timelineEvent:last-child {
+  padding-bottom: 0;
 }
 
 .timelineDate {
   font-family: var(--font-serif);
-  font-size: var(--text-sm);
+  font-size: 0.8125rem;
   color: var(--evidence-gold);
-  font-weight: 600;
-  margin-bottom: var(--space-1);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
 }
 
+/* Timeline dot with subtle glow */
 .timelineDot {
   position: absolute;
-  left: calc(-1 * var(--space-6) - 1px);
-  top: 0.15rem;
+  left: calc(-2rem + 1px);
+  top: 0.25rem;
   width: 10px;
   height: 10px;
   background: var(--evidence-gold);
   border-radius: 50%;
-  border: 2px solid var(--surface);
+  border: 2px solid var(--cream);
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.15);
 }
 
 .timelineContent {
   background: white;
-  padding: var(--space-3);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.timelineContent:hover {
+  border-color: rgba(201, 162, 39, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .timelineText {
-  font-size: var(--text-sm);
-  color: var(--text);
-  line-height: 1.5;
-  margin-bottom: var(--space-1);
+  font-size: 0.875rem;
+  color: var(--foreground);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
 }
 
 .timelineLink {
-  font-size: var(--text-xs);
+  font-size: 0.75rem;
   color: var(--primary);
   text-decoration: none;
-  opacity: 0.8;
+  font-weight: 500;
+  opacity: 0.7;
+  transition: all 0.2s ease;
 }
 
 .timelineLink:hover {
-  text-decoration: underline;
   opacity: 1;
+  color: var(--evidence-gold);
 }
 
-/* Sources Grid */
+/* ============================================
+   SOURCES GRID - Enhanced cards
+   ============================================ */
+
 .sourcesGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-3);
+  gap: 1rem;
 }
 
 .sourceCard {
   background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-4);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+  padding: 1.25rem;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top border accent on hover */
+.sourceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--evidence-gold);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
 .sourceCard:hover {
   border-color: var(--evidence-gold);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.sourceCard:hover::before {
+  transform: scaleX(1);
 }
 
 .sourceCardTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-base);
+  font-size: 1rem;
   color: var(--primary);
-  margin-bottom: var(--space-1);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.sourceCard:hover .sourceCardTitle {
+  color: var(--evidence-gold);
 }
 
 .sourceCardDescription {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  line-height: 1.5;
+  font-size: 0.8125rem;
+  color: var(--text-light);
+  line-height: 1.6;
 }
 
-/* CTA Section */
+/* ============================================
+   CTA SECTION - Compelling & polished
+   ============================================ */
+
 .ctaSection {
   background: linear-gradient(135deg, var(--primary) 0%, #0a1628 100%);
-  padding: var(--space-12) var(--space-4);
+  padding: 4rem 1rem;
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
 
+/* Texture overlay */
 .ctaSection::before {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: 0.02;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Decorative frame */
+.ctaSection::after {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  border: 1px solid rgba(201, 162, 39, 0.15);
   pointer-events: none;
 }
 
 .ctaTitle {
   font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   color: var(--evidence-parchment);
-  margin-bottom: var(--space-3);
+  margin-bottom: 1rem;
   position: relative;
   z-index: 1;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .ctaText {
-  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: var(--evidence-parchment);
   opacity: 0.85;
-  margin-bottom: var(--space-6);
+  margin-bottom: 2rem;
   max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 1;
+  font-style: italic;
+  line-height: 1.7;
 }
 
 .ctaButton {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: var(--evidence-gold);
   color: var(--evidence-ink);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-sm);
+  padding: 1rem 2rem;
+  border-radius: 2px;
   text-decoration: none;
-  font-weight: 600;
-  font-size: var(--text-base);
-  transition: all 0.2s ease;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
   position: relative;
   z-index: 1;
+  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.3);
 }
 
 .ctaButton:hover {
-  background: #d4ac2b;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+  background: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.4);
 }
 
-/* ===== TABLET (768px+) ===== */
+.ctaButton:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+/* ============================================
+   TABLET BREAKPOINT (768px+)
+   ============================================ */
+
 @media (min-width: 768px) {
   .hero {
-    padding: calc(var(--space-20) + 80px) var(--space-8) var(--space-20);
+    padding: 180px 1.5rem 5rem;
+  }
+
+  .heroBadge::before,
+  .heroBadge::after {
+    width: 3rem;
+  }
+
+  .container {
+    padding: 0 1.5rem;
   }
 
   .section,
   .featuredSection,
   .timelineSection,
   .sourcesSection {
-    padding: var(--space-14) var(--space-8);
+    padding: 4.5rem 1.5rem;
+  }
+
+  .sectionSubtitle {
+    margin-bottom: 2.5rem;
   }
 
   .quoteCard {
-    padding: var(--space-6);
+    padding: 1.5rem;
   }
 
   .quoteCardFeatured {
-    padding: var(--space-8);
+    padding: 2rem;
   }
 
   .quoteText {
-    padding: var(--space-3) 0 var(--space-3) var(--space-8);
+    padding: 1.25rem 1rem 0.75rem 1rem;
   }
 
   .quoteCardFeatured .quoteText {
-    padding: var(--space-4) 0 var(--space-4) var(--space-10);
+    padding: 2rem 1.25rem 1rem 1.25rem;
   }
 
   .quoteOpen,
   .quoteClose {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
 
   .quoteCardFeatured .quoteOpen,
   .quoteCardFeatured .quoteClose {
-    font-size: 3rem;
+    font-size: 5rem;
   }
 
+  .quoteCardFeatured .quoteOpen {
+    top: 0.1em;
+    left: 0.1em;
+  }
+
+  .quoteCardFeatured .quoteClose {
+    bottom: -0.3em;
+    right: 0.2em;
+  }
+
+  .sectionDivider {
+    padding: 2rem 1rem;
+  }
+
+  .dividerLine {
+    width: 5rem;
+  }
+
+  /* Timeline tablet layout - horizontal dates */
   .timeline {
-    padding-left: var(--space-8);
+    padding-left: 9rem;
   }
 
   .timeline::before {
-    left: 0;
+    left: 7.5rem;
   }
 
   .timelineEvent {
     display: grid;
     grid-template-columns: 7rem 1fr;
-    gap: var(--space-4);
+    gap: 1.5rem;
     padding-left: 0;
     align-items: start;
   }
@@ -462,66 +645,120 @@
   .timelineDate {
     text-align: right;
     margin-bottom: 0;
+    padding-top: 0.25rem;
+    font-size: 0.875rem;
   }
 
   .timelineDot {
-    left: calc(-1 * var(--space-8) - 4px);
-    top: 0.35rem;
+    left: -0.75rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+  }
+
+  .timelineContent {
+    padding: 1.25rem;
   }
 
   .timelineText {
-    font-size: var(--text-base);
+    font-size: 0.9375rem;
   }
 
   .timelineLink {
-    font-size: var(--text-sm);
+    font-size: 0.8125rem;
   }
 
   .sourcesGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
+    gap: 1.25rem;
   }
 
   .sourceCard {
-    padding: var(--space-5);
+    padding: 1.5rem;
   }
 
   .sourceCardTitle {
-    font-size: var(--text-lg);
-  }
-
-  .dividerLine {
-    width: 4rem;
+    font-size: 1.0625rem;
   }
 
   .ctaSection {
-    padding: var(--space-16) var(--space-8);
+    padding: 5rem 1.5rem;
+  }
+
+  .ctaSection::after {
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
+    bottom: 2rem;
   }
 
   .ctaButton {
-    padding: var(--space-4) var(--space-8);
-    font-size: var(--text-lg);
+    padding: 1.125rem 2.5rem;
+    font-size: 0.875rem;
   }
 }
 
-/* ===== DESKTOP (1024px+) ===== */
+/* ============================================
+   DESKTOP BREAKPOINT (1024px+)
+   ============================================ */
+
 @media (min-width: 1024px) {
   .hero {
-    padding: calc(var(--space-24) + 80px) var(--space-8) var(--space-24);
+    padding: 200px 2rem 6rem;
   }
 
   .section,
   .featuredSection,
   .timelineSection,
   .sourcesSection {
-    padding: var(--space-16) var(--space-8);
+    padding: 5rem 2rem;
   }
 
-  .sourcesGrid {
-    grid-template-columns: repeat(4, 1fr);
+  .sectionTitle {
+    font-size: 2.25rem;
+  }
+
+  .timeline {
+    padding-left: 10rem;
+  }
+
+  .timeline::before {
+    left: 8.5rem;
   }
 
   .timelineEvent {
     grid-template-columns: 8rem 1fr;
+    gap: 2rem;
+  }
+
+  .sourcesGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .sourceCard {
+    padding: 1.75rem;
+  }
+
+  .ctaSection {
+    padding: 6rem 2rem;
+  }
+}
+
+/* ============================================
+   LARGE DESKTOP (1280px+)
+   ============================================ */
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 52rem;
+  }
+
+  .quoteCardFeatured {
+    padding: 2.5rem;
+  }
+
+  .ctaTitle {
+    font-size: 2.75rem;
   }
 }

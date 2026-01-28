@@ -6,7 +6,7 @@ export function GroundStatement() {
   const { ref, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.4 })
 
   return (
-    <section ref={ref} className="relative py-32 md:py-48 bg-primary overflow-hidden">
+    <section ref={ref} className="relative py-24 md:py-32 bg-primary overflow-hidden">
       {/* Background image overlay - low angle ground shot */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-20"

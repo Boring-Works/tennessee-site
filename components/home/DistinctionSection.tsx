@@ -17,14 +17,18 @@ export function DistinctionSection() {
 
         {/* Timeline comparison */}
         <div className={`space-y-4 mb-10 fade-in-up stagger-1 ${isVisible ? 'visible' : ''}`}>
-          <div className="flex items-center justify-center gap-4 text-left">
-            <span className="text-accent font-serif font-bold text-lg w-24">1790–1792</span>
+          <div className="inline-flex items-center gap-4 text-left">
+            <span className="text-accent font-serif font-bold text-lg w-28 text-right shrink-0">
+              1790–1792
+            </span>
             <span className="text-primary font-serif text-lg">
               Rocky Mount: First Southwest territorial capital
             </span>
           </div>
-          <div className="flex items-center justify-center gap-4 text-left">
-            <span className="text-secondary/60 font-serif text-lg w-24">1792–1817</span>
+          <div className="inline-flex items-center gap-4 text-left">
+            <span className="text-secondary/60 font-serif text-lg w-28 text-right shrink-0">
+              1792–1817
+            </span>
             <span className="text-primary/70 font-serif text-lg">
               Knoxville: Second territorial, then first state capital
             </span>

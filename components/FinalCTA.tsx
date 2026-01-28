@@ -26,7 +26,7 @@ export default function FinalCTA() {
       />
 
       {/* Content */}
-      <div className="relative z-10 py-16 md:py-20 px-6">
+      <div className="relative z-10 py-20 md:py-28 px-6">
         <div className="max-w-2xl mx-auto text-center">
           {/* Decorative top flourish */}
           <div className="flex items-center justify-center gap-3 mb-8" aria-hidden="true">

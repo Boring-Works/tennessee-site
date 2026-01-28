@@ -6,7 +6,7 @@ export function MysteryHook() {
   const { ref, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.3 })
 
   return (
-    <section ref={ref} className="relative py-32 md:py-48 bg-primary overflow-hidden">
+    <section ref={ref} className="relative py-24 md:py-32 bg-primary overflow-hidden">
       {/* Subtle gradient continuation from hero */}
       <div
         className="absolute inset-0"

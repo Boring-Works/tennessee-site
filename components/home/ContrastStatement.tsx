@@ -14,7 +14,7 @@ export function ContrastStatement() {
   })
 
   return (
-    <section className="relative py-32 md:py-48 bg-primary overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-primary overflow-hidden">
       {/* Dark gradient for emphasis */}
       <div
         className="absolute inset-0"

@@ -81,13 +81,15 @@ export function PlanYourVisit() {
 
         {/* Social proof */}
         <div
-          className={`flex items-center justify-center gap-3 mb-10 fade-in-up stagger-2 ${isVisible ? 'visible' : ''}`}
+          className={`flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-10 fade-in-up stagger-2 ${isVisible ? 'visible' : ''}`}
         >
-          <span className="text-accent text-lg">★★★★★</span>
-          <span className="text-sm text-text-light">TripAdvisor</span>
-          <span className="text-text-light/30">·</span>
+          <div className="flex items-center gap-2">
+            <span className="text-accent text-lg">★★★★★</span>
+            <span className="text-sm text-text-light">TripAdvisor</span>
+          </div>
+          <span className="hidden sm:inline text-text-light/30">·</span>
           <span className="text-sm text-text-light">50,000+ visitors annually</span>
-          <span className="text-text-light/30">·</span>
+          <span className="hidden sm:inline text-text-light/30">·</span>
           <span className="text-sm text-text-light italic">
             &ldquo;Tennessee&apos;s Hidden Gem&rdquo;
           </span>

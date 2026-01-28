@@ -9,39 +9,55 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, var(--primary) 0%, #1a2a1a 100%);
-  padding: var(--space-16) var(--space-4);
+  background: linear-gradient(135deg, var(--primary) 0%, #0a1628 100%);
+  padding: calc(var(--space-16) + 80px) var(--space-4) var(--space-16);
   text-align: center;
   border-bottom: 3px solid var(--evidence-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero background texture */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
 }
 
 .heroContent {
   max-width: 48rem;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .heroBadge {
   font-family: var(--font-serif);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--evidence-gold);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.3em;
   margin-bottom: var(--space-4);
+  display: inline-block;
 }
 
 .heroTitle {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2rem, 8vw, 4rem);
   color: var(--evidence-parchment);
   font-weight: 400;
   margin-bottom: var(--space-4);
+  font-style: italic;
 }
 
 .heroSubtitle {
-  font-size: var(--text-lg);
+  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
   color: var(--evidence-parchment);
-  opacity: 0.8;
-  line-height: 1.6;
+  opacity: 0.85;
+  line-height: 1.7;
   max-width: 36rem;
   margin: 0 auto;
 }
@@ -58,7 +74,7 @@
 .featuredSection,
 .timelineSection,
 .sourcesSection {
-  padding: var(--space-12) var(--space-4);
+  padding: var(--space-10) var(--space-4);
   background: var(--surface);
 }
 
@@ -68,17 +84,17 @@
 
 .sectionTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-2xl);
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
   color: var(--primary);
   text-align: center;
   margin-bottom: var(--space-2);
 }
 
 .sectionSubtitle {
-  font-size: var(--text-base);
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
   color: var(--text-muted);
   text-align: center;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
 }
 
 /* Quote Card */
@@ -86,8 +102,8 @@
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: var(--space-6);
-  margin-bottom: var(--space-6);
+  padding: var(--space-5);
+  margin-bottom: var(--space-4);
   position: relative;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
@@ -95,7 +111,7 @@
 .quoteCardFeatured {
   background: linear-gradient(135deg, #fffef8 0%, #fff 100%);
   border: 2px solid var(--evidence-gold);
-  padding: var(--space-8);
+  padding: var(--space-6);
 }
 
 .quoteCardFeatured::before {
@@ -106,45 +122,54 @@
   right: 0;
   height: 4px;
   background: var(--evidence-gold);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 
 .quoteText {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   color: var(--evidence-ink);
   line-height: 1.8;
   margin-bottom: var(--space-4);
   position: relative;
-  padding: 0 var(--space-4);
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
+  border-left: 3px solid var(--evidence-gold);
 }
 
 .quoteCardFeatured .quoteText {
-  font-size: var(--text-xl);
+  font-size: clamp(1.05rem, 3vw, 1.25rem);
+  padding: var(--space-3) 0 var(--space-3) var(--space-8);
 }
 
+/* Quote marks - positioned inside the text flow for mobile */
 .quoteOpen,
 .quoteClose {
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--evidence-gold);
-  opacity: 0.4;
-  position: absolute;
+  opacity: 0.5;
   font-family: Georgia, serif;
   line-height: 1;
+  display: inline;
+  vertical-align: top;
 }
 
 .quoteOpen {
-  top: -0.5rem;
-  left: -1rem;
+  margin-right: 0.15em;
 }
 
 .quoteClose {
-  bottom: -1.5rem;
-  right: -0.5rem;
+  margin-left: 0.1em;
+}
+
+.quoteCardFeatured .quoteOpen,
+.quoteCardFeatured .quoteClose {
+  font-size: 2.5rem;
 }
 
 .quoteFooter {
   border-top: 1px solid var(--border);
   padding-top: var(--space-4);
+  margin-top: var(--space-2);
 }
 
 .quoteAttribution {
@@ -153,6 +178,7 @@
   color: var(--primary);
   display: block;
   margin-bottom: var(--space-1);
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .quoteSource {
@@ -169,6 +195,7 @@
   padding: var(--space-3);
   background: #f8f6f2;
   border-left: 3px solid var(--evidence-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .sourceLink {
@@ -180,6 +207,7 @@
   align-items: center;
   gap: var(--space-1);
   transition: color 0.2s ease;
+  padding: var(--space-2) 0;
 }
 
 .sourceLink:hover {
@@ -192,13 +220,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-4);
-  padding: var(--space-4) 0;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
   background: var(--surface);
 }
 
 .dividerLine {
-  width: 4rem;
+  width: 3rem;
   height: 1px;
   background: var(--evidence-gold);
   opacity: 0.3;
@@ -206,20 +234,21 @@
 
 .dividerOrnament {
   color: var(--evidence-gold);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   opacity: 0.5;
 }
 
 /* Timeline */
 .timeline {
   position: relative;
-  padding-left: var(--space-8);
+  padding-left: var(--space-6);
+  margin-top: var(--space-4);
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: 4px;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -233,10 +262,8 @@
 
 .timelineEvent {
   position: relative;
-  padding-bottom: var(--space-6);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-2);
+  padding-bottom: var(--space-5);
+  padding-left: var(--space-4);
 }
 
 .timelineDate {
@@ -244,12 +271,13 @@
   font-size: var(--text-sm);
   color: var(--evidence-gold);
   font-weight: 600;
+  margin-bottom: var(--space-1);
 }
 
 .timelineDot {
   position: absolute;
-  left: calc(-1 * var(--space-8) - 4px);
-  top: 0.25rem;
+  left: calc(-1 * var(--space-6) - 1px);
+  top: 0.15rem;
   width: 10px;
   height: 10px;
   background: var(--evidence-gold);
@@ -265,13 +293,14 @@
 }
 
 .timelineText {
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   color: var(--text);
+  line-height: 1.5;
   margin-bottom: var(--space-1);
 }
 
 .timelineLink {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--primary);
   text-decoration: none;
   opacity: 0.8;
@@ -285,15 +314,15 @@
 /* Sources Grid */
 .sourcesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
 }
 
 .sourceCard {
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: var(--space-5);
+  padding: var(--space-4);
   text-decoration: none;
   transition: all 0.2s ease;
 }
@@ -306,9 +335,9 @@
 
 .sourceCardTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--primary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 .sourceCardDescription {
@@ -319,38 +348,54 @@
 
 /* CTA Section */
 .ctaSection {
-  background: linear-gradient(135deg, var(--primary) 0%, #1a2a1a 100%);
-  padding: var(--space-16) var(--space-4);
+  background: linear-gradient(135deg, var(--primary) 0%, #0a1628 100%);
+  padding: var(--space-12) var(--space-4);
   text-align: center;
+  position: relative;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
 }
 
 .ctaTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-3xl);
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
   color: var(--evidence-parchment);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
+  position: relative;
+  z-index: 1;
 }
 
 .ctaText {
-  font-size: var(--text-lg);
+  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
   color: var(--evidence-parchment);
-  opacity: 0.8;
+  opacity: 0.85;
   margin-bottom: var(--space-6);
   max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .ctaButton {
   display: inline-block;
   background: var(--evidence-gold);
   color: var(--evidence-ink);
-  padding: var(--space-3) var(--space-8);
+  padding: var(--space-3) var(--space-6);
   border-radius: var(--radius-sm);
   text-decoration: none;
   font-weight: 600;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .ctaButton:hover {
@@ -359,10 +404,110 @@
   box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
 }
 
-/* Responsive */
+/* ===== TABLET (768px+) ===== */
 @media (min-width: 768px) {
   .hero {
-    padding: var(--space-20) var(--space-8);
+    padding: calc(var(--space-20) + 80px) var(--space-8) var(--space-20);
+  }
+
+  .section,
+  .featuredSection,
+  .timelineSection,
+  .sourcesSection {
+    padding: var(--space-14) var(--space-8);
+  }
+
+  .quoteCard {
+    padding: var(--space-6);
+  }
+
+  .quoteCardFeatured {
+    padding: var(--space-8);
+  }
+
+  .quoteText {
+    padding: var(--space-3) 0 var(--space-3) var(--space-8);
+  }
+
+  .quoteCardFeatured .quoteText {
+    padding: var(--space-4) 0 var(--space-4) var(--space-10);
+  }
+
+  .quoteOpen,
+  .quoteClose {
+    font-size: 2.5rem;
+  }
+
+  .quoteCardFeatured .quoteOpen,
+  .quoteCardFeatured .quoteClose {
+    font-size: 3rem;
+  }
+
+  .timeline {
+    padding-left: var(--space-8);
+  }
+
+  .timeline::before {
+    left: 0;
+  }
+
+  .timelineEvent {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-4);
+    padding-left: 0;
+    align-items: start;
+  }
+
+  .timelineDate {
+    text-align: right;
+    margin-bottom: 0;
+  }
+
+  .timelineDot {
+    left: calc(-1 * var(--space-8) - 4px);
+    top: 0.35rem;
+  }
+
+  .timelineText {
+    font-size: var(--text-base);
+  }
+
+  .timelineLink {
+    font-size: var(--text-sm);
+  }
+
+  .sourcesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .sourceCard {
+    padding: var(--space-5);
+  }
+
+  .sourceCardTitle {
+    font-size: var(--text-lg);
+  }
+
+  .dividerLine {
+    width: 4rem;
+  }
+
+  .ctaSection {
+    padding: var(--space-16) var(--space-8);
+  }
+
+  .ctaButton {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+  }
+}
+
+/* ===== DESKTOP (1024px+) ===== */
+@media (min-width: 1024px) {
+  .hero {
+    padding: calc(var(--space-24) + 80px) var(--space-8) var(--space-24);
   }
 
   .section,
@@ -372,14 +517,11 @@
     padding: var(--space-16) var(--space-8);
   }
 
-  .timelineEvent {
-    grid-template-columns: 8rem 1fr;
-    gap: var(--space-4);
-    align-items: start;
+  .sourcesGrid {
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  .timelineDot {
-    left: calc(-1 * var(--space-8) - 4px);
-    top: 0.35rem;
+  .timelineEvent {
+    grid-template-columns: 8rem 1fr;
   }
 }

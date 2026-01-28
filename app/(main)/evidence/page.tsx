@@ -24,6 +24,17 @@ const SOURCE_LINKS = {
   blountMansion: 'https://blountmansion.org/',
 } as const
 
+// Collection catalog for navigation
+const COLLECTIONS = [
+  { id: 'blount-letter', label: 'Blount Correspondence', code: 'MSS.1790' },
+  { id: 'washington-question', label: 'Washington Papers', code: 'MSS.1790' },
+  { id: 'appointment', label: 'Williamson Letters', code: 'MSS.1790' },
+  { id: 'federal-authority', label: 'Executive Orders', code: 'MSS.1791' },
+  { id: 'treaty-signers', label: 'Treaty Signatories', code: 'TREATY' },
+  { id: 'timeline', label: 'Chronology', code: 'CHRON' },
+  { id: 'sources', label: 'Repository Index', code: 'REF' },
+] as const
+
 // Treaty of Holston signatories - Cherokee leaders
 const TREATY_SIGNERS = [
   {
@@ -49,9 +60,40 @@ const TREATY_SIGNERS = [
   {
     cherokeeName: 'Enoleh',
     englishName: 'Black Fox',
-    role: 'Later served as Principal Chief, 1801–1811',
+    role: 'Later served as Principal Chief, 1801-1811',
   },
 ] as const
+
+// Curator's Note component
+function CuratorNote({ children }: { children: React.ReactNode }) {
+  return (
+    <aside className={styles.curatorNote}>
+      <span className={styles.curatorLabel}>Curator&apos;s Note</span>
+      <p>{children}</p>
+    </aside>
+  )
+}
+
+// Card Catalog navigation component
+function CardCatalog() {
+  return (
+    <nav className={styles.cardCatalog} aria-label="Collection navigation">
+      <div className={styles.cardCatalogHeader}>
+        <span className={styles.cardCatalogTitle}>Card Catalog</span>
+      </div>
+      <ul className={styles.cardCatalogList}>
+        {COLLECTIONS.map((collection) => (
+          <li key={collection.id}>
+            <a href={`#${collection.id}`} className={styles.cardCatalogLink}>
+              <span className={styles.cardCatalogCode}>{collection.code}</span>
+              <span className={styles.cardCatalogLabel}>{collection.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
 
 // Signer card component
 function SignerCard({
@@ -107,7 +149,7 @@ function QuoteCard({
             rel="noopener noreferrer"
             className={styles.sourceLink}
           >
-            View Original Source →
+            View Original Source
           </a>
         )}
       </footer>
@@ -149,7 +191,7 @@ function TimelineEvent({
             rel="noopener noreferrer"
             className={styles.timelineManuscriptLink}
           >
-            {manuscriptLabel || 'View original manuscript →'}
+            {manuscriptLabel || 'View original manuscript'}
           </a>
         )}
         {sourceUrl && (
@@ -159,7 +201,7 @@ function TimelineEvent({
             rel="noopener noreferrer"
             className={styles.timelineLink}
           >
-            Source →
+            Source
           </a>
         )}
       </div>
@@ -167,33 +209,43 @@ function TimelineEvent({
   )
 }
 
-// Section divider
-const SectionDivider = () => (
-  <div className={styles.sectionDivider} aria-hidden="true">
-    <span className={styles.dividerLine} />
-    <span className={styles.dividerOrnament}>✦</span>
-    <span className={styles.dividerLine} />
-  </div>
-)
-
 export default function EvidencePage() {
   return (
     <div className={styles.evidencePage}>
-      {/* Hero Section */}
+      {/* Card Catalog Navigation */}
+      <CardCatalog />
+
+      {/* Hero Section - Library entrance */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <p className={styles.heroBadge}>Digital Archive</p>
+          <p className={styles.heroBadge}>The Rocky Mount Archives</p>
           <h1 className={styles.heroTitle}>The Evidence Room</h1>
           <p className={styles.heroSubtitle}>
-            Primary source documents from the founding of Tennessee&apos;s government. Every quote
-            verified. Every claim sourced.
+            Primary documents from the founding of Tennessee&apos;s government. Examined. Verified.
+            Preserved.
+          </p>
+          <span className={styles.heroEstablished}>Est. 1790</span>
+        </div>
+      </section>
+
+      {/* Reading Room Introduction */}
+      <section className={styles.readingRoomIntro}>
+        <div className={styles.container}>
+          <p className={styles.readingRoomText}>
+            Welcome to the archive. The documents below trace the establishment of federal authority
+            in the Southwest Territory—from Washington&apos;s first questions to the treaty that
+            shaped the frontier.
+          </p>
+          <p className={styles.readingRoomNav}>
+            Browse by collection, or scroll to read in sequence.
           </p>
         </div>
       </section>
 
-      {/* Featured Quote */}
-      <section className={styles.featuredSection}>
+      {/* Featured Quote - Blount Correspondence */}
+      <section id="blount-letter" className={styles.featuredSection}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>MSS.1790.001 — Blount Correspondence</span>
           <h2 className={styles.sectionTitle}>The Hero Quote</h2>
           <p className={styles.sectionSubtitle}>
             Governor Blount&apos;s first letter from Rocky Mount
@@ -212,14 +264,17 @@ export default function EvidencePage() {
             oiled paper or wooden shutters. Glass windows signaled that Rocky Mount was a proper
             seat of government, not a crude outpost.
           </ContextPanel>
+          <CuratorNote>
+            This letter, written nine days after Blount&apos;s arrival, is the earliest surviving
+            description of Rocky Mount as a seat of government.
+          </CuratorNote>
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* The Question */}
-      <section className={styles.section}>
+      {/* The Question - Washington Papers */}
+      <section id="washington-question" className={styles.section}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>MSS.1790.002 — Washington Papers</span>
           <h2 className={styles.sectionTitle}>The Question</h2>
           <p className={styles.sectionSubtitle}>Washington asked. Rocky Mount was the answer.</p>
           <QuoteCard
@@ -238,11 +293,10 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* The Appointment */}
-      <section className={styles.section}>
+      {/* The Appointment - Williamson Letters */}
+      <section id="appointment" className={styles.section}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>MSS.1790.003 — Williamson Letters</span>
           <h2 className={styles.sectionTitle}>The Appointment</h2>
           <p className={styles.sectionSubtitle}>Why Washington chose Blount for the frontier</p>
           <QuoteCard
@@ -261,11 +315,10 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* The Authority */}
-      <section className={styles.section}>
+      {/* Federal Authority - Executive Proclamations */}
+      <section id="federal-authority" className={styles.section}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>MSS.1791.001 — Executive Proclamations</span>
           <h2 className={styles.sectionTitle}>Federal Authority</h2>
           <p className={styles.sectionSubtitle}>The Treaty of Holston became binding law</p>
           <QuoteCard
@@ -283,11 +336,10 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Treaty Signers Section */}
-      <section className={styles.signersSection}>
+      <section id="treaty-signers" className={styles.signersSection}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>TREATY.1791.001 — Holston Signatories</span>
           <h2 className={styles.sectionTitle}>Those Who Signed</h2>
           <p className={styles.sectionSubtitle}>
             Forty Cherokee leaders put their names to the Treaty of Holston
@@ -299,6 +351,11 @@ export default function EvidencePage() {
               on behalf of the Cherokee Nation. Their names are preserved in the treaty record.
             </p>
           </div>
+
+          <CuratorNote>
+            The names below are transliterated from the original treaty manuscript. Spellings vary
+            across historical sources.
+          </CuratorNote>
 
           <div className={styles.signersList}>
             {TREATY_SIGNERS.map((signer) => (
@@ -318,7 +375,7 @@ export default function EvidencePage() {
               rel="noopener noreferrer"
               className={styles.signersLink}
             >
-              View all 40 signatories at DigiTreaties →
+              View all 40 signatories at DigiTreaties
             </a>
 
             <p className={styles.signersDescendants}>
@@ -329,11 +386,10 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Timeline Section */}
-      <section className={styles.timelineSection}>
+      <section id="timeline" className={styles.timelineSection}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>CHRON.1790-1796 — Territory Chronology</span>
           <h2 className={styles.sectionTitle}>Verified Timeline</h2>
           <p className={styles.sectionSubtitle}>Key dates confirmed by primary sources</p>
 
@@ -374,7 +430,7 @@ export default function EvidencePage() {
               sourceUrl="https://avalon.law.yale.edu/18th_century/chr1791.asp"
               featured
               manuscriptUrl="https://digitreaties.org/treaties/treaty/88697242/"
-              manuscriptLabel="View the original 23-page manuscript →"
+              manuscriptLabel="View the original 23-page manuscript"
             />
             <TimelineEvent
               date="Nov 5, 1791"
@@ -405,11 +461,10 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Source Repositories */}
-      <section className={styles.sourcesSection}>
+      <section id="sources" className={styles.sourcesSection}>
         <div className={styles.container}>
+          <span className={styles.collectionLabel}>REF — Repository Index</span>
           <h2 className={styles.sectionTitle}>Our Sources</h2>
           <p className={styles.sectionSubtitle}>Where we verify our history</p>
 
@@ -461,7 +516,7 @@ export default function EvidencePage() {
             >
               <h3 className={styles.sourceCardTitle}>Papers of the War Department</h3>
               <p className={styles.sourceCardDescription}>
-                Reconstructed federal records from 1784–1800, recovered after the 1800 Washington
+                Reconstructed federal records from 1784-1800, recovered after the 1800 Washington
                 fire destroyed the originals.
               </p>
             </a>
@@ -494,15 +549,16 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Leaving the library */}
       <section className={styles.ctaSection}>
         <div className={styles.container}>
-          <h2 className={styles.ctaTitle}>Stand Where They Stood</h2>
+          <h2 className={styles.ctaTitle}>The Documents Live Here</h2>
           <p className={styles.ctaText}>
-            The documents prove it. The ground remains. Come see for yourself.
+            These archives tell the story. The ground holds the proof. Visit Rocky Mount to walk
+            where this history was made.
           </p>
           <Link href="/visit" className={styles.ctaButton}>
-            Plan Your Visit
+            Visit the Site
           </Link>
         </div>
       </section>

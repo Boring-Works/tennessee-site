@@ -1,0 +1,447 @@
+/* ===========================================
+   WELCOME SCREEN - STORY-LED DESIGN
+   Rocky Mount State Historic Site
+   Path A: Story-Led Experience
+   =========================================== */
+
+/* ===========================================
+   ENTRY ANIMATIONS
+   =========================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(201, 162, 39, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(201, 162, 39, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storyHook,
+  .heroYearContainer,
+  .brandContainer,
+  .peaksContainer,
+  .ctaGroup,
+  .divider,
+  .cardsContainer {
+    animation: none !important;
+  }
+
+  .heroYear {
+    animation: none;
+    text-shadow: 0 0 20px rgba(201, 162, 39, 0.2);
+  }
+}
+
+/* ===========================================
+   STORY HOOK
+   =========================================== */
+
+.storyHook {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 16px 0;
+  max-width: 600px;
+  line-height: 1.8;
+  text-align: center;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
+}
+
+/* ===========================================
+   HERO YEAR
+   =========================================== */
+
+.heroYearContainer {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.heroYear {
+  display: block;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(40px, 8vw, 56px);
+  font-weight: 600;
+  color: var(--accent, #c9a227);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  animation: subtleGlow 4s ease-in-out infinite;
+}
+
+.contextLine {
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+/* ===========================================
+   BRAND STATEMENT
+   =========================================== */
+
+.brandContainer {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.brandHeadline {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 12px 0;
+}
+
+.taglineContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.taglineLine {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent, #c9a227));
+}
+
+.taglineLine:last-child {
+  background: linear-gradient(90deg, var(--accent, #c9a227), transparent);
+}
+
+.taglineText {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent, #c9a227);
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .taglineContainer {
+    gap: 16px;
+  }
+
+  .taglineLine {
+    width: 40px;
+  }
+
+  .taglineText {
+    font-size: 18px;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* ===========================================
+   DUAL PEAKS COUNTDOWN
+   =========================================== */
+
+.peaksContainer {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.peakBadge {
+  text-align: center;
+  padding: 12px 20px;
+  background: rgba(201, 162, 39, 0.05);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: 4px;
+  min-width: 140px;
+  transition: all 0.3s ease;
+}
+
+.peakBadge:hover {
+  border-color: rgba(201, 162, 39, 0.4);
+  background: rgba(201, 162, 39, 0.08);
+}
+
+.peakLabel {
+  display: block;
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.6);
+  margin-bottom: 4px;
+}
+
+.peakDate {
+  display: block;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
+}
+
+.peakDays {
+  display: block;
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent, #c9a227);
+}
+
+.peakDays span {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(201, 162, 39, 0.6);
+  margin-left: 4px;
+}
+
+@media (max-width: 640px) {
+  .peaksContainer {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .peakBadge {
+    min-width: auto;
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* ===========================================
+   CTA GROUP
+   =========================================== */
+
+.ctaGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.primaryCTA {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 40px;
+  background: transparent;
+  border: 2px solid var(--accent, #c9a227);
+  color: var(--accent, #c9a227);
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 48px;
+}
+
+.primaryCTA:hover {
+  background: var(--accent, #c9a227);
+  color: #0a1628;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.35);
+}
+
+.primaryCTA:active {
+  transform: translateY(0);
+}
+
+.primaryCTA:focus-visible {
+  outline: 2px solid var(--accent, #c9a227);
+  outline-offset: 4px;
+}
+
+.ctaOrnament {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.secondaryLink {
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.secondaryLink:hover {
+  color: var(--accent, #c9a227);
+}
+
+.secondaryLink:focus-visible {
+  outline: 2px solid var(--accent, #c9a227);
+  outline-offset: 2px;
+}
+
+/* ===========================================
+   DECORATIVE DIVIDER
+   =========================================== */
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.3));
+}
+
+.dividerLine:last-child {
+  background: linear-gradient(90deg, rgba(201, 162, 39, 0.3), transparent);
+}
+
+.dividerDiamond {
+  color: var(--accent, #c9a227);
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+/* ===========================================
+   UTILITY CARDS
+   =========================================== */
+
+.cardsContainer {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.utilityCard {
+  padding: 20px 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: left;
+  min-width: 200px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(201, 162, 39, 0.1);
+}
+
+.utilityCard:hover:not(.utilityCardDisabled) {
+  background: rgba(201, 162, 39, 0.05);
+  border-color: rgba(201, 162, 39, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.utilityCard:focus-visible {
+  outline: 2px solid var(--accent, #c9a227);
+  outline-offset: 2px;
+}
+
+.utilityCardDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.03) 10px,
+      rgba(0, 0, 0, 0.03) 20px
+    ),
+    rgba(255, 255, 255, 0.03);
+}
+
+.cardTitle {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent, #c9a227);
+  margin: 0 0 4px 0;
+}
+
+.cardSubtitle {
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.cardCta {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-sans), 'Montserrat', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--accent, #c9a227);
+}
+
+.cardComingSoon {
+  margin-top: 12px;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 500px) {
+  .cardsContainer {
+    flex-direction: column;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .utilityCard {
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryCTA,
+  .utilityCard,
+  .peakBadge {
+    transition: none;
+  }
+}

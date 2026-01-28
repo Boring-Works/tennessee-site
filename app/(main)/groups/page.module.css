@@ -1,0 +1,204 @@
+/* Groups Page Styles */
+
+.hero {
+  background: var(--color-primary);
+  color: var(--color-cream);
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.subhead {
+  font-size: 1.125rem;
+  color: var(--color-cream-dark);
+}
+
+/* We Welcome */
+.welcome {
+  padding: 3rem 1.5rem;
+  background: var(--color-cream);
+}
+
+.welcome-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.welcome-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.welcome-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* Rates */
+.rates {
+  padding: 3rem 1.5rem;
+  background: white;
+}
+
+.rates-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.rates-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.rates-table {
+  border: 1px solid var(--color-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rates-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.rates-row:last-child {
+  border-bottom: none;
+}
+
+.rates-tier {
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.rates-price {
+  color: var(--color-secondary);
+}
+
+.rates-note {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.rates-includes {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Contact */
+.contact {
+  padding: 4rem 1.5rem;
+  background: var(--color-primary);
+  text-align: center;
+}
+
+.contact-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-headline {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--color-cream);
+  margin-bottom: 0.5rem;
+}
+
+.contact-desc {
+  color: var(--color-cream-dark);
+  margin-bottom: 1.5rem;
+}
+
+.contact-methods {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-btn-primary {
+  padding: 1rem 2rem;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.contact-btn-primary:hover {
+  background: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+.contact-btn-secondary {
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--color-cream);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-cream);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.contact-btn-secondary:hover {
+  background: var(--color-cream);
+  color: var(--color-primary);
+}
+
+/* What to Know */
+.know {
+  padding: 3rem 1.5rem;
+  background: var(--color-cream);
+}
+
+.know-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.know-headline {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.know-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #333;
+  line-height: 1.8;
+}

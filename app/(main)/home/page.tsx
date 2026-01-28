@@ -1,57 +1,27 @@
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import HeroSection from '@/components/HeroSection'
-import ExperiencePreview from '@/components/ExperiencePreview'
-import HomecomingSection from '@/components/HomecomingSection'
-import FinalCTA from '@/components/FinalCTA'
 import {
-  MysteryHook,
-  ExperimentSection,
-  ScrollTimeline,
-  ContrastStatement,
-  ProofSection,
-  DistinctionSection,
-  GroundStatement,
+  ConsolidatedStory,
+  ConsolidatedProof,
+  ConsolidatedExperience,
+  Commemorative2026,
   PlanYourVisit,
-  CampaignSection,
-  IndigenousAcknowledgment,
+  ConsolidatedClose,
 } from '@/components/home'
-import styles from './page.module.css'
 
-// Dynamic imports for below-fold components (code splitting)
-// Note: ssr is enabled by default, providing both code splitting and SSR benefits
-const EventsShowcase = dynamic(() => import('@/components/EventsShowcase'), {
-  loading: () => (
-    <div
-      style={{
-        minHeight: '600px',
-        background: '#0a1628',
-      }}
-    />
-  ),
-})
-
-const LedgerSection = dynamic(() => import('@/components/LedgerSection'), {
-  loading: () => (
-    <div
-      style={{
-        minHeight: '700px',
-        background: 'var(--parchment)',
-      }}
-    />
-  ),
-})
-
-const StorySection = dynamic(() => import('@/components/StorySection'), {
-  loading: () => (
-    <div
-      style={{
-        minHeight: '800px',
-        background: 'white',
-      }}
-    />
-  ),
-})
+/**
+ * Homepage - 7-Section Consolidated Structure
+ *
+ * Condensed from 17 sections to 7 dense, high-impact sections
+ * without losing any content or context.
+ *
+ * Section 1: Hero (unchanged)
+ * Section 2: The Story (MysteryHook + ExperimentSection + ScrollTimeline + ContrastStatement)
+ * Section 3: The Proof (ProofSection + DistinctionSection + Blount Letter)
+ * Section 4: The Experience (ExperiencePreview + GroundStatement + HomecomingSection)
+ * Section 5: 2026 Campaign (CampaignSection + EventsShowcase + LedgerSection)
+ * Section 6: Plan Your Visit (elevated position, unchanged content)
+ * Section 7: Close (IndigenousAcknowledgment + FinalCTA)
+ */
 
 export default function Home() {
   return (
@@ -62,218 +32,81 @@ export default function Home() {
       <HeroSection />
 
       {/* ============================================
-          SECTION 2: MYSTERY HOOK
-          "Before there was a Tennessee..."
+          SECTION 2: THE STORY
+          Combines: MysteryHook + ExperimentSection +
+          ScrollTimeline + ContrastStatement
+
+          Content preserved:
+          - "Before there was a Tennessee..."
+          - "Could democracy survive beyond the Appalachians?"
+          - 1770/1780/1790 timeline with details
+          - "This is where they governed."
           ============================================ */}
-      <MysteryHook />
+      <ConsolidatedStory />
 
       {/* ============================================
-          SECTION 3: THE EXPERIMENT
-          "Could democracy survive beyond the Appalachians?"
+          SECTION 3: THE PROOF
+          Combines: ProofSection + DistinctionSection +
+          Blount Letter
+
+          Content preserved:
+          - Blount, Jackson, Cobbs cards with quotes
+          - Blount letter ("glass windows" quote)
+          - 1790-1792 vs 1792-1817 distinction
+          - "The State started here."
           ============================================ */}
-      <ExperimentSection />
+      <ConsolidatedProof />
 
       {/* ============================================
-          SECTION 4: TIMELINE (Scroll-Triggered)
-          1770, 1780, 1790 - Three beats
+          SECTION 4: THE EXPERIENCE
+          Combines: ExperiencePreview + GroundStatement +
+          HomecomingSection (visit info)
+
+          Content preserved:
+          - "Step Into 1790" experience preview
+          - All 4 experience moments
+          - Testimonial
+          - "The buildings evolved. The ground endures."
+          - Visit info (hours, admission, location)
           ============================================ */}
-      <ScrollTimeline />
+      <ConsolidatedExperience />
 
       {/* ============================================
-          SECTION 5: CONTRAST STATEMENT
-          "This is where they governed."
+          SECTION 5: 2026 CAMPAIGN
+          Combines: CampaignSection + EventsShowcase +
+          LedgerSection
+
+          Content preserved:
+          - "Tennessee 230 / America 250"
+          - First 250 enrollment CTA
+          - Event categories and counts
+          - Featured upcoming event
+          - Promise vs Proof comparison
+          - Stats (600 miles, 14 years, 16th state)
           ============================================ */}
-      <ContrastStatement />
+      <Commemorative2026 />
 
       {/* ============================================
-          SECTION 6: THE PROOF (Authority Section)
-          Blount, Jackson, Cobbs
-          ============================================ */}
-      <ProofSection />
+          SECTION 6: PLAN YOUR VISIT
+          Elevated position for clear conversion
 
-      {/* ============================================
-          SECTION 7: THE DISTINCTION
-          Territorial vs State capital clarification
-          ============================================ */}
-      <DistinctionSection />
-
-      {/* ============================================
-          SECTION 8: GROUND STATEMENT
-          "The buildings evolved. The ground endures."
-          ============================================ */}
-      <GroundStatement />
-
-      {/* ============================================
-          SECTION 9: THE BLOUNT LETTER - Archival Document
-          ============================================ */}
-      <section className={styles['blount-section']} aria-labelledby="blount-heading">
-        {/* Parchment document with aged edges */}
-        <div className={styles['blount-document']}>
-          {/* Paper fold lines */}
-          <div
-            className={`${styles['blount-fold']} ${styles['blount-fold--horizontal']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-fold']} ${styles['blount-fold--vertical']}`}
-            aria-hidden="true"
-          />
-
-          {/* Burn/age edge effects */}
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--top']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--bottom']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--left']}`}
-            aria-hidden="true"
-          />
-          <div
-            className={`${styles['blount-edge']} ${styles['blount-edge--right']}`}
-            aria-hidden="true"
-          />
-
-          {/* Decorative top rule - quill flourish style */}
-          <div
-            className={`${styles['blount-rule']} ${styles['blount-rule-top']}`}
-            aria-hidden="true"
-          >
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--left']}`}>
-              ❧
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--center']}`}>
-              ✦
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--right']}`}>
-              ❧
-            </span>
-          </div>
-
-          {/* Document header */}
-          <header className={styles['blount-header']}>
-            <p className={styles['blount-recipient']}>Letter to President George Washington</p>
-            <p className={styles['blount-dateline']}>
-              <span>Rocky Mount</span>
-              <span className={styles['blount-dateline-sep']} aria-hidden="true">
-                ·
-              </span>
-              <time dateTime="1790-10-20">October 20, 1790</time>
-            </p>
-          </header>
-
-          {/* The quote with drop cap - Verified from Tennessee Encyclopedia */}
-          <blockquote className={styles['blount-blockquote']}>
-            <p
-              id="blount-heading"
-              className={`${styles['blount-text']} ${styles['blount-text--dropcap']}`}
-            >
-              <span className={styles['blount-dropcap']} aria-hidden="true">
-                I
-              </span>
-              <span className={styles['blount-text-body']}>
-                am very well accommodated with a Room with Glass Windows, Fireplace, etc., etc., at
-                this place.
-              </span>
-            </p>
-          </blockquote>
-
-          {/* Context line */}
-          <p className={styles['blount-context']}>
-            Glass windows were rare on the frontier. Rocky Mount was no rough cabin—it was where
-            federal power took root.
-          </p>
-
-          {/* Attribution with wax seal */}
-          <footer className={styles['blount-attribution']}>
-            {/* Wax seal */}
-            <div className={styles['blount-seal']} aria-hidden="true">
-              <span className={styles['blount-seal-inner']}>SW</span>
-            </div>
-            <cite className={`${styles['blount-author']} signature-text`}>Wm. Blount</cite>
-            <span className={styles['blount-title']}>
-              First Governor of the Southwest Territory
-            </span>
-          </footer>
-
-          {/* Decorative bottom rule - quill flourish style */}
-          <div
-            className={`${styles['blount-rule']} ${styles['blount-rule-bottom']}`}
-            aria-hidden="true"
-          >
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--left']}`}>
-              ❧
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--center']}`}>
-              ✦
-            </span>
-            <span className={styles['blount-rule-line']} />
-            <span className={`${styles['blount-flourish']} ${styles['blount-flourish--right']}`}>
-              ❧
-            </span>
-          </div>
-
-          {/* Subtle CTA */}
-          <Link href="/lectures" className={styles['blount-cta']}>
-            Explore Rocky Mount&apos;s founding story
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </section>
-
-      {/* ============================================
-          SECTION 10: EXPERIENCE PREVIEW
-          What You'll Experience
-          ============================================ */}
-      <ExperiencePreview />
-
-      {/* ============================================
-          SECTION 11: PLAN YOUR VISIT
-          Practical info consolidated
+          Content preserved:
+          - Location, hours, admission
+          - TripAdvisor social proof
+          - Dual CTAs
           ============================================ */}
       <PlanYourVisit />
 
       {/* ============================================
-          SECTION 12: 2026 CAMPAIGN (Scarcity)
-          First 250 enrollment
-          ============================================ */}
-      <CampaignSection />
+          SECTION 7: CLOSE
+          Combines: IndigenousAcknowledgment + FinalCTA
 
-      {/* ============================================
-          SECTION 13: INDIGENOUS ACKNOWLEDGMENT
+          Content preserved:
+          - Indigenous acknowledgment (respectful)
+          - Final CTA with closing tagline
+          - "Tennessee starts here. Will you?"
           ============================================ */}
-      <IndigenousAcknowledgment />
-
-      {/* ============================================
-          EVENTS SHOWCASE - The Commemorative Year
-          ============================================ */}
-      <EventsShowcase />
-
-      {/* ============================================
-          PROMISE VS PROOF - The Two Americas
-          ============================================ */}
-      <LedgerSection />
-
-      {/* ============================================
-          THE STORY - Progressive Revelation
-          ============================================ */}
-      <StorySection />
-
-      {/* ============================================
-          THE HOMECOMING - Final Section
-          ============================================ */}
-      <HomecomingSection />
-
-      {/* ============================================
-          FINAL CTA - Conversion Close
-          ============================================ */}
-      <FinalCTA />
+      <ConsolidatedClose />
     </>
   )
 }

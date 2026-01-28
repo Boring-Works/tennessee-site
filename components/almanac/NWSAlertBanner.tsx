@@ -8,6 +8,7 @@ import type { NWSAlert, NWSAlertsResponse, AlertSeverity } from '@/lib/almanac/t
 interface NWSAlertBannerProps {
   lat: number
   lon: number
+  onAlertChange?: (hasAlert: boolean, alertTitle?: string) => void
 }
 
 // Severity-based styling with triple encoding: color + icon + text label
@@ -51,7 +52,7 @@ const SEVERITY_STYLES: Record<
   },
 }
 
-export default function NWSAlertBanner({ lat, lon }: NWSAlertBannerProps) {
+export default function NWSAlertBanner({ lat, lon, onAlertChange }: NWSAlertBannerProps) {
   const [alerts, setAlerts] = useState<NWSAlert[]>([])
   const [loading, setLoading] = useState(true)
   const [expandedId, setExpandedId] = useState<string | null>(null)
@@ -61,14 +62,23 @@ export default function NWSAlertBanner({ lat, lon }: NWSAlertBannerProps) {
     try {
       const response = await fetch(`/api/nws-alerts?lat=${lat}&lon=${lon}`)
       const data: NWSAlertsResponse = await response.json()
-      setAlerts(data.alerts || [])
+      const alertList = data.alerts || []
+      setAlerts(alertList)
+
+      // Notify parent of alert status
+      if (onAlertChange) {
+        const hasAlert = alertList.length > 0
+        const firstAlertTitle = alertList[0]?.event
+        onAlertChange(hasAlert, firstAlertTitle)
+      }
     } catch {
       // Silently fail - alerts are supplementary
       setAlerts([])
+      onAlertChange?.(false, undefined)
     } finally {
       setLoading(false)
     }
-  }, [lat, lon])
+  }, [lat, lon, onAlertChange])
 
   useEffect(() => {
     fetchAlerts()

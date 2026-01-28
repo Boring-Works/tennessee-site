@@ -2,14 +2,21 @@
 
 import './almanac.css'
 import { useState, useEffect, useCallback, useMemo } from 'react'
+import { Sprout, Leaf } from 'lucide-react'
 import { WeatherAtmosphere } from '@/components/almanac/WeatherAtmosphere'
-import { AlmanacHero } from '@/components/almanac/AlmanacHero'
+import { TopBar } from '@/components/almanac/TopBar'
+import { NextChangeHero } from '@/components/almanac/NextChangeHero'
+import { NowDisplay } from '@/components/almanac/NowDisplay'
+import { DecisionRail } from '@/components/almanac/DecisionRail'
+import { CollapsibleDeck } from '@/components/almanac/CollapsibleDeck'
+import { ConditionsTiles } from '@/components/almanac/ConditionsTiles'
+import { DaylightBar } from '@/components/almanac/DaylightBar'
 import { FrontierSaying } from '@/components/almanac/FrontierSaying'
 import { TaskScores } from '@/components/almanac/TaskScores'
 import { MoonPhase } from '@/components/almanac/MoonPhase'
 import NativePulse from '@/components/almanac/NativePulse'
 import FarmerMemory from '@/components/almanac/FarmerMemory'
-import LocationPicker from '@/components/almanac/LocationPicker'
+import { FarmerMemorySummary } from '@/components/almanac/FarmerMemorySummary'
 import PlantingIntelligence from '@/components/almanac/PlantingIntelligence'
 import EnvironmentalWatch from '@/components/almanac/EnvironmentalWatch'
 import PrecipitationRadar from '@/components/almanac/PrecipitationRadar'
@@ -18,16 +25,12 @@ import BurnDayIndicator from '@/components/almanac/BurnDayIndicator'
 import LightningWatch from '@/components/almanac/LightningWatch'
 import AirQualityCard from '@/components/almanac/AirQualityCard'
 import HourlySparkline from '@/components/almanac/HourlySparkline'
-import CurrentConditionsCard from '@/components/almanac/CurrentConditionsCard'
 import SnowConditions from '@/components/almanac/SnowConditions'
-import SunBarometer from '@/components/almanac/SunBarometer'
-import AboutModal from '@/components/almanac/AboutModal'
 import StaleDataWarning from '@/components/almanac/StaleDataWarning'
 import OnboardingModal from '@/components/almanac/OnboardingModal'
 import TomorrowPreview from '@/components/almanac/TomorrowPreview'
-import RotatingHook from '@/components/almanac/RotatingHook'
 import PresentedByBlock from '@/components/almanac/PresentedByBlock'
-import { SectionDivider } from '@/components/almanac/SectionDivider'
+import ShareButton from '@/components/almanac/ShareButton'
 import { CompactSevenDay, type DayForecast } from '@/components/almanac/CompactSevenDay'
 import PrecipitationTiming from '@/components/almanac/PrecipitationTiming'
 import { transformWeatherData } from '@/lib/almanac/weather'
@@ -42,6 +45,8 @@ import { getDualSaying, type DualSaying } from '@/lib/almanac/sayings'
 import { getMoonData, isDay } from '@/lib/almanac/moonPhase'
 import { formatLocationName, type GeoLocation } from '@/lib/almanac/geocoding'
 import { loadLocation } from '@/lib/almanac/storage'
+import { getTemperatureAnomaly } from '@/lib/almanac/farmerMemory'
+import { getWeatherInfo } from '@/lib/almanac/types'
 import { logger } from '@/lib/logger'
 import type { WeatherData, TaskScores as TaskScoresType, MoonData } from '@/lib/almanac/types'
 
@@ -60,6 +65,9 @@ export default function AlmanacPage() {
   const [retryCount, setRetryCount] = useState(0)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [aqi, setAqi] = useState<number | null>(null)
+  const [burnDayStatus, setBurnDayStatus] = useState<'burn' | 'no-burn' | 'unknown'>('unknown')
+  const [hasActiveAlert, setHasActiveAlert] = useState(false)
+  const [alertTitle, setAlertTitle] = useState<string | undefined>()
 
   const fetchWeather = useCallback(async (loc: GeoLocation, attempt = 0) => {
     try {
@@ -175,6 +183,34 @@ export default function AlmanacPage() {
     })
   }, [weather])
 
+  // Calculate freeze info for DecisionRail
+  const freezeInfo = useMemo(() => {
+    if (!weather) return undefined
+    const isBelow32 = weather.current.temperature <= 32
+    const frostRisk = weather.current.temperature <= 36 && weather.current.humidity > 80
+    // Find next freeze in hourly
+    let nextFreezeHours: number | undefined
+    if (weather.current.temperature > 32) {
+      for (let i = 0; i < Math.min(24, weather.hourly.temperature.length); i++) {
+        if (weather.hourly.temperature[i] <= 32) {
+          nextFreezeHours = i
+          break
+        }
+      }
+    }
+    return { isBelow32, frostRisk, nextFreezeHours }
+  }, [weather])
+
+  // Calculate temperature anomaly for DecisionRail
+  const tempAnomaly = useMemo(() => {
+    if (!weather || todayIndex === -1) return undefined
+    const todayHigh = weather.daily.temperatureMax[todayIndex]
+    const todayLow = weather.daily.temperatureMin[todayIndex]
+    const now = new Date()
+    const anomaly = getTemperatureAnomaly(todayHigh, todayLow, now.getMonth() + 1, now.getDate())
+    return { diff: anomaly.highDiff, description: anomaly.description }
+  }, [weather, todayIndex])
+
   if (loading || !location) {
     return (
       <main className="min-h-screen bg-midnight text-almanac-parchment">
@@ -232,37 +268,39 @@ export default function AlmanacPage() {
         }
       : null
 
+  // Get weather condition for sharing
+  const weatherInfo = getWeatherInfo(weather.current.weatherCode)
+
   return (
     <div className="min-h-screen bg-midnight">
       <WeatherAtmosphere weatherCode={weather.current.weatherCode} />
+
+      {/* Sticky TopBar */}
+      <TopBar
+        location={location}
+        onLocationChange={handleLocationChange}
+        temperature={weather.current.temperature}
+        condition={weatherInfo.condition}
+      />
+
       <main id="main-content" className="min-h-screen text-almanac-parchment relative z-10">
         {/* Container: mobile narrow, desktop wide */}
-        <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 lg:px-6 py-6 lg:py-8">
+        <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 lg:px-6 py-4 lg:py-6">
           {/* ============================================================
               ALERTS - Full width, always at top (safety first)
               ============================================================ */}
-          <NWSAlertBanner lat={location.latitude} lon={location.longitude} />
+          <NWSAlertBanner
+            lat={location.latitude}
+            lon={location.longitude}
+            onAlertChange={(hasAlert, title) => {
+              setHasActiveAlert(hasAlert)
+              setAlertTitle(title)
+            }}
+          />
           <LightningWatch lat={location.latitude} lon={location.longitude} />
 
-          {/* ============================================================
-              HEADER - Compact on desktop to maximize content space
-              ============================================================ */}
-          <header className="text-center mb-4 lg:mb-6">
-            <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl text-almanac-gold tracking-wide uppercase">
-              The 1775 Almanac
-            </h1>
-            <p className="text-sm text-almanac-parchment/70 mt-1 tracking-wide">
-              Rocky Mount State Historic Site
-            </p>
-            <div className="mt-2 lg:mt-3 flex items-center justify-center gap-3">
-              <RotatingHook />
-              <AboutModal />
-            </div>
-          </header>
-
-          {/* Location + Stale Warning */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4">
-            <LocationPicker location={location} onLocationChange={handleLocationChange} />
+          {/* Stale Data Warning */}
+          <div className="flex justify-end mb-4">
             <StaleDataWarning
               lastUpdated={lastUpdated}
               onRefresh={() => location && fetchWeather(location)}
@@ -271,36 +309,40 @@ export default function AlmanacPage() {
           </div>
 
           {/* ============================================================
-              MOBILE LAYOUT: Single column, organized in 3 sections
-              SECTION 1: Glanceable (quick weather info)
-              SECTION 2: Today's Details (current conditions)
-              SECTION 3: For Working Farmers (planning & forecasts)
+              MOBILE LAYOUT: Single column, organized vertically
               ============================================================ */}
           <div className="flex flex-col gap-4 lg:hidden">
-            {/* ========== SECTION 1: GLANCEABLE ========== */}
-            {/* Hero */}
-            <AlmanacHero
+            {/* NOW Display */}
+            <NowDisplay
               temperature={weather.current.temperature}
               feelsLike={weather.current.feelsLike}
               weatherCode={weather.current.weatherCode}
-              location={formatLocationName(location)}
               windSpeed={weather.current.windSpeed}
               windDirection={weather.current.windDirection}
+              windGusts={weather.current.windGusts}
               humidity={weather.current.humidity}
+              dewPoint={weather.current.dewPoint}
               todayHigh={todayHigh}
               todayLow={todayLow}
+              lastUpdated={lastUpdated}
             />
 
-            {/* Precipitation Timing */}
-            <PrecipitationTiming
-              lat={location.latitude}
-              lon={location.longitude}
-              hourlyPrecipFallback={
-                weather?.hourly?.precipitationProbability?.[new Date().getHours()]
-              }
+            {/* Next Change Hero */}
+            <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
+
+            {/* Decision Rail */}
+            <DecisionRail
+              hasActiveAlert={hasActiveAlert}
+              alertTitle={alertTitle}
+              burnDayStatus={burnDayStatus}
+              tempAnomaly={tempAnomaly}
+              freezeInfo={freezeInfo}
             />
 
-            {/* Workability Scores - 2x2 grid on mobile */}
+            {/* Hourly Sparkline */}
+            <HourlySparkline hourly={weather.hourly} />
+
+            {/* Workability Scores */}
             <TaskScores
               sower={taskScores.sower}
               shepherd={taskScores.shepherd}
@@ -309,87 +351,93 @@ export default function AlmanacPage() {
               aqi={aqi}
             />
 
-            {/* Hourly Sparkline */}
-            <HourlySparkline hourly={weather.hourly} />
-
-            {/* Compact 7-Day */}
-            <CompactSevenDay days={compactDays} />
-
-            <SectionDivider label="Today's Details" />
-
-            {/* ========== SECTION 2: TODAY'S DETAILS ========== */}
-            {/* Tomorrow Preview + Burn Day grouped */}
+            {/* Tomorrow + 7-Day */}
             <div className="grid grid-cols-2 gap-4">
               <TomorrowPreview tomorrow={tomorrowData} />
-              <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
+              <BurnDayIndicator
+                lat={location.latitude}
+                lon={location.longitude}
+                onStatusChange={setBurnDayStatus}
+              />
+            </div>
+            <CompactSevenDay days={compactDays} />
+
+            {/* Today Deck */}
+            <div className="space-y-4 pt-4 border-t border-white/10">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-almanac-gold">
+                Today&apos;s Details
+              </h3>
+
+              {/* Farmer's Memory Summary (collapsed) */}
+              <CollapsibleDeck title="Farmer's Memory" defaultOpen={false}>
+                <FarmerMemory
+                  temperature={weather.current.temperature}
+                  humidity={weather.current.humidity}
+                  pressure={weather.current.pressure}
+                  windSpeed={weather.current.windSpeed}
+                  todayHigh={todayHigh}
+                  todayLow={todayLow}
+                />
+              </CollapsibleDeck>
+
+              {/* Daily Proverb */}
+              {saying && (
+                <div className="space-y-2">
+                  <FrontierSaying
+                    saying={saying.frontier}
+                    modernLine={saying.modern}
+                    temperature={weather.current.temperature}
+                    location={formatLocationName(location)}
+                  />
+                  <ShareButton
+                    frontierLine={saying.frontier}
+                    modernLine={saying.modern}
+                    temperature={weather.current.temperature}
+                    location={formatLocationName(location)}
+                  />
+                </div>
+              )}
             </div>
 
-            {/* Air Quality */}
-            <AirQualityCard lat={location.latitude} lon={location.longitude} onAqiChange={setAqi} />
-
-            {/* Sun & Atmosphere */}
-            <div className="grid grid-cols-2 gap-4">
-              <SunBarometer
-                sunrise={todaySunrise}
-                sunset={todaySunset}
-                pressure={weather.current.pressure}
-                windSpeed={weather.current.windSpeed}
-                windDirection={weather.current.windDirection}
-              />
-              <CurrentConditionsCard
-                cloudCover={weather.current.cloudCover}
-                visibility={weather.current.visibility}
-                dewPoint={weather.current.dewPoint}
+            {/* Radar + Conditions */}
+            <div className="space-y-4 pt-4 border-t border-white/10">
+              <DaylightBar sunrise={todaySunrise} sunset={todaySunset} />
+              <ConditionsTiles
                 uvIndex={weather.current.uvIndex}
-                pressure={weather.current.pressure}
-                snowDepth={weather.current.snowDepth}
+                visibility={weather.current.visibility}
+                cloudCover={weather.current.cloudCover}
                 windGusts={weather.current.windGusts}
+                moon={moon}
+                aqi={aqi}
               />
-            </div>
-
-            {/* Frontier Proverb */}
-            {saying && (
-              <FrontierSaying
-                saying={saying.frontier}
-                modernLine={saying.modern}
-                temperature={weather.current.temperature}
-                location={formatLocationName(location)}
-              />
-            )}
-
-            {/* Moon & Radar */}
-            <div className="grid grid-cols-2 gap-4">
-              <MoonPhase moon={moon} />
               <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
             </div>
 
-            <SectionDivider label="For Working Farmers" />
+            {/* Farm Deck */}
+            <CollapsibleDeck title="Farm Intelligence" icon={<Sprout className="w-4 h-4" />}>
+              <PlantingIntelligence
+                temperature={weather.current.temperature}
+                humidity={weather.current.humidity}
+                soilTemperature={weather.current.soilTemperature}
+                tempHigh={todayHigh}
+                tempLow={todayLow}
+              />
+              <div className="mt-4">
+                <NativePulse pulse={nativePulse} />
+              </div>
+            </CollapsibleDeck>
 
-            {/* ========== SECTION 3: FOR WORKING FARMERS ========== */}
-            {/* Planting Intelligence */}
-            <PlantingIntelligence
-              temperature={weather.current.temperature}
-              humidity={weather.current.humidity}
-              soilTemperature={weather.current.soilTemperature}
-              tempHigh={todayHigh}
-              tempLow={todayLow}
-            />
-
-            {/* Farmer's Memory */}
-            <FarmerMemory
-              temperature={weather.current.temperature}
-              humidity={weather.current.humidity}
-              pressure={weather.current.pressure}
-              windSpeed={weather.current.windSpeed}
-              todayHigh={todayHigh}
-              todayLow={todayLow}
-            />
-
-            {/* Native Pulse */}
-            <NativePulse pulse={nativePulse} />
-
-            {/* Environmental Watch */}
-            <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+            {/* Environment Deck */}
+            <CollapsibleDeck title="Environmental Watch" icon={<Leaf className="w-4 h-4" />}>
+              <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+              <div className="mt-4">
+                <AirQualityCard
+                  lat={location.latitude}
+                  lon={location.longitude}
+                  onAqiChange={setAqi}
+                />
+              </div>
+            </CollapsibleDeck>
 
             {/* Snow (conditional) */}
             {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
@@ -402,43 +450,32 @@ export default function AlmanacPage() {
           </div>
 
           {/* ============================================================
-              DESKTOP LAYOUT: 12-column Bento Grid
-              Goal: Answer 7 questions without scrolling
-
-              SECTION 1 - GLANCEABLE (above the fold):
-              ROW 1: [Hero 4] [PrecipTiming + Sparkline 5] [Tomorrow + Burn 3]
-              ROW 2: [Workability Scores 12 cols] - THE KEY FEATURE
-              ROW 3: [CompactSevenDay 12 cols]
-
-              SECTION 2 - TODAY'S DETAILS:
-              ROW 4: [Proverb 6] [AQI + Moon + Conditions 6]
-              ROW 5: [SunBarometer 4] [Radar 8]
-
-              SECTION 3 - FOR WORKING FARMERS:
-              ROW 6: [Planting Intelligence 6] [Farmer's Memory 6]
-              ROW 7: [Native Pulse 6] (available space)
-              ROW 8: [Environmental Watch 12 cols]
+              DESKTOP LAYOUT: 12-column Grid
               ============================================================ */}
           <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
-            {/* ========== SECTION 1: GLANCEABLE (Above the Fold) ========== */}
+            {/* ========== ROW 1: Above the Fold (3-column) ========== */}
             <section aria-label="At a Glance" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
-              {/* Hero - Compact temperature display */}
-              <div className="lg:col-span-4">
-                <AlmanacHero
+              {/* LEFT: NOW Display (3 cols) */}
+              <div className="lg:col-span-3">
+                <NowDisplay
                   temperature={weather.current.temperature}
                   feelsLike={weather.current.feelsLike}
                   weatherCode={weather.current.weatherCode}
-                  location={formatLocationName(location)}
                   windSpeed={weather.current.windSpeed}
                   windDirection={weather.current.windDirection}
+                  windGusts={weather.current.windGusts}
                   humidity={weather.current.humidity}
+                  dewPoint={weather.current.dewPoint}
                   todayHigh={todayHigh}
                   todayLow={todayLow}
+                  lastUpdated={lastUpdated}
                 />
               </div>
 
-              {/* PrecipTiming + Hourly Sparkline */}
-              <div className="lg:col-span-5 flex flex-col gap-3">
+              {/* CENTER: Next Change + Hourly (6 cols) */}
+              <div className="lg:col-span-6 flex flex-col gap-3">
+                <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
+                <HourlySparkline hourly={weather.hourly} />
                 <PrecipitationTiming
                   lat={location.latitude}
                   lon={location.longitude}
@@ -446,145 +483,190 @@ export default function AlmanacPage() {
                     weather?.hourly?.precipitationProbability?.[new Date().getHours()]
                   }
                 />
-                <HourlySparkline hourly={weather.hourly} />
               </div>
 
-              {/* Tomorrow + Burn Day - stretch to fill */}
-              <div className="lg:col-span-3 flex flex-col gap-3 justify-between">
-                <TomorrowPreview tomorrow={tomorrowData} />
-                <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
-              </div>
-
-              {/* Compact 7-Day Overview - HIGH PRIORITY */}
-              <div className="lg:col-span-12">
-                <CompactSevenDay days={compactDays} />
-              </div>
-
-              {/* Workability Scores */}
-              <div className="lg:col-span-12">
-                <TaskScores
-                  sower={taskScores.sower}
-                  shepherd={taskScores.shepherd}
-                  keeper={taskScores.keeper}
-                  builder={taskScores.builder}
-                  aqi={aqi}
-                  compact
+              {/* RIGHT: Decision Rail (3 cols) */}
+              <div className="lg:col-span-3">
+                <DecisionRail
+                  hasActiveAlert={hasActiveAlert}
+                  alertTitle={alertTitle}
+                  burnDayStatus={burnDayStatus}
+                  tempAnomaly={tempAnomaly}
+                  freezeInfo={freezeInfo}
                 />
               </div>
             </section>
 
-            <div className="lg:col-span-12">
-              <SectionDivider label="Today's Details" />
-            </div>
-
-            {/* ========== SECTION 2: TODAY'S DETAILS ========== */}
-            <section
-              aria-label="Today's Details"
-              className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
-            >
-              {/* Daily Proverb */}
-              <div className="lg:col-span-6">
-                {saying && (
-                  <FrontierSaying
-                    saying={saying.frontier}
-                    modernLine={saying.modern}
-                    temperature={weather.current.temperature}
-                    location={formatLocationName(location)}
-                  />
-                )}
-              </div>
-
-              {/* AQI + Moon + Current Conditions stack */}
-              <div className="lg:col-span-6 flex flex-col gap-3">
-                <AirQualityCard
+            {/* ========== ROW 2: Planning ========== */}
+            <section aria-label="Planning" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
+              {/* Tomorrow + Burn Day */}
+              <div className="lg:col-span-3 flex flex-col gap-3">
+                <TomorrowPreview tomorrow={tomorrowData} />
+                <BurnDayIndicator
                   lat={location.latitude}
                   lon={location.longitude}
-                  onAqiChange={setAqi}
+                  onStatusChange={setBurnDayStatus}
                 />
-                <div className="grid grid-cols-2 gap-3">
-                  <MoonPhase moon={moon} />
-                  <CurrentConditionsCard
-                    cloudCover={weather.current.cloudCover}
-                    visibility={weather.current.visibility}
-                    dewPoint={weather.current.dewPoint}
-                    uvIndex={weather.current.uvIndex}
-                    pressure={weather.current.pressure}
-                    snowDepth={weather.current.snowDepth}
-                    windGusts={weather.current.windGusts}
-                  />
+              </div>
+
+              {/* 7-Day Outlook */}
+              <div className="lg:col-span-9">
+                <CompactSevenDay days={compactDays} />
+              </div>
+            </section>
+
+            {/* ========== ROW 3: Today Deck ========== */}
+            <section aria-label="Today's Details" className="lg:col-span-12">
+              <div className="border-t border-white/10 pt-4 mt-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-almanac-gold mb-4">
+                  Today&apos;s Details
+                </h3>
+                <div className="grid lg:grid-cols-12 gap-4">
+                  {/* Workability Scores */}
+                  <div className="lg:col-span-8">
+                    <TaskScores
+                      sower={taskScores.sower}
+                      shepherd={taskScores.shepherd}
+                      keeper={taskScores.keeper}
+                      builder={taskScores.builder}
+                      aqi={aqi}
+                      compact
+                    />
+                  </div>
+
+                  {/* Farmer's Memory Summary */}
+                  <div className="lg:col-span-4 flex flex-col gap-3">
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                      <FarmerMemorySummary
+                        temperature={weather.current.temperature}
+                        humidity={weather.current.humidity}
+                        pressure={weather.current.pressure}
+                        windSpeed={weather.current.windSpeed}
+                        todayHigh={todayHigh}
+                        todayLow={todayLow}
+                      />
+                      <button
+                        onClick={() => {
+                          const el = document.getElementById('farmer-memory-deck')
+                          el?.scrollIntoView({ behavior: 'smooth' })
+                        }}
+                        className="text-xs text-almanac-gold hover:underline mt-2"
+                      >
+                        View full analysis
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Daily Proverb + Share */}
+                  <div className="lg:col-span-6">
+                    {saying && (
+                      <div className="space-y-2">
+                        <FrontierSaying
+                          saying={saying.frontier}
+                          modernLine={saying.modern}
+                          temperature={weather.current.temperature}
+                          location={formatLocationName(location)}
+                        />
+                        <ShareButton
+                          frontierLine={saying.frontier}
+                          modernLine={saying.modern}
+                          temperature={weather.current.temperature}
+                          location={formatLocationName(location)}
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Moon Phase */}
+                  <div className="lg:col-span-6">
+                    <MoonPhase moon={moon} />
+                  </div>
                 </div>
               </div>
+            </section>
 
-              {/* Sun/Barometer */}
-              <div className="lg:col-span-4">
-                <SunBarometer
-                  sunrise={todaySunrise}
-                  sunset={todaySunset}
-                  pressure={weather.current.pressure}
-                  windSpeed={weather.current.windSpeed}
-                  windDirection={weather.current.windDirection}
-                />
-              </div>
-
+            {/* ========== ROW 4: Radar + Conditions ========== */}
+            <section
+              aria-label="Radar and Conditions"
+              className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
+            >
               {/* Radar */}
               <div className="lg:col-span-8">
                 <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
               </div>
+
+              {/* Conditions */}
+              <div className="lg:col-span-4 flex flex-col gap-3">
+                <DaylightBar sunrise={todaySunrise} sunset={todaySunset} />
+                <ConditionsTiles
+                  uvIndex={weather.current.uvIndex}
+                  visibility={weather.current.visibility}
+                  cloudCover={weather.current.cloudCover}
+                  windGusts={weather.current.windGusts}
+                  moon={moon}
+                  aqi={aqi}
+                />
+              </div>
             </section>
 
-            <div className="lg:col-span-12">
-              <SectionDivider label="For Working Farmers" />
-            </div>
-
-            {/* ========== SECTION 3: FOR WORKING FARMERS ========== */}
-            <section
-              aria-label="For Working Farmers"
-              className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
-            >
-              {/* Planting Intelligence */}
-              <div className="lg:col-span-6">
-                <PlantingIntelligence
-                  temperature={weather.current.temperature}
-                  humidity={weather.current.humidity}
-                  soilTemperature={weather.current.soilTemperature}
-                  tempHigh={todayHigh}
-                  tempLow={todayLow}
-                />
-              </div>
-
-              {/* Farmer's Memory */}
-              <div className="lg:col-span-6">
-                <FarmerMemory
-                  temperature={weather.current.temperature}
-                  humidity={weather.current.humidity}
-                  pressure={weather.current.pressure}
-                  windSpeed={weather.current.windSpeed}
-                  todayHigh={todayHigh}
-                  todayLow={todayLow}
-                />
-              </div>
-
-              {/* Native Pulse */}
-              <div className="lg:col-span-6">
-                <NativePulse pulse={nativePulse} />
-              </div>
-
-              {/* Environmental Watch */}
-              <div className="lg:col-span-12">
-                <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
-              </div>
-
-              {/* Snow (Conditional) */}
-              {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
-                <div className="lg:col-span-12">
-                  <SnowConditions
-                    snowDepth={weather.current.snowDepth}
-                    currentTemp={weather.current.temperature}
-                    weatherCode={weather.current.weatherCode}
+            {/* ========== ROW 5: Farm Deck (CollapsibleDeck) ========== */}
+            <div className="lg:col-span-12" id="farmer-memory-deck">
+              <CollapsibleDeck
+                title="Farm Intelligence"
+                icon={<Sprout className="w-4 h-4" />}
+                defaultOpen={false}
+              >
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <PlantingIntelligence
+                    temperature={weather.current.temperature}
+                    humidity={weather.current.humidity}
+                    soilTemperature={weather.current.soilTemperature}
+                    tempHigh={todayHigh}
+                    tempLow={todayLow}
+                  />
+                  <FarmerMemory
+                    temperature={weather.current.temperature}
+                    humidity={weather.current.humidity}
+                    pressure={weather.current.pressure}
+                    windSpeed={weather.current.windSpeed}
+                    todayHigh={todayHigh}
+                    todayLow={todayLow}
                   />
                 </div>
-              )}
-            </section>
+                <div className="mt-4">
+                  <NativePulse pulse={nativePulse} />
+                </div>
+              </CollapsibleDeck>
+            </div>
+
+            {/* ========== ROW 6: Environment Deck (CollapsibleDeck) ========== */}
+            <div className="lg:col-span-12">
+              <CollapsibleDeck
+                title="Environmental Watch"
+                icon={<Leaf className="w-4 h-4" />}
+                defaultOpen={false}
+              >
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+                  <AirQualityCard
+                    lat={location.latitude}
+                    lon={location.longitude}
+                    onAqiChange={setAqi}
+                  />
+                </div>
+              </CollapsibleDeck>
+            </div>
+
+            {/* Snow (conditional) */}
+            {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
+              <div className="lg:col-span-12">
+                <SnowConditions
+                  snowDepth={weather.current.snowDepth}
+                  currentTemp={weather.current.temperature}
+                  weatherCode={weather.current.weatherCode}
+                />
+              </div>
+            )}
           </div>
 
           {/* Footer */}

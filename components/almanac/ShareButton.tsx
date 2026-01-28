@@ -5,10 +5,11 @@ import { Share2, Check } from 'lucide-react'
 import { logger } from '@/lib/logger'
 
 interface ShareButtonProps {
-  frontierLine: string
+  frontierLine?: string
   modernLine?: string
   temperature: number
   location: string
+  condition?: string
   iconOnly?: boolean
 }
 
@@ -17,6 +18,7 @@ export default function ShareButton({
   modernLine,
   temperature,
   location,
+  condition,
   iconOnly = false,
 }: ShareButtonProps) {
   const [copied, setCopied] = useState(false)
@@ -28,9 +30,14 @@ export default function ShareButton({
       day: 'numeric',
     })
 
-    const text = modernLine
-      ? `Today's Briefing from The 1775 Almanac\n${today} | ${location}\n\n1775: "${frontierLine}"\n2026: "${modernLine}"\n\nCurrently ${Math.round(temperature)}F\n\ntennessee-starts-here.vercel.app/almanac`
-      : `Today's Briefing from The 1775 Almanac\n${today} | ${location}\n\n"${frontierLine}"\n\nCurrently ${Math.round(temperature)}F\n\ntennessee-starts-here.vercel.app/almanac`
+    let text: string
+    if (frontierLine) {
+      text = modernLine
+        ? `Today's Briefing from The 1775 Almanac\n${today} | ${location}\n\n1775: "${frontierLine}"\n2026: "${modernLine}"\n\nCurrently ${Math.round(temperature)}F\n\ntennessee-starts-here.vercel.app/almanac`
+        : `Today's Briefing from The 1775 Almanac\n${today} | ${location}\n\n"${frontierLine}"\n\nCurrently ${Math.round(temperature)}F\n\ntennessee-starts-here.vercel.app/almanac`
+    } else {
+      text = `The 1775 Almanac\n${today} | ${location}\n\n${condition ? `${condition} - ` : ''}${Math.round(temperature)}F\n\ntennessee-starts-here.vercel.app/almanac`
+    }
 
     try {
       await navigator.clipboard.writeText(text)

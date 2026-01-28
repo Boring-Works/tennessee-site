@@ -10,9 +10,10 @@ import { INFO_CONTENT } from '@/lib/almanac/infoContent'
 interface BurnDayIndicatorProps {
   lat: number
   lon: number
+  onStatusChange?: (status: 'burn' | 'no-burn' | 'unknown') => void
 }
 
-export default function BurnDayIndicator({ lat, lon }: BurnDayIndicatorProps) {
+export default function BurnDayIndicator({ lat, lon, onStatusChange }: BurnDayIndicatorProps) {
   const [isSafeToBurn, setIsSafeToBurn] = useState<boolean | null>(null)
   const [fireAlertEvent, setFireAlertEvent] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -23,7 +24,9 @@ export default function BurnDayIndicator({ lat, lon }: BurnDayIndicatorProps) {
       const data: NWSAlertsResponse = await response.json()
 
       // Check if there's a fire weather alert
-      setIsSafeToBurn(!data.hasFireWeatherAlert)
+      const safeToBurn = !data.hasFireWeatherAlert
+      setIsSafeToBurn(safeToBurn)
+      onStatusChange?.(safeToBurn ? 'burn' : 'no-burn')
 
       // If there's a fire alert, find the specific event name
       if (data.hasFireWeatherAlert && data.alerts) {
@@ -43,10 +46,11 @@ export default function BurnDayIndicator({ lat, lon }: BurnDayIndicatorProps) {
       // Default to safe if we can't fetch - fail open for this feature
       setIsSafeToBurn(true)
       setFireAlertEvent(null)
+      onStatusChange?.('unknown')
     } finally {
       setLoading(false)
     }
-  }, [lat, lon])
+  }, [lat, lon, onStatusChange])
 
   useEffect(() => {
     checkBurnStatus()

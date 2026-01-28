@@ -4,7 +4,7 @@
 // The linter incorrectly flags this as "component creation during render"
 /* eslint-disable react-hooks/static-components */
 
-import { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Droplets, Wind, Sun, Sunrise, Sunset, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
 import { getWeatherInfo } from '@/lib/almanac/types'
@@ -209,44 +209,101 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
   const extraDays = days.slice(7)
   const hasExtraDays = extraDays.length > 0
 
+  // Split days into weekdays and weekend for visual grouping
+  const { weekdays, weekend, weekendStartIndex } = useMemo(() => {
+    const weekdayList: { day: DayForecast; originalIndex: number }[] = []
+    const weekendList: { day: DayForecast; originalIndex: number }[] = []
+
+    mainDays.forEach((day, index) => {
+      const isWeekend = day.day === 'Sa' || day.day === 'Su'
+      if (isWeekend) {
+        weekendList.push({ day, originalIndex: index })
+      } else {
+        weekdayList.push({ day, originalIndex: index })
+      }
+    })
+
+    // Find where weekend starts in the original array
+    const startIdx = mainDays.findIndex((d) => d.day === 'Sa' || d.day === 'Su')
+
+    return {
+      weekdays: weekdayList,
+      weekend: weekendList,
+      weekendStartIndex: startIdx >= 0 ? startIdx : mainDays.length,
+    }
+  }, [mainDays])
+
+  // Helper to render a day button
+  const renderDayButton = (day: DayForecast, originalIndex: number, isWeekend: boolean) => {
+    const WeatherIcon = getWeatherIcon(day.code)
+    const showPrecip = day.precipChance > 20
+
+    return (
+      <button
+        key={originalIndex}
+        onClick={() => setSelectedIndex(originalIndex)}
+        className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer ${
+          isWeekend ? 'bg-almanac-gold/5' : ''
+        }`}
+      >
+        {/* Day letter */}
+        <span
+          className={`text-xs font-medium ${isWeekend ? 'text-almanac-gold/80' : 'text-almanac-parchment/60'}`}
+        >
+          {day.day}
+        </span>
+
+        {/* Weather icon */}
+        <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
+
+        {/* High temp */}
+        <span className="text-sm font-semibold text-almanac-parchment">
+          {Math.round(day.high)}°
+        </span>
+
+        {/* Low temp */}
+        <span className="text-xs text-almanac-parchment/50">{Math.round(day.low)}°</span>
+
+        {/* Precip chance (only if >20%) */}
+        {showPrecip && (
+          <span className="flex items-center gap-0.5 text-xs text-blue-400">
+            <Droplets className="w-3 h-3" />
+            {day.precipChance}%
+          </span>
+        )}
+      </button>
+    )
+  }
+
   return (
     <div className="bg-white/5 border border-white/10 rounded-lg p-3">
-      {/* Main 7-day grid */}
-      <div className="grid grid-cols-7 gap-1">
-        {mainDays.map((day, index) => {
-          const WeatherIcon = getWeatherIcon(day.code)
-          const showPrecip = day.precipChance > 20
+      {/* Main 7-day grid with weekend grouping */}
+      <div className="flex gap-1">
+        {/* Weekdays before weekend */}
+        {weekdays
+          .filter((w) => w.originalIndex < weekendStartIndex)
+          .map((w) => renderDayButton(w.day, w.originalIndex, false))}
 
-          return (
-            <button
-              key={index}
-              onClick={() => setSelectedIndex(index)}
-              className="flex flex-col items-center gap-1 py-2 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              {/* Day letter */}
-              <span className="text-xs font-medium text-almanac-parchment/60">{day.day}</span>
-
-              {/* Weather icon */}
-              <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
-
-              {/* High temp */}
-              <span className="text-sm font-semibold text-almanac-parchment">
-                {Math.round(day.high)}°
+        {/* Weekend group */}
+        {weekend.length > 0 && (
+          <div className="flex flex-col">
+            {/* Weekend label */}
+            <div className="text-center mb-1">
+              <span className="text-[10px] text-almanac-gold/60 uppercase tracking-wider">
+                Weekend
               </span>
+            </div>
+            {/* Weekend days in a row with subtle border */}
+            <div className="flex gap-1 border border-almanac-gold/20 rounded-md p-0.5 bg-almanac-gold/5">
+              {weekend.map((w) => renderDayButton(w.day, w.originalIndex, true))}
+            </div>
+          </div>
+        )}
 
-              {/* Low temp */}
-              <span className="text-xs text-almanac-parchment/50">{Math.round(day.low)}°</span>
-
-              {/* Precip chance (only if >20%) */}
-              {showPrecip && (
-                <span className="flex items-center gap-0.5 text-xs text-blue-400">
-                  <Droplets className="w-3 h-3" />
-                  {day.precipChance}%
-                </span>
-              )}
-            </button>
-          )
-        })}
+        {/* Weekdays after weekend */}
+        {weekdays
+          .filter((w) => w.originalIndex > weekendStartIndex)
+          .map((w) => renderDayButton(w.day, w.originalIndex, false))}
       </div>
 
       {/* Extended forecast (days 8-16) */}

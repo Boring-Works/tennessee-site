@@ -3,15 +3,25 @@
 import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Pencil, Loader2, AlertCircle, X, RotateCcw } from 'lucide-react'
-import { searchLocation, formatLocationName, DEFAULT_LOCATION, type GeoLocation } from '@/lib/almanac/geocoding'
+import {
+  searchLocation,
+  formatLocationName,
+  DEFAULT_LOCATION,
+  type GeoLocation,
+} from '@/lib/almanac/geocoding'
 import { saveLocation, clearLocation } from '@/lib/almanac/storage'
 
 interface LocationPickerProps {
   location: GeoLocation
   onLocationChange: (location: GeoLocation) => void
+  compact?: boolean
 }
 
-export default function LocationPicker({ location, onLocationChange }: LocationPickerProps) {
+export default function LocationPicker({
+  location,
+  onLocationChange,
+  compact = false,
+}: LocationPickerProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -88,15 +98,29 @@ export default function LocationPicker({ location, onLocationChange }: LocationP
       </AnimatePresence>
 
       {/* Location Display Button - Made prominent so users can find it */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-almanac-gold/30 rounded-lg text-almanac-parchment hover:bg-white/10 hover:border-almanac-gold/50 hover:text-almanac-gold transition-all group"
-        aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
-      >
-        <MapPin className="w-4 h-4 text-almanac-gold" aria-hidden="true" />
-        <span className="text-sm font-medium">{formatLocationName(location)}</span>
-        <Pencil className="w-3 h-3 text-almanac-gold/70 group-hover:text-almanac-gold transition-colors" aria-hidden="true" />
-      </button>
+      {compact ? (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
+          aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
+          title="Change location"
+        >
+          <MapPin className="w-4 h-4" aria-hidden="true" />
+        </button>
+      ) : (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-almanac-gold/30 rounded-lg text-almanac-parchment hover:bg-white/10 hover:border-almanac-gold/50 hover:text-almanac-gold transition-all group"
+          aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
+        >
+          <MapPin className="w-4 h-4 text-almanac-gold" aria-hidden="true" />
+          <span className="text-sm font-medium">{formatLocationName(location)}</span>
+          <Pencil
+            className="w-3 h-3 text-almanac-gold/70 group-hover:text-almanac-gold transition-colors"
+            aria-hidden="true"
+          />
+        </button>
+      )}
 
       {/* Modal Overlay */}
       <AnimatePresence>

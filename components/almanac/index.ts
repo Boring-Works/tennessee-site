@@ -15,12 +15,18 @@ export { default as HourlySparkline } from './HourlySparkline'
 export { default as TomorrowPreview } from './TomorrowPreview'
 export { WeatherAtmosphere } from './WeatherAtmosphere'
 export { CompactSevenDay, type DayForecast } from './CompactSevenDay'
+export { ConditionsTiles } from './ConditionsTiles'
+export { RadarPreview } from './RadarPreview'
+export { DaylightBar } from './DaylightBar'
+export { NowDisplay } from './NowDisplay'
+export { DecisionRail } from './DecisionRail'
 
 // ============================================================================
 // Layout & UI Elements
 // ============================================================================
 export { SectionDivider } from './SectionDivider'
 export { InfoPopup, type InfoContent } from './InfoPopup'
+export { CollapsibleDeck } from './CollapsibleDeck'
 
 // ============================================================================
 // Task Scores
@@ -63,12 +69,19 @@ export { default as SpringIndex } from './SpringIndex'
 export { default as EnvironmentalWatch } from './EnvironmentalWatch'
 export { default as PrecipitationRadar } from './PrecipitationRadar'
 export { default as FarmerMemory } from './FarmerMemory'
+export { FarmerMemorySummary } from './FarmerMemorySummary'
 
 // ============================================================================
 // Sayings & Content
 // ============================================================================
 export { FrontierSaying } from './FrontierSaying'
 export { default as RotatingHook } from './RotatingHook'
+
+// ============================================================================
+// Top-Level Layout
+// ============================================================================
+export { TopBar } from './TopBar'
+export { NextChangeHero } from './NextChangeHero'
 
 // ============================================================================
 // User Interface

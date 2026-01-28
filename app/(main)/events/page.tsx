@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import eventsData from '@/data/events.json'
-import lecturesData from '@/data/lectures.json'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -115,11 +114,6 @@ function getNextUpcomingEvent() {
 
 export default function EventsPage() {
   const groupedEvents = groupEventsByMonth(eventsData.events)
-  const eventCount = eventsData.events.length
-  const newEventCount = eventsData.events.filter((e) => e.type === 'new').length
-  const festivalCount = eventsData.events.filter(
-    (e) => e.category === 'festival' || e.category === 'signature'
-  ).length
   const nextEvent = getNextUpcomingEvent()
 
   return (
@@ -138,45 +132,24 @@ export default function EventsPage() {
             <span className={styles['calendar-headline-text']}>The Commemorative Year</span>
           </h1>
 
-          {/* Subheadline */}
+          {/* Subheadline - Brand-approved tagline */}
           <p className={styles['calendar-subheadline']}>
-            America&apos;s 250th anniversary. Tennessee&apos;s 230th birthday. Our most ambitious
-            season yet.
+            America turns 250. Tennessee turns 230.
+            <br />
+            <span className={styles['calendar-subheadline-tagline']}>Tennessee starts here.</span>
           </p>
 
-          {/* Stats row */}
-          <div className={styles['calendar-stats']}>
-            <div className={styles['calendar-stat']}>
-              <span className={styles['calendar-stat-number']}>{eventCount}</span>
-              <span className={styles['calendar-stat-label']}>Events</span>
-            </div>
-            <div className={styles['calendar-stat-divider']} aria-hidden="true" />
-            <div className={styles['calendar-stat']}>
-              <span className={styles['calendar-stat-number']}>{newEventCount}</span>
-              <span className={styles['calendar-stat-label']}>New for 2026</span>
-            </div>
-            <div className={styles['calendar-stat-divider']} aria-hidden="true" />
-            <div className={styles['calendar-stat']}>
-              <span className={styles['calendar-stat-number']}>{lecturesData.lectures.length}</span>
-              <span className={styles['calendar-stat-label']}>Lectures</span>
-            </div>
-            <div className={styles['calendar-stat-divider']} aria-hidden="true" />
-            <div className={styles['calendar-stat']}>
-              <span className={styles['calendar-stat-number']}>{festivalCount}</span>
-              <span className={styles['calendar-stat-label']}>Festivals</span>
-            </div>
-          </div>
+          {/* Decorative divider */}
+          <div className={styles['calendar-divider']} aria-hidden="true" />
 
-          {/* Pricing clarification */}
-          <p className={styles['calendar-pricing-note']}>
-            Special events require advance tickets (separate from regular site admission)
-          </p>
-
-          {/* Coming Up Next - Urgent Callout */}
+          {/* Coming Up Next - Enhanced with description */}
           {nextEvent && (
             <a href={`#${nextEvent.event.id}`} className={styles['calendar-next-event']}>
-              <span className={styles['calendar-next-event-label']}>Next Event</span>
+              <span className={styles['calendar-next-event-label']}>Coming Up</span>
               <span className={styles['calendar-next-event-title']}>{nextEvent.event.title}</span>
+              <span className={styles['calendar-next-event-desc']}>
+                {nextEvent.event.description}
+              </span>
               <span className={styles['calendar-next-event-meta']}>
                 <span className={styles['calendar-next-event-date']}>
                   {formatDate(nextEvent.event.date)}
@@ -187,7 +160,7 @@ export default function EventsPage() {
                     ? 'Today!'
                     : nextEvent.daysAway === 1
                       ? 'Tomorrow!'
-                      : `${nextEvent.daysAway} Days Away`}
+                      : `${nextEvent.daysAway} days`}
                 </span>
               </span>
               <span className={styles['calendar-next-event-arrow']} aria-hidden="true">
@@ -195,6 +168,11 @@ export default function EventsPage() {
               </span>
             </a>
           )}
+
+          {/* Ticket note - clearer language */}
+          <p className={styles['calendar-pricing-note']}>
+            Most events require advance tickets · Separate from regular site admission
+          </p>
         </div>
       </section>
 
@@ -334,28 +312,12 @@ export default function EventsPage() {
                           <p className={styles['calendar-event-time']}>{event.time}</p>
                         )}
 
-                        {/* Ticket Pricing */}
-                        {'ticketPrice' in event && (
+                        {/* Ticket Status */}
+                        {'requiresTicket' in event && !event.requiresTicket && (
                           <p className={styles['calendar-event-price']}>
-                            {event.ticketPrice === 0 ? (
-                              <span className={styles['calendar-event-price-free']}>
-                                Free Event — No Ticket Required
-                              </span>
-                            ) : (
-                              <>
-                                <span className={styles['calendar-event-price-label']}>
-                                  {event.ticketLabel}:
-                                </span>
-                                <span className={styles['calendar-event-price-amount']}>
-                                  ${event.ticketPrice}
-                                </span>
-                                {'ticketNote' in event && event.ticketNote && (
-                                  <span className={styles['calendar-event-price-note']}>
-                                    {event.ticketNote}
-                                  </span>
-                                )}
-                              </>
-                            )}
+                            <span className={styles['calendar-event-price-free']}>
+                              Free Event — No Ticket Required
+                            </span>
                           </p>
                         )}
 
@@ -385,32 +347,28 @@ export default function EventsPage() {
                           </p>
                         )}
 
-                        {/* Get Tickets CTA */}
-                        {'ticketPrice' in event && (
-                          <div className={styles['calendar-event-cta']}>
-                            {event.ticketPrice === 0 ? (
-                              event.category === 'digital' ? (
-                                <span className={styles['calendar-event-cta-btn-disabled']}>
-                                  Online Event
-                                </span>
-                              ) : (
-                                <Link
-                                  href="/visit"
-                                  className={styles['calendar-event-cta-btn-secondary']}
-                                >
-                                  Plan Your Visit <span aria-hidden="true">→</span>
-                                </Link>
-                              )
-                            ) : (
-                              <a
-                                href={event.ticketUrl || `/events/${event.id}`}
-                                className={styles['calendar-event-cta-btn']}
-                              >
-                                Get Tickets <span aria-hidden="true">→</span>
-                              </a>
-                            )}
-                          </div>
-                        )}
+                        {/* Event CTA */}
+                        <div className={styles['calendar-event-cta']}>
+                          {event.category === 'digital' ? (
+                            <span className={styles['calendar-event-cta-btn-disabled']}>
+                              Online Event
+                            </span>
+                          ) : event.requiresTicket ? (
+                            <a
+                              href={event.ticketUrl || `/events/${event.id}`}
+                              className={styles['calendar-event-cta-btn']}
+                            >
+                              Reserve Your Spot <span aria-hidden="true">→</span>
+                            </a>
+                          ) : (
+                            <Link
+                              href="/visit"
+                              className={styles['calendar-event-cta-btn-secondary']}
+                            >
+                              Plan Your Visit <span aria-hidden="true">→</span>
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     </article>
                   )

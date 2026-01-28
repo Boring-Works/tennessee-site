@@ -57,6 +57,7 @@ export default function HomecomingSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [showTagline, setShowTagline] = useState(false)
+  const taglineTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -64,7 +65,7 @@ export default function HomecomingSection() {
         if (entry.isIntersecting) {
           setIsVisible(true)
           // Delay tagline animation
-          setTimeout(() => setShowTagline(true), 1200)
+          taglineTimeoutRef.current = setTimeout(() => setShowTagline(true), 1200)
           observer.disconnect()
         }
       },
@@ -75,7 +76,12 @@ export default function HomecomingSection() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (taglineTimeoutRef.current) {
+        clearTimeout(taglineTimeoutRef.current)
+      }
+    }
   }, [])
 
   return (

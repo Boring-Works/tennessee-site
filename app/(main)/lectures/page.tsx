@@ -104,7 +104,7 @@ export default function LecturesPage() {
 
           {/* Admission note */}
           <p className={styles['series-admission']}>
-            Included with regular admission · Seating limited · Arrive early
+            Advance registration recommended · Seating limited
           </p>
         </div>
       </section>

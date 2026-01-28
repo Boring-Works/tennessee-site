@@ -72,66 +72,25 @@
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
   max-width: 36rem;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
 }
 
-/* Calendar Stats */
-.calendar-stats {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-@media (min-width: 640px) {
-  .calendar-stats {
-    gap: 0;
-  }
-}
-
-.calendar-stat {
-  text-align: center;
-  padding: 0 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .calendar-stat {
-    padding: 0 2rem;
-  }
-}
-
-.calendar-stat-number {
+.calendar-subheadline-tagline {
   display: block;
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 2.75rem);
-  font-weight: 700;
-  color: white;
-  line-height: 1;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.02em;
 }
 
-.calendar-stat-label {
-  display: block;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 0.5rem;
-}
-
-.calendar-stat-divider {
-  display: none;
-  width: 1px;
-  height: 3rem;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-@media (min-width: 640px) {
-  .calendar-stat-divider {
-    display: block;
-  }
+/* Decorative Divider */
+.calendar-divider {
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  margin: 0 auto 2rem;
+  opacity: 0.6;
 }
 
 /* Pricing Clarification Note */
@@ -144,19 +103,22 @@
   margin-top: 1.5rem;
 }
 
-/* Coming Up Next - Urgent Callout */
+/* Coming Up Next Card */
 .calendar-next-event {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
+  gap: 0.625rem;
+  margin-top: 0;
+  padding: 1.5rem 1.5rem 1.25rem;
   background: rgba(10, 22, 40, 0.95);
   border: 2px solid var(--accent);
   border-radius: 4px;
   text-decoration: none;
   transition: all 0.2s ease;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .calendar-next-event:hover {
@@ -187,6 +149,18 @@
   .calendar-next-event-title {
     font-size: 1.5rem;
   }
+}
+
+.calendar-next-event-desc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 28rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .calendar-next-event-meta {
@@ -227,7 +201,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .calendar-next-event-arrow {
+  .calendar-next-event,
+  .calendar-next-event-arrow,
+  .year-progress-month,
+  .year-progress-month-dot,
+  .calendar-event,
+  .calendar-event-cta-btn,
+  .calendar-event-cta-btn-secondary,
+  .calendar-event-note-link,
+  .calendar-cta-btn,
+  .calendar-contact-btn {
+    transition: none;
     animation: none;
   }
 }

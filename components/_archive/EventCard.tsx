@@ -1,66 +1,66 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 interface EventCardProps {
-  id?: string; // Reserved for future linking/anchoring
-  title: string;
-  date: string;
-  endDate?: string | null;
-  time?: string | null;
-  type: "new" | "enhanced" | "recurring" | "milestone";
-  description: string;
-  featured?: boolean;
-  compact?: boolean;
+  id?: string // Reserved for future linking/anchoring
+  title: string
+  date: string
+  endDate?: string | null
+  time?: string | null
+  type: 'new' | 'enhanced' | 'recurring' | 'milestone'
+  description: string
+  featured?: boolean
+  compact?: boolean
 }
 
 function formatDate(dateStr: string): string {
-  const date = new Date(dateStr + "T12:00:00");
-  return date.toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-  });
+  const date = new Date(dateStr + 'T12:00:00')
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  })
 }
 
 function formatDateRange(start: string, end?: string | null): string {
-  if (!end) return formatDate(start);
+  if (!end) return formatDate(start)
 
-  const startDate = new Date(start + "T12:00:00");
-  const endDate = new Date(end + "T12:00:00");
+  const startDate = new Date(start + 'T12:00:00')
+  const endDate = new Date(end + 'T12:00:00')
 
   if (startDate.getMonth() === endDate.getMonth()) {
-    return `${startDate.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-    })}-${endDate.getDate()}`;
+    return `${startDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    })}-${endDate.getDate()}`
   }
 
-  return `${formatDate(start)} - ${formatDate(end)}`;
+  return `${formatDate(start)} - ${formatDate(end)}`
 }
 
 function formatShortDate(dateStr: string): { month: string; day: string } {
-  const date = new Date(dateStr + "T12:00:00");
+  const date = new Date(dateStr + 'T12:00:00')
   return {
-    month: date.toLocaleDateString("en-US", { month: "short" }).toUpperCase(),
+    month: date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
     day: date.getDate().toString(),
-  };
+  }
 }
 
-function TypeBadge({ type }: { type: EventCardProps["type"] }) {
+function TypeBadge({ type }: { type: EventCardProps['type'] }) {
   const badges = {
-    new: { label: "New for 2026", className: "bg-accent text-primary" },
-    enhanced: { label: "Enhanced", className: "bg-secondary text-white" },
-    recurring: { label: "Annual", className: "bg-text-light text-white" },
-    milestone: { label: "Milestone", className: "bg-primary text-white" },
-  };
+    new: { label: 'New for 2026', className: 'bg-accent text-primary' },
+    enhanced: { label: 'Enhanced', className: 'bg-secondary text-white' },
+    recurring: { label: 'Annual', className: 'bg-text-light text-white' },
+    milestone: { label: 'Milestone', className: 'bg-primary text-white' },
+  }
 
-  const badge = badges[type];
+  const badge = badges[type]
   return (
     <span
       className={`inline-block px-2.5 py-1 text-[10px] font-semibold rounded-sm uppercase tracking-wider ${badge.className}`}
     >
       {badge.label}
     </span>
-  );
+  )
 }
 
 export default function EventCard({
@@ -72,7 +72,7 @@ export default function EventCard({
   description,
   compact = false,
 }: EventCardProps) {
-  const shortDate = formatShortDate(date);
+  const shortDate = formatShortDate(date)
 
   if (compact) {
     return (
@@ -83,12 +83,10 @@ export default function EventCard({
           </time>
           <TypeBadge type={type} />
         </div>
-        <h3 className="font-serif text-lg font-bold text-primary mb-2">
-          {title}
-        </h3>
+        <h3 className="font-serif text-lg font-bold text-primary mb-2">{title}</h3>
         {time && <p className="text-sm text-text-light">{time}</p>}
       </article>
-    );
+    )
   }
 
   return (
@@ -106,11 +104,7 @@ export default function EventCard({
                 {title}
               </h3>
               {time && <p className="text-sm text-text-light">{time}</p>}
-              {endDate && (
-                <p className="text-xs text-text-light">
-                  Through {formatDate(endDate)}
-                </p>
-              )}
+              {endDate && <p className="text-xs text-text-light">Through {formatDate(endDate)}</p>}
             </div>
             <TypeBadge type={type} />
           </div>
@@ -120,7 +114,7 @@ export default function EventCard({
         <p className="text-foreground text-sm mt-3 leading-relaxed">{description}</p>
       </div>
     </article>
-  );
+  )
 }
 
 export function FeaturedEventCard({
@@ -131,7 +125,7 @@ export function FeaturedEventCard({
   type,
   description,
 }: EventCardProps) {
-  const shortDate = formatShortDate(date);
+  const shortDate = formatShortDate(date)
 
   return (
     <article className="card-hover bg-white border-2 border-accent/30 rounded-sm overflow-hidden shadow-md hover:border-accent hover:shadow-lg group">
@@ -141,7 +135,10 @@ export function FeaturedEventCard({
       <div className="p-6">
         <div className="flex items-start gap-4">
           {/* Date block */}
-          <time dateTime={date} className="bg-secondary text-white rounded-sm px-3 py-2 flex flex-col items-center min-w-[60px]">
+          <time
+            dateTime={date}
+            className="bg-secondary text-white rounded-sm px-3 py-2 flex flex-col items-center min-w-[60px]"
+          >
             <span className="text-xs font-semibold tracking-wider">{shortDate.month}</span>
             <span className="text-xl font-serif font-bold">{shortDate.day}</span>
           </time>
@@ -170,12 +167,18 @@ export function FeaturedEventCard({
             className="inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors link-underline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 rounded-sm"
           >
             View all events
-            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
         </div>
       </div>
     </article>
-  );
+  )
 }

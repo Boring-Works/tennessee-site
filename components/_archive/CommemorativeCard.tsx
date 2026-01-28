@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
@@ -13,6 +13,7 @@ export default function CommemorativeCard() {
   useEffect(() => {
     // Use ref to track mount status without triggering re-render cascade
     mountedRef.current = true
+    let intervalId: NodeJS.Timeout | null = null
 
     const calculateDays = () => {
       const now = new Date()
@@ -40,13 +41,15 @@ export default function CommemorativeCard() {
     const timeout = setTimeout(() => {
       calculateDays()
       // After first midnight, set up daily interval
-      const interval = setInterval(calculateDays, 24 * 60 * 60 * 1000)
-      return () => clearInterval(interval)
+      intervalId = setInterval(calculateDays, 24 * 60 * 60 * 1000)
     }, msUntilMidnight)
 
     return () => {
       mountedRef.current = false
       clearTimeout(timeout)
+      if (intervalId) {
+        clearInterval(intervalId)
+      }
     }
   }, [])
 
@@ -68,19 +71,29 @@ export default function CommemorativeCard() {
       {/* Textile Journey - From Fleece to Flag */}
       <nav className={styles.journey} aria-label="2026 Textile Event Journey">
         <div className={styles.event}>
-          <span className={styles.eventIcon} aria-hidden="true">🐑</span>
+          <span className={styles.eventIcon} aria-hidden="true">
+            🐑
+          </span>
           <span className={styles.eventName}>Woolly Days</span>
           <span className={styles.eventDate}>Apr 25-26</span>
         </div>
-        <span className={styles.arrow} aria-hidden="true">→</span>
+        <span className={styles.arrow} aria-hidden="true">
+          →
+        </span>
         <div className={`${styles.event} ${styles.eventHighlight}`}>
-          <span className={styles.eventIcon} aria-hidden="true">🧵</span>
+          <span className={styles.eventIcon} aria-hidden="true">
+            🧵
+          </span>
           <span className={styles.eventName}>Stitching Independence</span>
           <span className={styles.eventDate}>Jun 13-14</span>
         </div>
-        <span className={styles.arrow} aria-hidden="true">→</span>
+        <span className={styles.arrow} aria-hidden="true">
+          →
+        </span>
         <div className={styles.event}>
-          <span className={styles.eventIcon} aria-hidden="true">🇺🇸</span>
+          <span className={styles.eventIcon} aria-hidden="true">
+            🇺🇸
+          </span>
           <span className={styles.eventName}>America 250</span>
           <span className={styles.eventDate}>Jul 4</span>
         </div>

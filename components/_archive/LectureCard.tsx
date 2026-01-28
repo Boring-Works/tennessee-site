@@ -1,31 +1,31 @@
 interface Speaker {
-  name: string;
-  title: string;
-  institution?: string;
-  bio: string;
-  portraying?: string;
+  name: string
+  title: string
+  institution?: string
+  bio: string
+  portraying?: string
 }
 
 interface LectureCardProps {
-  number: number;
-  title: string;
-  date: string;
-  time: string;
-  speaker: Speaker;
-  description: string;
-  topics: string[];
-  format?: string;
-  note?: string;
+  number: number
+  title: string
+  date: string
+  time: string
+  speaker: Speaker
+  description: string
+  topics: string[]
+  format?: string
+  note?: string
 }
 
 function formatDate(dateStr: string): string {
-  const date = new Date(dateStr + "T12:00:00");
-  return date.toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const date = new Date(dateStr + 'T12:00:00')
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
 }
 
 export default function LectureCard({
@@ -47,7 +47,10 @@ export default function LectureCard({
       {/* Header */}
       <header className="bg-primary text-white px-6 py-5 relative">
         {/* Medallion */}
-        <div className="absolute -bottom-6 right-6 w-12 h-12 rounded-full border-2 border-accent bg-primary flex items-center justify-center shadow-lg z-10" aria-hidden="true">
+        <div
+          className="absolute -bottom-6 right-6 w-12 h-12 rounded-full border-2 border-accent bg-primary flex items-center justify-center shadow-lg z-10"
+          aria-hidden="true"
+        >
           <span className="font-serif font-bold text-accent text-lg">{number}</span>
         </div>
 
@@ -55,11 +58,15 @@ export default function LectureCard({
           <span className="text-xs uppercase tracking-widest text-accent font-semibold">
             Lecture {number}
           </span>
-          <span className="text-white/60" aria-hidden="true">•</span>
+          <span className="text-white/60" aria-hidden="true">
+            •
+          </span>
           <time className="text-white text-sm">{time}</time>
         </div>
         <h3 className="font-serif text-xl md:text-2xl font-bold pr-16">{title}</h3>
-        <time dateTime={date} className="text-white/90 text-sm mt-1 block">{formatDate(date)}</time>
+        <time dateTime={date} className="text-white/90 text-sm mt-1 block">
+          {formatDate(date)}
+        </time>
       </header>
 
       {/* Content */}
@@ -67,13 +74,13 @@ export default function LectureCard({
         {/* Speaker Info */}
         <div className="mb-5 pb-5 border-b border-gray-100">
           <p className="font-serif font-bold text-primary text-lg">
-            {speaker.portraying
-              ? `${speaker.name} as ${speaker.portraying}`
-              : speaker.name}
+            {speaker.portraying ? `${speaker.name} as ${speaker.portraying}` : speaker.name}
           </p>
           <p className="text-secondary font-medium">
             {speaker.title}
-            {speaker.institution && speaker.institution !== "Independent Scholar" && `, ${speaker.institution}`}
+            {speaker.institution &&
+              speaker.institution !== 'Independent Scholar' &&
+              `, ${speaker.institution}`}
           </p>
         </div>
 
@@ -90,7 +97,12 @@ export default function LectureCard({
               <li key={index} className="flex items-start gap-2 text-text-light">
                 <span className="text-accent mt-1">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </span>
                 {topic}
@@ -102,9 +114,7 @@ export default function LectureCard({
         {/* Format / Note */}
         {(format || note) && (
           <div className="bg-cream rounded-sm p-4 text-sm border-l-4 border-secondary/50 mb-5">
-            {format && (
-              <p className="text-secondary font-semibold mb-1">Format: {format}</p>
-            )}
+            {format && <p className="text-secondary font-semibold mb-1">Format: {format}</p>}
             {note && <p className="text-text-light italic">{note}</p>}
           </div>
         )}
@@ -112,7 +122,13 @@ export default function LectureCard({
         {/* Speaker Bio */}
         <details className="group">
           <summary className="cursor-pointer text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 rounded-sm">
-            <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              className="w-4 h-4 transition-transform group-open:rotate-90"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
             About the Speaker
@@ -123,5 +139,5 @@ export default function LectureCard({
         </details>
       </div>
     </article>
-  );
+  )
 }

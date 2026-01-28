@@ -1,20 +1,12 @@
-// Progressive revelation sections (legacy - kept for backward compatibility)
-export { MysteryHook } from './MysteryHook'
-export { ExperimentSection } from './ExperimentSection'
-export { ScrollTimeline } from './ScrollTimeline'
-export { ContrastStatement } from './ContrastStatement'
-export { ProofSection } from './ProofSection'
-export { DistinctionSection } from './DistinctionSection'
-export { GroundStatement } from './GroundStatement'
-
-// Practical sections (legacy - kept for backward compatibility)
-export { PlanYourVisit } from './PlanYourVisit'
-export { CampaignSection } from './CampaignSection'
-export { IndigenousAcknowledgment } from './IndigenousAcknowledgment'
-
-// Consolidated sections (new 7-section structure)
+// Consolidated 7-section structure (active)
 export { ConsolidatedStory } from './ConsolidatedStory'
 export { ConsolidatedProof } from './ConsolidatedProof'
 export { ConsolidatedExperience } from './ConsolidatedExperience'
 export { Commemorative2026 } from './Commemorative2026'
+export { PlanYourVisit } from './PlanYourVisit'
 export { ConsolidatedClose } from './ConsolidatedClose'
+
+// Legacy components have been archived to _archive/home/
+// See: MysteryHook, ExperimentSection, ScrollTimeline, ContrastStatement,
+//      ProofSection, DistinctionSection, GroundStatement, CampaignSection,
+//      IndigenousAcknowledgment

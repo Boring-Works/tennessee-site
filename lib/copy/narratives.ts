@@ -139,7 +139,7 @@ export const FIRST_250_CAMPAIGN = {
   promise: 'Your name will be read aloud on the capital grounds, July 4, 2026.',
   deadline: 'Enrollment closes June 1, 2026',
   keyDates: [
-    'June 13-14: Flag Weekend / Tennessee 230',
+    'June 13-14: Stitching Independence / Tennessee 230',
     'July 4: Colonial Independence Day / America 250',
   ],
 } as const

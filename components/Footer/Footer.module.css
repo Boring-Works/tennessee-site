@@ -126,10 +126,27 @@
   gap: 2.5rem;
 }
 
+/* Tablet: 2 columns, brand and commemoration span full width */
+@media (min-width: 640px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Larger tablet: 3 columns */
 @media (min-width: 768px) {
   .footer-grid {
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Desktop: brand + 4 nav columns + commemoration (6 total) */
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1.4fr repeat(4, 0.8fr) 1.2fr;
+    gap: 2rem;
   }
 }
 
@@ -328,6 +345,17 @@
 }
 
 .footer-link:hover .footer-link-bullet {
+  opacity: 1;
+}
+
+.footer-link-external {
+  font-size: 0.75rem;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-left: 0.125rem;
+}
+
+.footer-link:hover .footer-link-external {
   opacity: 1;
 }
 
@@ -888,14 +916,6 @@
 
 .footer-contact-icon {
   transition: transform 0.3s ease;
-}
-
-/* Update grid for 4 columns on larger screens */
-@media (min-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: 1.3fr 0.9fr 1fr 1fr;
-    gap: 2.5rem;
-  }
 }
 
 /* Legacy class for backwards compatibility */

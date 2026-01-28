@@ -40,22 +40,6 @@ const CompassIcon = () => (
   </svg>
 )
 
-// Clock icon for hours
-const ClockIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={styles['footer-icon']}
-  >
-    <circle cx="12" cy="12" r="10" />
-    <path d="M12 6v6l4 2" />
-  </svg>
-)
-
 // Social media icons
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={styles['footer-social-icon']}>
@@ -222,11 +206,45 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <nav className={styles['footer-nav']} aria-label="Footer navigation">
+          {/* VISIT Column */}
+          <nav className={styles['footer-nav']} aria-label="Visit navigation">
             <h3 className={styles['footer-nav-title']}>
               <QuillIcon />
-              Explore
+              Visit
+            </h3>
+            <ul className={styles['footer-nav-list']}>
+              <li>
+                <Link href="/visit" className={styles['footer-link']}>
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  Plan Your Visit
+                </Link>
+              </li>
+              <li>
+                <Link href="/groups" className={styles['footer-link']}>
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  Group Visits
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:info@rockymountmuseum.com" className={styles['footer-link']}>
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* EVENTS Column */}
+          <nav className={styles['footer-nav']} aria-label="Events navigation">
+            <h3 className={styles['footer-nav-title']}>
+              <QuillIcon />
+              Events
             </h3>
             <ul className={styles['footer-nav-list']}>
               <li>
@@ -234,7 +252,7 @@ export default function Footer() {
                   <span className={styles['footer-link-bullet']} aria-hidden="true">
                     ◆
                   </span>
-                  2026 Events Calendar
+                  Full Calendar
                 </Link>
               </li>
               <li>
@@ -242,23 +260,41 @@ export default function Footer() {
                   <span className={styles['footer-link-bullet']} aria-hidden="true">
                     ◆
                   </span>
-                  Lecture Series
+                  Lectures
                 </Link>
               </li>
+            </ul>
+          </nav>
+
+          {/* DISCOVER Column */}
+          <nav className={styles['footer-nav']} aria-label="Discover navigation">
+            <h3 className={styles['footer-nav-title']}>
+              <QuillIcon />
+              Discover
+            </h3>
+            <ul className={styles['footer-nav-list']}>
               <li>
-                <Link href="/first-250" className={styles['footer-link']}>
+                <Link href="/our-story" className={styles['footer-link']}>
                   <span className={styles['footer-link-bullet']} aria-hidden="true">
                     ◆
                   </span>
-                  First 250 Program
+                  Our Story
                 </Link>
               </li>
               <li>
-                <Link href="/visit" className={styles['footer-link']}>
+                <Link href="/evidence" className={styles['footer-link']}>
                   <span className={styles['footer-link-bullet']} aria-hidden="true">
                     ◆
                   </span>
-                  Plan Your Visit
+                  Evidence Room
+                </Link>
+              </li>
+              <li>
+                <Link href="/educators" className={styles['footer-link']}>
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  For Educators
                 </Link>
               </li>
               <li>
@@ -272,153 +308,70 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Contact & Hours */}
-          <div className={styles['footer-contact']}>
+          {/* SUPPORT Column */}
+          <nav className={styles['footer-nav']} aria-label="Support navigation">
             <h3 className={styles['footer-nav-title']}>
               <QuillIcon />
-              Contact
+              Support
             </h3>
-            <ul className={styles['footer-contact-list']}>
-              <li>
-                <a href="tel:+14235387396" className={styles['footer-contact-link']}>
-                  <svg
-                    className={styles['footer-contact-icon']}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    aria-hidden="true"
-                  >
-                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                  </svg>
-                  (423) 538-7396
-                </a>
-              </li>
+            <ul className={styles['footer-nav-list']}>
               <li>
                 <a
-                  href="mailto:info@rockymountmuseum.com"
-                  className={styles['footer-contact-link']}
-                >
-                  <svg
-                    className={styles['footer-contact-icon']}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    aria-hidden="true"
-                  >
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <path d="M22 6l-10 7L2 6" />
-                  </svg>
-                  info@rockymountmuseum.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://rockymountmuseum.com"
+                  href="https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles['footer-contact-link']}
+                  className={styles['footer-link']}
                 >
-                  <svg
-                    className={styles['footer-contact-icon']}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    aria-hidden="true"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                  </svg>
-                  rockymountmuseum.com
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  Membership
+                  <span className={styles['footer-link-external']} aria-hidden="true">
+                    {' '}
+                    →
+                  </span>
                   <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/donation.jsp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles['footer-link']}
+                >
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  Donate
+                  <span className={styles['footer-link-external']} aria-hidden="true">
+                    {' '}
+                    →
+                  </span>
+                  <span className="sr-only"> (opens in new tab)</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:info@rockymountmuseum.com?subject=Volunteer%20Inquiry"
+                  className={styles['footer-link']}
+                >
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  Volunteer
+                </a>
+              </li>
+              <li>
+                <Link href="/first-250" className={styles['footer-link']}>
+                  <span className={styles['footer-link-bullet']} aria-hidden="true">
+                    ◆
+                  </span>
+                  First 250
+                </Link>
+              </li>
             </ul>
-
-            {/* Hours of Operation */}
-            <div className={styles['footer-hours']}>
-              <h4 className={styles['footer-hours-title']}>
-                <ClockIcon />
-                Hours
-              </h4>
-              <dl className={styles['footer-hours-list']}>
-                <div className={styles['footer-hours-row']}>
-                  <dt>Tue – Sat</dt>
-                  <dd>10:00 AM – 5:00 PM</dd>
-                </div>
-                <div className={styles['footer-hours-row']}>
-                  <dt>Sunday</dt>
-                  <dd>1:00 PM – 5:00 PM</dd>
-                </div>
-                <div
-                  className={`${styles['footer-hours-row']} ${styles['footer-hours-row--closed']}`}
-                >
-                  <dt>Monday</dt>
-                  <dd>Closed</dd>
-                </div>
-              </dl>
-            </div>
-
-            {/* Admission Prices */}
-            <div className={styles['footer-admission']}>
-              <h4 className={styles['footer-hours-title']}>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={styles['footer-icon']}
-                  aria-hidden="true"
-                >
-                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                  <line x1="1" y1="10" x2="23" y2="10" />
-                </svg>
-                Admission
-              </h4>
-              <dl className={styles['footer-hours-list']}>
-                <div className={styles['footer-hours-row']}>
-                  <dt>Adults</dt>
-                  <dd>$12</dd>
-                </div>
-                <div className={styles['footer-hours-row']}>
-                  <dt>Seniors (65+)</dt>
-                  <dd>$10</dd>
-                </div>
-                <div className={styles['footer-hours-row']}>
-                  <dt>Children (6-17)</dt>
-                  <dd>$8</dd>
-                </div>
-                <div
-                  className={`${styles['footer-hours-row']} ${styles['footer-hours-row--free']}`}
-                >
-                  <dt>Under 6</dt>
-                  <dd>Free</dd>
-                </div>
-              </dl>
-            </div>
-
-            {/* Accessibility */}
-            <p className={styles['footer-accessibility']}>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className={styles['footer-accessibility-icon']}
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="4" r="2" />
-                <path d="M19 13v-2a2 2 0 00-2-2H7a2 2 0 00-2 2v2" />
-                <path d="M12 9v12" />
-                <path d="M8 21h8" />
-              </svg>
-              Wheelchair accessible grounds and main floor
-            </p>
-          </div>
+          </nav>
 
           {/* America 250 Badge - Enhanced */}
           <div className={styles['footer-commemoration']}>

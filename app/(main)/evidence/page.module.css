@@ -552,6 +552,55 @@
   color: var(--evidence-gold);
 }
 
+/* Featured timeline event - for significant documents */
+.timelineEventFeatured {
+  margin: 0.5rem 0;
+}
+
+.timelineDotFeatured {
+  background: var(--evidence-gold);
+  width: 14px;
+  height: 14px;
+  box-shadow:
+    0 0 0 3px rgba(201, 162, 39, 0.2),
+    0 0 12px rgba(201, 162, 39, 0.3);
+}
+
+.timelineContentFeatured {
+  background: linear-gradient(135deg, #fffefb 0%, #faf8f3 100%);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(201, 162, 39, 0.08);
+  padding: 1.25rem;
+}
+
+.timelineContentFeatured .timelineText {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* Manuscript link - prominent call to action */
+.timelineManuscriptLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--evidence-gold);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  margin-bottom: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.timelineManuscriptLink:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 /* ============================================
    SOURCES GRID - Enhanced cards
    ============================================ */
@@ -818,6 +867,24 @@
 
   .timelineLink {
     font-size: 0.8125rem;
+  }
+
+  /* Featured timeline tablet */
+  .timelineDotFeatured {
+    width: 16px;
+    height: 16px;
+  }
+
+  .timelineContentFeatured {
+    padding: 1.5rem;
+  }
+
+  .timelineContentFeatured .timelineText {
+    font-size: 1rem;
+  }
+
+  .timelineManuscriptLink {
+    font-size: 0.875rem;
   }
 
   .sourcesGrid {

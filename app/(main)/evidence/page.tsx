@@ -119,17 +119,38 @@ function TimelineEvent({
   date,
   event,
   sourceUrl,
+  featured,
+  manuscriptUrl,
+  manuscriptLabel,
 }: {
   date: string
   event: string
   sourceUrl?: string
+  featured?: boolean
+  manuscriptUrl?: string
+  manuscriptLabel?: string
 }) {
   return (
-    <div className={styles.timelineEvent}>
+    <div className={`${styles.timelineEvent} ${featured ? styles.timelineEventFeatured : ''}`}>
       <div className={styles.timelineDate}>{date}</div>
-      <div className={styles.timelineDot} aria-hidden="true" />
-      <div className={styles.timelineContent}>
+      <div
+        className={`${styles.timelineDot} ${featured ? styles.timelineDotFeatured : ''}`}
+        aria-hidden="true"
+      />
+      <div
+        className={`${styles.timelineContent} ${featured ? styles.timelineContentFeatured : ''}`}
+      >
         <p className={styles.timelineText}>{event}</p>
+        {manuscriptUrl && (
+          <a
+            href={manuscriptUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.timelineManuscriptLink}
+          >
+            {manuscriptLabel || 'View original manuscript →'}
+          </a>
+        )}
         {sourceUrl && (
           <a
             href={sourceUrl}
@@ -319,6 +340,9 @@ export default function EvidencePage() {
               date="Jul 2, 1791"
               event="Treaty of Holston signed with Cherokee Nation"
               sourceUrl="https://avalon.law.yale.edu/18th_century/chr1791.asp"
+              featured
+              manuscriptUrl="https://digitreaties.org/treaties/treaty/88697242/"
+              manuscriptLabel="View the original 23-page manuscript →"
             />
             <TimelineEvent
               date="Nov 5, 1791"

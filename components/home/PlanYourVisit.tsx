@@ -95,9 +95,29 @@ export function PlanYourVisit() {
           </span>
         </div>
 
+        {/* What to Expect Quick List */}
+        <div
+          className={`bg-cream/50 rounded-lg p-6 mb-10 max-w-2xl mx-auto fade-in-up stagger-3 ${isVisible ? 'visible' : ''}`}
+        >
+          <p className="text-xs uppercase tracking-wider text-secondary/60 mb-3 text-center">
+            Your Visit Includes
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-text-light">
+            <span className="flex items-center gap-1.5">
+              <span className="text-accent">✓</span> Guided tour with costumed interpreters
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-accent">✓</span> Access to all historic buildings
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-accent">✓</span> Museum exhibits &amp; gift shop
+            </span>
+          </div>
+        </div>
+
         {/* CTAs */}
         <div
-          className={`flex flex-col sm:flex-row gap-4 justify-center fade-in-up stagger-3 ${isVisible ? 'visible' : ''}`}
+          className={`flex flex-col sm:flex-row gap-4 justify-center fade-in-up stagger-4 ${isVisible ? 'visible' : ''}`}
         >
           <Link
             href="/visit"
@@ -109,9 +129,10 @@ export function PlanYourVisit() {
             href="https://maps.google.com/?q=Rocky+Mount+State+Historic+Site+Piney+Flats+TN"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center border-2 border-primary/20 text-primary px-8 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:border-primary/40 hover:bg-primary/5"
+            className="inline-flex flex-col items-center justify-center border-2 border-primary/20 text-primary px-8 py-4 transition-all duration-300 hover:border-primary/40 hover:bg-primary/5"
           >
-            Get Directions
+            <span className="text-sm font-bold uppercase tracking-wider">Get Directions</span>
+            <span className="text-xs text-text-light mt-0.5">Open in Google Maps</span>
           </a>
         </div>
       </div>

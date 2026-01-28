@@ -76,14 +76,21 @@ export function ConsolidatedClose() {
             <h2
               className={`font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 fade-in-up stagger-1 ${ctaVisible ? 'visible' : ''}`}
             >
-              Ready to Visit Rocky Mount?
+              The Story Continues With You
             </h2>
 
             {/* Subheading */}
             <p
-              className={`font-serif-elegant text-lg md:text-xl italic text-white/60 mb-8 fade-in-up stagger-2 ${ctaVisible ? 'visible' : ''}`}
+              className={`font-serif-elegant text-lg md:text-xl italic text-white/60 mb-4 fade-in-up stagger-2 ${ctaVisible ? 'visible' : ''}`}
             >
               {HOOKS.primaryCTA}
+            </p>
+
+            {/* Final social proof */}
+            <p
+              className={`text-sm text-white/40 mb-8 fade-in-up stagger-2 ${ctaVisible ? 'visible' : ''}`}
+            >
+              Join 50,000+ annual visitors discovering Tennessee&apos;s founding story
             </p>
 
             {/* Primary CTA - matching hero button */}

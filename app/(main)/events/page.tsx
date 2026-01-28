@@ -134,9 +134,11 @@ export default function EventsPage() {
 
           {/* Subheadline - Brand-approved tagline */}
           <p className={styles['calendar-subheadline']}>
-            America turns 250. Tennessee turns 230.
+            The nation turns 250. Tennessee turns 230.
             <br />
-            <span className={styles['calendar-subheadline-tagline']}>Tennessee starts here.</span>
+            <span className={styles['calendar-subheadline-tagline']}>
+              This is where that story started.
+            </span>
           </p>
 
           {/* Decorative divider */}

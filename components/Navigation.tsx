@@ -8,13 +8,14 @@ import { WaxSealSVG } from './WaxSealSVG'
 import styles from './Header/Header.module.css'
 
 const NAV_LINKS = [
-  { href: '/', label: 'Our Story' },
-  { href: '/evidence', label: 'Evidence' },
-  { href: '/events', label: 'Events' },
-  { href: '/lectures', label: 'Lectures' },
   { href: '/visit', label: 'Visit' },
-  { href: '/almanac', label: 'Almanac' },
+  { href: '/events', label: 'Events' },
+  { href: '/our-story', label: 'Our Story' },
+  { href: '/evidence', label: 'Evidence' },
+  { href: '/support', label: 'Support' },
 ]
+
+const EDUCATOR_LINK = { href: '/educators', label: 'For Educators' }
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -161,12 +162,22 @@ export default function Navigation() {
               {/* Divider */}
               <span className={styles['nav-divider']} aria-hidden="true" />
 
+              {/* Educators Button */}
+              <Link href={EDUCATOR_LINK.href} className={styles['cta-educators']}>
+                <span className={styles['cta-text']}>{EDUCATOR_LINK.label}</span>
+              </Link>
+
               {/* CTA */}
               <Link href="/visit" className={styles.cta}>
                 <span className={styles['cta-text']}>Plan Your Visit</span>
                 <Feather className={styles['cta-icon']} size={14} />
               </Link>
             </nav>
+
+            {/* Educators Button - stays visible on mobile */}
+            <Link href={EDUCATOR_LINK.href} className={styles['mobile-educators']}>
+              {EDUCATOR_LINK.label}
+            </Link>
 
             {/* Mobile Toggle */}
             <button

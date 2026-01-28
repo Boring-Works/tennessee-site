@@ -26,16 +26,16 @@ function isCriticalScore(score: number): boolean {
   return score <= 3
 }
 
-function getCardStyle(score: number): string {
-  if (score <= 2) {
-    return 'bg-red-900/20 border-red-500/40 shadow-lg shadow-red-900/20'
-  }
-  if (score <= 3) {
+function getCardStyle(score: number, isWorst: boolean): string {
+  // Only apply danger/warning backgrounds to the single worst score
+  // This creates visual hierarchy - the eye is drawn to the one card that needs attention
+  if (isWorst && score <= 3) {
+    if (score <= 2) {
+      return 'bg-red-900/20 border-red-500/40 shadow-lg shadow-red-900/20'
+    }
     return 'bg-orange-900/15 border-orange-500/30'
   }
-  if (score >= 9) {
-    return 'bg-green-900/10 border-green-500/20'
-  }
+  // All other cards use neutral styling (score numbers can still be colored)
   return 'bg-white/5 border-white/10'
 }
 
@@ -58,6 +58,7 @@ function ScoreCard({
   score,
   index,
   compact = false,
+  isWorst = false,
 }: {
   scoreKey: string
   title: string
@@ -65,9 +66,10 @@ function ScoreCard({
   score: TaskScore
   index: number
   compact?: boolean
+  isWorst?: boolean
 }) {
   const isCritical = isCriticalScore(score.score)
-  const cardStyle = getCardStyle(score.score)
+  const cardStyle = getCardStyle(score.score, isWorst)
   // Staggered count-up animation: each card starts 100ms after the previous
   const animatedScore = useCountUp(score.score, { duration: 600, delay: index * 100 })
 
@@ -140,6 +142,11 @@ export function TaskScores({
   const adjustedShepherd = adjustScoreForAQI(shepherd, aqi ?? null)
   const scores = { sower, shepherd: adjustedShepherd, keeper, builder }
 
+  // Find the worst (lowest) score key to highlight only that card
+  const scoreValues = SCORE_CARDS.map(({ key }) => ({ key, value: scores[key].score }))
+  const minScore = Math.min(...scoreValues.map((s) => s.value))
+  const worstKey = scoreValues.find((s) => s.value === minScore)?.key
+
   return (
     <section className={compact ? 'py-2' : 'py-3 lg:py-4'}>
       <div className={`flex items-center justify-center gap-3 ${compact ? 'mb-2' : 'mb-3'}`}>
@@ -161,6 +168,7 @@ export function TaskScores({
             score={scores[key]}
             index={index}
             compact={compact}
+            isWorst={key === worstKey}
           />
         ))}
       </div>

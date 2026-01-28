@@ -26,7 +26,7 @@ export default function SpringIndex() {
         : `Spring is ~${phenology.anomalyDays} days late`
 
   return (
-    <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full">
+    <div className="p-3 rounded-lg bg-white/5 border border-white/10">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Leaf className="w-4 h-4 text-almanac-gold" />
@@ -43,34 +43,43 @@ export default function SpringIndex() {
         <span className={`text-lg font-medium ${statusInfo.color}`}>{statusInfo.label}</span>
       </div>
 
-      {/* Days to events */}
-      <div className="space-y-2 mb-3">
-        {phenology.daysToFirstLeaf !== null && (
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-almanac-parchment/60 flex items-center gap-1">
-              <Leaf className="w-3 h-3" /> First Leaf
-            </span>
-            <span className="text-almanac-parchment font-medium">
-              ~{phenology.daysToFirstLeaf} days
-            </span>
-          </div>
-        )}
-        {phenology.daysToFirstBloom !== null && (
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-almanac-parchment/60 flex items-center gap-1">
-              <Flower2 className="w-3 h-3" /> First Bloom
-            </span>
-            <span className="text-almanac-parchment font-medium">
-              ~{phenology.daysToFirstBloom} days
-            </span>
-          </div>
-        )}
-        {phenology.daysToFirstLeaf === null && phenology.daysToFirstBloom === null && (
-          <p className="text-xs text-almanac-parchment/50 text-center">
-            Spring phenology events have passed
-          </p>
-        )}
-      </div>
+      {/* Days to events - only show if not dormant */}
+      {phenology.springStatus !== 'dormant' && (
+        <div className="space-y-2 mb-3">
+          {phenology.daysToFirstLeaf !== null && (
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-almanac-parchment/60 flex items-center gap-1">
+                <Leaf className="w-3 h-3" /> First Leaf
+              </span>
+              <span className="text-almanac-parchment font-medium">
+                ~{phenology.daysToFirstLeaf} days
+              </span>
+            </div>
+          )}
+          {phenology.daysToFirstBloom !== null && (
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-almanac-parchment/60 flex items-center gap-1">
+                <Flower2 className="w-3 h-3" /> First Bloom
+              </span>
+              <span className="text-almanac-parchment font-medium">
+                ~{phenology.daysToFirstBloom} days
+              </span>
+            </div>
+          )}
+          {phenology.daysToFirstLeaf === null && phenology.daysToFirstBloom === null && (
+            <p className="text-xs text-almanac-parchment/50 text-center">
+              Spring phenology events have passed
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Dormant season message */}
+      {phenology.springStatus === 'dormant' && (
+        <p className="text-xs text-almanac-parchment/50 text-center mb-3">
+          Tracking begins when GDD accumulation starts
+        </p>
+      )}
 
       {/* Anomaly */}
       <div

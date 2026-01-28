@@ -30,11 +30,6 @@ export default function FarmerMemory({
   const data = getFarmerMemoryData(temperature, humidity, pressure, windSpeed)
   const anomaly = getTemperatureAnomaly(todayHigh, todayLow, month, day)
 
-  const formattedDate = now.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-  })
-
   return (
     <section
       className="rounded-sm border border-white/10 overflow-hidden h-full"
@@ -59,9 +54,7 @@ export default function FarmerMemory({
         <div className="p-4">
           <div className="flex items-center gap-2 mb-3">
             <BarChart3 className="w-4 h-4 text-almanac-parchment/70" aria-hidden="true" />
-            <h3 className="text-sm font-medium text-almanac-parchment/90">
-              This Day: {formattedDate}
-            </h3>
+            <h3 className="text-sm font-medium text-almanac-parchment/90">Historical Averages</h3>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -161,7 +154,7 @@ export default function FarmerMemory({
               </p>
             </blockquote>
 
-            <div className="flex items-center gap-3 text-xs">
+            <div className="flex items-center gap-3 text-sm">
               <span
                 className={`font-medium ${
                   data.validatedProverb.correlation >= 70
@@ -173,12 +166,12 @@ export default function FarmerMemory({
               >
                 {data.validatedProverb.correlation}% accurate
               </span>
-              <span className="text-almanac-parchment/40">
+              <span className="text-almanac-parchment/50">
                 ({data.validatedProverb.sampleSize.toLocaleString()} cases)
               </span>
             </div>
 
-            <p className="text-xs text-almanac-parchment/50 mt-2 leading-relaxed">
+            <p className="text-sm text-almanac-parchment/60 mt-2 leading-relaxed">
               {data.validatedProverb.explanation}
             </p>
           </div>

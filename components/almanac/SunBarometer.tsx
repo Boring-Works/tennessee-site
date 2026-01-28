@@ -173,6 +173,7 @@ export default function SunBarometer({
 
       {/* Wind */}
       <div className="mt-4 pt-3 border-t border-white/10">
+        <h4 className="text-xs text-almanac-gold font-medium uppercase tracking-wide mb-2">Wind</h4>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Wind className="w-4 h-4 text-almanac-parchment/60" />

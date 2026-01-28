@@ -303,7 +303,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
       )}
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-4 mt-2 text-[10px] text-almanac-parchment/50">
+      <div className="flex items-center justify-center gap-4 mt-2 text-xs text-almanac-parchment/50">
         <div className="flex items-center gap-1">
           <div className="w-3 h-0.5 bg-almanac-gold rounded" />
           <span>Temperature</span>

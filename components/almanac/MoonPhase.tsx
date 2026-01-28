@@ -82,10 +82,10 @@ export function MoonPhase({ moon }: MoonPhaseProps) {
         <p className="text-sm text-almanac-parchment/50">{illuminationPercent}% illuminated</p>
       </div>
 
-      {/* Planting guidance */}
+      {/* Planting guidance - connected to moon phase */}
       <div className="border-t border-white/10 pt-3">
         <p className="text-xs text-almanac-gold font-medium uppercase tracking-wide mb-1">
-          {guidance.activity}
+          {moon.phaseName}: {guidance.activity}
         </p>
         <p className="text-xs text-almanac-parchment/60 leading-relaxed">{guidance.tip}</p>
       </div>

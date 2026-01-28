@@ -318,11 +318,11 @@ export default function AlmanacPage() {
             <SectionDivider label="Today's Details" />
 
             {/* ========== SECTION 2: TODAY'S DETAILS ========== */}
-            {/* Tomorrow Preview */}
-            <TomorrowPreview tomorrow={tomorrowData} />
-
-            {/* Burn Day */}
-            <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
+            {/* Tomorrow Preview + Burn Day grouped */}
+            <div className="grid grid-cols-2 gap-4">
+              <TomorrowPreview tomorrow={tomorrowData} />
+              <BurnDayIndicator lat={location.latitude} lon={location.longitude} />
+            </div>
 
             {/* Air Quality */}
             <AirQualityCard lat={location.latitude} lon={location.longitude} onAqiChange={setAqi} />

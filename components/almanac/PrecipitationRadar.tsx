@@ -233,6 +233,12 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         <div className="absolute bottom-2 right-2 bg-almanac-midnight/90 px-2 py-1 rounded text-xs text-almanac-parchment/60 z-10">
           ~60 mi view
         </div>
+
+        {/* No precipitation indicator - shows when radar is clear */}
+        <div className="absolute top-2 right-2 bg-green-900/80 border border-green-500/30 px-2 py-1 rounded text-xs text-green-400 z-10 flex items-center gap-1.5">
+          <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          Clear skies
+        </div>
       </div>
 
       {/* Timeline */}

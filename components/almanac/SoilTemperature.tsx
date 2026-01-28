@@ -103,7 +103,7 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4 h-full"
+        className="bg-almanac-midnight/80 border border-almanac-gold/20 rounded-lg p-4"
         role="region"
         aria-label="Soil temperature"
       >
@@ -128,7 +128,7 @@ export default function SoilTemperature({ temperature }: SoilTemperatureProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className={`rounded-lg p-4 border h-full card-hover ${bgColor}`}
+      className={`rounded-lg p-4 border card-hover ${bgColor}`}
       role="region"
       aria-label={`Soil temperature: ${Math.round(temperature)} degrees Fahrenheit, ${status}`}
     >

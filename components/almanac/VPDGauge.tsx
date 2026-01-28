@@ -36,7 +36,7 @@ export default function VPDGauge({ temperature, humidity }: VPDGaugeProps) {
 
       <div className="flex flex-col items-center">
         {/* Primary Value Display */}
-        <div className={`w-full rounded-lg border p-4 mb-3 ${getBgClass()}`}>
+        <div className="w-full mb-3">
           <div className="text-center">
             <div className={`text-4xl font-bold ${vpdInfo.color}`}>{vpd.toFixed(2)}</div>
             <div className="text-sm text-almanac-parchment/60 mt-1">kPa</div>

@@ -100,7 +100,7 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
   // Don't render if loading or no data
   if (loading) {
     return (
-      <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full animate-pulse">
+      <div className="p-3 rounded-lg bg-white/5 border border-white/10 animate-pulse">
         <div className="flex items-center gap-2 mb-3">
           <Waves className="w-4 h-4 text-almanac-gold/50" />
           <div className="h-4 bg-white/10 rounded w-24" />

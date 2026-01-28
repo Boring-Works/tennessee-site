@@ -96,7 +96,7 @@ export default function GDDTracker({ tempHigh, tempLow, baseTemp = 50 }: GDDTrac
   const nextPest = PEST_THRESHOLDS.find((pest) => pest.gdd > accumulatedGDD)
 
   return (
-    <div className="p-4 rounded-lg bg-white/5 border border-white/10 h-full">
+    <div className="p-3 rounded-lg bg-white/5 border border-white/10">
       <div className="flex items-center gap-2 mb-3">
         <Thermometer className="w-4 h-4 text-almanac-gold" />
         <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">GDD</h3>

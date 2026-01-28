@@ -37,13 +37,21 @@ export default function NativePulse({ pulse }: NativePulseProps) {
         </div>
 
         {/* Progress Bar */}
-        <div className="relative h-2 bg-almanac-midnight rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${pulse.progress}%` }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
-            className="absolute h-full bg-gradient-to-r from-almanac-gold/60 to-almanac-gold rounded-full"
-          />
+        <div className="space-y-1">
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-almanac-parchment/50 uppercase tracking-wide">
+              Season Progress
+            </span>
+            <span className="text-xs text-almanac-parchment/50">{pulse.progress}%</span>
+          </div>
+          <div className="relative h-2 bg-almanac-midnight rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${pulse.progress}%` }}
+              transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
+              className="absolute h-full bg-gradient-to-r from-almanac-gold/60 to-almanac-gold rounded-full"
+            />
+          </div>
         </div>
 
         {/* Tip */}

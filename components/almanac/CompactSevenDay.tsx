@@ -285,8 +285,9 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
               })}
             </div>
           </div>
-          <p className="text-center text-xs text-almanac-parchment/40 mt-1">
-            Scroll for {extraDays.length} more days →
+          <p className="text-center text-sm text-almanac-gold/70 mt-2 flex items-center justify-center gap-2 font-medium">
+            <span>Scroll for {extraDays.length} more days</span>
+            <span className="animate-bounce-x inline-block">→</span>
           </p>
         </>
       )}

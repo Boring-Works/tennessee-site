@@ -6,10 +6,12 @@ interface SectionDividerProps {
 
 export function SectionDivider({ label }: SectionDividerProps) {
   return (
-    <div className="flex items-center gap-4 py-6">
-      <div className="flex-1 h-px bg-almanac-gold/20" />
-      <span className="text-sm font-serif text-almanac-parchment/60 tracking-wide">{label}</span>
-      <div className="flex-1 h-px bg-almanac-gold/20" />
+    <div className="flex items-center gap-4 py-8">
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent via-almanac-gold/40 to-almanac-gold/40" />
+      <span className="text-base font-serif text-almanac-gold/80 tracking-wide uppercase">
+        {label}
+      </span>
+      <div className="flex-1 h-px bg-gradient-to-l from-transparent via-almanac-gold/40 to-almanac-gold/40" />
     </div>
   )
 }

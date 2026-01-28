@@ -23,7 +23,19 @@ export function FrontierSaying({ saying, modernLine, temperature, location }: Fr
 
   // Dual-line format: 1775 wisdom + 2026 application
   return (
-    <div className="bg-white/5 border border-white/10 rounded-sm p-4">
+    <div className="bg-white/5 border border-white/10 rounded-sm p-4 relative">
+      {/* Share button - top right corner */}
+      {temperature !== undefined && location && (
+        <div className="absolute top-3 right-3">
+          <ShareButton
+            frontierLine={saying}
+            modernLine={modernLine}
+            temperature={temperature}
+            location={location}
+            iconOnly
+          />
+        </div>
+      )}
       <p className="text-xs text-almanac-gold/50 text-center mb-2 font-medium tracking-widest uppercase">
         The Daily Proverb
       </p>
@@ -48,18 +60,6 @@ export function FrontierSaying({ saying, modernLine, temperature, location }: Fr
           </p>
         </div>
       </div>
-
-      {/* Share Button */}
-      {temperature !== undefined && location && (
-        <div className="text-center">
-          <ShareButton
-            frontierLine={saying}
-            modernLine={modernLine}
-            temperature={temperature}
-            location={location}
-          />
-        </div>
-      )}
     </div>
   )
 }

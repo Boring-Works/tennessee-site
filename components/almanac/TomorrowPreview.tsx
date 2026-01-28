@@ -81,7 +81,7 @@ export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
       <div className="space-y-2">
         {/* Temperature row */}
         <div className="flex items-center gap-3">
-          <span className="text-2xl">{emoji}</span>
+          <span className="text-2xl w-8 text-center flex-shrink-0">{emoji}</span>
           <div className="flex items-center gap-4 text-sm">
             <span className="flex items-center gap-1.5 text-almanac-parchment">
               <ThermometerSun className="w-4 h-4 text-orange-400" />
@@ -98,14 +98,14 @@ export default function TomorrowPreview({ tomorrow }: TomorrowPreviewProps) {
 
         {/* Precipitation row */}
         {tomorrow.precipChance > 0 && (
-          <div className="flex items-center gap-2 text-sm text-almanac-parchment/70 pl-9">
-            <Droplets className="w-4 h-4 text-blue-400" />
+          <div className="flex items-center gap-2 text-sm text-almanac-parchment/70 ml-11">
+            <Droplets className="w-4 h-4 text-blue-400 flex-shrink-0" />
             <span>{tomorrow.precipChance}% chance of precipitation</span>
           </div>
         )}
 
         {/* Outlook row */}
-        <div className={`text-sm font-medium pl-9 ${outlook.color}`}>{outlook.text}</div>
+        <div className={`text-sm font-medium ml-11 ${outlook.color}`}>{outlook.text}</div>
       </div>
     </motion.div>
   )

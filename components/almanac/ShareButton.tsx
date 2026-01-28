@@ -9,6 +9,7 @@ interface ShareButtonProps {
   modernLine?: string
   temperature: number
   location: string
+  iconOnly?: boolean
 }
 
 export default function ShareButton({
@@ -16,6 +17,7 @@ export default function ShareButton({
   modernLine,
   temperature,
   location,
+  iconOnly = false,
 }: ShareButtonProps) {
   const [copied, setCopied] = useState(false)
 
@@ -37,6 +39,19 @@ export default function ShareButton({
     } catch (err) {
       logger.error('Failed to copy:', err)
     }
+  }
+
+  if (iconOnly) {
+    return (
+      <button
+        onClick={handleShare}
+        className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
+        aria-label="Share today's briefing"
+        title="Share today's briefing"
+      >
+        {copied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+      </button>
+    )
   }
 
   return (

@@ -2,13 +2,13 @@
 
 import Link from 'next/link'
 import SmartCommemorativeCard from './SmartCommemorativeCard'
-import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
+import { MYSTERY_NARRATIVE, BUTTONS } from '@/lib/copy'
 
 export default function HeroSection() {
   const { hero } = MYSTERY_NARRATIVE
 
   return (
-    <section className="relative min-h-[90vh] bg-primary flex flex-col overflow-hidden">
+    <section className="relative min-h-screen bg-primary flex flex-col overflow-hidden">
       {/* Background with gradient */}
       <div
         className="absolute inset-0"
@@ -51,90 +51,29 @@ export default function HeroSection() {
               </div>
 
               {/* Eyebrow */}
-              <p className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-6 font-medium opacity-0 animate-[fadeUp_0.6s_ease-out_0.1s_forwards]">
-                Tennessee State Historic Site
+              <p className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-3 font-medium opacity-0 animate-[fadeUp_0.6s_ease-out_0.1s_forwards]">
+                Tennessee 230 · America 250
               </p>
 
               {/* Main Headline */}
-              <h1 className="font-serif text-[clamp(3rem,10vw,5rem)] font-bold text-white leading-[1.1] tracking-tight mb-3 opacity-0 animate-[fadeUp_0.6s_ease-out_0.2s_forwards]">
+              <h1 className="font-serif text-[clamp(3.5rem,12vw,6rem)] font-bold text-white leading-[1.05] tracking-tight mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.2s_forwards]">
                 {hero.headline}
               </h1>
 
               {/* Subhead */}
-              <p className="font-serif-elegant text-[clamp(1.5rem,4vw,2.5rem)] italic text-accent leading-tight mb-6 opacity-0 animate-[fadeUp_0.6s_ease-out_0.3s_forwards]">
+              <p className="font-serif-elegant text-[clamp(1.25rem,3vw,1.75rem)] text-white/80 leading-relaxed mb-8 opacity-0 animate-[fadeUp_0.6s_ease-out_0.3s_forwards]">
                 {hero.subhead}
               </p>
 
-              {/* Divider */}
-              <div className="w-[120px] h-[2px] bg-accent/50 mx-auto lg:mx-0 mb-6 opacity-0 animate-[fadeUp_0.6s_ease-out_0.35s_forwards]" />
-
-              {/* Narrative Timeline */}
-              <div className="space-y-2 mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
-                {hero.timeline.map((line, i) => (
-                  <p key={i} className="font-serif-elegant text-sm md:text-base text-white/70">
-                    {line}
-                  </p>
-                ))}
-              </div>
-
-              {/* Contrast Line */}
-              <p className="font-serif-elegant text-base md:text-lg italic text-white/80 mb-3 border-l-2 border-accent/60 pl-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.45s_forwards]">
-                {hero.contrast}
-              </p>
-
-              {/* Bridge */}
-              <p className="text-sm text-white/60 mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.48s_forwards]">
-                {hero.bridge}
-              </p>
-
-              {/* Location - Higher contrast + driving context */}
-              <p className="text-sm text-white/60 mb-4 flex items-center justify-center lg:justify-start gap-1.5 opacity-0 animate-[fadeUp_0.6s_ease-out_0.5s_forwards]">
-                <svg className="w-3.5 h-3.5 text-white/50" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Piney Flats, TN — 15 min from Johnson City
-              </p>
-
-              {/* Social Proof Line */}
-              <p className="text-sm text-white/50 mb-8 flex items-center justify-center lg:justify-start gap-2 opacity-0 animate-[fadeUp_0.6s_ease-out_0.52s_forwards]">
-                <span className="text-accent">★★★★★</span>
-                <span>TripAdvisor</span>
-                <span className="text-white/30">·</span>
-                <span>50,000+ visitors annually</span>
-                <span className="text-white/30">·</span>
-                <span className="italic">Tennessee&apos;s Hidden Gem</span>
-              </p>
-
-              {/* CTAs - Specific and benefit-oriented */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start opacity-0 animate-[fadeUp_0.6s_ease-out_0.55s_forwards]">
+              {/* Single Primary CTA */}
+              <div className="opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
                 <Link
                   href="/visit"
-                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-8 py-4 text-[14px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)]"
+                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)]"
                 >
-                  <span className="text-base transition-transform duration-300 group-hover:scale-110">
-                    ★
-                  </span>
                   {BUTTONS.primary}
-                  <span className="text-primary/70 font-medium normal-case tracking-normal">
-                    — Free Parking
-                  </span>
-                </Link>
-                <Link
-                  href="/first-250"
-                  className="inline-flex items-center justify-center border-2 border-white/25 text-white px-8 py-4 text-[14px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:border-white/50 hover:bg-white/5 hover:-translate-y-0.5"
-                >
-                  {BUTTONS.secondary}
                 </Link>
               </div>
-
-              {/* Stand where they stood CTA line */}
-              <p className="mt-6 text-sm font-serif-elegant italic text-accent/80 opacity-0 animate-[fadeUp_0.6s_ease-out_0.6s_forwards]">
-                {HOOKS.primaryCTA}
-              </p>
             </div>
 
             {/* RIGHT COLUMN (40%) - Commemorative Card */}
@@ -147,10 +86,20 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* Scroll Indicator */}
+      <div className="relative z-10 pb-8 flex flex-col items-center opacity-0 animate-[fadeUp_0.6s_ease-out_0.8s_forwards]">
+        <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-3">
+          Scroll to explore
+        </span>
+        <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
+          <div className="w-1.5 h-1.5 bg-white/40 rounded-full animate-[scrollBounce_1.5s_ease-in-out_infinite]" />
+        </div>
+      </div>
+
       {/* Footer - Keep secondary reference */}
-      <div className="relative z-10 py-6" style={{ padding: '1.5rem clamp(1.5rem, 5vw, 7.5rem)' }}>
+      <div className="relative z-10 py-4" style={{ padding: '1rem clamp(1.5rem, 5vw, 7.5rem)' }}>
         <div className="max-w-[1400px] mx-auto">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-white/25 text-center lg:text-left opacity-0 animate-[fadeUp_0.6s_ease-out_0.7s_forwards]">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-white/25 text-center lg:text-left opacity-0 animate-[fadeUp_0.6s_ease-out_0.9s_forwards]">
             Part of the America 250 National Commemoration
           </p>
         </div>
@@ -176,6 +125,17 @@ export default function HeroSection() {
           to {
             opacity: 1;
             transform: translateX(0);
+          }
+        }
+        @keyframes scrollBounce {
+          0%,
+          100% {
+            transform: translateY(0);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translateY(12px);
+            opacity: 0.8;
           }
         }
       `}</style>

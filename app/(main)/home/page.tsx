@@ -4,6 +4,18 @@ import HeroSection from '@/components/HeroSection'
 import ExperiencePreview from '@/components/ExperiencePreview'
 import HomecomingSection from '@/components/HomecomingSection'
 import FinalCTA from '@/components/FinalCTA'
+import {
+  MysteryHook,
+  ExperimentSection,
+  ScrollTimeline,
+  ContrastStatement,
+  ProofSection,
+  DistinctionSection,
+  GroundStatement,
+  PlanYourVisit,
+  CampaignSection,
+  IndigenousAcknowledgment,
+} from '@/components/home'
 import styles from './page.module.css'
 
 // Dynamic imports for below-fold components (code splitting)
@@ -45,12 +57,54 @@ export default function Home() {
   return (
     <>
       {/* ============================================
-          HERO SECTION
+          SECTION 1: HERO (Simplified - Above the Fold)
           ============================================ */}
       <HeroSection />
 
       {/* ============================================
-          THE BLOUNT LETTER - Archival Document
+          SECTION 2: MYSTERY HOOK
+          "Before there was a Tennessee..."
+          ============================================ */}
+      <MysteryHook />
+
+      {/* ============================================
+          SECTION 3: THE EXPERIMENT
+          "Could democracy survive beyond the Appalachians?"
+          ============================================ */}
+      <ExperimentSection />
+
+      {/* ============================================
+          SECTION 4: TIMELINE (Scroll-Triggered)
+          1770, 1780, 1790 - Three beats
+          ============================================ */}
+      <ScrollTimeline />
+
+      {/* ============================================
+          SECTION 5: CONTRAST STATEMENT
+          "This is where they governed."
+          ============================================ */}
+      <ContrastStatement />
+
+      {/* ============================================
+          SECTION 6: THE PROOF (Authority Section)
+          Blount, Jackson, Cobbs
+          ============================================ */}
+      <ProofSection />
+
+      {/* ============================================
+          SECTION 7: THE DISTINCTION
+          Territorial vs State capital clarification
+          ============================================ */}
+      <DistinctionSection />
+
+      {/* ============================================
+          SECTION 8: GROUND STATEMENT
+          "The buildings evolved. The ground endures."
+          ============================================ */}
+      <GroundStatement />
+
+      {/* ============================================
+          SECTION 9: THE BLOUNT LETTER - Archival Document
           ============================================ */}
       <section className={styles['blount-section']} aria-labelledby="blount-heading">
         {/* Parchment document with aged edges */}
@@ -173,9 +227,27 @@ export default function Home() {
       </section>
 
       {/* ============================================
-          EXPERIENCE PREVIEW - What You'll Experience
+          SECTION 10: EXPERIENCE PREVIEW
+          What You'll Experience
           ============================================ */}
       <ExperiencePreview />
+
+      {/* ============================================
+          SECTION 11: PLAN YOUR VISIT
+          Practical info consolidated
+          ============================================ */}
+      <PlanYourVisit />
+
+      {/* ============================================
+          SECTION 12: 2026 CAMPAIGN (Scarcity)
+          First 250 enrollment
+          ============================================ */}
+      <CampaignSection />
+
+      {/* ============================================
+          SECTION 13: INDIGENOUS ACKNOWLEDGMENT
+          ============================================ */}
+      <IndigenousAcknowledgment />
 
       {/* ============================================
           EVENTS SHOWCASE - The Commemorative Year

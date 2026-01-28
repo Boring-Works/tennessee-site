@@ -168,18 +168,16 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         </div>
       </div>
 
-      {/* Period summary stats */}
+      {/* Period summary - clear labeling */}
       <div className="flex items-center justify-between text-xs text-almanac-parchment/60 mb-2 px-1">
-        <div className="flex items-center gap-3">
-          <span>
-            <span className="text-red-400">H:</span> {chartData.periodHigh}°
+        <span className="text-almanac-parchment/40">
+          Next {range === '12H' ? '12' : range === '24H' ? '24' : '48'} hours:{' '}
+          <span className="text-almanac-parchment">
+            {chartData.periodHigh}° to {chartData.periodLow}°
           </span>
-          <span>
-            <span className="text-blue-400">L:</span> {chartData.periodLow}°
-          </span>
-        </div>
+        </span>
         {chartData.maxPrecip > 0 && (
-          <span className="text-blue-400">{chartData.maxPrecip}% rain chance</span>
+          <span className="text-blue-400">{chartData.maxPrecip}% rain</span>
         )}
       </div>
 

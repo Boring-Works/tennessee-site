@@ -97,7 +97,7 @@ export async function GET(request: Request) {
     wind_speed_unit: 'mph',
     precipitation_unit: 'inch',
     timezone: 'America/New_York',
-    forecast_days: '7',
+    forecast_days: '16',
     past_days: '2',
   })
 

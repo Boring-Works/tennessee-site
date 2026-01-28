@@ -140,18 +140,38 @@ export default function AlmanacPage() {
     return findTodayDailyIndex(weather.daily.time)
   }, [weather])
 
-  // Build compact 7-day forecast for quick glance
+  // Build extended forecast with all available days
   const compactDays: DayForecast[] = useMemo(() => {
     if (!weather) return []
     const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-    return weather.daily.time.slice(0, 7).map((dateStr, i) => {
+    const dayNamesFull = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]
+    // Use all available days from API (up to 16)
+    return weather.daily.time.map((dateStr, i) => {
       const date = new Date(dateStr)
       return {
         day: dayNames[date.getDay()],
+        dayFull: dayNamesFull[date.getDay()],
+        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         high: Math.round(weather.daily.temperatureMax[i]),
         low: Math.round(weather.daily.temperatureMin[i]),
         code: weather.daily.weatherCode[i],
         precipChance: weather.daily.precipitationProbability?.[i] || 0,
+        precipSum: weather.daily.precipitationSum[i],
+        sunrise: weather.daily.sunrise[i],
+        sunset: weather.daily.sunset[i],
+        windSpeedMax: weather.daily.windSpeedMax?.[i],
+        windGustsMax: weather.daily.windGustsMax?.[i],
+        uvIndexMax: weather.daily.uvIndexMax?.[i],
+        feelsLikeMax: weather.daily.feelsLikeMax?.[i],
+        feelsLikeMin: weather.daily.feelsLikeMin?.[i],
       }
     })
   }, [weather])

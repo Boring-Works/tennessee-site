@@ -1,7 +1,13 @@
 'use client'
 
-import { Droplets } from 'lucide-react'
+// getWeatherIcon returns a reference to an existing Lucide component, not a new component
+// The linter incorrectly flags this as "component creation during render"
+/* eslint-disable react-hooks/static-components */
+
+import { useState } from 'react'
+import { Droplets, Wind, Sun, Sunrise, Sunset, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
+import { getWeatherInfo } from '@/lib/almanac/types'
 
 // ============================================
 // TYPES
@@ -9,10 +15,20 @@ import { getWeatherIcon } from '@/lib/almanac/weatherIcons'
 
 export interface DayForecast {
   day: string // "M", "T", "W", etc.
+  dayFull?: string // "Monday", "Tuesday", etc.
+  date?: string // "Jan 28"
   high: number
   low: number
   code: number // WMO weather code
   precipChance: number
+  precipSum?: number // total precipitation in inches
+  sunrise?: string
+  sunset?: string
+  windSpeedMax?: number
+  windGustsMax?: number
+  uvIndexMax?: number
+  feelsLikeMax?: number
+  feelsLikeMin?: number
 }
 
 interface CompactSevenDayProps {
@@ -20,42 +36,274 @@ interface CompactSevenDayProps {
 }
 
 // ============================================
-// COMPACT SEVEN DAY COMPONENT
+// DAY DETAIL MODAL
+// ============================================
+
+function DayDetailModal({
+  day,
+  onClose,
+  onPrev,
+  onNext,
+  hasPrev,
+  hasNext,
+}: {
+  day: DayForecast
+  onClose: () => void
+  onPrev: () => void
+  onNext: () => void
+  hasPrev: boolean
+  hasNext: boolean
+}) {
+  const WeatherIcon = getWeatherIcon(day.code)
+  const weather = getWeatherInfo(day.code)
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div className="fixed inset-0 bg-black/70 z-50" onClick={onClose} />
+
+      {/* Modal */}
+      <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-sm bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-almanac-gold/20">
+          <button
+            onClick={onPrev}
+            disabled={!hasPrev}
+            className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <div className="text-center">
+            <h2 className="font-serif text-lg text-almanac-gold">{day.dayFull || day.day}</h2>
+            {day.date && <p className="text-xs text-almanac-parchment/50">{day.date}</p>}
+          </div>
+          <button
+            onClick={onNext}
+            disabled={!hasNext}
+            className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-5 space-y-4">
+          {/* Main weather */}
+          <div className="flex items-center justify-center gap-4">
+            <WeatherIcon className="w-16 h-16 text-almanac-gold" />
+            <div className="text-center">
+              <div className="text-3xl font-bold text-almanac-parchment">
+                {Math.round(day.high)}° / {Math.round(day.low)}°
+              </div>
+              <p className="text-almanac-parchment/70">{weather.condition}</p>
+            </div>
+          </div>
+
+          {/* Feels like */}
+          {(day.feelsLikeMax !== undefined || day.feelsLikeMin !== undefined) && (
+            <div className="text-center text-sm text-almanac-parchment/60">
+              Feels like {Math.round(day.feelsLikeMax ?? day.high)}° /{' '}
+              {Math.round(day.feelsLikeMin ?? day.low)}°
+            </div>
+          )}
+
+          {/* Details grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {/* Precipitation */}
+            <div className="bg-white/5 rounded-lg p-3 text-center">
+              <Droplets className="w-5 h-5 text-blue-400 mx-auto mb-1" />
+              <div className="text-lg font-semibold text-almanac-parchment">
+                {day.precipChance}%
+              </div>
+              <div className="text-xs text-almanac-parchment/50">Chance of rain</div>
+              {day.precipSum !== undefined && day.precipSum > 0 && (
+                <div className="text-xs text-blue-400 mt-1">
+                  {day.precipSum.toFixed(2)}&quot; expected
+                </div>
+              )}
+            </div>
+
+            {/* Wind */}
+            {day.windSpeedMax !== undefined && (
+              <div className="bg-white/5 rounded-lg p-3 text-center">
+                <Wind className="w-5 h-5 text-almanac-parchment/60 mx-auto mb-1" />
+                <div className="text-lg font-semibold text-almanac-parchment">
+                  {Math.round(day.windSpeedMax)} mph
+                </div>
+                <div className="text-xs text-almanac-parchment/50">Max wind</div>
+                {day.windGustsMax !== undefined && (
+                  <div className="text-xs text-almanac-parchment/40 mt-1">
+                    Gusts to {Math.round(day.windGustsMax)} mph
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* UV Index */}
+            {day.uvIndexMax !== undefined && (
+              <div className="bg-white/5 rounded-lg p-3 text-center">
+                <Sun className="w-5 h-5 text-yellow-400 mx-auto mb-1" />
+                <div className="text-lg font-semibold text-almanac-parchment">
+                  {Math.round(day.uvIndexMax)}
+                </div>
+                <div className="text-xs text-almanac-parchment/50">UV Index</div>
+                <div className="text-xs text-almanac-parchment/40 mt-1">
+                  {day.uvIndexMax <= 2
+                    ? 'Low'
+                    : day.uvIndexMax <= 5
+                      ? 'Moderate'
+                      : day.uvIndexMax <= 7
+                        ? 'High'
+                        : 'Very High'}
+                </div>
+              </div>
+            )}
+
+            {/* Sunrise/Sunset */}
+            {(day.sunrise || day.sunset) && (
+              <div className="bg-white/5 rounded-lg p-3 text-center">
+                <div className="flex justify-center gap-2 mb-1">
+                  <Sunrise className="w-4 h-4 text-orange-400" />
+                  <Sunset className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="text-sm font-semibold text-almanac-parchment">
+                  {day.sunrise &&
+                    new Date(day.sunrise).toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                    })}
+                </div>
+                <div className="text-sm text-almanac-parchment/70">
+                  {day.sunset &&
+                    new Date(day.sunset).toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                    })}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 p-1 text-almanac-parchment/40 hover:text-almanac-parchment"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+    </>
+  )
+}
+
+// ============================================
+// COMPACT FORECAST COMPONENT
 // ============================================
 
 export function CompactSevenDay({ days }: CompactSevenDayProps) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+
+  // Show first 7 days in main grid, rest in scrollable overflow
+  const mainDays = days.slice(0, 7)
+  const extraDays = days.slice(7)
+  const hasExtraDays = extraDays.length > 0
+
   return (
-    <div className="grid grid-cols-7 gap-1">
-      {days.map((day, index) => {
-        const WeatherIcon = getWeatherIcon(day.code)
-        const showPrecip = day.precipChance > 20
+    <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+      {/* Main 7-day grid */}
+      <div className="grid grid-cols-7 gap-1">
+        {mainDays.map((day, index) => {
+          const WeatherIcon = getWeatherIcon(day.code)
+          const showPrecip = day.precipChance > 20
 
-        return (
-          <div key={index} className="flex flex-col items-center gap-1 py-2 px-1">
-            {/* Day letter */}
-            <span className="text-xs font-medium text-almanac-parchment/60">{day.day}</span>
+          return (
+            <button
+              key={index}
+              onClick={() => setSelectedIndex(index)}
+              className="flex flex-col items-center gap-1 py-2 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer"
+            >
+              {/* Day letter */}
+              <span className="text-xs font-medium text-almanac-parchment/60">{day.day}</span>
 
-            {/* Weather icon */}
-            <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
+              {/* Weather icon */}
+              <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
 
-            {/* High temp */}
-            <span className="text-sm font-semibold text-almanac-parchment">
-              {Math.round(day.high)}°
-            </span>
-
-            {/* Low temp */}
-            <span className="text-xs text-almanac-parchment/50">{Math.round(day.low)}°</span>
-
-            {/* Precip chance (only if >20%) */}
-            {showPrecip && (
-              <span className="flex items-center gap-0.5 text-xs text-blue-400">
-                <Droplets className="w-3 h-3" />
-                {day.precipChance}%
+              {/* High temp */}
+              <span className="text-sm font-semibold text-almanac-parchment">
+                {Math.round(day.high)}°
               </span>
-            )}
+
+              {/* Low temp */}
+              <span className="text-xs text-almanac-parchment/50">{Math.round(day.low)}°</span>
+
+              {/* Precip chance (only if >20%) */}
+              {showPrecip && (
+                <span className="flex items-center gap-0.5 text-xs text-blue-400">
+                  <Droplets className="w-3 h-3" />
+                  {day.precipChance}%
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Extended forecast (days 8-16) */}
+      {hasExtraDays && (
+        <>
+          <div className="border-t border-white/10 my-2" />
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-1 min-w-min">
+              {extraDays.map((day, index) => {
+                const actualIndex = index + 7
+                const WeatherIcon = getWeatherIcon(day.code)
+                const showPrecip = day.precipChance > 20
+
+                return (
+                  <button
+                    key={actualIndex}
+                    onClick={() => setSelectedIndex(actualIndex)}
+                    className="flex flex-col items-center gap-1 py-2 px-2 rounded-md hover:bg-white/10 transition-colors cursor-pointer flex-shrink-0"
+                  >
+                    <span className="text-xs font-medium text-almanac-parchment/60">{day.day}</span>
+                    <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
+                    <span className="text-sm font-semibold text-almanac-parchment">
+                      {Math.round(day.high)}°
+                    </span>
+                    <span className="text-xs text-almanac-parchment/50">
+                      {Math.round(day.low)}°
+                    </span>
+                    {showPrecip && (
+                      <span className="flex items-center gap-0.5 text-xs text-blue-400">
+                        <Droplets className="w-3 h-3" />
+                        {day.precipChance}%
+                      </span>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
           </div>
-        )
-      })}
+          <p className="text-center text-xs text-almanac-parchment/40 mt-1">
+            Scroll for {extraDays.length} more days →
+          </p>
+        </>
+      )}
+
+      {/* Day detail modal */}
+      {selectedIndex !== null && days[selectedIndex] && (
+        <DayDetailModal
+          day={days[selectedIndex]}
+          onClose={() => setSelectedIndex(null)}
+          onPrev={() => setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev))}
+          onNext={() =>
+            setSelectedIndex((prev) => (prev !== null && prev < days.length - 1 ? prev + 1 : prev))
+          }
+          hasPrev={selectedIndex > 0}
+          hasNext={selectedIndex < days.length - 1}
+        />
+      )}
     </div>
   )
 }

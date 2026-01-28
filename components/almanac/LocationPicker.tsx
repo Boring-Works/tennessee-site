@@ -87,6 +87,7 @@ export default function LocationPicker({
             <AlertCircle className="w-4 h-4" />
             <span>Location won&apos;t persist after refresh (storage full)</span>
             <button
+              type="button"
               onClick={() => setStorageWarning(false)}
               className="ml-2 hover:text-white transition-colors"
               aria-label="Dismiss warning"
@@ -100,6 +101,7 @@ export default function LocationPicker({
       {/* Location Display Button - Made prominent so users can find it */}
       {compact ? (
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
           className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
           aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
@@ -109,6 +111,7 @@ export default function LocationPicker({
         </button>
       ) : (
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
           className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-almanac-gold/30 rounded-lg text-almanac-parchment hover:bg-white/10 hover:border-almanac-gold/50 hover:text-almanac-gold transition-all group"
           aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
@@ -153,6 +156,7 @@ export default function LocationPicker({
                   Change Location
                 </h3>
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
                   className="text-almanac-parchment/60 hover:text-almanac-parchment transition-colors"
                   aria-label="Close location picker"
@@ -199,6 +203,7 @@ export default function LocationPicker({
               {/* Actions */}
               <div className="flex gap-3">
                 <button
+                  type="button"
                   onClick={handleSearch}
                   disabled={isLoading || !query.trim()}
                   className="flex-1 flex items-center justify-center gap-2 bg-almanac-gold text-almanac-midnight font-medium py-3 rounded-lg hover:bg-almanac-gold/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -215,6 +220,7 @@ export default function LocationPicker({
                 </button>
 
                 <button
+                  type="button"
                   onClick={handleReset}
                   title="Reset to Sullivan County"
                   aria-label="Reset to Sullivan County, Tennessee"

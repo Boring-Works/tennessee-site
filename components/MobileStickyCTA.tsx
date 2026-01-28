@@ -1,42 +1,43 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function MobileStickyCTA() {
-  const [isVisible, setIsVisible] = useState(false);
-  const pathname = usePathname();
+  const [isVisible, setIsVisible] = useState(false)
+  const pathname = usePathname()
 
   // Don't show on Visit page (they're already there)
-  const hideOnPages = ["/visit"];
-  const shouldHide = hideOnPages.some((page) => pathname.startsWith(page));
+  const hideOnPages = ['/visit']
+  const shouldHide = hideOnPages.some((page) => pathname.startsWith(page))
 
   useEffect(() => {
     const handleScroll = () => {
       // Show after scrolling past the hero section (about 400px)
-      setIsVisible(window.scrollY > 400);
-    };
+      setIsVisible(window.scrollY > 400)
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-  if (shouldHide) return null;
+  if (shouldHide) return null
 
   return (
     <div
       className={`fixed bottom-0 left-0 right-0 md:hidden z-40 transition-all duration-300 ${
-        isVisible
-          ? "translate-y-0 opacity-100"
-          : "translate-y-full opacity-0"
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
       }`}
     >
       {/* Gradient fade */}
       <div className="absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-primary to-transparent pointer-events-none" />
 
       {/* CTA Bar */}
-      <nav aria-label="Quick actions" className="bg-primary border-t border-accent/30 px-4 py-3 safe-area-inset-bottom">
+      <nav
+        aria-label="Quick actions"
+        className="bg-primary border-t border-accent/30 px-4 py-3 safe-area-inset-bottom"
+      >
         <div className="flex gap-3">
           <Link
             href="/events"
@@ -53,5 +54,5 @@ export default function MobileStickyCTA() {
         </div>
       </nav>
     </div>
-  );
+  )
 }

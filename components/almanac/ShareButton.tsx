@@ -51,6 +51,7 @@ export default function ShareButton({
   if (iconOnly) {
     return (
       <button
+        type="button"
         onClick={handleShare}
         className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
         aria-label="Share today's briefing"
@@ -63,6 +64,7 @@ export default function ShareButton({
 
   return (
     <button
+      type="button"
       onClick={handleShare}
       className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/40 hover:text-almanac-gold transition-colors mt-3"
       aria-label="Share today's briefing"

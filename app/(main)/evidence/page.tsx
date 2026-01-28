@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
 import { ContextPanel } from './ContextPanel'
+import { EntryRoom } from '@/components/evidence/EntryRoom'
+import { MobileGuide } from '@/components/evidence/MobileGuide'
+import { Compass } from '@/components/ui/Compass'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -34,6 +37,17 @@ const COLLECTIONS = [
   { id: 'timeline', label: 'Chronology', code: 'CHRON' },
   { id: 'sources', label: 'Repository Index', code: 'REF' },
 ] as const
+
+// Sections for mobile guide navigation
+const MOBILE_GUIDE_SECTIONS = [
+  { id: 'blount-letter', label: 'Letters' },
+  { id: 'washington-question', label: 'The Question' },
+  { id: 'appointment', label: 'Appointment' },
+  { id: 'federal-authority', label: 'Federal Authority' },
+  { id: 'treaty-signers', label: 'Treaty Signers' },
+  { id: 'timeline', label: 'Timeline' },
+  { id: 'sources', label: 'Sources' },
+]
 
 // Treaty of Holston signatories - Cherokee leaders
 const TREATY_SIGNERS = [
@@ -228,19 +242,8 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      {/* Reading Room Introduction */}
-      <section className={styles.readingRoomIntro}>
-        <div className={styles.container}>
-          <p className={styles.readingRoomText}>
-            Welcome to the archive. The documents below trace the establishment of federal authority
-            in the Southwest Territory—from Washington&apos;s first questions to the treaty that
-            shaped the frontier.
-          </p>
-          <p className={styles.readingRoomNav}>
-            Browse by collection, or scroll to read in sequence.
-          </p>
-        </div>
-      </section>
+      {/* Entry Room - Visual Index */}
+      <EntryRoom />
 
       {/* Featured Quote - Blount Correspondence */}
       <section id="blount-letter" className={styles.featuredSection}>
@@ -468,6 +471,16 @@ export default function EvidencePage() {
           <h2 className={styles.sectionTitle}>Our Sources</h2>
           <p className={styles.sectionSubtitle}>Where we verify our history</p>
 
+          {/* Document Library link - featured */}
+          <Link href="/evidence/library" className={styles.libraryPromo}>
+            <span className={styles.libraryPromoIcon}>📖</span>
+            <div className={styles.libraryPromoText}>
+              <strong>Document Library</strong>
+              <span>Read complete transcriptions with full citations</span>
+            </div>
+            <span className={styles.libraryPromoArrow}>→</span>
+          </Link>
+
           <div className={styles.sourcesGrid}>
             <a
               href={SOURCE_LINKS.foundersOnline}
@@ -562,6 +575,10 @@ export default function EvidencePage() {
           </Link>
         </div>
       </section>
+
+      {/* Navigation Aids */}
+      <MobileGuide sections={MOBILE_GUIDE_SECTIONS} />
+      <Compass />
     </div>
   )
 }

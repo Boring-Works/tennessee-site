@@ -33,6 +33,7 @@ export function InfoPopup({ content, iconSize = 'sm' }: InfoPopupProps) {
   return (
     <>
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className="text-almanac-parchment/40 hover:text-almanac-gold transition-colors p-1 -m-1"
         aria-label={`Learn more about ${content.title}`}
@@ -80,6 +81,7 @@ function InfoModal({ content, onClose }: InfoModalProps) {
         <div className="flex items-start justify-between p-4 border-b border-almanac-gold/20">
           <h2 className="font-serif text-xl text-gold-leaf">{content.title}</h2>
           <button
+            type="button"
             onClick={onClose}
             className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
             aria-label="Close"

@@ -47,6 +47,7 @@ export default function OnboardingModal() {
           >
             {/* Close button */}
             <button
+              type="button"
               onClick={handleDismiss}
               className="absolute top-3 right-3 text-almanac-parchment/40 hover:text-almanac-parchment transition-colors"
               aria-label="Close"
@@ -78,19 +79,27 @@ export default function OnboardingModal() {
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Sprout className="w-4 h-4 text-almanac-success" />
-                  <span>Sower&apos;s Score — <em>When to plant</em></span>
+                  <span>
+                    Sower&apos;s Score — <em>When to plant</em>
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Thermometer className="w-4 h-4 text-almanac-warning" />
-                  <span>Outdoor Alert — <em>When to protect yourself</em></span>
+                  <span>
+                    Outdoor Alert — <em>When to protect yourself</em>
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <Moon className="w-4 h-4 text-blue-400" />
-                  <span>Keeper&apos;s Score — <em>Livestock &amp; pets</em></span>
+                  <span>
+                    Keeper&apos;s Score — <em>Livestock &amp; pets</em>
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
                   <HardHat className="w-4 h-4 text-orange-400" />
-                  <span>Builder&apos;s Score — <em>Projects &amp; repairs</em></span>
+                  <span>
+                    Builder&apos;s Score — <em>Projects &amp; repairs</em>
+                  </span>
                 </div>
               </div>
 
@@ -100,6 +109,7 @@ export default function OnboardingModal() {
 
               {/* CTA */}
               <button
+                type="button"
                 onClick={handleDismiss}
                 className="w-full py-3 bg-almanac-gold text-almanac-midnight font-medium rounded-lg hover:bg-almanac-gold/90 transition-colors"
               >

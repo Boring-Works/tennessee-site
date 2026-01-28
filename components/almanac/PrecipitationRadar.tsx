@@ -177,6 +177,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         </div>
         <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={() => setIsPlaying(!isPlaying)}
             className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 transition-colors"
             title={isPlaying ? 'Pause animation' : 'Play animation'}

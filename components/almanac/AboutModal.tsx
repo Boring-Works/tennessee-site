@@ -16,6 +16,7 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
       {/* Trigger Button */}
       {iconOnly ? (
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
           className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
           aria-label="About The 1775 Almanac"
@@ -25,6 +26,7 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
         </button>
       ) : (
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
           className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/50 hover:text-almanac-gold transition-colors mt-2"
         >
@@ -61,6 +63,7 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
                   <p className="text-sm text-almanac-parchment/60">Our Story</p>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
                   className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
                   aria-label="Close"

@@ -67,6 +67,7 @@ function DayDetailModal({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-almanac-gold/20">
           <button
+            type="button"
             onClick={onPrev}
             disabled={!hasPrev}
             className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed"
@@ -78,6 +79,7 @@ function DayDetailModal({
             {day.date && <p className="text-xs text-almanac-parchment/50">{day.date}</p>}
           </div>
           <button
+            type="button"
             onClick={onNext}
             disabled={!hasNext}
             className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed"
@@ -187,6 +189,7 @@ function DayDetailModal({
 
         {/* Close button */}
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-3 right-3 p-1 text-almanac-parchment/40 hover:text-almanac-parchment"
         >
@@ -240,6 +243,7 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
 
     return (
       <button
+        type="button"
         key={originalIndex}
         onClick={() => setSelectedIndex(originalIndex)}
         className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer ${
@@ -319,6 +323,7 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
 
                 return (
                   <button
+                    type="button"
                     key={actualIndex}
                     onClick={() => setSelectedIndex(actualIndex)}
                     className="flex flex-col items-center gap-1 py-2 px-2 rounded-md hover:bg-white/10 transition-colors cursor-pointer flex-shrink-0"

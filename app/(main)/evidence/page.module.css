@@ -973,6 +973,67 @@
 }
 
 /* ============================================
+   LIBRARY PROMO - Featured link to Document Library
+   ============================================ */
+
+.libraryPromo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.04) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  border-radius: 2px;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all var(--transition-dignified);
+}
+
+.libraryPromo:hover {
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.12) 0%, rgba(201, 162, 39, 0.06) 100%);
+  border-color: var(--brass);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.15);
+}
+
+.libraryPromoIcon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.libraryPromoText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.libraryPromoText strong {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--wood-dark);
+  font-weight: 500;
+}
+
+.libraryPromoText span {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.8125rem;
+  color: var(--ink-light);
+  font-style: italic;
+}
+
+.libraryPromoArrow {
+  font-size: 1.5rem;
+  color: var(--brass);
+  flex-shrink: 0;
+  transition: transform var(--transition-dignified);
+}
+
+.libraryPromo:hover .libraryPromoArrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
    SOURCES GRID - Card Catalog Drawers
    ============================================ */
 
@@ -1366,6 +1427,18 @@
     font-size: 1.0625rem;
   }
 
+  .libraryPromo {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .libraryPromoText strong {
+    font-size: 1.0625rem;
+  }
+
+  .libraryPromoText span {
+    font-size: 0.875rem;
+  }
+
   .ctaSection {
     padding: 6rem 1.5rem;
   }
@@ -1519,7 +1592,9 @@
   .ctaButton,
   .signersLink,
   .contextContent,
-  .cardCatalogLink {
+  .cardCatalogLink,
+  .libraryPromo,
+  .libraryPromoArrow {
     transition: none;
   }
 
@@ -1532,7 +1607,9 @@
   .quoteCardFeatured:hover,
   .sourceCard:hover,
   .timelineContent:hover,
-  .ctaButton:hover {
+  .ctaButton:hover,
+  .libraryPromo:hover,
+  .libraryPromo:hover .libraryPromoArrow {
     transform: none;
   }
 }

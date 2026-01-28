@@ -163,6 +163,7 @@ export default function NWSAlertBanner({ lat, lon, onAlertChange }: NWSAlertBann
                   {/* Actions */}
                   <div className="flex items-center gap-1 flex-shrink-0">
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation()
                         handleDismiss(alert.id)

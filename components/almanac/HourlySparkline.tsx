@@ -154,6 +154,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         <div className="flex gap-1">
           {(['12H', '24H', '48H'] as TimeRange[]).map((r) => (
             <button
+              type="button"
               key={r}
               onClick={() => setRange(r)}
               className={`px-2 py-1 text-xs rounded transition-colors ${

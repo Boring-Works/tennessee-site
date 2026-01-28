@@ -240,6 +240,7 @@ export default function AlmanacPage() {
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <p className="text-almanac-danger text-center">{error || 'Something went wrong'}</p>
             <button
+              type="button"
               onClick={() => location && fetchWeather(location)}
               className="mt-4 px-4 py-2 bg-gold-leaf text-midnight rounded-sm font-semibold hover:bg-gold-leaf/90 transition-colors"
             >
@@ -546,6 +547,7 @@ export default function AlmanacPage() {
                         todayLow={todayLow}
                       />
                       <button
+                        type="button"
                         onClick={() => {
                           const el = document.getElementById('farmer-memory-deck')
                           el?.scrollIntoView({ behavior: 'smooth' })

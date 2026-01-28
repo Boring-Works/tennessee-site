@@ -345,6 +345,7 @@ export default function First250Page() {
                   <div className={styles['legacy-tier-cta-wrapper']}>
                     {/* In production, these would link to enrollment forms */}
                     <button
+                      type="button"
                       className={styles['legacy-tier-cta']}
                       disabled
                       aria-label={`Enroll as ${framing.name} - Coming March 4, 2026`}

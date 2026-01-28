@@ -1727,4 +1727,15 @@
 }
 
 /* ============================================
- */
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .visit-hero-cta,
+  .visit-hero-scroll,
+  .visit-book-btn,
+  .visit-journey-btn,
+  .visit-groups-btn,
+  .visit-closing-cta {
+    transition: none;
+  }
+}

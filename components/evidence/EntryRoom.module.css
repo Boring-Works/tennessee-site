@@ -1,0 +1,234 @@
+/* Entry Room - Visual Index for Evidence Room */
+
+.entryRoom {
+  background: linear-gradient(180deg, #fffef8 0%, #faf7f0 100%);
+  padding: 2.5rem 1rem 3rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(42, 31, 26, 0.08);
+  position: relative;
+}
+
+/* Paper texture */
+.entryRoom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.entryRoomInner {
+  max-width: 40rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.welcome {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.0625rem);
+  color: #3d3229;
+  line-height: 1.75;
+  margin-bottom: 0.5rem;
+}
+
+.readingTime {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: #7a6b5d;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+/* Collection Grid */
+.collectionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.collectionCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 1.25rem 1rem;
+  background: rgba(255, 254, 248, 0.8);
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collectionCard:hover {
+  border-color: #c9a227;
+  background: rgba(201, 162, 39, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 31, 26, 0.08);
+}
+
+.collectionCard:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 2px;
+}
+
+.collectionIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.collectionName {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: #3d3229;
+  font-weight: 500;
+}
+
+.collectionCount {
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  color: #7a6b5d;
+}
+
+/* Library Link */
+.libraryLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(42, 31, 26, 0.04);
+  border: 1px solid rgba(42, 31, 26, 0.1);
+  border-radius: 2px;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.libraryLink:hover {
+  background: rgba(42, 31, 26, 0.08);
+  border-color: rgba(42, 31, 26, 0.2);
+}
+
+.libraryLink:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 2px;
+}
+
+.libraryIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.libraryText {
+  text-align: left;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.libraryText strong {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  color: #3d3229;
+  font-weight: 500;
+}
+
+.libraryText span {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: #7a6b5d;
+}
+
+.libraryArrow {
+  font-size: 1.25rem;
+  color: #c9a227;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.libraryLink:hover .libraryArrow {
+  transform: translateX(4px);
+}
+
+/* Scroll Hint */
+.scrollHint {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: #7a6b5d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scrollArrow {
+  font-size: 1rem;
+  opacity: 0.6;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Tablet+ */
+@media (min-width: 640px) {
+  .entryRoom {
+    padding: 3rem 1.5rem 3.5rem;
+  }
+
+  .collectionGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .collectionCard {
+    padding: 1.5rem 1rem;
+  }
+
+  .collectionIcon {
+    font-size: 1.75rem;
+  }
+
+  .collectionName {
+    font-size: 0.9375rem;
+  }
+
+  .libraryLink {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .entryRoom {
+    padding: 3.5rem 2rem 4rem;
+  }
+
+  .collectionCard:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .collectionCard,
+  .libraryLink,
+  .libraryArrow,
+  .scrollArrow {
+    transition: none;
+    animation: none;
+  }
+
+  .collectionCard:hover,
+  .libraryLink:hover .libraryArrow {
+    transform: none;
+  }
+}

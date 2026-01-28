@@ -263,7 +263,7 @@ export function ConsolidatedExperience() {
             <div
               className={`flex flex-wrap items-center justify-center gap-3 mb-10 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
             >
-              {['Families', 'History Enthusiasts', 'School Groups'].map((tag, i) => (
+              {['Families', 'History Enthusiasts', 'School Groups'].map((tag) => (
                 <span
                   key={tag}
                   className="px-4 py-1.5 border border-secondary/20 text-xs uppercase tracking-wider text-secondary/70 rounded-sm"

@@ -27,6 +27,7 @@ export default function AlmanacError({
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
+            type="button"
             onClick={reset}
             className="inline-block bg-almanac-gold text-midnight font-semibold px-8 py-3 rounded-sm hover:bg-almanac-gold/90 transition-colors uppercase tracking-wider text-sm"
           >

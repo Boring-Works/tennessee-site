@@ -34,7 +34,6 @@ export function generateICS(event: CalendarEvent): string {
   const startDate = formatICSDate(event.date)
   // For all-day events, end date should be the day after
   const endDateStr = event.endDate || event.date
-  const endDate = formatICSDate(endDateStr)
 
   // Calculate the day after for all-day event end
   const [year, month, day] = endDateStr.split('-').map(Number)

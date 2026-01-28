@@ -19,6 +19,15 @@ const eslintConfig = defineConfig([
       // Disallow console.* in production code
       // Use lib/logger.ts instead for dev-only logging
       'no-console': 'error',
+      // Allow unused variables/args prefixed with underscore
+      // This is standard TypeScript convention for intentionally unused params
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ])

@@ -10,7 +10,11 @@ interface StaleDataWarningProps {
   isLoading: boolean
 }
 
-export default function StaleDataWarning({ lastUpdated, onRefresh, isLoading }: StaleDataWarningProps) {
+export default function StaleDataWarning({
+  lastUpdated,
+  onRefresh,
+  isLoading,
+}: StaleDataWarningProps) {
   const [minutesOld, setMinutesOld] = useState(0)
 
   useEffect(() => {
@@ -44,12 +48,15 @@ export default function StaleDataWarning({ lastUpdated, onRefresh, isLoading }: 
         }`}
       >
         <div className="flex items-center gap-2">
-          <AlertCircle className={`w-4 h-4 ${isUrgent ? 'text-almanac-danger' : 'text-almanac-warning'}`} />
+          <AlertCircle
+            className={`w-4 h-4 ${isUrgent ? 'text-almanac-danger' : 'text-almanac-warning'}`}
+          />
           <span className={`text-sm ${isUrgent ? 'text-almanac-danger' : 'text-almanac-warning'}`}>
             Data is {minutesOld} minutes old
           </span>
         </div>
         <button
+          type="button"
           onClick={onRefresh}
           disabled={isLoading}
           className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded transition-colors ${

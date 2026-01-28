@@ -120,6 +120,7 @@ export function RadarPreview({ latitude, longitude, onExpand }: RadarPreviewProp
         {/* Controls overlay */}
         <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
           <button
+            type="button"
             onClick={() => setIsPlaying(!isPlaying)}
             className="p-1.5 bg-black/50 rounded-full hover:bg-black/70 transition-colors"
             aria-label={isPlaying ? 'Pause radar animation' : 'Play radar animation'}
@@ -133,6 +134,7 @@ export function RadarPreview({ latitude, longitude, onExpand }: RadarPreviewProp
 
           {onExpand && (
             <button
+              type="button"
               onClick={onExpand}
               className="p-1.5 bg-black/50 rounded-full hover:bg-black/70 transition-colors"
               aria-label="Expand radar view"

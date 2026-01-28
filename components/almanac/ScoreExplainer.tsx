@@ -23,105 +23,108 @@ export interface ScoreExplanation {
 export const SCORE_EXPLANATIONS: Record<string, ScoreExplanation> = {
   sower: {
     title: "Sower's Index",
-    subtitle: "Gardening & Planting",
-    description: "Rates today's conditions for outdoor gardening work—planting, transplanting, weeding, and soil work.",
+    subtitle: 'Gardening & Planting',
+    description:
+      "Rates today's conditions for outdoor gardening work—planting, transplanting, weeding, and soil work.",
     whoItsFor: [
-      "Home gardeners planning planting days",
-      "Landscapers scheduling outdoor work",
-      "Farmers deciding on field work",
-      "Anyone starting seeds or transplants",
+      'Home gardeners planning planting days',
+      'Landscapers scheduling outdoor work',
+      'Farmers deciding on field work',
+      'Anyone starting seeds or transplants',
     ],
     howItsCalculated: [
-      "Soil temperature (most important for seed germination)",
-      "Air temperature (transplant stress)",
-      "Rain probability and current precipitation",
-      "Wind speed (damages young plants)",
-      "Ground saturation (compaction risk)",
+      'Soil temperature (most important for seed germination)',
+      'Air temperature (transplant stress)',
+      'Rain probability and current precipitation',
+      'Wind speed (damages young plants)',
+      'Ground saturation (compaction risk)',
     ],
     scoreGuide: [
-      { range: "9-10", meaning: "Perfect conditions—plant anything" },
-      { range: "7-8", meaning: "Good day, minor considerations" },
-      { range: "5-6", meaning: "Workable with caution" },
-      { range: "3-4", meaning: "Poor—delay if possible" },
-      { range: "1-2", meaning: "Avoid—conditions will harm plants" },
+      { range: '9-10', meaning: 'Perfect conditions—plant anything' },
+      { range: '7-8', meaning: 'Good day, minor considerations' },
+      { range: '5-6', meaning: 'Workable with caution' },
+      { range: '3-4', meaning: 'Poor—delay if possible' },
+      { range: '1-2', meaning: 'Avoid—conditions will harm plants' },
     ],
   },
-  
+
   shepherd: {
-    title: "Outdoor Alert",
-    subtitle: "Pets, Kids & Livestock",
-    description: "Rates safety for extended outdoor time—walks, play, yard work, and animal care.",
+    title: 'Outdoor Alert',
+    subtitle: 'Pets, Kids & Livestock',
+    description: 'Rates safety for extended outdoor time—walks, play, yard work, and animal care.',
     whoItsFor: [
-      "Pet owners planning walks or outdoor time",
-      "Parents with children who play outside",
-      "Livestock and farm animal owners",
-      "Anyone working outdoors for extended periods",
+      'Pet owners planning walks or outdoor time',
+      'Parents with children who play outside',
+      'Livestock and farm animal owners',
+      'Anyone working outdoors for extended periods',
     ],
     howItsCalculated: [
-      "Heat Index (combines temp + humidity for heat stress)",
-      "Wind Chill (cold + wind = frostbite risk)",
-      "Precipitation (wet conditions)",
-      "Freezing rain detection (extremely dangerous)",
-      "High wind warnings",
+      'Heat Index (combines temp + humidity for heat stress)',
+      'Wind Chill (cold + wind = frostbite risk)',
+      'Precipitation (wet conditions)',
+      'Freezing rain detection (extremely dangerous)',
+      'High wind warnings',
     ],
     scoreGuide: [
-      { range: "9-10", meaning: "Safe for extended outdoor time" },
-      { range: "7-8", meaning: "Good with basic precautions" },
-      { range: "5-6", meaning: "Limit time, watch for stress signs" },
-      { range: "3-4", meaning: "Brief trips only—risk of harm" },
-      { range: "1-2", meaning: "Stay inside—dangerous conditions" },
+      { range: '9-10', meaning: 'Safe for extended outdoor time' },
+      { range: '7-8', meaning: 'Good with basic precautions' },
+      { range: '5-6', meaning: 'Limit time, watch for stress signs' },
+      { range: '3-4', meaning: 'Brief trips only—risk of harm' },
+      { range: '1-2', meaning: 'Stay inside—dangerous conditions' },
     ],
   },
-  
+
   keeper: {
     title: "Keeper's Gauge",
-    subtitle: "Property Maintenance",
-    description: "Rates conditions for exterior home maintenance—painting, staining, repairs, and outdoor projects.",
+    subtitle: 'Property Maintenance',
+    description:
+      'Rates conditions for exterior home maintenance—painting, staining, repairs, and outdoor projects.',
     whoItsFor: [
-      "Homeowners doing DIY exterior work",
-      "Painters and contractors",
-      "Anyone applying finishes (paint, stain, sealant)",
-      "Gutter cleaning, roof work, ladder tasks",
+      'Homeowners doing DIY exterior work',
+      'Painters and contractors',
+      'Anyone applying finishes (paint, stain, sealant)',
+      'Gutter cleaning, roof work, ladder tasks',
     ],
     howItsCalculated: [
       "Dew point spread (paint won't cure if too humid)",
-      "Rain probability (obvious)",
-      "Wind gusts (ladder safety, overspray)",
-      "Temperature (most paints need 50°F+)",
-      "Humidity levels (affects dry time)",
+      'Rain probability (obvious)',
+      'Wind gusts (ladder safety, overspray)',
+      'Temperature (most paints need 50°F+)',
+      'Humidity levels (affects dry time)',
     ],
     scoreGuide: [
-      { range: "9-10", meaning: "Ideal—finishes will cure perfectly" },
-      { range: "7-8", meaning: "Good, watch timing" },
-      { range: "5-6", meaning: "Prep work only, no finishes" },
-      { range: "3-4", meaning: "Interior work or planning" },
-      { range: "1-2", meaning: "Unsafe—stay off ladders" },
+      { range: '9-10', meaning: 'Ideal—finishes will cure perfectly' },
+      { range: '7-8', meaning: 'Good, watch timing' },
+      { range: '5-6', meaning: 'Prep work only, no finishes' },
+      { range: '3-4', meaning: 'Interior work or planning' },
+      { range: '1-2', meaning: 'Unsafe—stay off ladders' },
     ],
   },
-  
+
   builder: {
     title: "Builder's Grade",
-    subtitle: "Construction & Heavy Work",
-    description: "Rates conditions for construction, heavy labor, and professional outdoor work using OSHA guidelines.",
+    subtitle: 'Construction & Heavy Work',
+    description:
+      'Rates conditions for construction, heavy labor, and professional outdoor work using OSHA guidelines.',
     whoItsFor: [
-      "Construction workers and contractors",
-      "Roofers, framers, concrete crews",
-      "Landscaping heavy equipment operators",
-      "Anyone doing strenuous outdoor labor",
+      'Construction workers and contractors',
+      'Roofers, framers, concrete crews',
+      'Landscaping heavy equipment operators',
+      'Anyone doing strenuous outdoor labor',
     ],
     howItsCalculated: [
-      "Heat Index (OSHA heat illness thresholds)",
-      "Wind Chill (OSHA cold stress guidelines)",
-      "Wind gusts (crane and scaffold safety)",
-      "Precipitation (site safety)",
-      "Ground conditions (equipment operation)",
+      'Heat Index (OSHA heat illness thresholds)',
+      'Wind Chill (OSHA cold stress guidelines)',
+      'Wind gusts (crane and scaffold safety)',
+      'Precipitation (site safety)',
+      'Ground conditions (equipment operation)',
     ],
     scoreGuide: [
-      { range: "9-10", meaning: "Full productivity, no restrictions" },
-      { range: "7-8", meaning: "Good, standard safety protocols" },
-      { range: "5-6", meaning: "Work with mandatory breaks" },
-      { range: "3-4", meaning: "Reduced crews, limited tasks" },
-      { range: "1-2", meaning: "Site closed—unsafe conditions" },
+      { range: '9-10', meaning: 'Full productivity, no restrictions' },
+      { range: '7-8', meaning: 'Good, standard safety protocols' },
+      { range: '5-6', meaning: 'Work with mandatory breaks' },
+      { range: '3-4', meaning: 'Reduced crews, limited tasks' },
+      { range: '1-2', meaning: 'Site closed—unsafe conditions' },
     ],
   },
 }
@@ -146,6 +149,7 @@ export function InfoButton({ scoreKey, size = 'sm' }: InfoButtonProps) {
   return (
     <>
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className="text-almanac-parchment/40 hover:text-almanac-gold transition-colors p-1 -m-1"
         aria-label={`Learn more about ${explanation.title}`}
@@ -154,12 +158,7 @@ export function InfoButton({ scoreKey, size = 'sm' }: InfoButtonProps) {
       </button>
 
       <AnimatePresence>
-        {isOpen && (
-          <ScoreModal
-            explanation={explanation}
-            onClose={() => setIsOpen(false)}
-          />
-        )}
+        {isOpen && <ScoreModal explanation={explanation} onClose={() => setIsOpen(false)} />}
       </AnimatePresence>
     </>
   )
@@ -201,6 +200,7 @@ function ScoreModal({ explanation, onClose }: ScoreModalProps) {
             <p className="text-sm text-almanac-parchment/60">{explanation.subtitle}</p>
           </div>
           <button
+            type="button"
             onClick={onClose}
             className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
             aria-label="Close"
@@ -212,9 +212,7 @@ function ScoreModal({ explanation, onClose }: ScoreModalProps) {
         {/* Scrollable Content */}
         <div className="p-4 max-h-[70vh] overflow-y-auto space-y-5">
           {/* Description */}
-          <p className="text-almanac-parchment/80 leading-relaxed">
-            {explanation.description}
-          </p>
+          <p className="text-almanac-parchment/80 leading-relaxed">{explanation.description}</p>
 
           {/* Who It's For */}
           <div>
@@ -248,13 +246,19 @@ function ScoreModal({ explanation, onClose }: ScoreModalProps) {
             <div className="space-y-2">
               {explanation.scoreGuide.map((guide, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <span className={`text-sm font-mono font-bold w-12 ${
-                    i === 0 ? 'text-green-400' :
-                    i === 1 ? 'text-green-400/80' :
-                    i === 2 ? 'text-yellow-400' :
-                    i === 3 ? 'text-orange-400' :
-                    'text-red-400'
-                  }`}>
+                  <span
+                    className={`text-sm font-mono font-bold w-12 ${
+                      i === 0
+                        ? 'text-green-400'
+                        : i === 1
+                          ? 'text-green-400/80'
+                          : i === 2
+                            ? 'text-yellow-400'
+                            : i === 3
+                              ? 'text-orange-400'
+                              : 'text-red-400'
+                    }`}
+                  >
                     {guide.range}
                   </span>
                   <span className="text-sm text-almanac-parchment/70">{guide.meaning}</span>
@@ -266,8 +270,8 @@ function ScoreModal({ explanation, onClose }: ScoreModalProps) {
           {/* Data Source */}
           <div className="pt-3 border-t border-almanac-gold/10">
             <p className="text-xs text-almanac-parchment/40">
-              Calculations use NOAA heat index, NWS wind chill, and OSHA workplace safety guidelines. 
-              Weather data from Open-Meteo.
+              Calculations use NOAA heat index, NWS wind chill, and OSHA workplace safety
+              guidelines. Weather data from Open-Meteo.
             </p>
           </div>
         </div>
@@ -286,6 +290,7 @@ export function WorkabilityExplainer() {
   return (
     <>
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className="inline-flex items-center gap-1.5 text-sm text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
       >
@@ -315,6 +320,7 @@ export function WorkabilityExplainer() {
               <div className="flex items-start justify-between p-4 border-b border-almanac-gold/20">
                 <h2 className="font-serif text-xl text-gold-leaf">Today&apos;s Workability</h2>
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
                   className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
                 >
@@ -324,15 +330,19 @@ export function WorkabilityExplainer() {
 
               <div className="p-4 space-y-4">
                 <p className="text-almanac-parchment/80 leading-relaxed">
-                  Workability scores rate today&apos;s weather conditions for different outdoor activities on a scale of 1-10.
+                  Workability scores rate today&apos;s weather conditions for different outdoor
+                  activities on a scale of 1-10.
                 </p>
 
                 <p className="text-almanac-parchment/70 text-sm leading-relaxed">
-                  Unlike a simple forecast, these scores combine multiple weather factors—temperature, humidity, wind, precipitation probability—into actionable guidance.
+                  Unlike a simple forecast, these scores combine multiple weather
+                  factors—temperature, humidity, wind, precipitation probability—into actionable
+                  guidance.
                 </p>
 
                 <p className="text-almanac-parchment/70 text-sm leading-relaxed">
-                  Tap the <Info className="w-3.5 h-3.5 inline text-almanac-gold/60" /> icon on any score card to learn exactly what it measures and who it&apos;s designed for.
+                  Tap the <Info className="w-3.5 h-3.5 inline text-almanac-gold/60" /> icon on any
+                  score card to learn exactly what it measures and who it&apos;s designed for.
                 </p>
 
                 <div className="pt-3 border-t border-almanac-gold/10">

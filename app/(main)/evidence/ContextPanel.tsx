@@ -9,6 +9,7 @@ export function ContextPanel({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.contextPanel}>
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={styles.contextToggle}
         aria-expanded={isOpen}

@@ -18,6 +18,7 @@ export default function EnvironmentalWatch({ lat, lon }: EnvironmentalWatchProps
     <section className="space-y-4" role="region" aria-label="Environmental monitoring">
       {/* Section Header - Clickable to collapse on mobile */}
       <button
+        type="button"
         onClick={() => setIsExpanded(!isExpanded)}
         className="flex items-center gap-2 w-full text-left lg:cursor-default"
         aria-expanded={isExpanded}

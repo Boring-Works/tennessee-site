@@ -3,14 +3,16 @@
 import { useScrollReveal, useStaggeredReveal } from '@/hooks/useScrollReveal'
 
 /**
- * ConsolidatedStory Section
- * Merges: MysteryHook + ExperimentSection + ScrollTimeline + ContrastStatement
+ * ConsolidatedStory Section - ENHANCED VISUAL DESIGN
+ * Pushes CSS/Tailwind limits for maximum visual impact
  *
- * Content preserved:
- * - "Before there was a Tennessee, there was this ground."
- * - "Could democracy survive beyond the Appalachians?"
- * - 1770/1780/1790 timeline with full details
- * - "This is not where they gathered... This is where they governed."
+ * Visual techniques:
+ * - Animated grain texture overlay
+ * - Period-authentic decorative flourishes
+ * - Dramatic typography with drop caps
+ * - Glowing timeline markers with pulse animation
+ * - Strikethrough reveal on contrast lines
+ * - Radial spotlight effects
  */
 
 const timelineData = [
@@ -18,23 +20,26 @@ const timelineData = [
     year: '1770',
     text: 'The Cobbs settled this ground.',
     detail: 'Three generations would call it home.',
+    icon: '🏠',
   },
   {
     year: '1780',
     text: 'They armed the Revolution.',
     detail: 'Supplied the Overmountain Men at Kings Mountain.',
+    icon: '⚔️',
   },
   {
     year: '1790',
     text: 'Governor Blount made it the seat of federal power.',
     detail: 'The first capital of the Southwest Territory.',
+    icon: '🏛️',
   },
 ]
 
 const contrastLines = [
-  { text: 'This is not where they gathered.', highlight: false, emphasis: false },
-  { text: 'This is not where they farmed.', highlight: false, emphasis: false },
-  { text: 'This is where they governed.', highlight: true, emphasis: true },
+  { text: 'This is not where they gathered.', strike: true },
+  { text: 'This is not where they farmed.', strike: true },
+  { text: 'This is where they governed.', strike: false, finale: true },
 ]
 
 export function ConsolidatedStory() {
@@ -53,106 +58,293 @@ export function ConsolidatedStory() {
 
   return (
     <section className="relative bg-primary overflow-hidden">
-      {/* Gradient background for entire section */}
+      {/* === LAYERED BACKGROUND SYSTEM === */}
+
+      {/* Base gradient */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(180deg, #0a1628 0%, #0d1f35 25%, #050d18 50%, #0a1628 75%, #0d1f35 100%)`,
+          background: `
+            linear-gradient(180deg,
+              #0a1628 0%,
+              #0d1f35 20%,
+              #071220 40%,
+              #0a1628 60%,
+              #0d1f35 80%,
+              #050d18 100%
+            )
+          `,
         }}
         aria-hidden="true"
       />
 
-      {/* Part 1: Mystery Hook */}
-      <div ref={hookRef} className="relative z-10 py-20 md:py-28">
+      {/* Animated grain texture */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          animation: 'grain 8s steps(10) infinite',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Radial spotlight for depth */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 162, 39, 0.03) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 30% 80%, rgba(139, 69, 19, 0.05) 0%, transparent 40%),
+            radial-gradient(ellipse 60% 40% at 70% 60%, rgba(201, 162, 39, 0.02) 0%, transparent 40%)
+          `,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* === PART 1: MYSTERY HOOK === */}
+      <div ref={hookRef} className="relative z-10 py-24 md:py-36">
+        {/* Decorative top flourish */}
+        <div
+          className={`flex items-center justify-center gap-4 mb-12 transition-all duration-1000 ${hookVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          aria-hidden="true"
+        >
+          <span className="text-accent/30 text-2xl transform -scale-x-100">❧</span>
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+          <span className="text-accent/50 text-sm">✦</span>
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+          <span className="text-accent/30 text-2xl">❧</span>
+        </div>
+
         <div className="max-w-4xl mx-auto px-6 text-center">
+          {/* Drop cap treatment */}
           <p
-            className={`font-serif-elegant text-[clamp(1.75rem,5vw,3rem)] text-white/90 leading-relaxed italic fade-in-up ${hookVisible ? 'visible' : ''}`}
+            className={`font-serif-elegant text-[clamp(2rem,6vw,3.5rem)] text-white/90 leading-[1.3] transition-all duration-1000 delay-200 ${hookVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            Before there was a Tennessee,
+            <span
+              className="float-left text-[3em] leading-[0.8] mr-3 mt-1 font-serif font-bold text-accent/80"
+              style={{
+                textShadow: '0 0 40px rgba(201, 162, 39, 0.3)',
+              }}
+            >
+              B
+            </span>
+            <span className="italic">efore there was a Tennessee,</span>
             <br />
-            <span className="text-accent">there was this ground.</span>
+            <span
+              className="text-accent font-semibold"
+              style={{
+                textShadow: '0 0 60px rgba(201, 162, 39, 0.2)',
+              }}
+            >
+              there was this ground.
+            </span>
           </p>
+        </div>
+
+        {/* Bottom flourish */}
+        <div
+          className={`flex items-center justify-center gap-3 mt-12 transition-all duration-1000 delay-500 ${hookVisible ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden="true"
+        >
+          <div className="w-16 h-px bg-gradient-to-r from-transparent to-accent/30" />
+          <span className="text-accent/40 text-xs">◆</span>
+          <div className="w-16 h-px bg-gradient-to-l from-transparent to-accent/30" />
         </div>
       </div>
 
-      {/* Part 2: The Bold Experiment */}
-      <div ref={questionRef} className="relative z-10 py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p
-            className={`text-[10px] uppercase tracking-[0.3em] text-accent/60 mb-8 fade-in-up ${questionVisible ? 'visible' : ''}`}
-          >
-            The Bold Experiment
-          </p>
+      {/* === PART 2: THE BOLD EXPERIMENT === */}
+      <div ref={questionRef} className="relative z-10 py-20 md:py-32">
+        {/* Subtle vignette for this section */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(ellipse 100% 100% at 50% 50%, transparent 0%, rgba(5, 13, 24, 0.4) 100%)`,
+          }}
+          aria-hidden="true"
+        />
 
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
+          {/* Section label with animated underline */}
+          <div
+            className={`inline-block mb-10 transition-all duration-700 ${questionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          >
+            <p className="text-[11px] uppercase tracking-[0.4em] text-accent/70 mb-2">
+              The Bold Experiment
+            </p>
+            <div
+              className={`h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent transition-all duration-1000 delay-300 ${questionVisible ? 'w-full' : 'w-0'}`}
+              style={{ margin: '0 auto' }}
+            />
+          </div>
+
+          {/* Context line */}
           <p
-            className={`font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/80 leading-relaxed mb-6 fade-in-up stagger-1 ${questionVisible ? 'visible' : ''}`}
+            className={`font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${questionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
             In 1790, a question hung over the young republic:
           </p>
 
-          <p
-            className={`font-serif-elegant text-[clamp(1.5rem,4vw,2.25rem)] text-white/90 leading-relaxed italic fade-in-up stagger-2 ${questionVisible ? 'visible' : ''}`}
-          >
-            Could American democracy survive beyond the Appalachians?
-          </p>
-
-          <p
-            className={`text-sm text-white/50 mt-4 fade-in-up stagger-2 ${questionVisible ? 'visible' : ''}`}
-          >
-            600 miles from Philadelphia. Three weeks by horse.
-          </p>
-
+          {/* The Big Question - with quote marks */}
           <div
-            className={`w-16 h-px bg-accent/40 mx-auto my-10 fade-in-up stagger-3 ${questionVisible ? 'visible' : ''}`}
-          />
-
-          <p
-            className={`font-serif text-[clamp(1.25rem,3vw,1.5rem)] text-accent leading-relaxed fade-in-up stagger-4 ${questionVisible ? 'visible' : ''}`}
+            className={`relative inline-block transition-all duration-1000 delay-400 ${questionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            Rocky Mount provided the answer.
-          </p>
+            <span
+              className="absolute -left-8 -top-4 text-6xl text-accent/20 font-serif select-none"
+              aria-hidden="true"
+            >
+              &ldquo;
+            </span>
+            <p
+              className="font-serif-elegant text-[clamp(1.6rem,4.5vw,2.5rem)] text-white leading-[1.4] italic px-4"
+              style={{
+                textShadow: '0 2px 40px rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              Could American democracy survive
+              <br />
+              <span className="text-accent/90">beyond the Appalachians?</span>
+            </p>
+            <span
+              className="absolute -right-4 -bottom-6 text-6xl text-accent/20 font-serif select-none"
+              aria-hidden="true"
+            >
+              &rdquo;
+            </span>
+          </div>
+
+          {/* Distance visualization */}
+          <div
+            className={`mt-12 mb-10 transition-all duration-700 delay-600 ${questionVisible ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <div className="flex items-center justify-center gap-3 text-white/40 text-sm">
+              <span className="font-serif">Philadelphia</span>
+              <div className="relative w-32 md:w-48 h-px bg-white/20">
+                <div
+                  className={`absolute inset-y-0 left-0 bg-gradient-to-r from-accent/60 to-accent/20 transition-all duration-1500 delay-800 ${questionVisible ? 'w-full' : 'w-0'}`}
+                />
+                {/* Mile markers */}
+                <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] text-accent/60">
+                  600 miles
+                </span>
+              </div>
+              <span className="font-serif text-accent/80">Rocky Mount</span>
+            </div>
+            <p className="text-xs text-white/30 mt-3 tracking-wide">
+              Three weeks by horse through wilderness
+            </p>
+          </div>
+
+          {/* The Answer */}
+          <div
+            className={`relative transition-all duration-700 delay-800 ${questionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          >
+            <div className="absolute left-1/2 -translate-x-1/2 -top-6 w-px h-6 bg-gradient-to-b from-transparent to-accent/40" />
+            <p
+              className="font-serif text-[clamp(1.4rem,3.5vw,1.75rem)] text-accent font-semibold"
+              style={{
+                textShadow: '0 0 30px rgba(201, 162, 39, 0.25)',
+              }}
+            >
+              Rocky Mount provided the answer.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Part 3: Timeline */}
-      <div className="relative z-10 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-6">
+      {/* === PART 3: TIMELINE === */}
+      <div className="relative z-10 py-20 md:py-32">
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-accent/50">
+            Three Decades That Shaped a State
+          </p>
+        </div>
+
+        <div className="max-w-5xl mx-auto px-6">
           <div className="relative">
-            {/* Vertical line */}
+            {/* Glowing vertical line */}
             <div
-              className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-accent/20 transform md:-translate-x-1/2"
+              className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2"
+              style={{
+                background: `linear-gradient(180deg,
+                  transparent 0%,
+                  rgba(201, 162, 39, 0.4) 10%,
+                  rgba(201, 162, 39, 0.4) 90%,
+                  transparent 100%
+                )`,
+                boxShadow: '0 0 20px rgba(201, 162, 39, 0.2)',
+              }}
               aria-hidden="true"
             />
 
             {/* Timeline items */}
-            <div className="space-y-12 md:space-y-20">
+            <div className="space-y-16 md:space-y-24">
               {timelineData.map((item, index) => (
                 <div
                   key={item.year}
                   ref={timelineRefs[index]}
-                  className={`relative pl-20 md:pl-0 md:grid md:grid-cols-2 md:gap-12 fade-in-up ${timelineVisible[index] ? 'visible' : ''}`}
+                  className={`relative pl-24 md:pl-0 md:grid md:grid-cols-2 md:gap-16 transition-all duration-700 ${timelineVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
                 >
-                  {/* Year marker */}
+                  {/* Year marker with glow */}
                   <div
-                    className="absolute left-0 md:left-1/2 w-16 h-16 rounded-full bg-primary border-2 border-accent/40 flex items-center justify-center transform md:-translate-x-1/2"
-                    aria-hidden="true"
+                    className="absolute left-0 md:left-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transform md:-translate-x-1/2 z-10"
+                    style={{
+                      background: `radial-gradient(circle, #0d1f35 0%, #0a1628 100%)`,
+                      border: '2px solid rgba(201, 162, 39, 0.5)',
+                      boxShadow: timelineVisible[index]
+                        ? `
+                          0 0 20px rgba(201, 162, 39, 0.3),
+                          0 0 40px rgba(201, 162, 39, 0.1),
+                          inset 0 0 20px rgba(201, 162, 39, 0.1)
+                        `
+                        : 'none',
+                      transition: 'box-shadow 0.5s ease',
+                    }}
                   >
-                    <span className="text-accent/80 font-serif text-lg font-bold">
-                      {item.year.slice(-2)}
-                    </span>
+                    <div className="text-center">
+                      <span className="block text-lg md:text-xl">{item.icon}</span>
+                      <span className="block text-accent/90 font-serif text-xs font-bold mt-0.5">
+                        {item.year.slice(-2)}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Content - alternating sides on desktop */}
+                  {/* Content card - alternating sides */}
                   <div
-                    className={`${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:col-start-2 md:pl-12'}`}
+                    className={`${index % 2 === 0 ? 'md:text-right md:pr-16' : 'md:col-start-2 md:pl-16'}`}
                   >
-                    <span className="block text-[clamp(2.5rem,8vw,4rem)] font-serif font-bold text-white/10 leading-none mb-2">
+                    {/* Large year watermark */}
+                    <span
+                      className="block text-[clamp(3rem,10vw,5rem)] font-serif font-bold leading-none mb-3"
+                      style={{
+                        background: `linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)`,
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
                       {item.year}
                     </span>
-                    <p className="font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/90 leading-relaxed mb-2">
+
+                    {/* Main text */}
+                    <p
+                      className="font-serif text-[clamp(1.3rem,3.5vw,1.85rem)] text-white/95 leading-relaxed mb-3"
+                      style={{
+                        textShadow: '0 2px 20px rgba(0, 0, 0, 0.3)',
+                      }}
+                    >
                       {item.text}
                     </p>
-                    <p className="text-sm text-white/50">{item.detail}</p>
+
+                    {/* Detail with subtle styling */}
+                    <p className="text-sm text-white/50 font-light tracking-wide">{item.detail}</p>
+
+                    {/* Decorative line */}
+                    <div
+                      className={`mt-4 h-px bg-gradient-to-${index % 2 === 0 ? 'l' : 'r'} from-accent/30 to-transparent ${index % 2 === 0 ? 'ml-auto' : ''}`}
+                      style={{ width: '60%' }}
+                    />
                   </div>
                 </div>
               ))}
@@ -161,38 +353,117 @@ export function ConsolidatedStory() {
         </div>
       </div>
 
-      {/* Part 4: Contrast Statement */}
-      <div className="relative z-10 py-20 md:py-28">
+      {/* === PART 4: CONTRAST STATEMENT === */}
+      <div className="relative z-10 py-24 md:py-36">
+        {/* Dramatic radial spotlight */}
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(ellipse 100% 80% at 50% 50%, #0d1f35 0%, #050d18 100%)`,
+            background: `
+              radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13, 31, 53, 0.8) 0%, rgba(5, 13, 24, 1) 70%),
+              radial-gradient(ellipse 50% 30% at 50% 50%, rgba(201, 162, 39, 0.05) 0%, transparent 50%)
+            `,
           }}
           aria-hidden="true"
         />
+
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <div className="space-y-6 md:space-y-8">
+          {/* Decorative opener */}
+          <div className="flex items-center justify-center gap-4 mb-12" aria-hidden="true">
+            <div className="w-20 h-px bg-gradient-to-r from-transparent to-white/20" />
+            <span className="text-white/20 text-lg">✧</span>
+            <div className="w-20 h-px bg-gradient-to-l from-transparent to-white/20" />
+          </div>
+
+          <div className="space-y-8 md:space-y-10">
             {contrastLines.map((line, index) => (
               <p
                 key={index}
                 ref={contrastRefs[index]}
-                className={`font-serif-elegant leading-relaxed reveal-line ${
-                  contrastVisible[index] ? 'visible' : ''
+                className={`font-serif-elegant leading-relaxed transition-all duration-700 ${
+                  contrastVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 } ${
-                  line.emphasis
-                    ? 'text-[clamp(1.75rem,5vw,3rem)] text-accent italic font-semibold mt-2'
-                    : line.highlight
-                      ? 'text-[clamp(1.5rem,4vw,2.5rem)] text-accent italic font-semibold'
-                      : 'text-[clamp(1.5rem,4vw,2.5rem)] text-white/70'
+                  line.finale
+                    ? 'text-[clamp(2rem,6vw,3.5rem)] font-semibold mt-4'
+                    : 'text-[clamp(1.5rem,4vw,2.5rem)]'
                 }`}
-                style={{ transitionDelay: `${index * 0.15}s` }}
+                style={{
+                  transitionDelay: `${index * 200}ms`,
+                  color: line.finale ? undefined : 'rgba(255, 255, 255, 0.5)',
+                  textDecoration: line.strike && contrastVisible[index] ? 'line-through' : 'none',
+                  textDecorationColor: 'rgba(255, 255, 255, 0.3)',
+                  textDecorationThickness: '2px',
+                }}
               >
-                {line.text}
+                {line.finale ? (
+                  <span
+                    className="text-accent italic"
+                    style={{
+                      textShadow: `
+                        0 0 40px rgba(201, 162, 39, 0.4),
+                        0 0 80px rgba(201, 162, 39, 0.2)
+                      `,
+                    }}
+                  >
+                    {line.text}
+                  </span>
+                ) : (
+                  line.text
+                )}
               </p>
             ))}
           </div>
+
+          {/* Final flourish */}
+          <div
+            className={`flex items-center justify-center gap-3 mt-16 transition-all duration-700 delay-700 ${contrastVisible[2] ? 'opacity-100' : 'opacity-0'}`}
+            aria-hidden="true"
+          >
+            <span className="text-accent/30 transform -scale-x-100">❧</span>
+            <div className="w-12 h-px bg-accent/30" />
+            <span className="text-accent/40">✦</span>
+            <div className="w-12 h-px bg-accent/30" />
+            <span className="text-accent/30">❧</span>
+          </div>
         </div>
       </div>
+
+      {/* === KEYFRAME ANIMATIONS === */}
+      <style jsx>{`
+        @keyframes grain {
+          0%,
+          100% {
+            transform: translate(0, 0);
+          }
+          10% {
+            transform: translate(-2%, -2%);
+          }
+          20% {
+            transform: translate(2%, 2%);
+          }
+          30% {
+            transform: translate(-1%, 1%);
+          }
+          40% {
+            transform: translate(1%, -1%);
+          }
+          50% {
+            transform: translate(-2%, 2%);
+          }
+          60% {
+            transform: translate(2%, -2%);
+          }
+          70% {
+            transform: translate(-1%, -1%);
+          }
+          80% {
+            transform: translate(1%, 1%);
+          }
+          90% {
+            transform: translate(-2%, -1%);
+          }
+        }
+      `}</style>
     </section>
   )
 }

@@ -57,12 +57,14 @@ function ScoreCard({
   subtitle,
   score,
   index,
+  compact = false,
 }: {
   scoreKey: string
   title: string
   subtitle: string
   score: TaskScore
   index: number
+  compact?: boolean
 }) {
   const isCritical = isCriticalScore(score.score)
   const cardStyle = getCardStyle(score.score)
@@ -71,32 +73,36 @@ function ScoreCard({
 
   return (
     <div
-      className={`rounded-sm p-4 border transition-all card-hover ${cardStyle}`}
+      className={`rounded-sm border transition-all card-hover ${cardStyle} ${compact ? 'p-2 lg:p-3' : 'p-3 lg:p-4'}`}
       role="article"
       aria-label={`${title}: ${score.score} out of 10, ${score.label}`}
     >
-      <div className="flex justify-between items-start mb-3">
-        <div className="flex items-start gap-2">
+      <div className={`flex justify-between items-start ${compact ? 'mb-1' : 'mb-2'}`}>
+        <div className="flex items-start gap-1">
           <div>
-            <h3 className="font-serif text-lg text-gold-leaf">{title}</h3>
-            <p className="text-xs text-almanac-parchment/50">{subtitle}</p>
+            <h3
+              className={`font-serif text-gold-leaf ${compact ? 'text-sm' : 'text-base lg:text-lg'}`}
+            >
+              {title}
+            </h3>
+            <p className="text-[10px] lg:text-xs text-almanac-parchment/50">{subtitle}</p>
           </div>
-          <InfoButton scoreKey={scoreKey} />
+          <InfoButton scoreKey={scoreKey} size="sm" />
         </div>
         <div className="text-right">
           <span
-            className={`text-3xl font-sans font-bold ${SCORE_COLORS[score.label]} ${isCritical ? 'animate-pulse' : ''}`}
+            className={`font-sans font-bold ${SCORE_COLORS[score.label]} ${isCritical ? 'animate-pulse' : ''} ${compact ? 'text-xl lg:text-2xl' : 'text-2xl lg:text-3xl'}`}
           >
             {animatedScore}
           </span>
-          <span className="text-almanac-parchment/50 text-sm">/10</span>
+          <span className="text-almanac-parchment/50 text-xs">/10</span>
         </div>
       </div>
 
       {/* Label badge */}
-      <div className="flex items-center gap-2 mb-2">
+      <div className={`flex items-center gap-1 flex-wrap ${compact ? 'mb-1' : 'mb-2'}`}>
         <span
-          className={`text-xs font-medium px-2 py-0.5 rounded ${
+          className={`text-[10px] lg:text-xs font-medium px-1.5 py-0.5 rounded ${
             score.label === 'Perfect' || score.label === 'Good'
               ? 'bg-green-900/30 text-green-400'
               : score.label === 'Fair'
@@ -108,27 +114,44 @@ function ScoreCard({
         >
           {score.label}
         </span>
-        {isCritical && <span className="text-xs text-red-400 font-medium">⚠ Unfavorable</span>}
+        {isCritical && (
+          <span className="text-[10px] lg:text-xs text-red-400 font-medium">⚠ Unfavorable</span>
+        )}
       </div>
 
-      <p className="text-sm text-almanac-parchment/70 leading-relaxed">{score.instruction}</p>
+      <p
+        className={`text-almanac-parchment/70 leading-snug ${compact ? 'text-xs' : 'text-xs lg:text-sm'}`}
+      >
+        {score.instruction}
+      </p>
     </div>
   )
 }
 
-export function TaskScores({ sower, shepherd, keeper, builder, aqi }: TaskScoresProps) {
+export function TaskScores({
+  sower,
+  shepherd,
+  keeper,
+  builder,
+  aqi,
+  compact = false,
+}: TaskScoresProps & { compact?: boolean }) {
   // Apply AQI adjustment to Outdoor Alert (shepherd) score
   const adjustedShepherd = adjustScoreForAQI(shepherd, aqi ?? null)
   const scores = { sower, shepherd: adjustedShepherd, keeper, builder }
 
   return (
-    <section className="py-8">
-      <div className="flex items-center justify-center gap-3 mb-6">
-        <h2 className="font-serif text-2xl text-gold-leaf text-center">Today&apos;s Workability</h2>
+    <section className={compact ? 'py-2' : 'py-4 lg:py-6'}>
+      <div className={`flex items-center justify-center gap-3 ${compact ? 'mb-3' : 'mb-4'}`}>
+        <h2
+          className={`font-serif text-gold-leaf text-center ${compact ? 'text-lg' : 'text-xl lg:text-2xl'}`}
+        >
+          Today&apos;s Workability
+        </h2>
         <WorkabilityExplainer />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-2xl lg:max-w-none mx-auto">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3">
         {SCORE_CARDS.map(({ key, title, subtitle }, index) => (
           <ScoreCard
             key={key}
@@ -137,6 +160,7 @@ export function TaskScores({ sower, shepherd, keeper, builder, aqi }: TaskScores
             subtitle={subtitle}
             score={scores[key]}
             index={index}
+            compact={compact}
           />
         ))}
       </div>

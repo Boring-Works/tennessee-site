@@ -202,10 +202,6 @@ export default function AlmanacPage() {
   const todaySunrise = weather.daily.sunrise[todayIndex]
   const todaySunset = weather.daily.sunset[todayIndex]
 
-  // Pressure trend - currently defaulting to steady
-  // TODO: Add hourly pressure to API if available for trend calculation
-  const pressureTrend: 'rising' | 'falling' | 'steady' = 'steady'
-
   // Tomorrow's preview data
   const tomorrowData =
     todayIndex !== -1 && weather.daily.time[todayIndex + 1]
@@ -274,11 +270,6 @@ export default function AlmanacPage() {
               humidity={weather.current.humidity}
               todayHigh={todayHigh}
               todayLow={todayLow}
-              sunrise={todaySunrise}
-              sunset={todaySunset}
-              pressure={weather.current.pressure}
-              pressureTrend={pressureTrend}
-              uvIndex={weather.current.uvIndex}
             />
 
             {/* Precipitation Timing */}
@@ -415,7 +406,7 @@ export default function AlmanacPage() {
           <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
             {/* ========== SECTION 1: GLANCEABLE (Above the Fold) ========== */}
             <section aria-label="At a Glance" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
-              {/* Hero - Dominant temperature display */}
+              {/* Hero - Compact temperature display */}
               <div className="lg:col-span-4">
                 <AlmanacHero
                   temperature={weather.current.temperature}
@@ -427,11 +418,6 @@ export default function AlmanacPage() {
                   humidity={weather.current.humidity}
                   todayHigh={todayHigh}
                   todayLow={todayLow}
-                  sunrise={todaySunrise}
-                  sunset={todaySunset}
-                  pressure={weather.current.pressure}
-                  pressureTrend={pressureTrend}
-                  uvIndex={weather.current.uvIndex}
                 />
               </div>
 
@@ -461,6 +447,7 @@ export default function AlmanacPage() {
                   keeper={taskScores.keeper}
                   builder={taskScores.builder}
                   aqi={aqi}
+                  compact
                 />
               </div>
 

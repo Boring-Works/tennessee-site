@@ -1,10 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import styles from './page.module.css'
 
 // Collection catalog for navigation
 const COLLECTIONS = [
+  {
+    id: 'document-library',
+    label: 'Document Library',
+    code: 'LIBRARY',
+    isLink: true,
+    href: '/evidence/library',
+  },
   { id: 'blount-letter', label: 'Blount Correspondence', code: 'MSS.1790' },
   { id: 'washington-question', label: 'Washington Papers', code: 'MSS.1790' },
   { id: 'appointment', label: 'Williamson Letters', code: 'MSS.1790' },
@@ -78,17 +86,27 @@ export function CardCatalog() {
       <ul className={styles.cardCatalogList}>
         {COLLECTIONS.map((collection) => (
           <li key={collection.id}>
-            <a
-              href={`#${collection.id}`}
-              onClick={(e) => handleClick(e, collection.id)}
-              className={`${styles.cardCatalogLink} ${
-                activeSection === collection.id ? styles.cardCatalogLinkActive : ''
-              }`}
-              aria-current={activeSection === collection.id ? 'true' : undefined}
-            >
-              <span className={styles.cardCatalogCode}>{collection.code}</span>
-              <span className={styles.cardCatalogLabel}>{collection.label}</span>
-            </a>
+            {'isLink' in collection && collection.isLink ? (
+              <Link
+                href={collection.href}
+                className={`${styles.cardCatalogLink} ${styles.cardCatalogLinkFeatured}`}
+              >
+                <span className={styles.cardCatalogCode}>{collection.code}</span>
+                <span className={styles.cardCatalogLabel}>{collection.label}</span>
+              </Link>
+            ) : (
+              <a
+                href={`#${collection.id}`}
+                onClick={(e) => handleClick(e, collection.id)}
+                className={`${styles.cardCatalogLink} ${
+                  activeSection === collection.id ? styles.cardCatalogLinkActive : ''
+                }`}
+                aria-current={activeSection === collection.id ? 'true' : undefined}
+              >
+                <span className={styles.cardCatalogCode}>{collection.code}</span>
+                <span className={styles.cardCatalogLabel}>{collection.label}</span>
+              </a>
+            )}
           </li>
         ))}
       </ul>

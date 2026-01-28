@@ -207,7 +207,7 @@ export default function VisitPage() {
 
           {/* Significance statement */}
           <p className={styles['visit-hero-significance']}>
-            The first seat of government west of the Appalachian Mountains.
+            First capital of the Southwest Territory, 1790–1792.
           </p>
 
           {/* Decorative mid rule */}

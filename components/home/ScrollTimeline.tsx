@@ -16,7 +16,7 @@ const timelineData = [
   {
     year: '1790',
     text: 'Governor Blount made it the seat of federal power.',
-    detail: 'The first territorial capital beyond the original thirteen states.',
+    detail: 'The first capital of the Southwest Territory.',
   },
 ]
 

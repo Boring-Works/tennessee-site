@@ -282,9 +282,9 @@ Different lines for different contexts. All historically accurate.
 | **The Experiment** _(NEW)_        | Could American democracy extend beyond the Appalachians? Rocky Mount provided the answer.              | Website, intellectual appeal       |
 | **The Implementation** _(NEW)_    | A man who helped create the Constitution would now implement it on the frontier.                       | Blount positioning, tours          |
 | **The Distinction** _(NEW)_       | First territorial capital (1790-92). Knoxville became first state capital (1796).                      | FAQ, clarification                 |
-| **America 250: First Federal**    | First federal capital beyond the original thirteen states.                                             | America 250 campaign, grants       |
-| **America 250: Proving Ground**   | The proving ground for territorial governance.                                                         | America 250 campaign, grants       |
-| **America 250: Bridge**           | The bridge between democratic ideals and westward expansion.                                           | America 250 campaign, grants       |
+| **America 250: First SW Capital** | First capital of the Southwest Territory (1790-1792).                                                  | America 250 campaign, grants       |
+| **America 250: Constitution**     | Where a Constitution signer governed the frontier.                                                     | America 250 campaign, grants       |
+| **America 250: Tennessee Origin** | The ground where Tennessee's government began.                                                         | America 250 campaign, grants       |
 
 ---
 

@@ -62,7 +62,7 @@ import { HOOKS, BUTTONS, MYSTERY_NARRATIVE } from '@/lib/copy'
 **Use for:** 2026 campaign, ads, email, ticket conversion
 **Expires:** December 31, 2026
 
-**Hook:** "For 18 months, this ground was the capital of everything west of the mountains."
+**Hook:** "For approximately 16 months, this ground was the capital of everything west of the mountains."
 
 ### Tier 3: AUTHORITY (Prestige)
 

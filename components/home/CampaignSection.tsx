@@ -38,13 +38,13 @@ export function CampaignSection() {
         {/* Positioning lines */}
         <div className={`space-y-3 mb-10 fade-in-up stagger-2 ${isVisible ? 'visible' : ''}`}>
           <p className="font-serif-elegant text-lg text-white/70 italic">
-            First federal capital beyond the original thirteen states.
+            First capital of the Southwest Territory.
           </p>
           <p className="font-serif-elegant text-lg text-white/70 italic">
-            The proving ground for territorial governance.
+            Where a Constitution signer governed the frontier.
           </p>
           <p className="font-serif-elegant text-lg text-white/70 italic">
-            The bridge between democratic ideals and westward expansion.
+            The ground where Tennessee began.
           </p>
         </div>
 

@@ -190,12 +190,8 @@ export default function VisitPage() {
             <span className={styles['visit-hero-rule-line']} />
           </div>
 
-          {/* Establishment badge */}
+          {/* Site designation badge */}
           <p className={styles['visit-hero-badge']}>
-            <span className={styles['visit-hero-badge-year']}>Est. 1770</span>
-            <span className={styles['visit-hero-badge-sep']} aria-hidden="true">
-              ·
-            </span>
             <span>Tennessee State Historic Site</span>
           </p>
 
@@ -217,8 +213,9 @@ export default function VisitPage() {
 
           {/* Experience promise */}
           <p className={styles['visit-hero-promise']}>
-            History isn&apos;t behind glass here. Costumed interpreters bring 1790 to life on the
-            same grounds where William Blount governed and Andrew Jackson once stayed.
+            This is where federal power first reached west of the Appalachians. Walk the same
+            grounds where Governor Blount governed the Southwest Territory and negotiated the Treaty
+            of Holston with forty-one Cherokee chiefs.
           </p>
 
           {/* Quick facts row */}
@@ -238,7 +235,7 @@ export default function VisitPage() {
               <span className={styles['visit-hero-fact-star']}>★</span>
             </div>
             <div className={styles['visit-hero-fact']}>
-              <span className={styles['visit-hero-fact-value']}>Tue–Sun</span>
+              <span className={styles['visit-hero-fact-value']}>Wed–Sat</span>
               <span className={styles['visit-hero-fact-label']}>Open</span>
             </div>
           </div>
@@ -724,7 +721,7 @@ export default function VisitPage() {
           </div>
 
           <p className={styles['visit-closing-lead']}>
-            Tennessee&apos;s story started here in 1770.
+            Tennessee&apos;s story started here in 1790.
           </p>
           <h2 id="closing-heading" className={styles['visit-closing-headline']}>
             Come See Where It Began

@@ -211,15 +211,22 @@ export function Commemorative2026() {
             Be one of the <span className="text-accent font-semibold">First 250</span>.
           </p>
 
-          <Link
-            href="/first-250"
-            className={`inline-flex flex-col sm:flex-row items-center justify-center bg-accent text-primary px-8 sm:px-10 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-lg fade-in-up stagger-5 ${isVisible ? 'visible' : ''}`}
+          <div
+            className={`flex flex-col items-center gap-3 fade-in-up stagger-5 ${isVisible ? 'visible' : ''}`}
           >
-            <span>Join the First 250</span>
-            <span className="mt-1 sm:mt-0 sm:ml-2 text-primary/60 normal-case font-normal text-xs sm:text-sm">
-              — Enrollment closes June 1
-            </span>
-          </Link>
+            <Link
+              href="/first-250"
+              className="inline-flex flex-col sm:flex-row items-center justify-center bg-accent text-primary px-8 sm:px-10 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <span>Join the First 250</span>
+              <span className="mt-1 sm:mt-0 sm:ml-2 text-primary/60 normal-case font-normal text-xs sm:text-sm">
+                — Limited founding membership
+              </span>
+            </Link>
+            <p className="text-xs text-white/40">
+              Enrollment closes June 1, 2026 · Charter member benefits included
+            </p>
+          </div>
         </div>
       </div>
 
@@ -344,10 +351,19 @@ export function Commemorative2026() {
             </p>
           </div>
 
-          {/* Side by side comparison */}
+          {/* Side by side comparison with visual connection */}
           <div
-            className={`grid md:grid-cols-2 gap-8 mb-10 ${ledgerVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-700`}
+            className={`grid md:grid-cols-2 gap-8 mb-10 relative ${ledgerVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-700`}
           >
+            {/* Connection arrow (desktop only) */}
+            <div
+              className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center"
+              aria-hidden="true"
+            >
+              <div className="w-12 h-12 rounded-full bg-accent/20 border-2 border-accent/40 flex items-center justify-center">
+                <span className="text-accent text-lg">→</span>
+              </div>
+            </div>
             {/* 1776 - The Promise */}
             <div className="bg-white p-6 border border-secondary/10 rounded relative">
               <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">

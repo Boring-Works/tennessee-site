@@ -293,11 +293,24 @@
   ],
   "recurringPrograms": {
     "blacksmithWorkshops": {
+      "id": "blacksmith",
       "title": "Blacksmith Workshops",
-      "description": "Learn the art of the forge with hands-on blacksmithing instruction.",
+      "tagline": "Forge Your Own History",
+      "description": "Learn the art of the forge with hands-on blacksmithing instruction. Work alongside our master blacksmith to create your own hand-forged piece to take home.",
+      "schedule": "Select Saturdays",
+      "scheduleNote": "Check calendar for specific dates",
       "time": "10:00 AM - 2:00 PM",
+      "duration": "4 hours",
       "ticketUrl": null,
       "requiresTicket": true,
+      "category": "workshop",
+      "icon": "anvil",
+      "highlights": [
+        "Hands-on instruction from master blacksmith",
+        "Create your own hand-forged piece",
+        "Learn 18th-century techniques",
+        "All materials and safety equipment provided"
+      ],
       "dates": [
         "2026-02-21",
         "2026-03-28",
@@ -310,19 +323,45 @@
       ]
     },
     "hearthCooking": {
+      "id": "hearth-cooking",
       "title": "Hearth Cooking",
-      "description": "Experience authentic 18th-century cooking techniques at the open hearth.",
+      "tagline": "Cook Like It's 1790",
+      "description": "Experience authentic 18th-century cooking techniques at the open hearth. Prepare period recipes using traditional tools and methods, then enjoy what you've made.",
+      "schedule": "Quarterly",
+      "scheduleNote": "Seasonal dates throughout the year",
       "time": "10:00 AM - 2:00 PM",
+      "duration": "4 hours",
       "ticketUrl": null,
       "requiresTicket": true,
+      "category": "workshop",
+      "icon": "flame",
+      "highlights": [
+        "Cook over open hearth fire",
+        "Learn period recipes and techniques",
+        "Taste what you prepare",
+        "Take home recipe cards"
+      ],
       "dates": ["2026-02-28", "2026-03-28", "2026-06-27", "2026-07-25", "2026-08-22", "2026-09-26"]
     },
     "twilightOnTheMount": {
+      "id": "twilight",
       "title": "Twilight on the Mount",
-      "description": "Evening tours of Rocky Mount as the sun sets. A unique perspective on frontier life.",
+      "tagline": "History at Golden Hour",
+      "description": "Experience Rocky Mount as the sun sets over the Blue Ridge. Evening tours offer a unique perspective on frontier life, with special lighting and intimate storytelling.",
+      "schedule": "Summer Thursdays",
+      "scheduleNote": "May through August",
       "time": "7:00 PM",
+      "duration": "1.5 hours",
       "ticketUrl": null,
       "requiresTicket": true,
+      "category": "tour",
+      "icon": "sunset",
+      "highlights": [
+        "Golden hour photography opportunities",
+        "Smaller group sizes",
+        "Special evening interpretation",
+        "Cooler summer temperatures"
+      ],
       "dates": [
         "2026-05-28",
         "2026-06-11",
@@ -334,20 +373,46 @@
       ]
     },
     "homeschoolDays": {
+      "id": "homeschool",
       "title": "Homeschool Days",
-      "description": "Special programming for homeschool families with living history tours and hands-on activities.",
+      "tagline": "Curriculum Comes Alive",
+      "description": "Special programming designed for homeschool families. Living history tours, hands-on activities, and educational content aligned with Tennessee curriculum standards.",
+      "schedule": "Monthly",
+      "scheduleNote": "During school year",
       "time": "10:00 AM - 4:00 PM",
+      "duration": "Full day",
       "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
       "requiresTicket": true,
+      "category": "education",
+      "icon": "book",
+      "highlights": [
+        "TN Standards aligned content",
+        "Age-appropriate activities",
+        "Living history interpretation",
+        "Take-home educational materials"
+      ],
       "dates": ["2026-02-19", "2026-04-16", "2026-05-14", "2026-09-17", "2026-10-29"]
     },
     "behindTheScenes": {
-      "title": "Behind the Scenes Exclusive Tour",
-      "description": "Limited-capacity tour with artifact handling, collections access, heritage animal encounters, and coffee & pastries. Last Saturday of each month.",
+      "id": "behind-the-scenes",
+      "title": "Behind the Scenes",
+      "tagline": "The VIP Experience",
+      "description": "An exclusive, limited-capacity experience. Handle real artifacts, explore the collections vault, meet our heritage animals, and enjoy coffee and pastries with our curators.",
+      "schedule": "Last Saturday monthly",
+      "scheduleNote": "Limited to 10 guests",
       "time": "9:00 AM - 11:00 AM",
+      "duration": "2 hours",
       "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/658959/calendar/2026/01/?full-items=yes",
       "requiresTicket": true,
-      "capacity": 10
+      "category": "tour",
+      "icon": "key",
+      "capacity": 10,
+      "highlights": [
+        "Handle real 18th-century artifacts",
+        "Access to collections vault",
+        "Meet heritage breed animals",
+        "Coffee & pastries included"
+      ]
     }
   },
   "first250": {

@@ -35,15 +35,25 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
   useEffect(() => {
     let isMounted = true
     let retryTimeout: NodeJS.Timeout | null = null
+    let abortController: AbortController | null = null
 
     async function fetchRadarData(attempt = 0) {
       if (!isMounted) return
+
+      // Cancel any in-flight request
+      if (abortController) {
+        abortController.abort()
+      }
+
+      // Create new abort controller for this request
+      abortController = new AbortController()
+      const signal = abortController.signal
 
       try {
         setLoading(true)
         if (attempt > 0) setRetryCount(attempt)
 
-        const response = await fetch('/api/precipitation-radar')
+        const response = await fetch('/api/precipitation-radar', { signal })
         if (!response.ok) throw new Error('Failed to fetch radar data')
 
         const data = await response.json()
@@ -58,6 +68,11 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
         setError(null)
         setRetryCount(0)
       } catch (err) {
+        // Handle aborted requests gracefully
+        if (err instanceof Error && err.name === 'AbortError') {
+          return // Request was cancelled, don't update state
+        }
+
         logger.error('Radar fetch error:', err)
 
         if (!isMounted) return
@@ -82,6 +97,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
 
     return () => {
       isMounted = false
+      if (abortController) abortController.abort()
       clearInterval(interval)
       if (retryTimeout) clearTimeout(retryTimeout)
     }

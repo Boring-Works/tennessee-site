@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Waves, AlertTriangle, TrendingUp, TrendingDown, Minus } from 'lucide-react'
+import { logger } from '@/lib/logger'
 import type { StreamData, StreamStatus } from '@/lib/almanac/types'
 import { InfoPopup } from './InfoPopup'
 import { INFO_CONTENT } from '@/lib/almanac/infoContent'
@@ -71,12 +72,26 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
   const [streamData, setStreamData] = useState<StreamData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+
+  // Rocky Mount coordinates: 36.52°N, 82.26°W
+  // Only show this feature within ~50 miles of Sullivan County
+  const isNearRockyMount = Math.abs(lat - 36.52) < 0.75 && Math.abs(lon - -82.26) < 0.75
 
   useEffect(() => {
     async function fetchStreamData() {
+      // Cancel any in-flight request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+
+      // Create new abort controller for this request
+      abortControllerRef.current = new AbortController()
+      const signal = abortControllerRef.current.signal
+
       try {
         setLoading(true)
-        const response = await fetch(`/api/stream-levels?lat=${lat}&lon=${lon}`)
+        const response = await fetch(`/api/stream-levels?lat=${lat}&lon=${lon}`, { signal })
         const data: StreamResponse = await response.json()
 
         if (data.data) {
@@ -86,7 +101,13 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
           setStreamData(null)
           setError(data.message || 'No stream data available')
         }
-      } catch {
+      } catch (err) {
+        // Handle aborted requests gracefully
+        if (err instanceof Error && err.name === 'AbortError') {
+          return
+        }
+
+        logger.error('Stream data fetch error:', err)
         setError('Failed to fetch stream data')
         setStreamData(null)
       } finally {
@@ -95,7 +116,19 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
     }
 
     fetchStreamData()
+
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
   }, [lat, lon])
+
+  // Don't show this feature outside Sullivan County region
+  // This is a Rocky Mount-specific command center feature
+  if (!isNearRockyMount) {
+    return null
+  }
 
   // Don't render if loading or no data
   if (loading) {
@@ -121,20 +154,24 @@ export default function CreekWatch({ lat, lon }: CreekWatchProps) {
 
   return (
     <div className={`p-3 rounded-lg border ${statusInfo.bgColor}`}>
-      <div className="flex items-center gap-2 mb-2">
-        <Waves className="w-4 h-4 text-almanac-gold" />
-        <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide">
-          Creek Watch
-        </h3>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <Waves className="w-4 h-4 text-almanac-gold" />
+          <div>
+            <h3 className="text-sm font-medium text-almanac-parchment uppercase tracking-wide leading-tight">
+              Waterways Monitor
+            </h3>
+            <p className="text-[10px] text-almanac-parchment/50 leading-tight">
+              From Blount&apos;s Command
+            </p>
+          </div>
+        </div>
         <InfoPopup content={INFO_CONTENT.creekWatch} iconSize="sm" />
-        <span className="text-xs text-almanac-parchment/40 ml-auto">
-          {streamData.distanceMiles} mi away
-        </span>
       </div>
 
       {/* Station Name */}
       <p className="text-xs text-almanac-parchment/60 text-center mb-2 line-clamp-1">
-        {streamData.siteName}
+        {streamData.siteName} • {streamData.distanceMiles} mi
       </p>
 
       {/* Gage Height */}

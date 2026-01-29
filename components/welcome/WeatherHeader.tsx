@@ -13,6 +13,7 @@ interface WeatherData {
 export function WeatherHeader() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     const lat = 36.4539
@@ -33,12 +34,13 @@ export function WeatherHeader() {
         setLoading(false)
       })
       .catch(() => {
+        setError(true)
         setLoading(false)
       })
   }, [])
 
-  // Don't render anything while loading or on error
-  if (loading || !weather) {
+  // Show fallback while loading or on error
+  if (loading || error || !weather) {
     return (
       <Link
         href="/almanac"

@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Flame, ShieldCheck, ShieldAlert } from 'lucide-react'
+import { logger } from '@/lib/logger'
 import type { NWSAlertsResponse } from '@/lib/almanac/types'
 import { InfoPopup } from './InfoPopup'
 import { INFO_CONTENT } from '@/lib/almanac/infoContent'
@@ -17,16 +18,32 @@ export default function BurnDayIndicator({ lat, lon, onStatusChange }: BurnDayIn
   const [isSafeToBurn, setIsSafeToBurn] = useState<boolean | null>(null)
   const [fireAlertEvent, setFireAlertEvent] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const onStatusChangeRef = useRef(onStatusChange)
+
+  // Keep callback ref in sync without triggering re-fetches
+  useEffect(() => {
+    onStatusChangeRef.current = onStatusChange
+  }, [onStatusChange])
 
   const checkBurnStatus = useCallback(async () => {
+    // Cancel any in-flight request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    // Create new abort controller for this request
+    abortControllerRef.current = new AbortController()
+    const signal = abortControllerRef.current.signal
+
     try {
-      const response = await fetch(`/api/nws-alerts?lat=${lat}&lon=${lon}`)
+      const response = await fetch(`/api/nws-alerts?lat=${lat}&lon=${lon}`, { signal })
       const data: NWSAlertsResponse = await response.json()
 
       // Check if there's a fire weather alert
       const safeToBurn = !data.hasFireWeatherAlert
       setIsSafeToBurn(safeToBurn)
-      onStatusChange?.(safeToBurn ? 'burn' : 'no-burn')
+      onStatusChangeRef.current?.(safeToBurn ? 'burn' : 'no-burn')
 
       // If there's a fire alert, find the specific event name
       if (data.hasFireWeatherAlert && data.alerts) {
@@ -42,21 +59,32 @@ export default function BurnDayIndicator({ lat, lon, onStatusChange }: BurnDayIn
       } else {
         setFireAlertEvent(null)
       }
-    } catch {
+    } catch (err) {
+      // Handle aborted requests gracefully
+      if (err instanceof Error && err.name === 'AbortError') {
+        return
+      }
+
+      logger.error('Burn day status fetch error:', err)
       // Default to safe if we can't fetch - fail open for this feature
       setIsSafeToBurn(true)
       setFireAlertEvent(null)
-      onStatusChange?.('unknown')
+      onStatusChangeRef.current?.('unknown')
     } finally {
       setLoading(false)
     }
-  }, [lat, lon, onStatusChange])
+  }, [lat, lon])
 
   useEffect(() => {
     checkBurnStatus()
     // Refresh every 15 minutes
     const interval = setInterval(checkBurnStatus, 15 * 60 * 1000)
-    return () => clearInterval(interval)
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+      clearInterval(interval)
+    }
   }, [checkBurnStatus])
 
   // Don't show while loading

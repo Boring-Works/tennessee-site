@@ -158,7 +158,7 @@ export const INFO_CONTENT: Record<string, InfoContent> = {
   // ============================================================================
 
   creekWatch: {
-    title: 'Creek & Stream Levels',
+    title: "Blount's Waterways Monitor",
     scale: [
       { label: 'Flood Stage', value: '90th+ percentile', color: 'text-red-400' },
       { label: 'Above Normal', value: '75-90th percentile', color: 'text-orange-400' },
@@ -167,8 +167,8 @@ export const INFO_CONTENT: Record<string, InfoContent> = {
       { label: 'Much Below', value: '< 10th percentile', color: 'text-amber-700' },
     ],
     whyItMatters:
-      'Stream levels indicate regional water availability and flood risk. High water affects field access, livestock crossings, and fishing. Low water signals irrigation needs and potential drought stress.',
-    source: 'USGS Water Services',
+      'From Rocky Mount, Governor William Blount monitored the Holston and Watauga river systems—vital passages for trade, communication, and territorial control. These waterways carried settlers west, floated goods to market, and defined settlement boundaries. Today we monitor the same rivers that shaped frontier Tennessee. This feature only works in Sullivan County, where Rocky Mount commands the view.',
+    source: 'USGS real-time stream gauges (Sullivan County stations)',
     updateFrequency: 'Every 15 minutes',
   },
 

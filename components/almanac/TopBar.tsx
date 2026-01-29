@@ -12,9 +12,16 @@ interface TopBarProps {
   onLocationChange: (loc: GeoLocation) => void
   temperature: number
   condition: string
+  isLoading?: boolean
 }
 
-export function TopBar({ location, onLocationChange, temperature, condition }: TopBarProps) {
+export function TopBar({
+  location,
+  onLocationChange,
+  temperature,
+  condition,
+  isLoading = false,
+}: TopBarProps) {
   return (
     <header className="sticky top-0 z-40 bg-midnight/95 backdrop-blur-sm border-b border-almanac-gold/20">
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
@@ -26,12 +33,16 @@ export function TopBar({ location, onLocationChange, temperature, condition }: T
           <span className="hidden sm:inline text-almanac-parchment/40">|</span>
           <div className="hidden sm:flex items-center gap-1 text-sm text-almanac-parchment/70">
             <MapPin className="w-3.5 h-3.5" />
-            <span>{formatLocationName(location)}</span>
+            {isLoading ? (
+              <div className="h-4 w-32 bg-gradient-to-r from-white/10 to-white/20 animate-pulse rounded" />
+            ) : (
+              <span>{formatLocationName(location)}</span>
+            )}
           </div>
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-2">
+        <nav aria-label="Almanac actions" className="flex items-center gap-2">
           <LocationPicker location={location} onLocationChange={onLocationChange} compact />
           <AboutModal iconOnly />
           <ShareButton
@@ -40,7 +51,7 @@ export function TopBar({ location, onLocationChange, temperature, condition }: T
             location={formatLocationName(location)}
             iconOnly
           />
-        </div>
+        </nav>
       </div>
     </header>
   )

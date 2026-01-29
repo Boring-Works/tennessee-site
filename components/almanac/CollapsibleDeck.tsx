@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface CollapsibleDeckProps {
   title: string
@@ -44,14 +45,19 @@ export function CollapsibleDeck({
         )}
       </button>
 
-      {/* Content - collapsible */}
-      <div
-        className={`transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
-        }`}
-      >
-        <div className="p-4 border-t border-white/10">{children}</div>
-      </div>
+      {/* Content - collapsible with staggered animation */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, staggerChildren: 0.05 }}
+          >
+            <div className="p-4 border-t border-white/10">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

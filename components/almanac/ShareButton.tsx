@@ -53,7 +53,7 @@ export default function ShareButton({
       <button
         type="button"
         onClick={handleShare}
-        className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
+        className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
         aria-label="Share today's briefing"
         title="Share today's briefing"
       >
@@ -66,7 +66,7 @@ export default function ShareButton({
     <button
       type="button"
       onClick={handleShare}
-      className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/40 hover:text-almanac-gold transition-colors mt-3"
+      className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/40 hover:text-almanac-gold transition-colors mt-3 focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
       aria-label="Share today's briefing"
     >
       {copied ? (

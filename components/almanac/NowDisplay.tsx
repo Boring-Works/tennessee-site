@@ -68,10 +68,10 @@ export function NowDisplay({
       <div className="flex items-center gap-3 mb-3">
         <Icon className="w-12 h-12 text-almanac-gold flex-shrink-0" />
         <div>
-          <div className="text-4xl font-bold text-almanac-parchment leading-none">
+          <div className="text-5xl font-bold text-almanac-parchment leading-none">
             {Math.round(temperature)}°
           </div>
-          <p className="text-sm text-almanac-parchment/70 mt-1">{weather.condition}</p>
+          <p className="text-sm text-almanac-parchment/60 mt-1">{weather.condition}</p>
         </div>
       </div>
 
@@ -88,10 +88,10 @@ export function NowDisplay({
       </div>
 
       {/* Wind */}
-      <div className="flex items-center gap-2 text-sm text-almanac-parchment/70 mb-2">
+      <div className="flex items-center gap-2 text-sm text-almanac-parchment/60 mb-2">
         <Wind className="w-4 h-4" />
-        <span>
-          {Math.round(windSpeed)} mph
+        <span className="text-almanac-parchment">
+          {Math.round(windSpeed)} <span className="text-almanac-parchment/40">mph</span>
           {windDirection !== undefined && ` ${getWindDirection(windDirection)}`}
         </span>
         {windGusts && windGusts > windSpeed + 5 && (
@@ -100,12 +100,18 @@ export function NowDisplay({
       </div>
 
       {/* Humidity or Dew Point */}
-      <div className="flex items-center gap-2 text-sm text-almanac-parchment/70">
+      <div className="flex items-center gap-2 text-sm text-almanac-parchment/60">
         <Droplets className="w-4 h-4" />
         {dewPoint !== undefined ? (
-          <span>Dew point {Math.round(dewPoint)}°</span>
+          <span className="text-almanac-parchment">
+            Dew point {Math.round(dewPoint)}
+            <span className="text-almanac-parchment/40">°</span>
+          </span>
         ) : (
-          <span>Humidity {Math.round(humidity)}%</span>
+          <span className="text-almanac-parchment">
+            Humidity {Math.round(humidity)}
+            <span className="text-almanac-parchment/40">%</span>
+          </span>
         )}
       </div>
     </div>

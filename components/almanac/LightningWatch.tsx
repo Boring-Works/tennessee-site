@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Zap, AlertTriangle } from 'lucide-react'
+import { logger } from '@/lib/logger'
 import { fetchLightningData, getNearestStrikeDirection } from '@/lib/almanac/lightning'
 import { getLightningAlertLevel } from '@/lib/almanac/types'
 import type { LightningData } from '@/lib/almanac/types'
@@ -16,10 +17,15 @@ export default function LightningWatch({ lat, lon }: LightningWatchProps) {
   const [data, setData] = useState<LightningData | null>(null)
   const [loading, setLoading] = useState(true)
   const [direction, setDirection] = useState<string | null>(null)
+  const isMountedRef = useRef(true)
 
   const fetchData = useCallback(async () => {
     try {
       const lightningData = await fetchLightningData(lat, lon, 50)
+
+      // Only update state if still mounted
+      if (!isMountedRef.current) return
+
       setData(lightningData)
 
       if (lightningData.strikes.length > 0) {
@@ -28,18 +34,27 @@ export default function LightningWatch({ lat, lon }: LightningWatchProps) {
       } else {
         setDirection(null)
       }
-    } catch {
-      setData(null)
+    } catch (err) {
+      logger.error('Lightning data fetch error:', err)
+      if (isMountedRef.current) {
+        setData(null)
+      }
     } finally {
-      setLoading(false)
+      if (isMountedRef.current) {
+        setLoading(false)
+      }
     }
   }, [lat, lon])
 
   useEffect(() => {
+    isMountedRef.current = true
     fetchData()
     // Poll every 60 seconds for fresh lightning data
     const interval = setInterval(fetchData, 60 * 1000)
-    return () => clearInterval(interval)
+    return () => {
+      isMountedRef.current = false
+      clearInterval(interval)
+    }
   }, [fetchData])
 
   // Don't show while loading
@@ -108,7 +123,9 @@ export default function LightningWatch({ lat, lon }: LightningWatchProps) {
             >
               {alertInfo.label}
             </span>
-            <span className="font-medium text-sm text-almanac-parchment">LIGHTNING DETECTED</span>
+            <span className="text-base font-semibold text-almanac-parchment">
+              LIGHTNING DETECTED
+            </span>
           </div>
 
           {/* Strike info */}

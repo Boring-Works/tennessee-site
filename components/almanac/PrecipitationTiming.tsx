@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { CloudRain, CloudSun, Sun, CloudLightning, Cloud, AlertCircle } from 'lucide-react'
 import { logger } from '@/lib/logger'
@@ -110,16 +110,27 @@ export default function PrecipitationTiming({
   const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [retryCount, setRetryCount] = useState(0)
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Fetch and analyze precipitation data
   const fetchPrecipitation = useCallback(
     async (attempt = 0) => {
+      // Cancel any in-flight request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+
+      // Create new abort controller for this request
+      abortControllerRef.current = new AbortController()
+      const signal = abortControllerRef.current.signal
+
       try {
         setLoading(true)
         if (attempt > 0) setRetryCount(attempt)
 
         // Fetch radar data from our API
-        const response = await fetch('/api/precipitation-radar')
+        const response = await fetch('/api/precipitation-radar', { signal })
         if (!response.ok) throw new Error('Failed to fetch radar data')
 
         const data: RainViewerData = await response.json()
@@ -146,12 +157,17 @@ export default function PrecipitationTiming({
         setError(null)
         setRetryCount(0)
       } catch (err) {
+        // Handle aborted requests gracefully
+        if (err instanceof Error && err.name === 'AbortError') {
+          return
+        }
+
         logger.error('Precipitation timing error:', err)
 
         // Retry with exponential backoff
         if (attempt < MAX_RETRIES) {
           const delay = RETRY_DELAYS[attempt] || RETRY_DELAYS[RETRY_DELAYS.length - 1]
-          setTimeout(() => fetchPrecipitation(attempt + 1), delay)
+          retryTimeoutRef.current = setTimeout(() => fetchPrecipitation(attempt + 1), delay)
         } else {
           setError('Unable to analyze precipitation')
           setRetryCount(0)
@@ -169,7 +185,15 @@ export default function PrecipitationTiming({
 
     const interval = setInterval(() => fetchPrecipitation(), REFRESH_INTERVAL)
 
-    return () => clearInterval(interval)
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current)
+      }
+      clearInterval(interval)
+    }
   }, [fetchPrecipitation])
 
   // Loading state

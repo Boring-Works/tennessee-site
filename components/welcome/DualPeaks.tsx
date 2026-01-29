@@ -1,6 +1,7 @@
 'use client'
 
 import { useSyncExternalStore } from 'react'
+import { motion } from 'framer-motion'
 import styles from './welcome.module.css'
 
 interface PeakData {
@@ -40,16 +41,23 @@ export function DualPeaks({ peaks }: DualPeaksProps) {
 
   return (
     <div className={styles.peaksContainer}>
-      {peaks.map((peak, index) => {
+      {peaks.map((peak) => {
         const days = isClient ? calculateDaysRemaining(peak.targetDate) : null
         return (
-          <div key={index} className={styles.peakBadge}>
+          <div key={peak.targetDate} className={styles.peakBadge}>
             <span className={styles.peakLabel}>{peak.label}</span>
-            <span className={styles.peakDate}>{peak.date}</span>
-            <span className={styles.peakDays}>
+            <motion.span
+              className={styles.peakDays}
+              key={days}
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              aria-label={`${days !== null ? days : '—'} days remaining until ${peak.label}`}
+            >
               {days !== null ? days : '—'}
               <span> days</span>
-            </span>
+            </motion.span>
+            <span className={styles.peakDate}>{peak.date}</span>
           </div>
         )
       })}

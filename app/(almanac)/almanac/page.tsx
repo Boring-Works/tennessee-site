@@ -1,13 +1,14 @@
 'use client'
 
 import './almanac.css'
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Sprout, Leaf } from 'lucide-react'
 import { WeatherAtmosphere } from '@/components/almanac/WeatherAtmosphere'
 import { TopBar } from '@/components/almanac/TopBar'
 import { NextChangeHero } from '@/components/almanac/NextChangeHero'
 import { NowDisplay } from '@/components/almanac/NowDisplay'
 import { DecisionRail } from '@/components/almanac/DecisionRail'
+import { QuickActions } from '@/components/almanac/QuickActions'
 import { CollapsibleDeck } from '@/components/almanac/CollapsibleDeck'
 import { ConditionsTiles } from '@/components/almanac/ConditionsTiles'
 import { DaylightBar } from '@/components/almanac/DaylightBar'
@@ -68,13 +69,24 @@ export default function AlmanacPage() {
   const [burnDayStatus, setBurnDayStatus] = useState<'burn' | 'no-burn' | 'unknown'>('unknown')
   const [hasActiveAlert, setHasActiveAlert] = useState(false)
   const [alertTitle, setAlertTitle] = useState<string | undefined>()
+  const abortControllerRef = useRef<AbortController | null>(null)
 
   const fetchWeather = useCallback(async (loc: GeoLocation, attempt = 0) => {
+    // Cancel any in-flight request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    // Create new abort controller for this request
+    const abortController = new AbortController()
+    abortControllerRef.current = abortController
     try {
       setLoading(true)
       setRetryCount(attempt)
 
-      const response = await fetch(`/api/weather?lat=${loc.latitude}&lon=${loc.longitude}`)
+      const response = await fetch(`/api/weather?lat=${loc.latitude}&lon=${loc.longitude}`, {
+        signal: abortController.signal,
+      })
 
       if (!response.ok) {
         throw new Error('Failed to fetch weather data')
@@ -112,6 +124,11 @@ export default function AlmanacPage() {
       setError(null)
       setRetryCount(0)
     } catch (err) {
+      // Handle aborted requests gracefully
+      if (err instanceof Error && err.name === 'AbortError') {
+        return // Request was cancelled, don't update state
+      }
+
       logger.error('Weather fetch error:', err)
 
       if (attempt < MAX_RETRIES - 1) {
@@ -131,7 +148,8 @@ export default function AlmanacPage() {
     const savedLocation = loadLocation()
     setLocation(savedLocation)
     fetchWeather(savedLocation)
-  }, [fetchWeather])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Run only on mount
 
   const handleLocationChange = useCallback(
     (newLocation: GeoLocation) => {
@@ -282,6 +300,7 @@ export default function AlmanacPage() {
         onLocationChange={handleLocationChange}
         temperature={weather.current.temperature}
         condition={weatherInfo.condition}
+        isLoading={loading}
       />
 
       <main id="main-content" className="min-h-screen text-almanac-parchment relative z-10">
@@ -313,6 +332,14 @@ export default function AlmanacPage() {
               MOBILE LAYOUT: Single column, organized vertically
               ============================================================ */}
           <div className="flex flex-col gap-4 lg:hidden">
+            {/* Quick Actions - Critical decisions only */}
+            <QuickActions
+              hasActiveAlert={hasActiveAlert}
+              alertTitle={alertTitle}
+              burnDayStatus={burnDayStatus}
+              freezeInfo={freezeInfo}
+            />
+
             {/* NOW Display */}
             <NowDisplay
               temperature={weather.current.temperature}
@@ -331,14 +358,8 @@ export default function AlmanacPage() {
             {/* Next Change Hero */}
             <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
 
-            {/* Decision Rail */}
-            <DecisionRail
-              hasActiveAlert={hasActiveAlert}
-              alertTitle={alertTitle}
-              burnDayStatus={burnDayStatus}
-              tempAnomaly={tempAnomaly}
-              freezeInfo={freezeInfo}
-            />
+            {/* Decision Rail - Climate Context */}
+            <DecisionRail tempAnomaly={tempAnomaly} />
 
             {/* Hourly Sparkline */}
             <HourlySparkline hourly={weather.hourly} />
@@ -353,7 +374,7 @@ export default function AlmanacPage() {
             />
 
             {/* Tomorrow + 7-Day */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
               <TomorrowPreview tomorrow={tomorrowData} />
               <BurnDayIndicator
                 lat={location.latitude}
@@ -365,10 +386,6 @@ export default function AlmanacPage() {
 
             {/* Today Deck */}
             <div className="space-y-4 pt-4 border-t border-white/10">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-almanac-gold">
-                Today&apos;s Details
-              </h3>
-
               {/* Farmer's Memory Summary (collapsed) */}
               <CollapsibleDeck title="Farmer's Memory" defaultOpen={false}>
                 <FarmerMemory
@@ -414,7 +431,7 @@ export default function AlmanacPage() {
               <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
             </div>
 
-            {/* Farm Deck */}
+            {/* Farm Intelligence */}
             <CollapsibleDeck title="Farm Intelligence" icon={<Sprout className="w-4 h-4" />}>
               <PlantingIntelligence
                 temperature={weather.current.temperature}
@@ -428,7 +445,7 @@ export default function AlmanacPage() {
               </div>
             </CollapsibleDeck>
 
-            {/* Environment Deck */}
+            {/* Environmental Watch */}
             <CollapsibleDeck title="Environmental Watch" icon={<Leaf className="w-4 h-4" />}>
               <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
               <div className="mt-4">
@@ -486,15 +503,18 @@ export default function AlmanacPage() {
                 />
               </div>
 
-              {/* RIGHT: Decision Rail (3 cols) */}
-              <div className="lg:col-span-3">
-                <DecisionRail
+              {/* RIGHT: Quick Actions + Decision Rail (3 cols) */}
+              <div className="lg:col-span-3 flex flex-col gap-3">
+                {/* Quick Actions - Critical decisions only */}
+                <QuickActions
                   hasActiveAlert={hasActiveAlert}
                   alertTitle={alertTitle}
                   burnDayStatus={burnDayStatus}
-                  tempAnomaly={tempAnomaly}
                   freezeInfo={freezeInfo}
                 />
+
+                {/* Decision Rail - Climate Context */}
+                <DecisionRail tempAnomaly={tempAnomaly} />
               </div>
             </section>
 

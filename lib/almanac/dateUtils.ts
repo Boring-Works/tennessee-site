@@ -16,41 +16,48 @@
  * Parse date string to get year, month, day components
  * Handles both "YYYY-MM-DD" and "YYYY-MM-DDTHH:MM" formats
  */
-export function getDateComponents(dateString: string): { year: number; month: number; day: number } {
+export function getDateComponents(dateString: string): {
+  year: number
+  month: number
+  day: number
+} {
   const datePart = dateString.split('T')[0]
   const [year, month, day] = datePart.split('-').map(Number)
   return { year, month, day }
 }
 
 /**
- * Get today's date as YYYY-MM-DD string
+ * Get today's date as YYYY-MM-DD string in Eastern Time.
+ * CRITICAL: Use getEasternDateString() instead - this is kept for backwards compatibility.
+ * @deprecated Use getEasternDateString() for API data matching
  */
 export function getTodayString(): string {
-  const now = new Date()
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
+  return getEasternDateString()
 }
 
 /**
- * Check if a date string represents today
+ * Check if a date string represents today (in Eastern Time)
  */
 export function isDateToday(dateString: string): boolean {
   const { year, month, day } = getDateComponents(dateString)
   const now = new Date()
-  return year === now.getFullYear() && 
-         month === (now.getMonth() + 1) && 
-         day === now.getDate()
+  const eastern = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }))
+  return (
+    year === eastern.getFullYear() && month === eastern.getMonth() + 1 && day === eastern.getDate()
+  )
 }
 
 /**
- * Check if a date string represents tomorrow
+ * Check if a date string represents tomorrow (in Eastern Time)
  */
 export function isDateTomorrow(dateString: string): boolean {
   const { year, month, day } = getDateComponents(dateString)
-  const tomorrow = new Date()
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  return year === tomorrow.getFullYear() && 
-         month === (tomorrow.getMonth() + 1) && 
-         day === tomorrow.getDate()
+  const now = new Date()
+  const eastern = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }))
+  eastern.setDate(eastern.getDate() + 1)
+  return (
+    year === eastern.getFullYear() && month === eastern.getMonth() + 1 && day === eastern.getDate()
+  )
 }
 
 /**
@@ -83,8 +90,11 @@ export function findTodayDailyIndex(dailyTimes: string[]): number {
   }
 
   // Fallback: find first date >= today (handles edge cases around midnight)
+  // Use Eastern Time since API data is in ET
   const now = new Date()
-  const todayNum = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate()
+  const eastern = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }))
+  const todayNum =
+    eastern.getFullYear() * 10000 + (eastern.getMonth() + 1) * 100 + eastern.getDate()
 
   for (let i = 0; i < dailyTimes.length; i++) {
     const { year, month, day } = getDateComponents(dailyTimes[i])

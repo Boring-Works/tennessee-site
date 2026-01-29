@@ -288,9 +288,14 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         ))}
       </svg>
 
-      {/* Hover tooltip */}
+      {/* Hover tooltip with fade-in animation */}
       {hoveredInfo && (
-        <div className="text-center text-xs text-almanac-parchment/80 mt-2 p-2 bg-white/5 rounded">
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.15 }}
+          className="text-center text-xs text-almanac-parchment/80 mt-2 p-2 bg-white/5 rounded"
+        >
           <span className="font-medium">{hoveredInfo.time}</span>
           <span className="mx-2">•</span>
           <span className="text-almanac-gold font-bold">{hoveredInfo.temp}°F</span>
@@ -300,7 +305,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
               <span className="text-blue-400">{hoveredInfo.precip}% rain</span>
             </>
           )}
-        </div>
+        </motion.div>
       )}
 
       {/* Legend */}

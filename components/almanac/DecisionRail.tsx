@@ -1,14 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import {
-  AlertTriangle,
-  Flame,
-  TrendingUp,
-  TrendingDown,
-  Snowflake,
-  ThermometerSnowflake,
-} from 'lucide-react'
+import { TrendingUp, TrendingDown } from 'lucide-react'
 
 interface DecisionCard {
   id: string
@@ -21,112 +14,23 @@ interface DecisionCard {
 }
 
 interface DecisionRailProps {
-  // Alerts
-  hasActiveAlert?: boolean
-  alertTitle?: string
-
-  // Burn day
-  burnDayStatus?: 'burn' | 'no-burn' | 'unknown'
-
   // Temperature anomaly
   tempAnomaly?: {
     diff: number
     description: string
   }
-
-  // Freeze/frost info
-  freezeInfo?: {
-    isBelow32: boolean
-    nextFreezeHours?: number
-    frostRisk: boolean
-  }
 }
 
-export function DecisionRail({
-  hasActiveAlert,
-  alertTitle,
-  burnDayStatus,
-  tempAnomaly,
-  freezeInfo,
-}: DecisionRailProps) {
+export function DecisionRail({ tempAnomaly }: DecisionRailProps) {
   const cards = useMemo(() => {
     const allCards: DecisionCard[] = []
 
-    // 1. Active NWS Alert (highest priority)
-    if (hasActiveAlert && alertTitle) {
-      allCards.push({
-        id: 'alert',
-        priority: 1,
-        title: 'Active Alert',
-        value: alertTitle,
-        icon: <AlertTriangle className="w-4 h-4" />,
-        color: 'red',
-        show: true,
-      })
-    }
-
-    // 2. Freeze/Frost Warning
-    if (freezeInfo?.isBelow32) {
-      allCards.push({
-        id: 'freeze',
-        priority: 2,
-        title: 'Below Freezing',
-        value: 'Protect plants & pipes',
-        icon: <Snowflake className="w-4 h-4" />,
-        color: 'blue',
-        show: true,
-      })
-    } else if (freezeInfo?.frostRisk) {
-      allCards.push({
-        id: 'frost',
-        priority: 3,
-        title: 'Frost Risk',
-        value: 'Cover tender plants tonight',
-        icon: <ThermometerSnowflake className="w-4 h-4" />,
-        color: 'blue',
-        show: true,
-      })
-    } else if (freezeInfo?.nextFreezeHours && freezeInfo.nextFreezeHours <= 12) {
-      allCards.push({
-        id: 'freeze-coming',
-        priority: 3,
-        title: `Freeze in ${freezeInfo.nextFreezeHours}h`,
-        value: 'Prepare for cold',
-        icon: <Snowflake className="w-4 h-4" />,
-        color: 'blue',
-        show: true,
-      })
-    }
-
-    // 3. Burn Day Status (only if relevant - during burn season)
-    if (burnDayStatus === 'no-burn') {
-      allCards.push({
-        id: 'burn',
-        priority: 4,
-        title: 'No Burn Day',
-        value: 'Outdoor burning prohibited',
-        icon: <Flame className="w-4 h-4" />,
-        color: 'red',
-        show: true,
-      })
-    } else if (burnDayStatus === 'burn') {
-      allCards.push({
-        id: 'burn',
-        priority: 8,
-        title: 'Burn Day',
-        value: 'Burning permitted with permit',
-        icon: <Flame className="w-4 h-4" />,
-        color: 'green',
-        show: true,
-      })
-    }
-
-    // 4. Temperature anomaly (if significant)
+    // Temperature anomaly (if significant)
     if (tempAnomaly && Math.abs(tempAnomaly.diff) >= 5) {
       const isWarmer = tempAnomaly.diff > 0
       allCards.push({
         id: 'anomaly',
-        priority: 6,
+        priority: 1,
         title: 'Today vs Normal',
         value: tempAnomaly.description,
         icon: isWarmer ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />,
@@ -135,12 +39,8 @@ export function DecisionRail({
       })
     }
 
-    // Sort by priority and take top 3
-    return allCards
-      .filter((c) => c.show)
-      .sort((a, b) => a.priority - b.priority)
-      .slice(0, 3)
-  }, [hasActiveAlert, alertTitle, burnDayStatus, tempAnomaly, freezeInfo])
+    return allCards.filter((c) => c.show)
+  }, [tempAnomaly])
 
   const colorClasses = {
     red: 'bg-red-900/30 border-red-500/40 text-red-300',
@@ -151,11 +51,7 @@ export function DecisionRail({
   }
 
   if (cards.length === 0) {
-    return (
-      <div className="bg-white/5 border border-white/10 rounded-lg p-4 h-full flex items-center justify-center">
-        <p className="text-sm text-almanac-parchment/50 text-center">No urgent conditions</p>
-      </div>
-    )
+    return null
   }
 
   return (

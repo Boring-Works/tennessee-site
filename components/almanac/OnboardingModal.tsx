@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Sprout, HardHat, Thermometer, Moon } from 'lucide-react'
 
@@ -8,6 +8,7 @@ const STORAGE_KEY = 'almanac-onboarding-seen'
 
 export default function OnboardingModal() {
   const [isOpen, setIsOpen] = useState(false)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Check if user has seen onboarding
@@ -19,10 +20,58 @@ export default function OnboardingModal() {
     }
   }, [])
 
-  const handleDismiss = () => {
+  // Dismiss handler - defined before effects that use it
+  const handleDismiss = useCallback(() => {
     localStorage.setItem(STORAGE_KEY, 'true')
     setIsOpen(false)
-  }
+  }, [])
+
+  // Escape key handler
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        handleDismiss()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      return () => document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen, handleDismiss])
+
+  // Focus management and focus trap
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      // Focus first interactive element
+      const firstFocusable = modalRef.current.querySelector<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      firstFocusable?.focus()
+
+      // Focus trap
+      const handleTab = (e: KeyboardEvent) => {
+        if (e.key !== 'Tab' || !modalRef.current) return
+
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault()
+          lastElement?.focus()
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault()
+          firstElement?.focus()
+        }
+      }
+
+      document.addEventListener('keydown', handleTab)
+      return () => document.removeEventListener('keydown', handleTab)
+    }
+  }, [isOpen])
 
   return (
     <AnimatePresence>
@@ -39,11 +88,16 @@ export default function OnboardingModal() {
 
           {/* Modal */}
           <motion.div
+            ref={modalRef}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:w-full bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="onboarding-title"
+            aria-describedby="onboarding-description"
           >
             {/* Close button */}
             <button
@@ -58,7 +112,7 @@ export default function OnboardingModal() {
             <div className="p-6">
               {/* Header */}
               <div className="text-center mb-6">
-                <h2 className="font-serif text-xl text-almanac-gold mb-2">
+                <h2 id="onboarding-title" className="font-serif text-xl text-almanac-gold mb-2">
                   Welcome to The 1775 Almanac
                 </h2>
                 <p className="text-sm text-almanac-parchment/70">
@@ -67,7 +121,7 @@ export default function OnboardingModal() {
               </div>
 
               {/* Key insight */}
-              <div className="bg-white/5 rounded-lg p-4 mb-6">
+              <div id="onboarding-description" className="bg-white/5 rounded-lg p-4 mb-6">
                 <p className="text-center text-almanac-parchment/90">
                   <strong className="text-almanac-gold">The scores tell you what to DO</strong>
                   <br />

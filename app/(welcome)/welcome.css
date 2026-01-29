@@ -6,16 +6,17 @@
 
 /* CSS Custom Properties */
 .welcome-page {
-  --welcome-bg: #0a1628;
+  --welcome-bg: #0c1a2e;
   --text-primary: #f5f1e8;
-  --text-secondary: #a0977d;
+  --text-secondary: #b8a991;
   --text-muted: rgba(245, 241, 232, 0.5);
   --gold: #c9a227;
   --gold-muted: rgba(201, 162, 39, 0.6);
+  --copper: #b86f3e;
   --rust: #722f37;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(201, 162, 39, 0.2);
-  --card-hover-border: rgba(201, 162, 39, 0.5);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(201, 162, 39, 0.15);
+  --card-hover-border: rgba(201, 162, 39, 0.4);
   --disabled-opacity: 0.45;
 }
 
@@ -26,6 +27,36 @@
   display: flex;
   flex-direction: column;
   background: var(--welcome-bg);
+  position: relative;
+}
+
+.welcome-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 4px
+    );
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.welcome-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ===========================================
@@ -39,11 +70,28 @@
   gap: 0.5rem;
   padding: 0.75rem 1rem;
   background: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .weather-header--loading {
-  opacity: 0.6;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(201, 162, 39, 0.1) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
 
 .weather-icon {
@@ -51,11 +99,28 @@
   opacity: 0.6;
 }
 
+.weather-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .weather-text {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 0.85rem;
-  color: rgba(245, 241, 232, 0.5);
+  color: rgba(245, 241, 232, 0.8);
   letter-spacing: 0.02em;
+}
+
+.weather-cta {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.7);
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 /* ===========================================

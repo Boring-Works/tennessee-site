@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Info, X, BookOpen } from 'lucide-react'
 
@@ -10,25 +10,86 @@ interface AboutModalProps {
 
 export default function AboutModal({ iconOnly = false }: AboutModalProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  // Escape key handler
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      return () => document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen])
+
+  // Focus management and focus trap
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      // Store the element that opened the modal
+      const previousActiveElement = document.activeElement as HTMLElement
+
+      // Focus first interactive element
+      const firstFocusable = modalRef.current.querySelector<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      firstFocusable?.focus()
+
+      // Focus trap
+      const handleTab = (e: KeyboardEvent) => {
+        if (e.key !== 'Tab' || !modalRef.current) return
+
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault()
+          lastElement?.focus()
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault()
+          firstElement?.focus()
+        }
+      }
+
+      document.addEventListener('keydown', handleTab)
+
+      // Return focus on close
+      return () => {
+        document.removeEventListener('keydown', handleTab)
+        previousActiveElement?.focus()
+      }
+    }
+  }, [isOpen])
 
   return (
     <>
       {/* Trigger Button */}
       {iconOnly ? (
         <button
+          ref={triggerRef}
           type="button"
           onClick={() => setIsOpen(true)}
-          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
+          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
           aria-label="About The 1775 Almanac"
+          aria-expanded={isOpen}
           title="About The 1775 Almanac"
         >
           <BookOpen className="w-4 h-4" />
         </button>
       ) : (
         <button
+          ref={triggerRef}
           type="button"
           onClick={() => setIsOpen(true)}
-          className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/50 hover:text-almanac-gold transition-colors mt-2"
+          className="inline-flex items-center gap-1.5 text-xs text-almanac-parchment/50 hover:text-almanac-gold transition-colors mt-2 focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+          aria-expanded={isOpen}
         >
           <Info className="w-3 h-3" />
           <span>Our Story</span>
@@ -50,22 +111,31 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
 
             {/* Modal Content */}
             <motion.div
+              ref={modalRef}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-lg md:w-full bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="about-modal-title"
+              aria-describedby="about-modal-description"
             >
               {/* Header */}
               <div className="flex items-start justify-between p-4 border-b border-almanac-gold/20">
                 <div>
-                  <h2 className="font-serif text-xl text-almanac-gold">The 1775 Almanac</h2>
-                  <p className="text-sm text-almanac-parchment/60">Our Story</p>
+                  <h2 id="about-modal-title" className="font-serif text-xl text-almanac-gold">
+                    The 1775 Almanac
+                  </h2>
+                  <p id="about-modal-description" className="text-sm text-almanac-parchment/60">
+                    Our Story
+                  </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
+                  className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1 focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
                   aria-label="Close"
                 >
                   <X className="w-5 h-5" />

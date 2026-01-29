@@ -125,8 +125,19 @@ function calculateWindChill(tempF: number, windMph: number): number {
  * Using Sonntag 1990 constants: a=17.27, b=237.7
  */
 function calculateDewPoint(tempF: number, humidity: number): number {
+  // Guard against invalid humidity values
+  if (humidity <= 0 || humidity > 100) {
+    return Math.round(tempF) // Fallback to air temperature
+  }
+
   const tempC = ((tempF - 32) * 5) / 9
   const alpha = (17.27 * tempC) / (237.7 + tempC) + Math.log(humidity / 100)
+
+  // Guard against division by zero (extremely rare with real weather data)
+  if (Math.abs(17.27 - alpha) < 0.001) {
+    return Math.round(tempF) // Fallback to air temperature
+  }
+
   const dewPointC = (237.7 * alpha) / (17.27 - alpha)
   return Math.round((dewPointC * 9) / 5 + 32)
 }

@@ -1,6 +1,5 @@
 import { WeatherHeader } from '@/components/welcome/WeatherHeader'
 import { StoryHook } from '@/components/welcome/StoryHook'
-import { HeroYear } from '@/components/welcome/HeroYear'
 import { BrandStatement } from '@/components/welcome/BrandStatement'
 import { DualPeaks } from '@/components/welcome/DualPeaks'
 import { CTAGroup } from '@/components/welcome/CTAGroup'
@@ -47,9 +46,11 @@ export default function WelcomePage() {
       <div className="welcome-container">
         <StoryHook line1="Before there was a Tennessee," line2="there was this ground." />
 
-        <HeroYear year="1770" contextLine="William Cobb · Piney Flats · Sullivan County" />
-
-        <BrandStatement headline="ROCKY MOUNT" tagline="Tennessee Starts Here" />
+        <BrandStatement
+          headline="ROCKY MOUNT"
+          descriptor="First Capital of the Southwest Territory · 1790"
+          tagline="Tennessee Starts Here"
+        />
 
         <DualPeaks peaks={peaks} />
 
@@ -58,6 +59,9 @@ export default function WelcomePage() {
           primaryHref="/home"
           secondaryText="Be One of the First 250 · Enrollment closes June 1"
           secondaryHref="/first-250"
+          archiveText="Explore the Evidence"
+          archiveDescription="Read the original documents from Tennessee's founding."
+          archiveHref="/evidence"
         />
       </div>
     </main>

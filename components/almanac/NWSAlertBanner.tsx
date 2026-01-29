@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AlertTriangle, Info, ChevronDown, X } from 'lucide-react'
+import { logger } from '@/lib/logger'
 import type { NWSAlert, NWSAlertsResponse, AlertSeverity } from '@/lib/almanac/types'
 
 interface NWSAlertBannerProps {
@@ -71,8 +72,9 @@ export default function NWSAlertBanner({ lat, lon, onAlertChange }: NWSAlertBann
         const firstAlertTitle = alertList[0]?.event
         onAlertChange(hasAlert, firstAlertTitle)
       }
-    } catch {
-      // Silently fail - alerts are supplementary
+    } catch (err) {
+      // Log error for debugging, but fail silently - alerts are supplementary
+      logger.error('NWS alerts fetch error:', err)
       setAlerts([])
       onAlertChange?.(false, undefined)
     } finally {
@@ -144,7 +146,7 @@ export default function NWSAlertBanner({ lat, lon, onAlertChange }: NWSAlertBann
                         {style.textLabel}
                       </span>
                       {/* Event name */}
-                      <span className="font-medium text-sm text-almanac-parchment">
+                      <span className="text-base font-semibold text-almanac-parchment">
                         {alert.event}
                       </span>
                     </div>

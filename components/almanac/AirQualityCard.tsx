@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Wind } from 'lucide-react'
+import { logger } from '@/lib/logger'
 import type { AirQualityData } from '@/lib/almanac/types'
 import { getAQILevel } from '@/lib/almanac/types'
 import { InfoPopup } from './InfoPopup'
@@ -19,39 +20,66 @@ export default function AirQualityCard({ lat, lon, onAqiChange }: AirQualityCard
   const [data, setData] = useState<AirQualityData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const onAqiChangeRef = useRef(onAqiChange)
+
+  // Keep callback ref in sync without triggering re-fetches
+  useEffect(() => {
+    onAqiChangeRef.current = onAqiChange
+  }, [onAqiChange])
 
   const fetchAirQuality = useCallback(async () => {
+    // Cancel any in-flight request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    // Create new abort controller for this request
+    abortControllerRef.current = new AbortController()
+    const signal = abortControllerRef.current.signal
+
     try {
-      const response = await fetch(`/api/air-quality?lat=${lat}&lon=${lon}`)
+      const response = await fetch(`/api/air-quality?lat=${lat}&lon=${lon}`, { signal })
       const result = await response.json()
 
       if (result.error && !result.aqi) {
         setError(result.error)
         setData(null)
-        onAqiChange?.(null)
+        onAqiChangeRef.current?.(null)
       } else if (result.aqi !== null) {
         setData(result)
         setError(null)
-        onAqiChange?.(result.aqi)
+        onAqiChangeRef.current?.(result.aqi)
       } else {
         setData(null)
         setError('No air quality data available')
-        onAqiChange?.(null)
+        onAqiChangeRef.current?.(null)
       }
-    } catch {
+    } catch (err) {
+      // Handle aborted requests gracefully
+      if (err instanceof Error && err.name === 'AbortError') {
+        return
+      }
+
+      logger.error('Air quality fetch error:', err)
       setError('Failed to load air quality data')
       setData(null)
-      onAqiChange?.(null)
+      onAqiChangeRef.current?.(null)
     } finally {
       setLoading(false)
     }
-  }, [lat, lon, onAqiChange])
+  }, [lat, lon])
 
   useEffect(() => {
     fetchAirQuality()
     // Refresh every 15 minutes
     const interval = setInterval(fetchAirQuality, 15 * 60 * 1000)
-    return () => clearInterval(interval)
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+      clearInterval(interval)
+    }
   }, [fetchAirQuality])
 
   // Don't show while loading

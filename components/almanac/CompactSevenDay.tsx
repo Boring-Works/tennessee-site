@@ -57,34 +57,59 @@ function DayDetailModal({
   const WeatherIcon = getWeatherIcon(day.code)
   const weather = getWeatherInfo(day.code)
 
+  // Handle keyboard navigation in modal
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      } else if (e.key === 'ArrowLeft' && hasPrev) {
+        onPrev()
+      } else if (e.key === 'ArrowRight' && hasNext) {
+        onNext()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [onClose, onPrev, onNext, hasPrev, hasNext])
+
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/70 z-50" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/70 z-50" onClick={onClose} aria-hidden="true" />
 
       {/* Modal */}
-      <div className="fixed inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-sm bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden">
+      <div
+        className="fixed inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-sm bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-50 overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="day-detail-title"
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-almanac-gold/20">
           <button
             type="button"
             onClick={onPrev}
             disabled={!hasPrev}
-            className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+            aria-label="Previous day"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
           </button>
           <div className="text-center">
-            <h2 className="font-serif text-lg text-almanac-gold">{day.dayFull || day.day}</h2>
+            <h2 id="day-detail-title" className="font-serif text-lg text-almanac-gold">
+              {day.dayFull || day.day}
+            </h2>
             {day.date && <p className="text-xs text-almanac-parchment/50">{day.date}</p>}
           </div>
           <button
             type="button"
             onClick={onNext}
             disabled={!hasNext}
-            className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-1 text-almanac-parchment/50 hover:text-almanac-parchment disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+            aria-label="Next day"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 
@@ -191,9 +216,10 @@ function DayDetailModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-3 right-3 p-1 text-almanac-parchment/40 hover:text-almanac-parchment"
+          className="absolute top-3 right-3 p-1 text-almanac-parchment/40 hover:text-almanac-parchment focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+          aria-label="Close day details"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
     </>
@@ -206,6 +232,7 @@ function DayDetailModal({
 
 export function CompactSevenDay({ days }: CompactSevenDayProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const previousFocusRef = React.useRef<HTMLElement | null>(null)
 
   // Show first 7 days in main grid, rest in scrollable overflow
   const mainDays = days.slice(0, 7)
@@ -245,10 +272,14 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
       <button
         type="button"
         key={originalIndex}
-        onClick={() => setSelectedIndex(originalIndex)}
-        className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer ${
+        onClick={() => {
+          previousFocusRef.current = document.activeElement as HTMLElement
+          setSelectedIndex(originalIndex)
+        }}
+        className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight ${
           isWeekend ? 'bg-almanac-gold/5' : ''
         }`}
+        aria-label={`${day.dayFull || day.day}${day.date ? ' ' + day.date : ''}, High ${Math.round(day.high)}, Low ${Math.round(day.low)}`}
       >
         {/* Day letter */}
         <span
@@ -258,7 +289,7 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
         </span>
 
         {/* Weather icon */}
-        <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
+        <WeatherIcon className="w-5 h-5 text-almanac-gold/80" aria-hidden="true" />
 
         {/* High temp */}
         <span className="text-sm font-semibold text-almanac-parchment">
@@ -271,7 +302,7 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
         {/* Precip chance (only if >20%) */}
         {showPrecip && (
           <span className="flex items-center gap-0.5 text-xs text-blue-400">
-            <Droplets className="w-3 h-3" />
+            <Droplets className="w-3 h-3" aria-hidden="true" />
             {day.precipChance}%
           </span>
         )}
@@ -314,7 +345,20 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
       {hasExtraDays && (
         <>
           <div className="border-t border-white/10 my-2" />
-          <div className="overflow-x-auto scrollbar-hide">
+          <div
+            className="overflow-x-auto scrollbar-hide"
+            role="region"
+            aria-label="Extended 8-16 day forecast"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowRight') {
+                e.currentTarget.scrollBy({ left: 100, behavior: 'smooth' })
+              }
+              if (e.key === 'ArrowLeft') {
+                e.currentTarget.scrollBy({ left: -100, behavior: 'smooth' })
+              }
+            }}
+          >
             <div className="flex gap-1 min-w-min">
               {extraDays.map((day, index) => {
                 const actualIndex = index + 7
@@ -325,11 +369,15 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
                   <button
                     type="button"
                     key={actualIndex}
-                    onClick={() => setSelectedIndex(actualIndex)}
-                    className="flex flex-col items-center gap-1 py-2 px-2 rounded-md hover:bg-white/10 transition-colors cursor-pointer flex-shrink-0"
+                    onClick={() => {
+                      previousFocusRef.current = document.activeElement as HTMLElement
+                      setSelectedIndex(actualIndex)
+                    }}
+                    className="flex flex-col items-center gap-1 py-2 px-2 rounded-md hover:bg-white/10 transition-colors cursor-pointer flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+                    aria-label={`${day.dayFull || day.day}${day.date ? ' ' + day.date : ''}, High ${Math.round(day.high)}, Low ${Math.round(day.low)}`}
                   >
                     <span className="text-xs font-medium text-almanac-parchment/60">{day.day}</span>
-                    <WeatherIcon className="w-5 h-5 text-almanac-gold/80" />
+                    <WeatherIcon className="w-5 h-5 text-almanac-gold/80" aria-hidden="true" />
                     <span className="text-sm font-semibold text-almanac-parchment">
                       {Math.round(day.high)}°
                     </span>
@@ -338,7 +386,7 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
                     </span>
                     {showPrecip && (
                       <span className="flex items-center gap-0.5 text-xs text-blue-400">
-                        <Droplets className="w-3 h-3" />
+                        <Droplets className="w-3 h-3" aria-hidden="true" />
                         {day.precipChance}%
                       </span>
                     )}
@@ -358,7 +406,13 @@ export function CompactSevenDay({ days }: CompactSevenDayProps) {
       {selectedIndex !== null && days[selectedIndex] && (
         <DayDetailModal
           day={days[selectedIndex]}
-          onClose={() => setSelectedIndex(null)}
+          onClose={() => {
+            setSelectedIndex(null)
+            // Return focus to the button that opened the modal
+            if (previousFocusRef.current) {
+              previousFocusRef.current.focus()
+            }
+          }}
           onPrev={() => setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev))}
           onNext={() =>
             setSelectedIndex((prev) => (prev !== null && prev < days.length - 1 ? prev + 1 : prev))

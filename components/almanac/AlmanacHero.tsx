@@ -84,7 +84,7 @@ export function AlmanacHero({
               <Snowflake className="w-5 h-5 text-blue-400 absolute -top-1 -right-1 animate-pulse" />
             )}
           </div>
-          <div className="text-[72px] lg:text-[80px] font-sans font-bold leading-none text-almanac-parchment">
+          <div className="text-[72px] font-sans font-bold leading-none text-almanac-parchment">
             {Math.round(temperature)}°
           </div>
         </div>

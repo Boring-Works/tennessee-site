@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Pencil, Loader2, AlertCircle, X, RotateCcw } from 'lucide-react'
 import {
@@ -27,6 +27,8 @@ export default function LocationPicker({
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [storageWarning, setStorageWarning] = useState(false)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   const handleSearch = useCallback(async () => {
     if (!query.trim()) return
@@ -73,6 +75,41 @@ export default function LocationPicker({
     }
   }
 
+  // Focus management and focus trap
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      // Store the element that opened the modal
+      const previousActiveElement = document.activeElement as HTMLElement
+
+      // Focus trap
+      const handleTab = (e: KeyboardEvent) => {
+        if (e.key !== 'Tab' || !modalRef.current) return
+
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault()
+          lastElement?.focus()
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault()
+          firstElement?.focus()
+        }
+      }
+
+      document.addEventListener('keydown', handleTab)
+
+      // Return focus on close
+      return () => {
+        document.removeEventListener('keydown', handleTab)
+        previousActiveElement?.focus()
+      }
+    }
+  }, [isOpen])
+
   return (
     <>
       {/* Storage Warning - shown when localStorage fails */}
@@ -89,7 +126,7 @@ export default function LocationPicker({
             <button
               type="button"
               onClick={() => setStorageWarning(false)}
-              className="ml-2 hover:text-white transition-colors"
+              className="ml-2 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-amber-900"
               aria-label="Dismiss warning"
             >
               <X className="w-4 h-4" />
@@ -101,20 +138,24 @@ export default function LocationPicker({
       {/* Location Display Button - Made prominent so users can find it */}
       {compact ? (
         <button
+          ref={triggerRef}
           type="button"
           onClick={() => setIsOpen(true)}
-          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors"
+          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
           aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
+          aria-expanded={isOpen}
           title="Change location"
         >
           <MapPin className="w-4 h-4" aria-hidden="true" />
         </button>
       ) : (
         <button
+          ref={triggerRef}
           type="button"
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-almanac-gold/30 rounded-lg text-almanac-parchment hover:bg-white/10 hover:border-almanac-gold/50 hover:text-almanac-gold transition-all group"
+          className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-almanac-gold/30 rounded-lg text-almanac-parchment hover:bg-white/10 hover:border-almanac-gold/50 hover:text-almanac-gold transition-all group focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
           aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
+          aria-expanded={isOpen}
         >
           <MapPin className="w-4 h-4 text-almanac-gold" aria-hidden="true" />
           <span className="text-sm font-medium">{formatLocationName(location)}</span>
@@ -141,6 +182,7 @@ export default function LocationPicker({
 
             {/* Modal */}
             <motion.div
+              ref={modalRef}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -158,7 +200,7 @@ export default function LocationPicker({
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="text-almanac-parchment/60 hover:text-almanac-parchment transition-colors"
+                  className="p-2.5 md:p-2 text-almanac-parchment/60 hover:text-almanac-parchment transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
                   aria-label="Close location picker"
                 >
                   <X className="w-5 h-5" aria-hidden="true" />
@@ -206,7 +248,7 @@ export default function LocationPicker({
                   type="button"
                   onClick={handleSearch}
                   disabled={isLoading || !query.trim()}
-                  className="flex-1 flex items-center justify-center gap-2 bg-almanac-gold text-almanac-midnight font-medium py-3 rounded-lg hover:bg-almanac-gold/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 bg-almanac-gold text-almanac-midnight font-medium py-4 md:py-3 rounded-lg hover:bg-almanac-gold/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
                   aria-busy={isLoading}
                 >
                   {isLoading ? (
@@ -224,7 +266,7 @@ export default function LocationPicker({
                   onClick={handleReset}
                   title="Reset to Sullivan County"
                   aria-label="Reset to Sullivan County, Tennessee"
-                  className="flex items-center justify-center gap-2 px-4 py-3 border border-almanac-gold/30 text-almanac-parchment/80 rounded-lg hover:border-almanac-gold/50 hover:text-almanac-parchment transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 py-4 md:py-3 border border-almanac-gold/30 text-almanac-parchment/80 rounded-lg hover:border-almanac-gold/50 hover:text-almanac-parchment transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
                 >
                   <RotateCcw className="w-4 h-4" aria-hidden="true" />
                 </button>

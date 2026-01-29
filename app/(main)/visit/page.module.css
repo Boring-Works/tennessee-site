@@ -141,10 +141,7 @@
 
 .visit-hero-cta {
   display: inline-block;
-  padding: 1rem 2.5rem;
-  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--primary);
   background: var(--accent);
@@ -630,10 +627,7 @@
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 1rem;
-  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--primary);
   background: var(--accent);
@@ -815,10 +809,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: all 0.3s ease;
 }
@@ -1049,10 +1040,7 @@
 
 .visit-groups-btn {
   display: inline-block;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: all 0.3s ease;
 }
@@ -1146,10 +1134,7 @@
 
 .visit-closing-cta {
   display: inline-block;
-  padding: 1rem 2rem;
-  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   transition: all 0.3s ease;
 }

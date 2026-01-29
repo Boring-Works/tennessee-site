@@ -43,12 +43,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
   background: var(--color-accent);
   color: var(--color-primary);
   font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -97,7 +94,7 @@
 
 /* Programs */
 .programs {
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem;
   background: var(--color-cream);
 }
 
@@ -110,26 +107,26 @@
   font-family: var(--font-serif);
   font-size: 2rem;
   color: var(--color-primary);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
 .programs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .program-card {
   background: white;
-  border: 1px solid var(--color-secondary);
+  border: var(--border-card);
   border-radius: 4px;
-  padding: 1.5rem;
+  padding: 2rem;
   transition: all 0.2s ease;
 }
 
 .program-card:hover {
-  border-color: var(--color-accent);
+  border: var(--border-card-hover);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -153,12 +150,12 @@
 .program-desc {
   font-size: 0.9375rem;
   color: #555;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* Booking */
 .booking {
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem;
   background: var(--color-primary);
   text-align: center;
 }
@@ -172,7 +169,7 @@
   font-family: var(--font-serif);
   font-size: 1.75rem;
   color: var(--color-cream);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .booking-contact {
@@ -248,7 +245,7 @@
 
 /* History Context */
 .history {
-  padding: 2.5rem 1.5rem;
+  padding: 4rem 1.5rem;
   background: var(--color-primary);
 }
 
@@ -262,14 +259,14 @@
   font-family: var(--font-serif);
   font-size: 1.25rem;
   color: var(--color-accent);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .history-text {
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--color-cream-dark);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .history-link {

@@ -3,6 +3,17 @@ import Link from 'next/link'
 import { Claim } from '@/components/evidence/Claim'
 import styles from './page.module.css'
 
+// Section divider component for period-authentic transitions
+const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) => (
+  <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
+    <span className="section-divider-line" />
+    <span className="section-divider-flourish">❧</span>
+    <span className="section-divider-ornament">✦</span>
+    <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
+    <span className="section-divider-line" />
+  </div>
+)
+
 export const metadata: Metadata = {
   title: 'For Educators | Tennessee Starts Here',
   description:
@@ -68,7 +79,7 @@ export default function EducatorsPage() {
       <section className={styles.hero}>
         <div className={styles['hero-content']}>
           <p className={styles.eyebrow}>For Educators</p>
-          <h1 className={styles.headline}>History happens here.</h1>
+          <h1 className={styles.headline}>Tennessee&apos;s Government Started Here</h1>
           <p className={styles.subhead}>
             Give your students a tangible connection to Tennessee&apos;s founding.
           </p>
@@ -76,7 +87,7 @@ export default function EducatorsPage() {
             href="https://form.jotform.com/230155675460152"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles['cta-primary']}
+            className={`${styles['cta-primary']} btn-medium`}
           >
             Book a Field Trip
           </a>
@@ -117,6 +128,8 @@ export default function EducatorsPage() {
         </div>
       </section>
 
+      <SectionDivider variant="light" />
+
       {/* Programs */}
       <section className={styles.programs}>
         <div className={styles['programs-inner']}>
@@ -137,6 +150,8 @@ export default function EducatorsPage() {
         </div>
       </section>
 
+      <SectionDivider variant="default" />
+
       {/* Book CTA */}
       <section className={styles.booking}>
         <div className={styles['booking-inner']}>
@@ -145,7 +160,7 @@ export default function EducatorsPage() {
             href="https://form.jotform.com/230155675460152"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles['cta-primary']}
+            className={`${styles['cta-primary']} btn-medium`}
           >
             Book a Field Trip →
           </a>

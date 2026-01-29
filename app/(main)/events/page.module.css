@@ -522,14 +522,14 @@
 .calendar-event {
   display: flex;
   background: white;
-  border: 1px solid rgba(10, 22, 40, 0.1);
+  border: var(--border-card);
   border-radius: 2px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .calendar-event:hover {
-  border-color: var(--secondary);
+  border: var(--border-card-hover);
   box-shadow: 0 4px 20px rgba(10, 22, 40, 0.1);
   transform: translateY(-2px);
 }
@@ -561,8 +561,7 @@
 
 /* Event Type Variations */
 .calendar-event--signature {
-  border-color: var(--accent);
-  border-width: 2px;
+  border: var(--border-card-featured);
 }
 
 .calendar-event--signature .calendar-event-date {

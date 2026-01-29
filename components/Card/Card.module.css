@@ -1,0 +1,100 @@
+/* ============================================
+   CARD COMPONENT LIBRARY
+   Tennessee Starts Here
+   ============================================ */
+
+/* Base Card Styles */
+.card {
+  position: relative;
+  padding: var(--card-padding, 1.5rem);
+  border-radius: var(--card-radius, 2px);
+  transition: all var(--card-transition, 0.3s ease);
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: var(--card-padding, 2rem);
+  }
+}
+
+/* ============================================
+   VARIANT: DEFAULT
+   White background, standard shadow
+   ============================================ */
+
+.card--default {
+  background: white;
+  border: 1px solid rgba(10, 22, 40, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   VARIANT: FEATURED
+   Primary color background, enhanced styling
+   ============================================ */
+
+.card--featured {
+  background: var(--primary);
+  color: white;
+  border: 1px solid rgba(201, 162, 39, 0.3);
+}
+
+.card--featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  border-radius: var(--card-radius, 2px);
+}
+
+/* ============================================
+   VARIANT: SUBTLE
+   Cream background, minimal border
+   ============================================ */
+
+.card--subtle {
+  background: var(--cream);
+  border-left: 3px solid var(--accent);
+}
+
+/* ============================================
+   HOVER EFFECT
+   Optional hover state
+   ============================================ */
+
+.card--hover:hover {
+  transform: translateY(-2px);
+}
+
+.card--default.card--hover:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.1);
+}
+
+.card--featured.card--hover:hover {
+  border-color: var(--accent);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(201, 162, 39, 0.15);
+}
+
+.card--subtle.card--hover:hover {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card--hover:hover {
+    transform: none;
+  }
+}

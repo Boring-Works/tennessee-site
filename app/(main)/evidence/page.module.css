@@ -1366,6 +1366,80 @@
    CTA SECTION - Closing the Archive
    ============================================ */
 
+/* ============================================
+   EARLY CTA - Prominent placement after hero
+   Gold button on cream background
+   ============================================ */
+
+.earlyCtaSection {
+  background: var(--cream-light);
+  padding: 4rem 1rem;
+  text-align: center;
+  position: relative;
+  border-top: 1px solid rgba(201, 162, 39, 0.15);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+}
+
+.earlyCtaTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: var(--wood-dark);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.earlyCtaText {
+  font-family: var(--font-serif-elegant);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--ink-faded);
+  margin-bottom: 2rem;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  line-height: 1.75;
+}
+
+.earlyCtaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  color: var(--wood-dark);
+  padding: 1rem 2.25rem;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all var(--transition-dignified);
+  box-shadow:
+    0 2px 8px rgba(201, 162, 39, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  font-family: var(--font-serif);
+}
+
+.earlyCtaButton:hover {
+  background: linear-gradient(180deg, #d4ad32, var(--brass));
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(201, 162, 39, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.earlyCtaButton:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   CTA SECTION - Page closing CTA
+   Dark wood background
+   ============================================ */
+
 .ctaSection {
   background: var(--wood-grain-pattern), linear-gradient(180deg, var(--wood-dark) 0%, #1e1612 100%);
   padding: 5rem 1rem;

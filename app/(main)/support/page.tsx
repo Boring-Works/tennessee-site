@@ -2,6 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import styles from './page.module.css'
 
+// Section divider component for period-authentic transitions
+const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) => (
+  <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
+    <span className="section-divider-line" />
+    <span className="section-divider-flourish">❧</span>
+    <span className="section-divider-ornament">✦</span>
+    <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
+    <span className="section-divider-line" />
+  </div>
+)
+
 export const metadata: Metadata = {
   title: 'Support Rocky Mount | Tennessee Starts Here',
   description:
@@ -13,6 +24,27 @@ export const metadata: Metadata = {
     url: 'https://tennesseestartshere.com/support',
   },
 }
+
+const IMPACT_STATEMENTS = [
+  {
+    stat: '10,000+',
+    label: 'Annual Visitors',
+    description:
+      'Students, families, and history enthusiasts experience the birthplace of Tennessee.',
+  },
+  {
+    stat: '250 Years',
+    label: 'Preserving History',
+    description:
+      'From 1770s frontier home to the first territorial capital—maintained for future generations.',
+  },
+  {
+    stat: '5,000+',
+    label: 'Students Served',
+    description:
+      'Field trips bring Tennessee history to life through hands-on learning and primary sources.',
+  },
+]
 
 const SUPPORT_OPTIONS = [
   {
@@ -51,7 +83,7 @@ export default function SupportPage() {
       <section className={styles.hero}>
         <div className={styles['hero-content']}>
           <p className={styles.eyebrow}>Support Rocky Mount</p>
-          <h1 className={styles.headline}>Keep Tennessee&apos;s Origin Story Alive</h1>
+          <h1 className={styles.headline}>Preserve Where Tennessee Began</h1>
           <p className={styles.subhead}>
             Rocky Mount preserves the place where Tennessee&apos;s government began. Your support
             maintains these historic grounds, expands educational programs, and shares this story
@@ -59,6 +91,30 @@ export default function SupportPage() {
           </p>
         </div>
       </section>
+
+      <SectionDivider variant="light" />
+
+      {/* Your Impact */}
+      <section className={styles.impact}>
+        <div className={styles['impact-inner']}>
+          <h2 className={styles['impact-headline']}>Your Impact</h2>
+          <p className={styles['impact-intro']}>
+            Your support helps preserve the place where Tennessee&apos;s government was born and
+            share this story with thousands of visitors each year.
+          </p>
+          <div className={styles['impact-grid']}>
+            {IMPACT_STATEMENTS.map((item) => (
+              <article key={item.label} className={styles['impact-card']}>
+                <p className={styles['impact-stat']}>{item.stat}</p>
+                <h3 className={styles['impact-label']}>{item.label}</h3>
+                <p className={styles['impact-desc']}>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider variant="default" />
 
       {/* Ways to Support */}
       <section className={styles.options}>
@@ -74,7 +130,7 @@ export default function SupportPage() {
                   href={option.href}
                   target={option.external ? '_blank' : undefined}
                   rel={option.external ? 'noopener noreferrer' : undefined}
-                  className={styles['option-cta']}
+                  className={`${styles['option-cta']} btn-small`}
                 >
                   {option.cta} {option.external && '→'}
                 </a>
@@ -94,7 +150,7 @@ export default function SupportPage() {
           </p>
           <p className={styles['first250-limit']}>Limited to 250 members</p>
           <p className={styles['first250-opens']}>Enrollment opens March 4, 2026</p>
-          <Link href="/first-250" className={styles['first250-cta']}>
+          <Link href="/first-250" className={`${styles['first250-cta']} btn-small`}>
             Learn More →
           </Link>
         </div>

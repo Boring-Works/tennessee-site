@@ -18,6 +18,17 @@ export const metadata: Metadata = {
   },
 }
 
+// Section divider component for period-authentic transitions
+const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) => (
+  <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
+    <span className="section-divider-line" />
+    <span className="section-divider-flourish">❧</span>
+    <span className="section-divider-ornament">✦</span>
+    <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
+    <span className="section-divider-line" />
+  </div>
+)
+
 // External source links
 const SOURCE_LINKS = {
   foundersOnline: 'https://founders.archives.gov/',
@@ -212,26 +223,26 @@ export default function EvidencePage() {
         <nav className={styles.heroNav} aria-label="Evidence Room sections">
           <div className={styles.heroNavGrid}>
             <a href="#blount-letter" className={styles.heroNavCard}>
-              <span className={styles.heroNavIcon}>📜</span>
+              <span className={styles.heroNavIcon}>✦</span>
               <span className={styles.heroNavName}>Letters</span>
             </a>
             <a href="#treaty-signers" className={styles.heroNavCard}>
-              <span className={styles.heroNavIcon}>🤝</span>
+              <span className={styles.heroNavIcon}>★</span>
               <span className={styles.heroNavName}>Treaty Signers</span>
             </a>
             <Link href="/evidence/timeline" className={styles.heroNavCard}>
-              <span className={styles.heroNavIcon}>📅</span>
+              <span className={styles.heroNavIcon}>⏱</span>
               <span className={styles.heroNavName}>Timeline</span>
             </Link>
             <a href="#sources" className={styles.heroNavCard}>
-              <span className={styles.heroNavIcon}>📚</span>
+              <span className={styles.heroNavIcon}>❧</span>
               <span className={styles.heroNavName}>Sources</span>
             </a>
           </div>
 
           {/* Document Library - Primary CTA */}
           <Link href="/evidence/documents" className={styles.heroLibraryLink}>
-            <span className={styles.heroLibraryIcon}>📖</span>
+            <span className={styles.heroLibraryIcon}>✦</span>
             <span className={styles.heroLibraryText}>
               <strong>Full Document Library</strong>
               <span>Read complete transcriptions with archival citations</span>
@@ -249,6 +260,24 @@ export default function EvidencePage() {
 
       {/* Entry Room - Collection Overview */}
       <EntryRoom />
+
+      <SectionDivider variant="light" />
+
+      {/* Visit CTA - Prominent placement after hero */}
+      <section className={styles.earlyCtaSection}>
+        <div className={styles.container}>
+          <h2 className={styles.earlyCtaTitle}>The Documents Live Here</h2>
+          <p className={styles.earlyCtaText}>
+            These archives tell the story. The ground holds the proof. Visit Rocky Mount to walk
+            where this history was made.
+          </p>
+          <Link href="/visit" className={styles.earlyCtaButton}>
+            Visit the Site
+          </Link>
+        </div>
+      </section>
+
+      <SectionDivider variant="default" />
 
       {/* Featured Quote - Blount Correspondence */}
       <section id="blount-letter" className={styles.featuredSection}>
@@ -270,7 +299,7 @@ export default function EvidencePage() {
             href="/evidence/documents/blount-arrival-1790#glass-windows"
             className={styles.receiptLink}
           >
-            <span className={styles.receiptIcon}>📄</span>
+            <span className={styles.receiptIcon}>✦</span>
             <span className={styles.receiptText}>
               Read the full letter with this passage highlighted
             </span>
@@ -290,6 +319,8 @@ export default function EvidencePage() {
           </CuratorNote>
         </div>
       </section>
+
+      <SectionDivider variant="default" />
 
       {/* The Question - Washington Papers */}
       <section id="washington-question" className={styles.section}>
@@ -316,6 +347,8 @@ export default function EvidencePage() {
         </div>
       </section>
 
+      <SectionDivider variant="default" />
+
       {/* The Appointment - Williamson Letters */}
       <section id="appointment" className={styles.section}>
         <div className={styles.container}>
@@ -339,6 +372,8 @@ export default function EvidencePage() {
           </ContextPanel>
         </div>
       </section>
+
+      <SectionDivider variant="default" />
 
       {/* Federal Authority - Executive Proclamations */}
       <section id="federal-authority" className={styles.section}>
@@ -367,6 +402,8 @@ export default function EvidencePage() {
           </ContextPanel>
         </div>
       </section>
+
+      <SectionDivider variant="default" />
 
       {/* Treaty Signers Section */}
       <section id="treaty-signers" className={styles.signersSection}>
@@ -420,6 +457,8 @@ export default function EvidencePage() {
           </div>
         </div>
       </section>
+
+      <SectionDivider variant="default" />
 
       {/* Timeline Section */}
       <section id="timeline" className={styles.timelineSection}>
@@ -496,6 +535,8 @@ export default function EvidencePage() {
         </div>
       </section>
 
+      <SectionDivider variant="light" />
+
       {/* Source Repositories */}
       <section id="sources" className={styles.sourcesSection}>
         <div className={styles.container}>
@@ -505,7 +546,7 @@ export default function EvidencePage() {
 
           {/* Document Library link - featured */}
           <Link href="/evidence/documents" className={styles.libraryPromo}>
-            <span className={styles.libraryPromoIcon}>📖</span>
+            <span className={styles.libraryPromoIcon}>✦</span>
             <div className={styles.libraryPromoText}>
               <strong>Document Library</strong>
               <span>Read complete transcriptions with full citations</span>
@@ -593,6 +634,8 @@ export default function EvidencePage() {
           </div>
         </div>
       </section>
+
+      <SectionDivider variant="default" />
 
       {/* CTA Section - Leaving the library */}
       <section className={styles.ctaSection}>

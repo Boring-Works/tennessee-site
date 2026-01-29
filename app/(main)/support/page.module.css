@@ -30,12 +30,83 @@
 .subhead {
   font-size: 1.125rem;
   color: var(--color-cream-dark);
+  line-height: 1.8;
+}
+
+/* Your Impact */
+.impact {
+  padding: 5rem 1.5rem;
+  background: white;
+}
+
+.impact-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.impact-headline {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.impact-intro {
+  font-size: 1.125rem;
+  color: var(--color-text-light);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.impact-card {
+  background: var(--color-cream);
+  border: 1px solid var(--color-cream-dark);
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.impact-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.impact-stat {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.impact-label {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.impact-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-light);
   line-height: 1.7;
 }
 
 /* Options */
 .options {
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem;
   background: var(--color-cream);
 }
 
@@ -48,21 +119,21 @@
   font-family: var(--font-serif);
   font-size: 2rem;
   color: var(--color-primary);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
 .options-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .option-card {
   background: white;
   border: 1px solid var(--color-secondary);
   border-radius: 4px;
-  padding: 2rem;
+  padding: 2.5rem;
   text-align: center;
   transition: all 0.2s ease;
 }
@@ -92,12 +163,9 @@
 
 .option-cta {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
   background: var(--color-accent);
   color: var(--color-primary);
   font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
   border-radius: 4px;
   transition: all 0.2s ease;
 }
@@ -115,7 +183,7 @@
 
 /* First 250 */
 .first250 {
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem;
   background: var(--color-secondary);
   text-align: center;
 }
@@ -129,7 +197,7 @@
   font-family: var(--font-serif);
   font-size: 1.75rem;
   color: var(--color-cream);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .first250-desc {
@@ -151,12 +219,9 @@
 
 .first250-cta {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
   background: var(--color-accent);
   color: var(--color-primary);
   font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
   border-radius: 4px;
   transition: all 0.2s ease;
 }

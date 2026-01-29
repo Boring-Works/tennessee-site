@@ -250,7 +250,7 @@ export default function VisitPage() {
             href="https://fareharbor.com/embeds/book/rockymountmuseum/"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles['visit-hero-cta']}
+            className={`${styles['visit-hero-cta']} btn-large`}
           >
             <span className={styles['visit-hero-cta-seal']} aria-hidden="true">
               ★
@@ -498,7 +498,7 @@ export default function VisitPage() {
                 href="https://fareharbor.com/embeds/book/rockymountmuseum/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles['visit-book-btn']}
+                className={`${styles['visit-book-btn']} btn-medium`}
               >
                 <span className={styles['visit-book-btn-seal']} aria-hidden="true">
                   ★
@@ -575,14 +575,14 @@ export default function VisitPage() {
                   href={`https://www.google.com/maps/dir/?api=1&destination=${location.coordinates.lat},${location.coordinates.lng}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${styles['visit-journey-btn']} ${styles['visit-journey-btn--primary']}`}
+                  className={`${styles['visit-journey-btn']} ${styles['visit-journey-btn--primary']} btn-small`}
                 >
                   Get Directions
                   <span aria-hidden="true">↗</span>
                 </a>
                 <a
                   href={`tel:${contact.phone.replace(/[^0-9]/g, '')}`}
-                  className={`${styles['visit-journey-btn']} ${styles['visit-journey-btn--secondary']}`}
+                  className={`${styles['visit-journey-btn']} ${styles['visit-journey-btn--secondary']} btn-small`}
                 >
                   {contact.phone}
                 </a>
@@ -675,13 +675,13 @@ export default function VisitPage() {
           <div className={styles['visit-groups-actions']}>
             <a
               href={`tel:${contact.phone.replace(/[^0-9]/g, '')}`}
-              className={`${styles['visit-groups-btn']} ${styles['visit-groups-btn--primary']}`}
+              className={`${styles['visit-groups-btn']} ${styles['visit-groups-btn--primary']} btn-small`}
             >
               Call {contact.phone}
             </a>
             <a
               href={`mailto:${contact.email}`}
-              className={`${styles['visit-groups-btn']} ${styles['visit-groups-btn--secondary']}`}
+              className={`${styles['visit-groups-btn']} ${styles['visit-groups-btn--secondary']} btn-small`}
             >
               Email Us
             </a>
@@ -737,7 +737,7 @@ export default function VisitPage() {
               href="https://fareharbor.com/embeds/book/rockymountmuseum/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles['visit-closing-cta']} ${styles['visit-closing-cta--primary']}`}
+              className={`${styles['visit-closing-cta']} ${styles['visit-closing-cta--primary']} btn-medium`}
             >
               <span className={styles['visit-closing-cta-seal']} aria-hidden="true">
                 ★
@@ -746,7 +746,7 @@ export default function VisitPage() {
             </a>
             <Link
               href="/events"
-              className={`${styles['visit-closing-cta']} ${styles['visit-closing-cta--secondary']}`}
+              className={`${styles['visit-closing-cta']} ${styles['visit-closing-cta--secondary']} btn-medium`}
             >
               View 2026 Events
             </Link>

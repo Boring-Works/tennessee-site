@@ -1,3 +1,7 @@
+// Client component islands
+export { AnimatedCounter } from './AnimatedCounter'
+export { ScrollReveal } from './ScrollReveal'
+
 // Consolidated 7-section structure (active)
 export { ConsolidatedStory } from './ConsolidatedStory'
 export { ConsolidatedProof } from './ConsolidatedProof'

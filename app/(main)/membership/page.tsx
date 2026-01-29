@@ -26,54 +26,87 @@ function isBeforeFoundingDeadline(): boolean {
   return new Date() < FOUNDING_MEMBER_DEADLINE
 }
 
-// Membership tiers data
+// Membership tiers data - ordered high to low
 const MEMBERSHIP_TIERS = [
   {
-    id: 'individual',
-    name: 'Individual',
-    price: 40,
+    id: 'governors-circle',
+    name: "Governor's Circle",
+    tagline: 'Your name alongside history',
+    price: 2500,
     badge: null,
     benefits: [
-      'Unlimited free admission for one adult',
-      'Discounts on events & gift shop',
-      'Member newsletter',
-      'Recognition on our website',
+      'All Patriot Pass benefits',
+      'Name on permanent Founders Wall',
+      'Private tour with Executive Director',
+      "Exclusive Governor's Circle dinner (annual)",
+      'Recognition in all 2026 publications',
+      'Complimentary event tickets (4 per event)',
     ],
-    cta: 'Join as Individual',
+    cta: "Join Governor's Circle",
     highlighted: false,
   },
   {
-    id: 'family',
+    id: 'patriot-pass',
+    name: 'Patriot Pass',
+    tagline: 'For the devoted',
+    price: 200,
+    badge: 'BEST VALUE',
+    badgeType: 'value' as const,
+    benefits: [
+      'All Frontier Family benefits',
+      'Behind-the-scenes tours',
+      'Invitation to annual Patron event',
+      'Complimentary gift membership to share',
+      'Recognition on website donor wall',
+    ],
+    cta: 'Join as Patriot',
+    highlighted: false,
+  },
+  {
+    id: 'frontier-family',
     name: 'Frontier Family',
-    price: 75,
+    tagline: 'For the whole crew',
+    price: 100,
     badge: 'MOST POPULAR',
     badgeType: 'popular' as const,
     benefits: [
-      'Unlimited free admission for household',
-      'Discounts on events & gift shop',
-      'Member newsletter',
-      'Recognition on our website',
+      'Unlimited admission for household (up to 6)',
       'Original Seven Passport booklet',
       'Priority event registration',
+      '10% gift shop discount',
+      'Member newsletter',
     ],
     cta: 'Join as Family',
     highlighted: true,
   },
   {
-    id: 'patriot',
-    name: 'Patriot Circle',
-    price: 150,
-    priceLabel: '$150+',
-    badge: 'BEST VALUE',
-    badgeType: 'value' as const,
+    id: 'explorers-pass',
+    name: "Explorer's Pass",
+    tagline: 'For two',
+    price: 75,
+    badge: null,
     benefits: [
-      'All Frontier Family benefits',
-      'Recognition on Founders Wall (2026 gifts)',
-      'Invitation to annual Patron event',
-      'Behind-the-scenes tours',
-      'Complimentary gift membership',
+      'Unlimited admission for two adults',
+      'Original Seven Passport booklet',
+      '10% gift shop discount',
+      'Member newsletter',
     ],
-    cta: 'Join as Patriot',
+    cta: 'Join as Explorer',
+    highlighted: false,
+  },
+  {
+    id: 'settlers-pass',
+    name: "Settler's Pass",
+    tagline: 'For the curious',
+    price: 50,
+    badge: null,
+    benefits: [
+      'Unlimited admission for one adult',
+      '10% gift shop discount',
+      'Member newsletter',
+      'Website recognition',
+    ],
+    cta: 'Join as Settler',
     highlighted: false,
   },
 ]
@@ -83,7 +116,7 @@ const FAQ_ITEMS = [
   {
     question: 'Are membership benefits good at other historic sites?',
     answer:
-      'Rocky Mount membership provides unlimited free admission to Rocky Mount only. However, Frontier Family and Patriot Circle members receive the Original Seven Passport, which offers discounts at partner sites throughout the region.',
+      "Rocky Mount membership provides unlimited free admission to Rocky Mount only. However, Explorer's Pass and above receive the Original Seven Passport, which offers discounts at partner sites throughout the region.",
   },
   {
     question: "What's the Original Seven Passport?",
@@ -197,9 +230,10 @@ export default function MembershipPage() {
                   </span>
                 )}
                 <h3 className={styles['tier-name']}>{tier.name}</h3>
+                <p className={styles['tier-tagline']}>{tier.tagline}</p>
                 <p className={styles['tier-price']}>
                   <span className={styles['tier-price-amount']}>
-                    {tier.priceLabel || `$${tier.price}`}
+                    ${tier.price.toLocaleString()}
                   </span>
                   <span className={styles['tier-price-period']}>/year</span>
                 </p>
@@ -238,12 +272,13 @@ export default function MembershipPage() {
       <section className={styles.passport}>
         <div className={styles['passport-inner']}>
           <div className={styles['passport-content']}>
-            <span className={styles['passport-badge']}>Family &amp; Patriot Benefit</span>
+            <span className={styles['passport-badge']}>Explorer&apos;s Pass &amp; Above</span>
             <h2 className={styles['passport-headline']}>The Original Seven Passport</h2>
             <p className={styles['passport-desc']}>
-              Your Frontier Family or Patriot Circle membership includes the Original Seven Passport
-              &mdash; a booklet connecting seven historic sites across the frontier region. Visit
-              all seven, collect your stamps, and earn a commemorative pin.
+              Your Explorer&apos;s Pass, Frontier Family, Patriot Pass, or Governor&apos;s Circle
+              membership includes the Original Seven Passport &mdash; a booklet connecting seven
+              historic sites across the frontier region. Visit all seven, collect your stamps, and
+              earn a commemorative pin.
             </p>
             <Link href="/explore" className={styles['passport-link']}>
               Explore the Original Seven &rarr;
@@ -268,17 +303,17 @@ export default function MembershipPage() {
                 <tr>
                   <th className={styles['comparison-th']}>Benefit</th>
                   <th className={styles['comparison-th']}>Frontier Family</th>
-                  <th className={styles['comparison-th']}>Patriot Circle</th>
+                  <th className={styles['comparison-th']}>Patriot Pass</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className={styles['comparison-td']}>Price</td>
-                  <td className={styles['comparison-td']}>$75/year</td>
-                  <td className={styles['comparison-td']}>$150+/year</td>
+                  <td className={styles['comparison-td']}>$100/year</td>
+                  <td className={styles['comparison-td']}>$200/year</td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Unlimited household admission</td>
+                  <td className={styles['comparison-td']}>Household admission (up to 6)</td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-check']}>&#10003;</span>
                   </td>
@@ -305,7 +340,7 @@ export default function MembershipPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Founders Wall recognition</td>
+                  <td className={styles['comparison-td']}>Behind-the-scenes tours</td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-dash']}>&mdash;</span>
                   </td>
@@ -323,7 +358,7 @@ export default function MembershipPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Behind-the-scenes tours</td>
+                  <td className={styles['comparison-td']}>Complimentary gift membership</td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-dash']}>&mdash;</span>
                   </td>
@@ -332,7 +367,7 @@ export default function MembershipPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Complimentary gift membership</td>
+                  <td className={styles['comparison-td']}>Website donor wall recognition</td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-dash']}>&mdash;</span>
                   </td>

@@ -22,6 +22,7 @@ const NAV_STRUCTURE: NavItem[] = [
       { href: '/lectures', label: 'Lecture Series' },
     ],
   },
+  { href: '/membership', label: 'Membership' },
   {
     label: 'The Region',
     dropdown: [{ href: '/explore', label: 'Explore the Original Seven' }],

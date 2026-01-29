@@ -405,6 +405,14 @@
   margin-bottom: 1.5rem;
 }
 
+.passport-hashtag {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+
 .passport-link {
   display: inline-block;
   font-size: 0.875rem;
@@ -503,6 +511,20 @@
 
 .comparison-dash {
   color: var(--muted-foreground);
+}
+
+.comparison-subtext {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.comparison-callout {
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--primary);
+  text-align: center;
 }
 
 /* ============================================

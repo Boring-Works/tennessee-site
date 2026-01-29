@@ -151,6 +151,16 @@ const FAQ_ITEMS = [
     answer:
       'Present your membership card at the admissions desk. First-time members can show their confirmation email until their card arrives by mail (typically 2-3 weeks after joining).',
   },
+  {
+    question: 'Does my membership auto-renew?',
+    answer:
+      'No. Rocky Mount memberships do not auto-renew. We will send you a renewal reminder before your membership expires, and you can renew online or in person.',
+  },
+  {
+    question: "What's the difference between membership tiers?",
+    answer:
+      'All memberships include unlimited admission, free festivals, and the 2026 Event Passport. Higher tiers add premium event access, Behind the Scenes experiences, guest passes, and exclusive benefits. Frontier Family ($100) is our most popular choice for families. Patriot Pass ($200) includes free premium events—attend just two and the upgrade pays for itself.',
+  },
 ]
 
 // Section divider component
@@ -338,7 +348,11 @@ export default function MembershipPage() {
                   <td className={styles['comparison-td']}>FREE</td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Premium events</td>
+                  <td className={styles['comparison-td']}>
+                    Haunting on the Mount
+                    <br />
+                    <span className={styles['comparison-subtext']}>Candlelight Christmas</span>
+                  </td>
                   <td className={styles['comparison-td']}>50% off</td>
                   <td className={styles['comparison-td']}>FREE</td>
                 </tr>
@@ -373,6 +387,10 @@ export default function MembershipPage() {
               </tbody>
             </table>
           </div>
+
+          <p className={styles['comparison-callout']}>
+            Attend 2 premium events and the $100 upgrade pays for itself.
+          </p>
         </div>
       </section>
 

@@ -56,6 +56,16 @@
 
 **Status:** ✅ Deployed to production (commit ed85cc2)
 
+### 6. Events Page UI/UX Enhancements
+
+- Event cards now display full pricing details before booking
+- Format: "Adult $12 • Senior $10 • Child $8 • Members FREE"
+- "Coming Up" section shows "From $X" pricing
+- Pricing displayed in accent color for visibility
+- Users can compare costs at a glance without clicking through
+
+**Status:** ✅ Deployed to production (commit 25a25cf)
+
 ---
 
 ## 🎯 NAVIGATION CHECK

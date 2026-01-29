@@ -57,29 +57,43 @@
   },
   "contact": {
     "phone": "(423) 538-7396",
-    "email": "info@rockymountmuseum.com",
+    "email": "rockymountmuseum@gmail.com",
     "website": "https://rockymountmuseum.com",
     "social": {
       "facebook": "rockymountmuseum",
-      "instagram": "rockymountmuseum"
+      "instagram": "rockymounttn",
+      "tiktok": "rockymounttn"
     }
   },
   "hours": {
     "regular": {
-      "wednesday": "11:00 AM - 5:00 PM",
-      "thursday": "11:00 AM - 5:00 PM",
-      "friday": "11:00 AM - 5:00 PM",
-      "saturday": "11:00 AM - 5:00 PM",
+      "wednesday": "10:00 AM - 5:00 PM",
+      "thursday": "10:00 AM - 5:00 PM",
+      "friday": "10:00 AM - 5:00 PM",
+      "saturday": "10:00 AM - 5:00 PM",
       "sunday": "Closed",
       "monday": "Closed",
       "tuesday": "Closed"
     },
+    "formatted": {
+      "days": "Wednesday - Saturday",
+      "time": "10am - 5pm",
+      "short": "Wed-Sat 10am-5pm"
+    },
     "season": "March 4 through mid-December",
     "seasonNote": "Season opens March 4, 2026 for America 250 commemoration",
     "tourSchedule": "Hourly",
-    "tourNote": "Guided tours go out every hour. Last tour begins one hour before closing.",
+    "lastTour": "4:00 PM",
+    "tourNote": "Tours depart every hour. Last tour at 4pm.",
     "note": "Hours may vary for special events."
   },
+  "admissionIncludes": [
+    "Guided living history tour",
+    "Museum gallery access",
+    "Historic site grounds",
+    "Heritage trail",
+    "Free parking"
+  ],
   "admission": {
     "adults": {
       "price": 12,
@@ -242,25 +256,14 @@
     },
     "rockymountRole": "Rocky Mount served as the first seat of government for the Southwest Territory from 1790-1792, laying groundwork for Tennessee statehood."
   },
-  "historicalFigures": {
-    "williamCobb": {
-      "name": "William Cobb",
-      "role": "Founder & Patriot",
-      "years": "1770-1795",
-      "shortNote": "Built Rocky Mount and supplied the Overmountain Men",
-      "details": [
-        "Built the two-story log home between 1770-1772",
-        "Brought his family from North Carolina to establish the estate",
-        "He and his sons responded to John Sevier's call for volunteers in September 1780",
-        "Supplied the Overmountain Men with gunpowder, horses, blankets, and food for the Battle of King's Mountain",
-        "In 1795, transferred Rocky Mount to his daughter Penelope Massengill"
-      ]
-    },
-    "williamBlount": {
+  "historicalFigures": [
+    {
+      "id": "williamBlount",
       "name": "William Blount",
-      "role": "Governor of the Southwest Territory",
-      "years": "1790-1792 at Rocky Mount",
-      "shortNote": "Signer of the U.S. Constitution who governed from Rocky Mount",
+      "title": "Governor of the Southwest Territory",
+      "years": "1790–1796",
+      "hook": "Signed the U.S. Constitution. Appointed by George Washington. Made Rocky Mount his headquarters.",
+      "highlight": "Constitution Signer",
       "details": [
         "Appointed by President George Washington as territorial governor",
         "One of the signers of the U.S. Constitution",
@@ -269,16 +272,33 @@
         "Established foundational laws and land policies for the frontier region"
       ]
     },
-    "andrewJackson": {
+    {
+      "id": "andrewJackson",
       "name": "Andrew Jackson",
-      "role": "Future 7th President",
+      "title": "Future 7th President",
       "years": "1788",
-      "shortNote": "Lodged at Rocky Mount while awaiting his law license",
+      "hook": "Lodged at Rocky Mount for six weeks while awaiting his law license. He was 21 years old.",
+      "highlight": "Future President",
       "details": [
         "Stayed at Rocky Mount for six weeks as a young lawyer",
         "Was awaiting his license to practice law in the territory",
         "Would later become the 7th President of the United States"
       ]
+    },
+    {
+      "id": "williamCobb",
+      "name": "William Cobb",
+      "title": "Original Settler",
+      "years": "c. 1770",
+      "hook": "Staked his claim on this land six years before the Declaration of Independence was signed.",
+      "highlight": "Pioneer",
+      "details": [
+        "Built the two-story log home between 1770-1772",
+        "Brought his family from North Carolina to establish the estate",
+        "He and his sons responded to John Sevier's call for volunteers in September 1780",
+        "Supplied the Overmountain Men with gunpowder, horses, blankets, and food for the Battle of King's Mountain",
+        "In 1795, transferred Rocky Mount to his daughter Penelope Massengill"
+      ]
     }
-  }
+  ]
 }

@@ -97,3 +97,17 @@ export { default as PresentedByBlock } from './PresentedByBlock'
 // Info Content (re-exported from lib/almanac for convenience)
 // ============================================================================
 export { INFO_CONTENT, type InfoContent as InfoContentData } from '@/lib/almanac/infoContent'
+
+// ============================================================================
+// Governor's View Components
+// ============================================================================
+export { BrassBarometer } from './BrassBarometer'
+export { MercuryThermometer } from './MercuryThermometer'
+export { CopperWeathervane } from './CopperWeathervane'
+export { GovernorsBriefing } from './GovernorsBriefing'
+export { ViewToggle } from './ViewToggle'
+
+// ============================================================================
+// Governor's View Logic (re-exported from lib/almanac for convenience)
+// ============================================================================
+export { generateGovernorsBriefing } from '@/lib/almanac/generateBriefing'

@@ -4,8 +4,10 @@ import Image from 'next/image'
 import { MapPin, Clock, Ticket, GraduationCap, Users, BookOpen, Heart } from 'lucide-react'
 import { AnimatedCounter } from '@/components/home/AnimatedCounter'
 import { ScrollReveal } from '@/components/home/ScrollReveal'
+import { OriginalSevenMap } from '@/components/OriginalSevenMap'
 import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
 import eventsData from '@/data/events.json'
+import siteInfo from '@/data/siteInfo.json'
 
 export const metadata: Metadata = {
   title: 'Tennessee Starts Here | Rocky Mount State Historic Site',
@@ -174,6 +176,55 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* ════════════════════════════════════════════════════════════════════
+          ORIGINAL SEVEN COUNTIES
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <section
+          className="relative bg-[#FDFCFA] py-20 md:py-28 border-t border-[#E8E0D4]"
+          aria-labelledby="original-seven-heading"
+        >
+          <div className="max-w-6xl mx-auto px-6">
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-[#c9a227] mb-4 font-semibold">
+                Sullivan County · Heritage Trail
+              </p>
+              <h2
+                id="original-seven-heading"
+                className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-6 font-bold"
+              >
+                Governing Seat of the Original Seven
+              </h2>
+              <p className="text-lg text-primary/80 leading-relaxed">
+                From 1790 to 1792, Governor William Blount administered seven counties from this
+                ground—Sullivan, Washington, Greene, and Hawkins in the east; Davidson, Sumner, and
+                Tennessee in the Cumberland settlements. Rocky Mount was the center of territorial
+                government. The heritage trail connecting these founding places begins here.
+              </p>
+            </div>
+
+            {/* Map */}
+            <div className="mb-10">
+              <OriginalSevenMap variant="hero" showLabels showDistances interactive />
+            </div>
+
+            {/* CTA */}
+            <div className="text-center">
+              <Link
+                href="/explore"
+                className="inline-flex items-center gap-2 bg-[#c9a227] text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[#b89020] hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                Explore the Original Seven
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
 
       {/* ════════════════════════════════════════════════════════════════════
           AUDIENCE ROUTER
@@ -455,12 +506,20 @@ export default function HomePage() {
                 {
                   icon: Clock,
                   title: 'Visiting Hours',
-                  lines: ['Tue–Sat: 10am–5pm', 'Sunday: 1pm–5pm', 'Closed Mondays'],
+                  lines: [
+                    siteInfo.hours.formatted.short,
+                    siteInfo.hours.tourNote,
+                    `Closed ${['Sunday', 'Monday', 'Tuesday'].join('–')}`,
+                  ],
                 },
                 {
                   icon: Ticket,
                   title: 'Admission',
-                  lines: ['Adults $12 · Seniors $10', 'Children $8', '✓ Free Parking'],
+                  lines: [
+                    `Adults $${siteInfo.admission.adults.price} · Seniors $${siteInfo.admission.seniors.price}`,
+                    `Children $${siteInfo.admission.children.price}`,
+                    '✓ Free Parking',
+                  ],
                 },
               ].map((card, i) => (
                 <div

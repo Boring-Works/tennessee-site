@@ -503,7 +503,7 @@ export default function EducatorsPage() {
             Book a Field Trip →
           </a>
           <p className={styles['booking-contact']}>
-            Questions? <a href="mailto:info@rockymountmuseum.com">info@rockymountmuseum.com</a> |{' '}
+            Questions? <a href="mailto:rockymountmuseum@gmail.com">rockymountmuseum@gmail.com</a> |{' '}
             <a href="tel:+14235387396">(423) 538-7396</a>
           </p>
         </div>
@@ -914,7 +914,7 @@ export default function GroupsPage() {
             <a href="tel:+14235387396" className={styles['contact-btn-primary']}>
               Call (423) 538-7396
             </a>
-            <a href="mailto:info@rockymountmuseum.com" className={styles['contact-btn-secondary']}>
+            <a href="mailto:rockymountmuseum@gmail.com" className={styles['contact-btn-secondary']}>
               Email Us
             </a>
           </div>
@@ -1225,7 +1225,7 @@ const SUPPORT_OPTIONS = [
     description: 'Give time as interpreter or event support',
     price: 'Contact us to learn more',
     cta: 'Learn More',
-    href: 'mailto:info@rockymountmuseum.com?subject=Volunteer%20Inquiry',
+    href: 'mailto:rockymountmuseum@gmail.com?subject=Volunteer%20Inquiry',
     external: false,
     trustLabel: '',
   },
@@ -1291,7 +1291,7 @@ export default function SupportPage() {
       <section className={styles.contact}>
         <div className={styles['contact-inner']}>
           <p className={styles['contact-text']}>
-            Questions? <a href="mailto:info@rockymountmuseum.com">info@rockymountmuseum.com</a> |{' '}
+            Questions? <a href="mailto:rockymountmuseum@gmail.com">rockymountmuseum@gmail.com</a> |{' '}
             <a href="tel:+14235387396">(423) 538-7396</a>
           </p>
         </div>

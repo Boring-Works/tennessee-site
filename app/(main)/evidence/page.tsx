@@ -291,7 +291,7 @@ export default function EvidencePage() {
             quote={PRIMARY_QUOTES.glassWindowsFull.text}
             attribution={PRIMARY_QUOTES.glassWindowsFull.attribution}
             source={PRIMARY_QUOTES.glassWindowsFull.source}
-            context="Glass windows were a status symbol on the frontier. This detail proves Rocky Mount was no rough cabin."
+            context="Glass windows were a status symbol in the western territories. This detail proves Rocky Mount was no rough cabin."
             sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
             featured
           />
@@ -310,8 +310,9 @@ export default function EvidencePage() {
               Blount wrote this letter on October 20, 1790
             </Claim>
             , nine days after arriving. The &ldquo;Glass Windows&rdquo; detail wasn&apos;t idle
-            observation—on the frontier, most settlers used oiled paper or wooden shutters. Glass
-            windows signaled that Rocky Mount was a proper seat of government, not a crude outpost.
+            observation—in the western territories, most settlers used oiled paper or wooden
+            shutters. Glass windows signaled that Rocky Mount was a proper seat of government, not a
+            crude outpost.
           </ContextPanel>
           <CuratorNote>
             This letter, written nine days after Blount&apos;s arrival, is the earliest surviving
@@ -354,7 +355,9 @@ export default function EvidencePage() {
         <div className={styles.container}>
           <span className={styles.collectionLabel}>MSS.1790.003 — Williamson Letters</span>
           <h2 className={styles.sectionTitle}>The Appointment</h2>
-          <p className={styles.sectionSubtitle}>Why Washington chose Blount for the frontier</p>
+          <p className={styles.sectionSubtitle}>
+            Why Washington chose Blount for the western territories
+          </p>
           <QuoteCard
             quote={PRIMARY_QUOTES.williamsonRecommendation.text}
             attribution={PRIMARY_QUOTES.williamsonRecommendation.attribution}
@@ -631,6 +634,50 @@ export default function EvidencePage() {
                 documents.
               </p>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider variant="default" />
+
+      {/* Bias Disclosure Section */}
+      <section className={styles.biasDisclosure}>
+        <div className={styles.container}>
+          <span className={styles.collectionLabel}>EDITORIAL — Historical Interpretation</span>
+          <h2 className={styles.sectionTitle}>About This Archive</h2>
+
+          <div className={styles.biasDisclosureContent}>
+            <p className={styles.biasDisclosureLede}>
+              Every historical archive reflects choices made by those who created it. We acknowledge
+              the limitations and perspectives embedded in this collection.
+            </p>
+
+            <div className={styles.biasDisclosureGrid}>
+              <div className={styles.biasDisclosureCard}>
+                <h3 className={styles.biasDisclosureCardTitle}>Primary Sources</h3>
+                <p className={styles.biasDisclosureCardText}>
+                  The documents here were created by government officials—predominantly white men of
+                  property. They reflect the viewpoints and biases of that group.
+                </p>
+              </div>
+
+              <div className={styles.biasDisclosureCard}>
+                <h3 className={styles.biasDisclosureCardTitle}>Missing Voices</h3>
+                <p className={styles.biasDisclosureCardText}>
+                  Many perspectives are absent: enslaved people who worked this ground, Cherokee
+                  communities whose lands were negotiated away, women whose labor sustained
+                  households.
+                </p>
+              </div>
+
+              <div className={styles.biasDisclosureCard}>
+                <h3 className={styles.biasDisclosureCardTitle}>Our Commitment</h3>
+                <p className={styles.biasDisclosureCardText}>
+                  We strive to present these documents accurately while acknowledging whose stories
+                  they tell—and whose they exclude. History requires both preservation and honesty.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

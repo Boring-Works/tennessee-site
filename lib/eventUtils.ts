@@ -1,6 +1,9 @@
 // Event display configuration - maps event IDs to display info
 // This overrides events.json titles/descriptions for card display
 
+// Re-export shared date utilities for backward compatibility
+export { parseLocalDate, formatDate, formatDateRange, daysFromNow } from './dateUtils'
+
 export interface EventDisplayConfig {
   id: string
   title: string

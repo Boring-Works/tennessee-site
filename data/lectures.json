@@ -2,7 +2,7 @@
   "series": {
     "title": "Rocky Mount Lecture Series",
     "subtitle": "Tennessee's Founding Story",
-    "description": "Rocky Mount's first-ever lecture series brings scholars and living history interpreters to Northeast Tennessee. Five lectures exploring colonial religion, Revolutionary War heroism, and the birth of Tennessee government.",
+    "description": "Five speakers. Five stories that shaped Tennessee. From a woman who made gunpowder to a governor who chose this ground for his capitol—the voices of scholars and living historians bring the 1790s alive. Rocky Mount's first-ever lecture series.",
     "year": 2026,
     "note": "Advance registration recommended. Seating is limited."
   },
@@ -16,13 +16,13 @@
         "name": "Dr. James P. Byrd",
         "title": "Professor",
         "institution": "Vanderbilt University",
-        "bio": "Dr. James P. Byrd is a professor at Vanderbilt Divinity School specializing in American religious history. His research focuses on the intersection of religion, politics, and culture in early America."
+        "bio": "Author of 'Sacred Scripture, Sacred War: The Bible and the American Revolution,' Dr. Byrd has appeared on PBS and C-SPAN. He teaches American religious history at Vanderbilt Divinity School."
       },
-      "description": "Explore how faith shaped life on the Tennessee frontier. Dr. Byrd examines the role of religion in colonial America and its influence on early settlers who ventured across the Appalachian Mountains.",
+      "description": "What did frontier settlers believe—and why did it matter? Dr. Byrd reveals how Bible, pulpit, and prayer shaped the men who marched to Kings Mountain, turning religious conviction into Revolutionary action.",
       "topics": [
+        "How preachers fueled revolution",
         "Religious diversity on the frontier",
-        "The role of churches in frontier communities",
-        "Faith and the Revolutionary spirit"
+        "Faith that moved men to fight"
       ]
     },
     {
@@ -34,14 +34,14 @@
         "name": "Lisa Bennett",
         "title": "Living History Interpreter",
         "institution": "Sycamore Shoals State Historic Park",
-        "bio": "Lisa Bennett brings Mary Patton to life through first-person interpretation. Her portrayal honors the Revolutionary War heroine who supplied gunpowder to the Overmountain Men before their march to Kings Mountain.",
+        "bio": "Lisa Bennett has portrayed Mary Patton for over 15 years at Sycamore Shoals and historic sites across the Southeast. Her interpretation is based on extensive research into 18th-century powder production.",
         "portraying": "Mary Patton"
       },
-      "description": "Meet Mary Patton, the woman who supplied 500 pounds of gunpowder to the Overmountain Men. Through first-person interpretation, Lisa Bennett brings this unsung Revolutionary War heroine to life.",
+      "description": "500 pounds of gunpowder. One determined woman. Without Mary Patton's powder, there would be no victory at Kings Mountain. She walks into the room and tells you her story—face to face, in her own words.",
       "topics": [
-        "Mary Patton's life and legacy",
-        "Gunpowder manufacturing on the frontier",
-        "Women's contributions to the Revolution"
+        "How one woman changed the Revolution",
+        "The dangerous art of making gunpowder",
+        "Women who stayed—and women who fought"
       ],
       "format": "First-person interpretation"
     },
@@ -54,13 +54,13 @@
         "name": "Thomas Bachelor",
         "title": "Historian & Reenactor",
         "institution": "Independent Scholar",
-        "bio": "Thomas Bachelor combines academic credentials with authentic reenactor perspective. His research focuses on the military history of the Southern campaigns of the Revolutionary War."
+        "bio": "A 20-year veteran of Revolutionary War reenactment and OVTA-affiliated historian, Thomas Bachelor has walked the Overmountain Victory Trail multiple times and published research on the Southern Campaign."
       },
-      "description": "The 1780 march to Kings Mountain was not inevitable victory—it was a desperate gamble. Thomas Bachelor examines the risks taken by Sullivan County men who left their families unprotected to change the course of the Revolution.",
+      "description": "They bet everything—farms, families, lives. The textbooks call it patriotism. Thomas Bachelor calls it what it was: a desperate gamble by men who knew they might never come home. He strips away the myth.",
       "topics": [
-        "The strategic situation in 1780",
-        "Sullivan County's contribution",
-        "The decision to march"
+        "Why 1780 was the darkest hour",
+        "What they left behind—undefended",
+        "The odds they faced"
       ],
       "note": "Presented one week before Early Frontier Days"
     },
@@ -73,13 +73,13 @@
         "name": "Dr. Caroline H. Whitfield",
         "title": "Historian",
         "institution": "Independent Scholar",
-        "bio": "Dr. Caroline H. Whitfield specializes in early Tennessee history and the political development of the Southwest Territory."
+        "bio": "Dr. Whitfield's dissertation examined William Blount's network of political alliances in the Southwest Territory. She has consulted for museums and historic sites across Tennessee."
       },
-      "description": "William Blount, signer of the U.S. Constitution, was appointed by President George Washington to govern the Southwest Territory. Learn how he chose Rocky Mount as his headquarters and laid the foundation for Tennessee statehood.",
+      "description": "George Washington sent William Blount west. Blount chose this ground—Rocky Mount—as his capitol. Dr. Whitfield reveals the political intrigue, land speculation, and unlikely friendships that birthed Tennessee.",
       "topics": [
-        "Blount's appointment and arrival",
-        "Governing from Rocky Mount (1790-1792)",
-        "The path to Tennessee statehood"
+        "Why Blount chose Rocky Mount",
+        "Land deals and political maneuvers",
+        "The road from territory to state"
       ],
       "note": "This is Rocky Mount's story—where Tennessee's government began"
     },
@@ -92,13 +92,13 @@
         "name": "David Doan",
         "title": "Flag Historian",
         "institution": "Independent Scholar",
-        "bio": "David Doan is a flag historian who has spent decades researching the evolution of American flags from the colonial era to the present."
+        "bio": "David Doan has spent 30 years researching American flags, consulting for the Smithsonian and state historical societies. His collection includes rare Revolutionary-era flag fragments."
       },
-      "description": "From the Grand Union to the Stars and Stripes, explore the evolution of the American flag. Presented as part of Stitching Independence weekend, this lecture precedes the dedication of Rocky Mount's America 250 commemorative flag.",
+      "description": "Every star and stripe carries a story. From the Grand Union at Boston to the banner that inspired Key's anthem—David Doan traces 250 years of stars and stripes. Followed by Rocky Mount's commemorative flag dedication.",
       "topics": [
-        "Evolution of American flags",
-        "Flag etiquette and traditions",
-        "The meaning of our national symbol"
+        "Flags that flew at key battles",
+        "The Betsy Ross question",
+        "What our flag means today"
       ],
       "note": "Part of Stitching Independence weekend"
     }
@@ -110,9 +110,9 @@
     "speaker": {
       "name": "Dr. Daniel Redbird Wolfe",
       "title": "Cherokee Historian",
-      "bio": "Dr. Daniel Redbird Wolfe provides Cherokee perspective on frontier Tennessee history."
+      "bio": "Dr. Wolfe, of Cherokee descent, holds a PhD in American Studies and serves as cultural consultant to museums interpreting pre-colonial and contact-era history in the Southeast."
     },
-    "description": "While not part of the formal lecture series, this weekend event offers extended programming on Cherokee culture and frontier diplomacy.",
+    "description": "The Overmountain settlements sat within Cherokee territory. Treaties were signed, broken, tested. Hear the other side of the frontier story—told by Cherokee scholars and artisans.",
     "note": "This is a weekend festival, not a single lecture"
   }
 }

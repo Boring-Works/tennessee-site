@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 
 // Section divider component for period-authentic transitions
@@ -70,7 +71,7 @@ const SUPPORT_OPTIONS = [
     description: 'Give time as interpreter or event support',
     price: 'Contact us to learn more',
     cta: 'Learn More',
-    href: 'mailto:info@rockymountmuseum.com?subject=Volunteer%20Inquiry',
+    href: 'mailto:rockymountmuseum@gmail.com?subject=Volunteer%20Inquiry',
     external: false,
     trustLabel: '',
   },
@@ -160,8 +161,10 @@ export default function SupportPage() {
       <section className={styles.contact}>
         <div className={styles['contact-inner']}>
           <p className={styles['contact-text']}>
-            Questions? <a href="mailto:info@rockymountmuseum.com">info@rockymountmuseum.com</a> |{' '}
-            <a href="tel:+14235387396">(423) 538-7396</a>
+            Questions? <a href="mailto:rockymountmuseum@gmail.com">rockymountmuseum@gmail.com</a> |{' '}
+            <a href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}>
+              {siteInfo.contact.phone}
+            </a>
           </p>
         </div>
       </section>

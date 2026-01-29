@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Claim } from '@/components/evidence/Claim'
+import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -25,7 +26,11 @@ const GROUP_TYPES = [
 ]
 
 const RATES = [
-  { tier: 'Groups of 10+', price: '$10/person', note: '(regular $12)' },
+  {
+    tier: 'Groups of 10+',
+    price: '$10/person',
+    note: `(regular $${siteInfo.admission.adults.price})`,
+  },
   { tier: 'Groups of 25+', price: '$8/person', note: '' },
   { tier: 'Student groups', price: '$6/student', note: '' },
   { tier: 'Driver/escort', price: 'Complimentary', note: '' },
@@ -105,10 +110,16 @@ export default function GroupsPage() {
           <h2 className={styles['contact-headline']}>Plan Your Group Visit</h2>
           <p className={styles['contact-desc']}>Contact us to schedule your group tour.</p>
           <div className={styles['contact-methods']}>
-            <a href="tel:+14235387396" className={styles['contact-btn-primary']}>
-              Call (423) 538-7396
+            <a
+              href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}
+              className={styles['contact-btn-primary']}
+            >
+              Call {siteInfo.contact.phone}
             </a>
-            <a href="mailto:info@rockymountmuseum.com" className={styles['contact-btn-secondary']}>
+            <a
+              href={`mailto:${siteInfo.contact.email}`}
+              className={styles['contact-btn-secondary']}
+            >
               Email Us
             </a>
           </div>

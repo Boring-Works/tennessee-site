@@ -160,15 +160,22 @@ This document describes the structure and requirements for all JSON data files i
       lng: number               // Longitude
     }
     directions: string          // Driving directions summary
+    drivingDistances: Array<{
+      city: string              // "Johnson City, TN"
+      miles: number             // Distance in miles
+      time: string              // "25 min"
+      route: string             // "US-23 North"
+    }>
   }
 
   contact: {
     phone: string               // "(423) 538-7396"
-    email: string               // "info@rockymountmuseum.com"
+    email: string               // "rockymountmuseum@gmail.com"
     website: string             // "https://rockymountmuseum.com"
     social: {
       facebook: string          // Username (without URL)
       instagram: string
+      tiktok: string
     }
   }
 
@@ -182,10 +189,20 @@ This document describes the structure and requirements for all JSON data files i
       saturday: string
       sunday: string
     }
+    formatted: {
+      days: string              // "Wednesday - Saturday"
+      time: string              // "10am - 5pm"
+      short: string             // "Wed-Sat 10am-5pm"
+    }
     season: string              // Note on seasonal hours
-    tours: string               // "Hourly"
+    seasonNote: string          // Additional seasonal context
+    tourSchedule: string        // "Hourly"
+    lastTour: string            // "4:00 PM"
+    tourNote: string            // Tour scheduling details
     note: string                // General hours note
   }
+
+  admissionIncludes: string[]   // What admission includes (e.g., "Guided living history tour")
 
   admission: {
     adults: { price: number, label: string }
@@ -195,19 +212,44 @@ This document describes the structure and requirements for all JSON data files i
     groups?: {
       note: string              // "Groups of 10 or more, please call"
     }
-    note: string                // What admission includes
+    note: string                // Additional pricing notes
   }
 
   whatToExpect: {
     tourDuration: string        // "Approximately 1 hour"
     features: string[]          // What to see/do
-    accessibility: string       // Accessibility info
+    accessibility: {
+      summary: string           // Overview of accessibility options
+      museumGallery: {
+        name: string            // "Museum Gallery Tour"
+        description: string     // Tour description
+        adaCompliant: boolean
+        features: string[]      // Accessibility features
+      }
+      historicSiteTour: {
+        name: string            // "Historic Site Tour"
+        description: string     // Tour description
+        adaCompliant: boolean
+        features: string[]      // Accessibility features/limitations
+        note?: string           // Additional notes
+      }
+    }
     recommendations: string[]   // Tips for visitors
   }
+
+  sisterSites: Array<{
+    name: string                // Site name
+    city: string                // City location
+    miles: number               // Distance in miles
+    time: string                // Drive time
+    description: string         // Site description
+    website: string             // Site URL
+  }>
 
   nearbyAttractions: Array<{
     name: string
     distance: string            // "15 minutes"
+    description: string         // Attraction description
   }>
 
   first250: {
@@ -235,13 +277,15 @@ This document describes the structure and requirements for all JSON data files i
     rockymountRole: string
   }
 
-  historicalFigures: {
-    [key: string]: {            // williamCobb, williamBlount, etc.
-      name: string
-      role: string
-      note: string
-    }
-  }
+  historicalFigures: Array<{
+    id: string                  // Unique identifier (e.g., "williamBlount")
+    name: string                // Full name
+    title: string               // Historical title/position
+    years: string               // Active years (e.g., "1790–1796")
+    hook: string                // Brief compelling summary
+    highlight: string           // Key distinction (e.g., "Constitution Signer")
+    details: string[]           // Detailed bullet points
+  }>
 }
 ```
 

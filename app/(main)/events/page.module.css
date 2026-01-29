@@ -307,6 +307,13 @@
   font-weight: 600;
 }
 
+.coming-up-card-urgency {
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .calendar-next-event,
   .calendar-next-event-arrow,
@@ -904,6 +911,66 @@
 .calendar-event-note-link:hover {
   color: var(--secondary);
   text-decoration: underline;
+}
+
+/* Daily Tours Banner */
+.calendar-tours-banner {
+  background: linear-gradient(135deg, var(--primary) 0%, #0d1f3a 100%);
+  border-top: 1px solid rgba(201, 162, 39, 0.2);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+  padding: 2.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .calendar-tours-banner {
+    padding: 3rem 1.5rem;
+  }
+}
+
+.calendar-tours-banner-inner {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.calendar-tours-banner-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.75rem;
+}
+
+.calendar-tours-banner-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 1.5rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calendar-tours-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: var(--primary);
+  padding: 0.875rem 2rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.calendar-tours-banner-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
 }
 
 /* Calendar CTA Section */

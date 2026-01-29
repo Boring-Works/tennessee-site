@@ -15,12 +15,12 @@ export const MYSTERY_NARRATIVE = {
   },
   hero: {
     badge: 'Tennessee 230 · America 250',
-    headline: 'ROCKY MOUNT',
+    headline: 'TENNESSEE STARTS HERE',
     subhead: "Where Tennessee's government began.",
     timeline: [
       'In 1770, the Cobbs settled this ground.',
       'In 1780, they armed the Revolution.',
-      'In 1790, Governor Blount made it the seat of federal power.',
+      'In 1790, Governor Blount made it the seat of federal power—and negotiated the Treaty of Holston with 42 Cherokee leaders.',
     ],
     contrast:
       'This is not where they gathered. This is not where they farmed. This is where they governed.',

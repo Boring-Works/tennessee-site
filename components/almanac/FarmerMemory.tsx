@@ -4,6 +4,8 @@ import { TrendingUp, TrendingDown, History, BookOpen, BarChart3 } from 'lucide-r
 import { getFarmerMemoryData, getTemperatureAnomaly } from '@/lib/almanac/farmerMemory'
 import { InfoPopup } from './InfoPopup'
 import { INFO_CONTENT } from '@/lib/almanac/infoContent'
+import { ArchiveLinkCard } from './ArchiveLinkCard'
+import { getRelevantDocuments } from '@/lib/almanac/archiveMapping'
 
 interface FarmerMemoryProps {
   temperature: number
@@ -29,6 +31,18 @@ export default function FarmerMemory({
   // Let React Compiler handle memoization
   const data = getFarmerMemoryData(temperature, humidity, pressure, windSpeed)
   const anomaly = getTemperatureAnomaly(todayHigh, todayLow, month, day)
+
+  // Get relevant archive documents for current conditions
+  const relevantDocs = getRelevantDocuments({
+    temperature,
+    month,
+    hasRain: false, // TODO: Get from weather data
+    hasSnow: false, // TODO: Get from weather data
+    windSpeed,
+  })
+
+  // Pick the first matching document (if any)
+  const featuredDoc = relevantDocs[0]
 
   return (
     <section
@@ -185,6 +199,24 @@ export default function FarmerMemory({
               <br />
               Check back as conditions change.
             </p>
+          </div>
+        )}
+
+        {/* From the Archive - Featured document */}
+        {featuredDoc && (
+          <div className="p-4 border-t border-white/10">
+            <div className="flex items-center gap-2 mb-3">
+              <History className="w-4 h-4 text-gold-leaf" aria-hidden="true" />
+              <h3 className="text-sm font-medium text-gold-leaf">From the Archive</h3>
+            </div>
+            <ArchiveLinkCard
+              title={featuredDoc.title}
+              description={featuredDoc.context}
+              href={`/evidence/documents/${featuredDoc.slug}`}
+              type="document"
+              date={featuredDoc.date}
+              category={featuredDoc.theme}
+            />
           </div>
         )}
       </div>

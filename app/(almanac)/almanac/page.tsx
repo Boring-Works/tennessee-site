@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { Sprout, Leaf } from 'lucide-react'
 import { WeatherAtmosphere } from '@/components/almanac/WeatherAtmosphere'
 import { TopBar } from '@/components/almanac/TopBar'
+import { ViewToggle } from '@/components/almanac/ViewToggle'
 import { NextChangeHero } from '@/components/almanac/NextChangeHero'
 import { NowDisplay } from '@/components/almanac/NowDisplay'
 import { DecisionRail } from '@/components/almanac/DecisionRail'
@@ -26,6 +27,11 @@ import StaleDataWarning from '@/components/almanac/StaleDataWarning'
 import PresentedByBlock from '@/components/almanac/PresentedByBlock'
 import ShareButton from '@/components/almanac/ShareButton'
 import PrecipitationTiming from '@/components/almanac/PrecipitationTiming'
+import { BrassBarometer } from '@/components/almanac/BrassBarometer'
+import { MercuryThermometer } from '@/components/almanac/MercuryThermometer'
+import { CopperWeathervane } from '@/components/almanac/CopperWeathervane'
+import { GovernorsBriefing } from '@/components/almanac/GovernorsBriefing'
+import { generateGovernorsBriefing } from '@/lib/almanac/generateBriefing'
 
 // 🚀 PERFORMANCE: Dynamic imports for heavy/below-fold components
 // Reduces initial bundle size by ~30%
@@ -91,6 +97,7 @@ const RETRY_DELAYS = [1000, 2000, 4000]
 const MAX_RETRIES = 3
 
 export default function AlmanacPage() {
+  const [view, setView] = useState<'almanac' | 'governor'>('almanac')
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [taskScores, setTaskScores] = useState<TaskScoresType | null>(null)
@@ -340,224 +347,83 @@ export default function AlmanacPage() {
       />
 
       <main id="main-content" className="min-h-screen text-almanac-parchment relative z-10">
-        {/* Container: mobile narrow, desktop wide */}
-        <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 lg:px-6 py-4 lg:py-6">
-          {/* ============================================================
+        {/* View Toggle */}
+        <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 lg:px-6 pt-6">
+          <ViewToggle view={view} onViewChange={setView} />
+        </div>
+
+        {view === 'almanac' && (
+          /* Container: mobile narrow, desktop wide */
+          <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 lg:px-6 py-4 lg:py-6">
+            {/* ============================================================
               ALERTS - Full width, always at top (safety first)
               ============================================================ */}
-          <NWSAlertBanner
-            lat={location.latitude}
-            lon={location.longitude}
-            onAlertChange={(hasAlert, title) => {
-              setHasActiveAlert(hasAlert)
-              setAlertTitle(title)
-            }}
-          />
-          <LightningWatch lat={location.latitude} lon={location.longitude} />
-
-          {/* Stale Data Warning */}
-          <div className="flex justify-end mb-4">
-            <StaleDataWarning
-              lastUpdated={lastUpdated}
-              onRefresh={() => location && fetchWeather(location)}
-              isLoading={loading}
+            <NWSAlertBanner
+              lat={location.latitude}
+              lon={location.longitude}
+              onAlertChange={(hasAlert, title) => {
+                setHasActiveAlert(hasAlert)
+                setAlertTitle(title)
+              }}
             />
-          </div>
+            <LightningWatch lat={location.latitude} lon={location.longitude} />
 
-          {/* ============================================================
+            {/* Stale Data Warning */}
+            <div className="flex justify-end mb-4">
+              <StaleDataWarning
+                lastUpdated={lastUpdated}
+                onRefresh={() => location && fetchWeather(location)}
+                isLoading={loading}
+              />
+            </div>
+
+            {/* ============================================================
               MOBILE LAYOUT: Single column, organized vertically
               ============================================================ */}
-          <div className="flex flex-col gap-4 lg:hidden">
-            {/* Quick Actions - Critical decisions only */}
-            <QuickActions
-              hasActiveAlert={hasActiveAlert}
-              alertTitle={alertTitle}
-              burnDayStatus={burnDayStatus}
-              freezeInfo={freezeInfo}
-            />
-
-            {/* NOW Display */}
-            <NowDisplay
-              temperature={weather.current.temperature}
-              feelsLike={weather.current.feelsLike}
-              weatherCode={weather.current.weatherCode}
-              windSpeed={weather.current.windSpeed}
-              windDirection={weather.current.windDirection}
-              windGusts={weather.current.windGusts}
-              humidity={weather.current.humidity}
-              dewPoint={weather.current.dewPoint}
-              todayHigh={todayHigh}
-              todayLow={todayLow}
-              lastUpdated={lastUpdated}
-            />
-
-            {/* Next Change Hero */}
-            <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
-
-            {/* Decision Rail - Climate Context */}
-            <DecisionRail tempAnomaly={tempAnomaly} />
-
-            {/* Hourly Sparkline */}
-            <HourlySparkline hourly={weather.hourly} />
-
-            {/* Workability Scores */}
-            <TaskScores
-              sower={taskScores.sower}
-              shepherd={taskScores.shepherd}
-              keeper={taskScores.keeper}
-              builder={taskScores.builder}
-              aqi={aqi}
-            />
-
-            {/* Tomorrow + 7-Day */}
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-              <TomorrowPreview tomorrow={tomorrowData} />
-              <BurnDayIndicator
-                lat={location.latitude}
-                lon={location.longitude}
-                onStatusChange={setBurnDayStatus}
+            <div className="flex flex-col gap-4 lg:hidden">
+              {/* Quick Actions - Critical decisions only */}
+              <QuickActions
+                hasActiveAlert={hasActiveAlert}
+                alertTitle={alertTitle}
+                burnDayStatus={burnDayStatus}
+                freezeInfo={freezeInfo}
               />
-            </div>
-            <CompactSevenDay days={compactDays} />
 
-            {/* Today Deck */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              {/* Farmer's Memory Summary (collapsed) */}
-              <CollapsibleDeck title="Farmer's Memory" defaultOpen={false}>
-                <FarmerMemory
-                  temperature={weather.current.temperature}
-                  humidity={weather.current.humidity}
-                  pressure={weather.current.pressure}
-                  windSpeed={weather.current.windSpeed}
-                  todayHigh={todayHigh}
-                  todayLow={todayLow}
-                />
-              </CollapsibleDeck>
-
-              {/* Daily Proverb */}
-              {saying && (
-                <div className="space-y-2">
-                  <FrontierSaying
-                    saying={saying.frontier}
-                    modernLine={saying.modern}
-                    temperature={weather.current.temperature}
-                    location={formatLocationName(location)}
-                  />
-                  <ShareButton
-                    frontierLine={saying.frontier}
-                    modernLine={saying.modern}
-                    temperature={weather.current.temperature}
-                    location={formatLocationName(location)}
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Radar + Conditions */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <DaylightBar sunrise={todaySunrise} sunset={todaySunset} />
-              <ConditionsTiles
-                uvIndex={weather.current.uvIndex}
-                visibility={weather.current.visibility}
-                cloudCover={weather.current.cloudCover}
+              {/* NOW Display */}
+              <NowDisplay
+                temperature={weather.current.temperature}
+                feelsLike={weather.current.feelsLike}
+                weatherCode={weather.current.weatherCode}
+                windSpeed={weather.current.windSpeed}
+                windDirection={weather.current.windDirection}
                 windGusts={weather.current.windGusts}
-                moon={moon}
+                humidity={weather.current.humidity}
+                dewPoint={weather.current.dewPoint}
+                todayHigh={todayHigh}
+                todayLow={todayLow}
+                lastUpdated={lastUpdated}
+              />
+
+              {/* Next Change Hero */}
+              <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
+
+              {/* Decision Rail - Climate Context */}
+              <DecisionRail tempAnomaly={tempAnomaly} />
+
+              {/* Hourly Sparkline */}
+              <HourlySparkline hourly={weather.hourly} />
+
+              {/* Workability Scores */}
+              <TaskScores
+                sower={taskScores.sower}
+                shepherd={taskScores.shepherd}
+                keeper={taskScores.keeper}
+                builder={taskScores.builder}
                 aqi={aqi}
               />
-              <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
-            </div>
 
-            {/* Farm Intelligence */}
-            <CollapsibleDeck title="Farm Intelligence" icon={<Sprout className="w-4 h-4" />}>
-              <PlantingIntelligence
-                temperature={weather.current.temperature}
-                humidity={weather.current.humidity}
-                soilTemperature={weather.current.soilTemperature}
-                tempHigh={todayHigh}
-                tempLow={todayLow}
-              />
-              <div className="mt-4">
-                <NativePulse pulse={nativePulse} />
-              </div>
-            </CollapsibleDeck>
-
-            {/* Environmental Watch */}
-            <CollapsibleDeck title="Environmental Watch" icon={<Leaf className="w-4 h-4" />}>
-              <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
-              <div className="mt-4">
-                <AirQualityCard
-                  lat={location.latitude}
-                  lon={location.longitude}
-                  onAqiChange={setAqi}
-                />
-              </div>
-            </CollapsibleDeck>
-
-            {/* Snow (conditional) */}
-            {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
-              <SnowConditions
-                snowDepth={weather.current.snowDepth}
-                currentTemp={weather.current.temperature}
-                weatherCode={weather.current.weatherCode}
-              />
-            )}
-          </div>
-
-          {/* ============================================================
-              DESKTOP LAYOUT: 12-column Grid
-              ============================================================ */}
-          <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
-            {/* ========== ROW 1: Above the Fold (3-column) ========== */}
-            <section aria-label="At a Glance" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
-              {/* LEFT: NOW Display (3 cols) */}
-              <div className="lg:col-span-3">
-                <NowDisplay
-                  temperature={weather.current.temperature}
-                  feelsLike={weather.current.feelsLike}
-                  weatherCode={weather.current.weatherCode}
-                  windSpeed={weather.current.windSpeed}
-                  windDirection={weather.current.windDirection}
-                  windGusts={weather.current.windGusts}
-                  humidity={weather.current.humidity}
-                  dewPoint={weather.current.dewPoint}
-                  todayHigh={todayHigh}
-                  todayLow={todayLow}
-                  lastUpdated={lastUpdated}
-                />
-              </div>
-
-              {/* CENTER: Next Change + Hourly (6 cols) */}
-              <div className="lg:col-span-6 flex flex-col gap-3">
-                <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
-                <HourlySparkline hourly={weather.hourly} />
-                <PrecipitationTiming
-                  lat={location.latitude}
-                  lon={location.longitude}
-                  hourlyPrecipFallback={
-                    weather?.hourly?.precipitationProbability?.[new Date().getHours()]
-                  }
-                />
-              </div>
-
-              {/* RIGHT: Quick Actions + Decision Rail (3 cols) */}
-              <div className="lg:col-span-3 flex flex-col gap-3">
-                {/* Quick Actions - Critical decisions only */}
-                <QuickActions
-                  hasActiveAlert={hasActiveAlert}
-                  alertTitle={alertTitle}
-                  burnDayStatus={burnDayStatus}
-                  freezeInfo={freezeInfo}
-                />
-
-                {/* Decision Rail - Climate Context */}
-                <DecisionRail tempAnomaly={tempAnomaly} />
-              </div>
-            </section>
-
-            {/* ========== ROW 2: Planning ========== */}
-            <section aria-label="Planning" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
-              {/* Tomorrow + Burn Day */}
-              <div className="lg:col-span-3 flex flex-col gap-3">
+              {/* Tomorrow + 7-Day */}
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
                 <TomorrowPreview tomorrow={tomorrowData} />
                 <BurnDayIndicator
                   lat={location.latitude}
@@ -565,96 +431,43 @@ export default function AlmanacPage() {
                   onStatusChange={setBurnDayStatus}
                 />
               </div>
+              <CompactSevenDay days={compactDays} />
 
-              {/* 7-Day Outlook */}
-              <div className="lg:col-span-9">
-                <CompactSevenDay days={compactDays} />
-              </div>
-            </section>
+              {/* Today Deck */}
+              <div className="space-y-4 pt-4 border-t border-white/10">
+                {/* Farmer's Memory Summary (collapsed) */}
+                <CollapsibleDeck title="Farmer's Memory" defaultOpen={false}>
+                  <FarmerMemory
+                    temperature={weather.current.temperature}
+                    humidity={weather.current.humidity}
+                    pressure={weather.current.pressure}
+                    windSpeed={weather.current.windSpeed}
+                    todayHigh={todayHigh}
+                    todayLow={todayLow}
+                  />
+                </CollapsibleDeck>
 
-            {/* ========== ROW 3: Today Deck ========== */}
-            <section aria-label="Today's Details" className="lg:col-span-12">
-              <div className="border-t border-white/10 pt-4 mt-2">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-almanac-gold mb-4">
-                  Today&apos;s Details
-                </h3>
-                <div className="grid lg:grid-cols-12 gap-4">
-                  {/* Workability Scores */}
-                  <div className="lg:col-span-8">
-                    <TaskScores
-                      sower={taskScores.sower}
-                      shepherd={taskScores.shepherd}
-                      keeper={taskScores.keeper}
-                      builder={taskScores.builder}
-                      aqi={aqi}
-                      compact
+                {/* Daily Proverb */}
+                {saying && (
+                  <div className="space-y-2">
+                    <FrontierSaying
+                      saying={saying.frontier}
+                      modernLine={saying.modern}
+                      temperature={weather.current.temperature}
+                      location={formatLocationName(location)}
+                    />
+                    <ShareButton
+                      frontierLine={saying.frontier}
+                      modernLine={saying.modern}
+                      temperature={weather.current.temperature}
+                      location={formatLocationName(location)}
                     />
                   </div>
-
-                  {/* Farmer's Memory Summary */}
-                  <div className="lg:col-span-4 flex flex-col gap-3">
-                    <div className="bg-white/5 border border-white/10 rounded-lg p-4">
-                      <FarmerMemorySummary
-                        temperature={weather.current.temperature}
-                        humidity={weather.current.humidity}
-                        pressure={weather.current.pressure}
-                        windSpeed={weather.current.windSpeed}
-                        todayHigh={todayHigh}
-                        todayLow={todayLow}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const el = document.getElementById('farmer-memory-deck')
-                          el?.scrollIntoView({ behavior: 'smooth' })
-                        }}
-                        className="text-xs text-almanac-gold hover:underline mt-2"
-                      >
-                        View full analysis
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Daily Proverb + Share */}
-                  <div className="lg:col-span-6">
-                    {saying && (
-                      <div className="space-y-2">
-                        <FrontierSaying
-                          saying={saying.frontier}
-                          modernLine={saying.modern}
-                          temperature={weather.current.temperature}
-                          location={formatLocationName(location)}
-                        />
-                        <ShareButton
-                          frontierLine={saying.frontier}
-                          modernLine={saying.modern}
-                          temperature={weather.current.temperature}
-                          location={formatLocationName(location)}
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Moon Phase */}
-                  <div className="lg:col-span-6">
-                    <MoonPhase moon={moon} />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* ========== ROW 4: Radar + Conditions ========== */}
-            <section
-              aria-label="Radar and Conditions"
-              className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
-            >
-              {/* Radar */}
-              <div className="lg:col-span-8">
-                <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
+                )}
               </div>
 
-              {/* Conditions */}
-              <div className="lg:col-span-4 flex flex-col gap-3">
+              {/* Radar + Conditions */}
+              <div className="space-y-4 pt-4 border-t border-white/10">
                 <DaylightBar sunrise={todaySunrise} sunset={todaySunset} />
                 <ConditionsTiles
                   uvIndex={weather.current.uvIndex}
@@ -664,48 +477,27 @@ export default function AlmanacPage() {
                   moon={moon}
                   aqi={aqi}
                 />
+                <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
               </div>
-            </section>
 
-            {/* ========== ROW 5: Farm Deck (CollapsibleDeck) ========== */}
-            <div className="lg:col-span-12" id="farmer-memory-deck">
-              <CollapsibleDeck
-                title="Farm Intelligence"
-                icon={<Sprout className="w-4 h-4" />}
-                defaultOpen={false}
-              >
-                <div className="grid lg:grid-cols-2 gap-4">
-                  <PlantingIntelligence
-                    temperature={weather.current.temperature}
-                    humidity={weather.current.humidity}
-                    soilTemperature={weather.current.soilTemperature}
-                    tempHigh={todayHigh}
-                    tempLow={todayLow}
-                  />
-                  <FarmerMemory
-                    temperature={weather.current.temperature}
-                    humidity={weather.current.humidity}
-                    pressure={weather.current.pressure}
-                    windSpeed={weather.current.windSpeed}
-                    todayHigh={todayHigh}
-                    todayLow={todayLow}
-                  />
-                </div>
+              {/* Farm Intelligence */}
+              <CollapsibleDeck title="Farm Intelligence" icon={<Sprout className="w-4 h-4" />}>
+                <PlantingIntelligence
+                  temperature={weather.current.temperature}
+                  humidity={weather.current.humidity}
+                  soilTemperature={weather.current.soilTemperature}
+                  tempHigh={todayHigh}
+                  tempLow={todayLow}
+                />
                 <div className="mt-4">
                   <NativePulse pulse={nativePulse} />
                 </div>
               </CollapsibleDeck>
-            </div>
 
-            {/* ========== ROW 6: Environment Deck (CollapsibleDeck) ========== */}
-            <div className="lg:col-span-12">
-              <CollapsibleDeck
-                title="Environmental Watch"
-                icon={<Leaf className="w-4 h-4" />}
-                defaultOpen={false}
-              >
-                <div className="grid lg:grid-cols-2 gap-4">
-                  <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+              {/* Environmental Watch */}
+              <CollapsibleDeck title="Environmental Watch" icon={<Leaf className="w-4 h-4" />}>
+                <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+                <div className="mt-4">
                   <AirQualityCard
                     lat={location.latitude}
                     lon={location.longitude}
@@ -713,26 +505,298 @@ export default function AlmanacPage() {
                   />
                 </div>
               </CollapsibleDeck>
-            </div>
 
-            {/* Snow (conditional) */}
-            {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
-              <div className="lg:col-span-12">
+              {/* Snow (conditional) */}
+              {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
                 <SnowConditions
                   snowDepth={weather.current.snowDepth}
                   currentTemp={weather.current.temperature}
                   weatherCode={weather.current.weatherCode}
                 />
+              )}
+            </div>
+
+            {/* ============================================================
+              DESKTOP LAYOUT: 12-column Grid
+              ============================================================ */}
+            <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
+              {/* ========== ROW 1: Above the Fold (3-column) ========== */}
+              <section
+                aria-label="At a Glance"
+                className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
+              >
+                {/* LEFT: NOW Display (3 cols) */}
+                <div className="lg:col-span-3">
+                  <NowDisplay
+                    temperature={weather.current.temperature}
+                    feelsLike={weather.current.feelsLike}
+                    weatherCode={weather.current.weatherCode}
+                    windSpeed={weather.current.windSpeed}
+                    windDirection={weather.current.windDirection}
+                    windGusts={weather.current.windGusts}
+                    humidity={weather.current.humidity}
+                    dewPoint={weather.current.dewPoint}
+                    todayHigh={todayHigh}
+                    todayLow={todayLow}
+                    lastUpdated={lastUpdated}
+                  />
+                </div>
+
+                {/* CENTER: Next Change + Hourly (6 cols) */}
+                <div className="lg:col-span-6 flex flex-col gap-3">
+                  <NextChangeHero
+                    hourly={weather.hourly}
+                    currentTemp={weather.current.temperature}
+                  />
+                  <HourlySparkline hourly={weather.hourly} />
+                  <PrecipitationTiming
+                    lat={location.latitude}
+                    lon={location.longitude}
+                    hourlyPrecipFallback={
+                      weather?.hourly?.precipitationProbability?.[new Date().getHours()]
+                    }
+                  />
+                </div>
+
+                {/* RIGHT: Quick Actions + Decision Rail (3 cols) */}
+                <div className="lg:col-span-3 flex flex-col gap-3">
+                  {/* Quick Actions - Critical decisions only */}
+                  <QuickActions
+                    hasActiveAlert={hasActiveAlert}
+                    alertTitle={alertTitle}
+                    burnDayStatus={burnDayStatus}
+                    freezeInfo={freezeInfo}
+                  />
+
+                  {/* Decision Rail - Climate Context */}
+                  <DecisionRail tempAnomaly={tempAnomaly} />
+                </div>
+              </section>
+
+              {/* ========== ROW 2: Planning ========== */}
+              <section aria-label="Planning" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
+                {/* Tomorrow + Burn Day */}
+                <div className="lg:col-span-3 flex flex-col gap-3">
+                  <TomorrowPreview tomorrow={tomorrowData} />
+                  <BurnDayIndicator
+                    lat={location.latitude}
+                    lon={location.longitude}
+                    onStatusChange={setBurnDayStatus}
+                  />
+                </div>
+
+                {/* 7-Day Outlook */}
+                <div className="lg:col-span-9">
+                  <CompactSevenDay days={compactDays} />
+                </div>
+              </section>
+
+              {/* ========== ROW 3: Today Deck ========== */}
+              <section aria-label="Today's Details" className="lg:col-span-12">
+                <div className="border-t border-white/10 pt-4 mt-2">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-almanac-gold mb-4">
+                    Today&apos;s Details
+                  </h3>
+                  <div className="grid lg:grid-cols-12 gap-4">
+                    {/* Workability Scores */}
+                    <div className="lg:col-span-8">
+                      <TaskScores
+                        sower={taskScores.sower}
+                        shepherd={taskScores.shepherd}
+                        keeper={taskScores.keeper}
+                        builder={taskScores.builder}
+                        aqi={aqi}
+                        compact
+                      />
+                    </div>
+
+                    {/* Farmer's Memory Summary */}
+                    <div className="lg:col-span-4 flex flex-col gap-3">
+                      <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                        <FarmerMemorySummary
+                          temperature={weather.current.temperature}
+                          humidity={weather.current.humidity}
+                          pressure={weather.current.pressure}
+                          windSpeed={weather.current.windSpeed}
+                          todayHigh={todayHigh}
+                          todayLow={todayLow}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const el = document.getElementById('farmer-memory-deck')
+                            el?.scrollIntoView({ behavior: 'smooth' })
+                          }}
+                          className="text-xs text-almanac-gold hover:underline mt-2"
+                        >
+                          View full analysis
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Daily Proverb + Share */}
+                    <div className="lg:col-span-6">
+                      {saying && (
+                        <div className="space-y-2">
+                          <FrontierSaying
+                            saying={saying.frontier}
+                            modernLine={saying.modern}
+                            temperature={weather.current.temperature}
+                            location={formatLocationName(location)}
+                          />
+                          <ShareButton
+                            frontierLine={saying.frontier}
+                            modernLine={saying.modern}
+                            temperature={weather.current.temperature}
+                            location={formatLocationName(location)}
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Moon Phase */}
+                    <div className="lg:col-span-6">
+                      <MoonPhase moon={moon} />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* ========== ROW 4: Radar + Conditions ========== */}
+              <section
+                aria-label="Radar and Conditions"
+                className="lg:col-span-12 grid lg:grid-cols-12 gap-4"
+              >
+                {/* Radar */}
+                <div className="lg:col-span-8">
+                  <PrecipitationRadar latitude={location.latitude} longitude={location.longitude} />
+                </div>
+
+                {/* Conditions */}
+                <div className="lg:col-span-4 flex flex-col gap-3">
+                  <DaylightBar sunrise={todaySunrise} sunset={todaySunset} />
+                  <ConditionsTiles
+                    uvIndex={weather.current.uvIndex}
+                    visibility={weather.current.visibility}
+                    cloudCover={weather.current.cloudCover}
+                    windGusts={weather.current.windGusts}
+                    moon={moon}
+                    aqi={aqi}
+                  />
+                </div>
+              </section>
+
+              {/* ========== ROW 5: Farm Deck (CollapsibleDeck) ========== */}
+              <div className="lg:col-span-12" id="farmer-memory-deck">
+                <CollapsibleDeck
+                  title="Farm Intelligence"
+                  icon={<Sprout className="w-4 h-4" />}
+                  defaultOpen={false}
+                >
+                  <div className="grid lg:grid-cols-2 gap-4">
+                    <PlantingIntelligence
+                      temperature={weather.current.temperature}
+                      humidity={weather.current.humidity}
+                      soilTemperature={weather.current.soilTemperature}
+                      tempHigh={todayHigh}
+                      tempLow={todayLow}
+                    />
+                    <FarmerMemory
+                      temperature={weather.current.temperature}
+                      humidity={weather.current.humidity}
+                      pressure={weather.current.pressure}
+                      windSpeed={weather.current.windSpeed}
+                      todayHigh={todayHigh}
+                      todayLow={todayLow}
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <NativePulse pulse={nativePulse} />
+                  </div>
+                </CollapsibleDeck>
               </div>
-            )}
+
+              {/* ========== ROW 6: Environment Deck (CollapsibleDeck) ========== */}
+              <div className="lg:col-span-12">
+                <CollapsibleDeck
+                  title="Environmental Watch"
+                  icon={<Leaf className="w-4 h-4" />}
+                  defaultOpen={false}
+                >
+                  <div className="grid lg:grid-cols-2 gap-4">
+                    <EnvironmentalWatch lat={location.latitude} lon={location.longitude} />
+                    <AirQualityCard
+                      lat={location.latitude}
+                      lon={location.longitude}
+                      onAqiChange={setAqi}
+                    />
+                  </div>
+                </CollapsibleDeck>
+              </div>
+
+              {/* Snow (conditional) */}
+              {weather.current.snowDepth !== undefined && weather.current.snowDepth > 0 && (
+                <div className="lg:col-span-12">
+                  <SnowConditions
+                    snowDepth={weather.current.snowDepth}
+                    currentTemp={weather.current.temperature}
+                    weatherCode={weather.current.weatherCode}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <PresentedByBlock lastUpdated={lastUpdated} />
+
+            {/* First-visit Onboarding */}
+            <OnboardingModal />
           </div>
+        )}
 
-          {/* Footer */}
-          <PresentedByBlock lastUpdated={lastUpdated} />
+        {view === 'governor' && (
+          /* Governor's View: Brass Instruments & Executive Briefing */
+          <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4 lg:py-6">
+            {/* Alerts still show in Governor's View */}
+            <NWSAlertBanner
+              lat={location.latitude}
+              lon={location.longitude}
+              onAlertChange={(hasAlert, title) => {
+                setHasActiveAlert(hasAlert)
+                setAlertTitle(title)
+              }}
+            />
+            <LightningWatch lat={location.latitude} lon={location.longitude} />
 
-          {/* First-visit Onboarding */}
-          <OnboardingModal />
-        </div>
+            {/* Stale Data Warning */}
+            <div className="flex justify-end mb-4">
+              <StaleDataWarning
+                lastUpdated={lastUpdated}
+                onRefresh={() => location && fetchWeather(location)}
+                isLoading={loading}
+              />
+            </div>
+
+            {/* Brass Instruments Display */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+              <BrassBarometer pressure={weather.current.pressure} />
+              <MercuryThermometer temperature={weather.current.temperature} />
+              <CopperWeathervane
+                windDirection={weather.current.windDirection}
+                windSpeed={weather.current.windSpeed}
+              />
+            </div>
+
+            {/* Governor's Intelligence Briefing */}
+            <GovernorsBriefing briefing={generateGovernorsBriefing(weather)} />
+
+            {/* Footer */}
+            <PresentedByBlock lastUpdated={lastUpdated} />
+
+            {/* First-visit Onboarding */}
+            <OnboardingModal />
+          </div>
+        )}
       </main>
     </div>
   )

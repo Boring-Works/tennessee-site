@@ -3,6 +3,7 @@ import Link from 'next/link'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 import { PAGE_METADATA, HOOKS } from '@/lib/copy'
+import { useHours } from '@/lib/hooks/useHours'
 
 export const metadata: Metadata = {
   title: PAGE_METADATA.visit.title,
@@ -84,30 +85,8 @@ const PortraitFrame = ({ initials, highlight }: { initials: string; highlight: s
   </div>
 )
 
-// Historical figures for the "Who Walked Here" section
-const historicalFigures = [
-  {
-    name: 'William Blount',
-    title: 'Governor of the Southwest Territory',
-    years: '1790–1796',
-    hook: 'Signed the U.S. Constitution. Appointed by George Washington. Made Rocky Mount his headquarters.',
-    highlight: 'Constitution Signer',
-  },
-  {
-    name: 'Andrew Jackson',
-    title: 'Future 7th President',
-    years: '1788',
-    hook: 'Lodged at Rocky Mount for six weeks while awaiting his law license. He was 21 years old.',
-    highlight: 'Future President',
-  },
-  {
-    name: 'William Cobb',
-    title: 'Original Settler',
-    years: 'c. 1770',
-    hook: 'Staked his claim on this land six years before the Declaration of Independence was signed.',
-    highlight: 'Pioneer',
-  },
-]
+// Historical figures from siteInfo
+const { historicalFigures } = siteInfo
 
 // Tour experience highlights
 const experienceHighlights = [
@@ -133,7 +112,7 @@ const experienceHighlights = [
 ]
 
 // Heritage Trail - nearby historic sites with narrative connection
-const heritageTrail = [
+const _heritageTrail = [
   {
     name: 'Sycamore Shoals State Historic Park',
     distance: '30 min',
@@ -153,7 +132,8 @@ const heritageTrail = [
 ]
 
 export default function VisitPage() {
-  const { location, hours, admission, whatToExpect, contact, sisterSites } = siteInfo
+  const { location, admission, whatToExpect, contact, sisterSites } = siteInfo
+  const hours = useHours() // useHours returns a data object, can be used in server component
 
   return (
     <>
@@ -221,8 +201,8 @@ export default function VisitPage() {
           {/* Quick facts row */}
           <div className={styles['visit-hero-facts']}>
             <div className={styles['visit-hero-fact']}>
-              <span className={styles['visit-hero-fact-value']}>Wed–Sat</span>
-              <span className={styles['visit-hero-fact-label']}>11am–5pm</span>
+              <span className={styles['visit-hero-fact-value']}>{hours.formatted.days}</span>
+              <span className={styles['visit-hero-fact-label']}>{hours.formatted.time}</span>
             </div>
             <div className={styles['visit-hero-fact-divider']} aria-hidden="true">
               <span className={styles['visit-hero-fact-star']}>★</span>
@@ -413,17 +393,17 @@ export default function VisitPage() {
               </h3>
               <dl className={styles['visit-hours']}>
                 <div className={styles['visit-hours-row']}>
-                  <dt>Tuesday – Saturday</dt>
-                  <dd>{hours.regular.tuesday}</dd>
+                  <dt>{hours.formatted.days}</dt>
+                  <dd>{hours.formatted.time}</dd>
                 </div>
                 <div className={styles['visit-hours-row']}>
-                  <dt>Sunday</dt>
-                  <dd>{hours.regular.sunday}</dd>
+                  <dt>Last Tour</dt>
+                  <dd>{hours.lastTour}</dd>
                 </div>
                 <div
                   className={`${styles['visit-hours-row']} ${styles['visit-hours-row--closed']}`}
                 >
-                  <dt>Monday</dt>
+                  <dt>Sunday – Tuesday</dt>
                   <dd>Closed</dd>
                 </div>
               </dl>

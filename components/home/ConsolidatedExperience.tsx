@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { BUTTONS, HOOKS } from '@/lib/copy'
+import siteInfo from '@/data/siteInfo.json'
 
 /**
  * ConsolidatedExperience Section - ENHANCED VISUAL DESIGN
@@ -515,7 +516,8 @@ export function ConsolidatedExperience() {
               <div className="w-12 h-px bg-secondary/20" />
             </div>
             <p className="text-sm text-secondary/60 uppercase tracking-wider">
-              200 Hyder Hill Road · Piney Flats, Tennessee
+              {siteInfo.location.address.street} · {siteInfo.location.address.city},{' '}
+              {siteInfo.location.address.state}
             </p>
             <p className="text-xs text-text-light mt-2">
               30 min from Johnson City · 45 min from Knoxville
@@ -573,9 +575,9 @@ export function ConsolidatedExperience() {
                 Hours
               </div>
               <div className="pt-2">
-                <p className="font-serif text-xl text-primary mb-1">Wed – Sat</p>
-                <p className="font-serif text-lg text-primary/80">10am – 5pm</p>
-                <p className="text-xs text-accent mt-2 font-medium">Guided tours every hour</p>
+                <p className="font-serif text-xl text-primary mb-1">Wed–Sat</p>
+                <p className="font-serif text-lg text-primary/80">10am–5pm</p>
+                <p className="text-xs text-accent mt-2 font-medium">Last tour 4pm</p>
               </div>
             </div>
 
@@ -595,10 +597,13 @@ export function ConsolidatedExperience() {
               </div>
               <div className="pt-2">
                 <p className="font-serif text-primary">
-                  <span className="text-xl">$12</span>
+                  <span className="text-xl">${siteInfo.admission.adults.price}</span>
                   <span className="text-sm text-secondary/60"> Adults</span>
                 </p>
-                <p className="text-sm text-primary/70 mt-1">Seniors $10 · Children $8</p>
+                <p className="text-sm text-primary/70 mt-1">
+                  Seniors ${siteInfo.admission.seniors.price} · Children $
+                  {siteInfo.admission.children.price}
+                </p>
                 <p className="text-xs text-text-light mt-2">Under 6 free</p>
               </div>
             </div>

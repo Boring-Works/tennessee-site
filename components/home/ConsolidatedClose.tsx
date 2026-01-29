@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { HOOKS, BUTTONS } from '@/lib/copy'
+import siteInfo from '@/data/siteInfo.json'
 
 /**
  * ConsolidatedClose Section
@@ -232,7 +233,8 @@ export function ConsolidatedClose() {
             <p
               className={`mt-8 text-xs text-white/20 fade-in-up stagger-6 ${ctaVisible ? 'visible' : ''}`}
             >
-              Rocky Mount State Historic Site · Piney Flats, Tennessee
+              {siteInfo.site.name} · {siteInfo.location.address.city},{' '}
+              {siteInfo.location.address.state}
               <br />
               <span className="text-white/15">Capital of the Southwest Territory · 1790–1792</span>
             </p>

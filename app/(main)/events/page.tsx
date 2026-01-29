@@ -1,6 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import eventsData from '@/data/events.json'
+import siteInfo from '@/data/siteInfo.json'
+import { getTicketUrl } from '@/lib/data'
+import { JsonLd } from '@/components/JsonLd'
+import { generateEventsListSchema } from '@/lib/seo'
+import { EventsToursBanner } from '@/components/events/EventsToursBanner'
+import { EventsHoursCTA } from '@/components/events/EventsHoursCTA'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -129,6 +135,7 @@ export default function EventsPage() {
 
   return (
     <>
+      <JsonLd data={generateEventsListSchema(eventsData.events)} />
       {/* ============================================
           PAGE HEADER - The Commemorative Year
           ============================================ */}
@@ -158,8 +165,14 @@ export default function EventsPage() {
           {/* Coming Up - Featured Strip with 3 events */}
           {upcomingEvents.length > 0 && (
             <div className={styles['coming-up']}>
-              <h2 className={styles['coming-up-label']}>Coming Up</h2>
-              <div className={styles['coming-up-grid']}>
+              <h2 className={styles['coming-up-label']} id="coming-up-heading">
+                Coming Up
+              </h2>
+              <div
+                className={styles['coming-up-grid']}
+                role="region"
+                aria-labelledby="coming-up-heading"
+              >
                 {upcomingEvents.map((item, index) => (
                   <a
                     key={item.event.id}
@@ -171,6 +184,15 @@ export default function EventsPage() {
                     <span className={styles['coming-up-card-meta']}>
                       <span className={styles['coming-up-card-date']}>
                         {formatDate(item.event.date)}
+                        {item.daysAway <= 7 && (
+                          <span className={styles['coming-up-card-urgency']}>
+                            {item.daysAway === 0
+                              ? ' — Today!'
+                              : item.daysAway === 1
+                                ? ' — Tomorrow!'
+                                : ` — ${item.daysAway} days`}
+                          </span>
+                        )}
                       </span>
                       <span className={styles['coming-up-card-price']}>
                         {formatPrice(item.event)}
@@ -200,16 +222,25 @@ export default function EventsPage() {
               const monthId = month.toLowerCase().replace(/\s+/g, '-')
               const shortMonth = month.split(' ')[0].slice(0, 3)
 
-              return (
+              return hasEvents ? (
                 <a
                   key={month}
-                  href={hasEvents ? `#${monthId}` : undefined}
-                  className={`${styles['year-progress-month']} ${hasEvents ? styles['year-progress-month--active'] : styles['year-progress-month--empty']}`}
-                  aria-label={hasEvents ? `Jump to ${month}` : `No events in ${month}`}
+                  href={`#${monthId}`}
+                  className={`${styles['year-progress-month']} ${styles['year-progress-month--active']}`}
+                  aria-label={`Jump to ${month}`}
                 >
                   <span className={styles['year-progress-month-dot']} aria-hidden="true" />
                   <span className={styles['year-progress-month-label']}>{shortMonth}</span>
                 </a>
+              ) : (
+                <span
+                  key={month}
+                  className={`${styles['year-progress-month']} ${styles['year-progress-month--empty']}`}
+                  aria-hidden="true"
+                >
+                  <span className={styles['year-progress-month-dot']} aria-hidden="true" />
+                  <span className={styles['year-progress-month-label']}>{shortMonth}</span>
+                </span>
               )
             })}
           </div>
@@ -368,8 +399,16 @@ export default function EventsPage() {
                             </span>
                           ) : event.requiresTicket ? (
                             <a
-                              href={event.ticketUrl || `/events/${event.id}`}
+                              href={getTicketUrl(event) || `/events/${event.id}`}
                               className={styles['calendar-event-cta-btn']}
+                              target={
+                                getTicketUrl(event)?.includes('fareharbor') ? '_blank' : undefined
+                              }
+                              rel={
+                                getTicketUrl(event)?.includes('fareharbor')
+                                  ? 'noopener noreferrer'
+                                  : undefined
+                              }
                             >
                               Reserve Your Spot <span aria-hidden="true">→</span>
                             </a>
@@ -393,38 +432,14 @@ export default function EventsPage() {
       </section>
 
       {/* ============================================
+          DAILY TOURS BANNER
+          ============================================ */}
+      <EventsToursBanner />
+
+      {/* ============================================
           VISIT CTA - See It In Person
           ============================================ */}
-      <section className={styles['calendar-cta']} aria-labelledby="calendar-cta-heading">
-        <div className={styles['calendar-cta-inner']}>
-          <div className={styles['calendar-cta-content']}>
-            <p className={styles['calendar-cta-eyebrow']}>Experience History</p>
-            <h2 id="calendar-cta-heading" className={styles['calendar-cta-headline']}>
-              See Where Tennessee Began
-            </h2>
-            <p className={styles['calendar-cta-desc']}>
-              Walk the same grounds as William Blount and Andrew Jackson. Living history tours
-              daily.
-            </p>
-          </div>
-
-          <div className={styles['calendar-cta-action']}>
-            <Link href="/visit" className={styles['calendar-cta-btn']}>
-              Plan Your Visit
-            </Link>
-            <p className={styles['calendar-cta-hours']}>Open Tue–Sat 10am–5pm, Sun 1pm–5pm</p>
-            {/* Regular Site Admission */}
-            <div className={styles['calendar-cta-admission']}>
-              <p className={styles['calendar-cta-admission-label']}>
-                Regular Site Admission (Non-Event Days)
-              </p>
-              <p className={styles['calendar-cta-admission-prices']}>
-                Adults $12 · Seniors $10 · Children $8 · Under 6 Free
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EventsHoursCTA siteInfo={siteInfo} />
 
       {/* ============================================
           CONTACT - Group Visits
@@ -437,8 +452,11 @@ export default function EventsPage() {
           <p className={styles['calendar-contact-desc']}>
             Group rates for 10+. School programs and private tours available.
           </p>
-          <a href="tel:+14235387396" className={styles['calendar-contact-btn']}>
-            (423) 538-7396
+          <a
+            href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}
+            className={styles['calendar-contact-btn']}
+          >
+            {siteInfo.contact.phone}
           </a>
         </div>
       </section>

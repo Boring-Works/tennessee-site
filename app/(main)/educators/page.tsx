@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Claim } from '@/components/evidence/Claim'
+import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 
 // Section divider component for period-authentic transitions
@@ -165,8 +166,10 @@ export default function EducatorsPage() {
             Book a Field Trip →
           </a>
           <p className={styles['booking-contact']}>
-            Questions? <a href="mailto:info@rockymountmuseum.com">info@rockymountmuseum.com</a> |{' '}
-            <a href="tel:+14235387396">(423) 538-7396</a>
+            Questions? <a href="mailto:rockymountmuseum@gmail.com">rockymountmuseum@gmail.com</a> |{' '}
+            <a href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}>
+              {siteInfo.contact.phone}
+            </a>
           </p>
         </div>
       </section>

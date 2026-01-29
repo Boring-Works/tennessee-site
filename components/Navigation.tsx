@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/programs', label: 'Programs' },
   { href: '/events', label: 'Events' },
   { href: '/our-story', label: 'Our Story' },
+  { href: '/explore', label: 'Explore' },
   { href: '/evidence', label: 'Evidence' },
   { href: '/educators', label: 'Educators' },
   { href: '/support', label: 'Support' },

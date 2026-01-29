@@ -109,8 +109,8 @@ export const documents: HistoricalDocument[] = [
     content: `<p>In this letter, President Washington requests Secretary of War Knox to prepare matters requiring presidential approval before Washington's departure to Virginia. The letter addresses multiple frontier concerns:</p>
 
 <ul>
-  <li>Regulations for trade with Indian tribes</li>
-  <li>Restraining hostile Indian activities</li>
+  <li>Regulations for trade with Native American nations</li>
+  <li>Addressing conflicts arising from territorial expansion</li>
   <li>Western frontier security measures</li>
   <li>A proposed proclamation forbidding encroachments on tribal territories</li>
   <li>Instructions for the territorial governor</li>
@@ -325,7 +325,7 @@ export const documents: HistoricalDocument[] = [
 
 <h3>The Security Situation</h3>
 
-<p>Blount mentions "Farrowgood" (George Farragut) traveling with a military "Guard" and "Treasure"—likely specie for militia pay or land purchases. Farragut found it "not quite safe to proceed" due to threats from "northern Indians" (likely Shawnee or Chickamauga factions). This reveals the dangerous conditions surrounding the new seat of government.</p>
+<p>Blount mentions "Farrowgood" (George Farragut) traveling with a military "Guard" and "Treasure"—likely specie for militia pay or land purchases. Farragut found it "not quite safe to proceed" due to resistance from northern Indigenous groups (likely Shawnee or Chickamauga Cherokee factions opposing U.S. expansion into their territories). This reveals the dangerous conditions surrounding the new seat of government and ongoing Indigenous resistance to American territorial claims.</p>
 
 <h3>About George Farragut</h3>
 
@@ -419,7 +419,7 @@ export const documents: HistoricalDocument[] = [
         birthDeath: 'c. 1730 – c. 1796',
         role: 'Principal Chief of the Upper Towns (Overhill Cherokee)',
         biography:
-          'Hanging Maw was the leading chief of the Overhill Cherokee from 1788 to 1794, following the death of Old Tassel. He claimed leadership by right of being the chief headman of the Overhill Towns. Following the failure of peace talks with Virginians in 1777, he initially supported Dragging Canoe and the Chickamauga faction, but after devastating American attacks in 1780, he joined Old Tassel in working for peace. He signed both the 1785 Treaty of Hopewell and the 1791 Treaty of Holston. In 1793, land disputes led Knoxville settlers to attack a Cherokee negotiating party led by Hanging Maw, wounding the chief and his wife and killing several Indians.',
+          'Hanging Maw was the leading chief of the Overhill Cherokee from 1788 to 1794, following the death of Old Tassel. He claimed leadership by right of being the chief headman of the Overhill Towns. Following the failure of peace talks with Virginians in 1777, he initially supported Dragging Canoe and the Chickamauga faction, but after devastating American attacks in 1780, he joined Old Tassel in working for peace. He signed both the 1785 Treaty of Hopewell and the 1791 Treaty of Holston. In 1793, land disputes led Knoxville settlers to attack a Cherokee negotiating party led by Hanging Maw, wounding the chief and his wife and killing several Cherokee delegates.',
       },
       {
         cherokeeName: 'Nenetooyah',
@@ -446,7 +446,7 @@ export const documents: HistoricalDocument[] = [
         birthDeath: 'c. 1744 – August 9, 1807',
         role: 'War chief, later Principal Chief of the Chickamauga',
         biography:
-          "One of the most feared warriors of the Cherokee during the Cherokee-American wars. His siblings included Pumpkin Boy, Old Tassel, and the grandmother of Sequoyah. After his brother Old Tassel was killed under a truce in 1788, Doublehead became one of the most capable and vicious Cherokee war leaders. Following Dragging Canoe's death in 1792, he became part of the leadership triumvirate with Bloody Fellow and John Watts. On August 9, 1807, he was killed by Major Ridge, Alex Saunders, and John Rogers, either for control of the cotton trade or for his ceding of Indian lands.",
+          "One of the most feared warriors of the Cherokee during the Cherokee-American wars. His siblings included Pumpkin Boy, Old Tassel, and the grandmother of Sequoyah. After his brother Old Tassel was killed under a truce in 1788, Doublehead became one of the most capable and vicious Cherokee war leaders. Following Dragging Canoe's death in 1792, he became part of the leadership triumvirate with Bloody Fellow and John Watts. On August 9, 1807, he was killed by Major Ridge, Alex Saunders, and John Rogers, either for control of the cotton trade or for his controversial ceding of Cherokee lands to the United States.",
       },
       {
         cherokeeName: 'Enoleh',

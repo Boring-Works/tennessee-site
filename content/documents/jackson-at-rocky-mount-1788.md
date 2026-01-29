@@ -1,7 +1,7 @@
 ---
 id: jackson-at-rocky-mount-1788
 title: "Andrew Jackson's Stay at Rocky Mount"
-date: '1788-04-15'
+date: '1788-04-00'
 content_type: testimony
 source: 'Tennessee Encyclopedia, Rocky Mount State Historic Site, Andrew Jackson Papers'
 source_url: 'https://tennesseeencyclopedia.net/entries/rocky-mount/'
@@ -12,6 +12,7 @@ verification:
   status: verified
   source_count: 4
   method: 'Cross-referenced Tennessee Encyclopedia, Rocky Mount Museum, Miller Center, The Hermitage'
+  notes: 'Date narrowed to Spring 1788 based on biographical timelines. No primary documentation (letters or receipts) from Jackson actual stay has been identified. Six-week duration consistently cited across scholarly sources.'
 ---
 
 ## Andrew Jackson at Rocky Mount, 1788

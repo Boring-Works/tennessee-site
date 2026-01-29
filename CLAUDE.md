@@ -30,6 +30,18 @@ When Cody says **"HOTFIX"**, immediately run the full verification sequence:
 
 This is the pre-publish checklist. Do not ask questions — just run it.
 
+### CHECK DATA
+
+When Cody says **"CHECK DATA"**, validate all JSON data files:
+
+1. `npm run validate:data` — Run validation script
+2. Report:
+   - Errors (must fix): Schema violations, missing fields
+   - Warnings: Events on closed days, pre-season dates
+   - Info: Events using default FareHarbor booking
+
+The validator checks `events.json`, `lectures.json`, and `siteInfo.json` against `docs/DATA-STANDARDS.md`.
+
 ---
 
 ## Key Systems
@@ -64,6 +76,30 @@ Weather utility with farmer-focused task scores:
 | `farmerMemory.ts` | Cross-day pattern detection              |
 
 **Almanac Docs:** `docs/ALMANAC.md`
+
+### Data System (`data/` + `lib/data/`)
+
+All dynamic site data uses JSON files as single source of truth.
+
+| File            | Purpose                              |
+| --------------- | ------------------------------------ |
+| `siteInfo.json` | Hours, prices, contact, social links |
+| `events.json`   | 2026 events calendar                 |
+| `lectures.json` | Lecture series details               |
+| `lib/data/`     | Data utilities (ticket URL helpers)  |
+
+**Data Standards:** `docs/DATA-STANDARDS.md`
+
+**Smart Ticket URLs:** Events with `requiresTicket: true` automatically use FareHarbor's default booking flow unless a custom `ticketUrl` is specified.
+
+```typescript
+import { getTicketUrl } from '@/lib/data'
+
+// Uses default FareHarbor if ticketUrl is null
+const bookingUrl = getTicketUrl(event)
+```
+
+**Validation:** Run `npm run validate:data` to check all JSON files against standards.
 
 ---
 
@@ -117,17 +153,22 @@ components/
 lib/
 ├── copy/                # Brand copy constants
 ├── almanac/             # Weather business logic
+├── data/                # Data utilities (ticket URL helpers)
 ├── logger.ts            # Dev-only logging
 └── utils.ts             # Shared utilities
 
 data/
-├── events.json          # 2026 events
+├── events.json          # 2026 events (single source of truth)
 ├── lectures.json        # Lecture series
 └── siteInfo.json        # Hours, prices, contact
+
+scripts/
+└── validate-data.ts     # JSON validation script
 
 docs/
 ├── COPY.md              # Brand guide (references lib/copy/)
 ├── ALMANAC.md           # Weather feature docs
+├── DATA-STANDARDS.md    # JSON schemas & validation rules
 ├── PROJECT.md           # Technical specification
 └── STYLE-GUIDE.md       # Visual design system
 ```
@@ -136,14 +177,16 @@ docs/
 
 ## Key Files
 
-| File              | Purpose                                |
-| ----------------- | -------------------------------------- |
-| `lib/copy/`       | Brand copy constants (source of truth) |
-| `lib/almanac/`    | Weather calculation logic              |
-| `lib/logger.ts`   | Dev-only logging utility               |
-| `docs/COPY.md`    | Brand guidelines                       |
-| `docs/ALMANAC.md` | Weather feature docs                   |
-| `CONTRIBUTING.md` | Full coding standards                  |
+| File                     | Purpose                                |
+| ------------------------ | -------------------------------------- |
+| `lib/copy/`              | Brand copy constants (source of truth) |
+| `lib/almanac/`           | Weather calculation logic              |
+| `lib/data/`              | Data utilities (ticket URL helpers)    |
+| `lib/logger.ts`          | Dev-only logging utility               |
+| `docs/COPY.md`           | Brand guidelines                       |
+| `docs/ALMANAC.md`        | Weather feature docs                   |
+| `docs/DATA-STANDARDS.md` | JSON data schemas & validation         |
+| `CONTRIBUTING.md`        | Full coding standards                  |
 
 ---
 
@@ -157,8 +200,19 @@ docs/
 
 ### Add New Event
 
-1. Edit `data/events.json`
-2. Events page auto-generates from JSON
+1. Edit `data/events.json` (keep chronological order)
+2. Required fields: `id`, `title`, `date`, `type`, `category`, `description`, `requiresTicket`
+3. For ticketed events: Set `requiresTicket: true`. Add `ticketUrl` only if NOT using default FareHarbor
+4. Run `npm run validate:data` to check for errors
+5. Events page auto-generates from JSON
+
+**Validation Rules:**
+
+- Single-day events must be on Wed-Sat (Rocky Mount open days)
+- Dates must be in YYYY-MM-DD format
+- Season runs March 4 - mid-December 2026
+
+See `docs/DATA-STANDARDS.md` for full schema and examples.
 
 ### Modify Weather Logic
 

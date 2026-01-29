@@ -9,15 +9,14 @@ const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-playfair',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '700'], // Reduced from 6 weights to 2 (50% reduction)
 })
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-cormorant',
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  weight: ['400', '700'], // Reduced from 5 weights to 2
 })
 
 const greatVibes = Great_Vibes({
@@ -31,7 +30,7 @@ const cinzel = Cinzel({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-cinzel',
-  weight: ['400', '600', '700'],
+  weight: ['400', '700'], // Reduced from 3 weights to 2
 })
 
 export const metadata: Metadata = {

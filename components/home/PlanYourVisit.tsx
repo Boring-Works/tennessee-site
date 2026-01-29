@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { BUTTONS } from '@/lib/copy'
+import siteInfo from '@/data/siteInfo.json'
 
 /**
  * PlanYourVisit Section
@@ -167,12 +168,12 @@ export function PlanYourVisit() {
               <h3 className="font-serif text-xl text-primary text-center mb-2">Visiting Hours</h3>
               <div className="space-y-1 text-center">
                 <p className="text-sm text-text-light">
-                  <span className="font-medium">Tue–Sat</span> 10am–5pm
+                  <span className="font-medium">Wed–Sat</span> 10am–5pm
                 </p>
                 <p className="text-sm text-text-light">
-                  <span className="font-medium">Sunday</span> 1pm–5pm
+                  <span className="font-medium">Last tour</span> at 4pm
                 </p>
-                <p className="text-xs text-text-light/60 mt-2">Closed Mondays</p>
+                <p className="text-xs text-text-light/60 mt-2">Closed Sun–Tue</p>
               </div>
             </div>
           </div>
@@ -214,11 +215,20 @@ export function PlanYourVisit() {
               <h3 className="font-serif text-xl text-primary text-center mb-2">Admission</h3>
               <div className="space-y-1 text-center">
                 <p className="text-sm text-text-light">
-                  Adults <span className="font-semibold text-accent">$12</span> · Seniors{' '}
-                  <span className="font-semibold text-accent">$10</span>
+                  Adults{' '}
+                  <span className="font-semibold text-accent">
+                    ${siteInfo.admission.adults.price}
+                  </span>{' '}
+                  · Seniors{' '}
+                  <span className="font-semibold text-accent">
+                    ${siteInfo.admission.seniors.price}
+                  </span>
                 </p>
                 <p className="text-sm text-text-light">
-                  Children <span className="font-semibold text-accent">$8</span>
+                  Children{' '}
+                  <span className="font-semibold text-accent">
+                    ${siteInfo.admission.children.price}
+                  </span>
                 </p>
                 <p className="text-xs text-accent/80 mt-2 font-medium">✓ Free Parking</p>
               </div>

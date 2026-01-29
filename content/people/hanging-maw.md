@@ -14,6 +14,11 @@ is_signatory: true
 signature_url: 'https://digitreaties.org/treaties/treaty/88697242/'
 documents: ['treaty-holston-1791', 'treaty-hopewell-1785']
 faction: 'peace'
+verification:
+  status: reconstructed
+  source_count: 4
+  method: 'Biography reconstructed from U.S. government records, treaty documents, settler correspondence, and secondary historical sources'
+  notes: 'No Cherokee-authored documents about Hanging Maw have been identified in archives. This biography reflects how he was perceived and documented by U.S. officials and settlers. Cherokee oral histories and tribal records may contain different perspectives.'
 ---
 
 ## Biography

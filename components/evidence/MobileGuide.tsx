@@ -138,7 +138,7 @@ export function MobileGuide({ sections }: MobileGuideProps) {
             </ul>
             <div className="px-3 py-2 border-t border-[#c9a227]/20">
               <Link
-                href="/evidence/library"
+                href="/evidence/documents"
                 className="flex items-center gap-2 text-xs text-[#8b4513] hover:text-[#c9a227] transition-colors"
               >
                 <svg

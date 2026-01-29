@@ -50,19 +50,6 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
           <span className="capitalize">{doc.content_type}</span>
           {doc.collection && <span className="text-gold-leaf/60">{doc.collection}</span>}
         </div>
-
-        {/* Conversation threading */}
-        {doc.responds_to && (
-          <p className="mt-4 text-sm text-almanac-parchment/50">
-            ← Responds to:{' '}
-            <a
-              href={`/evidence/documents/${doc.responds_to}`}
-              className="text-gold-leaf hover:underline"
-            >
-              {doc.responds_to}
-            </a>
-          </p>
-        )}
       </header>
 
       {/* Document Content */}

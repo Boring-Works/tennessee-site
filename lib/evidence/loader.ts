@@ -17,6 +17,8 @@ import type {
   DocumentContentType,
   Person,
   PersonFrontmatter,
+  Collection,
+  CollectionFrontmatter,
 } from './types'
 
 // Path to documents directory
@@ -24,6 +26,9 @@ const DOCUMENTS_DIR = path.join(process.cwd(), 'content', 'documents')
 
 // Path to people directory
 const PEOPLE_DIR = path.join(process.cwd(), 'content', 'people')
+
+// Path to collections directory
+const COLLECTIONS_DIR = path.join(process.cwd(), 'content', 'collections')
 
 // =============================================================================
 // Passage Extraction
@@ -213,6 +218,16 @@ export async function getDocumentsMentioning(personId: string): Promise<Document
 }
 
 /**
+ * Get documents that respond to a specific document
+ *
+ * @param documentId - The document ID to find responses for
+ */
+export async function getRespondingDocuments(documentId: string): Promise<Document[]> {
+  const allDocs = await getAllDocuments()
+  return allDocs.filter((doc) => doc.responds_to === documentId)
+}
+
+/**
  * Get a specific passage by its compound ID
  *
  * @param passageId - The passage ID in format "documentId#anchor"
@@ -345,4 +360,93 @@ export async function getCherokeePeople(): Promise<Person[]> {
 export async function getSignatories(): Promise<Person[]> {
   const allPeople = await getAllPeople()
   return allPeople.filter((person) => person.is_signatory)
+}
+
+// =============================================================================
+// Collection Loading Functions
+// =============================================================================
+
+/**
+ * Get all collection slugs for static generation
+ *
+ * Returns an array of collection slugs (filenames without extension)
+ */
+export async function getCollectionSlugs(): Promise<string[]> {
+  try {
+    const files = await fs.readdir(COLLECTIONS_DIR)
+    return files
+      .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
+      .map((file) => file.replace(/\.mdx?$/, ''))
+  } catch (error) {
+    // Directory doesn't exist yet
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return []
+    }
+    throw error
+  }
+}
+
+/**
+ * Get a single collection by slug
+ *
+ * @param slug - The collection slug (filename without extension)
+ * @returns The parsed Collection or null if not found
+ */
+export async function getCollection(slug: string): Promise<Collection | null> {
+  // Try both .md and .mdx extensions
+  const extensions = ['.md', '.mdx']
+
+  for (const ext of extensions) {
+    const filePath = path.join(COLLECTIONS_DIR, `${slug}${ext}`)
+
+    try {
+      const rawContent = await fs.readFile(filePath, 'utf-8')
+
+      // Parse frontmatter using gray-matter
+      const parsed = matter(rawContent)
+      const frontmatter = parsed.data as CollectionFrontmatter
+      const content = parsed.content
+
+      // Build the Collection object
+      const collection: Collection = {
+        id: frontmatter.id,
+        name: frontmatter.name,
+        description: frontmatter.description,
+        why_it_matters: frontmatter.why_it_matters,
+        document_count: frontmatter.document_count,
+        date_range: frontmatter.date_range,
+        key_figures: frontmatter.key_figures || [],
+        content: content.trim() || undefined,
+      }
+
+      return collection
+    } catch (error) {
+      // File not found, try next extension
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+        continue
+      }
+      throw error
+    }
+  }
+
+  return null
+}
+
+/**
+ * Get all collections
+ *
+ * Loads and parses all collection files from the content directory
+ */
+export async function getAllCollections(): Promise<Collection[]> {
+  const slugs = await getCollectionSlugs()
+
+  const collections = await Promise.all(
+    slugs.map(async (slug) => {
+      const collection = await getCollection(slug)
+      return collection
+    })
+  )
+
+  // Filter out any null results
+  return collections.filter((c): c is Collection => c !== null)
 }

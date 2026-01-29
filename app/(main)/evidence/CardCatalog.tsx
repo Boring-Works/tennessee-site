@@ -11,7 +11,7 @@ const COLLECTIONS = [
     label: 'Document Library',
     code: 'LIBRARY',
     isLink: true,
-    href: '/evidence/library',
+    href: '/evidence/documents',
   },
   { id: 'blount-letter', label: 'Blount Correspondence', code: 'MSS.1790' },
   { id: 'washington-question', label: 'Washington Papers', code: 'MSS.1790' },

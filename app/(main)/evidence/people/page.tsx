@@ -46,16 +46,17 @@ export default async function PeoplePage() {
 
           {/* Introduction */}
           <p className="peopleIntro">
-            On July 2, 1791, forty Cherokee leaders gathered at White&apos;s Fort to sign the Treaty
-            of Holston with Governor William Blount. Their names, transliterated from the original
-            manuscript, are preserved here alongside the stories we have been able to recover.
+            On July 2, 1791, forty-two Cherokee leaders gathered at White&apos;s Fort to sign the
+            Treaty of Holston with Governor William Blount. Their names, transliterated from the
+            original manuscript, are preserved here alongside the stories we have been able to
+            recover.
           </p>
 
           {/* Cherokee Signatories Section */}
           <section className="peopleSection">
             <h2 className="peopleSectionTitle">
               <span>Cherokee Signatories</span>
-              <span className="peopleSectionCount">{cherokeeSignatories.length}</span>
+              <span className="peopleSectionCount">{cherokeeSignatories.length} of 42</span>
             </h2>
 
             <p className="peopleSectionIntro">
@@ -64,6 +65,12 @@ export default async function PeoplePage() {
                 <span className="peopleSectionNote">
                   {' '}
                   Featured profiles ({fullBioCount}) appear first.
+                </span>
+              )}
+              {cherokeeSignatories.length < 42 && (
+                <span className="peopleSectionNote">
+                  {' '}
+                  Research ongoing for remaining {42 - cherokeeSignatories.length} signatories.
                 </span>
               )}
             </p>

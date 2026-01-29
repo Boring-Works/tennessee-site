@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Menu, X } from 'lucide-react'
-import { WaxSealSVG } from './WaxSealSVG'
 import styles from './Header/Header.module.css'
 
 const NAV_LINKS = [
@@ -12,10 +11,9 @@ const NAV_LINKS = [
   { href: '/events', label: 'Events' },
   { href: '/our-story', label: 'Our Story' },
   { href: '/evidence', label: 'Evidence' },
+  { href: '/educators', label: 'Educators' },
   { href: '/support', label: 'Support' },
 ]
-
-const EDUCATOR_LINK = { href: '/educators', label: 'For Educators' }
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -38,6 +36,45 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Scroll to top + focus management on route change
+  useEffect(() => {
+    // Scroll to top immediately on route change
+    window.scrollTo({ top: 0, behavior: 'instant' })
+
+    // Move focus to main heading for better keyboard navigation
+    // Give page time to render, then focus first h1
+    const focusHeading = () => {
+      const mainHeading = document.querySelector('main h1, main [role="heading"][aria-level="1"]')
+      if (mainHeading instanceof HTMLElement) {
+        mainHeading.setAttribute('tabindex', '-1')
+        mainHeading.focus({ preventScroll: true })
+        // Remove tabindex after focus to preserve natural tab order
+        mainHeading.addEventListener(
+          'blur',
+          () => {
+            mainHeading.removeAttribute('tabindex')
+          },
+          { once: true }
+        )
+      }
+    }
+
+    // Small delay to let page content render
+    const timeoutId = setTimeout(focusHeading, 100)
+    return () => clearTimeout(timeoutId)
+  }, [pathname])
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [mobileMenuOpen])
 
   // Scroll lock + escape key + focus trap
   useEffect(() => {
@@ -93,7 +130,7 @@ export default function Navigation() {
   )
 
   // Pages with light backgrounds need dark header
-  const isLightBackgroundPage = pathname.startsWith('/evidence/library')
+  const isLightBackgroundPage = pathname.startsWith('/evidence/documents')
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false)
@@ -128,10 +165,6 @@ export default function Navigation() {
           <div className={styles.inner}>
             {/* Logo */}
             <Link href="/" className={styles.logo}>
-              <WaxSealSVG
-                className={`${styles.seal} ${isScrolled ? styles['seal--small'] : ''}`}
-                size={isScrolled ? 32 : 40}
-              />
               <div className={styles['logo-stack']}>
                 <span className={styles['logo-text']}>ROCKY MOUNT</span>
                 <div
@@ -166,21 +199,11 @@ export default function Navigation() {
               {/* Divider */}
               <span className={styles['nav-divider']} aria-hidden="true" />
 
-              {/* Educators Button */}
-              <Link href={EDUCATOR_LINK.href} className={styles['cta-educators']}>
-                <span className={styles['cta-text']}>{EDUCATOR_LINK.label}</span>
-              </Link>
-
               {/* CTA - Primary */}
               <Link href="/visit" className={styles.cta}>
                 <span className={styles['cta-text']}>Plan Your Visit</span>
               </Link>
             </nav>
-
-            {/* Educators Button - stays visible on mobile */}
-            <Link href={EDUCATOR_LINK.href} className={styles['mobile-educators']}>
-              {EDUCATOR_LINK.label}
-            </Link>
 
             {/* Mobile Toggle */}
             <button

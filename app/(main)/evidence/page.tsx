@@ -4,7 +4,7 @@ import { PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
 import { ContextPanel } from './ContextPanel'
 import { CardCatalog } from './CardCatalog'
 import { MobileGuide } from '@/components/evidence/MobileGuide'
-import { EntryRoom } from '@/components/evidence'
+import { EntryRoom, Claim } from '@/components/evidence'
 import { Compass } from '@/components/ui/Compass'
 import styles from './page.module.css'
 
@@ -219,10 +219,10 @@ export default function EvidencePage() {
               <span className={styles.heroNavIcon}>🤝</span>
               <span className={styles.heroNavName}>Treaty Signers</span>
             </a>
-            <a href="#timeline" className={styles.heroNavCard}>
+            <Link href="/evidence/timeline" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>📅</span>
               <span className={styles.heroNavName}>Timeline</span>
-            </a>
+            </Link>
             <a href="#sources" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>📚</span>
               <span className={styles.heroNavName}>Sources</span>
@@ -230,7 +230,7 @@ export default function EvidencePage() {
           </div>
 
           {/* Document Library - Primary CTA */}
-          <Link href="/evidence/library" className={styles.heroLibraryLink}>
+          <Link href="/evidence/documents" className={styles.heroLibraryLink}>
             <span className={styles.heroLibraryIcon}>📖</span>
             <span className={styles.heroLibraryText}>
               <strong>Full Document Library</strong>
@@ -277,10 +277,12 @@ export default function EvidencePage() {
             <span className={styles.receiptArrow}>→</span>
           </Link>
           <ContextPanel>
-            Blount wrote this letter on October 20, 1790, nine days after arriving. The &ldquo;Glass
-            Windows&rdquo; detail wasn&apos;t idle observation—on the frontier, most settlers used
-            oiled paper or wooden shutters. Glass windows signaled that Rocky Mount was a proper
-            seat of government, not a crude outpost.
+            <Claim doc="blount-arrival-1790" passage="glass-windows">
+              Blount wrote this letter on October 20, 1790
+            </Claim>
+            , nine days after arriving. The &ldquo;Glass Windows&rdquo; detail wasn&apos;t idle
+            observation—on the frontier, most settlers used oiled paper or wooden shutters. Glass
+            windows signaled that Rocky Mount was a proper seat of government, not a crude outpost.
           </ContextPanel>
           <CuratorNote>
             This letter, written nine days after Blount&apos;s arrival, is the earliest surviving
@@ -303,9 +305,12 @@ export default function EvidencePage() {
             sourceUrl="https://founders.archives.gov/documents/Washington/05-06-02-0135"
           />
           <ContextPanel>
-            Washington posed this question to Secretary of War Henry Knox on August 13, 1790. The
-            answer would determine where federal authority took root west of the Appalachians. Knox
-            pointed to the Holston settlements—and William Cobb&apos;s home became that seat of
+            Washington posed this question to{' '}
+            <Claim doc="washington-to-knox-1790-08" passage="residence-question">
+              Secretary of War Henry Knox on August 13, 1790
+            </Claim>
+            . The answer would determine where federal authority took root west of the Appalachians.
+            Knox pointed to the Holston settlements—and William Cobb&apos;s home became that seat of
             power.
           </ContextPanel>
         </div>
@@ -325,10 +330,12 @@ export default function EvidencePage() {
             sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0277"
           />
           <ContextPanel>
-            Hugh Williamson wrote this recommendation on May 28, 1790. The western territory was
-            torn by factional disputes between settlers and speculators. Williamson argued only
-            Blount commanded enough respect from both sides. Washington agreed—Blount was nominated
-            within two weeks.
+            <Claim doc="williamson-to-washington-1790-05" passage="faction-unifier">
+              Hugh Williamson wrote this recommendation on May 28, 1790
+            </Claim>
+            . The western territory was torn by factional disputes between settlers and speculators.
+            Williamson argued only Blount commanded enough respect from both sides. Washington
+            agreed—Blount was nominated within two weeks.
           </ContextPanel>
         </div>
       </section>
@@ -347,9 +354,16 @@ export default function EvidencePage() {
             sourceUrl="https://founders.archives.gov/"
           />
           <ContextPanel>
-            This proclamation, signed November 11, 1791, made the Treaty of Holston binding federal
-            law. Countersigned by Secretary of State Thomas Jefferson, it required all U.S. officers
-            to enforce the terms Blount had negotiated with 40 Cherokee chiefs that July.
+            <Claim doc="washington-proclamation-1791" passage="binding-law">
+              This proclamation, signed November 11, 1791
+            </Claim>
+            , made the Treaty of Holston binding federal law. Countersigned by Secretary of State
+            Thomas Jefferson, it required all U.S. officers to enforce the terms Blount had
+            negotiated with{' '}
+            <Claim doc="treaty-holston-1791" passage="signatories">
+              42 Cherokee chiefs
+            </Claim>{' '}
+            that July.
           </ContextPanel>
         </div>
       </section>
@@ -360,7 +374,7 @@ export default function EvidencePage() {
           <span className={styles.collectionLabel}>TREATY.1791.001 — Holston Signatories</span>
           <h2 className={styles.sectionTitle}>Those Who Signed</h2>
           <p className={styles.sectionSubtitle}>
-            Forty Cherokee leaders put their names to the Treaty of Holston
+            Forty-two Cherokee leaders put their names to the Treaty of Holston
           </p>
 
           <div className={styles.signersIntro}>
@@ -388,7 +402,7 @@ export default function EvidencePage() {
 
           <div className={styles.signersFooter}>
             <Link href="/evidence/people" className={styles.signersLink}>
-              View all 40 signatories
+              View all 42 signatories
             </Link>
             <a
               href={SOURCE_LINKS.digiTreatiesHolston}
@@ -490,7 +504,7 @@ export default function EvidencePage() {
           <p className={styles.sectionSubtitle}>Where we verify our history</p>
 
           {/* Document Library link - featured */}
-          <Link href="/evidence/library" className={styles.libraryPromo}>
+          <Link href="/evidence/documents" className={styles.libraryPromo}>
             <span className={styles.libraryPromoIcon}>📖</span>
             <div className={styles.libraryPromoText}>
               <strong>Document Library</strong>

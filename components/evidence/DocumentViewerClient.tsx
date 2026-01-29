@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react'
 import type { Document } from '@/lib/evidence/types'
 import { DocumentViewer } from './DocumentViewer'
+import { CitationExporter } from './CitationExporter'
 
 interface DocumentViewerClientProps {
   document: Document
@@ -28,5 +29,13 @@ function useUrlHash(): string | undefined {
 export function DocumentViewerClient({ document }: DocumentViewerClientProps) {
   const highlightId = useUrlHash()
 
-  return <DocumentViewer document={document} highlightId={highlightId} />
+  return (
+    <>
+      <DocumentViewer document={document} highlightId={highlightId} />
+      {/* Citation Export - inside client component to access URL hash */}
+      <div className="max-w-3xl mx-auto mt-6 flex justify-end">
+        <CitationExporter document={document} passageAnchor={highlightId} />
+      </div>
+    </>
+  )
 }

@@ -16,7 +16,7 @@ export const documents: HistoricalDocument[] = [
       'There shall be perpetual peace and friendship between all the citizens of the United States of America, and all the individuals composing the whole Cherokee nation of Indians.',
     keyQuoteAttribution: 'Article I, Treaty of Holston',
     whyThisMatters:
-      'This treaty, negotiated by Governor William Blount during his tenure at Rocky Mount, established the boundary between the United States and Cherokee Nation. Signed by 40 Cherokee chiefs and ratified by President Washington, it became the foundation of federal-Cherokee relations for the next decade and shaped the future borders of Tennessee.',
+      'This treaty, negotiated by Governor William Blount during his tenure at Rocky Mount, established the boundary between the United States and Cherokee Nation. Signed by 42 Cherokee chiefs and ratified by President Washington, it became the foundation of federal-Cherokee relations for the next decade and shaped the future borders of Tennessee.',
     content: `<p>The treaty was negotiated by William Blount, Governor of the Territory south of the Ohio River, representing the United States, and Cherokee Chiefs and Warriors representing their nation. It aimed to establish permanent peace and remove causes of war through boundary clarification and friendly arrangements.</p>
 
 <h3>Articles of the Treaty</h3>
@@ -59,7 +59,7 @@ export const documents: HistoricalDocument[] = [
 
 <h3>Signatories</h3>
 
-<p>Signed by forty Cherokee chiefs and warriors, including Squollecuttah (Hanging Maw), Nenetooyah (Bloody Fellow), Kunoskeskie (John Watts), Chuquilatague (Doublehead), and Enoleh (Black Fox).</p>
+<p>Signed by forty-two Cherokee chiefs and warriors, including Squollecuttah (Hanging Maw), Nenetooyah (Bloody Fellow), Kunoskeskie (John Watts), Chuquilatague (Doublehead), and Enoleh (Black Fox).</p>
 
 <p><strong>Interpreters:</strong> John Thompson and James Carey</p>
 
@@ -79,7 +79,7 @@ export const documents: HistoricalDocument[] = [
       },
     ],
     citation:
-      '"Treaty of Holston with the Cherokee, July 2, 1791." Transcribed by Rocky Mount State Historic Site from Avalon Project, Yale Law School. https://tennesseestartshere.com/evidence/library/treaty-of-holston-1791',
+      '"Treaty of Holston with the Cherokee, July 2, 1791." Transcribed by Rocky Mount State Historic Site from Avalon Project, Yale Law School. https://tennesseestartshere.com/evidence/documents/treaty-of-holston-1791',
     relatedDocuments: [
       {
         slug: 'washington-proclamation-1791',
@@ -134,7 +134,7 @@ export const documents: HistoricalDocument[] = [
       },
     ],
     citation:
-      '"George Washington to Henry Knox, 13 August 1790." Founders Online, National Archives, The Papers of George Washington, Presidential Series, Vol. 6. https://tennesseestartshere.com/evidence/library/washington-to-knox-1790',
+      '"George Washington to Henry Knox, 13 August 1790." Founders Online, National Archives, The Papers of George Washington, Presidential Series, Vol. 6. https://tennesseestartshere.com/evidence/documents/washington-to-knox-1790',
     relatedDocuments: [
       { slug: 'jefferson-to-blount-1790', title: 'Jefferson to Blount (August 1, 1790)' },
       {
@@ -206,7 +206,7 @@ export const documents: HistoricalDocument[] = [
       },
     ],
     citation:
-      '"Washington\'s Proclamation, 11 November 1791." Founders Online, National Archives; Also in Territorial Papers, Vol. 4, page 68. https://tennesseestartshere.com/evidence/library/washington-proclamation-1791',
+      '"Washington\'s Proclamation, 11 November 1791." Founders Online, National Archives; Also in Territorial Papers, Vol. 4, page 68. https://tennesseestartshere.com/evidence/documents/washington-proclamation-1791',
     relatedDocuments: [
       { slug: 'treaty-of-holston-1791', title: 'Treaty of Holston (July 2, 1791)' },
       { slug: 'cherokee-treaty-signatories', title: 'Cherokee Treaty Signatories' },
@@ -268,7 +268,7 @@ export const documents: HistoricalDocument[] = [
       },
     ],
     citation:
-      '"Thomas Jefferson to William Blount, 1 August 1790." Founders Online, National Archives. https://tennesseestartshere.com/evidence/library/jefferson-to-blount-1790',
+      '"Thomas Jefferson to William Blount, 1 August 1790." Founders Online, National Archives. https://tennesseestartshere.com/evidence/documents/jefferson-to-blount-1790',
     relatedDocuments: [
       { slug: 'washington-to-knox-1790', title: 'Washington to Knox (August 13, 1790)' },
       {
@@ -345,7 +345,7 @@ export const documents: HistoricalDocument[] = [
       },
     ],
     citation:
-      '"William Blount to John Gray Blount, 20 October 1790." State Archives of North Carolina, John Gray Blount Papers, PC.193. Published in Keith, Alice Barnwell, ed. The John Gray Blount Papers, Vol. II (1790-1795). Raleigh: State Department of Archives and History, 1959. pp. 127-128. https://tennesseestartshere.com/evidence/library/blount-to-jg-blount-1790-10-20',
+      '"William Blount to John Gray Blount, 20 October 1790." State Archives of North Carolina, John Gray Blount Papers, PC.193. Published in Keith, Alice Barnwell, ed. The John Gray Blount Papers, Vol. II (1790-1795). Raleigh: State Department of Archives and History, 1959. pp. 127-128. https://tennesseestartshere.com/evidence/documents/blount-to-jg-blount-1790-10-20',
     relatedDocuments: [
       { slug: 'jefferson-to-blount-1790', title: 'Jefferson to Blount (August 1, 1790)' },
       { slug: 'washington-to-knox-1790', title: 'Washington to Knox (August 13, 1790)' },
@@ -367,8 +367,8 @@ export const documents: HistoricalDocument[] = [
     category: 'cherokee-sources',
     badge: 'Cherokee Source',
     whyThisMatters:
-      'Forty Cherokee chiefs and warriors signed the Treaty of Holston on July 2, 1791. Their names—in Cherokee and English—are preserved in the treaty record. Their descendants continue today as the Cherokee Nation, Eastern Band of Cherokee Indians, and United Keetoowah Band of Cherokee Indians.',
-    content: `<p>The Treaty of Holston was signed on July 2, 1791, at the treaty ground on the bank of the Holston River, near the mouth of the French Broad, within the Southwest Territory. Forty Cherokee chiefs and warriors signed the original treaty, with an additional article signed in Philadelphia on February 17, 1792.</p>
+      'Forty-two Cherokee chiefs and warriors signed the Treaty of Holston on July 2, 1791. Their names—in Cherokee and English—are preserved in the treaty record. Their descendants continue today as the Cherokee Nation, Eastern Band of Cherokee Indians, and United Keetoowah Band of Cherokee Indians.',
+    content: `<p>The Treaty of Holston was signed on July 2, 1791, at the treaty ground on the bank of the Holston River, near the mouth of the French Broad, within the Southwest Territory. Forty-two Cherokee chiefs and warriors signed the original treaty, with an additional article signed in Philadelphia on February 17, 1792.</p>
 
 <p>The signatories represented both "peace" and "war" factions within the Cherokee Nation:</p>
 
@@ -403,7 +403,7 @@ export const documents: HistoricalDocument[] = [
       },
     ],
     citation:
-      '"Cherokee Signatories to the Treaty of Holston, 1791." Compiled by Rocky Mount State Historic Site from Papers of the War Department and Avalon Project. https://tennesseestartshere.com/evidence/library/cherokee-treaty-signatories',
+      '"Cherokee Signatories to the Treaty of Holston, 1791." Compiled by Rocky Mount State Historic Site from Papers of the War Department and Avalon Project. https://tennesseestartshere.com/evidence/documents/cherokee-treaty-signatories',
     relatedDocuments: [
       { slug: 'treaty-of-holston-1791', title: 'Treaty of Holston (July 2, 1791)' },
       {

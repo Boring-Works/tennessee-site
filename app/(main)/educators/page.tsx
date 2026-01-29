@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import { Claim } from '@/components/evidence/Claim'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -90,6 +92,28 @@ export default function EducatorsPage() {
               <span className={styles['stats-label']}>{stat.label}</span>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Why This Place */}
+      <section className={styles.history}>
+        <div className={styles['history-inner']}>
+          <h2 className={styles['history-headline']}>Why This Place Matters</h2>
+          <p className={styles['history-text']}>
+            Rocky Mount is where{' '}
+            <Claim doc="blount-arrival-1790" passage="glass-windows">
+              Governor William Blount established the first seat of territorial government
+            </Claim>{' '}
+            in October 1790. Here, students stand where the{' '}
+            <Claim doc="treaty-holston-1791" passage="article-1-peace">
+              Treaty of Holston was planned
+            </Claim>
+            —a peace agreement between the United States and Cherokee Nation that shaped
+            Tennessee&apos;s borders.
+          </p>
+          <Link href="/evidence" className={styles['history-link']}>
+            Explore primary sources →
+          </Link>
         </div>
       </section>
 

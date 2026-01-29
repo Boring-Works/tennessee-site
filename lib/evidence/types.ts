@@ -287,3 +287,42 @@ export interface ClaimWithProvenance extends Claim {
   passage: Passage
   document: Document
 }
+
+// =============================================================================
+// Collection Types
+// =============================================================================
+
+/**
+ * A collection of related documents
+ */
+export interface Collection {
+  /** Unique identifier: "blount-papers" */
+  id: string
+  /** Display name: "The Blount Papers" */
+  name: string
+  /** Brief description of the collection */
+  description: string
+  /** Why this collection matters for understanding history */
+  why_it_matters: string
+  /** Number of documents in the collection */
+  document_count: number
+  /** Date range covered: "1790-1791" */
+  date_range: string
+  /** Key figures associated with this collection */
+  key_figures: string[]
+  /** Full content from markdown body */
+  content?: string
+}
+
+/**
+ * Frontmatter shape for Collection MDX files
+ */
+export interface CollectionFrontmatter {
+  id: string
+  name: string
+  description: string
+  why_it_matters: string
+  document_count: number
+  date_range: string
+  key_figures?: string[]
+}

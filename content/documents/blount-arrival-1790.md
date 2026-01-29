@@ -8,6 +8,7 @@ collection: blount-papers
 author: william-blount
 recipient: henry-knox
 people_mentioned: [william-cobb]
+responds_to: knox-to-washington-1790-08
 verification:
   status: verified
   source_count: 2

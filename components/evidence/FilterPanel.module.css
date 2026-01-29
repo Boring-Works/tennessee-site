@@ -1,0 +1,112 @@
+.filterPanel {
+  margin-bottom: 1.5rem;
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--almanac-parchment, #e8e0d0);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.toggleButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.toggleIcon {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.activeIndicator {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  background: rgba(212, 168, 83, 0.2);
+  color: var(--gold-leaf, #d4a853);
+  border-radius: 0.125rem;
+}
+
+.filters {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+}
+
+.filterGroup {
+  margin-bottom: 1rem;
+}
+
+.filterGroup:last-child {
+  margin-bottom: 0;
+}
+
+.filterLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(232, 224, 208, 0.6);
+}
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterOption {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: rgba(232, 224, 208, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filterOption:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.filterOptionActive {
+  background: rgba(212, 168, 83, 0.15);
+  border-color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, #d4a853);
+}
+
+.clearButton {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: rgba(232, 224, 208, 0.7);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.clearButton:hover {
+  color: var(--almanac-parchment, #e8e0d0);
+  border-color: rgba(255, 255, 255, 0.25);
+}

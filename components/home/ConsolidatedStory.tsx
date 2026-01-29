@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollReveal, useStaggeredReveal } from '@/hooks/useScrollReveal'
+import { Claim } from '@/components/evidence/Claim'
 
 /**
  * ConsolidatedStory Section - ENHANCED VISUAL DESIGN
@@ -181,7 +182,11 @@ export function ConsolidatedStory() {
           <p
             className={`font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${questionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            In 1790, a question hung over the young republic:
+            In{' '}
+            <Claim doc="washington-to-knox-1790-08" passage="residence-question">
+              1790
+            </Claim>
+            , a question hung over the young republic:
           </p>
 
           {/* The Big Question - with quote marks */}
@@ -334,7 +339,13 @@ export function ConsolidatedStory() {
                         textShadow: '0 2px 20px rgba(0, 0, 0, 0.3)',
                       }}
                     >
-                      {item.text}
+                      {item.year === '1790' ? (
+                        <Claim doc="blount-arrival-1790" passage="glass-windows">
+                          {item.text}
+                        </Claim>
+                      ) : (
+                        item.text
+                      )}
                     </p>
 
                     {/* Detail with subtle styling */}

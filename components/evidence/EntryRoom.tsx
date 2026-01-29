@@ -20,7 +20,7 @@ const COLLECTIONS: Collection[] = [
     name: 'The Blount Papers',
     count: 9,
     unit: 'documents',
-    href: '#blount-letter',
+    href: '/evidence/collections/blount-papers',
   },
   {
     id: 'treaties',
@@ -28,7 +28,7 @@ const COLLECTIONS: Collection[] = [
     name: 'Treaties & Proclamations',
     count: 4,
     unit: 'documents',
-    href: '#federal-authority',
+    href: '/evidence/collections/treaties',
   },
   {
     id: 'knoxville-gazette',
@@ -44,13 +44,13 @@ const COLLECTIONS: Collection[] = [
     name: 'Federal Correspondence',
     count: 8,
     unit: 'documents',
-    href: '#washington-question',
+    href: '/evidence/collections/federal-correspondence',
   },
   {
     id: 'cherokee-signatories',
     icon: '🪶',
     name: 'Cherokee Signatories',
-    count: 40,
+    count: 42,
     unit: 'people',
     href: '/evidence/people',
     featured: true,
@@ -59,9 +59,9 @@ const COLLECTIONS: Collection[] = [
     id: 'timeline',
     icon: '📅',
     name: 'Timeline',
-    count: 12,
+    count: 40,
     unit: 'events',
-    href: '#timeline',
+    href: '/evidence/timeline',
   },
 ]
 
@@ -103,7 +103,7 @@ export function EntryRoom() {
           ))}
         </div>
 
-        <Link href="/evidence/library" className={styles.libraryLink}>
+        <Link href="/evidence/documents" className={styles.libraryLink}>
           <span className={styles.libraryIcon}>📖</span>
           <span className={styles.libraryText}>
             <strong>Full Document Library</strong>

@@ -36,7 +36,11 @@ The treaty aimed to establish permanent peace and remove causes of war through b
 
 </passage>
 
+<passage id="article-2-protection">
+
 **Article II** — The Cherokee Nation acknowledges to be under the protection of the United States of America, and of no other sovereign; and they also stipulate that the said Cherokee Nation will not hold any treaty with any foreign power, individual state, or with individuals of any state.
+
+</passage>
 
 **Article III** — The Cherokee Nation shall deliver all prisoners taken from American citizens, at the treaty ground, on or before the first day of April next.
 
@@ -58,7 +62,11 @@ In consideration of which cession, the United States will pay to the Cherokee Na
 
 </passage>
 
+<passage id="article-8-settlers">
+
 **Article VIII** — Citizens of the United States settling on Cherokee lands shall forfeit the protection of the United States, and the Cherokee may punish them as they see fit.
+
+</passage>
 
 **Article IX** — No citizen of the United States shall hunt on Cherokee lands without a passport from the Cherokee Nation.
 
@@ -70,7 +78,11 @@ In consideration of which cession, the United States will pay to the Cherokee Na
 
 **Article XIII** — The Cherokee shall give notice to the United States of any designs against the peace of the United States.
 
+<passage id="article-14-implements">
+
 **Article XIV** — The United States shall furnish the Cherokee Nation with useful implements of husbandry and shall appoint not more than four interpreters.
+
+</passage>
 
 **Article XV** — All animosities for past grievances shall cease, and the contracting parties will carry this treaty into full execution with good faith.
 

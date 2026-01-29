@@ -36,7 +36,7 @@ export default function MobileStickyCTA() {
       {/* CTA Bar */}
       <nav
         aria-label="Quick actions"
-        className="bg-primary border-t border-accent/30 px-4 py-3 safe-area-inset-bottom"
+        className="bg-primary border-t border-accent/30 px-4 py-3 pb-[env(safe-area-inset-bottom)]"
       >
         <div className="flex gap-3">
           <Link

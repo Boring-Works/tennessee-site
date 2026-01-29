@@ -96,9 +96,9 @@ export const PRIMARY_QUOTES = {
   },
   // Treaty authority
   treatyProclamation: {
-    text: 'I do hereby enjoin and require all officers of the United States, civil and military...to govern themselves according to the said treaty, as they will answer the contrary at their peril.',
+    text: 'I, George Washington, President of the United States, having seen and considered the said Treaty, do, by and with the advice and consent of the Senate, accept, ratify and confirm the same, and every clause and article thereof.',
     attribution: 'George Washington, November 11, 1791',
-    source: 'Founders Online, War Department Papers',
+    source: 'Founders Online, National Archives',
   },
 } as const
 

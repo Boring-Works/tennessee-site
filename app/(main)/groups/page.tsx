@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import { Claim } from '@/components/evidence/Claim'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -59,6 +61,22 @@ export default function GroupsPage() {
               <li key={type}>{type}</li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* Historical Context */}
+      <section className={styles.history}>
+        <div className={styles['history-inner']}>
+          <p className={styles['history-text']}>
+            Your group will tour the home where{' '}
+            <Claim doc="blount-arrival-1790" passage="glass-windows">
+              Governor Blount noted the rare &quot;Glass Windows&quot;
+            </Claim>{' '}
+            in 1790—Tennessee&apos;s first capital. View{' '}
+            <Link href="/evidence" className={styles['history-link']}>
+              primary source documents →
+            </Link>
+          </p>
         </div>
       </section>
 

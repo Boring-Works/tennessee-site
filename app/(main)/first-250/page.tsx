@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import EmailSignup from '@/components/EmailSignup'
 import VintageGauge from '@/components/VintageGauge'
+import { Claim } from '@/components/evidence'
 import siteInfo from '@/data/siteInfo.json'
 import enrollmentData from '@/data/enrollment.json'
 import styles from './page.module.css'
@@ -93,8 +94,11 @@ export default function First250Page() {
           <div className={styles['legacy-vision-scene']}>
             <p className={styles['legacy-vision-text']}>
               It&apos;s <strong>July 4, 2026</strong>. You&apos;re standing on the grounds of Rocky
-              Mount — the same soil where William Blount established Tennessee&apos;s first
-              government 236 years ago.
+              Mount — the same soil where{' '}
+              <Claim doc="blount-arrival-1790" passage="glass-windows">
+                William Blount established Tennessee&apos;s first government
+              </Claim>{' '}
+              236 years ago.
             </p>
             <p className={styles['legacy-vision-text']}>
               Around you, 250 Tennesseans have gathered. The American flag flies overhead. A voice
@@ -131,8 +135,10 @@ export default function First250Page() {
               </span>
               <h3 className={styles['legacy-why-card-title']}>The First Capital</h3>
               <p className={styles['legacy-why-card-text']}>
-                Rocky Mount was the first capital of the Southwest Territory. This is where
-                Tennessee&apos;s government began.
+                <Claim doc="washington-to-knox-1790-08" passage="residence-question">
+                  Rocky Mount was the first capital of the Southwest Territory
+                </Claim>
+                . This is where Tennessee&apos;s government began.
               </p>
             </article>
 
@@ -142,8 +148,10 @@ export default function First250Page() {
               </span>
               <h3 className={styles['legacy-why-card-title']}>A Once-in-Generations Moment</h3>
               <p className={styles['legacy-why-card-text']}>
-                America&apos;s 250th birthday happens once. Being part of this commemoration means
-                joining a legacy.
+                <Claim doc="washington-proclamation-1791" passage="binding-law">
+                  America&apos;s 250th birthday
+                </Claim>{' '}
+                happens once. Being part of this commemoration means joining a legacy.
               </p>
             </article>
 

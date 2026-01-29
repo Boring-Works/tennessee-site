@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useScrollReveal, useStaggeredReveal } from '@/hooks/useScrollReveal'
+import { Claim } from '@/components/evidence/Claim'
 
 /**
  * ConsolidatedProof Section - ENHANCED VISUAL DESIGN
@@ -19,8 +20,21 @@ const figures = [
   {
     name: 'William Blount',
     title: 'Constitution Signer',
-    role: 'Governor 1790-1792',
-    quote: 'Commissioned by Washington to govern the frontier.',
+    role: (
+      <>
+        Governor{' '}
+        <Claim doc="blount-arrival-1790" passage="glass-windows">
+          1790-1792
+        </Claim>
+      </>
+    ),
+    quote: (
+      <>
+        <Claim doc="blount-commission-1790" passage="appointment">
+          Commissioned by Washington to govern the frontier.
+        </Claim>
+      </>
+    ),
     badge: null,
     initial: 'WB',
     connection: 'Governed from this ground',
@@ -28,11 +42,23 @@ const figures = [
   {
     name: 'Andrew Jackson',
     title: 'Future President',
-    role: 'Lodged here 1788',
-    quote: 'Six weeks at age 21, studying law.',
+    role: (
+      <>
+        <Claim doc="jackson-at-rocky-mount-1788" passage="six-weeks">
+          Lodged here 1788
+        </Claim>
+      </>
+    ),
+    quote: (
+      <>
+        <Claim doc="jackson-at-rocky-mount-1788" passage="waiting-period">
+          Six weeks at age 21, awaiting his law license.
+        </Claim>
+      </>
+    ),
     badge: '7th President',
     initial: 'AJ',
-    connection: 'Studied law under these roofs',
+    connection: 'Prepared for his frontier career here',
   },
   {
     name: 'The Cobb Family',
@@ -271,14 +297,20 @@ export function ConsolidatedProof() {
           {/* Enhanced closing statement */}
           <div className="text-center max-w-3xl mx-auto">
             <p className="font-serif-elegant text-lg md:text-xl text-primary/80 italic mb-8 leading-relaxed">
-              &ldquo;A man who helped create the Constitution
+              &ldquo;
+              <Claim doc="blount-commission-1790" passage="appointment">
+                A man who helped create the Constitution
+              </Claim>
               <br />
               would now implement it on the frontier.&rdquo;
             </p>
 
             <div className="space-y-2">
               <p className="font-serif text-base md:text-lg text-secondary">
-                Governor Blount governed here. Andrew Jackson lodged here.
+                <Claim doc="blount-arrival-1790" passage="glass-windows">
+                  Governor Blount governed here.
+                </Claim>{' '}
+                Andrew Jackson lodged here.
               </p>
               <p
                 className="font-serif text-xl md:text-2xl text-accent font-semibold"

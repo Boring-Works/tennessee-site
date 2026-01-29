@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, useSyncExternalStore } from 'react'
 import eventsData from '@/data/events.json'
 
 /**
@@ -26,6 +26,15 @@ const seasonal = eventsData.events.filter((e) => e.category === 'seasonal')
 
 function getNextEvent() {
   return eventsData.events[0]
+}
+
+// Client-only rendering hook (prevents hydration mismatch)
+function useIsClient() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true, // client
+    () => false // server
+  )
 }
 
 // Animated counter hook
@@ -108,11 +117,12 @@ export function Commemorative2026() {
   const [isVisible, setIsVisible] = useState(false)
   const [ledgerVisible, setLedgerVisible] = useState(false)
   const [hoveredStar, setHoveredStar] = useState<number | null>(null)
+  const isClient = useIsClient()
 
   const nextEvent = getNextEvent()
   const eventCount = eventsData.events.length
 
-  // Generate 16 stars for the 16 states
+  // Generate 16 stars for the 16 states (client-only to avoid hydration mismatch)
   const generateStars = useCallback(() => {
     return Array.from({ length: 16 }, (_, i) => ({
       id: i,
@@ -181,34 +191,35 @@ export function Commemorative2026() {
       <div className="relative bg-primary">
         {/* Animated star field background */}
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-          {stars.map((star) => (
-            <div
-              key={star.id}
-              className="absolute transition-all duration-500"
-              style={{
-                left: `${star.x}%`,
-                top: `${star.y}%`,
-                transform: `scale(${hoveredStar === star.id ? 1.5 : 1})`,
-                opacity: isVisible ? 1 : 0,
-                transitionDelay: `${star.delay}s`,
-              }}
-              onMouseEnter={() => setHoveredStar(star.id)}
-              onMouseLeave={() => setHoveredStar(null)}
-            >
-              <span
-                className={`text-lg ${star.id === 15 ? 'text-accent' : 'text-white/20'}`}
+          {isClient &&
+            stars.map((star) => (
+              <div
+                key={star.id}
+                className="absolute transition-all duration-500"
                 style={{
-                  textShadow:
-                    star.id === 15
-                      ? '0 0 20px rgba(201, 162, 39, 0.6), 0 0 40px rgba(201, 162, 39, 0.3)'
-                      : 'none',
-                  animation: star.id === 15 ? 'pulse 2s ease-in-out infinite' : 'none',
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                  transform: `scale(${hoveredStar === star.id ? 1.5 : 1})`,
+                  opacity: isVisible ? 1 : 0,
+                  transitionDelay: `${star.delay.toFixed(1)}s`,
                 }}
+                onMouseEnter={() => setHoveredStar(star.id)}
+                onMouseLeave={() => setHoveredStar(null)}
               >
-                ★
-              </span>
-            </div>
-          ))}
+                <span
+                  className={`text-lg ${star.id === 15 ? 'text-accent' : 'text-white/20'}`}
+                  style={{
+                    textShadow:
+                      star.id === 15
+                        ? '0 0 20px rgba(201, 162, 39, 0.6), 0 0 40px rgba(201, 162, 39, 0.3)'
+                        : 'none',
+                    animation: star.id === 15 ? 'pulse 2s ease-in-out infinite' : 'none',
+                  }}
+                >
+                  ★
+                </span>
+              </div>
+            ))}
 
           {/* Deep gradient overlay */}
           <div

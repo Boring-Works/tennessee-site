@@ -126,7 +126,7 @@
   font-family: var(--font-cinzel), 'Cinzel', serif;
   font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   color: white;
   transition: color 0.3s ease;
 }
@@ -148,13 +148,16 @@
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: left;
-  height: 1rem;
+  height: 1.5rem;
   opacity: 1;
+  margin-top: 0.25rem;
+  position: relative;
 }
 
 .logo-tagline--hidden {
   height: 0;
   opacity: 0;
+  margin-top: 0;
 }
 
 .logo-tagline-dash {
@@ -162,14 +165,26 @@
 }
 
 .logo-tagline-text {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: 0.625rem;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: none; /* Lowercase for subordinate feel */
-  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.8);
   white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .logo-tagline {
+    height: 1.625rem;
+    margin-top: 0.3125rem;
+  }
+
+  .logo-tagline-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+  }
 }
 
 /* ============================================
@@ -293,64 +308,9 @@
 }
 
 /* ============================================
-   EDUCATORS CTA BUTTON - SECONDARY
-   Outline only, gold text - supporting action
+   EDUCATORS CTA BUTTON - REMOVED
+   Educators is now a standard nav link
    ============================================ */
-
-.cta-educators {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 1px solid var(--gold, #c9a227);
-  color: var(--gold, #c9a227);
-  font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.cta-educators:hover {
-  background: var(--gold, #c9a227);
-  color: #0a1628;
-}
-
-.cta-educators:focus-visible {
-  outline: 2px solid var(--gold, #c9a227);
-  outline-offset: 2px;
-}
-
-/* Mobile Educators Button - Secondary style */
-.mobile-educators {
-  display: none;
-  padding: 0.375rem 0.625rem;
-  background: transparent;
-  border: 1px solid var(--gold, #c9a227);
-  color: var(--gold, #c9a227);
-  font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: 0.5rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin-right: 0.75rem;
-}
-
-@media (max-width: 767px) {
-  .mobile-educators {
-    display: flex;
-  }
-}
-
-@media (min-width: 768px) {
-  .cta-educators {
-    display: flex;
-  }
-}
 
 /* ============================================
    BOTTOM RULE - REMOVED for cleaner aesthetic
@@ -576,7 +536,6 @@
 @media (prefers-reduced-motion: reduce) {
   .header,
   .stripe,
-  .seal,
   .logo-tagline,
   .nav-link-underline,
   .nav-link-glow,
@@ -585,8 +544,7 @@
   .mobile-backdrop,
   .mobile-link,
   .mobile-cta,
-  .cta-icon,
-  .cta-educators {
+  .cta-icon {
     transition: none;
   }
 }

@@ -291,7 +291,7 @@ export default function EvidencePage() {
             quote={PRIMARY_QUOTES.glassWindowsFull.text}
             attribution={PRIMARY_QUOTES.glassWindowsFull.attribution}
             source={PRIMARY_QUOTES.glassWindowsFull.source}
-            context="Glass windows were a status symbol in the western territories. This detail proves Rocky Mount was no rough cabin."
+            context="Glass windows were rare even in settler communities east of the mountains—most used oiled paper or wooden shutters. At Rocky Mount, they signaled federal authority and investment in the first constitutional capital west of Appalachia."
             sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
             featured
           />
@@ -310,9 +310,9 @@ export default function EvidencePage() {
               Blount wrote this letter on October 20, 1790
             </Claim>
             , nine days after arriving. The &ldquo;Glass Windows&rdquo; detail wasn&apos;t idle
-            observation—in the western territories, most settlers used oiled paper or wooden
-            shutters. Glass windows signaled that Rocky Mount was a proper seat of government, not a
-            crude outpost.
+            observation—most settler structures in the region used oiled paper or wooden shutters.
+            Glass windows at Rocky Mount signaled federal commitment to permanence—this was not
+            temporary settlement, but a capital built to last.
           </ContextPanel>
           <CuratorNote>
             This letter, written nine days after Blount&apos;s arrival, is the earliest surviving
@@ -356,7 +356,8 @@ export default function EvidencePage() {
           <span className={styles.collectionLabel}>MSS.1790.003 — Williamson Letters</span>
           <h2 className={styles.sectionTitle}>The Appointment</h2>
           <p className={styles.sectionSubtitle}>
-            Why Washington chose Blount for the western territories
+            Why Washington chose Blount to govern the Territory and negotiate with the Cherokee
+            Nation
           </p>
           <QuoteCard
             quote={PRIMARY_QUOTES.williamsonRecommendation.text}

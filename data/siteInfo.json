@@ -21,7 +21,39 @@
       "lat": 36.4081,
       "lng": -82.3247
     },
-    "directions": "Located off US-11E between Johnson City and Bristol. From I-26, take Exit 13 and follow signs to Rocky Mount."
+    "directions": "Located off US-11E between Johnson City and Bristol. From I-26, take Exit 13 and follow signs to Rocky Mount.",
+    "drivingDistances": [
+      {
+        "city": "Johnson City, TN",
+        "miles": 18,
+        "time": "25 min",
+        "route": "US-23 North"
+      },
+      {
+        "city": "Bristol, TN/VA",
+        "miles": 28,
+        "time": "40 min",
+        "route": "US-11E South"
+      },
+      {
+        "city": "Kingsport, TN",
+        "miles": 40,
+        "time": "50 min",
+        "route": "I-26 East"
+      },
+      {
+        "city": "Knoxville, TN",
+        "miles": 95,
+        "time": "1 hr 45 min",
+        "route": "I-40 East to I-81 North"
+      },
+      {
+        "city": "Asheville, NC",
+        "miles": 110,
+        "time": "2 hr 15 min",
+        "route": "I-26 North"
+      }
+    ]
   },
   "contact": {
     "phone": "(423) 538-7396",
@@ -44,8 +76,8 @@
     },
     "season": "March 4 through mid-December",
     "seasonNote": "Season opens March 4, 2026 for America 250 commemoration",
-    "tourTimes": ["11:00 AM", "1:00 PM", "3:00 PM"],
-    "tourNote": "Guided tours depart at scheduled times. Last tour begins at 3:00 PM.",
+    "tourSchedule": "Hourly",
+    "tourNote": "Guided tours go out every hour. Last tour begins one hour before closing.",
     "note": "Hours may vary for special events."
   },
   "admission": {
@@ -112,22 +144,63 @@
       "Gift shop on site"
     ]
   },
-  "nearbyAttractions": [
+  "sisterSites": [
     {
-      "name": "Bristol Motor Speedway",
-      "distance": "15 minutes"
-    },
-    {
-      "name": "Downtown Johnson City",
-      "distance": "20 minutes"
+      "name": "Tipton-Haynes State Historic Site",
+      "city": "Johnson City",
+      "miles": 11,
+      "time": "15 min",
+      "description": "45-acre site with eleven restored buildings, limestone cave, and nature trails",
+      "website": "https://www.tipton-haynes.org"
     },
     {
       "name": "Sycamore Shoals State Historic Park",
-      "distance": "30 minutes"
+      "city": "Elizabethton",
+      "miles": 13,
+      "time": "15 min",
+      "description": "Site of the 1775 Treaty and reconstructed Fort Watauga",
+      "website": "https://tnstateparks.com/parks/sycamore-shoals"
     },
     {
-      "name": "Downtown Bristol (State Street)",
-      "distance": "20 minutes"
+      "name": "Carter Mansion",
+      "city": "Elizabethton",
+      "miles": 13,
+      "time": "15 min",
+      "description": "Tennessee's oldest frame house (circa 1780), National Historic Landmark",
+      "website": "https://tnstateparks.com/parks/sycamore-shoals"
+    },
+    {
+      "name": "Chester Inn State Historic Site",
+      "city": "Jonesborough",
+      "miles": 16,
+      "time": "20 min",
+      "description": "Oldest wood-frame building in Tennessee's oldest town, hosted three U.S. Presidents",
+      "website": "https://www.heritageall.org/chester-inn"
+    },
+    {
+      "name": "Warriors' Path State Park",
+      "city": "Kingsport",
+      "miles": 26,
+      "time": "32 min",
+      "description": "970-acre park on Fort Patrick Henry Lake, named for the Great Indian Warpath",
+      "website": "https://tnstateparks.com/parks/warriors-path"
+    }
+  ],
+  "nearbyAttractions": [
+    {
+      "name": "Bristol Motor Speedway",
+      "distance": "15 minutes",
+      "description": "NASCAR's most famous short track"
+    },
+    {
+      "name": "Downtown Jonesborough",
+      "distance": "20 minutes",
+      "description": "Tennessee's oldest town, home of the National Storytelling Festival"
+    },
+    {
+      "name": "Downtown Bristol",
+      "distance": "40 minutes",
+      "description": "Birthplace of Country Music, straddling the TN/VA state line"
     }
   ],
   "first250": {
@@ -172,18 +245,40 @@
   "historicalFigures": {
     "williamCobb": {
       "name": "William Cobb",
-      "role": "Original settler",
-      "note": "Settled this land ~1770, six years before the Declaration of Independence"
+      "role": "Founder & Patriot",
+      "years": "1770-1795",
+      "shortNote": "Built Rocky Mount and supplied the Overmountain Men",
+      "details": [
+        "Built the two-story log home between 1770-1772",
+        "Brought his family from North Carolina to establish the estate",
+        "He and his sons responded to John Sevier's call for volunteers in September 1780",
+        "Supplied the Overmountain Men with gunpowder, horses, blankets, and food for the Battle of King's Mountain",
+        "In 1795, transferred Rocky Mount to his daughter Penelope Massengill"
+      ]
     },
     "williamBlount": {
       "name": "William Blount",
-      "role": "Governor of the Southwest Territory (1790-1796)",
-      "note": "Signer of the U.S. Constitution, appointed by President Washington, used Rocky Mount as his headquarters"
+      "role": "Governor of the Southwest Territory",
+      "years": "1790-1792 at Rocky Mount",
+      "shortNote": "Signer of the U.S. Constitution who governed from Rocky Mount",
+      "details": [
+        "Appointed by President George Washington as territorial governor",
+        "One of the signers of the U.S. Constitution",
+        "Lived at Rocky Mount with the Cobb family during his tenure",
+        "Made Rocky Mount the first federal capital beyond the original thirteen states",
+        "Established foundational laws and land policies for the frontier region"
+      ]
     },
     "andrewJackson": {
       "name": "Andrew Jackson",
-      "role": "Future President",
-      "note": "Lodged at Rocky Mount for six weeks while awaiting his law license"
+      "role": "Future 7th President",
+      "years": "1788",
+      "shortNote": "Lodged at Rocky Mount while awaiting his law license",
+      "details": [
+        "Stayed at Rocky Mount for six weeks as a young lawyer",
+        "Was awaiting his license to practice law in the territory",
+        "Would later become the 7th President of the United States"
+      ]
     }
   }
 }

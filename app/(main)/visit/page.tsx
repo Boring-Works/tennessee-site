@@ -153,7 +153,7 @@ const heritageTrail = [
 ]
 
 export default function VisitPage() {
-  const { location, hours, admission, whatToExpect, contact } = siteInfo
+  const { location, hours, admission, whatToExpect, contact, sisterSites } = siteInfo
 
   return (
     <>
@@ -222,7 +222,7 @@ export default function VisitPage() {
           <div className={styles['visit-hero-facts']}>
             <div className={styles['visit-hero-fact']}>
               <span className={styles['visit-hero-fact-value']}>Wed–Sat</span>
-              <span className={styles['visit-hero-fact-label']}>11am–4:30pm</span>
+              <span className={styles['visit-hero-fact-label']}>11am–5pm</span>
             </div>
             <div className={styles['visit-hero-fact-divider']} aria-hidden="true">
               <span className={styles['visit-hero-fact-star']}>★</span>
@@ -242,7 +242,7 @@ export default function VisitPage() {
 
           {/* Season note */}
           <p className={styles['visit-hero-season']}>
-            Season opens March · See <Link href="/events">events</Link> for specific dates
+            Season opens March 4, 2026 · See <Link href="/events">events</Link> for details
           </p>
 
           {/* Primary CTA with wax seal */}
@@ -535,15 +535,22 @@ export default function VisitPage() {
             <div className={styles['visit-prepare-accessibility']}>
               <strong>Accessibility:</strong>
               <p className="mt-2">{whatToExpect.accessibility.summary}</p>
-              <div className="mt-3 space-y-2">
-                <p className="text-sm">
-                  <strong className="text-green-700">Museum Gallery:</strong>{' '}
-                  {whatToExpect.accessibility.museumGallery.features.slice(0, 2).join(', ')}
-                </p>
-                <p className="text-sm">
-                  <strong className="text-amber-700">Historic Site Tour:</strong>{' '}
-                  {whatToExpect.accessibility.historicSiteTour.features.slice(0, 2).join(', ')}
-                </p>
+              <div className="mt-3 space-y-3">
+                <div className="text-sm">
+                  <p>
+                    <strong className="text-green-700">Museum Gallery:</strong>{' '}
+                    {whatToExpect.accessibility.museumGallery.features.join(' · ')}
+                  </p>
+                </div>
+                <div className="text-sm">
+                  <p>
+                    <strong className="text-amber-700">Historic Site Tour:</strong>{' '}
+                    {whatToExpect.accessibility.historicSiteTour.features.join(' · ')}
+                  </p>
+                  <p className="text-text-light mt-1 italic">
+                    {whatToExpect.accessibility.historicSiteTour.note}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -602,18 +609,14 @@ export default function VisitPage() {
 
             {/* Distance indicators */}
             <div className={styles['visit-journey-distances']}>
-              <p className={styles['visit-journey-distance']}>
-                <span className={styles['visit-journey-distance-time']}>20 min</span>
-                <span className={styles['visit-journey-distance-from']}>from Johnson City</span>
-              </p>
-              <p className={styles['visit-journey-distance']}>
-                <span className={styles['visit-journey-distance-time']}>20 min</span>
-                <span className={styles['visit-journey-distance-from']}>from Bristol</span>
-              </p>
-              <p className={styles['visit-journey-distance']}>
-                <span className={styles['visit-journey-distance-time']}>45 min</span>
-                <span className={styles['visit-journey-distance-from']}>from Knoxville</span>
-              </p>
+              {location.drivingDistances.slice(0, 3).map((dist) => (
+                <p key={dist.city} className={styles['visit-journey-distance']}>
+                  <span className={styles['visit-journey-distance-time']}>{dist.time}</span>
+                  <span className={styles['visit-journey-distance-from']}>
+                    from {dist.city.split(',')[0]}
+                  </span>
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -642,7 +645,7 @@ export default function VisitPage() {
           </header>
 
           <div className={styles['visit-trail-grid']}>
-            {heritageTrail.map((site, index) => (
+            {sisterSites.map((site, index) => (
               <article key={site.name} className={styles['visit-trail-site']}>
                 {/* Trail marker number */}
                 <div className={styles['visit-trail-marker']} aria-hidden="true">
@@ -651,9 +654,11 @@ export default function VisitPage() {
                 <div className={styles['visit-trail-site-content']}>
                   <div className={styles['visit-trail-site-header']}>
                     <h3 className={styles['visit-trail-site-name']}>{site.name}</h3>
-                    <span className={styles['visit-trail-site-distance']}>{site.distance}</span>
+                    <span className={styles['visit-trail-site-distance']}>
+                      {site.time} · {site.city}
+                    </span>
                   </div>
-                  <p className={styles['visit-trail-site-connection']}>{site.connection}</p>
+                  <p className={styles['visit-trail-site-connection']}>{site.description}</p>
                 </div>
               </article>
             ))}

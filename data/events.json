@@ -22,8 +22,16 @@
       "type": "new",
       "category": "camp",
       "description": "Trade screens for sawdust and adventure. Campers dip candles, fire the forge, feed heritage animals, and learn skills frontier children mastered by age ten. Johnson City & Bristol schools week. Lunch provided.",
-      "ticketUrl": null,
+      "fareHarborId": "562803",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562803/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 180,
+        "underFive": null,
+        "members": 150
+      },
       "featured": false
     },
     {
@@ -35,8 +43,16 @@
       "type": "new",
       "category": "camp",
       "description": "Trade screens for sawdust and adventure. Campers dip candles, fire the forge, feed heritage animals, and learn skills frontier children mastered by age ten. Sullivan County schools week. Lunch provided.",
-      "ticketUrl": null,
+      "fareHarborId": "562804",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562804/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 135,
+        "underFive": null,
+        "members": 115
+      },
       "featured": false
     },
     {
@@ -80,6 +96,13 @@
       "description": "Sullivan County men left these fields for Kings Mountain. Their wives and children stayed behind, undefended. Hear the stories the textbooks left out—the gambles, the sacrifices, the families who risked everything.",
       "ticketUrl": null,
       "requiresTicket": false,
+      "pricing": {
+        "adult": 0,
+        "senior": 0,
+        "child": 0,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -91,8 +114,16 @@
       "type": "enhanced",
       "category": "festival",
       "description": "Hear the shears clip through fleece. Watch raw wool become thread on a spinning wheel. Dig your hands into soil where heirloom seeds take root. Two days of fiber arts, heritage gardening, and the rhythms of spring on a working 1791 homestead.",
-      "ticketUrl": null,
+      "fareHarborId": "562805",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562805/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -104,8 +135,16 @@
       "type": "recurring",
       "category": "education",
       "description": "History jumps off the page when you can touch it. Your students will dip quill pens, card wool, and hear stories from interpreters who've walked in William Cobb's shoes. TN Standards-aligned activities and take-home materials included.",
-      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
+      "fareHarborId": "258228",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 8,
+        "senior": 6,
+        "child": 5,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -132,8 +171,16 @@
       "type": "new",
       "category": "festival",
       "description": "Musket smoke drifts past canvas tents. Traders hawk pewter, powder, and handmade goods. Militia camps come alive with drill and fire. Three days of the largest Revolutionary-era gathering in the region, with OVTA. Bigger than ever for America 250.",
-      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/289142/?full-items=yes&flow=408845",
+      "fareHarborId": "289142",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/289142/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -188,8 +235,16 @@
       "type": "new",
       "category": "signature",
       "description": "Two days of stars, stripes, and stitches. Saturday: Tennessee's 230th recognition and our America 250 flag dedication. Sunday: the Betsy Ross Sip & Sew—wine, needles, and the art of flag-making. Limited seats for Sip & Sew.",
-      "ticketUrl": null,
+      "fareHarborId": "562806",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562806/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -201,8 +256,16 @@
       "type": "new",
       "category": "camp",
       "description": "Five days as a frontier kid. Fire a flintlock (blanks!). Cook over an open hearth. Chase heritage chickens. Learn the skills that built Tennessee—then take them home. Ages 7-12. Lunch provided.",
-      "ticketUrl": null,
+      "fareHarborId": "562807",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562807/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 225,
+        "underFive": null,
+        "members": 180
+      },
       "featured": false
     },
     {
@@ -214,9 +277,17 @@
       "type": "new",
       "category": "workshop",
       "description": "The fire roars. The hammer falls. You and your kid, shoulder to shoulder, forging something real. Create a hand-wrought keepsake together at the anvil—a Father's Day gift money can't buy. 10 pairs only. Reserve now.",
-      "ticketUrl": null,
+      "fareHarborId": "562808",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562808/",
       "requiresTicket": true,
       "capacity": 10,
+      "pricing": {
+        "adult": 50,
+        "senior": null,
+        "child": null,
+        "underFive": null,
+        "members": 45
+      },
       "featured": false
     },
     {
@@ -228,8 +299,16 @@
       "type": "new",
       "category": "camp",
       "description": "Five days as a frontier kid. Fire a flintlock (blanks!). Cook over an open hearth. Chase heritage chickens. Learn the skills that built Tennessee—then take them home. Ages 7-12. Lunch provided.",
-      "ticketUrl": null,
+      "fareHarborId": "562809",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562809/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 225,
+        "underFive": null,
+        "members": 180
+      },
       "featured": false
     },
     {
@@ -241,8 +320,16 @@
       "type": "new",
       "category": "signature",
       "description": "America turns 250—and you're standing where Tennessee began. The First 250 ceremony reads each enrolled name aloud. Muskets fire. Period music plays. The flag rises. This is the day. This is the place. Don't watch history—be part of it.",
-      "ticketUrl": null,
+      "fareHarborId": "562810",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562810/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -254,8 +341,16 @@
       "type": "new",
       "category": "family",
       "description": "One last summer hurrah before the books come out. Kids race hoops, toss horseshoes, and play the games frontier children played. Adults sip lemonade in the shade. A family day with no screens, no schedules—just summer fun, 1791 style.",
-      "ticketUrl": null,
+      "fareHarborId": "562811",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562811/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -267,8 +362,16 @@
       "type": "recurring",
       "category": "education",
       "description": "Launch the school year with history you can hold. Your students card wool, write with quill and ink, and meet William Cobb himself. Perfect kickoff to your homeschool year. TN Standards-aligned activities and take-home materials included.",
-      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
+      "fareHarborId": "258228",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 8,
+        "senior": 6,
+        "child": 5,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -282,8 +385,16 @@
       "speaker": "Dr. Daniel Redbird Wolfe",
       "speakerTitle": "Cherokee Historian",
       "description": "The Overmountain settlements sat within Cherokee territory. Treaties were signed, broken, and tested. Hear the other side of the frontier story—told by Cherokee scholars and artisans. Two days of demonstrations, lectures, and perspectives rarely heard.",
-      "ticketUrl": null,
+      "fareHarborId": "562812",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562812/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 15,
+        "senior": 12,
+        "child": 10,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -295,8 +406,16 @@
       "type": "new",
       "category": "signature",
       "description": "Your family built Tennessee. Now come home. The first-ever gathering of descendants from founding families—Cobbs, Shelbys, Seaviers. Friday: registered descendants only. Sat-Sun: open to all. Oral histories. Genealogy help. Stories passed down 250 years.",
-      "ticketUrl": null,
+      "fareHarborId": "562813",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562813/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 25,
+        "senior": 20,
+        "child": 15,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -321,8 +440,16 @@
       "type": "enhanced",
       "category": "festival",
       "description": "The smell of wood smoke and simmering apple butter. Cider pressing. Corn shelling. Sorghum boiling down to molasses. Experience the autumn harvest the way Tennesseans did it for 200 years—with your whole family, working alongside our interpreters.",
-      "ticketUrl": null,
+      "fareHarborId": "562814",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562814/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -334,9 +461,17 @@
       "type": "recurring",
       "category": "seasonal",
       "description": "Candlelight flickers. Shadows move. The frontier had stories they only told after dark—tales of restless spirits, unexplained sounds in the woods, and things that walked the Wilderness Road at night. Six evenings of spooky tours (Oct 15-17 & 22-24). Ages 13+.",
-      "ticketUrl": null,
+      "fareHarborId": "562815",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562815/",
       "requiresTicket": true,
       "ageRecommendation": "13+",
+      "pricing": {
+        "adult": 15,
+        "senior": 12,
+        "child": 10,
+        "underFive": null,
+        "members": 0
+      },
       "featured": true
     },
     {
@@ -348,8 +483,16 @@
       "type": "recurring",
       "category": "seasonal",
       "description": "Cedar garlands. Dried apples. The smell of spiced cider. Before Hallmark, before Santa, there was simply the joy of gathering with family. Experience Christmas the way early Tennesseans celebrated—simple, meaningful, and warm. Wed-Sat through November.",
-      "ticketUrl": null,
+      "fareHarborId": "562816",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562816/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 12,
+        "senior": 10,
+        "child": 8,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -361,8 +504,16 @@
       "type": "recurring",
       "category": "seasonal",
       "description": "A thousand candles light the grounds. Carolers sing in the cabin. Cider warms cold hands. Rocky Mount's most magical tradition returns—four evenings when the 18th century glows. Friday & Saturday, Dec 4-5 and 11-12. Sells out every year.",
-      "ticketUrl": null,
+      "fareHarborId": "562817",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562817/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 15,
+        "senior": 12,
+        "child": 10,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": true
     }
   ],
@@ -376,10 +527,18 @@
       "scheduleNote": "Check calendar for specific dates",
       "time": "10:00 AM - 2:00 PM",
       "duration": "4 hours",
-      "ticketUrl": null,
+      "fareHarborId": "562818",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562818/",
       "requiresTicket": true,
       "category": "workshop",
       "icon": "anvil",
+      "pricing": {
+        "adult": 40,
+        "senior": 35,
+        "child": null,
+        "underFive": null,
+        "members": 30
+      },
       "highlights": [
         "Work alongside our master blacksmith",
         "Forge your own piece to take home",
@@ -405,10 +564,18 @@
       "scheduleNote": "Seasonal dates throughout the year",
       "time": "10:00 AM - 2:00 PM",
       "duration": "4 hours",
-      "ticketUrl": null,
+      "fareHarborId": "562819",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562819/",
       "requiresTicket": true,
       "category": "workshop",
       "icon": "flame",
+      "pricing": {
+        "adult": 35,
+        "senior": 30,
+        "child": null,
+        "underFive": null,
+        "members": 25
+      },
       "highlights": [
         "Cook over open hearth fire",
         "Master period recipes and techniques",
@@ -426,10 +593,18 @@
       "scheduleNote": "May through August",
       "time": "7:00 PM",
       "duration": "1.5 hours",
-      "ticketUrl": null,
+      "fareHarborId": "562820",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562820/",
       "requiresTicket": true,
       "category": "tour",
       "icon": "sunset",
+      "pricing": {
+        "adult": 10,
+        "senior": 8,
+        "child": 6,
+        "underFive": 0,
+        "members": 0
+      },
       "highlights": [
         "Evening hours for summer schedules",
         "Cooler temperatures, smaller groups",
@@ -455,10 +630,18 @@
       "scheduleNote": "During school year",
       "time": "10:00 AM - 4:00 PM",
       "duration": "Full day",
-      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
+      "fareHarborId": "258228",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
       "requiresTicket": true,
       "category": "education",
       "icon": "book",
+      "pricing": {
+        "adult": 8,
+        "senior": 6,
+        "child": 5,
+        "underFive": 0,
+        "members": 0
+      },
       "highlights": [
         "TN Standards aligned",
         "Age-appropriate activities for all grades",
@@ -476,11 +659,19 @@
       "scheduleNote": "Limited to 10 guests",
       "time": "9:00 AM - 11:00 AM",
       "duration": "2 hours",
-      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/658959/calendar/2026/01/?full-items=yes",
+      "fareHarborId": "658959",
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/658959/",
       "requiresTicket": true,
       "category": "tour",
       "icon": "key",
       "capacity": 10,
+      "pricing": {
+        "adult": 45,
+        "senior": 40,
+        "child": null,
+        "underFive": null,
+        "members": 35
+      },
       "highlights": [
         "Handle real 18th-century artifacts",
         "Private access to collections vault",

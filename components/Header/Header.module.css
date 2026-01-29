@@ -530,7 +530,254 @@
 }
 
 /* ============================================
-   REDUCED MOTION
+   DROPDOWN NAVIGATION - Desktop
+   ============================================ */
+
+.nav-item {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 0.5rem 0.25rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.dropdown-toggle:hover {
+  color: white;
+}
+
+.dropdown-toggle--active {
+  color: white;
+}
+
+.dropdown-toggle:focus-visible {
+  outline: 2px solid var(--gold, #c9a227);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Chevron icon for dropdown toggle */
+.dropdown-chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.5rem;
+}
+
+.dropdown-toggle[aria-expanded='true'] .dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown container */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: rgba(10, 15, 20, 0.98);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: 2px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(201, 162, 39, 0.1);
+  margin-top: 0.5rem;
+  padding: 0.75rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.5rem);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 100;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-item:hover .dropdown-menu,
+.nav-item:focus-within .dropdown-menu,
+.dropdown-menu[aria-hidden='false'] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Dropdown items */
+.dropdown-item {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item:hover {
+  background: rgba(201, 162, 39, 0.08);
+  color: var(--gold, #c9a227);
+  padding-left: 1.5rem;
+}
+
+.dropdown-item:focus-visible {
+  outline: 2px solid var(--gold, #c9a227);
+  outline-offset: -2px;
+  background: rgba(201, 162, 39, 0.12);
+}
+
+.dropdown-item--active {
+  color: var(--gold, #c9a227);
+  background: rgba(201, 162, 39, 0.05);
+}
+
+.dropdown-item--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gold, #c9a227);
+  transition: width 0.2s ease;
+}
+
+/* Dropdown separator */
+.dropdown-separator {
+  height: 1px;
+  background: rgba(201, 162, 39, 0.1);
+  margin: 0.5rem 0;
+}
+
+/* Underline animation for dropdown toggle */
+.dropdown-toggle-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold, #c9a227);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-toggle:hover .dropdown-toggle-underline,
+.dropdown-toggle--active .dropdown-toggle-underline,
+.nav-item:hover .dropdown-toggle-underline {
+  transform: scaleX(1);
+}
+
+/* ============================================
+   DROPDOWN NAVIGATION - Mobile
+   ============================================ */
+
+.mobile-dropdown-item {
+  display: block;
+  padding: 0.75rem 0;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.mobile-dropdown-item:hover,
+.mobile-dropdown-item:focus-visible {
+  color: var(--gold, #c9a227);
+}
+
+.mobile-dropdown-item--active {
+  color: var(--gold, #c9a227);
+}
+
+.mobile-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-dropdown-toggle:hover,
+.mobile-dropdown-toggle:focus-visible {
+  color: var(--gold, #c9a227);
+}
+
+.mobile-dropdown-toggle[aria-expanded='true'] {
+  color: var(--gold, #c9a227);
+}
+
+.mobile-dropdown-chevron {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-dropdown-toggle[aria-expanded='true'] .mobile-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.mobile-dropdown-menu[aria-hidden='false'] {
+  display: flex;
+}
+
+/* ============================================
+   REDUCED MOTION - Updated with Dropdown
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -544,7 +791,27 @@
   .mobile-backdrop,
   .mobile-link,
   .mobile-cta,
-  .cta-icon {
+  .cta-icon,
+  .dropdown-menu,
+  .dropdown-chevron,
+  .dropdown-item,
+  .dropdown-toggle-underline,
+  .mobile-dropdown-chevron,
+  .mobile-dropdown-toggle {
     transition: none;
+  }
+
+  /* Ensure dropdowns are still visible with reduced motion */
+  .dropdown-menu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-dropdown-menu[aria-hidden='false'] {
+    display: flex;
+    opacity: 1;
   }
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Cormorant_Garamond, Great_Vibes, Cinzel } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { DEFAULT_METADATA } from '@/lib/copy'
 
@@ -78,7 +80,11 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col">{children}</body>
+      <body className="min-h-screen flex flex-col">
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   )
 }

@@ -122,11 +122,21 @@ function getUpcomingEvents(count: number = 3) {
   return upcoming
 }
 
-// Format price for display
-function formatPrice(event: (typeof eventsData.events)[0]): string {
-  if (!event.requiresTicket) return 'Free'
-  if (event.ticketUrl) return 'Ticketed'
-  return 'Ticketed'
+// Format full pricing details
+function formatPricingDetails(event: (typeof eventsData.events)[0]): string | null {
+  if (!event.requiresTicket || !('pricing' in event) || !event.pricing) {
+    return null
+  }
+
+  const prices: string[] = []
+
+  if (event.pricing.adult) prices.push(`Adult $${event.pricing.adult}`)
+  if (event.pricing.senior) prices.push(`Senior $${event.pricing.senior}`)
+  if (event.pricing.child) prices.push(`Child $${event.pricing.child}`)
+  if (event.pricing.underFive === 0) prices.push('Under 5 FREE')
+  if (event.pricing.members === 0) prices.push('Members FREE')
+
+  return prices.length > 0 ? prices.join(' • ') : null
 }
 
 export default function EventsPage() {
@@ -195,7 +205,13 @@ export default function EventsPage() {
                         )}
                       </span>
                       <span className={styles['coming-up-card-price']}>
-                        {formatPrice(item.event)}
+                        {!item.event.requiresTicket
+                          ? 'Free'
+                          : 'pricing' in item.event &&
+                              item.event.pricing &&
+                              item.event.pricing.adult
+                            ? `From $${item.event.pricing.adult}`
+                            : 'Ticketed'}
                       </span>
                     </span>
                   </a>
@@ -356,13 +372,19 @@ export default function EventsPage() {
                           <p className={styles['calendar-event-time']}>{event.time}</p>
                         )}
 
-                        {/* Ticket Status */}
-                        {'requiresTicket' in event && !event.requiresTicket && (
+                        {/* Pricing */}
+                        {!event.requiresTicket ? (
                           <p className={styles['calendar-event-price']}>
                             <span className={styles['calendar-event-price-free']}>
                               Free Event — No Ticket Required
                             </span>
                           </p>
+                        ) : (
+                          formatPricingDetails(event) && (
+                            <p className={styles['calendar-event-price']}>
+                              {formatPricingDetails(event)}
+                            </p>
+                          )
                         )}
 
                         {/* Speaker (for lectures) */}

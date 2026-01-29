@@ -35,12 +35,16 @@ const MEMBERSHIP_TIERS = [
     price: 2500,
     badge: null,
     benefits: [
-      'All Patriot Pass benefits',
+      'Unlimited admission for household',
+      'All festivals FREE',
+      'All premium events FREE',
+      'Behind the Scenes: Unlimited',
+      'Unlimited guest passes',
       'Name on permanent Founders Wall',
       'Private tour with Executive Director',
-      "Exclusive Governor's Circle dinner (annual)",
-      'Recognition in all 2026 publications',
-      'Complimentary event tickets (4 per event)',
+      "Exclusive Governor's Circle dinner",
+      '2026 Event Passport',
+      'Newsletter + early registration',
     ],
     cta: "Join Governor's Circle",
     highlighted: false,
@@ -53,11 +57,13 @@ const MEMBERSHIP_TIERS = [
     badge: 'BEST VALUE',
     badgeType: 'value' as const,
     benefits: [
-      'All Frontier Family benefits',
-      'Behind-the-scenes tours',
-      'Invitation to annual Patron event',
-      'Complimentary gift membership to share',
-      'Recognition on website donor wall',
+      'Admission: 2 adults + up to 4 children',
+      'All festivals FREE',
+      'All premium events FREE',
+      'Behind the Scenes: 2 FREE',
+      '4 guest passes per year',
+      '2026 Event Passport',
+      'Newsletter + early registration',
     ],
     cta: 'Join as Patriot',
     highlighted: false,
@@ -70,11 +76,13 @@ const MEMBERSHIP_TIERS = [
     badge: 'MOST POPULAR',
     badgeType: 'popular' as const,
     benefits: [
-      'Unlimited admission for household (up to 6)',
+      'Admission: 2 adults + up to 4 children',
+      'All festivals FREE',
+      'Premium events 50% off',
+      'Behind the Scenes: 1 FREE',
+      '2 guest passes per year',
       '2026 Event Passport',
-      'Priority event registration',
-      '10% gift shop discount',
-      'Member newsletter',
+      'Newsletter + early registration',
     ],
     cta: 'Join as Family',
     highlighted: true,
@@ -86,10 +94,13 @@ const MEMBERSHIP_TIERS = [
     price: 75,
     badge: null,
     benefits: [
-      'Unlimited admission for two adults',
+      'Admission: 2 adults',
+      'All festivals FREE',
+      'Premium events 50% off',
+      'Behind the Scenes: 50% off',
+      '1 guest pass per year',
       '2026 Event Passport',
-      '10% gift shop discount',
-      'Member newsletter',
+      'Newsletter + early registration',
     ],
     cta: 'Join as Explorer',
     highlighted: false,
@@ -101,10 +112,12 @@ const MEMBERSHIP_TIERS = [
     price: 50,
     badge: null,
     benefits: [
-      'Unlimited admission for one adult',
+      'Admission: 1 adult',
+      'All festivals FREE',
+      'Premium events 50% off',
+      'Behind the Scenes: 50% off',
       '2026 Event Passport',
-      '10% gift shop discount',
-      'Member newsletter',
+      'Newsletter + early registration',
     ],
     cta: 'Join as Settler',
     highlighted: false,
@@ -177,13 +190,9 @@ export default function MembershipPage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles['hero-content']}>
-          <p className={styles.eyebrow}>Membership</p>
-          <h1 className={styles.headline}>Join the Story</h1>
-          <p className={styles.subhead}>
-            Rocky Mount preserves where Tennessee began. Your membership supports living history
-            programs, educational outreach, and preservation of these hallowed grounds for future
-            generations.
-          </p>
+          <p className={styles.eyebrow}>2026 Membership</p>
+          <h1 className={styles.headline}>Tennessee Starts Here. So Should Your Year.</h1>
+          <p className={styles.subhead}>One membership. Every festival. Every tour. All year.</p>
         </div>
       </section>
 
@@ -196,11 +205,17 @@ export default function MembershipPage() {
               <h2 className={styles['founding-banner-headline']}>Founding Member Registry</h2>
               <p className={styles['founding-banner-desc']}>
                 Join before March 4, 2026 and be recognized as a Founding Member in America&apos;s
-                250th year. Your name will be permanently listed in our commemorative registry.
+                250th year. Your name will be permanently displayed at Rocky Mount. This opportunity
+                closes forever on March 4 and will never return.
               </p>
-              <Link href="/first-250" className={styles['founding-banner-link']}>
-                Learn about the First 250 &rarr;
-              </Link>
+              <a
+                href={NEONCRM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles['founding-banner-link']}
+              >
+                Become a Founding Member &rarr;
+              </a>
             </div>
           </div>
         </section>
@@ -275,10 +290,11 @@ export default function MembershipPage() {
             <span className={styles['passport-badge']}>Included With Every Membership</span>
             <h2 className={styles['passport-headline']}>The 2026 Event Passport</h2>
             <p className={styles['passport-desc']}>
-              Every member receives the America 250 Event Passport &mdash; your guide to Rocky
-              Mount&apos;s commemorative year. Attend events, collect stamps, and earn recognition
-              as you experience the 250th anniversary celebrations.
+              Every member receives the America 250 Event Passport &mdash; a physical booklet to
+              track your commemorative year. Attend events, collect stamps, and earn recognition.
+              Collect 8 or more stamps and receive a commemorative pin at our December ceremony.
             </p>
+            <p className={styles['passport-hashtag']}>#TN250Passport</p>
             <Link href="/events" className={styles['passport-link']}>
               View 2026 Events &rarr;
             </Link>
@@ -312,13 +328,29 @@ export default function MembershipPage() {
                   <td className={styles['comparison-td']}>$200/year</td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Household admission (up to 6)</td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
+                  <td className={styles['comparison-td']}>Admission</td>
+                  <td className={styles['comparison-td']}>2 adults + 4 children</td>
+                  <td className={styles['comparison-td']}>2 adults + 4 children</td>
+                </tr>
+                <tr>
+                  <td className={styles['comparison-td']}>Festivals</td>
+                  <td className={styles['comparison-td']}>FREE</td>
+                  <td className={styles['comparison-td']}>FREE</td>
+                </tr>
+                <tr>
+                  <td className={styles['comparison-td']}>Premium events</td>
+                  <td className={styles['comparison-td']}>50% off</td>
+                  <td className={styles['comparison-td']}>FREE</td>
+                </tr>
+                <tr>
+                  <td className={styles['comparison-td']}>Behind the Scenes</td>
+                  <td className={styles['comparison-td']}>1 FREE</td>
+                  <td className={styles['comparison-td']}>2 FREE</td>
+                </tr>
+                <tr>
+                  <td className={styles['comparison-td']}>Guest passes</td>
+                  <td className={styles['comparison-td']}>2 per year</td>
+                  <td className={styles['comparison-td']}>4 per year</td>
                 </tr>
                 <tr>
                   <td className={styles['comparison-td']}>2026 Event Passport</td>
@@ -330,45 +362,9 @@ export default function MembershipPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Priority event registration</td>
+                  <td className={styles['comparison-td']}>Newsletter + early registration</td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles['comparison-td']}>Behind-the-scenes tours</td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-dash']}>&mdash;</span>
-                  </td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles['comparison-td']}>Annual Patron event invitation</td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-dash']}>&mdash;</span>
-                  </td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles['comparison-td']}>Complimentary gift membership</td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-dash']}>&mdash;</span>
-                  </td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-check']}>&#10003;</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles['comparison-td']}>Website donor wall recognition</td>
-                  <td className={styles['comparison-td']}>
-                    <span className={styles['comparison-dash']}>&mdash;</span>
                   </td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-check']}>&#10003;</span>
@@ -400,10 +396,23 @@ export default function MembershipPage() {
       {/* Emotional Close */}
       <section className={styles.close}>
         <div className={styles['close-inner']}>
-          <h2 className={styles['close-headline']}>This Story Needs You</h2>
+          <h2 className={styles['close-headline']}>
+            In 2026, America turns 250. Tennessee turns 230.
+          </h2>
           <p className={styles['close-desc']}>
-            Every member helps preserve the place where Tennessee&apos;s government was born. Join
-            us in keeping this story alive for the next 250 years.
+            And for one year, Rocky Mount will celebrate both&mdash;with festivals, tours,
+            ceremonies, and moments you can&apos;t replicate.
+          </p>
+          <p className={styles['close-question']}>
+            Your grandchildren will ask you someday: &ldquo;Where were you when America turned
+            250?&rdquo;
+          </p>
+          <p className={styles['close-answer']}>
+            You could answer: &ldquo;I watched it on TV.&rdquo;
+          </p>
+          <p className={styles['close-answer-alt']}>
+            Or you could answer: &ldquo;I was there. I stood where Tennessee began. And I have the
+            passport to prove it.&rdquo;
           </p>
           <a
             href={NEONCRM_URL}

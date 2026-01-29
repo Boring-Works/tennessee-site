@@ -44,6 +44,18 @@
 
 **Status:** ✅ Deployed to production
 
+### 5. Events Pricing & Booking Integration
+
+- Added FareHarbor pricing data to all 18 main events
+- Added pricing to all 5 recurring programs
+- Standardized pricing structure:
+  - adult, senior, child, underFive, members fields
+  - null for non-applicable pricing tiers
+- Updated all ticketUrl fields with clean FareHarbor direct booking links
+- Added fareHarborId field for future API integration
+
+**Status:** ✅ Deployed to production (commit ed85cc2)
+
 ---
 
 ## 🎯 NAVIGATION CHECK

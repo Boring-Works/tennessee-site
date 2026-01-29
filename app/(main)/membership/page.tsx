@@ -102,9 +102,9 @@ const MEMBERSHIP_TIERS = [
     badge: null,
     benefits: [
       'Unlimited admission for one adult',
+      'Original Seven Passport booklet',
       '10% gift shop discount',
       'Member newsletter',
-      'Website recognition',
     ],
     cta: 'Join as Settler',
     highlighted: false,
@@ -116,7 +116,7 @@ const FAQ_ITEMS = [
   {
     question: 'Are membership benefits good at other historic sites?',
     answer:
-      "Rocky Mount membership provides unlimited free admission to Rocky Mount only. However, Explorer's Pass and above receive the Original Seven Passport, which offers discounts at partner sites throughout the region.",
+      'Rocky Mount membership provides unlimited free admission to Rocky Mount only. However, every member receives the Original Seven Passport, which offers discounts at partner sites throughout the region.',
   },
   {
     question: "What's the Original Seven Passport?",
@@ -272,11 +272,10 @@ export default function MembershipPage() {
       <section className={styles.passport}>
         <div className={styles['passport-inner']}>
           <div className={styles['passport-content']}>
-            <span className={styles['passport-badge']}>Explorer&apos;s Pass &amp; Above</span>
+            <span className={styles['passport-badge']}>Included With Every Membership</span>
             <h2 className={styles['passport-headline']}>The Original Seven Passport</h2>
             <p className={styles['passport-desc']}>
-              Your Explorer&apos;s Pass, Frontier Family, Patriot Pass, or Governor&apos;s Circle
-              membership includes the Original Seven Passport &mdash; a booklet connecting seven
+              Every member receives the Original Seven Passport &mdash; a booklet connecting seven
               historic sites across the frontier region. Visit all seven, collect your stamps, and
               earn a commemorative pin.
             </p>

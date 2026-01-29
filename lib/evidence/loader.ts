@@ -15,10 +15,15 @@ import type {
   Passage,
   VerificationStatus,
   DocumentContentType,
+  Person,
+  PersonFrontmatter,
 } from './types'
 
 // Path to documents directory
 const DOCUMENTS_DIR = path.join(process.cwd(), 'content', 'documents')
+
+// Path to people directory
+const PEOPLE_DIR = path.join(process.cwd(), 'content', 'people')
 
 // =============================================================================
 // Passage Extraction
@@ -226,4 +231,118 @@ export async function getPassage(passageId: string): Promise<Passage | null> {
   }
 
   return doc.passages.find((p) => p.anchor === anchor) || null
+}
+
+// =============================================================================
+// Person Loading Functions
+// =============================================================================
+
+/**
+ * Get all person slugs for static generation
+ *
+ * Returns an array of person slugs (filenames without extension)
+ */
+export async function getPersonSlugs(): Promise<string[]> {
+  try {
+    const files = await fs.readdir(PEOPLE_DIR)
+    return files
+      .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
+      .map((file) => file.replace(/\.mdx?$/, ''))
+  } catch (error) {
+    // Directory doesn't exist yet
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return []
+    }
+    throw error
+  }
+}
+
+/**
+ * Get a single person by slug
+ *
+ * @param slug - The person slug (filename without extension)
+ * @returns The parsed Person or null if not found
+ */
+export async function getPerson(slug: string): Promise<Person | null> {
+  // Try both .md and .mdx extensions
+  const extensions = ['.md', '.mdx']
+
+  for (const ext of extensions) {
+    const filePath = path.join(PEOPLE_DIR, `${slug}${ext}`)
+
+    try {
+      const rawContent = await fs.readFile(filePath, 'utf-8')
+
+      // Parse frontmatter using gray-matter
+      const parsed = matter(rawContent)
+      const frontmatter = parsed.data as PersonFrontmatter
+      const content = parsed.content
+
+      // Build the Person object
+      const person: Person = {
+        id: frontmatter.id,
+        name: frontmatter.name,
+        name_cherokee: frontmatter.name_cherokee,
+        role: frontmatter.role,
+        town: frontmatter.town,
+        clan: frontmatter.clan,
+        bio_type: frontmatter.bio_type,
+        bio_short: frontmatter.bio_short,
+        bio_full: content.trim() || undefined,
+        is_cherokee: frontmatter.is_cherokee,
+        is_signatory: frontmatter.is_signatory,
+        signature_url: frontmatter.signature_url,
+        documents: [], // Will be populated when linking documents
+      }
+
+      return person
+    } catch (error) {
+      // File not found, try next extension
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+        continue
+      }
+      throw error
+    }
+  }
+
+  return null
+}
+
+/**
+ * Get all people
+ *
+ * Loads and parses all person files from the content directory
+ */
+export async function getAllPeople(): Promise<Person[]> {
+  const slugs = await getPersonSlugs()
+
+  const people = await Promise.all(
+    slugs.map(async (slug) => {
+      const person = await getPerson(slug)
+      return person
+    })
+  )
+
+  // Filter out any null results
+  return people.filter((person): person is Person => person !== null)
+}
+
+/**
+ * Get all Cherokee people
+ *
+ * Returns people where is_cherokee is true
+ */
+export async function getCherokeePeople(): Promise<Person[]> {
+  const allPeople = await getAllPeople()
+  return allPeople.filter((person) => person.is_cherokee)
+}
+
+/**
+ * Get all signatories
+ *
+ * Returns people who signed the Treaty of Holston (is_signatory = true)
+ */
+export async function getSignatories(): Promise<Person[]> {
+  const allPeople = await getAllPeople()
+  return allPeople.filter((person) => person.is_signatory)
 }

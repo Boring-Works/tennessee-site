@@ -7,45 +7,99 @@ interface Collection {
   id: string
   icon: string
   name: string
-  count: string
+  count: number
+  unit: string
+  href: string
+  featured?: boolean
 }
 
 const COLLECTIONS: Collection[] = [
-  { id: 'blount-letter', icon: '📜', name: 'Letters', count: '4 docs' },
-  { id: 'treaty-signers', icon: '🤝', name: 'Treaty Signers', count: '40 names' },
-  { id: 'timeline', icon: '📅', name: 'Timeline', count: '12 dates' },
-  { id: 'sources', icon: '📚', name: 'Sources', count: '6 repos' },
+  {
+    id: 'blount-papers',
+    icon: '📜',
+    name: 'The Blount Papers',
+    count: 9,
+    unit: 'documents',
+    href: '#blount-letter',
+  },
+  {
+    id: 'treaties',
+    icon: '🖋️',
+    name: 'Treaties & Proclamations',
+    count: 4,
+    unit: 'documents',
+    href: '#federal-authority',
+  },
+  {
+    id: 'knoxville-gazette',
+    icon: '📰',
+    name: 'The Knoxville Gazette',
+    count: 14,
+    unit: 'issues',
+    href: '/evidence/collections/knoxville-gazette',
+  },
+  {
+    id: 'federal-correspondence',
+    icon: '✉️',
+    name: 'Federal Correspondence',
+    count: 8,
+    unit: 'documents',
+    href: '#washington-question',
+  },
+  {
+    id: 'cherokee-signatories',
+    icon: '🪶',
+    name: 'Cherokee Signatories',
+    count: 40,
+    unit: 'people',
+    href: '/evidence/people',
+    featured: true,
+  },
+  {
+    id: 'timeline',
+    icon: '📅',
+    name: 'Timeline',
+    count: 12,
+    unit: 'events',
+    href: '#timeline',
+  },
 ]
 
 export function EntryRoom() {
-  const handleCollectionClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+  const handleCollectionClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's a hash link, handle smooth scroll
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const element = document.getElementById(href.slice(1))
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
+    // Otherwise let the Link component handle navigation
   }
 
   return (
     <section className={styles.entryRoom}>
       <div className={styles.entryRoomInner}>
         <p className={styles.welcome}>
-          Welcome to the archive. Four collections await. Browse by topic or scroll to read in
-          sequence.
+          Welcome to the archive. Six collections await your exploration.
         </p>
-        <p className={styles.readingTime}>~6 min read</p>
+        <p className={styles.readingTime}>Browse by topic or scroll to read in sequence</p>
 
         <div className={styles.collectionGrid}>
           {COLLECTIONS.map((collection) => (
-            <button
-              type="button"
+            <Link
               key={collection.id}
-              onClick={() => handleCollectionClick(collection.id)}
-              className={styles.collectionCard}
+              href={collection.href}
+              onClick={(e) => handleCollectionClick(e, collection.href)}
+              className={`${styles.collectionCard} ${collection.featured ? styles.collectionCardFeatured : ''}`}
             >
               <span className={styles.collectionIcon}>{collection.icon}</span>
               <span className={styles.collectionName}>{collection.name}</span>
-              <span className={styles.collectionCount}>{collection.count}</span>
-            </button>
+              <span className={styles.collectionCount}>
+                {collection.count} {collection.unit}
+              </span>
+            </Link>
           ))}
         </div>
 

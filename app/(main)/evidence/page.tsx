@@ -4,6 +4,7 @@ import { PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
 import { ContextPanel } from './ContextPanel'
 import { CardCatalog } from './CardCatalog'
 import { MobileGuide } from '@/components/evidence/MobileGuide'
+import { EntryRoom } from '@/components/evidence'
 import { Compass } from '@/components/ui/Compass'
 import styles from './page.module.css'
 
@@ -246,6 +247,9 @@ export default function EvidencePage() {
         </div>
       </section>
 
+      {/* Entry Room - Collection Overview */}
+      <EntryRoom />
+
       {/* Featured Quote - Blount Correspondence */}
       <section id="blount-letter" className={styles.featuredSection}>
         <div className={styles.container}>
@@ -383,13 +387,16 @@ export default function EvidencePage() {
           </div>
 
           <div className={styles.signersFooter}>
+            <Link href="/evidence/people" className={styles.signersLink}>
+              View all 40 signatories
+            </Link>
             <a
               href={SOURCE_LINKS.digiTreatiesHolston}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.signersLink}
             >
-              View all 40 signatories at DigiTreaties
+              View treaty manuscript at DigiTreaties
             </a>
 
             <p className={styles.signersDescendants}>

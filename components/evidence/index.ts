@@ -1,3 +1,5 @@
 export { DocumentViewer } from './DocumentViewer'
 export { DocumentViewerClient } from './DocumentViewerClient'
+export { EntryRoom } from './EntryRoom'
+export { PersonCard } from './PersonCard'
 export { VerificationBadge } from './VerificationBadge'

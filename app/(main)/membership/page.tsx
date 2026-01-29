@@ -71,7 +71,7 @@ const MEMBERSHIP_TIERS = [
     badgeType: 'popular' as const,
     benefits: [
       'Unlimited admission for household (up to 6)',
-      'Original Seven Passport booklet',
+      '2026 Event Passport',
       'Priority event registration',
       '10% gift shop discount',
       'Member newsletter',
@@ -87,7 +87,7 @@ const MEMBERSHIP_TIERS = [
     badge: null,
     benefits: [
       'Unlimited admission for two adults',
-      'Original Seven Passport booklet',
+      '2026 Event Passport',
       '10% gift shop discount',
       'Member newsletter',
     ],
@@ -102,7 +102,7 @@ const MEMBERSHIP_TIERS = [
     badge: null,
     benefits: [
       'Unlimited admission for one adult',
-      'Original Seven Passport booklet',
+      '2026 Event Passport',
       '10% gift shop discount',
       'Member newsletter',
     ],
@@ -116,12 +116,12 @@ const FAQ_ITEMS = [
   {
     question: 'Are membership benefits good at other historic sites?',
     answer:
-      'Rocky Mount membership provides unlimited free admission to Rocky Mount only. However, every member receives the Original Seven Passport, which offers discounts at partner sites throughout the region.',
+      'Rocky Mount membership provides unlimited free admission to Rocky Mount only. Every member also receives the 2026 Event Passport to track your participation in our commemorative year events.',
   },
   {
-    question: "What's the Original Seven Passport?",
+    question: "What's the 2026 Event Passport?",
     answer:
-      "A booklet that connects seven historic sites across Northeast Tennessee and Southwest Virginia. Visit all seven, get your passport stamped, and receive a commemorative pin. It's our way of encouraging you to explore the entire frontier story.",
+      "A commemorative booklet for America's 250th anniversary year. Attend Rocky Mount events, get your passport stamped at each one, and earn recognition for your participation in this historic year.",
   },
   {
     question: 'Can I upgrade my membership later?',
@@ -273,14 +273,14 @@ export default function MembershipPage() {
         <div className={styles['passport-inner']}>
           <div className={styles['passport-content']}>
             <span className={styles['passport-badge']}>Included With Every Membership</span>
-            <h2 className={styles['passport-headline']}>The Original Seven Passport</h2>
+            <h2 className={styles['passport-headline']}>The 2026 Event Passport</h2>
             <p className={styles['passport-desc']}>
-              Every member receives the Original Seven Passport &mdash; a booklet connecting seven
-              historic sites across the frontier region. Visit all seven, collect your stamps, and
-              earn a commemorative pin.
+              Every member receives the America 250 Event Passport &mdash; your guide to Rocky
+              Mount&apos;s commemorative year. Attend events, collect stamps, and earn recognition
+              as you experience the 250th anniversary celebrations.
             </p>
-            <Link href="/explore" className={styles['passport-link']}>
-              Explore the Original Seven &rarr;
+            <Link href="/events" className={styles['passport-link']}>
+              View 2026 Events &rarr;
             </Link>
           </div>
         </div>
@@ -321,7 +321,7 @@ export default function MembershipPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className={styles['comparison-td']}>Original Seven Passport</td>
+                  <td className={styles['comparison-td']}>2026 Event Passport</td>
                   <td className={styles['comparison-td']}>
                     <span className={styles['comparison-check']}>&#10003;</span>
                   </td>

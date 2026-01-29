@@ -1,4 +1,4 @@
-import { WeatherHeader } from '@/components/welcome/WeatherHeader'
+import { SiteHeader } from '@/components/welcome/SiteHeader'
 import { StoryHook } from '@/components/welcome/StoryHook'
 import { BrandStatement } from '@/components/welcome/BrandStatement'
 import { DualPeaks } from '@/components/welcome/DualPeaks'
@@ -41,7 +41,7 @@ const peaks: [
 export default function WelcomePage() {
   return (
     <main className="welcome-page">
-      <WeatherHeader />
+      <SiteHeader />
 
       <div className="welcome-container">
         <StoryHook line1="Before there was a Tennessee," line2="there was this ground." />

@@ -45,12 +45,12 @@ export function WeatherHeader() {
       <Link
         href="/almanac"
         className="weather-header weather-header--loading"
-        aria-label="View The 1775 Almanac - Current weather for Sullivan County"
+        aria-label="View Blount's Weather Station - Current weather for Sullivan County"
       >
         <span className="weather-content">
           <span className="weather-text">Sullivan County, Tennessee</span>
         </span>
-        <span className="weather-cta">The 1775 Almanac &rarr;</span>
+        <span className="weather-cta">Blount&apos;s Weather Station &rarr;</span>
       </Link>
     )
   }
@@ -59,7 +59,7 @@ export function WeatherHeader() {
     <Link
       href="/almanac"
       className="weather-header"
-      aria-label="View The 1775 Almanac - Current weather for Sullivan County"
+      aria-label="View Blount's Weather Station - Current weather for Sullivan County"
     >
       <span className="weather-content">
         <span className="weather-icon" aria-hidden="true">
@@ -69,7 +69,7 @@ export function WeatherHeader() {
           Sullivan County, Tennessee &middot; {weather.temp}&deg;F &middot; {weather.condition}
         </span>
       </span>
-      <span className="weather-cta">The 1775 Almanac &rarr;</span>
+      <span className="weather-cta">Blount&apos;s Weather Station &rarr;</span>
     </Link>
   )
 }

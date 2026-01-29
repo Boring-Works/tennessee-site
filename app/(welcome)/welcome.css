@@ -60,67 +60,90 @@
 }
 
 /* ===========================================
-   WEATHER HEADER
+   SITE HEADER
    =========================================== */
 
-.weather-header {
+.site-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 1rem;
   padding: 0.75rem 1rem;
   background: rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+  text-decoration: none;
+  transition: background 0.3s ease;
 }
 
-/* Shimmer animation */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+.site-header:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.weather-header--loading {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(201, 162, 39, 0.1) 50%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+.site-header:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
 }
 
-.weather-icon {
-  font-size: 1rem;
-  opacity: 0.6;
-}
-
-.weather-content {
+.site-header-content {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.weather-text {
+.site-header-location {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 0.85rem;
   color: rgba(245, 241, 232, 0.8);
   letter-spacing: 0.02em;
 }
 
-.weather-cta {
+.site-header-separator {
+  color: rgba(245, 241, 232, 0.5);
+  font-size: 0.85rem;
+}
+
+.site-header-status {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: rgba(245, 241, 232, 0.6);
+  letter-spacing: 0.02em;
+}
+
+.site-header-status--open {
+  color: rgba(139, 195, 74, 0.85);
+}
+
+.site-header-cta {
   font-family: var(--font-cinzel), 'Cinzel', serif;
   font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(201, 162, 39, 0.7);
-  margin-left: auto;
   white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.site-header:hover .site-header-cta {
+  color: rgba(201, 162, 39, 0.9);
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .site-header-content {
+    width: 100%;
+  }
+
+  .site-header-cta {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* ===========================================

@@ -331,14 +331,6 @@ export default function Footer() {
                   For Educators
                 </Link>
               </li>
-              <li>
-                <Link href="/almanac" className={styles['footer-link']}>
-                  <span className={styles['footer-link-bullet']} aria-hidden="true">
-                    ◆
-                  </span>
-                  Almanac
-                </Link>
-              </li>
             </ul>
           </nav>
 

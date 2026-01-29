@@ -1,0 +1,79 @@
+
+> tennessee-starts-here@0.2.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/codyboring/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/codyboring/CodyML/projects/TNRocky/tennessee-starts-here/package-lock.json
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.5s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/127) ...
+  Generating static pages using 7 workers (31/127) 
+  Generating static pages using 7 workers (63/127) 
+  Generating static pages using 7 workers (95/127) 
+✓ Generating static pages using 7 workers (127/127) in 592.5ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /almanac
+├ ƒ /api/air-quality
+├ ƒ /api/nws-alerts
+├ ƒ /api/precipitation-radar
+├ ƒ /api/stream-levels
+├ ƒ /api/weather
+├ ○ /educators
+├ ○ /events
+├ ○ /evidence
+├ ○ /evidence/collections
+├ ● /evidence/collections/[slug]
+│ ├ /evidence/collections/blount-papers
+│ ├ /evidence/collections/federal-correspondence
+│ ├ /evidence/collections/knoxville-gazette
+│ └ [+2 more paths]
+├ ○ /evidence/documents
+├ ● /evidence/documents/[slug]
+│ ├ /evidence/documents/blount-arrival-1790
+│ ├ /evidence/documents/blount-commission-1790
+│ ├ /evidence/documents/blount-to-knox-1790-11
+│ └ [+35 more paths]
+├ ○ /evidence/library
+├ ● /evidence/library/[slug]
+│ ├ /evidence/library/treaty-of-holston-1791
+│ ├ /evidence/library/washington-to-knox-1790
+│ ├ /evidence/library/washington-proclamation-1791
+│ └ [+3 more paths]
+├ ○ /evidence/people
+├ ● /evidence/people/[slug]
+│ ├ /evidence/people/andrew-jackson
+│ ├ /evidence/people/auknah
+│ ├ /evidence/people/bear-at-home
+│ └ [+47 more paths]
+├ ○ /evidence/timeline
+├ ○ /explore
+├ ○ /first-250
+├ ○ /groups
+├ ○ /home
+├ ○ /lectures
+├ ○ /manifest.webmanifest
+├ ○ /our-story
+├ ○ /programs
+├ ○ /sitemap.xml
+├ ○ /support
+└ ○ /visit
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

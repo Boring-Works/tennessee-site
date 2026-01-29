@@ -3,15 +3,29 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 import styles from './Header/Header.module.css'
 
-const NAV_LINKS = [
+interface NavItem {
+  href?: string
+  label: string
+  dropdown?: Array<{ href: string; label: string }>
+}
+
+const NAV_STRUCTURE: NavItem[] = [
   { href: '/visit', label: 'Visit' },
-  { href: '/programs', label: 'Programs' },
-  { href: '/events', label: 'Events' },
-  { href: '/our-story', label: 'Our Story' },
-  { href: '/explore', label: 'Explore' },
+  {
+    label: 'Events & Programs',
+    dropdown: [
+      { href: '/events', label: '2026 Events Calendar' },
+      { href: '/programs', label: 'Recurring Programs' },
+      { href: '/lectures', label: 'Lecture Series' },
+    ],
+  },
+  {
+    label: 'The Region',
+    dropdown: [{ href: '/explore', label: 'Explore the Original Seven' }],
+  },
   { href: '/evidence', label: 'Evidence' },
   { href: '/educators', label: 'Educators' },
   { href: '/support', label: 'Support' },
@@ -20,8 +34,11 @@ const NAV_LINKS = [
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [expandedMobileDropdowns, setExpandedMobileDropdowns] = useState<Set<string>>(new Set())
   const pathname = usePathname()
   const menuRef = useRef<HTMLDivElement>(null)
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Throttled scroll listener
   useEffect(() => {
@@ -94,11 +111,15 @@ export default function Navigation() {
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
-        setMobileMenuOpen(false)
+      // Escape closes dropdown or mobile menu
+      if (e.key === 'Escape') {
+        setOpenDropdown(null)
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false)
+        }
       }
 
-      // Focus trap
+      // Focus trap in mobile menu
       if (e.key === 'Tab' && mobileMenuOpen && menuRef.current) {
         const focusables = menuRef.current.querySelectorAll('a, button')
         const first = focusables[0] as HTMLElement
@@ -123,7 +144,8 @@ export default function Navigation() {
   }, [mobileMenuOpen])
 
   const isActive = useCallback(
-    (href: string) => {
+    (href?: string) => {
+      if (!href) return false
       if (href === '/') return pathname === '/' || pathname === '/home'
       // Exact match or starts with href followed by /
       return pathname === href || pathname.startsWith(href + '/')
@@ -131,11 +153,76 @@ export default function Navigation() {
     [pathname]
   )
 
+  // Check if any item in dropdown is active
+  const isDropdownActive = useCallback(
+    (items?: Array<{ href: string; label: string }>) => {
+      if (!items) return false
+      return items.some((item) => isActive(item.href))
+    },
+    [isActive]
+  )
+
   // Pages with light backgrounds need dark header
   const isLightBackgroundPage = pathname.startsWith('/evidence/documents')
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false)
+  }, [])
+
+  // Click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest('[data-dropdown-menu]')) {
+        setOpenDropdown(null)
+      }
+    }
+
+    if (openDropdown) {
+      document.addEventListener('click', handleClickOutside)
+      return () => document.removeEventListener('click', handleClickOutside)
+    }
+  }, [openDropdown])
+
+  // Cleanup dropdown timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  // Hover handlers for desktop dropdowns
+  const handleDropdownHover = useCallback((label: string, isEntering: boolean) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current)
+    }
+
+    if (isEntering) {
+      // Small delay to prevent accidental opens
+      dropdownTimeoutRef.current = setTimeout(() => {
+        setOpenDropdown(label)
+      }, 150)
+    } else {
+      // Delay to allow moving to dropdown
+      dropdownTimeoutRef.current = setTimeout(() => {
+        setOpenDropdown(null)
+      }, 100)
+    }
+  }, [])
+
+  // Mobile dropdown toggle
+  const toggleMobileDropdown = useCallback((label: string) => {
+    setExpandedMobileDropdowns((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(label)) {
+        newSet.delete(label)
+      } else {
+        newSet.add(label)
+      }
+      return newSet
+    })
   }, [])
 
   return (
@@ -178,22 +265,78 @@ export default function Navigation() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className={styles.nav} aria-label="Main navigation">
+            <nav className={styles.nav} aria-label="Main navigation" data-dropdown-menu>
               <ul className={styles['nav-list']} role="menubar">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href} role="none">
-                    <Link
-                      href={link.href}
-                      role="menuitem"
-                      aria-current={isActive(link.href) ? 'page' : undefined}
-                      className={`${styles['nav-link']} ${
-                        isActive(link.href) ? styles['nav-link--active'] : ''
-                      }`}
-                    >
-                      {link.label}
-                      <span className={styles['nav-link-underline']} aria-hidden="true" />
-                      <span className={styles['nav-link-glow']} aria-hidden="true" />
-                    </Link>
+                {NAV_STRUCTURE.map((item) => (
+                  <li key={item.label} role="none" className={styles['nav-item']}>
+                    {item.dropdown ? (
+                      // Dropdown item
+                      <div
+                        className={styles['dropdown-wrapper']}
+                        onMouseEnter={() => handleDropdownHover(item.label, true)}
+                        onMouseLeave={() => handleDropdownHover(item.label, false)}
+                      >
+                        <button
+                          role="menuitem"
+                          aria-haspopup="true"
+                          aria-expanded={openDropdown === item.label}
+                          className={`${styles['dropdown-toggle']} ${
+                            isDropdownActive(item.dropdown) ? styles['dropdown-toggle--active'] : ''
+                          }`}
+                          onClick={() =>
+                            setOpenDropdown(openDropdown === item.label ? null : item.label)
+                          }
+                        >
+                          {item.label}
+                          <ChevronDown
+                            size={14}
+                            className={styles['dropdown-chevron']}
+                            aria-hidden="true"
+                          />
+                          <span
+                            className={styles['dropdown-toggle-underline']}
+                            aria-hidden="true"
+                          />
+                        </button>
+
+                        {/* Dropdown menu */}
+                        <ul
+                          role="menu"
+                          className={styles['dropdown-menu']}
+                          aria-hidden={openDropdown !== item.label}
+                        >
+                          {item.dropdown.map((subitem) => (
+                            <li key={subitem.href} role="none">
+                              <Link
+                                href={subitem.href}
+                                role="menuitem"
+                                aria-current={isActive(subitem.href) ? 'page' : undefined}
+                                className={`${styles['dropdown-item']} ${
+                                  isActive(subitem.href) ? styles['dropdown-item--active'] : ''
+                                }`}
+                                onClick={() => setOpenDropdown(null)}
+                              >
+                                {subitem.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      // Regular link item
+                      <Link
+                        href={item.href!}
+                        role="menuitem"
+                        aria-current={isActive(item.href) ? 'page' : undefined}
+                        className={`${styles['nav-link']} ${
+                          isActive(item.href) ? styles['nav-link--active'] : ''
+                        }`}
+                      >
+                        {item.label}
+                        <span className={styles['nav-link-underline']} aria-hidden="true" />
+                        <span className={styles['nav-link-glow']} aria-hidden="true" />
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -250,19 +393,68 @@ export default function Navigation() {
           {/* Content */}
           <nav className={styles['mobile-nav']}>
             <ul className={styles['mobile-list']}>
-              {NAV_LINKS.map((link, index) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    aria-current={isActive(link.href) ? 'page' : undefined}
-                    className={`${styles['mobile-link']} ${
-                      isActive(link.href) ? styles['mobile-link--active'] : ''
-                    }`}
-                    onClick={closeMobileMenu}
-                    style={{ transitionDelay: `${100 + index * 50}ms` }}
-                  >
-                    <span className={styles['mobile-link-text']}>{link.label}</span>
-                  </Link>
+              {NAV_STRUCTURE.map((item, index) => (
+                <li key={item.label}>
+                  {item.dropdown ? (
+                    // Mobile dropdown (accordion)
+                    <div className={styles['mobile-dropdown-wrapper']}>
+                      <button
+                        className={`${styles['mobile-link']} ${
+                          isDropdownActive(item.dropdown) ? styles['mobile-link--active'] : ''
+                        }`}
+                        onClick={() => toggleMobileDropdown(item.label)}
+                        aria-expanded={expandedMobileDropdowns.has(item.label)}
+                        style={{ transitionDelay: `${100 + index * 50}ms` }}
+                      >
+                        <span className={styles['mobile-link-text']}>{item.label}</span>
+                        <ChevronDown
+                          size={16}
+                          className={`${styles['mobile-dropdown-icon']} ${
+                            expandedMobileDropdowns.has(item.label)
+                              ? styles['mobile-dropdown-icon--open']
+                              : ''
+                          }`}
+                          aria-hidden="true"
+                        />
+                      </button>
+
+                      {/* Mobile accordion items */}
+                      <ul
+                        className={`${styles['mobile-dropdown-list']} ${
+                          expandedMobileDropdowns.has(item.label)
+                            ? styles['mobile-dropdown-list--open']
+                            : ''
+                        }`}
+                      >
+                        {item.dropdown.map((subitem) => (
+                          <li key={subitem.href}>
+                            <Link
+                              href={subitem.href}
+                              className={`${styles['mobile-dropdown-link']} ${
+                                isActive(subitem.href) ? styles['mobile-dropdown-link--active'] : ''
+                              }`}
+                              onClick={closeMobileMenu}
+                            >
+                              {subitem.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    // Regular mobile link
+                    <Link
+                      href={item.href!}
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                      className={`${styles['mobile-link']} ${
+                        isActive(item.href) ? styles['mobile-link--active'] : ''
+                      }`}
+                      onClick={closeMobileMenu}
+                      style={{ transitionDelay: `${100 + index * 50}ms` }}
+                    >
+                      <span className={styles['mobile-link-text']}>{item.label}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

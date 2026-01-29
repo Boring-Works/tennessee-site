@@ -532,9 +532,20 @@ export default function VisitPage() {
                 </li>
               ))}
             </ul>
-            <p className={styles['visit-prepare-accessibility']}>
-              <strong>Accessibility:</strong> {whatToExpect.accessibility}
-            </p>
+            <div className={styles['visit-prepare-accessibility']}>
+              <strong>Accessibility:</strong>
+              <p className="mt-2">{whatToExpect.accessibility.summary}</p>
+              <div className="mt-3 space-y-2">
+                <p className="text-sm">
+                  <strong className="text-green-700">Museum Gallery:</strong>{' '}
+                  {whatToExpect.accessibility.museumGallery.features.slice(0, 2).join(', ')}
+                </p>
+                <p className="text-sm">
+                  <strong className="text-amber-700">Historic Site Tour:</strong>{' '}
+                  {whatToExpect.accessibility.historicSiteTour.features.slice(0, 2).join(', ')}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

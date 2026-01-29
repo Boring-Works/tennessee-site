@@ -34,17 +34,19 @@
   },
   "hours": {
     "regular": {
-      "wednesday": "11:00 AM - 4:30 PM",
-      "thursday": "11:00 AM - 4:30 PM",
-      "friday": "11:00 AM - 4:30 PM",
-      "saturday": "11:00 AM - 4:30 PM",
+      "wednesday": "11:00 AM - 5:00 PM",
+      "thursday": "11:00 AM - 5:00 PM",
+      "friday": "11:00 AM - 5:00 PM",
+      "saturday": "11:00 AM - 5:00 PM",
       "sunday": "Closed",
       "monday": "Closed",
       "tuesday": "Closed"
     },
-    "season": "Opens March (see events for specific dates)",
-    "tours": "Hourly",
-    "note": "Hours may vary for special events. Last tour begins one hour before closing."
+    "season": "March 4 through mid-December",
+    "seasonNote": "Season opens March 4, 2026 for America 250 commemoration",
+    "tourTimes": ["11:00 AM", "1:00 PM", "3:00 PM"],
+    "tourNote": "Guided tours depart at scheduled times. Last tour begins at 3:00 PM.",
+    "note": "Hours may vary for special events."
   },
   "admission": {
     "adults": {
@@ -77,7 +79,32 @@
       "Learn about daily life in 1790s frontier Tennessee",
       "See craft demonstrations (varies by day)"
     ],
-    "accessibility": "Main house is accessible via ramp. Some outbuildings have uneven terrain.",
+    "accessibility": {
+      "summary": "Multiple tour options available for different accessibility needs",
+      "museumGallery": {
+        "name": "Museum Gallery Tour",
+        "description": "Indoor exhibit tour with artifacts and displays",
+        "adaCompliant": true,
+        "features": [
+          "Fully ADA compliant",
+          "No stairs or inclines",
+          "Climate controlled",
+          "Wheelchair accessible"
+        ]
+      },
+      "historicSiteTour": {
+        "name": "Historic Site Tour",
+        "description": "Outdoor living history tour of the grounds and buildings",
+        "adaCompliant": false,
+        "features": [
+          "Outdoor walking tour",
+          "Includes stairs and inclines",
+          "Uneven terrain at some outbuildings",
+          "Main house accessible via ramp"
+        ],
+        "note": "Please call ahead to discuss specific accessibility needs"
+      }
+    },
     "recommendations": [
       "Wear comfortable walking shoes",
       "Tours are outdoors—dress for weather",

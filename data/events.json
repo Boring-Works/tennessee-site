@@ -5,17 +5,43 @@
       "title": "Road to 250 Season Opening",
       "date": "2026-03-04",
       "endDate": null,
-      "time": "Online / Video Release",
+      "time": "10:00 AM",
       "type": "new",
-      "category": "digital",
-      "description": "Launch Rocky Mount's commemorative year with a video unveiling America 250 programming. First 250 community enrollment begins—be among the first Tennesseans to join the celebration.",
+      "category": "signature",
+      "description": "Rocky Mount's America 250 year begins. First 250 community enrollment opens—be among the first Tennesseans to join the celebration.",
       "ticketUrl": null,
       "requiresTicket": false,
       "featured": true
     },
     {
+      "id": "spring-break-camp-1",
+      "title": "Spring Break Camp Week 1",
+      "date": "2026-03-16",
+      "endDate": "2026-03-20",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Spring break adventure at Rocky Mount for Johnson City & Bristol school students. Hands-on frontier activities, crafts, and historical exploration.",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "featured": false
+    },
+    {
+      "id": "spring-break-camp-2",
+      "title": "Spring Break Camp Week 2",
+      "date": "2026-03-24",
+      "endDate": "2026-03-27",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Spring break adventure at Rocky Mount for Sullivan County school students. Hands-on frontier activities, crafts, and historical exploration.",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "featured": false
+    },
+    {
       "id": "lecture-byrd",
-      "title": "Lecture: Colonial Religion on the Frontier",
+      "title": "James P. Byrd Guest Lecture: Colonial Religion",
       "date": "2026-03-27",
       "endDate": null,
       "time": "2:00 PM",
@@ -29,18 +55,16 @@
       "featured": false
     },
     {
-      "id": "lecture-patton",
-      "title": "Lecture: Powder for Kings Mountain",
-      "date": "2026-04-18",
+      "id": "sullivan-co-250",
+      "title": "Sullivan County 250",
+      "date": "2026-04-17",
       "endDate": null,
-      "time": "2:00 PM",
+      "time": "10:00 AM - 4:00 PM",
       "type": "new",
-      "category": "lecture",
-      "speaker": "Lisa Bennett as Mary Patton",
-      "speakerTitle": "Living History Interpreter",
-      "description": "Meet Mary Patton, the woman who supplied gunpowder to the Overmountain Men. Lisa Bennett brings this Revolutionary War heroine to life through first-person interpretation.",
+      "category": "festival",
+      "description": "Celebrate Sullivan County's role in America's founding. Special programming highlighting local Revolutionary War history and the county's contribution to the Overmountain Men.",
       "ticketUrl": null,
-      "requiresTicket": true,
+      "requiresTicket": false,
       "featured": false
     },
     {
@@ -54,20 +78,18 @@
       "description": "Experience sheep shearing, wool processing, and colonial gardening techniques. This year featuring special America 250 interpretation connecting frontier agriculture to the Revolutionary era.",
       "ticketUrl": null,
       "requiresTicket": true,
-      "featured": false
+      "featured": true
     },
     {
-      "id": "lecture-bachelor",
-      "title": "Lecture: All In - The Overmountain Men's Gamble",
-      "date": "2026-05-15",
+      "id": "homeschool-spring",
+      "title": "Homeschool Day - Spring",
+      "date": "2026-05-14",
       "endDate": null,
-      "time": "2:00 PM",
-      "type": "new",
-      "category": "lecture",
-      "speaker": "Thomas Bachelor",
-      "speakerTitle": "Historian & Reenactor",
-      "description": "The 1780 march to Kings Mountain was a desperate gamble—not inevitable victory. Thomas Bachelor examines the risks taken by Sullivan County men who changed the course of the Revolution.",
-      "ticketUrl": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "recurring",
+      "category": "education",
+      "description": "Special programming for homeschool families. Living history tour, hands-on crafts, and educational activities designed for home educators.",
+      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
       "requiresTicket": true,
       "featured": false
     },
@@ -76,28 +98,13 @@
       "title": "Early Frontier Days & Colonial Trade Fair",
       "date": "2026-05-22",
       "endDate": "2026-05-24",
-      "time": "10:00 AM - 5:00 PM",
+      "time": "10:00 AM - 4:00 PM",
       "type": "new",
       "category": "festival",
-      "description": "Three days celebrating frontier life and Revolutionary-era trade. Living history demonstrations, period vendors, militia encampments, and authentic colonial crafts. In partnership with the Overmountain Victory Trail Association.",
-      "ticketUrl": null,
+      "description": "Three days celebrating frontier life and Revolutionary-era trade. Living history demonstrations, period vendors, militia encampments, and authentic colonial crafts. In collaboration with the Overmountain Victory Trail Association.",
+      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/289142/?full-items=yes&flow=408845",
       "requiresTicket": true,
       "featured": true
-    },
-    {
-      "id": "lecture-whitfield",
-      "title": "Lecture: William Blount and the Birth of Tennessee Government",
-      "date": "2026-05-29",
-      "endDate": null,
-      "time": "2:00 PM",
-      "type": "new",
-      "category": "lecture",
-      "speaker": "Dr. Caroline H. Whitfield",
-      "speakerTitle": "Historian",
-      "description": "William Blount, Constitution signer, was appointed by George Washington to govern the Southwest Territory. Learn how he chose Rocky Mount as his headquarters and laid the foundation for Tennessee statehood.",
-      "ticketUrl": null,
-      "requiresTicket": true,
-      "featured": false
     },
     {
       "id": "tn-230-birthday",
@@ -113,32 +120,57 @@
       "featured": false
     },
     {
-      "id": "lecture-doan",
-      "title": "Lecture: The Story of the American Flag",
+      "id": "america-250-flag-weekend",
+      "title": "America 250 Flag Weekend",
       "date": "2026-06-13",
-      "endDate": null,
-      "time": "11:00 AM",
+      "endDate": "2026-06-14",
+      "time": "10:00 AM - 5:00 PM",
       "type": "new",
-      "category": "lecture",
-      "speaker": "David Doan",
-      "speakerTitle": "Flag Historian",
-      "description": "From the Grand Union to the Stars and Stripes, explore the evolution of the American flag. Presented as part of Stitching Independence weekend.",
+      "category": "signature",
+      "description": "TN 230 Recognition, America 250 Flag Dedication ceremony, and the Betsy Ross Sip & Sew social event. Celebrate Tennessee's 230th birthday with flag history and textile arts.",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "featured": true
+    },
+    {
+      "id": "summer-camp-1",
+      "title": "Summer Camp Week 1",
+      "date": "2026-06-15",
+      "endDate": "2026-06-19",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Week-long summer camp adventure at Rocky Mount. Leadership, nature, and history for young explorers. Hands-on activities, frontier skills, and historical discovery.",
       "ticketUrl": null,
       "requiresTicket": true,
       "featured": false
     },
     {
-      "id": "stitching-independence",
-      "title": "Stitching Independence",
-      "date": "2026-06-13",
-      "endDate": "2026-06-14",
-      "time": "10:00 AM - 5:00 PM",
+      "id": "fathers-day-forge",
+      "title": "Father's Day Weekend at the Forge",
+      "date": "2026-06-20",
+      "endDate": null,
+      "time": "10:00 AM - 2:00 PM",
       "type": "new",
-      "category": "festival",
-      "description": "From fleece to flag—trace the journey of American independence through textile. Celebrate Tennessee's 230th birthday with the America 250 flag dedication ceremony, flag history lecture, and the Betsy Ross Sip & Sew social event.",
+      "category": "workshop",
+      "description": "Parent and child blacksmithing experience. Work side-by-side at the forge to create a keepsake. Limited to 10 pairs—reserve early.",
       "ticketUrl": null,
       "requiresTicket": true,
-      "featured": true
+      "capacity": 10,
+      "featured": false
+    },
+    {
+      "id": "summer-camp-2",
+      "title": "Summer Camp Week 2",
+      "date": "2026-06-22",
+      "endDate": "2026-06-26",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Week-long summer camp adventure at Rocky Mount. Leadership, nature, and history for young explorers. Hands-on activities, frontier skills, and historical discovery.",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "featured": false
     },
     {
       "id": "colonial-independence-day",
@@ -148,23 +180,34 @@
       "time": "10:00 AM - 4:00 PM",
       "type": "new",
       "category": "signature",
-      "description": "America's 250th birthday at the place where Tennessee's government began. The signature event of our commemorative year featuring the First 250 ceremony—where enrolled participants' names will be read aloud—period demonstrations, and patriotic celebration.",
+      "description": "America's 250th Birthday at the place where Tennessee's government began. The signature event of our commemorative year featuring the First 250 ceremony—where enrolled participants' names will be read aloud—period demonstrations, and patriotic celebration.",
       "ticketUrl": null,
       "requiresTicket": true,
       "featured": true
     },
     {
-      "id": "cherokee-heritage",
-      "title": "Cherokee Heritage Weekend",
-      "date": "2026-08-22",
-      "endDate": "2026-08-23",
+      "id": "back-to-school",
+      "title": "Back to School at the Frontier",
+      "date": "2026-08-01",
+      "endDate": null,
       "time": "10:00 AM - 4:00 PM",
       "type": "new",
-      "category": "festival",
-      "speaker": "Dr. Daniel Redbird Wolfe",
-      "speakerTitle": "Cherokee Historian",
-      "description": "Explore the Cherokee perspective on frontier Tennessee. Dr. Daniel Redbird Wolfe leads programming examining Cherokee culture, frontier diplomacy, and the complex relationships between settlers and native peoples.",
+      "category": "family",
+      "description": "Last adventure before school starts! Family-friendly frontier fun with games, crafts, and activities for all ages.",
       "ticketUrl": null,
+      "requiresTicket": true,
+      "featured": false
+    },
+    {
+      "id": "homeschool-late-summer",
+      "title": "Homeschool Day - Late Summer",
+      "date": "2026-08-29",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "recurring",
+      "category": "education",
+      "description": "Special programming for homeschool families. Living history tour, hands-on crafts, and educational activities designed for home educators.",
+      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
       "requiresTicket": true,
       "featured": false
     },
@@ -182,6 +225,19 @@
       "featured": true
     },
     {
+      "id": "ovta-victory-day",
+      "title": "OVTA Victory Day",
+      "date": "2026-09-24",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Commemorate the Overmountain Men's march to Kings Mountain. In partnership with the Overmountain Victory Trail Association. Date pending OVTA confirmation.",
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "featured": false
+    },
+    {
       "id": "harvest-fest",
       "title": "Harvest Fest",
       "date": "2026-10-10",
@@ -192,7 +248,7 @@
       "description": "Celebrate the autumn harvest with demonstrations of colonial food preservation, apple butter making, and period crafts. This year featuring special America 250 interpretation.",
       "ticketUrl": null,
       "requiresTicket": true,
-      "featured": false
+      "featured": true
     },
     {
       "id": "haunting",
@@ -202,10 +258,11 @@
       "time": "6:00 PM - 9:00 PM",
       "type": "recurring",
       "category": "seasonal",
-      "description": "Experience Rocky Mount after dark. Spooky tales from Tennessee's frontier past, candlelit tours, and seasonal treats. Thursday through Saturday evenings.",
+      "description": "Experience Rocky Mount after dark. Spooky tales from Tennessee's frontier past, candlelit tours, and seasonal treats. Thursday through Saturday evenings (Oct 15-17 & 22-24).",
       "ticketUrl": null,
       "requiresTicket": true,
-      "featured": false
+      "ageRecommendation": "13+",
+      "featured": true
     },
     {
       "id": "frontier-christmas",
@@ -215,7 +272,7 @@
       "time": "10:00 AM - 4:00 PM",
       "type": "recurring",
       "category": "seasonal",
-      "description": "Discover how frontier families celebrated the holidays. Period decorations, traditional crafts, and warm hospitality. Wednesday through Saturday during November.",
+      "description": "Discover how frontier families celebrated the holidays. Period decorations, traditional crafts, and warm hospitality. Wednesday through Saturday (Nov 4-7, 11-14, 18-21).",
       "ticketUrl": null,
       "requiresTicket": true,
       "featured": false
@@ -228,10 +285,75 @@
       "time": "5:00 PM - 8:00 PM",
       "type": "recurring",
       "category": "seasonal",
-      "description": "Rocky Mount by candlelight. Experience the magic of a colonial Christmas with carolers, warm cider, and the glow of candles throughout the historic site. Friday and Saturday evenings in December.",
+      "description": "Rocky Mount by candlelight. Experience the magic of a colonial Christmas with carolers, warm cider, and the glow of candles throughout the historic site. Friday and Saturday evenings (Dec 4-5 & 11-12).",
       "ticketUrl": null,
       "requiresTicket": true,
-      "featured": false
+      "featured": true
     }
-  ]
+  ],
+  "recurringPrograms": {
+    "blacksmithWorkshops": {
+      "title": "Blacksmith Workshops",
+      "description": "Learn the art of the forge with hands-on blacksmithing instruction.",
+      "time": "10:00 AM - 2:00 PM",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "dates": [
+        "2026-02-21",
+        "2026-03-28",
+        "2026-04-18",
+        "2026-05-16",
+        "2026-07-18",
+        "2026-08-15",
+        "2026-09-19",
+        "2026-10-17"
+      ]
+    },
+    "hearthCooking": {
+      "title": "Hearth Cooking",
+      "description": "Experience authentic 18th-century cooking techniques at the open hearth.",
+      "time": "10:00 AM - 2:00 PM",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "dates": ["2026-02-28", "2026-03-28", "2026-06-27", "2026-07-25", "2026-08-22", "2026-09-26"]
+    },
+    "twilightOnTheMount": {
+      "title": "Twilight on the Mount",
+      "description": "Evening tours of Rocky Mount as the sun sets. A unique perspective on frontier life.",
+      "time": "7:00 PM",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "dates": [
+        "2026-05-28",
+        "2026-06-11",
+        "2026-06-25",
+        "2026-07-09",
+        "2026-07-23",
+        "2026-08-06",
+        "2026-08-20"
+      ]
+    },
+    "homeschoolDays": {
+      "title": "Homeschool Days",
+      "description": "Special programming for homeschool families with living history tours and hands-on activities.",
+      "time": "10:00 AM - 4:00 PM",
+      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/258228/?full-items=yes&flow=no",
+      "requiresTicket": true,
+      "dates": ["2026-02-19", "2026-04-16", "2026-05-14", "2026-09-17", "2026-10-29"]
+    },
+    "behindTheScenes": {
+      "title": "Behind the Scenes Exclusive Tour",
+      "description": "Limited-capacity tour with artifact handling, collections access, heritage animal encounters, and coffee & pastries. Last Saturday of each month.",
+      "time": "9:00 AM - 11:00 AM",
+      "ticketUrl": "https://fareharbor.com/embeds/book/rockymountmuseum/items/658959/calendar/2026/01/?full-items=yes",
+      "requiresTicket": true,
+      "capacity": 10
+    }
+  },
+  "first250": {
+    "enrollmentStart": "2026-03-04",
+    "enrollmentEnd": "2026-06-01",
+    "ceremonyDate": "2026-07-04",
+    "url": "https://rockymountmuseum.com/first250"
+  }
 }

@@ -44,3 +44,66 @@
     padding: 10rem 2rem 5rem;
   }
 }
+
+/* ============================================
+   GOVERNING THE TERRITORY SECTION
+   ============================================ */
+
+.story-governing {
+  background: var(--cream);
+  padding: 4rem 1.5rem;
+}
+
+.story-governing-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.story-governing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.story-governing-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0 0 1rem;
+}
+
+.story-governing-intro {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.story-governing-map {
+  margin: 2.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.story-governing-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.story-governing-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--foreground);
+  margin: 0 0 1.25rem;
+}
+
+.story-governing-content p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .story-governing {
+    padding: 5rem 2rem;
+  }
+}

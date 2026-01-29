@@ -262,6 +262,16 @@ export default function EvidencePage() {
             sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
             featured
           />
+          <Link
+            href="/evidence/documents/blount-arrival-1790#glass-windows"
+            className={styles.receiptLink}
+          >
+            <span className={styles.receiptIcon}>📄</span>
+            <span className={styles.receiptText}>
+              Read the full letter with this passage highlighted
+            </span>
+            <span className={styles.receiptArrow}>→</span>
+          </Link>
           <ContextPanel>
             Blount wrote this letter on October 20, 1790, nine days after arriving. The &ldquo;Glass
             Windows&rdquo; detail wasn&apos;t idle observation—on the frontier, most settlers used

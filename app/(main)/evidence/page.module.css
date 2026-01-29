@@ -802,6 +802,55 @@
 }
 
 /* ============================================
+   RECEIPT LINK - Link to full document
+   ============================================ */
+
+.receiptLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, var(--wood-light) 0%, var(--wood-medium) 100%);
+  border: 1px solid var(--brass);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all var(--transition-dignified);
+}
+
+.receiptLink:hover {
+  background: linear-gradient(135deg, var(--wood-medium) 0%, var(--wood-dark) 100%);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 2px 6px rgba(201, 162, 39, 0.15);
+}
+
+.receiptIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.receiptText {
+  flex: 1;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--cream-light);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.receiptArrow {
+  font-size: 1rem;
+  color: var(--brass);
+  transition: transform var(--transition-dignified);
+}
+
+.receiptLink:hover .receiptArrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
    CONTEXT PANEL - Expandable Document Info
    ============================================ */
 

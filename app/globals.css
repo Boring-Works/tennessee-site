@@ -59,9 +59,9 @@
      ============================================ */
 
   /* Semantic Gold Tokens */
-  --gold-primary: var(--gold-primary); /* Main brand gold - use for primary brand elements */
-  --gold-hover: var(--gold-hover); /* Hover state - brighter for interactive feedback */
-  --gold-shimmer: var(--gold-shimmer); /* Glows, borders, overlays - 40% opacity */
+  --gold-primary: #c9a227; /* Main brand gold - use for primary brand elements */
+  --gold-hover: #d4af37; /* Hover state - brighter for interactive feedback */
+  --gold-shimmer: rgba(201, 162, 39, 0.4); /* Glows, borders, overlays - 40% opacity */
 
   /* ============================================
      NAVIGATION DESIGN TOKENS
@@ -108,12 +108,36 @@
   --header-height-scrolled: 64px;
   --header-height-mobile: 56px;
 
-  /* Animation */
-  --nav-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --nav-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --nav-duration-open: 400ms;
-  --nav-duration-close: 280ms;
-  --nav-duration-hover: 300ms;
+  /* ============================================
+     MOTION DESIGN SYSTEM
+     Standardized animation durations and easing curves
+     Usage: Use --duration-{speed} with --ease-{curve} for all animations
+     ============================================ */
+
+  /* Duration Tokens */
+  --duration-instant: 100ms; /* Micro-interactions: toggles, ripples */
+  --duration-fast: 200ms; /* Hovers, focus states, small transitions */
+  --duration-base: 300ms; /* Standard transitions: cards, buttons */
+  --duration-moderate: 400ms; /* Modal opens, dropdowns, panels */
+  --duration-slow: 600ms; /* Hero animations, scroll reveals */
+  --duration-dramatic: 800ms; /* Page transitions, elaborate entrances */
+  --duration-ambient: 2000ms; /* Decorative loops: pulses, glows */
+
+  /* Easing Curve Tokens */
+  --ease-standard: ease; /* Browser default: all-purpose */
+  --ease-out: ease-out; /* Browser ease-out: exits, fades */
+  --ease-in-out: ease-in-out; /* Browser ease-in-out: loops, pulses */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1); /* Material ease: smooth transitions */
+  --ease-decelerate: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slow finish: entrances */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1); /* Bouncy spring: playful motion */
+  --ease-elegant: cubic-bezier(0.05, 0.8, 0.15, 1); /* Dramatic: hero animations */
+
+  /* Navigation-Specific (Legacy - maintained for backwards compatibility) */
+  --nav-ease-spring: var(--ease-spring);
+  --nav-ease-out: var(--ease-smooth);
+  --nav-duration-open: var(--duration-moderate);
+  --nav-duration-close: 280ms; /* Slightly faster close */
+  --nav-duration-hover: var(--duration-base);
   --nav-stagger: 50ms;
 
   /* Focus */
@@ -125,12 +149,20 @@
   --nav-fab-size: 56px;
 }
 
-/* Reduced motion */
+/* Reduced motion - respects user accessibility preferences */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --nav-duration-open: 0.01ms;
-    --nav-duration-close: 0.01ms;
-    --nav-duration-hover: 0.01ms;
+    /* Override all durations to near-instant for accessibility */
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-moderate: 1ms;
+    --duration-slow: 1ms;
+    --duration-dramatic: 1ms;
+    --duration-ambient: 1ms;
+    --nav-duration-open: 1ms;
+    --nav-duration-close: 1ms;
+    --nav-duration-hover: 1ms;
     --nav-stagger: 0ms;
   }
 }
@@ -165,22 +197,64 @@
   --color-almanac-warning: var(--almanac-warning);
   --color-almanac-danger: var(--almanac-danger);
 
+  /* ============================================
+     SPACING & LAYOUT SYSTEM
+     8pt base grid (0.5rem = 8px) with semantic naming
+     Based on codebase analysis: 1rem (309x), 1.5rem (303x), 2rem (208x) most common
+     Usage: Use --space-{size} for component spacing, --layout-{context} for pages
+     ============================================ */
+
+  /* Base Spacing Scale (8pt grid) */
+  --space-3xs: 0.125rem; /* 2px  - Minimal separator, fine details */
+  --space-2xs: 0.25rem; /* 4px  - Badges, tight inline spacing */
+  --space-xs: 0.5rem; /* 8px  - Icon gaps, compact elements */
+  --space-sm: 0.75rem; /* 12px - Small padding, tight layouts */
+  --space-md: 1rem; /* 16px - Base spacing unit (most common) */
+  --space-lg: 1.5rem; /* 24px - Card padding, comfortable spacing */
+  --space-xl: 2rem; /* 32px - Section spacing, large cards */
+  --space-2xl: 2.5rem; /* 40px - Section breaks */
+  --space-3xl: 3rem; /* 48px - Major section spacing */
+  --space-4xl: 4rem; /* 64px - Page section padding */
+  --space-5xl: 5rem; /* 80px - Large page sections */
+  --space-6xl: 6rem; /* 96px - Hero spacing */
+  --space-7xl: 7rem; /* 112px - Maximum vertical rhythm */
+  --space-8xl: 8rem; /* 128px - Rare, dramatic spacing */
+
+  /* Gap Scale (for flex/grid gaps) */
+  --gap-xs: 0.5rem; /* 8px  - Tight icon + text */
+  --gap-sm: 0.75rem; /* 12px - Compact layouts */
+  --gap-md: 1rem; /* 16px - Standard gap (most common) */
+  --gap-lg: 1.5rem; /* 24px - Comfortable card grids */
+  --gap-xl: 2rem; /* 32px - Spacious layouts */
+  --gap-2xl: 2.5rem; /* 40px - Wide grids */
+  --gap-3xl: 3rem; /* 48px - Hero grid spacing */
+  --gap-4xl: 4rem; /* 64px - Maximum grid gaps */
+
+  /* Semantic Layout Tokens */
+  --layout-page-padding-mobile: 1.5rem; /* Mobile horizontal padding */
+  --layout-page-padding-tablet: 2rem; /* Tablet horizontal padding */
+  --layout-page-padding-desktop: clamp(2rem, 5vw, 7.5rem); /* Fluid desktop padding */
+
+  --layout-section-y-mobile: 4rem; /* Mobile vertical section spacing */
+  --layout-section-y-tablet: 5rem; /* Tablet vertical section spacing */
+  --layout-section-y-desktop: 5rem; /* Desktop vertical section spacing */
+
   /* Card System - Border Colors */
   --color-card-border: rgba(10, 22, 40, 0.1);
   --color-card-border-hover: var(--accent);
 
   /* Card System - Spacing */
-  --spacing-card-sm: 1rem;
-  --spacing-card-md: 1.5rem;
-  --spacing-card-lg: 2rem;
+  --spacing-card-sm: 1rem; /* Small cards, compact layouts */
+  --spacing-card-md: 1.5rem; /* Standard cards (most common) */
+  --spacing-card-lg: 2rem; /* Large cards, spacious layouts */
 
   /* Card System - Border Radius */
   --radius-card: 2px;
 
-  /* Transitions */
-  --transition-card: 400ms;
-  --transition-standard: 400ms;
-  --transition-dramatic: 600ms;
+  /* Composite Transitions (Legacy - use duration + easing tokens for new work) */
+  --transition-card: var(--duration-moderate) var(--ease-smooth);
+  --transition-standard: var(--duration-moderate) var(--ease-smooth);
+  --transition-dramatic: var(--duration-slow) var(--ease-decelerate);
 }
 
 /* ============================================

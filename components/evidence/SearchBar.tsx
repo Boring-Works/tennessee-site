@@ -137,7 +137,13 @@ export function SearchBar({
       </div>
 
       {isOpen && results.length > 0 && (
-        <div ref={resultsRef} id="search-results" className={styles.results} role="listbox">
+        <div
+          ref={resultsRef}
+          id="search-results"
+          className={styles.results}
+          role="listbox"
+          aria-label="Search results"
+        >
           {results.map((result, i) => (
             <Link
               key={result.passage_id || result.doc_id}
@@ -171,7 +177,9 @@ export function SearchBar({
       )}
 
       {isOpen && query && results.length === 0 && (
-        <div className={styles.noResults}>No documents found for &ldquo;{query}&rdquo;</div>
+        <div className={styles.noResults} role="status" aria-live="polite">
+          No documents found for &ldquo;{query}&rdquo;
+        </div>
       )}
     </div>
   )

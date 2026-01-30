@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useId } from 'react'
 import type { DocumentVerification } from '@/lib/evidence/types'
 
 interface VerificationBadgeProps {
@@ -31,27 +32,45 @@ const BADGE_CONFIG = {
 }
 
 export function VerificationBadge({ verification, size = 'md' }: VerificationBadgeProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const tooltipId = useId()
   const config = BADGE_CONFIG[verification.status]
 
   const sizeClasses = size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-3 py-1'
 
   return (
-    <div className="group relative">
-      <span
+    <div className="relative inline-block">
+      <button
+        type="button"
         className={`
           inline-flex items-center gap-1.5 rounded-full border
-          font-medium cursor-help
+          font-medium cursor-help min-h-[44px] min-w-[44px]
+          bg-transparent appearance-none
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-almanac-parchment/50
           ${config.className}
           ${sizeClasses}
         `}
-        title={verification.method || `${config.label}: ${verification.source_count} source(s)`}
+        aria-describedby={tooltipId}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        onFocus={() => setIsOpen(true)}
+        onBlur={() => setIsOpen(false)}
       >
-        <span>{config.icon}</span>
+        <span aria-hidden="true">{config.icon}</span>
         <span>{config.label}</span>
-      </span>
+      </button>
 
-      {/* Hover tooltip with details */}
-      <div className="absolute top-full right-0 mt-2 w-64 p-3 rounded-lg bg-midnight border border-white/10 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+      {/* Tooltip with details - visible on hover and focus */}
+      <div
+        id={tooltipId}
+        role="tooltip"
+        className={`
+          absolute top-full right-0 mt-2 w-64 p-3 rounded-lg
+          bg-midnight border border-white/10 shadow-xl
+          transition-all z-10
+          ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+        `}
+      >
         <p className="text-xs text-almanac-parchment/80">
           {verification.source_count} source{verification.source_count !== 1 ? 's' : ''} verified
         </p>

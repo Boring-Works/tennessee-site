@@ -49,8 +49,13 @@
 
 .clearButton {
   position: absolute;
-  right: 0.75rem;
-  padding: 0.25rem;
+  right: 0.25rem;
+  /* WCAG 2.5.5: Touch target minimum 44x44px */
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.25rem;
   line-height: 1;
   /* WCAG 2.1 AA: Increased from 0.5 to 0.65 for 4.5:1 contrast */

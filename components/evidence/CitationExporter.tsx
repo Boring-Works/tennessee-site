@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 interface CitationExporterProps {
   document: {
@@ -109,6 +109,15 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
   const [isOpen, setIsOpen] = useState(false)
   const [copiedFormat, setCopiedFormat] = useState<CitationFormat | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const menuId = `citation-menu-${document.id}`
+
+  // Return focus to trigger when closing
+  const closeDropdown = useCallback(() => {
+    setIsOpen(false)
+    triggerRef.current?.focus()
+  }, [])
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -121,6 +130,58 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
     if (isOpen) {
       window.addEventListener('mousedown', handleClickOutside)
       return () => window.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  // Focus trap and Escape key handler
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        closeDropdown()
+        return
+      }
+
+      if (e.key === 'Tab') {
+        const menuElement = menuRef.current
+        if (!menuElement) return
+
+        const focusableElements = menuElement.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+
+        if (focusableElements.length === 0) return
+
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (e.shiftKey) {
+          // Shift+Tab: if on first element, go to last
+          if (window.document.activeElement === firstElement) {
+            e.preventDefault()
+            lastElement.focus()
+          }
+        } else {
+          // Tab: if on last element, go to first
+          if (window.document.activeElement === lastElement) {
+            e.preventDefault()
+            firstElement.focus()
+          }
+        }
+      }
+    }
+
+    window.document.addEventListener('keydown', handleKeyDown)
+    return () => window.document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, closeDropdown])
+
+  // Focus first menu item when dropdown opens
+  useEffect(() => {
+    if (isOpen && menuRef.current) {
+      const firstMenuItem = menuRef.current.querySelector<HTMLElement>('button[role="menuitem"]')
+      firstMenuItem?.focus()
     }
   }, [isOpen])
 
@@ -156,6 +217,7 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
     <div ref={dropdownRef} className="relative inline-block">
       {/* Trigger Button */}
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="
@@ -168,6 +230,8 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
         title="Cite this document"
         aria-expanded={isOpen}
         aria-haspopup="menu"
+        aria-controls={isOpen ? menuId : undefined}
+        aria-label="Cite this document - choose citation format"
       >
         <span className="text-base leading-none">&#x1F4CB;</span>
         <span>Cite</span>
@@ -176,6 +240,8 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
       {/* Dropdown Menu */}
       {isOpen && (
         <div
+          ref={menuRef}
+          id={menuId}
           className="
             absolute top-full right-0 mt-1 z-20
             min-w-[140px] py-1
@@ -183,6 +249,7 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
             rounded-lg shadow-xl
           "
           role="menu"
+          aria-label="Citation format options"
         >
           {(Object.keys(FORMAT_LABELS) as CitationFormat[]).map((format) => (
             <button
@@ -190,10 +257,11 @@ export function CitationExporter({ document, passageAnchor }: CitationExporterPr
               type="button"
               onClick={() => handleCopy(format)}
               className="
-                w-full px-3 py-2 text-left text-sm
+                w-full px-3 py-3 text-left text-sm
                 text-almanac-parchment/80 hover:text-almanac-gold
                 hover:bg-white/5 transition-colors
                 flex items-center justify-between gap-2
+                min-h-[44px]
               "
               role="menuitem"
             >

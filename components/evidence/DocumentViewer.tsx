@@ -3,13 +3,22 @@
 import { useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
-import rehypeSanitize from 'rehype-sanitize'
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import type { Document } from '@/lib/evidence/types'
 import { VerificationBadge } from './VerificationBadge'
 
 interface DocumentViewerProps {
   document: Document
   highlightId?: string
+}
+
+// Custom sanitization schema that allows id and class on spans for passage highlighting
+const sanitizeSchema = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    span: [...(defaultSchema.attributes?.span ?? []), 'id', 'className'],
+  },
 }
 
 export function DocumentViewer({ document: doc, highlightId }: DocumentViewerProps) {
@@ -87,18 +96,17 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
           prose-hr:border-white/10"
       >
         <ReactMarkdown
-          rehypePlugins={[rehypeRaw, rehypeSanitize]}
+          rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
           components={{
             // Handle passage spans with highlighting
             span: (componentProps) => {
               // Defensive: handle cases where props might be undefined or malformed
-              if (!componentProps || typeof componentProps !== 'object') {
-                return <span />
-              }
-              const id = componentProps.id as string | undefined
-              const className = componentProps.className as string | undefined
-              const children = componentProps.children
-              const isHighlighted = id === highlightId
+              // react-markdown v10 may pass undefined props in certain edge cases
+              const props = componentProps ?? {}
+              const id = typeof props.id === 'string' ? props.id : undefined
+              const className = typeof props.className === 'string' ? props.className : undefined
+              const children = props.children
+              const isHighlighted = Boolean(id && id === highlightId)
               const isPassage = className === 'passage'
 
               return (
@@ -107,7 +115,7 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
                   className={`
                     ${isPassage ? 'block my-4 py-3 px-4 rounded border-l-4 border-gold-leaf/30 bg-white/5' : ''}
                     ${isHighlighted ? 'bg-gold-leaf/20 border-gold-leaf scroll-mt-24 animate-pulse-once' : ''}
-                  `}
+                  `.trim()}
                 >
                   {children}
                 </span>

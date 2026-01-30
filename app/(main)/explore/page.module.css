@@ -101,9 +101,21 @@
 
 .explore-trail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .explore-trail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .explore-trail-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Site Card */
@@ -194,8 +206,20 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .explore-nearby-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .explore-nearby-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .explore-nearby-item {
@@ -255,8 +279,20 @@
 
 .explore-itineraries-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: 1fr;
   gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .explore-itineraries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .explore-itineraries-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Itinerary Card */
@@ -406,8 +442,20 @@
 
 .explore-resources-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .explore-resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .explore-resources-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .explore-resource-section {

@@ -191,7 +191,7 @@
 .dual-countdown {
   display: flex;
   justify-content: center;
-  gap: 4rem;
+  gap: clamp(1.5rem, 8vw, 4rem);
 }
 
 .countdown-item {
@@ -217,17 +217,13 @@
   color: rgba(245, 241, 232, 0.7);
 }
 
-@media (max-width: 480px) {
-  .dual-countdown {
-    gap: 2rem;
-  }
-
+@media (max-width: 375px) {
   .countdown-label {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
 
   .countdown-days {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -475,16 +471,30 @@
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.25rem;
-  max-width: 520px;
+  max-width: 260px;
   width: 100%;
 }
 
-@media (max-width: 500px) {
+@media (min-width: 500px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 520px;
+  }
+}
+
+@media (min-width: 768px) {
   .cards-container {
     grid-template-columns: 1fr;
-    max-width: 260px;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 520px;
   }
 }
 

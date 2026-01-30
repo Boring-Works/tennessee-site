@@ -1,7 +1,7 @@
 /* Our Story Page Styles */
 
 .story-header {
-  padding: 8rem 1.5rem 4rem;
+  padding: var(--space-8xl) var(--layout-page-padding-mobile) var(--space-4xl);
   background: linear-gradient(to bottom, rgba(10, 22, 40, 1) 0%, rgba(10, 22, 40, 0.95) 100%);
   text-align: center;
 }
@@ -18,7 +18,7 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold, var(--gold-primary));
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .story-headline {
@@ -27,7 +27,7 @@
   font-weight: 700;
   line-height: 1.2;
   color: white;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
 }
 
 .story-subhead {
@@ -41,7 +41,7 @@
 
 @media (min-width: 768px) {
   .story-header {
-    padding: 10rem 2rem 5rem;
+    padding: 10rem var(--layout-page-padding-tablet) var(--space-5xl);
   }
 }
 
@@ -51,7 +51,7 @@
 
 .story-governing {
   background: var(--cream);
-  padding: 4rem 1.5rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
 }
 
 .story-governing-inner {
@@ -61,7 +61,7 @@
 
 .story-governing-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-3xl);
 }
 
 .story-governing-headline {
@@ -69,7 +69,7 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 400;
   color: var(--primary);
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-md);
 }
 
 .story-governing-intro {
@@ -81,7 +81,7 @@
 }
 
 .story-governing-map {
-  margin: 2.5rem 0;
+  margin: var(--space-2xl) 0;
   display: flex;
   justify-content: center;
 }
@@ -104,6 +104,15 @@
 
 @media (min-width: 768px) {
   .story-governing {
-    padding: 5rem 2rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
+}
+
+/* ============================================
+   REDUCED MOTION - Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable transitions for users who prefer reduced motion */
+  /* Note: No transitions currently exist in this file.
+     This block serves as a placeholder for future additions. */
 }

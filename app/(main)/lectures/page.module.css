@@ -7,14 +7,14 @@
   position: relative;
   background: var(--primary);
   color: white;
-  padding: 7rem 1rem 4rem;
+  padding: var(--space-7xl) var(--layout-page-padding-mobile) var(--space-4xl);
   text-align: center;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .series-hero {
-    padding: 8rem 1.5rem 5rem;
+    padding: var(--space-8xl) var(--layout-page-padding-tablet) var(--space-5xl);
   }
 }
 
@@ -37,15 +37,15 @@
 .series-milestone-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--primary);
   background: var(--accent);
-  padding: 0.5rem 1rem;
-  margin-bottom: 1.5rem;
+  padding: var(--space-xs) var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .series-milestone-icon {
@@ -55,7 +55,7 @@
 .series-headline {
   font-family: var(--font-serif);
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .series-headline-small {
@@ -65,7 +65,7 @@
   font-weight: 400;
   font-style: italic;
   color: var(--accent);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .series-headline-large {
@@ -78,7 +78,7 @@
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: rgba(255, 255, 255, 0.9);
   max-width: 36rem;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--space-xl);
   line-height: 1.6;
 }
 
@@ -86,8 +86,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: var(--gap-lg);
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 640px) {
@@ -153,12 +153,12 @@
   z-index: 100;
   background: var(--cream);
   border-bottom: 1px solid rgba(10, 22, 40, 0.1);
-  padding: 0.75rem 1rem;
+  padding: var(--space-sm) var(--space-md);
 }
 
 @media (min-width: 768px) {
   .series-timeline {
-    padding: 1rem 1.5rem;
+    padding: var(--space-md) var(--space-lg);
   }
 }
 
@@ -203,17 +203,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem 1rem;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-md);
   text-decoration: none;
   position: relative;
   z-index: 1;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 @media (min-width: 640px) {
   .series-timeline-point {
-    padding: 0.5rem 1.5rem;
+    padding: var(--space-xs) var(--space-lg);
   }
 }
 
@@ -231,7 +231,7 @@
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--primary);
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .series-timeline-dot {
@@ -240,7 +240,7 @@
   border-radius: 50%;
   background: var(--secondary);
   border: 2px solid var(--cream);
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 .series-timeline-date {
@@ -258,14 +258,14 @@
 
 /* Series Prologue */
 .series-prologue {
-  padding: 3rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--burgundy);
   color: white;
 }
 
 @media (min-width: 768px) {
   .series-prologue {
-    padding: 4rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -279,14 +279,14 @@
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
 }
 
 .series-prologue-text {
   font-size: clamp(0.9375rem, 2vw, 1.0625rem);
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-md);
 }
 
 .series-prologue-text:last-child {
@@ -295,13 +295,13 @@
 
 /* Series Lectures List */
 .series-lectures {
-  padding: 3rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream-dark);
 }
 
 @media (min-width: 768px) {
   .series-lectures {
-    padding: 4rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -313,15 +313,15 @@
 /* Individual Lecture */
 .series-lecture {
   display: flex;
-  gap: 1rem;
-  padding-bottom: 3rem;
-  scroll-margin-top: 5rem;
+  gap: var(--gap-md);
+  padding-bottom: var(--space-3xl);
+  scroll-margin-top: var(--space-5xl);
 }
 
 @media (min-width: 768px) {
   .series-lecture {
-    gap: 2rem;
-    padding-bottom: 4rem;
+    gap: var(--gap-xl);
+    padding-bottom: var(--space-4xl);
   }
 }
 
@@ -368,7 +368,7 @@
   flex: 1;
   width: 2px;
   background: rgba(10, 22, 40, 0.15);
-  margin-top: 0.75rem;
+  margin-top: var(--space-sm);
 }
 
 .series-lecture:last-child .series-lecture-line {
@@ -387,16 +387,16 @@
 /* Lecture Header */
 .series-lecture-header {
   display: flex;
-  gap: 1rem;
-  padding: 1.25rem;
+  gap: var(--gap-md);
+  padding: var(--spacing-card-md);
   background: var(--primary);
   color: white;
 }
 
 @media (min-width: 768px) {
   .series-lecture-header {
-    gap: 1.5rem;
-    padding: 1.5rem;
+    gap: var(--gap-lg);
+    padding: var(--spacing-card-md);
   }
 }
 
@@ -412,7 +412,7 @@
   flex-direction: column;
   align-items: center;
   background: var(--secondary);
-  padding: 0.5rem 0.75rem;
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 2px;
 }
 
@@ -471,14 +471,14 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
+  gap: var(--gap-sm);
+  padding: var(--space-md) var(--spacing-card-md);
   border-bottom: 1px solid rgba(10, 22, 40, 0.08);
 }
 
 @media (min-width: 768px) {
   .series-lecture-speaker {
-    padding: 1.25rem 1.5rem;
+    padding: var(--spacing-card-md) var(--spacing-card-md);
   }
 }
 
@@ -509,13 +509,13 @@
   text-transform: uppercase;
   color: var(--burgundy);
   background: rgba(114, 47, 55, 0.1);
-  padding: 0.25rem 0.625rem;
+  padding: var(--space-2xs) 0.625rem;
   border-radius: 2px;
 }
 
 /* Lecture Body */
 .series-lecture-desc {
-  padding: 1rem 1.25rem 0;
+  padding: var(--space-md) var(--spacing-card-md) 0;
   font-size: 0.9375rem;
   line-height: 1.7;
   color: var(--foreground);
@@ -524,12 +524,12 @@
 
 @media (min-width: 768px) {
   .series-lecture-desc {
-    padding: 1.25rem 1.5rem 0;
+    padding: var(--spacing-card-md) var(--spacing-card-md) 0;
   }
 }
 
 .series-lecture-format {
-  padding: 0.75rem 1.25rem 0;
+  padding: var(--space-sm) var(--spacing-card-md) 0;
   font-size: 0.8125rem;
   color: var(--secondary);
   margin: 0;
@@ -537,18 +537,18 @@
 
 @media (min-width: 768px) {
   .series-lecture-format {
-    padding: 0.75rem 1.5rem 0;
+    padding: var(--space-sm) var(--spacing-card-md) 0;
   }
 }
 
 /* You'll Discover */
 .series-lecture-discover {
-  padding: 1rem 1.25rem;
+  padding: var(--space-md) var(--spacing-card-md);
 }
 
 @media (min-width: 768px) {
   .series-lecture-discover {
-    padding: 1.25rem 1.5rem;
+    padding: var(--spacing-card-md) var(--spacing-card-md);
   }
 }
 
@@ -558,7 +558,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--secondary);
-  margin: 0 0 0.75rem;
+  margin: 0 0 var(--space-sm);
 }
 
 .series-lecture-discover-list {
@@ -567,13 +567,13 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
 }
 
 .series-lecture-discover-list li {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   font-size: 0.875rem;
   color: var(--foreground);
   line-height: 1.5;
@@ -588,12 +588,12 @@
 
 /* Speaker Bio (expandable) */
 .series-lecture-bio {
-  padding: 0 1.25rem;
+  padding: 0 var(--spacing-card-md);
 }
 
 @media (min-width: 768px) {
   .series-lecture-bio {
-    padding: 0 1.5rem;
+    padding: 0 var(--spacing-card-md);
   }
 }
 
@@ -605,7 +605,7 @@
   font-weight: 600;
   color: var(--primary);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .series-lecture-bio-toggle:hover {
@@ -620,7 +620,7 @@
 .series-lecture-bio-icon {
   width: 1rem;
   height: 1rem;
-  transition: transform 0.2s ease;
+  transition: transform var(--duration-fast) var(--ease-standard);
 }
 
 .series-lecture-bio[open] .series-lecture-bio-icon {
@@ -631,8 +631,8 @@
   font-size: 0.8125rem;
   line-height: 1.7;
   color: var(--text-light);
-  margin: 0.75rem 0 0;
-  padding-left: 1rem;
+  margin: var(--space-sm) 0 0;
+  padding-left: var(--space-md);
   border-left: 2px solid rgba(10, 22, 40, 0.1);
 }
 
@@ -640,9 +640,9 @@
 .series-lecture-connection {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  margin: 1rem 1.25rem 0;
-  padding: 0.875rem 1rem;
+  gap: var(--gap-xs);
+  margin: var(--space-md) var(--spacing-card-md) 0;
+  padding: 0.875rem var(--space-md);
   font-size: 0.8125rem;
   font-style: italic;
   color: var(--secondary);
@@ -652,7 +652,7 @@
 
 @media (min-width: 768px) {
   .series-lecture-connection {
-    margin: 1rem 1.5rem 0;
+    margin: var(--space-md) var(--spacing-card-md) 0;
   }
 }
 
@@ -663,7 +663,7 @@
 
 /* Special note */
 .series-lecture-note {
-  padding: 0.75rem 1.25rem 1.25rem;
+  padding: var(--space-sm) var(--spacing-card-md) var(--spacing-card-md);
   font-size: 0.75rem;
   font-style: italic;
   color: var(--text-light);
@@ -672,19 +672,19 @@
 
 @media (min-width: 768px) {
   .series-lecture-note {
-    padding: 0.75rem 1.5rem 1.5rem;
+    padding: var(--space-sm) var(--spacing-card-md) var(--spacing-card-md);
   }
 }
 
 /* Beyond the Series */
 .series-beyond {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream);
 }
 
 @media (min-width: 768px) {
   .series-beyond {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -695,7 +695,7 @@
 
 .series-beyond-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 .series-beyond-eyebrow {
@@ -704,7 +704,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--secondary);
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-xs);
 }
 
 .series-beyond-headline {
@@ -712,7 +712,7 @@
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   color: var(--primary);
-  margin: 0 0 0.75rem;
+  margin: 0 0 var(--space-sm);
 }
 
 .series-beyond-intro {
@@ -726,17 +726,17 @@
 /* Beyond Event Card */
 .series-beyond-event {
   display: flex;
-  gap: 1.25rem;
+  gap: var(--gap-md);
   background: white;
   border: 1px solid rgba(10, 22, 40, 0.1);
-  padding: 1.5rem;
+  padding: var(--spacing-card-md);
   border-left: 4px solid var(--secondary);
 }
 
 @media (min-width: 768px) {
   .series-beyond-event {
-    padding: 2rem;
-    gap: 2rem;
+    padding: var(--spacing-card-lg);
+    gap: var(--gap-xl);
   }
 }
 
@@ -777,8 +777,8 @@
   text-transform: uppercase;
   color: var(--secondary);
   border: 1px solid var(--secondary);
-  padding: 0.1875rem 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.1875rem var(--space-xs);
+  margin-bottom: var(--space-xs);
 }
 
 .series-beyond-event-title {
@@ -786,18 +786,18 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--primary);
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-xs);
 }
 
 .series-beyond-event-desc {
   font-size: 0.875rem;
   color: var(--foreground);
   line-height: 1.6;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-md);
 }
 
 .series-beyond-event-speaker {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .series-beyond-event-speaker-name {
@@ -822,7 +822,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--secondary);
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .series-beyond-event-link:hover {
@@ -837,7 +837,7 @@
 /* Series CTA */
 .series-cta {
   position: relative;
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--primary);
   color: white;
   text-align: center;
@@ -846,7 +846,7 @@
 
 @media (min-width: 768px) {
   .series-cta {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -870,39 +870,39 @@
   font-family: var(--font-serif);
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-xs);
 }
 
 .series-cta-subheadline {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 2rem;
+  margin: 0 0 var(--space-xl);
 }
 
 .series-cta-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 480px) {
   .series-cta-actions {
     flex-direction: row;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--gap-md);
   }
 }
 
 .series-cta-btn {
   display: inline-block;
-  padding: 0.875rem 2rem;
+  padding: 0.875rem var(--space-xl);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-standard);
 }
 
 .series-cta-btn--primary {
@@ -934,7 +934,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;

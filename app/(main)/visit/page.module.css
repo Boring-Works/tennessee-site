@@ -12,14 +12,20 @@
   position: relative;
   background: var(--primary);
   color: white;
-  padding: 7rem 1rem 4rem;
+  padding: var(--space-6xl) var(--layout-page-padding-mobile) var(--space-4xl);
   text-align: center;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .visit-hero {
-    padding: 8rem 1.5rem 5rem;
+    padding: var(--space-7xl) var(--layout-page-padding-tablet) var(--space-5xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-hero {
+    padding: var(--space-7xl) var(--layout-page-padding-desktop) var(--space-5xl);
   }
 }
 
@@ -42,13 +48,13 @@
 .visit-hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-xs);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .visit-hero-badge-year {
@@ -61,7 +67,7 @@
 }
 
 .visit-hero-headline {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .visit-hero-headline-small {
@@ -71,7 +77,7 @@
   font-weight: 400;
   font-style: italic;
   color: var(--accent);
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-2xs);
 }
 
 .visit-hero-headline-large {
@@ -86,7 +92,7 @@
 .visit-hero-significance {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .visit-hero-promise {
@@ -94,20 +100,20 @@
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.75);
   max-width: 36rem;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--space-xl);
 }
 
 .visit-hero-facts {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: var(--gap-lg);
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 480px) {
   .visit-hero-facts {
-    gap: 2rem;
+    gap: var(--gap-xl);
   }
 }
 
@@ -140,19 +146,22 @@
 }
 
 .visit-hero-cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--primary);
   background: var(--accent);
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
+  transition: all var(--duration-base) var(--ease-smooth);
+  margin-bottom: var(--space-md);
 }
 
 .visit-hero-cta:hover {
   background: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 .visit-hero-cta:focus-visible {
@@ -180,13 +189,13 @@
 .visit-hero-scroll {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: var(--space-xs);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-smooth);
 }
 
 .visit-hero-scroll:hover {
@@ -195,13 +204,19 @@
 
 /* Who Walked Here - Historical Figures */
 .visit-figures {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream);
 }
 
 @media (min-width: 768px) {
   .visit-figures {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-figures {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
   }
 }
 
@@ -212,7 +227,7 @@
 
 .visit-figures-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-3xl);
 }
 
 .visit-figures-eyebrow {
@@ -221,7 +236,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--secondary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .visit-figures-headline {
@@ -229,7 +244,7 @@
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .visit-figures-intro {
@@ -241,7 +256,7 @@
 
 .visit-figures-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: var(--gap-lg);
 }
 
 @media (min-width: 768px) {
@@ -319,13 +334,13 @@
 
 /* The Experience - Living History Preview */
 .visit-experience {
-  padding: 4rem 1rem;
+  padding: var(--space-4xl) var(--layout-page-padding-mobile);
   background: white;
 }
 
 @media (min-width: 768px) {
   .visit-experience {
-    padding: 5rem 1.5rem;
+    padding: var(--space-5xl) var(--layout-page-padding-tablet);
   }
 }
 
@@ -336,7 +351,7 @@
 
 .visit-experience-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-3xl);
 }
 
 .visit-experience-eyebrow {
@@ -345,7 +360,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--secondary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .visit-experience-headline {
@@ -366,19 +381,19 @@
 
 .visit-experience-grid {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--gap-lg);
 }
 
 @media (min-width: 640px) {
   .visit-experience-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: var(--gap-lg);
   }
 }
 
 .visit-moment {
   display: flex;
-  gap: 1rem;
+  gap: var(--gap-md);
   padding: 1.25rem;
   background: var(--cream);
   border-left: 3px solid var(--accent);
@@ -421,13 +436,19 @@
 
 /* Plan Your Visit - Practical Info */
 .visit-practical {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream-dark);
 }
 
 @media (min-width: 768px) {
   .visit-practical {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-practical {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
   }
 }
 
@@ -458,30 +479,31 @@
   font-weight: 700;
   color: var(--primary);
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-2xl);
 }
 
 .visit-practical-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: var(--gap-lg);
 }
 
 @media (min-width: 768px) {
   .visit-practical-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: var(--gap-xl);
   }
 }
 
 .visit-card {
   background: white;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: var(--spacing-card-md);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-card);
 }
 
 @media (min-width: 768px) {
   .visit-card {
-    padding: 2rem;
+    padding: var(--spacing-card-lg);
   }
 }
 
@@ -493,12 +515,12 @@
 .visit-card-title {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: var(--space-sm);
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--space-lg);
 }
 
 .visit-card--featured .visit-card-title {
@@ -603,7 +625,7 @@
   margin: 0 0 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
 }
 
 .visit-book-includes li {
@@ -631,7 +653,7 @@
   text-transform: uppercase;
   color: var(--primary);
   background: var(--accent);
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-standard);
 }
 
 .visit-book-btn:hover {
@@ -654,14 +676,14 @@
 /* Before You Arrive */
 .visit-prepare {
   margin-top: 2rem;
-  padding: 1.5rem;
+  padding: var(--space-lg);
   background: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 @media (min-width: 768px) {
   .visit-prepare {
-    padding: 2rem;
+    padding: var(--space-xl);
   }
 }
 
@@ -676,7 +698,7 @@
 .visit-prepare-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 2rem;
+  gap: var(--gap-sm) var(--gap-xl);
   list-style: none;
   padding: 0;
   margin: 0 0 1.25rem;
@@ -706,13 +728,19 @@
 
 /* The Journey - Directions */
 .visit-journey {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream);
 }
 
 @media (min-width: 768px) {
   .visit-journey {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-journey {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
   }
 }
 
@@ -723,7 +751,7 @@
 
 .visit-journey-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-2xl);
 }
 
 .visit-journey-eyebrow {
@@ -756,21 +784,22 @@
 
 .visit-journey-content {
   display: grid;
-  gap: 2rem;
+  gap: var(--gap-xl);
 }
 
 @media (min-width: 768px) {
   .visit-journey-content {
     grid-template-columns: 1fr auto;
     align-items: start;
-    gap: 3rem;
+    gap: var(--gap-3xl);
   }
 }
 
 .visit-journey-address {
   background: white;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: var(--spacing-card-lg);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-card);
 }
 
 .visit-address {
@@ -808,10 +837,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
+  min-height: 44px;
+  gap: var(--space-xs);
   font-weight: 700;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-smooth);
 }
 
 .visit-journey-btn--primary {
@@ -842,7 +872,7 @@
 .visit-journey-distances {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--gap-md);
 }
 
 @media (min-width: 768px) {
@@ -853,7 +883,7 @@
 
 .visit-journey-distance {
   text-align: center;
-  padding: 1rem 1.5rem;
+  padding: var(--space-md) var(--space-lg);
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
@@ -880,13 +910,19 @@
 
 /* Heritage Trail */
 .visit-trail {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: white;
 }
 
 @media (min-width: 768px) {
   .visit-trail {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-trail {
+    padding: var(--layout-section-y-desktop) var(--layout-page-padding-desktop);
   }
 }
 
@@ -897,7 +933,7 @@
 
 .visit-trail-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-2xl);
 }
 
 .visit-trail-eyebrow {
@@ -926,20 +962,21 @@
 
 .visit-trail-grid {
   display: grid;
-  gap: 1rem;
+  gap: var(--gap-md);
 }
 
 @media (min-width: 640px) {
   .visit-trail-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: var(--gap-lg);
   }
 }
 
 .visit-trail-site {
-  padding: 1.5rem;
+  padding: var(--spacing-card-md);
   background: var(--cream);
   border-left: 3px solid var(--secondary);
+  border-radius: var(--radius-card);
 }
 
 .visit-trail-site-header {
@@ -978,13 +1015,19 @@
 
 /* Groups Contact */
 .visit-groups {
-  padding: 3rem 1rem;
+  padding: var(--space-3xl) var(--layout-page-padding-mobile);
   background: var(--cream-dark);
 }
 
 @media (min-width: 768px) {
   .visit-groups {
-    padding: 4rem 1.5rem;
+    padding: var(--layout-section-y-mobile) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-groups {
+    padding: var(--layout-section-y-mobile) var(--layout-page-padding-desktop);
   }
 }
 
@@ -993,7 +1036,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--gap-lg);
   align-items: center;
   text-align: center;
 }
@@ -1003,7 +1046,7 @@
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
-    gap: 2rem;
+    gap: var(--gap-xl);
   }
 }
 
@@ -1042,7 +1085,7 @@
   display: inline-block;
   font-weight: 700;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-standard);
 }
 
 .visit-groups-btn--primary {
@@ -1073,7 +1116,7 @@
 /* Visit Closing */
 .visit-closing {
   position: relative;
-  padding: 5rem 1rem;
+  padding: var(--space-5xl) var(--layout-page-padding-mobile);
   background: var(--primary);
   color: white;
   text-align: center;
@@ -1082,7 +1125,13 @@
 
 @media (min-width: 768px) {
   .visit-closing {
-    padding: 6rem 1.5rem;
+    padding: var(--space-6xl) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-closing {
+    padding: var(--space-6xl) var(--layout-page-padding-desktop);
   }
 }
 
@@ -1113,30 +1162,33 @@
   font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 .visit-closing-cta-group {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 480px) {
   .visit-closing-cta-group {
     flex-direction: row;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--gap-md);
   }
 }
 
 .visit-closing-cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font-weight: 700;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-smooth);
 }
 
 .visit-closing-cta--primary {
@@ -1184,8 +1236,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 2rem 1rem;
+  gap: var(--gap-sm);
+  padding: var(--space-xl) var(--layout-page-padding-mobile);
   background: var(--cream);
 }
 
@@ -1729,15 +1781,33 @@
 }
 
 /* ============================================
-   REDUCED MOTION
+   REDUCED MOTION - Accessibility
+   Disables animations for users who prefer reduced motion
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+  /* Disable all transitions */
   .visit-hero-cta,
   .visit-hero-scroll,
   .visit-book-btn,
   .visit-journey-btn,
   .visit-groups-btn,
-  .visit-closing-cta {
+  .visit-closing-cta,
+  .visit-figure,
+  .visit-card,
+  .visit-trail-site,
+  .visit-journey-address,
+  .visit-faq-item,
+  .visit-faq-question {
     transition: none;
+  }
+
+  /* Remove hover transforms */
+  .visit-hero-cta:hover,
+  .visit-journey-btn--primary:hover,
+  .visit-groups-btn:hover,
+  .visit-closing-cta--primary:hover,
+  .visit-figure:hover,
+  .portrait-frame:hover {
+    transform: none;
   }
 }

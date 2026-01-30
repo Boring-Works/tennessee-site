@@ -7,14 +7,14 @@
   position: relative;
   background: var(--primary);
   color: white;
-  padding: 7rem 1rem 4rem;
+  padding: var(--space-7xl) var(--layout-page-padding-mobile) var(--space-4xl);
   text-align: center;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .hero {
-    padding: 8rem 1.5rem 5rem;
+    padding: var(--space-8xl) var(--layout-page-padding-tablet) var(--space-5xl);
   }
 }
 
@@ -41,7 +41,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .headline {
@@ -50,7 +50,7 @@
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .subhead {
@@ -67,12 +67,12 @@
 
 .founding-banner {
   background: linear-gradient(135deg, #1a365d 0%, #2d4a3e 100%);
-  padding: 2rem 1rem;
+  padding: var(--space-xl) var(--layout-page-padding-mobile);
 }
 
 @media (min-width: 768px) {
   .founding-banner {
-    padding: 3rem 1.5rem;
+    padding: var(--space-3xl) var(--layout-page-padding-tablet);
   }
 }
 
@@ -94,16 +94,16 @@
   text-transform: uppercase;
   color: var(--gold-hover);
   background: rgba(212, 175, 55, 0.15);
-  padding: 0.375rem 0.875rem;
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 2px;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .founding-banner-headline {
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .founding-banner-desc {
@@ -111,16 +111,18 @@
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
   max-width: 32rem;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto var(--gap-lg);
 }
 
 .founding-banner-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--gold-hover);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .founding-banner-link:hover {
@@ -132,13 +134,13 @@
    ============================================ */
 
 .tiers {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--background);
 }
 
 @media (min-width: 768px) {
   .tiers {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -153,20 +155,20 @@
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
   color: var(--foreground);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .tiers-intro {
   font-size: 1rem;
   color: var(--muted-foreground);
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-2xl);
 }
 
 .tiers-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: var(--gap-lg);
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 640px) {
@@ -178,14 +180,14 @@
 @media (min-width: 900px) {
   .tiers-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    gap: var(--gap-lg);
   }
 }
 
 @media (min-width: 1200px) {
   .tiers-grid {
     grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
+    gap: var(--gap-md);
   }
 }
 
@@ -195,15 +197,15 @@
   background: white;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  padding: 2rem 1.5rem;
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
   transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
 }
 
 .tier-card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .tier-card--highlighted {
@@ -213,7 +215,7 @@
 
 .tier-card--highlighted:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Tier Badge */
@@ -226,7 +228,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 0.25rem 0.75rem;
+  padding: var(--space-2xs) var(--space-sm);
   border-radius: 2px;
   white-space: nowrap;
 }
@@ -254,11 +256,11 @@
   font-size: 0.8125rem;
   font-style: italic;
   color: var(--muted-foreground);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .tier-price {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .tier-price-amount {
@@ -276,17 +278,17 @@
 .tier-benefits {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
   text-align: left;
 }
 
 .tier-benefit {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
   font-size: 0.875rem;
   color: var(--foreground);
-  padding: 0.5rem 0;
+  padding: var(--space-xs) 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -304,13 +306,14 @@
 .tier-cta {
   display: block;
   width: 100%;
-  padding: 0.875rem 1.5rem;
+  min-height: 44px;
+  padding: 0.875rem var(--space-lg);
   font-size: 0.875rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
   border-radius: 0.25rem;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
   background: transparent;
   color: var(--primary);
   border: 1px solid var(--primary);
@@ -348,13 +351,13 @@
    ============================================ */
 
 .passport {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%);
 }
 
 @media (min-width: 768px) {
   .passport {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -365,7 +368,7 @@
 }
 
 .passport-content {
-  padding: 2rem;
+  padding: var(--space-xl);
   background: white;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
@@ -373,7 +376,7 @@
 
 @media (min-width: 768px) {
   .passport-content {
-    padding: 3rem;
+    padding: var(--space-3xl);
   }
 }
 
@@ -385,9 +388,9 @@
   text-transform: uppercase;
   color: var(--primary);
   background: rgba(0, 0, 0, 0.05);
-  padding: 0.375rem 0.75rem;
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 2px;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .passport-headline {
@@ -395,14 +398,14 @@
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   color: var(--foreground);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .passport-desc {
   font-size: 0.9375rem;
   line-height: 1.7;
   color: var(--muted-foreground);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .passport-hashtag {
@@ -410,16 +413,18 @@
   font-weight: 600;
   color: var(--primary);
   letter-spacing: 0.02em;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .passport-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .passport-link:hover {
@@ -431,13 +436,13 @@
    ============================================ */
 
 .comparison {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--background);
 }
 
 @media (min-width: 768px) {
   .comparison {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -452,13 +457,13 @@
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   color: var(--foreground);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .comparison-intro {
   font-size: 1rem;
   color: var(--muted-foreground);
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 .comparison-table-wrapper {
@@ -474,7 +479,7 @@
 }
 
 .comparison-th {
-  padding: 1rem 0.75rem;
+  padding: var(--space-md) var(--space-sm);
   font-weight: 700;
   color: var(--foreground);
   background: rgba(0, 0, 0, 0.02);
@@ -490,7 +495,7 @@
 }
 
 .comparison-td {
-  padding: 0.875rem 0.75rem;
+  padding: 0.875rem var(--space-sm);
   border-bottom: 1px solid var(--border);
   color: var(--foreground);
 }
@@ -519,7 +524,7 @@
 }
 
 .comparison-callout {
-  margin-top: 1.5rem;
+  margin-top: var(--space-lg);
   font-size: 0.9375rem;
   font-weight: 600;
   font-style: italic;
@@ -532,13 +537,13 @@
    ============================================ */
 
 .faq {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%);
 }
 
 @media (min-width: 768px) {
   .faq {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -553,13 +558,13 @@
   font-weight: 700;
   color: var(--foreground);
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
 }
 
 .faq-item {
@@ -577,13 +582,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.25rem;
+  min-height: 44px;
+  padding: var(--space-md) 1.25rem;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--foreground);
   cursor: pointer;
   list-style: none;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--duration-fast) var(--ease-standard);
 }
 
 .faq-question::-webkit-details-marker {
@@ -599,7 +605,7 @@
   font-size: 1.25rem;
   font-weight: 400;
   color: var(--muted-foreground);
-  transition: transform 0.2s ease;
+  transition: transform var(--duration-fast) var(--ease-standard);
 }
 
 .faq-item[open] .faq-icon {
@@ -622,7 +628,7 @@
    ============================================ */
 
 .close {
-  padding: 5rem 1rem;
+  padding: var(--space-5xl) var(--layout-page-padding-mobile);
   background: var(--primary);
   color: white;
   text-align: center;
@@ -630,7 +636,7 @@
 
 @media (min-width: 768px) {
   .close {
-    padding: 6rem 1.5rem;
+    padding: var(--space-6xl) var(--layout-page-padding-tablet);
   }
 }
 
@@ -644,14 +650,14 @@
   font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .close-desc {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .close-question {
@@ -660,14 +666,14 @@
   font-style: italic;
   line-height: 1.5;
   color: var(--accent);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .close-answer {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .close-answer-alt {
@@ -675,12 +681,13 @@
   font-weight: 600;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-2xl);
 }
 
 .close-cta {
   display: inline-block;
-  padding: 1rem 2.5rem;
+  min-height: 44px;
+  padding: var(--space-md) var(--space-2xl);
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -689,13 +696,13 @@
   background: var(--accent);
   color: var(--primary);
   border-radius: 0.25rem;
-  transition: all 0.3s ease;
-  margin-bottom: 1.5rem;
+  transition: all var(--duration-base) var(--ease-standard);
+  margin-bottom: var(--space-lg);
 }
 
 .close-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 .close-note {
@@ -710,4 +717,28 @@
 
 .close-note a:hover {
   text-decoration: underline;
+}
+
+/* ============================================
+   REDUCED MOTION - Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .founding-banner-link,
+  .tier-card,
+  .tier-cta,
+  .passport-link,
+  .faq-question,
+  .faq-icon,
+  .close-cta {
+    transition: none;
+  }
+
+  .tier-card--highlighted:hover,
+  .close-cta:hover {
+    transform: none;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: none;
+  }
 }

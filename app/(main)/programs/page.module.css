@@ -34,7 +34,7 @@
   color: var(--accent);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .programs-hero-headline {
@@ -42,7 +42,7 @@
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 400;
   line-height: 1.15;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .programs-hero-headline-accent {
@@ -63,7 +63,13 @@
    ---------------------------------------- */
 .programs-grid-section {
   background: var(--cream);
-  padding: 4rem 1.5rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .programs-grid-section {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
 }
 
 .programs-grid-inner {
@@ -94,7 +100,7 @@
 .programs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 2rem;
+  gap: var(--gap-xl);
 }
 
 /* ----------------------------------------
@@ -104,12 +110,12 @@
   background: white;
   border: var(--border-card);
   border-radius: var(--radius-card);
-  padding: 2rem;
+  padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
 }
 
 .program-card:hover {
@@ -134,7 +140,7 @@
 }
 
 .program-card-header {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .program-card-title {
@@ -161,7 +167,7 @@
 .program-card-highlights {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
 }
 
 .program-card-highlights li {
@@ -183,10 +189,10 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  padding: 1rem;
+  padding: var(--space-md);
   background: var(--cream);
   border-radius: 2px;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .program-card-schedule-item {
@@ -217,7 +223,7 @@
 
 .program-card-cta {
   margin-top: auto;
-  padding-top: 1rem;
+  padding-top: var(--space-md);
 }
 
 .program-card-btn {
@@ -230,7 +236,7 @@
   font-weight: 500;
   letter-spacing: 0.05em;
   border-radius: 2px;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--duration-fast) var(--ease-standard);
 }
 
 .program-card-btn:hover {
@@ -253,7 +259,13 @@
    ---------------------------------------- */
 .programs-groups {
   background: white;
-  padding: 4rem 1.5rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .programs-groups {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
 }
 
 .programs-groups-inner {
@@ -261,7 +273,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: var(--gap-xl);
   align-items: center;
 }
 
@@ -284,7 +296,7 @@
   font-size: 1rem;
   line-height: 1.65;
   color: var(--text-light);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .programs-groups-list {
@@ -293,7 +305,7 @@
   margin: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem 1.5rem;
+  gap: 0.5rem var(--gap-lg);
 }
 
 .programs-groups-list li {
@@ -323,7 +335,7 @@
   letter-spacing: 0.05em;
   border-radius: 2px;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 .programs-groups-btn--primary {
@@ -351,8 +363,14 @@
    ---------------------------------------- */
 .programs-education {
   background: var(--cream);
-  padding: 4rem 1.5rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .programs-education {
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
+  }
 }
 
 .programs-education-inner {
@@ -364,7 +382,7 @@
   width: 56px;
   height: 56px;
   color: var(--accent);
-  margin: 0 auto 1.5rem;
+  margin: 0 auto var(--space-lg);
 }
 
 .programs-education-icon svg {
@@ -384,7 +402,7 @@
   font-size: 1rem;
   line-height: 1.65;
   color: var(--text-light);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .programs-education-btn {
@@ -395,7 +413,7 @@
   font-weight: 500;
   letter-spacing: 0.05em;
   border-radius: 2px;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--duration-fast) var(--ease-standard);
 }
 
 .programs-education-btn:hover {
@@ -407,11 +425,7 @@
    ---------------------------------------- */
 @media (max-width: 640px) {
   .programs-hero {
-    padding: 4rem 1rem 3rem;
-  }
-
-  .programs-grid-section {
-    padding: 3rem 1rem;
+    padding: var(--space-4xl) var(--space-md) var(--space-3xl);
   }
 
   .programs-grid {
@@ -419,7 +433,7 @@
   }
 
   .program-card {
-    padding: 1.5rem;
+    padding: var(--space-lg);
   }
 
   .program-card-schedule {
@@ -428,5 +442,38 @@
 
   .programs-groups-list {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION - Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .program-card {
+    transition: none;
+  }
+
+  .program-card-btn {
+    transition: none;
+  }
+
+  .program-card-btn--secondary {
+    transition: none;
+  }
+
+  .programs-groups-btn {
+    transition: none;
+  }
+
+  .programs-groups-btn--primary {
+    transition: none;
+  }
+
+  .programs-groups-btn--secondary {
+    transition: none;
+  }
+
+  .programs-education-btn {
+    transition: none;
   }
 }

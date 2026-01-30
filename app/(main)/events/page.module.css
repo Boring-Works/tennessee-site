@@ -7,14 +7,14 @@
   position: relative;
   background: var(--primary);
   color: white;
-  padding: 7rem 1rem 4rem;
+  padding: var(--space-7xl) var(--layout-page-padding-mobile) var(--space-4xl);
   text-align: center;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .calendar-header {
-    padding: 8rem 1.5rem 5rem;
+    padding: var(--space-8xl) var(--layout-page-padding-tablet) var(--space-5xl);
   }
 }
 
@@ -40,7 +40,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .calendar-headline {
@@ -48,7 +48,7 @@
   font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 700;
   line-height: 1.05;
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--space-lg);
 }
 
 .calendar-headline-year {
@@ -58,7 +58,7 @@
   font-weight: 400;
   letter-spacing: 0.3em;
   color: var(--accent);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .calendar-headline-text {
@@ -72,7 +72,7 @@
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
   max-width: 36rem;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--space-xl);
   line-height: 1.8;
 }
 
@@ -86,10 +86,10 @@
 
 /* Decorative Divider */
 .calendar-divider {
-  width: 4rem;
+  width: var(--space-4xl);
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--space-xl);
   opacity: 0.6;
 }
 
@@ -100,7 +100,7 @@
   font-style: italic;
   color: var(--accent);
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: var(--space-lg);
 }
 
 /* Coming Up Next Card */
@@ -108,14 +108,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.625rem;
+  gap: var(--gap-sm);
   margin-top: 0;
-  padding: 1.5rem 1.5rem 1.25rem;
+  padding: var(--space-lg) var(--space-lg) 1.25rem;
   background: rgba(10, 22, 40, 0.95);
   border: 2px solid var(--accent);
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
   max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
@@ -125,7 +125,7 @@
   background: rgba(10, 22, 40, 1);
   transform: translateY(-2px);
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.3),
+    var(--shadow-lg),
     0 0 20px var(--gold-shimmer);
 }
 
@@ -167,7 +167,7 @@
 .calendar-next-event-meta {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -203,7 +203,7 @@
 
 /* Coming Up - Featured Strip (3 events) */
 .coming-up {
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
   width: 100%;
   max-width: 56rem;
   margin-left: auto;
@@ -217,19 +217,19 @@
   text-transform: uppercase;
   color: var(--accent);
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .coming-up-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
 }
 
 @media (min-width: 640px) {
   .coming-up-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: var(--gap-md);
   }
 }
 
@@ -237,13 +237,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
+  gap: var(--gap-xs);
+  padding: var(--space-md) var(--space-lg);
   background: rgba(10, 22, 40, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 .coming-up-card:hover {
@@ -259,14 +259,14 @@
 
 .coming-up-card--next:hover {
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.3),
+    var(--shadow-lg),
     0 0 20px var(--gold-shimmer);
 }
 
 .coming-up-card-badge {
   position: absolute;
   top: -0.5rem;
-  left: 1rem;
+  left: var(--space-md);
   padding: 0.125rem 0.5rem;
   background: var(--accent);
   color: var(--primary);
@@ -295,7 +295,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   font-size: 0.8125rem;
 }
 
@@ -312,7 +312,7 @@
   color: var(--secondary);
   font-weight: 700;
   font-size: 0.75rem;
-  margin-left: 0.25rem;
+  margin-left: var(--space-2xs);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -338,12 +338,12 @@
   z-index: 100;
   background: var(--cream);
   border-bottom: 1px solid rgba(10, 22, 40, 0.1);
-  padding: 0.75rem 1rem;
+  padding: var(--space-sm) var(--space-md);
 }
 
 @media (min-width: 768px) {
   .year-progress {
-    padding: 1rem 1.5rem;
+    padding: var(--space-md) var(--space-lg);
   }
 }
 
@@ -363,7 +363,7 @@
   display: flex;
   justify-content: space-between;
   min-width: max-content;
-  gap: 0.25rem;
+  gap: var(--gap-xs);
 }
 
 @media (min-width: 768px) {
@@ -377,17 +377,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
-  padding: 0.5rem 0.75rem;
+  gap: var(--gap-xs);
+  padding: var(--space-xs) var(--space-sm);
   min-height: 44px;
   min-width: 44px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 @media (min-width: 768px) {
   .year-progress-month {
-    padding: 0.5rem 1rem;
+    padding: var(--space-xs) var(--space-md);
   }
 }
 
@@ -410,11 +410,11 @@
 }
 
 .year-progress-month-dot {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: var(--space-xs);
+  height: var(--space-xs);
   border-radius: 50%;
   background: var(--secondary);
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 .year-progress-month--empty .year-progress-month-dot {
@@ -427,7 +427,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-light);
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .year-progress-month:focus-visible {
@@ -440,12 +440,12 @@
 .filter-bar {
   background: var(--cream);
   border-bottom: 1px solid rgba(10, 22, 40, 0.08);
-  padding: 1rem;
+  padding: var(--space-md);
 }
 
 @media (min-width: 768px) {
   .filter-bar {
-    padding: 1.25rem 1.5rem;
+    padding: var(--space-lg) var(--space-lg);
   }
 }
 
@@ -459,7 +459,7 @@
 /* Empty State */
 .empty-state {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: var(--space-4xl) var(--space-xl);
   color: var(--text-light);
 }
 
@@ -467,17 +467,17 @@
   font-family: var(--font-serif-elegant);
   font-size: 1.125rem;
   font-style: italic;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .empty-state-btn {
   background: var(--primary);
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: var(--space-sm) var(--space-lg);
   min-height: 44px;
   border-radius: 0.375rem;
   font-weight: 500;
-  transition: background 0.2s ease;
+  transition: background var(--duration-fast) var(--ease-standard);
 }
 
 .empty-state-btn:hover {
@@ -486,20 +486,20 @@
 
 /* Living Calendar - Month Sections */
 .living-calendar {
-  padding: 3rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream-dark);
 }
 
 @media (min-width: 768px) {
   .living-calendar {
-    padding: 4rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
 .calendar-month {
   max-width: 64rem;
-  margin: 0 auto 4rem;
-  scroll-margin-top: 5rem;
+  margin: 0 auto var(--space-4xl);
+  scroll-margin-top: var(--space-5xl);
 }
 
 .calendar-month:last-child {
@@ -511,29 +511,29 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
+  gap: var(--gap-md);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
   border-bottom: 2px solid var(--primary);
 }
 
 @media (min-width: 768px) {
   .calendar-month-header {
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-xl);
   }
 }
 
 .calendar-month-title-group {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--gap-xs);
 }
 
 @media (min-width: 640px) {
   .calendar-month-title-group {
     flex-direction: row;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--gap-md);
   }
 }
 
@@ -573,7 +573,7 @@
 @media (min-width: 768px) {
   .calendar-month-events {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: var(--gap-lg);
   }
 }
 
@@ -582,14 +582,14 @@
   display: flex;
   background: white;
   border: var(--border-card);
-  border-radius: 2px;
+  border-radius: var(--radius-card);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-standard);
 }
 
 .calendar-event:hover {
   border: var(--border-card-hover);
-  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.1);
+  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
@@ -657,13 +657,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0.5rem;
+  padding: var(--space-md) var(--space-xs);
 }
 
 @media (min-width: 768px) {
   .calendar-event-date {
     width: 6rem;
-    padding: 1.5rem 0.75rem;
+    padding: var(--space-lg) var(--space-sm);
   }
 }
 
@@ -713,15 +713,15 @@
 /* Event Content */
 .calendar-event-content {
   flex: 1;
-  padding: 1rem 1.25rem;
+  padding: var(--space-md) var(--space-lg);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
 }
 
 @media (min-width: 768px) {
   .calendar-event-content {
-    padding: 1.25rem 1.5rem;
+    padding: var(--space-lg) var(--space-lg);
   }
 }
 
@@ -816,7 +816,7 @@
 .wax-seal-text--multi {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: var(--gap-xs);
 }
 
 /* Signature event card wax seal positioning */
@@ -878,7 +878,7 @@
 .calendar-event-speaker {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: var(--gap-xs);
   margin: 0;
 }
 
@@ -907,7 +907,7 @@
 .calendar-event-price {
   display: flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: var(--gap-xs);
   font-size: 0.8125rem;
   color: var(--accent);
   font-weight: 600;
@@ -937,8 +937,8 @@
 
 /* Event CTA Section */
 .calendar-event-cta {
-  margin-top: 1rem;
-  padding-top: 0.875rem;
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
   border-top: 1px solid rgba(10, 22, 40, 0.1);
 }
 
@@ -947,7 +947,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   width: 100%;
   padding: 0.875rem 1.25rem;
   background: var(--accent);
@@ -958,14 +958,14 @@
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 4px;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
   min-height: 48px;
 }
 
 .calendar-event-cta-btn:hover {
   background: #b8922a;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--gold-shimmer);
+  box-shadow: var(--shadow-gold-sm);
 }
 
 .calendar-event-cta-btn:focus-visible {
@@ -978,7 +978,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   width: 100%;
   padding: 0.875rem 1.25rem;
   background: transparent;
@@ -990,7 +990,7 @@
   text-decoration: none;
   border: 2px solid var(--secondary);
   border-radius: 4px;
-  transition: all 0.2s ease;
+  transition: all var(--duration-fast) var(--ease-standard);
   min-height: 48px;
 }
 
@@ -1029,7 +1029,7 @@
 .calendar-event-cta-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: var(--gap-xs);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -1037,8 +1037,8 @@
   color: var(--accent);
   min-height: 44px;
   /* Expand touch target with padding for inline links */
-  padding: 0.5rem 0;
-  transition: color 0.2s ease;
+  padding: var(--space-xs) 0;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .calendar-event-cta-link:hover {
@@ -1052,8 +1052,8 @@
 
 /* Subtle note link (softened CTA) */
 .calendar-event-note {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
   border-top: 1px solid var(--gold-shimmer);
 }
 
@@ -1064,8 +1064,8 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0.5rem 0;
-  transition: color 0.2s ease;
+  padding: var(--space-xs) 0;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .calendar-event-note-link:hover {
@@ -1078,12 +1078,12 @@
   background: linear-gradient(135deg, var(--primary) 0%, #0d1f3a 100%);
   border-top: 1px solid var(--gold-shimmer);
   border-bottom: 1px solid var(--gold-shimmer);
-  padding: 2.5rem 1rem;
+  padding: var(--space-2xl) var(--layout-page-padding-mobile);
 }
 
 @media (min-width: 768px) {
   .calendar-tours-banner {
-    padding: 3rem 1.5rem;
+    padding: var(--space-3xl) var(--layout-page-padding-tablet);
   }
 }
 
@@ -1105,7 +1105,7 @@
   font-size: 1rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
@@ -1114,24 +1114,24 @@
 .calendar-tours-banner-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   background: var(--accent);
   color: var(--primary);
-  padding: 0.875rem 2rem;
+  padding: 0.875rem var(--space-xl);
   min-height: 44px;
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.3s ease;
-  border-radius: 2px;
+  transition: all var(--duration-base) var(--ease-standard);
+  border-radius: var(--radius-card);
 }
 
 .calendar-tours-banner-btn:hover {
   background: var(--secondary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--gold-shimmer);
+  box-shadow: var(--shadow-gold-sm);
 }
 
 /* Calendar CTA Section */
@@ -1139,13 +1139,13 @@
   position: relative;
   background: var(--burgundy);
   color: white;
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .calendar-cta {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -1165,7 +1165,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--gap-xl);
   text-align: center;
 }
 
@@ -1175,7 +1175,7 @@
     align-items: center;
     justify-content: space-between;
     text-align: left;
-    gap: 3rem;
+    gap: var(--gap-3xl);
   }
 }
 
@@ -1217,7 +1217,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: var(--gap-md);
 }
 
 @media (min-width: 768px) {
@@ -1241,14 +1241,14 @@
 .calendar-cta-progress-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 2px;
-  transition: width 0.5s ease;
+  border-radius: var(--radius-card);
+  transition: width var(--duration-slow) var(--ease-standard);
 }
 
 .calendar-cta-progress-label {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.8);
-  margin-top: 0.5rem;
+  margin-top: var(--space-xs);
   text-align: center;
 }
 
@@ -1272,9 +1272,9 @@
   text-transform: uppercase;
   color: var(--burgundy);
   background: white;
-  padding: 0.875rem 2rem;
+  padding: 0.875rem var(--space-xl);
   min-height: 44px;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-standard);
   position: relative;
   overflow: hidden;
 }
@@ -1301,7 +1301,7 @@
   background: var(--accent);
   color: var(--primary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--gold-shimmer);
+  box-shadow: var(--shadow-gold-lg);
 }
 
 .calendar-cta-btn:hover::before {
@@ -1324,13 +1324,13 @@
   font-size: 0.8125rem;
   /* WCAG 2.1 AA: Increased from 0.7 to 0.85 for 5.5:1+ contrast on burgundy bg */
   color: rgba(255, 255, 255, 0.85);
-  margin-top: 0.75rem;
+  margin-top: var(--space-sm);
 }
 
 /* Regular Admission Pricing */
 .calendar-cta-admission {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -1341,7 +1341,7 @@
   text-transform: uppercase;
   /* WCAG 2.1 AA: Increased from 0.5 to 0.75 for 4.5:1+ contrast on burgundy bg */
   color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 var(--space-xs) 0;
 }
 
 .calendar-cta-admission-prices {
@@ -1353,14 +1353,14 @@
 
 /* Calendar Contact Section */
 .calendar-contact {
-  padding: 4rem 1rem;
+  padding: var(--layout-section-y-mobile) var(--layout-page-padding-mobile);
   background: var(--cream);
   text-align: center;
 }
 
 @media (min-width: 768px) {
   .calendar-contact {
-    padding: 5rem 1.5rem;
+    padding: var(--layout-section-y-tablet) var(--layout-page-padding-tablet);
   }
 }
 
@@ -1380,7 +1380,7 @@
 .calendar-contact-desc {
   font-size: 0.9375rem;
   color: var(--text-light);
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
 }
 
 .calendar-contact-btn {
@@ -1392,9 +1392,9 @@
   letter-spacing: 0.05em;
   color: white;
   background: var(--primary);
-  padding: 0.875rem 2rem;
+  padding: 0.875rem var(--space-xl);
   min-height: 44px;
-  transition: all 0.3s ease;
+  transition: all var(--duration-base) var(--ease-standard);
 }
 
 .calendar-contact-btn:hover {

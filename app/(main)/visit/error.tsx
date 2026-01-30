@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { logger } from '@/lib/logger'
+import styles from './error.module.css'
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -15,22 +16,16 @@ export default function VisitError({ error, reset }: ErrorProps) {
   }, [error])
 
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 py-16 text-center">
-      <h1 className="font-serif text-3xl md:text-4xl text-primary mb-4">Something went wrong</h1>
-      <p className="text-text-light mb-8 max-w-md">
+    <div className={styles.errorContainer}>
+      <h1 className={styles.errorTitle}>Something went wrong</h1>
+      <p className={styles.errorMessage}>
         We couldn&apos;t load the visit information. Please try again.
       </p>
-      <div className="flex gap-4 flex-wrap justify-center">
-        <button
-          onClick={reset}
-          className="px-6 py-3 bg-accent text-primary font-semibold rounded hover:bg-accent/90 transition-colors"
-        >
+      <div className={styles.errorActions}>
+        <button onClick={reset} className={styles.errorButton}>
           Try Again
         </button>
-        <Link
-          href="/events"
-          className="px-6 py-3 border-2 border-primary text-primary font-semibold rounded hover:bg-primary hover:text-white transition-colors"
-        >
+        <Link href="/events" className={styles.errorButtonSecondary}>
           View Events
         </Link>
       </div>

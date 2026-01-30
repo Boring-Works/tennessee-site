@@ -11,13 +11,13 @@ export default function DocumentNotFound() {
         <div className="flex gap-4 justify-center flex-wrap">
           <Link
             href="/evidence/documents"
-            className="px-6 py-3 rounded-lg transition-colors bg-gold-leaf text-midnight"
+            className="px-6 py-3 rounded-lg bg-gold-leaf text-midnight min-h-[44px] inline-flex items-center"
           >
             Browse Archive
           </Link>
           <Link
             href="/evidence"
-            className="px-6 py-3 rounded-lg border transition-colors border-gold-leaf/30 text-gold-leaf"
+            className="px-6 py-3 rounded-lg border border-gold-leaf/30 text-gold-leaf min-h-[44px] inline-flex items-center"
           >
             Evidence Room
           </Link>

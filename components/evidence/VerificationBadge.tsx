@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useId } from 'react'
+import { useState, useId, useEffect, useCallback } from 'react'
 import type { DocumentVerification } from '@/lib/evidence/types'
 
 interface VerificationBadgeProps {
@@ -37,6 +37,23 @@ export function VerificationBadge({ verification, size = 'md' }: VerificationBad
   const config = BADGE_CONFIG[verification.status]
 
   const sizeClasses = size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-3 py-1'
+
+  // Close tooltip on Escape key
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    },
+    [isOpen]
+  )
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+      return () => document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, handleKeyDown])
 
   return (
     <div className="relative inline-block">

@@ -246,7 +246,7 @@
 .timelineContainer {
   max-width: 48rem;
   margin: 0 auto;
-  padding: 3rem 1rem 4rem;
+  padding: 3rem 1.5rem 4rem;
   position: relative;
   min-height: 600px;
 }
@@ -412,6 +412,8 @@
   font-weight: 500;
   line-height: 1.4;
   margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .eventDescription {
@@ -420,6 +422,8 @@
   color: var(--ink-light);
   line-height: 1.7;
   margin-bottom: 0.75rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .eventMeta {

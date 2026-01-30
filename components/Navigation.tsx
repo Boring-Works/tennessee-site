@@ -40,7 +40,6 @@ const NAV_STRUCTURE: NavItem[] = [
   {
     label: 'Evidence Room',
     href: '/evidence',
-    badge: 'New',
     dropdown: [
       { label: 'Documents', href: '/evidence/documents' },
       { label: 'People', href: '/evidence/people' },

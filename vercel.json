@@ -4,11 +4,5 @@
   "devCommand": "npm run dev",
   "installCommand": "npm ci",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "git": {
-    "deploymentEnabled": {
-      "main": true,
-      "production": true
-    }
-  }
+  "regions": ["iad1"]
 }

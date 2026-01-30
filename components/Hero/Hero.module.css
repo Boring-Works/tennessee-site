@@ -54,6 +54,15 @@
   margin: 0 auto;
 }
 
+@media (min-width: 768px) {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero-content {
     justify-content: center;

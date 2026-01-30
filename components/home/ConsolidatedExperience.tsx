@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 import { BUTTONS, HOOKS } from '@/lib/copy'
 import siteInfo from '@/data/siteInfo.json'
 
@@ -24,6 +24,36 @@ interface ExperienceMoment {
   description: string
   detail: string
   icon: React.ReactNode
+}
+
+/**
+ * Custom hook for intersection observer
+ * Consolidates repeated observer logic
+ */
+function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(threshold: number = 0.2) {
+  const ref = useRef<T>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold }
+    )
+
+    const currentRef = ref.current
+    if (currentRef) {
+      observer.observe(currentRef)
+    }
+
+    return () => observer.disconnect()
+  }, [threshold])
+
+  return { ref, isVisible }
 }
 
 // Period-authentic engraving-style SVG icons
@@ -130,67 +160,11 @@ const experiences: ExperienceMoment[] = [
   },
 ]
 
-export function ConsolidatedExperience() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const groundRef = useRef<HTMLDivElement>(null)
-  const [groundVisible, setGroundVisible] = useState(false)
-  const visitRef = useRef<HTMLDivElement>(null)
-  const [visitVisible, setVisitVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setGroundVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-
-    if (groundRef.current) {
-      observer.observe(groundRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisitVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3 }
-    )
-
-    if (visitRef.current) {
-      observer.observe(visitRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+function ConsolidatedExperienceComponent() {
+  // Use consolidated intersection observer hooks
+  const { ref: sectionRef, isVisible } = useIntersectionObserver<HTMLElement>(0.2)
+  const { ref: groundRef, isVisible: groundVisible } = useIntersectionObserver<HTMLDivElement>(0.4)
+  const { ref: visitRef, isVisible: visitVisible } = useIntersectionObserver<HTMLDivElement>(0.3)
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
@@ -665,3 +639,6 @@ export function ConsolidatedExperience() {
     </section>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export const ConsolidatedExperience = memo(ConsolidatedExperienceComponent)

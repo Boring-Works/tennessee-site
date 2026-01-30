@@ -1,10 +1,10 @@
 ---
 id: blount-to-knox-1791-06
-title: 'Blount to Knox on Treaty Progress'
+title: Blount to Knox on Treaty Progress
 date: '1791-06-15'
 content_type: letter
 source: 'American State Papers: Indian Affairs'
-source_url: 'https://memory.loc.gov/ammem/amlaw/lwsp.html'
+source_url: https://memory.loc.gov/ammem/amlaw/lwsp.html
 collection: blount-papers
 author: william-blount
 recipient: henry-knox
@@ -12,11 +12,13 @@ people_mentioned:
   - hanging-maw
   - john-watts
   - doublehead
-physical_location: "Main House - Governor's office"
+physical_location: Main House - Governor's office
 verification:
   status: verified
   source_count: 2
-  method: 'Cross-referenced with American State Papers'
+  method: Cross-referenced with American State Papers
+description: Governor Blount communicates with Secretary of War Knox regarding Cherokee
+  treaty negotiations and territorial administrative matters in June 1791.
 ---
 
 ## Letter from Governor Blount to Secretary Knox
@@ -34,3 +36,22 @@ I have endeavored to conduct the negotiations with fairness and to impress upon 
 Your obedient servant,
 
 William Blount
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Blount to Knox on Treaty Progress." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-06>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Blount to Knox on Treaty Progress. Retrieved from https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-06
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Blount to Knox on Treaty Progress." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-06.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-06`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

@@ -864,9 +864,19 @@ function calculateStratificationProgress(date: Date): number {
   return Math.min(100, Math.round((daysIntoSeason / seasonLength) * 100))
 }
 
-export function calculateNativePulse(metrics: ExtendedMetrics): NativePulseResult {
+/**
+ * Calculate native plant pulse status based on weather metrics.
+ *
+ * @param metrics - Extended weather metrics
+ * @param referenceDate - Optional reference date for calculations (defaults to now)
+ */
+export function calculateNativePulse(
+  metrics: ExtendedMetrics,
+  referenceDate?: Date
+): NativePulseResult {
   const { temperature, precipitation, month } = metrics
-  const progress = calculateStratificationProgress(new Date())
+  const date = referenceDate ?? new Date()
+  const progress = calculateStratificationProgress(date)
 
   // Winter stratification period (Dec-Feb)
   if (month >= 12 || month <= 2) {

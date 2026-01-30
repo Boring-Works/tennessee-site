@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, memo } from 'react'
 import { BookingButton } from './BookingButton'
 
 interface MobileStickyCTAProps {
@@ -41,7 +41,7 @@ interface MobileStickyCTAProps {
  * />
  * ```
  */
-export function MobileStickyCTA({
+function MobileStickyCTAComponent({
   itemId,
   eventTitle,
   show = true,
@@ -49,22 +49,30 @@ export function MobileStickyCTA({
 }: MobileStickyCTAProps) {
   const [isVisible, setIsVisible] = useState(false)
 
+  // Memoized scroll handler for performance
+  const handleScroll = useCallback(() => {
+    const scrolled = window.scrollY > 300
+    setIsVisible(scrolled)
+  }, [])
+
   useEffect(() => {
     if (!show) {
       return
     }
 
-    // Show CTA after scrolling 300px down the page
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 300
-      setIsVisible(scrolled)
-    }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Check initial scroll position
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [show])
+    // Defer initial check to avoid synchronous setState in effect
+    // Use requestAnimationFrame for proper scheduling
+    const rafId = requestAnimationFrame(() => {
+      handleScroll()
+    })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      cancelAnimationFrame(rafId)
+    }
+  }, [show, handleScroll])
 
   if (!show) return null
 
@@ -94,3 +102,5 @@ export function MobileStickyCTA({
     </div>
   )
 }
+
+export const MobileStickyCTA = memo(MobileStickyCTAComponent)

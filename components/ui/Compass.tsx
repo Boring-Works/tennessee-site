@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, memo } from 'react'
 
-export function Compass() {
+export const Compass = memo(function Compass() {
   const [rotation, setRotation] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -30,32 +30,47 @@ export function Compass() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      scrollToTop()
+    }
+  }
+
+  const compassTicks = useMemo(
+    () =>
+      Array.from({ length: 60 }).map((_, i) => (
+        <line
+          key={i}
+          x1="50"
+          y1="5"
+          x2="50"
+          y2={i % 5 === 0 ? '10' : '7'}
+          stroke="#c9a227"
+          strokeWidth={i % 5 === 0 ? '1.5' : '0.5'}
+          transform={`rotate(${i * 6} 50 50)`}
+        />
+      )),
+    []
+  )
+
   return (
     <button
       type="button"
       onClick={scrollToTop}
-      className={`fixed bottom-6 left-6 z-[45] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer outline-none focus:ring-2 focus:ring-[#c9a227] rounded-full ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
+      onKeyDown={handleKeyDown}
+      className={`fixed bottom-6 left-6 z-[45] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-[#c9a227] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2a1f1a] rounded-full ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
       }`}
+      tabIndex={isVisible ? 0 : -1}
+      aria-hidden={!isVisible}
       aria-label="Return to top"
     >
       <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] bg-[#2a1f1a] border-2 border-[#c9a227] overflow-hidden transform group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[0_0_25px_rgba(201,162,39,0.5)]">
         {/* Compass Rose Background */}
         <div className="absolute inset-0 opacity-80">
           <svg viewBox="0 0 100 100" className="w-full h-full p-1">
-            {/* Outer Ring Ticks */}
-            {Array.from({ length: 60 }).map((_, i) => (
-              <line
-                key={i}
-                x1="50"
-                y1="5"
-                x2="50"
-                y2={i % 5 === 0 ? '10' : '7'}
-                stroke="#c9a227"
-                strokeWidth={i % 5 === 0 ? '1.5' : '0.5'}
-                transform={`rotate(${i * 6} 50 50)`}
-              />
-            ))}
+            {compassTicks}
             {/* Cardinal Directions */}
             <text
               x="50"
@@ -134,4 +149,4 @@ export function Compass() {
       </div>
     </button>
   )
-}
+})

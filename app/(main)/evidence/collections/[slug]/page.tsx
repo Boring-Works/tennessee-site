@@ -36,6 +36,7 @@ function renderContent(content: string): React.ReactNode {
   const lines = content.split('\n')
   const elements: React.ReactNode[] = []
   let currentParagraph: string[] = []
+  let currentList: React.ReactNode[] = []
   let key = 0
 
   const flushParagraph = () => {
@@ -52,11 +53,23 @@ function renderContent(content: string): React.ReactNode {
     }
   }
 
+  const flushList = () => {
+    if (currentList.length > 0) {
+      elements.push(
+        <ul key={key++} className="collectionList">
+          {currentList}
+        </ul>
+      )
+      currentList = []
+    }
+  }
+
   for (const line of lines) {
     const trimmed = line.trim()
 
     if (trimmed.startsWith('## ')) {
       flushParagraph()
+      flushList()
       elements.push(
         <h2 key={key++} className="collectionHeading">
           {trimmed.slice(3)}
@@ -64,6 +77,7 @@ function renderContent(content: string): React.ReactNode {
       )
     } else if (trimmed.startsWith('### ')) {
       flushParagraph()
+      flushList()
       elements.push(
         <h3 key={key++} className="collectionSubheading">
           {trimmed.slice(4)}
@@ -71,19 +85,22 @@ function renderContent(content: string): React.ReactNode {
       )
     } else if (trimmed.startsWith('- ')) {
       flushParagraph()
-      elements.push(
+      currentList.push(
         <li key={key++} className="collectionListItem">
           {trimmed.slice(2)}
         </li>
       )
     } else if (trimmed === '') {
       flushParagraph()
+      flushList()
     } else {
+      flushList()
       currentParagraph.push(trimmed)
     }
   }
 
   flushParagraph()
+  flushList()
   return elements
 }
 
@@ -122,8 +139,8 @@ export default async function CollectionPage({ params }: PageProps) {
         <main className="collectionContent">
           {/* Back Link */}
           <nav className="collectionNav">
-            <Link href="/evidence/documents" className="collectionBackLink">
-              <span aria-hidden="true">&larr;</span> All Documents
+            <Link href="/evidence/collections" className="collectionBackLink">
+              <span aria-hidden="true">&larr;</span> All Collections
             </Link>
           </nav>
 
@@ -211,8 +228,8 @@ export default async function CollectionPage({ params }: PageProps) {
 
           {/* Footer Navigation */}
           <footer className="collectionFooter">
-            <Link href="/evidence/documents" className="collectionFooterLink">
-              <span aria-hidden="true">&larr;</span> All Documents
+            <Link href="/evidence/collections" className="collectionFooterLink">
+              <span aria-hidden="true">&larr;</span> All Collections
             </Link>
             <Link href="/evidence" className="collectionFooterLink">
               Evidence Room <span aria-hidden="true">&rarr;</span>

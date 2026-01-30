@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import styles from './welcome.module.css'
 
 interface StoryHookProps {
@@ -7,7 +8,7 @@ interface StoryHookProps {
   line2: string
 }
 
-export function StoryHook({ line1, line2 }: StoryHookProps) {
+export const StoryHook = memo(function StoryHook({ line1, line2 }: StoryHookProps) {
   return (
     <p className={styles.storyHook}>
       {line1}
@@ -15,4 +16,4 @@ export function StoryHook({ line1, line2 }: StoryHookProps) {
       {line2}
     </p>
   )
-}
+})

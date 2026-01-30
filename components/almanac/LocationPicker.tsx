@@ -141,12 +141,12 @@ export default function LocationPicker({
           ref={triggerRef}
           type="button"
           onClick={() => setIsOpen(true)}
-          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight active:scale-95"
           aria-label={`Current location: ${formatLocationName(location)}. Click to change.`}
           aria-expanded={isOpen}
           title="Change location"
         >
-          <MapPin className="w-4 h-4" aria-hidden="true" />
+          <MapPin className="w-5 h-5" aria-hidden="true" />
         </button>
       ) : (
         <button
@@ -200,7 +200,7 @@ export default function LocationPicker({
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="p-2.5 md:p-2 text-almanac-parchment/60 hover:text-almanac-parchment transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-almanac-parchment/60 hover:text-almanac-parchment transition-colors -m-2 rounded focus:outline-none focus:ring-2 focus:ring-almanac-gold active:scale-95"
                   aria-label="Close location picker"
                 >
                   <X className="w-5 h-5" aria-hidden="true" />

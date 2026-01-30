@@ -32,6 +32,77 @@
   --border-card: 1px solid rgba(10, 22, 40, 0.1);
   --border-card-hover: 1px solid var(--accent);
   --border-card-featured: 2px solid var(--accent);
+
+  /* ============================================
+     NAVIGATION DESIGN TOKENS
+     ============================================ */
+
+  /* Colors - Navigation */
+  --nav-heritage-brown: #4a3728;
+  --nav-parchment: #f5f1e8;
+  --nav-ink: #2c2416;
+  --nav-gold: #c9a227;
+  --nav-gold-hover: #d4af37;
+  --nav-gold-rgb: 201, 162, 39;
+
+  /* Background States */
+  --nav-bg-transparent: transparent;
+  --nav-bg-scrolled: rgba(44, 36, 22, 0.97);
+  --nav-bg-mobile-drawer: #0a0f14;
+
+  /* Text Colors */
+  --nav-text-light: rgba(255, 255, 255, 0.7);
+  --nav-text-light-hover: white;
+  --nav-text-dark: #2c2416;
+
+  /* Typography - Desktop */
+  --nav-font-desktop: var(--font-cinzel), 'Cinzel', serif;
+  --nav-size-desktop: 0.75rem;
+  --nav-weight-desktop: 600;
+  --nav-spacing-desktop: 0.12em;
+
+  /* Typography - Mobile */
+  --nav-font-mobile: var(--font-cormorant), 'Cormorant Garamond', serif;
+  --nav-size-mobile: 1.5rem;
+  --nav-weight-mobile: 400;
+  --nav-spacing-mobile: 0;
+
+  /* Spacing */
+  --nav-gap: 2.5rem;
+  --nav-item-padding: 0.75rem 0.5rem;
+  --nav-dropdown-padding: 0.875rem 1.25rem;
+  --nav-mobile-gap: 1rem;
+
+  /* Header Heights */
+  --header-height-transparent: 96px;
+  --header-height-scrolled: 64px;
+  --header-height-mobile: 56px;
+
+  /* Animation */
+  --nav-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-duration-open: 400ms;
+  --nav-duration-close: 280ms;
+  --nav-duration-hover: 300ms;
+  --nav-stagger: 50ms;
+
+  /* Focus */
+  --nav-focus-ring: 2px solid var(--nav-gold);
+  --nav-focus-offset: 4px;
+
+  /* Touch Targets */
+  --nav-touch-min: 44px;
+  --nav-fab-size: 56px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nav-duration-open: 0.01ms;
+    --nav-duration-close: 0.01ms;
+    --nav-duration-hover: 0.01ms;
+    --nav-stagger: 0ms;
+  }
 }
 
 @theme inline {
@@ -83,30 +154,70 @@
 }
 
 /* ============================================
+   SCREEN READER UTILITIES - Accessibility
+   ============================================ */
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focusable variant for skip links */
+.sr-only:not(.focus\:not-sr-only):focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
    SKIP LINK - Accessibility
    ============================================ */
+
+.skip-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
 
 .skip-link {
   position: absolute;
   top: -100px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
-  color: var(--primary);
+  background: #c9a227;
+  color: #0d1821;
   padding: 0.75rem 1.5rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.875rem;
   font-weight: 600;
-  z-index: 100;
+  text-decoration: none;
   border-radius: 0 0 4px 4px;
   transition: top 0.2s ease;
+  white-space: nowrap;
 }
 
 .skip-link:focus {
   top: 0;
+  outline: 2px solid #0d1821;
+  outline-offset: 2px;
 }
 
 .skip-link:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  top: 0;
 }
 
 /* ============================================
@@ -800,4 +911,28 @@ input[type='radio']:focus-visible {
 /* Compact variant - less vertical padding */
 .chapter-divider--compact {
   padding: 1.5rem 1rem;
+}
+
+/* ============================================
+   PULSE-ONCE ANIMATION
+   ============================================ */
+
+@keyframes pulse-once {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-once {
+  animation: pulse-once 1s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-once {
+    animation: none;
+  }
 }

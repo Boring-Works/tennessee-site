@@ -4,7 +4,7 @@ title: 'Knox to Blount: Treaty Authorization'
 date: '1791-04-22'
 content_type: letter
 source: 'American State Papers: Indian Affairs'
-source_url: 'https://memory.loc.gov/ammem/amlaw/lwsp.html'
+source_url: https://memory.loc.gov/ammem/amlaw/lwsp.html
 collection: federal-correspondence
 author: henry-knox
 recipient: william-blount
@@ -12,7 +12,9 @@ people_mentioned: []
 verification:
   status: verified
   source_count: 2
-  method: 'Cross-referenced with American State Papers and War Department records'
+  method: Cross-referenced with American State Papers and War Department records
+description: Secretary of War Henry Knox instructs Governor William Blount on federal
+  policy regarding Cherokee relations and territorial governance in April 1791.
 ---
 
 ## Letter from Secretary Knox to Governor Blount
@@ -32,3 +34,22 @@ The President having determined that a treaty should be held with the Cherokee N
 I have the honor to be, your obedient servant,
 
 H. Knox
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knox to Blount: Treaty Authorization." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knox-to-blount-1791-04>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Knox to Blount: Treaty Authorization. Retrieved from https://tennesseestartshere.com/evidence/documents/knox-to-blount-1791-04
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knox to Blount: Treaty Authorization." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knox-to-blount-1791-04.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knox-to-blount-1791-04`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

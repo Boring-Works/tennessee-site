@@ -103,10 +103,10 @@ export default function OnboardingModal() {
             <button
               type="button"
               onClick={handleDismiss}
-              className="absolute top-3 right-3 text-almanac-parchment/40 hover:text-almanac-parchment transition-colors"
+              className="absolute top-2 right-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-almanac-parchment/40 hover:text-almanac-parchment transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold active:scale-95"
               aria-label="Close"
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
 
             <div className="p-6">
@@ -165,7 +165,7 @@ export default function OnboardingModal() {
               <button
                 type="button"
                 onClick={handleDismiss}
-                className="w-full py-3 bg-almanac-gold text-almanac-midnight font-medium rounded-lg hover:bg-almanac-gold/90 transition-colors"
+                className="w-full min-h-[44px] py-3 bg-almanac-gold text-almanac-midnight font-medium rounded-lg hover:bg-almanac-gold/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold focus-visible:ring-offset-2 focus-visible:ring-offset-almanac-midnight active:scale-[0.98]"
               >
                 Got it — Show me the weather
               </button>

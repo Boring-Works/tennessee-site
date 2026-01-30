@@ -16,50 +16,125 @@ export const metadata: Metadata = {
   },
 }
 
-// Icons for itineraries
-const icons = {
-  halfDay: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 6v6l4 2" />
-    </svg>
-  ),
-  fullDay: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="5" />
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-    </svg>
-  ),
-  weekend: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <rect x="3" y="4" width="18" height="18" rx="2" />
-      <path d="M16 2v4M8 2v4M3 10h18" />
-    </svg>
-  ),
-  map: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M9 3L3 6v15l6-3M9 3l6 3M9 3v15m6-12l6-3v15l-6 3m0-15v15m0 0l-6-3" />
-    </svg>
-  ),
-  bed: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M3 18v-6a2 2 0 012-2h14a2 2 0 012 2v6M3 18v2M21 18v2M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3" />
-    </svg>
-  ),
-  utensils: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3m0 0v7" />
-    </svg>
-  ),
+// TypeScript interfaces for data
+interface ItineraryStop {
+  name: string
+  time: string
+  note: string
 }
 
+interface Itinerary {
+  id: string
+  title: string
+  duration: string
+  icon: React.ReactNode
+  description: string
+  stops: ItineraryStop[]
+  overnight?: string
+}
+
+interface LodgingPlace {
+  name: string
+  location: string
+  description: string
+  note: string
+}
+
+interface DiningPlace {
+  name: string
+  location: string
+  type: string
+}
+
+// Icon components - defined as functions to prevent hydration issues
+const HalfDayIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+    role="img"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v6l4 2" />
+  </svg>
+)
+
+const FullDayIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+    role="img"
+  >
+    <circle cx="12" cy="12" r="5" />
+    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+  </svg>
+)
+
+const WeekendIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+    role="img"
+  >
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+  </svg>
+)
+
+const MapIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+    role="img"
+  >
+    <path d="M9 3L3 6v15l6-3M9 3l6 3M9 3v15m6-12l6-3v15l-6 3m0-15v15m0 0l-6-3" />
+  </svg>
+)
+
+const BedIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+    role="img"
+  >
+    <path d="M3 18v-6a2 2 0 012-2h14a2 2 0 012 2v6M3 18v2M21 18v2M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3" />
+  </svg>
+)
+
+const UtensilsIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+    role="img"
+  >
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3m0 0v7" />
+  </svg>
+)
+
 // Itinerary data
-const itineraries = [
+const itineraries: Itinerary[] = [
   {
     id: 'half-day',
     title: 'Half-Day Heritage Tour',
     duration: '4-5 hours',
-    icon: icons.halfDay,
+    icon: <HalfDayIcon />,
     description:
       'Perfect for a morning or afternoon. Focus on the heart of the Original Seven with Rocky Mount and two nearby sister sites.',
     stops: [
@@ -84,7 +159,7 @@ const itineraries = [
     id: 'full-day',
     title: 'Full-Day Frontier Experience',
     duration: '8-10 hours',
-    icon: icons.fullDay,
+    icon: <FullDayIcon />,
     description:
       'A complete journey through the four eastern counties. Visit multiple historic sites and experience the full scope of frontier Tennessee.',
     stops: [
@@ -119,7 +194,7 @@ const itineraries = [
     id: 'weekend',
     title: 'Weekend Presidential Trail',
     duration: '2 days',
-    icon: icons.weekend,
+    icon: <WeekendIcon />,
     description:
       'Follow in the footsteps of three presidents who passed through the Original Seven. Andrew Jackson, James K. Polk, and Andrew Johnson all have connections to these grounds.',
     stops: [
@@ -139,7 +214,7 @@ const itineraries = [
 ]
 
 // Lodging recommendations
-const lodging = [
+const lodging: LodgingPlace[] = [
   {
     name: 'Historic Eureka Inn',
     location: 'Jonesborough',
@@ -161,7 +236,7 @@ const lodging = [
 ]
 
 // Dining recommendations
-const dining = [
+const dining: DiningPlace[] = [
   {
     name: 'The Storyteller Restaurant',
     location: 'Jonesborough',
@@ -249,6 +324,7 @@ export default function ExplorePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles['explore-site-link']}
+                  aria-label={`Visit ${site.name} website (opens in new tab)`}
                 >
                   Visit Website
                   <span aria-hidden="true"> →</span>
@@ -313,7 +389,7 @@ export default function ExplorePage() {
                   ))}
                 </ol>
 
-                {'overnight' in itinerary && itinerary.overnight && (
+                {itinerary.overnight && (
                   <p className={styles['explore-itinerary-overnight']}>
                     <strong>Overnight:</strong> {itinerary.overnight}
                   </p>
@@ -339,7 +415,7 @@ export default function ExplorePage() {
             {/* Lodging */}
             <div className={styles['explore-resource-section']}>
               <div className={styles['explore-resource-icon']} aria-hidden="true">
-                {icons.bed}
+                <BedIcon />
               </div>
               <h3 className={styles['explore-resource-title']}>Where to Stay</h3>
               <p className={styles['explore-resource-intro']}>
@@ -359,7 +435,7 @@ export default function ExplorePage() {
             {/* Dining */}
             <div className={styles['explore-resource-section']}>
               <div className={styles['explore-resource-icon']} aria-hidden="true">
-                {icons.utensils}
+                <UtensilsIcon />
               </div>
               <h3 className={styles['explore-resource-title']}>Where to Eat</h3>
               <p className={styles['explore-resource-intro']}>
@@ -379,7 +455,7 @@ export default function ExplorePage() {
             {/* Downloads */}
             <div className={styles['explore-resource-section']}>
               <div className={styles['explore-resource-icon']} aria-hidden="true">
-                {icons.map}
+                <MapIcon />
               </div>
               <h3 className={styles['explore-resource-title']}>Trail Resources</h3>
               <p className={styles['explore-resource-intro']}>Maps and guides for your journey.</p>

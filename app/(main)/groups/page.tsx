@@ -49,19 +49,23 @@ export default function GroupsPage() {
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
+      <section className={styles.hero} aria-labelledby="groups-heading">
         <div className={styles['hero-content']}>
           <p className={styles.eyebrow}>Group Visits</p>
-          <h1 className={styles.headline}>Bring Your Group</h1>
+          <h1 id="groups-heading" className={styles.headline}>
+            Bring Your Group
+          </h1>
           <p className={styles.subhead}>Special rates for tours, reunions, and organizations</p>
         </div>
       </section>
 
       {/* We Welcome */}
-      <section className={styles.welcome}>
+      <section className={styles.welcome} aria-labelledby="welcome-heading">
         <div className={styles['welcome-inner']}>
-          <h2 className={styles['welcome-headline']}>We Welcome</h2>
-          <ul className={styles['welcome-list']}>
+          <h2 id="welcome-heading" className={styles['welcome-headline']}>
+            We Welcome
+          </h2>
+          <ul className={styles['welcome-list']} role="list">
             {GROUP_TYPES.map((type) => (
               <li key={type}>{type}</li>
             ))}
@@ -70,7 +74,7 @@ export default function GroupsPage() {
       </section>
 
       {/* Historical Context */}
-      <section className={styles.history}>
+      <section className={styles.history} aria-label="Historical context">
         <div className={styles['history-inner']}>
           <p className={styles['history-text']}>
             Your group will tour the home where{' '}
@@ -79,46 +83,54 @@ export default function GroupsPage() {
             </Claim>{' '}
             in 1790—Tennessee&apos;s first capital. View{' '}
             <Link href="/evidence" className={styles['history-link']}>
-              primary source documents →
+              primary source documents
+              <span className="sr-only"> (opens evidence page)</span>
+              <span aria-hidden="true"> →</span>
             </Link>
           </p>
         </div>
       </section>
 
       {/* Rates */}
-      <section className={styles.rates}>
+      <section className={styles.rates} aria-labelledby="rates-heading">
         <div className={styles['rates-inner']}>
-          <h2 className={styles['rates-headline']}>Group Rates</h2>
-          <div className={styles['rates-table']}>
+          <h2 id="rates-heading" className={styles['rates-headline']}>
+            Group Rates
+          </h2>
+          <dl className={styles['rates-table']}>
             {RATES.map((rate) => (
               <div key={rate.tier} className={styles['rates-row']}>
-                <span className={styles['rates-tier']}>{rate.tier}</span>
-                <span className={styles['rates-price']}>
+                <dt className={styles['rates-tier']}>{rate.tier}</dt>
+                <dd className={styles['rates-price']}>
                   {rate.price}
                   {rate.note && <span className={styles['rates-note']}> {rate.note}</span>}
-                </span>
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
           <p className={styles['rates-includes']}>All visits include guided tour (~1 hour)</p>
         </div>
       </section>
 
       {/* Contact Form CTA */}
-      <section className={styles.contact}>
+      <section className={styles.contact} aria-labelledby="contact-heading">
         <div className={styles['contact-inner']}>
-          <h2 className={styles['contact-headline']}>Plan Your Group Visit</h2>
+          <h2 id="contact-heading" className={styles['contact-headline']}>
+            Plan Your Group Visit
+          </h2>
           <p className={styles['contact-desc']}>Contact us to schedule your group tour.</p>
-          <div className={styles['contact-methods']}>
+          <div className={styles['contact-methods']} role="group" aria-label="Contact options">
             <a
               href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}
               className={styles['contact-btn-primary']}
+              aria-label={`Call us at ${siteInfo.contact.phone}`}
             >
               Call {siteInfo.contact.phone}
             </a>
             <a
               href={`mailto:${siteInfo.contact.email}`}
               className={styles['contact-btn-secondary']}
+              aria-label={`Email us at ${siteInfo.contact.email}`}
             >
               Email Us
             </a>
@@ -127,10 +139,12 @@ export default function GroupsPage() {
       </section>
 
       {/* What to Know */}
-      <section className={styles.know}>
+      <section className={styles.know} aria-labelledby="know-heading">
         <div className={styles['know-inner']}>
-          <h2 className={styles['know-headline']}>What to Know</h2>
-          <ul className={styles['know-list']}>
+          <h2 id="know-heading" className={styles['know-headline']}>
+            What to Know
+          </h2>
+          <ul className={styles['know-list']} role="list">
             {WHAT_TO_KNOW.map((item) => (
               <li key={item}>{item}</li>
             ))}

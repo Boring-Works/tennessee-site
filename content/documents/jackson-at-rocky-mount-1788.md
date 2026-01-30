@@ -5,6 +5,7 @@ date: '1788-04-01'
 content_type: testimony
 source: 'Tennessee Encyclopedia, Rocky Mount State Historic Site, Andrew Jackson Papers'
 source_url: 'https://tennesseeencyclopedia.net/entries/rocky-mount/'
+collection: standalone
 people_mentioned:
   - william-cobb
 verification:

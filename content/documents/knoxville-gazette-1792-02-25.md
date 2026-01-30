@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1792-02-25
-title: 'Knoxville Gazette - Cherokee Delegation'
+title: Knoxville Gazette - Cherokee Delegation
 date: '1792-02-25'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -12,7 +12,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+description: Knoxville Gazette from February 25, 1792, covering news and announcements
+  from the Southwest Territory.
 ---
 
 ## The Knoxville Gazette
@@ -32,3 +34,22 @@ verification:
 The spring season approaches, and the inhabitants are making preparations for planting. The lands opened by the late treaty are said to be of excellent quality for cultivation.
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Cherokee Delegation." _Rocky Mount State Historic Site Evidence Room_, 1792. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-02-25>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1792). Knoxville Gazette - Cherokee Delegation. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-02-25
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Cherokee Delegation." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-02-25.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-02-25`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

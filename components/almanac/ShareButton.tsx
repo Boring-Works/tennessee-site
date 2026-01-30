@@ -53,11 +53,15 @@ export default function ShareButton({
       <button
         type="button"
         onClick={handleShare}
-        className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight active:scale-95"
         aria-label="Share today's briefing"
         title="Share today's briefing"
       >
-        {copied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+        {copied ? (
+          <Check className="w-5 h-5" aria-hidden="true" />
+        ) : (
+          <Share2 className="w-5 h-5" aria-hidden="true" />
+        )}
       </button>
     )
   }

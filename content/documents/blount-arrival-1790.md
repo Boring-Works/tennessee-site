@@ -1,19 +1,23 @@
 ---
 id: blount-arrival-1790
-title: 'Blount to Secretary of War'
+title: Blount to Secretary of War
 date: 1790-10-20
 content_type: letter
-source: 'Tennessee Encyclopedia, citing Blount Papers'
+source: Tennessee Encyclopedia, citing Blount Papers
 collection: blount-papers
 author: william-blount
 recipient: henry-knox
-people_mentioned: [william-cobb]
+people_mentioned:
+  - william-cobb
 responds_to: knox-to-washington-1790-08
-physical_location: 'Main House - The window Blount described'
+physical_location: Main House - The window Blount described
 verification:
   status: verified
   source_count: 2
-  method: 'Cross-referenced with Founders Online and TN Encyclopedia'
+  method: Cross-referenced with Founders Online and TN Encyclopedia
+description: Governor William Blount describes his arrival at Rocky Mount on October
+  11, 1790, noting the luxury of glass windows at William Cobb's residence, first
+  capital of the Southwest Territory.
 ---
 
 At William Cobb's Washington County...
@@ -49,3 +53,22 @@ Henry Knox served as Secretary of War under President Washington from 1789 to 17
 This letter is cited in the Tennessee Encyclopedia article on Rocky Mount and is part of the Blount Papers collection. The text has been verified against multiple sources including the Tennessee Encyclopedia and references in Founders Online annotations.
 
 The original letter is part of the territorial correspondence records from this period. The excerpt quoted here represents the most significant passage regarding Blount's arrival and initial impressions of his accommodations at Rocky Mount.
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Blount to Secretary of War." _Rocky Mount State Historic Site Evidence Room_, 1790. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/blount-arrival-1790>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1790). Blount to Secretary of War. Retrieved from https://tennesseestartshere.com/evidence/documents/blount-arrival-1790
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Blount to Secretary of War." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/blount-arrival-1790.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/blount-arrival-1790`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

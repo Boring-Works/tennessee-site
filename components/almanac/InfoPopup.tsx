@@ -35,10 +35,10 @@ export function InfoPopup({ content, iconSize = 'sm' }: InfoPopupProps) {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="text-almanac-parchment/40 hover:text-almanac-gold transition-colors p-1 -m-1"
+        className="min-w-[44px] min-h-[44px] flex items-center justify-center text-almanac-parchment/40 hover:text-almanac-gold transition-colors -m-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold active:scale-95"
         aria-label={`Learn more about ${content.title}`}
       >
-        <Info className={iconClassName} />
+        <Info className={iconClassName} aria-hidden="true" />
       </button>
 
       <AnimatePresence>
@@ -83,10 +83,10 @@ function InfoModal({ content, onClose }: InfoModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center text-almanac-parchment/40 hover:text-almanac-parchment transition-colors -m-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold active:scale-95"
             aria-label="Close"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import styles from './welcome.module.css'
 
 interface BrandStatementProps {
@@ -8,14 +9,18 @@ interface BrandStatementProps {
   tagline: string
 }
 
-export function BrandStatement({ headline, descriptor, tagline }: BrandStatementProps) {
+export const BrandStatement = memo(function BrandStatement({
+  headline,
+  descriptor,
+  tagline,
+}: BrandStatementProps) {
   return (
-    <div className={styles.brandContainer}>
+    <header className={styles.brandContainer}>
       <h1 className={styles.brandHeadline}>{headline}</h1>
       <p className={styles.brandDescriptor}>{descriptor}</p>
-      <div className={styles.taglineContainer}>
+      <div className={styles.taglineContainer} aria-label="Site tagline">
         <span className={styles.taglineText}>{tagline}</span>
       </div>
-    </div>
+    </header>
   )
-}
+})

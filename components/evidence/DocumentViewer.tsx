@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
 import type { Document } from '@/lib/evidence/types'
 import { VerificationBadge } from './VerificationBadge'
 
@@ -11,12 +13,17 @@ interface DocumentViewerProps {
 }
 
 export function DocumentViewer({ document: doc, highlightId }: DocumentViewerProps) {
-  // Scroll to highlighted passage on mount
+  // Derive announcement from highlightId (screen readers read once on change)
+  const highlightAnnouncement = useMemo(
+    () => (highlightId ? `Highlighted passage: ${highlightId}` : ''),
+    [highlightId]
+  )
+
+  // Handle scroll-to-highlight effect separately
   useEffect(() => {
     if (highlightId) {
       const element = globalThis.document.getElementById(highlightId)
       if (element) {
-        // Small delay to ensure render is complete
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }, 100)
@@ -32,7 +39,23 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
 
   return (
     <article className="max-w-3xl mx-auto">
-      {/* Document Header */}
+      <nav
+        className="sr-only focus-within:not-sr-only focus-within:absolute focus-within:z-50 focus-within:bg-midnight focus-within:p-2"
+        aria-label="Skip navigation"
+      >
+        <a href="#document-content" className="text-gold-leaf underline">
+          Skip to document content
+        </a>
+        {' | '}
+        <a href="#document-source" className="text-gold-leaf underline">
+          Skip to source
+        </a>
+      </nav>
+
+      <div role="status" aria-live="polite" className="sr-only">
+        {highlightAnnouncement}
+      </div>
+
       <header className="mb-8 pb-6 border-b border-white/10">
         <div className="flex items-start justify-between gap-4 mb-4">
           <h1 className="font-serif text-3xl text-gold-leaf">{doc.title}</h1>
@@ -45,6 +68,7 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
               year: 'numeric',
               month: 'long',
               day: 'numeric',
+              timeZone: 'UTC',
             })}
           </span>
           <span className="capitalize">{doc.content_type}</span>
@@ -52,8 +76,8 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
         </div>
       </header>
 
-      {/* Document Content */}
       <div
+        id="document-content"
         className="prose prose-invert prose-gold max-w-none
           prose-headings:font-serif prose-headings:text-gold-leaf
           prose-p:text-almanac-parchment/80 prose-p:leading-relaxed
@@ -63,9 +87,17 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
           prose-hr:border-white/10"
       >
         <ReactMarkdown
+          rehypePlugins={[rehypeRaw, rehypeSanitize]}
           components={{
             // Handle passage spans with highlighting
-            span: ({ id, className, children }) => {
+            span: (componentProps) => {
+              // Defensive: handle cases where props might be undefined or malformed
+              if (!componentProps || typeof componentProps !== 'object') {
+                return <span />
+              }
+              const id = componentProps.id as string | undefined
+              const className = componentProps.className as string | undefined
+              const children = componentProps.children
               const isHighlighted = id === highlightId
               const isPassage = className === 'passage'
 
@@ -87,8 +119,7 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
         </ReactMarkdown>
       </div>
 
-      {/* Source Attribution */}
-      <footer className="mt-12 pt-6 border-t border-white/10">
+      <footer id="document-source" className="mt-12 pt-6 border-t border-white/10">
         <h2 className="font-serif text-lg text-gold-leaf mb-3">Source</h2>
         <p className="text-sm text-almanac-parchment/60">
           {doc.source}

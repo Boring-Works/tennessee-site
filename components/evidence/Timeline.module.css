@@ -248,6 +248,7 @@
   margin: 0 auto;
   padding: 3rem 1rem 4rem;
   position: relative;
+  min-height: 600px;
 }
 
 /* ============================================
@@ -380,6 +381,11 @@
   display: block;
 }
 
+.eventContent {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
 .eventContent:hover {
   border-color: var(--brass);
   box-shadow:
@@ -491,6 +497,48 @@
 
 .eventFeatured .eventTitle {
   font-size: 1.0625rem;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--paper-texture), var(--cream-light);
+  border: 1px solid rgba(42, 31, 26, 0.08);
+  border-radius: 2px;
+}
+
+.emptyStateText {
+  font-family: var(--font-serif-elegant);
+  font-size: 0.9375rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.clearFiltersBtn {
+  padding: 0.625rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--cream-light);
+  background: var(--brass);
+  border: 1px solid var(--brass);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-dignified);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.clearFiltersBtn:hover {
+  background: var(--brass-dark);
+  border-color: var(--brass-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
 }
 
 /* ============================================

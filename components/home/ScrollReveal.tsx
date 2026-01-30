@@ -1,15 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback, memo, type ReactNode } from 'react'
 
 interface ScrollRevealProps {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
   threshold?: number
   delay?: number
 }
 
-export function ScrollReveal({
+export const ScrollReveal = memo(function ScrollReveal({
   children,
   className = '',
   threshold = 0.1,
@@ -19,27 +19,33 @@ export function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null)
   const hasRevealed = useRef(false)
 
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries
+      if (entry.isIntersecting && !hasRevealed.current) {
+        if (delay > 0) {
+          setTimeout(() => setIsVisible(true), delay)
+        } else {
+          setIsVisible(true)
+        }
+        hasRevealed.current = true
+      }
+    },
+    [delay]
+  )
+
   useEffect(() => {
     const element = ref.current
     if (!element) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasRevealed.current) {
-          if (delay > 0) {
-            setTimeout(() => setIsVisible(true), delay)
-          } else {
-            setIsVisible(true)
-          }
-          hasRevealed.current = true
-        }
-      },
-      { threshold, rootMargin: '0px 0px -50px 0px' }
-    )
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold,
+      rootMargin: '0px 0px -50px 0px',
+    })
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [threshold, delay])
+  }, [threshold, handleIntersection])
 
   return (
     <div
@@ -51,4 +57,4 @@ export function ScrollReveal({
       {children}
     </div>
   )
-}
+})

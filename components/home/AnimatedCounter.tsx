@@ -1,43 +1,47 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback, memo } from 'react'
 
 interface AnimatedCounterProps {
   end: number
   duration?: number
   start?: number
   className?: string
+  /** Accessible label for screen readers */
+  ariaLabel?: string
 }
 
-export function AnimatedCounter({
+export const AnimatedCounter = memo(function AnimatedCounter({
   end,
   duration = 2000,
   start = 0,
   className = '',
+  ariaLabel,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(start)
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLSpanElement>(null)
   const hasAnimated = useRef(false)
 
+  // Memoized intersection callback
+  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    const [entry] = entries
+    if (entry.isIntersecting && !hasAnimated.current) {
+      setIsVisible(true)
+      hasAnimated.current = true
+    }
+  }, [])
+
   // Intersection Observer to trigger on viewport entry
   useEffect(() => {
     const element = ref.current
     if (!element) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          setIsVisible(true)
-          hasAnimated.current = true
-        }
-      },
-      { threshold: 0.2 }
-    )
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 })
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [])
+  }, [handleIntersection])
 
   // Animate count when visible
   useEffect(() => {
@@ -65,8 +69,14 @@ export function AnimatedCounter({
   }, [isVisible, start, end, duration])
 
   return (
-    <span ref={ref} className={className}>
+    <span
+      ref={ref}
+      className={className}
+      role="status"
+      aria-live="polite"
+      aria-label={ariaLabel || `Count: ${count}`}
+    >
       {count}
     </span>
   )
-}
+})

@@ -58,6 +58,7 @@ function groupEventsByMonth(
     const monthKey = date.toLocaleDateString('en-US', {
       month: 'long',
       year: 'numeric',
+      timeZone: 'UTC',
     })
 
     if (!grouped[monthKey]) {
@@ -75,6 +76,7 @@ function formatDate(dateStr: string): string {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
+    timeZone: 'UTC',
   })
 }
 

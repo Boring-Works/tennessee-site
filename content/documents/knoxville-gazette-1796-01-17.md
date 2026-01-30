@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1796-01-17
-title: 'Knoxville Gazette - Constitutional Convention'
+title: Knoxville Gazette - Constitutional Convention
 date: '1796-01-17'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -11,7 +11,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+description: Knoxville Gazette from January 17, 1796, documenting territorial news
+  and announcements from early 1796.
 ---
 
 ## The Knoxville Gazette
@@ -31,3 +33,22 @@ verification:
 Upon the adoption of this constitution, our territory will assume the dignified rank of a sovereign state, entitled to equal representation in the councils of the nation.
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Constitutional Convention." _Rocky Mount State Historic Site Evidence Room_, 1796. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-01-17>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1796). Knoxville Gazette - Constitutional Convention. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-01-17
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Constitutional Convention." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-01-17.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-01-17`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

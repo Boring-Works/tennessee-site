@@ -19,10 +19,10 @@
   --ink-light: #4a443e;
   --leather: #8b4513;
   --leather-dark: #654321;
-  --transition-dignified: 0.35s ease;
+  --transition-dignified: 0.35s var(--nav-ease-spring);
 
   /* Document type colors */
-  --type-letter: #c9a227;
+  --type-letter: var(--brass);
   --type-treaty: #8b4513;
   --type-proclamation: #8b0000;
   --type-newspaper: #4a5568;
@@ -33,7 +33,7 @@
   --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
 
   background: var(--paper-texture), var(--cream-medium);
-  padding: 3rem 1rem;
+  padding: 4rem 1rem;
 }
 
 /* ============================================
@@ -500,7 +500,7 @@
 
 @media (min-width: 640px) {
   .trailsSection {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
 
   .trailContent {

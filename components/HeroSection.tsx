@@ -2,14 +2,18 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { memo } from 'react'
 import SmartCommemorativeCard from './SmartCommemorativeCard'
 import { MYSTERY_NARRATIVE, BUTTONS } from '@/lib/copy'
 
-export default function HeroSection() {
+const HeroSection = memo(function HeroSection() {
   const { hero } = MYSTERY_NARRATIVE
 
   return (
-    <section className="relative min-h-screen bg-primary flex flex-col overflow-hidden">
+    <section
+      className="relative min-h-screen bg-primary flex flex-col overflow-hidden"
+      aria-labelledby="hero-headline"
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -67,7 +71,10 @@ export default function HeroSection() {
               </p>
 
               {/* Main Headline */}
-              <h1 className="font-serif text-[clamp(3.5rem,12vw,6rem)] font-bold text-white leading-[1.05] tracking-tight mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.2s_forwards]">
+              <h1
+                id="hero-headline"
+                className="font-serif text-[clamp(3.5rem,12vw,6rem)] font-bold text-white leading-[1.05] tracking-tight mb-4 opacity-0 animate-[fadeUp_0.6s_ease-out_0.2s_forwards]"
+              >
                 {hero.headline}
               </h1>
 
@@ -90,7 +97,8 @@ export default function HeroSection() {
               <div className="opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
                 <Link
                   href="/visit"
-                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)]"
+                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                  aria-label={`${BUTTONS.primary} - Plan your visit to Rocky Mount`}
                 >
                   {BUTTONS.primary}
                 </Link>
@@ -108,7 +116,10 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="relative z-10 pb-8 flex flex-col items-center opacity-0 animate-[fadeUp_0.6s_ease-out_0.8s_forwards]">
+      <div
+        className="relative z-10 pb-8 flex flex-col items-center opacity-0 animate-[fadeUp_0.6s_ease-out_0.8s_forwards]"
+        aria-hidden="true"
+      >
         <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-3">
           Scroll to explore
         </span>
@@ -162,4 +173,6 @@ export default function HeroSection() {
       `}</style>
     </section>
   )
-}
+})
+
+export default HeroSection

@@ -1,19 +1,21 @@
 ---
 id: blount-to-knox-1791-01
-title: 'Blount to Knox on Territory Progress'
+title: Blount to Knox on Territory Progress
 date: '1791-01-08'
 content_type: letter
 source: 'American State Papers: Indian Affairs'
-source_url: 'https://memory.loc.gov/ammem/amlaw/lwsp.html'
+source_url: https://memory.loc.gov/ammem/amlaw/lwsp.html
 collection: blount-papers
 author: william-blount
 recipient: henry-knox
 people_mentioned: []
-physical_location: "Main House - Governor's office"
+physical_location: Main House - Governor's office
 verification:
   status: verified
   source_count: 2
-  method: 'Cross-referenced with American State Papers and Blount correspondence'
+  method: Cross-referenced with American State Papers and Blount correspondence
+description: Governor Blount updates Secretary of War Knox on land disputes, Indian
+  relations, and the territorial government's progress in early 1791.
 ---
 
 ## Letter from Governor Blount to Secretary Knox
@@ -31,3 +33,22 @@ I continue to receive intelligence from the Cherokee country. <passage id="chero
 Your most obedient servant,
 
 William Blount
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Blount to Knox on Territory Progress." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-01>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Blount to Knox on Territory Progress. Retrieved from https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-01
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Blount to Knox on Territory Progress." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-01.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-01`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

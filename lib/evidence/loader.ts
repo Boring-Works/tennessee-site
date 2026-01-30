@@ -233,11 +233,11 @@ export async function getRespondingDocuments(documentId: string): Promise<Docume
  * @param passageId - The passage ID in format "documentId#anchor"
  */
 export async function getPassage(passageId: string): Promise<Passage | null> {
-  const [documentId, anchor] = passageId.split('#')
-
-  if (!documentId || !anchor) {
+  const parts = passageId.split('#')
+  if (parts.length !== 2 || !parts[0] || !parts[1]) {
     return null
   }
+  const [documentId, anchor] = parts
 
   const doc = await getDocument(documentId)
 
@@ -449,4 +449,83 @@ export async function getAllCollections(): Promise<Collection[]> {
 
   // Filter out any null results
   return collections.filter((c): c is Collection => c !== null)
+}
+
+// =============================================================================
+// Document Navigation Functions
+// =============================================================================
+
+/**
+ * Navigation data for a document within its collection
+ */
+export interface DocumentNavigationData {
+  previousDoc: { slug: string; title: string } | null
+  nextDoc: { slug: string; title: string } | null
+  currentIndex: number
+  totalCount: number
+  collectionName: string | null
+}
+
+/**
+ * Get navigation data for a document within its collection
+ *
+ * Returns the previous/next documents in the same collection,
+ * ordered by date.
+ *
+ * @param documentSlug - The current document's slug
+ * @returns Navigation data or null if document not found or has no collection
+ */
+export async function getDocumentNavigation(
+  documentSlug: string
+): Promise<DocumentNavigationData | null> {
+  const currentDoc = await getDocument(documentSlug)
+
+  if (!currentDoc || !currentDoc.collection) {
+    return null
+  }
+
+  // Get all documents in the same collection
+  const collectionDocs = await getDocumentsByCollection(currentDoc.collection)
+
+  // Sort by date (chronological order)
+  const sortedDocs = collectionDocs.sort((a, b) => {
+    const dateA = new Date(a.date)
+    const dateB = new Date(b.date)
+    return dateA.getTime() - dateB.getTime()
+  })
+
+  // Find current document's index
+  const currentIndex = sortedDocs.findIndex((doc) => doc.id === currentDoc.id)
+
+  if (currentIndex === -1) {
+    return null
+  }
+
+  // Get collection name if available
+  const collection = await getCollection(currentDoc.collection)
+
+  // Get previous and next documents
+  const previousDoc =
+    currentIndex > 0
+      ? {
+          slug: sortedDocs[currentIndex - 1].id,
+          title: sortedDocs[currentIndex - 1].title,
+        }
+      : null
+
+  const nextDoc =
+    currentIndex < sortedDocs.length - 1
+      ? {
+          slug: sortedDocs[currentIndex + 1].id,
+          title: sortedDocs[currentIndex + 1].title,
+        }
+      : null
+
+  return {
+    previousDoc,
+    nextDoc,
+    currentIndex: currentIndex + 1, // Convert to 1-based index
+    totalCount: sortedDocs.length,
+    collectionName: collection?.name || null,
+  }
 }

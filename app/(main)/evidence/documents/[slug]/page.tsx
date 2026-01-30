@@ -1,8 +1,13 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getDocument, getDocumentSlugs, getRespondingDocuments } from '@/lib/evidence/loader'
+import {
+  getDocument,
+  getDocumentSlugs,
+  getRespondingDocuments,
+  getDocumentNavigation,
+} from '@/lib/evidence/loader'
 import { DocumentViewerClient } from '@/components/evidence/DocumentViewerClient'
-import { ConnectionsPanel } from '@/components/evidence'
+import { ConnectionsPanel, DocumentNavigation } from '@/components/evidence'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -35,23 +40,34 @@ export default async function DocumentPage({ params }: PageProps) {
     notFound()
   }
 
-  // Fetch related documents for conversation threading
-  const [respondingDocs, respondedToDoc] = await Promise.all([
+  // Fetch related documents for conversation threading and navigation
+  const [respondingDocs, respondedToDoc, navigationData] = await Promise.all([
     getRespondingDocuments(document.id),
     document.responds_to ? getDocument(document.responds_to) : Promise.resolve(null),
+    getDocumentNavigation(slug),
   ])
 
   return (
     <div className="min-h-screen bg-midnight">
       <div className="container mx-auto px-4 py-12">
-        {/* Back link */}
-        <nav className="mb-8">
-          <Link
-            href="/evidence"
-            className="text-sm text-gold-leaf/60 hover:text-gold-leaf transition-colors"
-          >
-            ← Back to Evidence Room
-          </Link>
+        <nav className="mb-8" aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm flex-wrap text-gold-leaf/60">
+            <li>
+              <Link href="/evidence" className="hover:opacity-100 transition-opacity">
+                Evidence Room
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link href="/evidence/documents" className="hover:opacity-100 transition-opacity">
+                Archive
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-gold-leaf" aria-current="page">
+              {document.title}
+            </li>
+          </ol>
         </nav>
 
         <DocumentViewerClient document={document} />
@@ -72,6 +88,19 @@ export default async function DocumentPage({ params }: PageProps) {
             }))}
           />
         </div>
+
+        {/* Document Navigation */}
+        {navigationData && (
+          <div className="max-w-3xl mx-auto">
+            <DocumentNavigation
+              previousDoc={navigationData.previousDoc}
+              nextDoc={navigationData.nextDoc}
+              currentIndex={navigationData.currentIndex}
+              totalCount={navigationData.totalCount}
+              collectionName={navigationData.collectionName || undefined}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

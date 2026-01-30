@@ -55,7 +55,7 @@
   },
   {
     "id": "blount-arrives",
-    "date": "1790-10-10",
+    "date": "1790-10-11",
     "title": "Blount Arrives at Rocky Mount",
     "description": "Governor Blount arrives at William Cobb's home, establishing Rocky Mount as the seat of territorial government.",
     "documentId": "blount-arrival-1790",
@@ -183,7 +183,7 @@
     "id": "gazette-nov-12",
     "date": "1791-11-12",
     "title": "Gazette Reports Territory News",
-    "description": "The second issue of the Knoxville Gazette covers territorial developments and frontier conditions.",
+    "description": "The second issue of the Knoxville Gazette covers territorial developments and frontier conditions. (Note: Biweekly schedule suggests Nov 19; Nov 12 date requires archival verification)",
     "documentId": "knoxville-gazette-1791-11-12",
     "type": "newspaper",
     "featured": false
@@ -207,6 +207,33 @@
     "featured": false
   },
   {
+    "id": "cherokee-delegation-arrives",
+    "date": "1791-12-29",
+    "title": "Cherokee Delegation Arrives in Philadelphia",
+    "description": "Five Cherokee chiefs arrive in Philadelphia by ship to protest Treaty of Holston terms directly to President Washington.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "event",
+    "featured": true
+  },
+  {
+    "id": "cherokee-meet-washington",
+    "date": "1792-01-04",
+    "title": "Cherokee Chiefs Meet President Washington",
+    "description": "Bloody Fellow leads Cherokee delegation in meeting with President Washington, who directs them to Secretary of War Henry Knox.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "event",
+    "featured": false
+  },
+  {
+    "id": "cherokee-delegation-speeches",
+    "date": "1792-01-05",
+    "title": "Cherokee Delegation Presents Demands",
+    "description": "Led by Bloody Fellow, Cherokee chiefs present formal objections to Treaty of Holston, demanding increased annuity and settler removal.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "speech",
+    "featured": true
+  },
+  {
     "id": "gazette-jan",
     "date": "1792-01-07",
     "title": "New Year Gazette Edition",
@@ -228,9 +255,18 @@
     "id": "treaty-additional",
     "date": "1792-02-17",
     "title": "Additional Treaty Article Signed",
-    "description": "An additional article to the Treaty of Holston increases the annual payment to the Cherokee Nation to $1,500.",
+    "description": "An additional article to the Treaty of Holston increases the annual payment to the Cherokee Nation to $1,500. Cherokee delegation's successful negotiation.",
     "documentId": "treaty-holston-additional-1792",
     "type": "treaty",
+    "featured": false
+  },
+  {
+    "id": "cherokee-delegation-departs",
+    "date": "1792-02-18",
+    "title": "Cherokee Delegation Departs Philadelphia",
+    "description": "Cherokee chiefs depart Philadelphia with increased annuity secured, demonstrating Cherokee diplomatic power.",
+    "documentId": "cherokee-delegation-philadelphia-1792",
+    "type": "event",
     "featured": false
   },
   {
@@ -268,6 +304,15 @@
     "documentId": "knoxville-gazette-1792-10-06",
     "type": "newspaper",
     "featured": false
+  },
+  {
+    "id": "little-turkey-peace",
+    "date": "1792-10-09",
+    "title": "Little Turkey Warns of Lower Towns War",
+    "description": "Cherokee principal chief Little Turkey sends urgent message distinguishing peace faction from war faction, warns of Spanish influence among Lower Towns.",
+    "documentId": "little-turkey-peace-efforts-1792",
+    "type": "letter",
+    "featured": true
   },
   {
     "id": "gazette-mar-93",
@@ -340,5 +385,14 @@
     "documentId": "bradley-map-1796",
     "type": "event",
     "featured": false
+  },
+  {
+    "id": "john-watts-boundary-speech",
+    "date": "1796-12-22",
+    "title": "John Watts Demands Treaty Enforcement",
+    "description": "Cherokee leader John Watts addresses President Washington, demanding formal boundary survey with Cherokee oversight and accountability for treaty violations.",
+    "documentId": "john-watts-boundary-speech-1796",
+    "type": "speech",
+    "featured": true
   }
 ]

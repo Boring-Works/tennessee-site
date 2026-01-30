@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1795-02-14
-title: 'Knoxville Gazette - Constitutional Convention Call'
+title: Knoxville Gazette - Constitutional Convention Call
 date: '1795-02-14'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -11,7 +11,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+description: Knoxville Gazette from February 14, 1795, reporting on territorial affairs
+  and developments in early 1795.
 ---
 
 ## The Knoxville Gazette
@@ -31,3 +33,22 @@ verification:
 The sentiment in favor of statehood is nearly universal throughout the territory. The people are eager to enjoy the full rights of American citizens, including representation in the councils of the nation.
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Constitutional Convention Call." _Rocky Mount State Historic Site Evidence Room_, 1795. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1795-02-14>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1795). Knoxville Gazette - Constitutional Convention Call. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1795-02-14
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Constitutional Convention Call." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1795-02-14.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1795-02-14`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

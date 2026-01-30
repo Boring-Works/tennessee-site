@@ -27,9 +27,17 @@ This stay occurred two years before Governor William Blount would arrive to esta
 - **1812-1815:** Major General, hero of the Battle of New Orleans
 - **1829-1837:** 7th President of the United States
 
+### Indian Removal Policy
+
+As president, Jackson was the primary architect of Indian Removal, a systematic policy of displacing Indigenous peoples from their ancestral lands east of the Mississippi River. In 1830, he signed the Indian Removal Act, which authorized the federal government to negotiate treaties exchanging Native American tribal lands in the eastern states for territory west of the Mississippi.
+
+The policy resulted in the forced relocation of approximately 60,000 Native Americans, including the Cherokee, Choctaw, Chickasaw, Creek, and Seminole peoples. The Cherokee removal, known as the Trail of Tears (1838-1839), occurred after Jackson left office but was the direct result of policies he established and enforced. Approximately 4,000 Cherokee people—nearly one-quarter of the Cherokee Nation—died during the forced march to Indian Territory (present-day Oklahoma) from exposure, disease, and starvation.
+
+Jackson's removal policies represented the culmination of the settler-colonial expansion that began in the 1790s during the territorial period at Rocky Mount. The treaties negotiated during the Southwest Territory era, including the Treaty of Holston (1791), were repeatedly violated by settlers with inadequate federal enforcement—a pattern that Jackson's policies brought to its devastating conclusion.
+
 ### Legacy
 
-Jackson's frontier legal career began at Rocky Mount before continuing to Jonesborough and Nashville. The young attorney who waited for his law license at William Cobb's home would become one of the most consequential figures in American history.
+Jackson's frontier legal career began at Rocky Mount before continuing to Jonesborough and Nashville. The young attorney who waited for his law license at William Cobb's home would become one of the most consequential figures in American history—a legacy that includes both his rise to the presidency and his role in the forced dispossession of Native American peoples from their lands.
 
 ---
 

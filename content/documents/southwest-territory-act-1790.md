@@ -1,17 +1,19 @@
 ---
 id: southwest-territory-act-1790
-title: 'Act for the Government of the Southwest Territory'
+title: Act for the Government of the Southwest Territory
 date: '1790-05-26'
 content_type: legal
-source: 'Statutes at Large, 1st Congress'
-source_url: 'https://memory.loc.gov/ammem/amlaw/lwsl.html'
+source: Statutes at Large, 1st Congress
+source_url: https://memory.loc.gov/ammem/amlaw/lwsl.html
 collection: treaties
 people_mentioned:
   - george-washington
 verification:
   status: verified
   source_count: 3
-  method: 'Original statute verified through Library of Congress American Memory'
+  method: Original statute verified through Library of Congress American Memory
+description: Federal legislation establishing the Territory South of the River Ohio
+  in 1790, creating the framework for territorial government and frontier administration.
 ---
 
 ## An Act for the Government of the Territory of the United States, South of the River Ohio
@@ -35,3 +37,22 @@ Approved, May 26, 1790
 ---
 
 _Note: This act established the Southwest Territory and provided the legal framework under which William Blount would govern. The exception in Section 2 preserved the right of slaveholding in the territory, unlike the Northwest Ordinance which prohibited slavery._
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Act for the Government of the Southwest Territory." _Rocky Mount State Historic Site Evidence Room_, 1790. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/southwest-territory-act-1790>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1790). Act for the Government of the Southwest Territory. Retrieved from https://tennesseestartshere.com/evidence/documents/southwest-territory-act-1790
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Act for the Government of the Southwest Territory." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/southwest-territory-act-1790.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/southwest-territory-act-1790`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

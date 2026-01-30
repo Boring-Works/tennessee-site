@@ -50,37 +50,56 @@ export function NowDisplay({
     : null
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-lg p-4 h-full flex flex-col">
+    <section
+      className="bg-white/5 border border-white/10 rounded-lg p-4 h-full flex flex-col"
+      aria-label="Current weather conditions"
+      role="region"
+    >
       {/* Header: NOW */}
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-almanac-gold">
-          Now
-        </span>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-almanac-gold">Now</h2>
         {updateTime && (
-          <span className="flex items-center gap-1 text-xs text-almanac-parchment/40">
-            <Clock className="w-3 h-3" />
-            {updateTime}
+          <span
+            className="flex items-center gap-1 text-xs text-almanac-parchment/40"
+            aria-label={`Last updated at ${updateTime}`}
+          >
+            <Clock className="w-3 h-3" aria-hidden="true" />
+            <span>{updateTime}</span>
           </span>
         )}
       </div>
 
       {/* Main temp + condition */}
       <div className="flex items-center gap-3 mb-3">
-        <Icon className="w-12 h-12 text-almanac-gold flex-shrink-0" />
+        <Icon className="w-12 h-12 text-almanac-gold flex-shrink-0" aria-hidden="true" />
         <div>
-          <div className="text-5xl font-bold text-almanac-parchment leading-none">
+          <div
+            className="text-5xl font-bold text-almanac-parchment leading-none"
+            aria-label={`Current temperature: ${Math.round(temperature)} degrees Fahrenheit`}
+          >
             {Math.round(temperature)}°
           </div>
-          <p className="text-sm text-almanac-parchment/60 mt-1">{weather.condition}</p>
+          <p
+            className="text-sm text-almanac-parchment/60 mt-1"
+            aria-label={`Weather condition: ${weather.condition}`}
+          >
+            {weather.condition}
+          </p>
         </div>
       </div>
 
       {/* Feels like + H/L */}
       <div className="flex items-center justify-between text-sm mb-3 pb-3 border-b border-white/10">
-        <span className="text-almanac-parchment/60">
+        <span
+          className="text-almanac-parchment/60"
+          aria-label={`Feels like ${Math.round(feelsLike)} degrees`}
+        >
           Feels like <span className="text-almanac-parchment">{Math.round(feelsLike)}°</span>
         </span>
-        <span className="text-almanac-parchment/60">
+        <span
+          className="text-almanac-parchment/60"
+          aria-label={`Today's high: ${Math.round(todayHigh)} degrees, low: ${Math.round(todayLow)} degrees`}
+        >
           H: <span className="text-almanac-parchment">{Math.round(todayHigh)}°</span>
           {' / '}
           L: <span className="text-blue-400">{Math.round(todayLow)}°</span>
@@ -88,8 +107,11 @@ export function NowDisplay({
       </div>
 
       {/* Wind */}
-      <div className="flex items-center gap-2 text-sm text-almanac-parchment/60 mb-2">
-        <Wind className="w-4 h-4" />
+      <div
+        className="flex items-center gap-2 text-sm text-almanac-parchment/60 mb-2"
+        aria-label={`Wind speed: ${Math.round(windSpeed)} miles per hour${windDirection !== undefined ? `, direction: ${getWindDirection(windDirection)}` : ''}${windGusts && windGusts > windSpeed + 5 ? `, gusts up to ${Math.round(windGusts)} miles per hour` : ''}`}
+      >
+        <Wind className="w-4 h-4" aria-hidden="true" />
         <span className="text-almanac-parchment">
           {Math.round(windSpeed)} <span className="text-almanac-parchment/40">mph</span>
           {windDirection !== undefined && ` ${getWindDirection(windDirection)}`}
@@ -100,8 +122,15 @@ export function NowDisplay({
       </div>
 
       {/* Humidity or Dew Point */}
-      <div className="flex items-center gap-2 text-sm text-almanac-parchment/60">
-        <Droplets className="w-4 h-4" />
+      <div
+        className="flex items-center gap-2 text-sm text-almanac-parchment/60"
+        aria-label={
+          dewPoint !== undefined
+            ? `Dew point: ${Math.round(dewPoint)} degrees`
+            : `Humidity: ${Math.round(humidity)} percent`
+        }
+      >
+        <Droplets className="w-4 h-4" aria-hidden="true" />
         {dewPoint !== undefined ? (
           <span className="text-almanac-parchment">
             Dew point {Math.round(dewPoint)}
@@ -114,6 +143,6 @@ export function NowDisplay({
           </span>
         )}
       </div>
-    </div>
+    </section>
   )
 }

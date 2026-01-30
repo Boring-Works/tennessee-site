@@ -1,18 +1,19 @@
 'use client'
 
+import { useMemo, useCallback } from 'react'
 import Link from 'next/link'
 import lecturesData from '@/data/lectures.json'
-import type { LecturesData } from '@/types/data'
+import type { LecturesData, Speaker } from '@/types/data'
 import { useContact } from '@/lib/hooks/useContact'
 import styles from './page.module.css'
 
 const typedLecturesData = lecturesData as LecturesData
 
 // Roman numerals for chapter numbers
-const romanNumerals = ['I', 'II', 'III', 'IV', 'V']
+const ROMAN_NUMERALS = ['I', 'II', 'III', 'IV', 'V'] as const
 
 // Narrative connections between lectures
-const lectureConnections: Record<number, string> = {
+const LECTURE_CONNECTIONS: Readonly<Record<number, string>> = {
   1: 'Understanding frontier faith sets the stage for the sacrifices that followed.',
   2: "Mary Patton's powder enabled the march you'll learn about next.",
   3: "The Overmountain Men's victory made westward expansion possible.",
@@ -21,14 +22,30 @@ const lectureConnections: Record<number, string> = {
 }
 
 // Credential badges for speakers
-const credentialBadges: Record<string, string> = {
+const CREDENTIAL_BADGES: Readonly<Record<string, string>> = {
   'Vanderbilt University': 'Vanderbilt Scholar',
   'Sycamore Shoals State Historic Park': 'Living History',
   'Independent Scholar': 'Historian',
 }
 
+/**
+ * Get speaker credential badge text
+ */
+function getSpeakerCredential(speaker: Speaker): string {
+  if (speaker.institution && speaker.institution in CREDENTIAL_BADGES) {
+    return CREDENTIAL_BADGES[speaker.institution]
+  }
+  return speaker.title
+}
+
+/**
+ * Format date string to full display format
+ * Uses fixed timezone approach to prevent hydration mismatches
+ */
 function formatDate(dateStr: string): string {
-  const date = new Date(dateStr + 'T12:00:00')
+  // Parse YYYY-MM-DD format manually to avoid timezone issues
+  const [year, month, day] = dateStr.split('-').map(Number)
+  const date = new Date(year, month - 1, day, 12, 0, 0)
   return date.toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
@@ -36,11 +53,17 @@ function formatDate(dateStr: string): string {
   })
 }
 
+/**
+ * Format date string to short month/day format
+ * Uses fixed timezone approach to prevent hydration mismatches
+ */
 function formatShortDate(dateStr: string): { month: string; day: string } {
-  const date = new Date(dateStr + 'T12:00:00')
+  // Parse YYYY-MM-DD format manually to avoid timezone issues
+  const [year, month, day] = dateStr.split('-').map(Number)
+  const date = new Date(year, month - 1, day, 12, 0, 0)
   return {
     month: date.toLocaleDateString('en-US', { month: 'short' }),
-    day: date.getDate().toString(),
+    day: day.toString(),
   }
 }
 
@@ -50,6 +73,28 @@ function formatShortDate(dateStr: string): { month: string; day: string } {
 export default function LecturesPage() {
   const { lectures, additionalProgramming } = typedLecturesData
   const contact = useContact()
+
+  // Memoize formatted dates to prevent recalculation on every render
+  const formattedDates = useMemo(() => {
+    return lectures.map((lecture) => ({
+      id: lecture.id,
+      shortDate: formatShortDate(lecture.date),
+      fullDate: formatDate(lecture.date),
+    }))
+  }, [lectures])
+
+  // Create a lookup for formatted dates by lecture id
+  const getFormattedDates = useCallback(
+    (lectureId: number) => {
+      return (
+        formattedDates.find((d) => d.id === lectureId) ?? {
+          shortDate: { month: '', day: '' },
+          fullDate: '',
+        }
+      )
+    },
+    [formattedDates]
+  )
 
   return (
     <>
@@ -110,7 +155,7 @@ export default function LecturesPage() {
         <div className={styles['series-timeline-inner']}>
           <div className={styles['series-timeline-track']}>
             {lectures.map((lecture, index) => {
-              const shortDate = formatShortDate(lecture.date)
+              const { shortDate } = getFormattedDates(lecture.id)
               return (
                 <a
                   key={lecture.id}
@@ -118,7 +163,7 @@ export default function LecturesPage() {
                   className={styles['series-timeline-point']}
                   aria-label={`Jump to Lecture ${index + 1}: ${lecture.title}`}
                 >
-                  <span className={styles['series-timeline-chapter']}>{romanNumerals[index]}</span>
+                  <span className={styles['series-timeline-chapter']}>{ROMAN_NUMERALS[index]}</span>
                   <span className={styles['series-timeline-dot']} aria-hidden="true" />
                   <span className={styles['series-timeline-date']}>
                     {shortDate.month} {shortDate.day}
@@ -162,12 +207,10 @@ export default function LecturesPage() {
 
         <div className={styles['series-lectures-list']}>
           {lectures.map((lecture, index) => {
-            const chapter = romanNumerals[index]
-            const shortDate = formatShortDate(lecture.date)
-            const credential = lecture.speaker.institution
-              ? credentialBadges[lecture.speaker.institution] || lecture.speaker.title
-              : lecture.speaker.title
-            const connection = lectureConnections[lecture.id]
+            const chapter = ROMAN_NUMERALS[index]
+            const { shortDate, fullDate } = getFormattedDates(lecture.id)
+            const credential = getSpeakerCredential(lecture.speaker)
+            const connection = LECTURE_CONNECTIONS[lecture.id]
             const isLastLecture = index === lectures.length - 1
 
             return (
@@ -198,9 +241,7 @@ export default function LecturesPage() {
 
                     <div className={styles['series-lecture-title-group']}>
                       <h3 className={styles['series-lecture-title']}>{lecture.title}</h3>
-                      <p className={styles['series-lecture-full-date']}>
-                        {formatDate(lecture.date)}
-                      </p>
+                      <p className={styles['series-lecture-full-date']}>{fullDate}</p>
                     </div>
                   </header>
 

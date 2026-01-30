@@ -57,6 +57,7 @@ function formatDate(dateString: string): string {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'UTC',
   })
 }
 
@@ -177,6 +178,7 @@ export function Timeline({ className, filterYears }: TimelineProps) {
             className={`${styles.yearButton} ${activeYear === null ? styles.yearButtonActive : ''}`}
             onClick={() => handleYearClick(null)}
             type="button"
+            aria-current={activeYear === null ? 'true' : undefined}
           >
             All Years
           </button>
@@ -186,90 +188,118 @@ export function Timeline({ className, filterYears }: TimelineProps) {
               className={`${styles.yearButton} ${activeYear === year ? styles.yearButtonActive : ''}`}
               onClick={() => handleYearClick(year)}
               type="button"
+              aria-current={activeYear === year ? 'true' : undefined}
             >
               {year}
             </button>
           ))}
         </div>
 
-        {/* Month Selector - shown when a year is selected */}
-        {activeYear !== null && monthsInYear.length > 1 && (
-          <div className={styles.monthSelector}>
+        <div
+          className={styles.monthSelector}
+          style={{
+            maxHeight: activeYear !== null && monthsInYear.length > 1 ? '100px' : '0',
+            overflow: 'hidden',
+            opacity: activeYear !== null && monthsInYear.length > 1 ? 1 : 0,
+            transition: 'max-height 0.3s ease, opacity 0.3s ease',
+          }}
+        >
+          <button
+            className={`${styles.monthButton} ${activeMonth === null ? styles.monthButtonActive : ''}`}
+            onClick={() => setActiveMonth(null)}
+            type="button"
+            aria-current={activeMonth === null ? 'true' : undefined}
+          >
+            All {activeYear}
+          </button>
+          {monthsInYear.map((month) => (
             <button
-              className={`${styles.monthButton} ${activeMonth === null ? styles.monthButtonActive : ''}`}
-              onClick={() => setActiveMonth(null)}
+              key={month}
+              className={`${styles.monthButton} ${activeMonth === month ? styles.monthButtonActive : ''}`}
+              onClick={() => setActiveMonth(month)}
               type="button"
+              aria-current={activeMonth === month ? 'true' : undefined}
             >
-              All {activeYear}
+              {getMonthAbbrev(month)}
             </button>
-            {monthsInYear.map((month) => (
-              <button
-                key={month}
-                className={`${styles.monthButton} ${activeMonth === month ? styles.monthButtonActive : ''}`}
-                onClick={() => setActiveMonth(month)}
-                type="button"
-              >
-                {getMonthAbbrev(month)}
-              </button>
-            ))}
-          </div>
-        )}
+          ))}
+        </div>
       </nav>
 
       {/* Timeline Content */}
       <div className={styles.timelineContainer}>
-        {displayYears.map((year) => (
-          <section key={year} className={styles.yearGroup} id={`year-${year}`}>
-            <div className={styles.yearLabel}>
-              <h2 className={styles.yearLabelInner}>
-                <span>{year}</span>
-                <span className={styles.yearLabelLine} aria-hidden="true" />
-              </h2>
-            </div>
+        {displayYears.length > 0 ? (
+          <>
+            {displayYears.map((year) => (
+              <section key={year} className={styles.yearGroup} id={`year-${year}`}>
+                <div className={styles.yearLabel}>
+                  <h2 className={styles.yearLabelInner}>
+                    <span>{year}</span>
+                    <span className={styles.yearLabelLine} aria-hidden="true" />
+                  </h2>
+                </div>
 
-            <div className={styles.track}>
-              {eventsByYear[year].map((event) => {
-                const typeClassName = `eventType${event.type.charAt(0).toUpperCase() + event.type.slice(1)}`
+                <div className={styles.track}>
+                  {eventsByYear[year].map((event) => {
+                    const typeClassName = `eventType${event.type.charAt(0).toUpperCase() + event.type.slice(1)}`
 
-                const content = (
-                  <div
-                    className={`${styles.eventContent} ${event.featured ? styles.eventContentFeatured : ''}`}
-                  >
-                    <time className={styles.eventDate} dateTime={event.date}>
-                      {formatDate(event.date)}
-                    </time>
-                    <h3 className={styles.eventTitle}>{event.title}</h3>
-                    <p className={styles.eventDescription}>{event.description}</p>
-                    <div className={styles.eventMeta}>
-                      <span className={styles.eventType}>
-                        <span className={styles.eventTypeLabel}>{getTypeLabel(event.type)}</span>
-                      </span>
-                      {event.documentId && (
-                        <span className={styles.eventLink}>
-                          View Document <span className={styles.eventLinkArrow}>→</span>
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                )
+                    const content = (
+                      <div
+                        className={`${styles.eventContent} ${event.featured ? styles.eventContentFeatured : ''}`}
+                      >
+                        <time className={styles.eventDate} dateTime={event.date}>
+                          {formatDate(event.date)}
+                        </time>
+                        <h3 className={styles.eventTitle}>{event.title}</h3>
+                        <p className={styles.eventDescription}>{event.description}</p>
+                        <div className={styles.eventMeta}>
+                          <span className={styles.eventType}>
+                            <span className={styles.eventTypeLabel}>
+                              {getTypeLabel(event.type)}
+                            </span>
+                          </span>
+                          {event.documentId && (
+                            <span className={styles.eventLink}>
+                              View Document <span className={styles.eventLinkArrow}>→</span>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )
 
-                return (
-                  <article
-                    key={event.id}
-                    className={`${styles.event} ${event.featured ? styles.eventFeatured : ''} ${styles[typeClassName] || ''}`}
-                  >
-                    <div className={styles.eventDot} aria-hidden="true" />
-                    {event.documentId ? (
-                      <Link href={`/evidence/documents/${event.documentId}`}>{content}</Link>
-                    ) : (
-                      content
-                    )}
-                  </article>
-                )
-              })}
-            </div>
-          </section>
-        ))}
+                    return (
+                      <article
+                        key={event.id}
+                        className={`${styles.event} ${event.featured ? styles.eventFeatured : ''} ${styles[typeClassName] || ''}`}
+                      >
+                        <div className={styles.eventDot} aria-hidden="true" />
+                        {event.documentId ? (
+                          <Link href={`/evidence/documents/${event.documentId}`}>{content}</Link>
+                        ) : (
+                          content
+                        )}
+                      </article>
+                    )
+                  })}
+                </div>
+              </section>
+            ))}
+          </>
+        ) : (
+          <div className={styles.emptyState}>
+            <p className={styles.emptyStateText}>No events found for the selected filters.</p>
+            <button
+              onClick={() => {
+                setActiveYear(null)
+                setActiveMonth(null)
+              }}
+              className={styles.clearFiltersBtn}
+              type="button"
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
 
         {/* Legend */}
         <aside className={styles.legend}>

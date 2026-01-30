@@ -3,16 +3,25 @@ import Link from 'next/link'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 
+// Section divider variant type
+type DividerVariant = 'default' | 'light' | 'dark'
+
 // Section divider component for period-authentic transitions
-const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) => (
-  <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
-    <span className="section-divider-line" />
-    <span className="section-divider-flourish">❧</span>
-    <span className="section-divider-ornament">✦</span>
-    <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
-    <span className="section-divider-line" />
-  </div>
-)
+function SectionDivider({ variant = 'default' }: { variant?: DividerVariant }): React.ReactElement {
+  return (
+    <div
+      className={`section-divider section-divider--${variant}`}
+      aria-hidden="true"
+      role="presentation"
+    >
+      <span className="section-divider-line" />
+      <span className="section-divider-flourish">&#10087;</span>
+      <span className="section-divider-ornament">&#10022;</span>
+      <span className="section-divider-flourish section-divider-flourish--flip">&#10087;</span>
+      <span className="section-divider-line" />
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
   title: 'Support Rocky Mount | Tennessee Starts Here',
@@ -26,7 +35,25 @@ export const metadata: Metadata = {
   },
 }
 
-const IMPACT_STATEMENTS = [
+// Impact statement interface
+interface ImpactStatement {
+  stat: string
+  label: string
+  description: string
+}
+
+// Support option interface
+interface SupportOption {
+  title: string
+  description: string
+  price: string
+  cta: string
+  href: string
+  external: boolean
+  trustLabel: string
+}
+
+const IMPACT_STATEMENTS: ImpactStatement[] = [
   {
     stat: '10,000+',
     label: 'Annual Visitors',
@@ -47,7 +74,7 @@ const IMPACT_STATEMENTS = [
   },
 ]
 
-const SUPPORT_OPTIONS = [
+const SUPPORT_OPTIONS: SupportOption[] = [
   {
     title: 'Become a Member',
     description: 'Join our community of history supporters',
@@ -81,10 +108,12 @@ export default function SupportPage() {
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
+      <section className={styles.hero} aria-labelledby="support-hero-title">
         <div className={styles['hero-content']}>
           <p className={styles.eyebrow}>Support Rocky Mount</p>
-          <h1 className={styles.headline}>Preserve Where Tennessee Began</h1>
+          <h1 id="support-hero-title" className={styles.headline}>
+            Preserve Where Tennessee Began
+          </h1>
           <p className={styles.subhead}>
             Rocky Mount preserves the place where Tennessee&apos;s government began. Your support
             maintains these historic grounds, expands educational programs, and shares this story
@@ -96,18 +125,32 @@ export default function SupportPage() {
       <SectionDivider variant="light" />
 
       {/* Your Impact */}
-      <section className={styles.impact}>
+      <section className={styles.impact} aria-labelledby="impact-headline">
         <div className={styles['impact-inner']}>
-          <h2 className={styles['impact-headline']}>Your Impact</h2>
+          <h2 id="impact-headline" className={styles['impact-headline']}>
+            Your Impact
+          </h2>
           <p className={styles['impact-intro']}>
             Your support helps preserve the place where Tennessee&apos;s government was born and
             share this story with thousands of visitors each year.
           </p>
-          <div className={styles['impact-grid']}>
+          <div className={styles['impact-grid']} role="list">
             {IMPACT_STATEMENTS.map((item) => (
-              <article key={item.label} className={styles['impact-card']}>
-                <p className={styles['impact-stat']}>{item.stat}</p>
-                <h3 className={styles['impact-label']}>{item.label}</h3>
+              <article
+                key={item.label}
+                className={styles['impact-card']}
+                role="listitem"
+                aria-labelledby={`impact-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <p className={styles['impact-stat']} aria-label={`${item.stat} ${item.label}`}>
+                  {item.stat}
+                </p>
+                <h3
+                  id={`impact-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  className={styles['impact-label']}
+                >
+                  {item.label}
+                </h3>
                 <p className={styles['impact-desc']}>{item.description}</p>
               </article>
             ))}
@@ -118,13 +161,25 @@ export default function SupportPage() {
       <SectionDivider variant="default" />
 
       {/* Ways to Support */}
-      <section className={styles.options}>
+      <section className={styles.options} aria-labelledby="options-headline">
         <div className={styles['options-inner']}>
-          <h2 className={styles['options-headline']}>Ways to Support</h2>
-          <div className={styles['options-grid']}>
+          <h2 id="options-headline" className={styles['options-headline']}>
+            Ways to Support
+          </h2>
+          <div className={styles['options-grid']} role="list">
             {SUPPORT_OPTIONS.map((option) => (
-              <article key={option.title} className={styles['option-card']}>
-                <h3 className={styles['option-title']}>{option.title}</h3>
+              <article
+                key={option.title}
+                className={styles['option-card']}
+                role="listitem"
+                aria-labelledby={`option-${option.title.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <h3
+                  id={`option-${option.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  className={styles['option-title']}
+                >
+                  {option.title}
+                </h3>
                 <p className={styles['option-desc']}>{option.description}</p>
                 <p className={styles['option-price']}>{option.price}</p>
                 <a
@@ -132,6 +187,7 @@ export default function SupportPage() {
                   target={option.external ? '_blank' : undefined}
                   rel={option.external ? 'noopener noreferrer' : undefined}
                   className={`${styles['option-cta']} btn-small`}
+                  aria-label={option.external ? `${option.cta} (opens in new tab)` : option.cta}
                 >
                   {option.cta} {option.external && '→'}
                 </a>
@@ -143,9 +199,11 @@ export default function SupportPage() {
       </section>
 
       {/* First 250 */}
-      <section className={styles.first250}>
+      <section className={styles.first250} aria-labelledby="first250-headline">
         <div className={styles['first250-inner']}>
-          <h2 className={styles['first250-headline']}>The First 250</h2>
+          <h2 id="first250-headline" className={styles['first250-headline']}>
+            The First 250
+          </h2>
           <p className={styles['first250-desc']}>
             Join our founding circle for America&apos;s 250th.
           </p>
@@ -158,11 +216,18 @@ export default function SupportPage() {
       </section>
 
       {/* Contact */}
-      <section className={styles.contact}>
+      <section className={styles.contact} aria-label="Contact information">
         <div className={styles['contact-inner']}>
           <p className={styles['contact-text']}>
-            Questions? <a href="mailto:rockymountmuseum@gmail.com">rockymountmuseum@gmail.com</a> |{' '}
-            <a href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}>
+            Questions?{' '}
+            <a href="mailto:rockymountmuseum@gmail.com" aria-label="Email Rocky Mount Museum">
+              rockymountmuseum@gmail.com
+            </a>{' '}
+            |{' '}
+            <a
+              href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}
+              aria-label={`Call Rocky Mount at ${siteInfo.contact.phone}`}
+            >
               {siteInfo.contact.phone}
             </a>
           </p>

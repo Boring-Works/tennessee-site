@@ -1,0 +1,49 @@
+File,Required_Field,Status,Coverage,Issue,Impact_Severity
+events.json,id (file-level),MISSING,0/4 files,No unique identifier for file,HIGH
+events.json,title (file-level),MISSING,0/4 files,Can't name or describe the dataset,HIGH
+events.json,date (file-level),MISSING,0/4 files,No creation/update timestamp,HIGH
+events.json,content_type,MISSING,0/4 files,Can't categorize data,MEDIUM
+events.json,source,MISSING,0/4 files,No source attribution,MEDIUM
+events.json,collection,MISSING,0/4 files,Can't group with related files,MEDIUM
+events.json,source_url (optional),MISSING,0/4 files,FareHarbor URLs exist but not tracked,MEDIUM
+events.json,people_mentioned (optional),MISSING,0/4 files,6 speakers not indexed or searchable,HIGH
+events.json,responds_to (optional),MISSING,0/4 files,No marking of event-lecture relationships,MEDIUM
+events.json,responses (optional),MISSING,0/4 files,No bidirectional linking,MEDIUM
+events.json,verification (optional),MISSING,0/4 files,No verification dates for prices/URLs,HIGH
+lectures.json,id (file-level),MISSING,0/4 files,No unique identifier for lecture series,MEDIUM
+lectures.json,title (file-level),PARTIAL,1/4 files,series.title exists but not at file level,MEDIUM
+lectures.json,date (file-level),MISSING,0/4 files,No series-level timestamp,MEDIUM
+lectures.json,content_type,MISSING,0/4 files,Can't categorize data,MEDIUM
+lectures.json,source,MISSING,0/4 files,No source attribution,MEDIUM
+lectures.json,collection,MISSING,0/4 files,Can't group with related files,MEDIUM
+lectures.json,source_url (optional),MISSING,0/4 files,No external URLs tracked,LOW
+lectures.json,people_mentioned (optional),MISSING,0/4 files,5 speakers not indexed; Lisa Bennett/Mary Patton dual role hidden,CRITICAL
+lectures.json,responds_to (optional),MISSING,0/4 files,No marking of lecture-event relationships,HIGH
+lectures.json,responses (optional),MISSING,0/4 files,No bidirectional linking back to events,HIGH
+lectures.json,verification (optional),MISSING,0/4 files,No verification dates for speaker bios,MEDIUM
+siteInfo.json,id (file-level),MISSING,0/4 files,No unique identifier,MEDIUM
+siteInfo.json,title (file-level),MISSING,0/4 files,Can't name dataset,MEDIUM
+siteInfo.json,date (file-level),MISSING,0/4 files,No timestamp,CRITICAL
+siteInfo.json,content_type,MISSING,0/4 files,Can't categorize,MEDIUM
+siteInfo.json,source,MISSING,0/4 files,No source attribution,MEDIUM
+siteInfo.json,collection,MISSING,0/4 files,Can't group with related files,MEDIUM
+siteInfo.json,source_url (optional),MISSING,0/4 files,Sister site URLs exist but not tracked,MEDIUM
+siteInfo.json,people_mentioned (optional),MISSING,0/4 files,3 historical figures not indexed,MEDIUM
+siteInfo.json,responds_to (optional),MISSING,0/4 files,No cross-file relationships,MEDIUM
+siteInfo.json,responses (optional),MISSING,0/4 files,No bidirectional linking,MEDIUM
+siteInfo.json,verification (optional),MISSING,0/4 files,Contact/hours data has NO verification dates - CRITICAL GAP,CRITICAL
+enrollment.json,id (file-level),MISSING,0/4 files,No unique identifier,MEDIUM
+enrollment.json,title (file-level),MISSING,0/4 files,Can't name dataset,MEDIUM
+enrollment.json,date (file-level),MISSING,0/4 files,No timestamp - can't track changes,CRITICAL
+enrollment.json,content_type,MISSING,0/4 files,Can't categorize,MEDIUM
+enrollment.json,source,MISSING,0/4 files,No source attribution,MEDIUM
+enrollment.json,collection,MISSING,0/4 files,Can't group with related files,MEDIUM
+enrollment.json,source_url (optional),MISSING,0/4 files,No external URLs,LOW
+enrollment.json,people_mentioned (optional),MISSING,0/4 files,No people indexed,LOW
+enrollment.json,responds_to (optional),MISSING,0/4 files,No cross-file relationships,LOW
+enrollment.json,responses (optional),MISSING,0/4 files,No bidirectional linking,LOW
+enrollment.json,verification (optional),MISSING,0/4 files,No verification dates - enrollment data changes frequently with no audit trail,CRITICAL
+
+Summary,TOTAL_REQUIRED,0 of 6 implemented,0%,All required fields missing from all files,CRITICAL
+Summary,TOTAL_OPTIONAL,0 of 5 implemented,0%,All optional fields missing from all files,CRITICAL
+Summary,TOTAL_COMPLIANCE,0 of 24 fields,0%,Complete absence of metadata governance,CRITICAL

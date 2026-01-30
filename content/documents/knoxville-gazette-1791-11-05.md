@@ -1,10 +1,10 @@
 ---
 id: knoxville-gazette-1791-11-05
-title: 'Knoxville Gazette - First Issue'
+title: Knoxville Gazette - First Issue
 date: '1791-11-05'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
-source_url: 'https://tennesseeencyclopedia.net/entries/knoxville-gazette/'
+source: Tennessee State Library and Archives
+source_url: https://tennesseeencyclopedia.net/entries/knoxville-gazette/
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -12,7 +12,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through Tennessee Encyclopedia and historical newspaper records'
+  method: Verified through Tennessee Encyclopedia and historical newspaper records
+description: Knoxville Gazette newspaper from November 5, 1791, reporting on territorial
+  news and events from the early Southwest Territory.
 ---
 
 ## The Knoxville Gazette
@@ -40,3 +42,22 @@ _From the latest dispatches received..._
 ---
 
 _Subscription: Two dollars per annum, payable half-yearly in advance._
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - First Issue." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-05>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Knoxville Gazette - First Issue. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-05
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - First Issue." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-05.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-05`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

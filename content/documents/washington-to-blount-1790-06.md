@@ -1,18 +1,19 @@
 ---
 id: washington-to-blount-1790-06
 title: "Washington's Instructions to Governor Blount"
-date: '1790-06-12'
+date: '1790-06-08'
 content_type: letter
-source: 'Founders Online, National Archives'
-source_url: 'https://founders.archives.gov/documents/Washington/05-05-02-0290'
+source: 'American State Papers, Founders Online annotations'
+source_url: 'https://founders.archives.gov/documents/Washington/05-06-02-0119'
 collection: federal-correspondence
 author: george-washington
 recipient: william-blount
 people_mentioned: []
 verification:
-  status: verified
-  source_count: 2
-  method: 'Cross-referenced with Founders Online and American State Papers'
+  status: nuance
+  source_count: 3
+  method: 'Synthesized from multiple period documents. No single original instructions letter has been located.'
+  notes: 'Instructions were developed collaboratively between Washington, Knox, and Jefferson, transmitted via multiple documents June-August 1790.'
 ---
 
 ## Letter from President Washington to William Blount

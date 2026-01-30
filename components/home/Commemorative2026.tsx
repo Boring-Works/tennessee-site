@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef, useState, useCallback, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState, useMemo, useSyncExternalStore } from 'react'
 import eventsData from '@/data/events.json'
 
 /**
@@ -122,18 +122,41 @@ export function Commemorative2026() {
   const nextEvent = getNextEvent()
   const eventCount = eventsData.events.length
 
-  // Generate 16 stars for the 16 states (client-only to avoid hydration mismatch)
-  const generateStars = useCallback(() => {
-    return Array.from({ length: 16 }, (_, i) => ({
-      id: i,
-      x: 10 + (i % 8) * 11 + Math.random() * 5,
-      y: 20 + Math.floor(i / 8) * 30 + Math.random() * 10,
-      delay: i * 0.1,
-      label: i === 15 ? 'Tennessee (16th)' : `State ${i + 1}`,
-    }))
-  }, [])
+  // Generate 16 stars for the 16 states - use deterministic positions to avoid hydration mismatch
+  // Seeded pseudo-random values for star positions (pre-calculated)
+  const starOffsets = useMemo(
+    () => [
+      [2.1, 4.3],
+      [3.7, 8.1],
+      [1.2, 2.9],
+      [4.5, 6.7],
+      [0.8, 3.2],
+      [3.3, 9.1],
+      [2.8, 5.4],
+      [4.1, 7.8],
+      [1.9, 2.1],
+      [3.5, 6.3],
+      [2.4, 8.7],
+      [4.8, 4.9],
+      [0.6, 7.2],
+      [3.1, 3.6],
+      [2.7, 9.4],
+      [4.3, 5.8],
+    ],
+    []
+  )
 
-  const [stars] = useState(generateStars)
+  const stars = useMemo(
+    () =>
+      Array.from({ length: 16 }, (_, i) => ({
+        id: i,
+        x: 10 + (i % 8) * 11 + starOffsets[i][0],
+        y: 20 + Math.floor(i / 8) * 30 + starOffsets[i][1],
+        delay: i * 0.1,
+        label: i === 15 ? 'Tennessee (16th)' : `State ${i + 1}`,
+      })),
+    [starOffsets]
+  )
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -171,11 +194,11 @@ export function Commemorative2026() {
     return () => observer.disconnect()
   }, [])
 
-  // Parse event date
-  const eventDate = new Date(nextEvent.date + 'T12:00:00')
-  const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short' })
-  const dayNum = eventDate.getDate()
-  const year = eventDate.getFullYear()
+  // Parse event date using UTC to avoid hydration mismatch between server/client
+  const eventDate = new Date(nextEvent.date + 'T12:00:00Z')
+  const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+  const dayNum = eventDate.getUTCDate()
+  const year = eventDate.getUTCFullYear()
 
   // Animated counters
   const animatedEventCount = useCountUp(eventCount, 1500, isVisible)

@@ -45,7 +45,7 @@ export default function TimelinePage() {
               className="inline-flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity"
               style={{ color: '#c9a227' }}
             >
-              <span>←</span>
+              <span aria-hidden="true">←</span>
               <span>Back to Evidence Room</span>
             </Link>
           </nav>

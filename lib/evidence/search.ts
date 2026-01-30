@@ -188,10 +188,22 @@ function calculateScore(text: string, terms: string[]): { score: number; matches
 // =============================================================================
 
 /**
+ * Escape HTML entities to prevent XSS
+ */
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+}
+
+/**
  * Highlight search terms in text
  */
 export function highlightTerms(text: string, terms: string[]): string {
-  let result = text
+  let result = escapeHtml(text)
 
   for (const term of terms) {
     const regex = new RegExp(`(${escapeRegex(term)})`, 'gi')

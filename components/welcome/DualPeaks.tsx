@@ -1,6 +1,6 @@
 'use client'
 
-import { useSyncExternalStore } from 'react'
+import { memo, useSyncExternalStore, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import styles from './welcome.module.css'
 
@@ -11,7 +11,7 @@ interface PeakData {
 }
 
 interface DualPeaksProps {
-  peaks: [PeakData, PeakData]
+  peaks: readonly [PeakData, PeakData]
 }
 
 function calculateDaysRemaining(targetDate: string): number {
@@ -23,9 +23,7 @@ function calculateDaysRemaining(targetDate: string): number {
 }
 
 // Empty subscribe - we don't need to listen for changes
-function subscribe() {
-  return () => {}
-}
+const subscribe = () => () => {}
 
 // Use useSyncExternalStore to safely handle hydration
 function useIsClient() {
@@ -36,31 +34,44 @@ function useIsClient() {
   )
 }
 
-export function DualPeaks({ peaks }: DualPeaksProps) {
+// Memoized animation config to prevent recreation on each render
+const motionAnimationConfig = {
+  initial: { scale: 1 },
+  animate: { scale: [1, 1.15, 1] },
+  transition: { duration: 0.4, ease: 'easeInOut' as const },
+}
+
+export const DualPeaks = memo(function DualPeaks({ peaks }: DualPeaksProps) {
   const isClient = useIsClient()
 
+  // Memoize days calculations
+  const daysData = useMemo(() => {
+    if (!isClient) return [null, null] as const
+    return peaks.map((peak) => calculateDaysRemaining(peak.targetDate)) as [number, number]
+  }, [isClient, peaks])
+
   return (
-    <div className={styles.peaksContainer}>
-      {peaks.map((peak) => {
-        const days = isClient ? calculateDaysRemaining(peak.targetDate) : null
+    <section className={styles.peaksContainer} aria-label="Commemorative countdown timers">
+      {peaks.map((peak, index) => {
+        const days = daysData[index]
         return (
-          <div key={peak.targetDate} className={styles.peakBadge}>
+          <article key={peak.targetDate} className={styles.peakBadge}>
             <span className={styles.peakLabel}>{peak.label}</span>
             <motion.span
               className={styles.peakDays}
               key={days}
-              initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              aria-label={`${days !== null ? days : '—'} days remaining until ${peak.label}`}
+              {...motionAnimationConfig}
+              role="timer"
+              aria-live="polite"
+              aria-label={`${days !== null ? days : 'Loading'} days remaining until ${peak.label}`}
             >
               {days !== null ? days : '—'}
-              <span> days</span>
+              <span aria-hidden="true"> days</span>
             </motion.span>
             <span className={styles.peakDate}>{peak.date}</span>
-          </div>
+          </article>
         )
       })}
-    </div>
+    </section>
   )
-}
+})

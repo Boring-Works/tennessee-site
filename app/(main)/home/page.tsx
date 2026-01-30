@@ -25,9 +25,10 @@ const seasonal = eventsData.events.filter((e) => e.category === 'seasonal')
 const nextEvent = eventsData.events[0]
 const eventCount = eventsData.events.length
 
-const eventDate = new Date(nextEvent.date + 'T12:00:00')
-const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short' })
-const dayNum = eventDate.getDate()
+// Parse event date using UTC to avoid hydration mismatch between server/client
+const eventDate = new Date(nextEvent.date + 'T12:00:00Z')
+const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+const dayNum = eventDate.getUTCDate()
 
 const AUDIENCE_CARDS = [
   {
@@ -228,12 +229,19 @@ export default function HomePage() {
               >
                 Governing Seat of the Original Seven
               </h2>
-              <p className="text-lg text-primary/80 leading-relaxed">
+              <p className="text-lg text-primary/80 leading-relaxed mb-4">
                 From 1790 to 1792, Governor William Blount administered seven counties from this
                 ground—Sullivan, Washington, Greene, and Hawkins in the east; Davidson, Sumner, and
                 Tennessee in the Cumberland settlements. Rocky Mount was the center of territorial
                 government. The heritage trail connecting these founding places begins here.
               </p>
+              {/* Cherokee Context */}
+              <div className="mt-6 pt-6 border-t border-primary/10">
+                <p className="text-sm text-primary/60 italic leading-relaxed">
+                  These lands were Cherokee territory. The Evidence Room includes Cherokee voices
+                  documenting their diplomatic resistance to American expansion during this period.
+                </p>
+              </div>
             </div>
 
             {/* Map */}

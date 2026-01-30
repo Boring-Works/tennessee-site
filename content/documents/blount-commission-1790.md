@@ -1,10 +1,10 @@
 ---
 id: blount-commission-1790
-title: "Blount's Commission as Governor"
+title: Blount's Commission as Governor
 date: '1790-06-08'
 content_type: legal
 source: 'American State Papers: Miscellaneous'
-source_url: 'https://memory.loc.gov/ammem/amlaw/lwsp.html'
+source_url: https://memory.loc.gov/ammem/amlaw/lwsp.html
 collection: federal-correspondence
 author: george-washington
 people_mentioned:
@@ -12,7 +12,10 @@ people_mentioned:
 verification:
   status: verified
   source_count: 3
-  method: 'Cross-referenced with American State Papers and territorial records'
+  method: Cross-referenced with American State Papers and territorial records
+description: Official commission appointing William Blount as Governor of the Territory
+  South of the River Ohio and Superintendent of Indian Affairs under President George
+  Washington.
 ---
 
 ## Commission of William Blount as Governor
@@ -33,3 +36,22 @@ G. Washington
 
 By the President:
 Th: Jefferson, Secretary of State
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Blount's Commission as Governor." _Rocky Mount State Historic Site Evidence Room_, 1790. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/blount-commission-1790>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1790). Blount's Commission as Governor. Retrieved from https://tennesseestartshere.com/evidence/documents/blount-commission-1790
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Blount's Commission as Governor." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/blount-commission-1790.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/blount-commission-1790`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

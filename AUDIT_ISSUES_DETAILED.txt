@@ -1,0 +1,168 @@
+PEOPLE PROFILES AUDIT - DETAILED ISSUE LISTING
+================================================
+
+PROJECT: Tennessee Starts Here
+DIRECTORY: /Users/codyboring/CodyML/projects/TNRocky/tennessee-starts-here/content/people/
+AUDIT DATE: 2026-01-30
+
+================================================
+CRITICAL ISSUES
+================================================
+
+ISSUE #1: Missing name_cherokee Field
+Location: long-will.md
+Severity: CRITICAL - Data integrity
+Line: 2 (frontmatter)
+
+File Content (lines 1-10):
+---
+id: long-will
+name: 'Long Will'
+role: 'Signatory'
+bio_type: basic
+is_cherokee: true      <-- TRUE but no name_cherokee field
+is_signatory: true
+signature_url: 'https://digitreaties.org/treaties/treaty/88697242/'
+documents: ['treaty-holston-1791']
+---
+
+Problem: When is_cherokee=true, the name_cherokee field MUST be present
+Current Fields: id, name, role, bio_type, is_cherokee, is_signatory, signature_url, documents
+Missing Fields: name_cherokee
+
+Fix: Add one of the following after line 3:
+  Option A (if Cherokee name known): name_cherokee: '[Cherokee Name]'
+  Option B (if not documented): name_cherokee_note: 'No Cherokee name documented'
+
+---
+
+ISSUE #2: Missing name_cherokee Field
+Location: robin-mcclemore.md
+Severity: CRITICAL - Data integrity
+Line: 2 (frontmatter)
+
+File Content (lines 1-10):
+---
+id: robin-mcclemore
+name: 'Robin McClemore'
+role: 'Signatory'
+bio_type: basic
+is_cherokee: true      <-- TRUE but no name_cherokee field
+is_signatory: true
+signature_url: 'https://digitreaties.org/treaties/treaty/88697242/'
+documents: ['treaty-holston-1791']
+---
+
+Problem: When is_cherokee=true, the name_cherokee field MUST be present
+Current Fields: id, name, role, bio_type, is_cherokee, is_signatory, signature_url, documents
+Missing Fields: name_cherokee
+
+Fix: Add one of the following after line 3:
+  Option A (if Cherokee name known): name_cherokee: '[Cherokee Name]'
+  Option B (if not documented): name_cherokee_note: 'No Cherokee name documented'
+
+================================================
+MINOR INCONSISTENCIES
+================================================
+
+ISSUE #3: Inconsistent Field Name (Non-critical)
+Location: andrew-jackson.md
+Severity: MINOR - Style consistency
+Line: 2 (frontmatter)
+
+File Content (lines 1-9):
+---
+slug: andrew-jackson     <-- Uses 'slug' instead of 'id'
+name: Andrew Jackson
+birth_date: '1767-03-15'
+death_date: '1845-06-08'
+is_cherokee: false
+is_signatory: false
+dignitary_title: '7th President of the United States'
+---
+
+Problem: Inconsistent with 49 other files that use 'id' field
+Why it matters: Creates cognitive overhead when switching between files
+
+Fix: Change line 2 from:
+  slug: andrew-jackson
+To:
+  id: andrew-jackson
+
+================================================
+REFERENCE: Expected Formats
+================================================
+
+BASIC CHEROKEE SIGNATORY (for long-will, robin-mcclemore):
+
+---
+id: [filename-slug]
+name: '[Full Name]'
+name_cherokee: '[Cherokee Name or Transliteration]'
+role: 'Signatory'
+bio_type: basic
+is_cherokee: true
+is_signatory: true
+signature_url: 'https://digitreaties.org/treaties/treaty/88697242/'
+documents: ['treaty-holston-1791']
+---
+
+FULL CHEROKEE PROFILE (extended example - john-watts.md):
+
+---
+id: john-watts
+name: 'John Watts'
+name_cherokee: 'Kunoskeskie'
+name_cherokee_alt: 'Ganodisgi, Kunokeski'
+name_meaning: 'Also known as Young Tassel'
+role: 'War Council Head of the Chickamauga Cherokee'
+town: 'Willstown'
+birth_year: 1750
+death_year: 1808
+bio_type: full
+is_cherokee: true
+is_signatory: [true/false]
+---
+
+NON-CHEROKEE HISTORICAL FIGURE (andrew-jackson.md - AFTER FIX):
+
+---
+id: andrew-jackson
+name: Andrew Jackson
+birth_date: '1767-03-15'
+death_date: '1845-06-08'
+is_cherokee: false
+is_signatory: false
+dignitary_title: '7th President of the United States'
+---
+
+================================================
+VERIFICATION CHECKLIST
+================================================
+
+After fixing issues, verify:
+
+LONG-WILL.MD:
+[ ] Line 2: 'id: long-will' is present
+[ ] Between lines 1-4: 'name_cherokee:' field added
+[ ] Field follows 'name:' field
+[ ] Format is consistent with other Cherokee profiles
+
+ROBIN-MCCLEMORE.MD:
+[ ] Line 2: 'id: robin-mcclemore' is present
+[ ] Between lines 1-4: 'name_cherokee:' field added
+[ ] Field follows 'name:' field
+[ ] Format is consistent with other Cherokee profiles
+
+ANDREW-JACKSON.MD:
+[ ] Line 2: Changed from 'slug:' to 'id:'
+[ ] Value remains 'andrew-jackson'
+
+All files:
+[ ] No trailing whitespace
+[ ] YAML syntax still valid (run parser if available)
+[ ] Build completes without errors
+
+================================================
+END REPORT
+================================================

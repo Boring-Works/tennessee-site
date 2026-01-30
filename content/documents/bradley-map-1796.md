@@ -1,17 +1,19 @@
 ---
 id: bradley-map-1796
-title: 'Bradley Map of Tennessee'
+title: Bradley Map of Tennessee
 date: '1796-06-01'
 content_type: report
-source: 'Library of Congress Geography and Map Division'
-source_url: 'https://www.loc.gov/maps/'
+source: Library of Congress Geography and Map Division
+source_url: https://www.loc.gov/maps/
 collection: maps
 people_mentioned: []
 verification:
   status: single-source
   source_count: 1
-  method: 'Original at Library of Congress'
-  notes: 'Visual resource - one of the earliest detailed maps of the new state'
+  method: Original at Library of Congress
+  notes: Visual resource - one of the earliest detailed maps of the new state
+description: Historical map by Arthur Bradley showing the territorial configuration
+  and geographical features of the region around Rocky Mount in 1796.
 ---
 
 ## A Map of the State of Tennessee
@@ -31,3 +33,22 @@ _Compiled from the surveys in the Surveyors General Office, 1796_
 ---
 
 _This map is significant for showing Tennessee at the moment of statehood, with the Cherokee lands and American settlements clearly delineated._
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Bradley Map of Tennessee." _Rocky Mount State Historic Site Evidence Room_, 1796. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/bradley-map-1796>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1796). Bradley Map of Tennessee. Retrieved from https://tennesseestartshere.com/evidence/documents/bradley-map-1796
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Bradley Map of Tennessee." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/bradley-map-1796.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/bradley-map-1796`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 
 interface Section {
@@ -16,7 +16,11 @@ export function MobileGuide({ sections }: MobileGuideProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [announcement, setAnnouncement] = useState<string>('')
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const isMountedRef = useRef(true)
+  const menuRef = useRef<HTMLDivElement | null>(null)
+  const toggleButtonRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     // Show guide after scrolling past hero (300px)
@@ -34,6 +38,11 @@ export function MobileGuide({ sections }: MobileGuideProps) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id)
+          // Update announcement for screen readers
+          const section = sections.find((s) => s.id === entry.target.id)
+          if (section) {
+            setAnnouncement(`Currently viewing: ${section.label}`)
+          }
         }
       })
     }
@@ -50,47 +59,107 @@ export function MobileGuide({ sections }: MobileGuideProps) {
     handleScroll() // Initial check
 
     return () => {
+      isMountedRef.current = false
       observer.disconnect()
       window.removeEventListener('scroll', handleScroll)
-      // Clear any pending scroll timeout
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current)
       }
     }
   }, [sections])
 
-  const handleSectionClick = (sectionId: string) => {
+  useEffect(() => {
+    if (isOpen) {
+      const menu = menuRef.current
+      if (menu) {
+        const focusableElements = menu.querySelectorAll(
+          'button, a, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements[0] as HTMLElement
+        if (firstElement) {
+          firstElement.focus()
+        }
+      }
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false)
+        toggleButtonRef.current?.focus()
+      }
+
+      if (e.key === 'Tab') {
+        const menu = menuRef.current
+        if (!menu) return
+
+        const focusableElements = menu.querySelectorAll(
+          'button, a, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements[0] as HTMLElement
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault()
+            lastElement.focus()
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault()
+            firstElement.focus()
+          }
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
+
+  const handleSectionClick = useCallback((sectionId: string) => {
     setIsOpen(false)
-    // Clear any existing timeout
+    toggleButtonRef.current?.focus()
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current)
     }
-    // Small delay to allow menu close animation
     scrollTimeoutRef.current = setTimeout(() => {
+      if (!isMountedRef.current) return
       const element = document.getElementById(sectionId)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
     }, 100)
-  }
+  }, [])
 
   return (
     <>
+      {/* Screen reader announcement for section changes */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {announcement}
+      </div>
+
       {/* Guide Button - only visible on mobile/tablet */}
       <div
-        className={`fixed bottom-6 right-6 z-[50] lg:hidden transition-all duration-500 ${
+        className={`fixed bottom-6 right-6 z-[60] lg:hidden transition-all duration-500 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
         }`}
       >
         {/* Expanded Menu */}
         <div
+          ref={menuRef}
           className={`absolute bottom-full right-0 mb-3 w-48 transition-all duration-300 ${
             isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
           }`}
         >
           <nav
+            id="mobile-guide-menu"
+            role="navigation"
+            aria-label="Evidence Room navigation menu"
             className="bg-[#faf7f0] border border-[#c9a227]/30 rounded-sm shadow-lg overflow-hidden"
-            aria-label="Page sections"
           >
             <div className="px-3 py-2 border-b border-[#c9a227]/20 flex items-center justify-between">
               <span className="text-xs font-serif text-[#c9a227] uppercase tracking-wider">
@@ -98,8 +167,11 @@ export function MobileGuide({ sections }: MobileGuideProps) {
               </span>
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
-                className="text-[#3d3229]/50 hover:text-[#3d3229] p-1"
+                onClick={() => {
+                  setIsOpen(false)
+                  toggleButtonRef.current?.focus()
+                }}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#3d3229]/50 hover:text-[#3d3229] -m-2 rounded transition-colors focus-visible:outline-2 focus-visible:outline-[#c9a227] focus-visible:outline-offset-2"
                 aria-label="Close guide"
               >
                 <svg
@@ -125,6 +197,8 @@ export function MobileGuide({ sections }: MobileGuideProps) {
                         ? 'text-[#c9a227] bg-[#c9a227]/10'
                         : 'text-[#3d3229] hover:bg-[#3d3229]/5'
                     }`}
+                    aria-current={activeSection === section.id ? 'true' : undefined}
+                    aria-label={`Jump to ${section.label} section`}
                   >
                     <span
                       className={`w-1.5 h-1.5 rounded-full transition-colors ${
@@ -160,6 +234,7 @@ export function MobileGuide({ sections }: MobileGuideProps) {
 
         {/* Toggle Button */}
         <button
+          ref={toggleButtonRef}
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={`w-12 h-12 rounded-sm shadow-lg transition-all duration-300 flex items-center justify-center ${
@@ -168,7 +243,8 @@ export function MobileGuide({ sections }: MobileGuideProps) {
               : 'bg-[#2a1f1a] text-[#c9a227] border border-[#c9a227]/50'
           }`}
           aria-expanded={isOpen}
-          aria-label="Toggle navigation guide"
+          aria-label={isOpen ? 'Close navigation guide' : 'Open navigation guide'}
+          aria-controls="mobile-guide-menu"
         >
           <svg
             width="20"

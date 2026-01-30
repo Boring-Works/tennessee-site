@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import styles from './EvidenceTrails.module.css'
+import trailsData from '@/content/evidence-trails.json'
 
 /**
  * A single document in a trail
@@ -28,191 +29,7 @@ interface Trail {
   cta: string
 }
 
-/**
- * The five narrative trails through Rocky Mount's story
- */
-const TRAILS: Trail[] = [
-  {
-    id: 'the-question',
-    title: 'The Question',
-    subtitle: 'How Rocky Mount Was Chosen',
-    description:
-      "Follow the correspondence that led Washington to choose this remote frontier cabin as America's first territorial capital.",
-    icon: '?',
-    cta: 'Trace the decision',
-    documents: [
-      {
-        id: 'washington-to-knox-1790-08',
-        title: '"Where ought the Governor to reside?"',
-        date: '1790-08-13',
-        type: 'letter',
-        excerpt:
-          'Washington asks Knox the crucial question about locating the territorial government.',
-      },
-      {
-        id: 'knox-to-washington-1790-08',
-        title: 'Knox Recommends Holston',
-        date: '1790-08-17',
-        type: 'letter',
-        excerpt:
-          'The Secretary of War recommends "a respectable residence" belonging to William Cobb.',
-      },
-      {
-        id: 'blount-commission-1790',
-        title: "Blount's Commission",
-        date: '1790-06-08',
-        type: 'legal',
-        excerpt: 'Washington appoints Blount Governor and Superintendent of Indian Affairs.',
-      },
-      {
-        id: 'blount-arrival-1790',
-        title: '"Glass Windows, Fireplace, etc."',
-        date: '1790-10-20',
-        type: 'letter',
-        excerpt:
-          'Blount announces his arrival at Rocky Mount, impressed by its frontier refinement.',
-      },
-    ],
-  },
-  {
-    id: 'the-treaty',
-    title: 'The Treaty',
-    subtitle: 'Making Peace with the Cherokee',
-    description:
-      'The Treaty of Holston promised perpetual peace. Follow the documents from negotiation through ratification.',
-    icon: '\u2696',
-    cta: 'Read the negotiations',
-    documents: [
-      {
-        id: 'blount-to-knox-1791-06',
-        title: 'Planning the Treaty',
-        date: '1791-06-15',
-        type: 'letter',
-        excerpt: 'Blount reports on preparations for the treaty conference.',
-      },
-      {
-        id: 'treaty-holston-1791',
-        title: 'Treaty of Holston',
-        date: '1791-07-02',
-        type: 'treaty',
-        excerpt:
-          'Forty-two Cherokee leaders sign a treaty establishing boundaries and "perpetual peace."',
-      },
-      {
-        id: 'washington-proclamation-1791',
-        title: "Washington's Proclamation",
-        date: '1791-11-11',
-        type: 'proclamation',
-        excerpt: 'The President formally ratifies the treaty, making it the law of the land.',
-      },
-      {
-        id: 'treaty-holston-additional-1792',
-        title: 'Additional Article',
-        date: '1792-02-17',
-        type: 'treaty',
-        excerpt: 'Cherokee representatives negotiate increased compensation in Philadelphia.',
-      },
-    ],
-  },
-  {
-    id: 'the-signers',
-    title: 'The Signers',
-    subtitle: '42 Cherokee Leaders',
-    description:
-      'Each mark on the treaty represents a person who shaped history. Meet the Cherokee leaders who signed.',
-    icon: '\u270D',
-    cta: 'Meet the Forty-Two',
-    documents: [
-      {
-        id: 'treaty-holston-1791',
-        title: 'Treaty Signatories',
-        date: '1791-07-02',
-        type: 'treaty',
-        excerpt:
-          'Hanging Maw, Bloody Fellow, John Watts, Doublehead, and 38 others put their marks.',
-      },
-    ],
-  },
-  {
-    id: 'the-governor',
-    title: 'The Governor',
-    subtitle: "Blount's Life at Rocky Mount",
-    description:
-      'William Blount governed from this cabin for fourteen months. His letters reveal the daily reality of frontier administration.',
-    icon: '\u2606',
-    cta: 'Read his correspondence',
-    documents: [
-      {
-        id: 'williamson-to-washington-1790-05',
-        title: "Williamson's Recommendation",
-        date: '1790-05-28',
-        type: 'letter',
-        excerpt:
-          'Hugh Williamson recommends Blount as someone who "commands such general respect."',
-      },
-      {
-        id: 'blount-arrival-1790',
-        title: 'First Days at Rocky Mount',
-        date: '1790-10-20',
-        type: 'letter',
-        excerpt: 'Blount settles in, noting the comfort of his accommodations on the frontier.',
-      },
-      {
-        id: 'rocky-mount-inventory-1791',
-        title: 'Rocky Mount Property',
-        date: '1791-10-15',
-        type: 'inventory',
-        excerpt: "The only detailed description of Rocky Mount's buildings during Blount's tenure.",
-      },
-      {
-        id: 'blount-to-knox-1791-11',
-        title: 'Final Months',
-        date: '1791-11-15',
-        type: 'letter',
-        excerpt: 'Blount reports from Rocky Mount as plans form to relocate to Knoxville.',
-      },
-    ],
-  },
-  {
-    id: 'the-press',
-    title: 'The Press',
-    subtitle: 'First Tennessee News',
-    description:
-      "The Knoxville Gazette was Tennessee's first newspaper. Follow frontier news from 1791 to statehood.",
-    icon: '\u2708',
-    cta: 'Read the headlines',
-    documents: [
-      {
-        id: 'knoxville-gazette-1791-11-05',
-        title: 'First Issue',
-        date: '1791-11-05',
-        type: 'newspaper',
-        excerpt: "George Roulstone prints Tennessee's first newspaper in the new capital.",
-      },
-      {
-        id: 'knoxville-gazette-1791-11-12',
-        title: 'Second Issue',
-        date: '1791-11-12',
-        type: 'newspaper',
-        excerpt: 'News of the territory continues with the second published edition.',
-      },
-      {
-        id: 'knoxville-gazette-1792-07-07',
-        title: 'Mid-Year Report',
-        date: '1792-07-07',
-        type: 'newspaper',
-        excerpt: 'Frontier news and notices from the territorial capital.',
-      },
-      {
-        id: 'knoxville-gazette-1796-06-06',
-        title: 'Statehood Approaches',
-        date: '1796-06-06',
-        type: 'newspaper',
-        excerpt: 'Tennessee prepares to join the Union as the sixteenth state.',
-      },
-    ],
-  },
-]
+const TRAILS: Trail[] = trailsData as Trail[]
 
 /**
  * Get CSS class for document type
@@ -238,6 +55,7 @@ function formatDate(dateString: string): string {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'UTC',
   })
 }
 
@@ -257,6 +75,36 @@ export function EvidenceTrails({ className }: EvidenceTrailsProps) {
 
   const currentTrail = TRAILS.find((t) => t.id === activeTrail) || TRAILS[0]
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const currentIndex = TRAILS.findIndex((t) => t.id === activeTrail)
+    let newIndex = currentIndex
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        e.preventDefault()
+        newIndex = currentIndex + 1 >= TRAILS.length ? 0 : currentIndex + 1
+        break
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        e.preventDefault()
+        newIndex = currentIndex - 1 < 0 ? TRAILS.length - 1 : currentIndex - 1
+        break
+      case 'Home':
+        e.preventDefault()
+        newIndex = 0
+        break
+      case 'End':
+        e.preventDefault()
+        newIndex = TRAILS.length - 1
+        break
+      default:
+        return
+    }
+
+    setActiveTrail(TRAILS[newIndex].id)
+  }
+
   return (
     <section className={`${styles.trailsSection} ${className || ''}`}>
       {/* Header */}
@@ -270,13 +118,22 @@ export function EvidenceTrails({ className }: EvidenceTrailsProps) {
       </header>
 
       {/* Trail Selection Tabs */}
-      <nav className={styles.trailTabs} aria-label="Select a trail">
+      <nav
+        className={styles.trailTabs}
+        aria-label="Select a trail"
+        role="tablist"
+        onKeyDown={handleKeyDown}
+      >
         {TRAILS.map((trail) => (
           <button
             key={trail.id}
+            id={`tab-${trail.id}`}
             className={`${styles.trailTab} ${activeTrail === trail.id ? styles.trailTabActive : ''}`}
             onClick={() => setActiveTrail(trail.id)}
-            aria-pressed={activeTrail === trail.id}
+            role="tab"
+            aria-selected={activeTrail === trail.id}
+            aria-controls={`tabpanel-${trail.id}`}
+            tabIndex={activeTrail === trail.id ? 0 : -1}
             type="button"
           >
             <span className={styles.tabIcon} aria-hidden="true">
@@ -288,7 +145,12 @@ export function EvidenceTrails({ className }: EvidenceTrailsProps) {
       </nav>
 
       {/* Active Trail Content */}
-      <div className={styles.trailContent}>
+      <div
+        className={styles.trailContent}
+        role="tabpanel"
+        id={`tabpanel-${activeTrail}`}
+        aria-labelledby={`tab-${activeTrail}`}
+      >
         {/* Trail Description */}
         <div className={styles.trailIntro}>
           <h3 className={styles.trailTitle}>

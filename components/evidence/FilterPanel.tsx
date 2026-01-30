@@ -68,6 +68,7 @@ export function FilterPanel({
                 type="button"
                 onClick={() => onCollectionChange(null)}
                 className={`${styles.filterOption} ${!selectedCollection ? styles.filterOptionActive : ''}`}
+                aria-pressed={!selectedCollection}
               >
                 All Collections
               </button>
@@ -77,6 +78,7 @@ export function FilterPanel({
                   type="button"
                   onClick={() => onCollectionChange(collection)}
                   className={`${styles.filterOption} ${selectedCollection === collection ? styles.filterOptionActive : ''}`}
+                  aria-pressed={selectedCollection === collection}
                 >
                   {COLLECTION_LABELS[collection] || collection}
                 </button>
@@ -92,6 +94,7 @@ export function FilterPanel({
                 type="button"
                 onClick={() => onContentTypeChange(null)}
                 className={`${styles.filterOption} ${!selectedContentType ? styles.filterOptionActive : ''}`}
+                aria-pressed={!selectedContentType}
               >
                 All Types
               </button>
@@ -101,6 +104,7 @@ export function FilterPanel({
                   type="button"
                   onClick={() => onContentTypeChange(type)}
                   className={`${styles.filterOption} ${selectedContentType === type ? styles.filterOptionActive : ''}`}
+                  aria-pressed={selectedContentType === type}
                 >
                   {CONTENT_TYPE_LABELS[type] || type}
                 </button>

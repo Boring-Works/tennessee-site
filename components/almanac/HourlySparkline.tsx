@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import type { HourlyForecast } from '@/lib/almanac/types'
+import { useHourlyStartIndex } from '@/lib/almanac/useClientTime'
 
 interface HourlySparklineProps {
   hourly: HourlyForecast
@@ -21,19 +22,14 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
   const [range, setRange] = useState<TimeRange>('24H')
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
+  // Use hydration-safe hook for finding current hour index
+  const { startIndex: baseStartIndex, isHydrated } = useHourlyStartIndex(hourly.time)
+
   // Compute all chart data in a single useMemo to avoid dependency issues
   const chartData = useMemo(() => {
-    const now = new Date()
+    // Use a stable start index (0) during SSR, then real index after hydration
+    const startIndex = isHydrated ? baseStartIndex : 0
     const hours = range === '12H' ? 12 : range === '24H' ? 24 : 48
-
-    // Find first future hour
-    let startIndex = 0
-    for (let i = 0; i < hourly.time.length; i++) {
-      if (new Date(hourly.time[i]) >= now) {
-        startIndex = i
-        break
-      }
-    }
 
     const endIndex = Math.min(startIndex + hours, hourly.time.length)
 
@@ -118,7 +114,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
       maxPrecip,
       avgPrecip,
     }
-  }, [hourly, range])
+  }, [hourly, range, baseStartIndex, isHydrated])
 
   // Hovered point info
   const hoveredInfo = useMemo(() => {
@@ -187,7 +183,13 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full h-auto"
         onMouseLeave={() => setHoveredIndex(null)}
+        role="img"
+        aria-label={`Hourly temperature forecast chart showing temperatures from ${chartData.periodLow} to ${chartData.periodHigh} degrees over the next ${range === '12H' ? '12' : range === '24H' ? '24' : '48'} hours${chartData.maxPrecip > 0 ? `, with up to ${chartData.maxPrecip}% chance of rain` : ''}`}
       >
+        <title>
+          Hourly forecast: {chartData.periodHigh}° high, {chartData.periodLow}° low
+          {chartData.maxPrecip > 0 ? `, ${chartData.maxPrecip}% max rain chance` : ''}
+        </title>
         {/* Freezing line */}
         {chartData.showFreezingLine && (
           <line

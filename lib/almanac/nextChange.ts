@@ -3,6 +3,10 @@
  *
  * Analyzes hourly forecast data to detect the next significant weather change
  * and provide actionable alerts for users.
+ *
+ * NOTE: This module uses Date objects for time calculations. When called
+ * during SSR, the server time will be used. The calling component should
+ * handle hydration by deferring the calculation to client-side only.
  */
 
 import type { HourlyForecast } from './types'
@@ -32,10 +36,18 @@ const PRECIP_THRESHOLD = 20 // % chance
 const WIND_GUST_THRESHOLD = 25 // mph
 
 /**
- * Detect the next significant weather change in the next 24 hours
+ * Detect the next significant weather change in the next 24 hours.
+ *
+ * @param hourly - Hourly forecast data
+ * @param currentTemp - Current temperature
+ * @param referenceTime - Optional reference time (defaults to now). Pass a stable time for SSR.
  */
-export function detectNextChange(hourly: HourlyForecast, currentTemp: number): NextChange {
-  const now = new Date()
+export function detectNextChange(
+  hourly: HourlyForecast,
+  currentTemp: number,
+  referenceTime?: Date
+): NextChange {
+  const now = referenceTime ?? new Date()
 
   // Look ahead 24 hours
   const lookAheadHours = 24

@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1791-11-12
-title: 'Knoxville Gazette - Treaty Proclamation'
+title: Knoxville Gazette - Treaty Proclamation
 date: '1791-11-12'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -12,12 +12,17 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+  notes: 'Date uncertainty: Historical sources describe Gazette as biweekly publication (first issue Nov 5, second expected Nov 19). Surviving archives show Nov 5 then Dec 3. November 12 date requires verification against original Tennessee State Library holdings.'
+description: Knoxville Gazette newspaper from November 12, 1791, covering territorial
+  announcements and local news from the region.
 ---
 
 ## The Knoxville Gazette
 
 ### Volume 1, Number 2 - November 12, 1791
+
+**Note on Date:** Historical sources describe the Knoxville Gazette as a biweekly publication. The first issue appeared November 5, 1791 (Saturday). If biweekly, the second issue would be November 19. Surviving digitized archives show November 5, then December 3, with no November issue preserved. The November 12 date cited here requires verification against original holdings at Tennessee State Library and Archives.
 
 ---
 
@@ -41,3 +46,22 @@ Whiskey, per gallon: 3s
 ---
 
 _Printed every Saturday by George Roulstone_
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Treaty Proclamation." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-12>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Knoxville Gazette - Treaty Proclamation. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-12
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Treaty Proclamation." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-12.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1791-11-12`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

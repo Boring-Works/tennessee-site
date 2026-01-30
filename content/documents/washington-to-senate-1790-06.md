@@ -1,10 +1,10 @@
 ---
 id: washington-to-senate-1790-06
-title: "Washington's Nomination of Blount to Senate"
+title: Washington's Nomination of Blount to Senate
 date: '1790-06-07'
 content_type: letter
-source: 'Founders Online, National Archives'
-source_url: 'https://founders.archives.gov/documents/Washington/05-05-02-0258'
+source: Founders Online, National Archives
+source_url: https://founders.archives.gov/documents/Washington/05-05-02-0258
 collection: federal-correspondence
 author: george-washington
 people_mentioned:
@@ -12,7 +12,10 @@ people_mentioned:
 verification:
   status: verified
   source_count: 3
-  method: 'Original at National Archives, verified through Founders Online and Senate records'
+  method: Original at National Archives, verified through Founders Online and Senate
+    records
+description: President George Washington submits William Blount's appointment to the
+  U.S. Senate for confirmation as Governor of the Southwest Territory in June 1790.
 ---
 
 ## Message from President Washington to the Senate
@@ -30,3 +33,22 @@ G. Washington
 ---
 
 _Note: The Senate confirmed Blount's nomination the following day, June 8, 1790. He became the first and only Governor of the Southwest Territory, serving until Tennessee achieved statehood in 1796._
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Washington's Nomination of Blount to Senate." _Rocky Mount State Historic Site Evidence Room_, 1790. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/washington-to-senate-1790-06>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1790). Washington's Nomination of Blount to Senate. Retrieved from https://tennesseestartshere.com/evidence/documents/washington-to-senate-1790-06
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Washington's Nomination of Blount to Senate." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/washington-to-senate-1790-06.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/washington-to-senate-1790-06`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

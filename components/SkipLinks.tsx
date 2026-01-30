@@ -1,3 +1,7 @@
+'use client'
+
+import { memo, useCallback } from 'react'
+
 /**
  * SkipLinks - Accessibility component for keyboard navigation
  *
@@ -18,27 +22,57 @@ interface SkipLinksProps {
   showNavigationLink?: boolean
   /** Custom main content ID (default: "main-content") */
   mainContentId?: string
-  /** Custom navigation ID (default: "navigation") */
+  /** Custom navigation ID (default: "main-navigation") */
   navigationId?: string
 }
 
-export function SkipLinks({
+function SkipLinksComponent({
   showNavigationLink = false,
   mainContentId = 'main-content',
-  navigationId = 'navigation',
+  navigationId = 'main-navigation',
 }: SkipLinksProps) {
+  /**
+   * Handle skip link click with focus management
+   * Ensures the target element receives focus for screen readers
+   */
+  const handleSkipClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+      const target = document.getElementById(targetId)
+      if (target) {
+        e.preventDefault()
+        // Add tabindex if not focusable
+        if (!target.hasAttribute('tabindex')) {
+          target.setAttribute('tabindex', '-1')
+        }
+        target.focus({ preventScroll: false })
+        // Scroll into view
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    },
+    []
+  )
+
   return (
-    <>
-      <a href={`#${mainContentId}`} className="skip-link">
+    <nav className="skip-links" aria-label="Skip navigation">
+      <a
+        href={`#${mainContentId}`}
+        className="skip-link"
+        onClick={(e) => handleSkipClick(e, mainContentId)}
+      >
         Skip to main content
       </a>
       {showNavigationLink && (
-        <a href={`#${navigationId}`} className="skip-link">
+        <a
+          href={`#${navigationId}`}
+          className="skip-link"
+          onClick={(e) => handleSkipClick(e, navigationId)}
+        >
           Skip to navigation
         </a>
       )}
-    </>
+    </nav>
   )
 }
 
+export const SkipLinks = memo(SkipLinksComponent)
 export default SkipLinks

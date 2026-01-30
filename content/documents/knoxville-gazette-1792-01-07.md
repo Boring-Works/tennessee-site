@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1792-01-07
-title: 'Knoxville Gazette - New Year Edition'
+title: Knoxville Gazette - New Year Edition
 date: '1792-01-07'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -11,7 +11,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+description: Knoxville Gazette from January 7, 1792, reporting on territorial administration
+  and regional developments.
 ---
 
 ## The Knoxville Gazette
@@ -33,3 +35,22 @@ verification:
 <passage id="ferry-notice">Ferry across the Holston. The subscriber has established a ferry at the mouth of First Creek, where travelers and their effects will be conveyed across the river at the following rates: Man and horse, one shilling; Footman, six pence; Wagon and team, three shillings.</passage>
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - New Year Edition." _Rocky Mount State Historic Site Evidence Room_, 1792. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-01-07>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1792). Knoxville Gazette - New Year Edition. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-01-07
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - New Year Edition." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-01-07.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-01-07`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

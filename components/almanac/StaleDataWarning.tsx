@@ -59,13 +59,14 @@ export default function StaleDataWarning({
           type="button"
           onClick={onRefresh}
           disabled={isLoading}
-          className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded transition-colors ${
+          className={`flex items-center gap-1.5 text-xs font-medium min-h-[44px] px-4 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-95 ${
             isUrgent
-              ? 'bg-almanac-danger/30 text-almanac-parchment hover:bg-almanac-danger/40'
-              : 'bg-almanac-warning/30 text-almanac-parchment hover:bg-almanac-warning/40'
-          } disabled:opacity-50`}
+              ? 'bg-almanac-danger/30 text-almanac-parchment hover:bg-almanac-danger/40 focus-visible:ring-almanac-danger'
+              : 'bg-almanac-warning/30 text-almanac-parchment hover:bg-almanac-warning/40 focus-visible:ring-almanac-warning'
+          } disabled:opacity-50 disabled:active:scale-100`}
+          aria-label={isLoading ? 'Refreshing data' : 'Refresh weather data'}
         >
-          <RefreshCw className={`w-3 h-3 ${isLoading ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} aria-hidden="true" />
           {isLoading ? 'Refreshing...' : 'Refresh'}
         </button>
       </motion.div>

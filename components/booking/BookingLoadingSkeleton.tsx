@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 /**
  * BookingLoadingSkeleton Component
  *
@@ -7,8 +9,7 @@
  * Note: FareHarbor handles its own loading states, but this component
  * can be used for custom loading UIs if needed.
  */
-
-export function BookingLoadingSkeleton() {
+function BookingLoadingSkeletonComponent() {
   return (
     <div className="animate-pulse space-y-4 p-6">
       {/* Header skeleton */}
@@ -39,3 +40,5 @@ export function BookingLoadingSkeleton() {
     </div>
   )
 }
+
+export const BookingLoadingSkeleton = memo(BookingLoadingSkeletonComponent)

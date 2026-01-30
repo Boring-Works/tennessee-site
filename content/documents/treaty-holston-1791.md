@@ -1,22 +1,31 @@
 ---
 id: treaty-holston-1791
-title: 'Treaty of Holston with the Cherokee'
+title: Treaty of Holston with the Cherokee
 date: 1791-07-02
 content_type: treaty
-source: 'Avalon Project, Yale Law School; DigiTreaties; War Department Papers'
-source_url: 'https://digitreaties.org/treaties/treaty/88697242/'
+source: Avalon Project, Yale Law School; DigiTreaties; War Department Papers
+source_url: https://digitreaties.org/treaties/treaty/88697242/
 collection: treaties
 author: william-blount
 people_mentioned:
-  [hanging-maw, bloody-fellow, doublehead, john-watts, black-fox, standing-turkey, the-boots]
-physical_location: 'Main House - Where negotiations were coordinated'
+  - hanging-maw
+  - bloody-fellow
+  - doublehead
+  - john-watts
+  - black-fox
+  - standing-turkey
+  - the-boots
+physical_location: Main House - Where negotiations were coordinated
 verification:
   status: verified
   source_count: 3
-  method: 'Cross-referenced with Avalon Project, DigiTreaties, and National Archives'
+  method: Cross-referenced with Avalon Project, DigiTreaties, and National Archives
 responds_to: null
 responses:
   - washington-proclamation-1791
+description: The Treaty of Holston, signed July 2, 1791, between William Blount representing
+  the United States and Cherokee Nation leaders, establishing peace and territorial
+  boundaries.
 ---
 
 # Treaty of Holston
@@ -131,3 +140,22 @@ Plus approximately 35 additional named signatories.
 - Signatory list verified against War Department Papers
 - National Archives Identifier: 88697242
 - Cross-referenced with Charles J. Kappler, _Indian Affairs: Laws and Treaties_, Vol. II (1904)
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Treaty of Holston with the Cherokee." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/treaty-holston-1791>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Treaty of Holston with the Cherokee. Retrieved from https://tennesseestartshere.com/evidence/documents/treaty-holston-1791
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Treaty of Holston with the Cherokee." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/treaty-holston-1791.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/treaty-holston-1791`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

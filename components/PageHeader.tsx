@@ -66,11 +66,7 @@ export function PageHeader({
   }
 
   return (
-    <header
-      className={`${bgColors[variant]} py-12 md:py-16 ${className}`}
-      role="banner"
-      aria-label="Page header"
-    >
+    <header className={`${bgColors[variant]} py-12 md:py-16 ${className}`} aria-label="Page header">
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Breadcrumb Navigation */}
         {breadcrumbs && breadcrumbs.length > 0 && (

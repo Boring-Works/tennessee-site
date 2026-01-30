@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1793-08-24
-title: 'Knoxville Gazette - Territory Census'
+title: Knoxville Gazette - Territory Census
 date: '1793-08-24'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -11,7 +11,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+description: Knoxville Gazette from August 24, 1793, documenting territorial developments
+  and announcements from mid-1793.
 ---
 
 ## The Knoxville Gazette
@@ -31,3 +33,22 @@ verification:
 The trade of Knoxville continues to increase. Several new stores have been established, and goods of all kinds are now available at reasonable prices.
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Territory Census." _Rocky Mount State Historic Site Evidence Room_, 1793. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1793-08-24>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1793). Knoxville Gazette - Territory Census. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1793-08-24
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Territory Census." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1793-08-24.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1793-08-24`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

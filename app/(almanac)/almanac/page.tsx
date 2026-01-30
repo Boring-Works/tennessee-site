@@ -303,7 +303,7 @@ export default function AlmanacPage() {
             <button
               type="button"
               onClick={() => location && fetchWeather(location)}
-              className="mt-4 px-4 py-2 bg-gold-leaf text-midnight rounded-sm font-semibold hover:bg-gold-leaf/90 transition-colors"
+              className="mt-4 min-h-[44px] px-6 py-2 bg-gold-leaf text-midnight rounded-sm font-semibold hover:bg-gold-leaf/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-leaf focus-visible:ring-offset-2 focus-visible:ring-offset-midnight active:scale-95"
             >
               Try Again
             </button>
@@ -627,7 +627,7 @@ export default function AlmanacPage() {
                             const el = document.getElementById('farmer-memory-deck')
                             el?.scrollIntoView({ behavior: 'smooth' })
                           }}
-                          className="text-xs text-almanac-gold hover:underline mt-2"
+                          className="min-h-[44px] text-xs text-almanac-gold hover:underline mt-2 px-2 -mx-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold active:scale-95"
                         >
                           View full analysis
                         </button>

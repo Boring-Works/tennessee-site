@@ -1,10 +1,10 @@
 ---
 id: blount-to-knox-1791-07
-title: 'Blount to Knox Announcing Treaty Conclusion'
+title: Blount to Knox Announcing Treaty Conclusion
 date: '1791-07-05'
 content_type: letter
 source: 'American State Papers: Indian Affairs'
-source_url: 'https://memory.loc.gov/ammem/amlaw/lwsp.html'
+source_url: https://memory.loc.gov/ammem/amlaw/lwsp.html
 collection: blount-papers
 author: william-blount
 recipient: henry-knox
@@ -12,11 +12,14 @@ people_mentioned:
   - hanging-maw
   - bloody-fellow
   - john-watts
-physical_location: "Main House - Governor's office"
+physical_location: Main House - Governor's office
 verification:
   status: verified
   source_count: 3
-  method: 'Cross-referenced with American State Papers, treaty records, and territorial documents'
+  method: Cross-referenced with American State Papers, treaty records, and territorial
+    documents
+description: William Blount reports to Henry Knox on the Treaty of Holston negotiations
+  and their implications for the Southwest Territory in July 1791.
 ---
 
 ## Letter from Governor Blount to Secretary Knox
@@ -34,3 +37,22 @@ The Cherokee have ceded to the United States a considerable tract of country, in
 I have the honor to be, with great respect, your most obedient servant,
 
 William Blount
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Blount to Knox Announcing Treaty Conclusion." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-07>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Blount to Knox Announcing Treaty Conclusion. Retrieved from https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-07
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Blount to Knox Announcing Treaty Conclusion." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-07.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/blount-to-knox-1791-07`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

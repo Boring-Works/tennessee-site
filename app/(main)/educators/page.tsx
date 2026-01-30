@@ -4,16 +4,18 @@ import { Claim } from '@/components/evidence/Claim'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 
-// Section divider component for period-authentic transitions
-const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) => (
-  <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
-    <span className="section-divider-line" />
-    <span className="section-divider-flourish">❧</span>
-    <span className="section-divider-ornament">✦</span>
-    <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
-    <span className="section-divider-line" />
-  </div>
-)
+/** Section divider component for period-authentic transitions */
+function SectionDivider({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) {
+  return (
+    <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
+      <span className="section-divider-line" />
+      <span className="section-divider-flourish">&#10087;</span>
+      <span className="section-divider-ornament">&#10022;</span>
+      <span className="section-divider-flourish section-divider-flourish--flip">&#10087;</span>
+      <span className="section-divider-line" />
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
   title: 'For Educators | Tennessee Starts Here',
@@ -27,7 +29,21 @@ export const metadata: Metadata = {
   },
 }
 
-const PROGRAMS = [
+/** Program type definition */
+interface Program {
+  name: string
+  duration: string
+  capacity: string
+  description: string
+}
+
+/** Stat type definition */
+interface Stat {
+  label: string
+  icon: string
+}
+
+const PROGRAMS: Program[] = [
   {
     name: 'Living History Tour',
     duration: '~2 hours',
@@ -67,20 +83,24 @@ const PROGRAMS = [
   },
 ]
 
-const STATS = [
+const STATS: Stat[] = [
   { label: 'TN Standards Aligned', icon: '📚' },
   { label: 'Hands-On Learning', icon: '🎓' },
   { label: 'Bus Parking Available', icon: '🚌' },
 ]
 
 export default function EducatorsPage() {
+  const phoneNumber = siteInfo.contact.phone.replace(/[^0-9]/g, '')
+
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
+      <section className={styles.hero} aria-labelledby="educators-heading">
         <div className={styles['hero-content']}>
           <p className={styles.eyebrow}>For Educators</p>
-          <h1 className={styles.headline}>Tennessee&apos;s Government Started Here</h1>
+          <h1 id="educators-heading" className={styles.headline}>
+            Tennessee&apos;s Government Started Here
+          </h1>
           <p className={styles.subhead}>
             Give your students a tangible connection to Tennessee&apos;s founding.
           </p>
@@ -89,18 +109,22 @@ export default function EducatorsPage() {
             target="_blank"
             rel="noopener noreferrer"
             className={`${styles['cta-primary']} btn-medium`}
+            aria-label="Book a field trip (opens in new tab)"
           >
             Book a Field Trip
+            <span className="sr-only"> (opens in new tab)</span>
           </a>
         </div>
       </section>
 
       {/* Stats Bar */}
-      <section className={styles.stats}>
+      <section className={styles.stats} aria-label="Site features">
         <div className={styles['stats-inner']}>
           {STATS.map((stat) => (
             <div key={stat.label} className={styles['stats-item']}>
-              <span className={styles['stats-icon']}>{stat.icon}</span>
+              <span className={styles['stats-icon']} aria-hidden="true">
+                {stat.icon}
+              </span>
               <span className={styles['stats-label']}>{stat.label}</span>
             </div>
           ))}
@@ -108,9 +132,11 @@ export default function EducatorsPage() {
       </section>
 
       {/* Why This Place */}
-      <section className={styles.history}>
+      <section className={styles.history} aria-labelledby="history-heading">
         <div className={styles['history-inner']}>
-          <h2 className={styles['history-headline']}>Why This Place Matters</h2>
+          <h2 id="history-heading" className={styles['history-headline']}>
+            Why This Place Matters
+          </h2>
           <p className={styles['history-text']}>
             Rocky Mount is where{' '}
             <Claim doc="blount-arrival-1790" passage="glass-windows">
@@ -120,11 +146,12 @@ export default function EducatorsPage() {
             <Claim doc="treaty-holston-1791" passage="article-1-peace">
               Treaty of Holston was planned
             </Claim>
-            —a peace agreement between the United States and Cherokee Nation that shaped
+            &mdash;a peace agreement between the United States and Cherokee Nation that shaped
             Tennessee&apos;s borders.
           </p>
           <Link href="/evidence" className={styles['history-link']}>
-            Explore primary sources →
+            Explore primary sources
+            <span aria-hidden="true"> &rarr;</span>
           </Link>
         </div>
       </section>
@@ -132,16 +159,20 @@ export default function EducatorsPage() {
       <SectionDivider variant="light" />
 
       {/* Programs */}
-      <section className={styles.programs}>
+      <section className={styles.programs} aria-labelledby="programs-heading">
         <div className={styles['programs-inner']}>
-          <h2 className={styles['programs-headline']}>Programs</h2>
-          <div className={styles['programs-grid']}>
+          <h2 id="programs-heading" className={styles['programs-headline']}>
+            Programs
+          </h2>
+          <div className={styles['programs-grid']} role="list">
             {PROGRAMS.map((program) => (
-              <article key={program.name} className={styles['program-card']}>
+              <article key={program.name} className={styles['program-card']} role="listitem">
                 <h3 className={styles['program-name']}>{program.name}</h3>
                 <div className={styles['program-meta']}>
                   <span>{program.duration}</span>
-                  <span className={styles['program-divider']}>·</span>
+                  <span className={styles['program-divider']} aria-hidden="true">
+                    &middot;
+                  </span>
                   <span>{program.capacity}</span>
                 </div>
                 <p className={styles['program-desc']}>{program.description}</p>
@@ -154,20 +185,29 @@ export default function EducatorsPage() {
       <SectionDivider variant="default" />
 
       {/* Book CTA */}
-      <section className={styles.booking}>
+      <section className={styles.booking} aria-labelledby="booking-heading">
         <div className={styles['booking-inner']}>
-          <h2 className={styles['booking-headline']}>Book a Field Trip</h2>
+          <h2 id="booking-heading" className={styles['booking-headline']}>
+            Book a Field Trip
+          </h2>
           <a
             href="https://form.jotform.com/230155675460152"
             target="_blank"
             rel="noopener noreferrer"
             className={`${styles['cta-primary']} btn-medium`}
+            aria-label="Book a field trip (opens in new tab)"
           >
-            Book a Field Trip →
+            Book a Field Trip
+            <span aria-hidden="true"> &rarr;</span>
+            <span className="sr-only"> (opens in new tab)</span>
           </a>
           <p className={styles['booking-contact']}>
-            Questions? <a href="mailto:rockymountmuseum@gmail.com">rockymountmuseum@gmail.com</a> |{' '}
-            <a href={`tel:+1${siteInfo.contact.phone.replace(/[^0-9]/g, '')}`}>
+            Questions?{' '}
+            <a href="mailto:rockymountmuseum@gmail.com" aria-label="Email Rocky Mount Museum">
+              rockymountmuseum@gmail.com
+            </a>{' '}
+            |{' '}
+            <a href={`tel:+1${phoneNumber}`} aria-label={`Call ${siteInfo.contact.phone}`}>
               {siteInfo.contact.phone}
             </a>
           </p>
@@ -175,9 +215,11 @@ export default function EducatorsPage() {
       </section>
 
       {/* Funding */}
-      <section className={styles.funding}>
+      <section className={styles.funding} aria-labelledby="funding-heading">
         <div className={styles['funding-inner']}>
-          <h2 className={styles['funding-headline']}>Funding Your Trip</h2>
+          <h2 id="funding-heading" className={styles['funding-headline']}>
+            Funding Your Trip
+          </h2>
           <ul className={styles['funding-list']}>
             <li>
               <strong>TN Arts Commission:</strong> Student Ticket Subsidy Grants (30-day advance
@@ -194,9 +236,11 @@ export default function EducatorsPage() {
       </section>
 
       {/* Resources */}
-      <section className={styles.resources}>
+      <section className={styles.resources} aria-labelledby="resources-heading">
         <div className={styles['resources-inner']}>
-          <h2 className={styles['resources-headline']}>Downloadable Resources</h2>
+          <h2 id="resources-heading" className={styles['resources-headline']}>
+            Downloadable Resources
+          </h2>
           <p className={styles['resources-coming']}>Classroom materials coming March 2026.</p>
           <p className={styles['resources-email']}>Or email us for current materials.</p>
         </div>

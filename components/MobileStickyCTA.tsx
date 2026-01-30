@@ -8,8 +8,8 @@ export default function MobileStickyCTA() {
   const [isVisible, setIsVisible] = useState(false)
   const pathname = usePathname()
 
-  // Don't show on Visit page (they're already there)
-  const hideOnPages = ['/visit']
+  // Don't show on Visit page or Evidence Room (reading experience, not promotional)
+  const hideOnPages = ['/visit', '/evidence']
   const shouldHide = hideOnPages.some((page) => pathname.startsWith(page))
 
   useEffect(() => {

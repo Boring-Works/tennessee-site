@@ -76,12 +76,12 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
           ref={triggerRef}
           type="button"
           onClick={() => setIsOpen(true)}
-          className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 text-almanac-parchment/50 hover:text-almanac-gold transition-colors focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight active:scale-95"
           aria-label="About The 1775 Almanac"
           aria-expanded={isOpen}
           title="About The 1775 Almanac"
         >
-          <BookOpen className="w-4 h-4" />
+          <BookOpen className="w-5 h-5" aria-hidden="true" />
         </button>
       ) : (
         <button
@@ -135,10 +135,10 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="text-almanac-parchment/40 hover:text-almanac-parchment transition-colors p-1 focus:outline-none focus:ring-2 focus:ring-almanac-gold focus:ring-offset-2 focus:ring-offset-almanac-midnight"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-almanac-parchment/40 hover:text-almanac-parchment transition-colors -m-2 rounded focus:outline-none focus:ring-2 focus:ring-almanac-gold active:scale-95"
                   aria-label="Close"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
@@ -222,7 +222,7 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
                     href="https://rockymountmuseum.com/visit"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block mt-3 text-sm text-almanac-gold hover:text-almanac-gold/80 transition-colors"
+                    className="inline-flex items-center min-h-[44px] mt-3 text-sm text-almanac-gold hover:text-almanac-gold/80 transition-colors rounded focus:outline-none focus:ring-2 focus:ring-almanac-gold"
                   >
                     Plan Your Visit →
                   </a>

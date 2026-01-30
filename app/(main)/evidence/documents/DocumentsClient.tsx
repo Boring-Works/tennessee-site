@@ -46,7 +46,12 @@ export function DocumentsClient({ documents, searchIndex }: DocumentsClientProps
     })
   }, [documents, selectedCollection, selectedContentType])
 
-  // Group filtered documents by collection
+  // Derive announcement from filtered count (no useEffect needed)
+  const resultAnnouncement = useMemo(() => {
+    const count = filteredDocuments.length
+    return `${count} document${count !== 1 ? 's' : ''} found`
+  }, [filteredDocuments.length])
+
   const filteredCollections = useMemo(() => {
     const grouped = new Map<string, Document[]>()
     for (const doc of filteredDocuments) {
@@ -61,6 +66,9 @@ export function DocumentsClient({ documents, searchIndex }: DocumentsClientProps
     <div className="documentsPage">
       <div className="documentsContainer">
         <main className="documentsContent">
+          <div role="status" aria-live="polite" className="sr-only">
+            {resultAnnouncement}
+          </div>
           {/* Header */}
           <header className="documentsHeader">
             <h1 className="documentsTitle">Document Archive</h1>
@@ -113,8 +121,22 @@ export function DocumentsClient({ documents, searchIndex }: DocumentsClientProps
             </div>
           </div>
 
-          {/* Document List */}
-          {viewMode === 'list' ? (
+          {filteredDocuments.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-lg text-gold-leaf/60 mb-4">
+                No documents match your current filters.
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCollection(null)
+                  setSelectedContentType(null)
+                }}
+                className="px-4 py-2 border border-gold-leaf/30 text-gold-leaf rounded hover:border-gold-leaf transition-colors"
+              >
+                Clear all filters
+              </button>
+            </div>
+          ) : viewMode === 'list' ? (
             <div className="documentsListView">
               {Object.entries(filteredCollections).map(([collection, docs]) => (
                 <section key={collection} className="documentsCollection">

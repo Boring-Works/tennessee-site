@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1796-06-06
-title: 'Knoxville Gazette - Tennessee Statehood'
+title: Knoxville Gazette - Tennessee Statehood
 date: '1796-06-06'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -11,7 +11,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 3
-  method: 'Cross-referenced with Tennessee Encyclopedia and historical records'
+  method: Cross-referenced with Tennessee Encyclopedia and historical records
+description: Knoxville Gazette from June 6, 1796, covering territorial events and
+  developments from 1796.
 ---
 
 ## The Knoxville Gazette
@@ -33,3 +35,22 @@ verification:
 From the establishment of federal government at Rocky Mount in October 1790, through the Treaty of Holston in 1791, to this day of statehood, Tennessee has traveled a remarkable path. The state enters the Union strong, growing, and full of promise.
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Tennessee Statehood." _Rocky Mount State Historic Site Evidence Room_, 1796. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-06-06>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1796). Knoxville Gazette - Tennessee Statehood. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-06-06
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Tennessee Statehood." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-06-06.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1796-06-06`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

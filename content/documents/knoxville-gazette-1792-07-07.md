@@ -1,9 +1,9 @@
 ---
 id: knoxville-gazette-1792-07-07
-title: 'Knoxville Gazette - Treaty Anniversary'
+title: Knoxville Gazette - Treaty Anniversary
 date: '1792-07-07'
 content_type: newspaper
-source: 'Tennessee State Library and Archives'
+source: Tennessee State Library and Archives
 collection: knoxville-gazette
 author: george-roulstone
 people_mentioned:
@@ -11,7 +11,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Verified through historical newspaper records'
+  method: Verified through historical newspaper records
+description: Knoxville Gazette from July 7, 1792, documenting summer territorial news
+  and local announcements.
 ---
 
 ## The Knoxville Gazette
@@ -33,3 +35,22 @@ verification:
 <passage id="independence-celebration">The anniversary of American Independence was celebrated in Knoxville on the fourth instant with appropriate ceremonies. A salute was fired at sunrise, and the citizens assembled to hear an oration on the blessings of liberty. The day concluded with a public dinner at which patriotic toasts were drunk.</passage>
 
 ---
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Knoxville Gazette - Treaty Anniversary." _Rocky Mount State Historic Site Evidence Room_, 1792. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-07-07>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1792). Knoxville Gazette - Treaty Anniversary. Retrieved from https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-07-07
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Knoxville Gazette - Treaty Anniversary." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-07-07.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/knoxville-gazette-1792-07-07`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

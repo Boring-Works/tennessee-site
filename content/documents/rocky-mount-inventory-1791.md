@@ -1,19 +1,22 @@
 ---
 id: rocky-mount-inventory-1791
-title: 'Inventory of Rocky Mount Property'
+title: Inventory of Rocky Mount Property
 date: '1791-10-15'
 content_type: inventory
-source: 'Sullivan County Records'
+source: Sullivan County Records
 collection: maps
 author: william-cobb
 people_mentioned:
   - william-blount
-physical_location: 'Entire Site - Inventory of this property'
+physical_location: Entire Site - Inventory of this property
 verification:
   status: single-source
   source_count: 1
-  method: 'From Sullivan County historical records'
-  notes: 'Property inventory provides rare detailed description of Rocky Mount buildings and grounds'
+  method: From Sullivan County historical records
+  notes: Property inventory provides rare detailed description of Rocky Mount buildings
+    and grounds
+description: Detailed inventory of Rocky Mount estate documenting furnishings, goods,
+  and property from 1791, revealing the sophistication of this frontier settlement.
 ---
 
 ## Inventory of the Rocky Mount Property
@@ -39,3 +42,22 @@ Being an inventory of the dwelling house and outbuildings at Rocky Mount, Sulliv
 ---
 
 _This inventory, prepared as Governor Blount prepared to remove to Knoxville, provides the most detailed contemporary description of Rocky Mount's physical appearance._
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Inventory of Rocky Mount Property." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/rocky-mount-inventory-1791>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Inventory of Rocky Mount Property. Retrieved from https://tennesseestartshere.com/evidence/documents/rocky-mount-inventory-1791
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Inventory of Rocky Mount Property." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/rocky-mount-inventory-1791.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/rocky-mount-inventory-1791`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

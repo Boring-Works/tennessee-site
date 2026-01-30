@@ -49,6 +49,29 @@ export default async function DocumentPage({ params }: { params: Promise<{ slug:
   return (
     <div className="library libraryPage">
       <div className="libraryContainer">
+        <nav className="mb-8" aria-label="Breadcrumb">
+          <ol
+            className="flex items-center gap-2 text-sm flex-wrap"
+            style={{ color: 'rgba(201, 162, 39, 0.6)' }}
+          >
+            <li>
+              <Link href="/evidence" className="hover:opacity-100 transition-opacity">
+                Evidence Room
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link href="/evidence/library" className="hover:opacity-100 transition-opacity">
+                Document Library
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li style={{ color: 'var(--gold-leaf, #c9a227)' }} aria-current="page">
+              {doc.title}
+            </li>
+          </ol>
+        </nav>
+
         <article className="documentPage">
           {/* Document Header */}
           <header className="documentHeader">

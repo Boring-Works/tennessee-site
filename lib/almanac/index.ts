@@ -173,6 +173,14 @@ export { saveLocation, loadLocation, clearLocation } from './storage'
 // Hooks
 // ============================================================================
 export { useCountUp } from './useCountUp'
+export {
+  useClientTime,
+  useIsClient,
+  useClientTimeValue,
+  useDaylightProgress,
+  useHourlyStartIndex,
+} from './useClientTime'
+export type { DaylightInfo } from './useClientTime'
 
 // ============================================================================
 // Info Content

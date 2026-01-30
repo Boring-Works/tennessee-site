@@ -34,6 +34,17 @@ const FEATURED_DOCUMENTS: FeaturedDocument[] = [
     authorTitle: 'President of the United States',
     linkHref: '/evidence/documents/washington-proclamation-1791#treaty-ratified',
   },
+  {
+    id: 'john-watts-boundary-1796',
+    title: 'John Watts Demands Accountability',
+    date: '1796-12-22',
+    dateFormatted: 'December 22, 1796',
+    excerpt:
+      '"I would insist on a formal boundary to be surveyed between the Cherokee Nation and the United States, following the line established with Governor Blount."',
+    author: 'John Watts (Kunoskeskie)',
+    authorTitle: 'Cherokee Leader, Head of War Council',
+    linkHref: '/evidence/documents/john-watts-boundary-speech-1796',
+  },
 ]
 
 export function DocumentTeaser() {
@@ -49,6 +60,16 @@ export function DocumentTeaser() {
       />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
+        {/* Washington's Question */}
+        <div className="text-center mb-10">
+          <blockquote className="font-serif text-lg md:text-xl italic text-primary/70 dark:text-white/60 mb-2">
+            &ldquo;Where ought the Governor to reside?&rdquo;
+          </blockquote>
+          <cite className="not-italic text-xs uppercase tracking-[0.2em] text-secondary/50 dark:text-accent/60">
+            — President George Washington, August 13, 1790
+          </cite>
+        </div>
+
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-4 mb-6" aria-hidden="true">
@@ -66,14 +87,26 @@ export function DocumentTeaser() {
             See the Evidence
           </h2>
 
-          <p className="text-text-light dark:text-white/70 max-w-2xl mx-auto">
+          <p className="text-text-light dark:text-white/70 max-w-2xl mx-auto mb-6">
             The claims we make are backed by original documents. Read the words written by those who
             shaped Tennessee&apos;s founding.
+          </p>
+
+          {/* Trust Statement */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 dark:bg-accent/5 border border-accent/30 dark:border-accent/20 rounded-sm">
+            <span className="text-accent text-sm">✓</span>
+            <p className="text-sm font-medium text-primary dark:text-white">
+              Every claim on this website links to its primary source
+            </p>
+          </div>
+          <p className="text-xs text-secondary/60 dark:text-white/50 mt-2">
+            40+ documents from the National Archives, Library of Congress, and Papers of the War
+            Department
           </p>
         </div>
 
         {/* Document Cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
           {FEATURED_DOCUMENTS.map((doc) => (
             <article
               key={doc.id}
@@ -159,11 +192,14 @@ export function DocumentTeaser() {
             href="/evidence"
             className="inline-flex items-center gap-3 bg-primary dark:bg-accent text-white dark:text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-secondary dark:hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-lg"
           >
-            Explore the Evidence Room
+            Be Among the First to Explore the Evidence Room
             <span className="transition-transform duration-300 group-hover:translate-x-1">
               &rarr;
             </span>
           </Link>
+          <p className="text-xs text-secondary/50 dark:text-white/40 mt-3 italic">
+            Discover the documents that shaped the American frontier
+          </p>
         </div>
       </div>
     </section>

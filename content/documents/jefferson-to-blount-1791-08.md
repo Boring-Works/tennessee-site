@@ -1,10 +1,10 @@
 ---
 id: jefferson-to-blount-1791-08
-title: 'Jefferson to Blount on Treaty Ratification'
+title: Jefferson to Blount on Treaty Ratification
 date: '1791-08-31'
 content_type: letter
-source: 'Founders Online, National Archives'
-source_url: 'https://founders.archives.gov/'
+source: Founders Online, National Archives
+source_url: https://founders.archives.gov/
 collection: federal-correspondence
 author: thomas-jefferson
 recipient: william-blount
@@ -13,7 +13,9 @@ people_mentioned:
 verification:
   status: verified
   source_count: 2
-  method: 'Cross-referenced with Founders Online and State Department records'
+  method: Cross-referenced with Founders Online and State Department records
+description: Thomas Jefferson, Secretary of State, writes to Governor William Blount
+  regarding territorial administration and Indian affairs in August 1791.
 ---
 
 ## Letter from Secretary Jefferson to Governor Blount
@@ -33,3 +35,22 @@ I have the honor to inform you that the treaty which you concluded with the Cher
 I have the honor to be, with great respect, your most obedient servant,
 
 Th: Jefferson
+
+---
+
+## How to Cite This Document
+
+**MLA Format:**  
+"Jefferson to Blount on Treaty Ratification." _Rocky Mount State Historic Site Evidence Room_, 1791. Web. Accessed January 30, 2026. <https://tennesseestartshere.com/evidence/documents/jefferson-to-blount-1791-08>
+
+**APA Format:**  
+Rocky Mount State Historic Site. (1791). Jefferson to Blount on Treaty Ratification. Retrieved from https://tennesseestartshere.com/evidence/documents/jefferson-to-blount-1791-08
+
+**Chicago Format:**  
+Rocky Mount State Historic Site. "Jefferson to Blount on Treaty Ratification." Rocky Mount State Historic Site Evidence Room. Accessed January 30, 2026. https://tennesseestartshere.com/evidence/documents/jefferson-to-blount-1791-08.
+
+**Permalink:** `https://tennesseestartshere.com/evidence/documents/jefferson-to-blount-1791-08`
+
+---
+
+_For corrections or research inquiries, contact: rockymountmuseum@gmail.com_

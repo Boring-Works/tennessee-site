@@ -213,6 +213,14 @@ const evidenceBreadcrumbs = [
 export default function EvidencePage() {
   return (
     <div className={styles.evidencePage}>
+      {/* Skip to content link for keyboard navigation */}
+      <a
+        href="#blount-letter"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#c9a227] focus:text-[#2a1f1a] focus:rounded-sm focus:font-serif focus:text-sm"
+      >
+        Skip to Evidence Room collections
+      </a>
+
       {/* Breadcrumb Structured Data for Search Navigation */}
       <JsonLd data={generateBreadcrumbSchema(evidenceBreadcrumbs)} />
 
@@ -240,10 +248,10 @@ export default function EvidencePage() {
               <span className={styles.heroNavIcon}>★</span>
               <span className={styles.heroNavName}>Treaty Signers</span>
             </a>
-            <Link href="/evidence/timeline" className={styles.heroNavCard}>
+            <a href="#timeline" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>⏱</span>
               <span className={styles.heroNavName}>Timeline</span>
-            </Link>
+            </a>
             <a href="#sources" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>❧</span>
               <span className={styles.heroNavName}>Sources</span>
@@ -271,29 +279,19 @@ export default function EvidencePage() {
       {/* Entry Room - Collection Overview */}
       <EntryRoom />
 
-      <SectionDivider variant="light" />
-
-      {/* Visit CTA - Prominent placement after hero */}
-      <section className={styles.earlyCtaSection}>
-        <div className={styles.container}>
-          <h2 className={styles.earlyCtaTitle}>The Documents Live Here</h2>
-          <p className={styles.earlyCtaText}>
-            These archives tell the story. The ground holds the proof. Visit Rocky Mount to walk
-            where this history was made.
-          </p>
-          <Link href="/visit" className={styles.earlyCtaButton}>
-            Visit the Site
-          </Link>
-        </div>
-      </section>
-
       <SectionDivider variant="default" />
 
       {/* Featured Quote - Blount Correspondence */}
-      <section id="blount-letter" className={styles.featuredSection}>
+      <section
+        id="blount-letter"
+        className={styles.featuredSection}
+        aria-labelledby="blount-letter-heading"
+      >
         <div className={styles.container}>
           <span className={styles.collectionLabel}>MSS.1790.001 — Blount Correspondence</span>
-          <h2 className={styles.sectionTitle}>The Hero Quote</h2>
+          <h2 id="blount-letter-heading" className={styles.sectionTitle}>
+            The Hero Quote
+          </h2>
           <p className={styles.sectionSubtitle}>
             Governor Blount&apos;s first letter from Rocky Mount
           </p>
@@ -334,10 +332,16 @@ export default function EvidencePage() {
       <SectionDivider variant="default" />
 
       {/* The Question - Washington Papers */}
-      <section id="washington-question" className={styles.section}>
+      <section
+        id="washington-question"
+        className={styles.section}
+        aria-labelledby="washington-question-heading"
+      >
         <div className={styles.container}>
           <span className={styles.collectionLabel}>MSS.1790.002 — Washington Papers</span>
-          <h2 className={styles.sectionTitle}>The Question</h2>
+          <h2 id="washington-question-heading" className={styles.sectionTitle}>
+            The Question
+          </h2>
           <p className={styles.sectionSubtitle}>Washington asked. Rocky Mount was the answer.</p>
           <QuoteCard
             quote={PRIMARY_QUOTES.washingtonsQuestion.text}
@@ -361,10 +365,12 @@ export default function EvidencePage() {
       <SectionDivider variant="default" />
 
       {/* The Appointment - Williamson Letters */}
-      <section id="appointment" className={styles.section}>
+      <section id="appointment" className={styles.section} aria-labelledby="appointment-heading">
         <div className={styles.container}>
           <span className={styles.collectionLabel}>MSS.1790.003 — Williamson Letters</span>
-          <h2 className={styles.sectionTitle}>The Appointment</h2>
+          <h2 id="appointment-heading" className={styles.sectionTitle}>
+            The Appointment
+          </h2>
           <p className={styles.sectionSubtitle}>
             Why Washington chose Blount to govern the Territory and negotiate with the Cherokee
             Nation
@@ -390,10 +396,16 @@ export default function EvidencePage() {
       <SectionDivider variant="default" />
 
       {/* Federal Authority - Executive Proclamations */}
-      <section id="federal-authority" className={styles.section}>
+      <section
+        id="federal-authority"
+        className={styles.section}
+        aria-labelledby="federal-authority-heading"
+      >
         <div className={styles.container}>
           <span className={styles.collectionLabel}>MSS.1791.001 — Executive Proclamations</span>
-          <h2 className={styles.sectionTitle}>Federal Authority</h2>
+          <h2 id="federal-authority-heading" className={styles.sectionTitle}>
+            Federal Authority
+          </h2>
           <p className={styles.sectionSubtitle}>The Treaty of Holston became binding law</p>
           <QuoteCard
             quote={PRIMARY_QUOTES.treatyProclamation.text}
@@ -420,12 +432,19 @@ export default function EvidencePage() {
       <SectionDivider variant="default" />
 
       {/* Treaty Signers Section */}
-      <section id="treaty-signers" className={styles.signersSection}>
+      <section
+        id="treaty-signers"
+        className={styles.signersSection}
+        aria-labelledby="treaty-signers-heading"
+      >
         <div className={styles.container}>
           <span className={styles.collectionLabel}>TREATY.1791.001 — Holston Signatories</span>
-          <h2 className={styles.sectionTitle}>Those Who Signed</h2>
+          <h2 id="treaty-signers-heading" className={styles.sectionTitle}>
+            Those Who Signed
+          </h2>
           <p className={styles.sectionSubtitle}>
-            Forty-two Cherokee leaders put their names to the Treaty of Holston
+            Five featured signatories from the forty-two Cherokee leaders who signed the Treaty of
+            Holston
           </p>
 
           <div className={styles.signersIntro}>
@@ -475,10 +494,12 @@ export default function EvidencePage() {
       <SectionDivider variant="default" />
 
       {/* Timeline Section */}
-      <section id="timeline" className={styles.timelineSection}>
+      <section id="timeline" className={styles.timelineSection} aria-labelledby="timeline-heading">
         <div className={styles.container}>
           <span className={styles.collectionLabel}>CHRON.1790-1796 — Territory Chronology</span>
-          <h2 className={styles.sectionTitle}>Verified Timeline</h2>
+          <h2 id="timeline-heading" className={styles.sectionTitle}>
+            Verified Timeline
+          </h2>
           <p className={styles.sectionSubtitle}>Key dates confirmed by primary sources</p>
 
           <div className={styles.timeline}>
@@ -552,10 +573,12 @@ export default function EvidencePage() {
       <SectionDivider variant="light" />
 
       {/* Source Repositories */}
-      <section id="sources" className={styles.sourcesSection}>
+      <section id="sources" className={styles.sourcesSection} aria-labelledby="sources-heading">
         <div className={styles.container}>
           <span className={styles.collectionLabel}>REF — Repository Index</span>
-          <h2 className={styles.sectionTitle}>Our Sources</h2>
+          <h2 id="sources-heading" className={styles.sectionTitle}>
+            Our Sources
+          </h2>
           <p className={styles.sectionSubtitle}>Where we verify our history</p>
 
           {/* Document Library link - featured */}

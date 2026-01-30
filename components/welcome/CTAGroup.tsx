@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { memo } from 'react'
 import styles from './welcome.module.css'
 
 interface CTAGroupProps {
@@ -13,7 +14,7 @@ interface CTAGroupProps {
   secondaryHref: string
 }
 
-export function CTAGroup({
+export const CTAGroup = memo(function CTAGroup({
   primaryText,
   primaryHref,
   archiveText,
@@ -23,12 +24,20 @@ export function CTAGroup({
   secondaryHref,
 }: CTAGroupProps) {
   return (
-    <div className={styles.ctaGroup}>
-      <Link href={primaryHref} className={styles.primaryCTA}>
+    <nav className={styles.ctaGroup} aria-label="Main navigation">
+      <Link
+        href={primaryHref}
+        className={styles.primaryCTA}
+        aria-label={`${primaryText} - Enter the main site`}
+      >
         {primaryText}
       </Link>
 
-      <Link href={archiveHref} className={styles.archiveCTA}>
+      <Link
+        href={archiveHref}
+        className={styles.archiveCTA}
+        aria-label={`${archiveText} - ${archiveDescription}`}
+      >
         <span className={styles.archiveTitle}>{archiveText}</span>
         <span className={styles.archiveDescription}>{archiveDescription}</span>
         <span className={styles.archiveArrow} aria-hidden="true">
@@ -36,9 +45,9 @@ export function CTAGroup({
         </span>
       </Link>
 
-      <Link href={secondaryHref} className={styles.secondaryLink}>
+      <Link href={secondaryHref} className={styles.secondaryLink} aria-label={secondaryText}>
         {secondaryText} <span aria-hidden="true">→</span>
       </Link>
-    </div>
+    </nav>
   )
-}
+})

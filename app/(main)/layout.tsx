@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation'
 import MobileStickyCTA from '@/components/MobileStickyCTA'
 import ScrollProgress from '@/components/ScrollProgress'
 import Analytics from '@/components/Analytics'
+import SkipLinks from '@/components/SkipLinks'
 
 // Dynamic import for Footer (code splitting, SSR enabled)
 const Footer = dynamic(() => import('@/components/Footer'), {
@@ -25,6 +26,7 @@ export default function MainLayout({
 }>) {
   return (
     <>
+      <SkipLinks showNavigationLink />
       <Analytics />
       <ScrollProgress />
       <Navigation />

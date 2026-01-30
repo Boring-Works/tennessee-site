@@ -1,9 +1,13 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 interface ClaimProps {
+  /** Document ID to link to */
   doc: string
+  /** Optional passage/anchor within the document */
   passage?: string
-  children: React.ReactNode
+  /** The claim text content */
+  children: ReactNode
 }
 
 /**
@@ -17,8 +21,8 @@ export function Claim({ doc, passage, children }: ClaimProps) {
   return (
     <Link
       href={href}
-      className="border-b border-dotted border-current/50 hover:border-solid hover:border-gold-leaf hover:text-gold-leaf transition-colors duration-200"
-      title="View source document"
+      className="border-b border-dotted border-current/50 hover:border-solid hover:border-gold-leaf hover:text-gold-leaf focus:outline-none focus:ring-2 focus:ring-gold-leaf focus:ring-offset-1 rounded-sm transition-colors duration-200"
+      aria-label={`View source document for: ${typeof children === 'string' ? children : 'this claim'}`}
     >
       {children}
     </Link>

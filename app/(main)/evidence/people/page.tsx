@@ -39,7 +39,7 @@ export default async function PeoplePage() {
           <CherokeeSignatories signatories={cherokeeSignatories} />
 
           {/* Other Historical Figures Section (if any) */}
-          {otherFigures.length > 0 && (
+          {otherFigures.length > 0 ? (
             <section className="peopleSection">
               <h2 className="peopleSectionTitle">
                 <span>Other Historical Figures</span>
@@ -73,6 +73,12 @@ export default async function PeoplePage() {
                 ))}
               </div>
             </section>
+          ) : (
+            <div className="text-center py-8" style={{ color: 'var(--cream-faded, #a89f8c)' }}>
+              <p>
+                The records here focus on the Cherokee leaders who shaped Tennessee&apos;s founding.
+              </p>
+            </div>
           )}
 
           {/* Back Link */}

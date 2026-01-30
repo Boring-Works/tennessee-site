@@ -181,8 +181,22 @@ export function TaskScores({
       ? SCORE_CARDS
       : SCORE_CARDS.filter(({ key }) => key === worstKey)
 
+  // Generate overall assessment text for accessibility
+  const overallAssessment =
+    overallScore >= 7
+      ? 'Good day for work'
+      : overallScore >= 5
+        ? 'Fair conditions'
+        : overallScore >= 3
+          ? 'Difficult conditions'
+          : 'Avoid outdoor work'
+
   return (
-    <section className={compact ? 'py-2' : 'py-3 lg:py-4'}>
+    <section
+      className={compact ? 'py-2' : 'py-3 lg:py-4'}
+      aria-label={`Today's workability score: ${overallScore} out of 10. ${overallAssessment}`}
+      role="region"
+    >
       <div className={`flex items-center justify-center gap-3 ${compact ? 'mb-2' : 'mb-3'}`}>
         <h2
           className={`font-serif text-gold-leaf text-center ${compact ? 'text-lg' : 'text-xl lg:text-2xl'}`}
@@ -193,13 +207,22 @@ export function TaskScores({
       </div>
 
       {/* Overall Workability Index - Primary Decision Signal */}
-      <div className="flex flex-col items-center justify-center mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
+      <div
+        className="flex flex-col items-center justify-center mb-6 p-4 bg-white/5 rounded-lg border border-white/10"
+        role="status"
+        aria-live="polite"
+        aria-label={`Overall workability score: ${overallScore} out of 10, ${overallAssessment}`}
+      >
         <span className="text-xs uppercase tracking-wider text-almanac-parchment/60 mb-2">
           Today&apos;s Overall Workability
         </span>
         <div className="flex items-baseline gap-2">
-          <div className="text-5xl font-bold text-almanac-parchment">{overallScore}</div>
-          <div className="text-2xl text-almanac-parchment/40">/10</div>
+          <div className="text-5xl font-bold text-almanac-parchment" aria-hidden="true">
+            {overallScore}
+          </div>
+          <div className="text-2xl text-almanac-parchment/40" aria-hidden="true">
+            /10
+          </div>
         </div>
         <span
           className={`text-sm font-semibold mt-2 px-3 py-1 rounded ${
@@ -211,6 +234,7 @@ export function TaskScores({
                   ? 'bg-orange-900/30 text-orange-400'
                   : 'bg-red-900/30 text-red-400'
           }`}
+          aria-hidden="true"
         >
           {overallScore >= 7
             ? 'GOOD DAY FOR WORK'

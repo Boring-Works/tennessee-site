@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { memo } from 'react'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 import { PAGE_METADATA, HOOKS } from '@/lib/copy'
-import { useHours } from '@/lib/hooks/useHours'
 import { JsonLd } from '@/components/JsonLd'
 import { generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo'
 
@@ -18,74 +18,93 @@ export const metadata: Metadata = {
 }
 
 // Section divider component for period-authentic transitions
-const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'light' | 'dark' }) => (
-  <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
-    <span className="section-divider-line" />
-    <span className="section-divider-flourish">❧</span>
-    <span className="section-divider-ornament">✦</span>
-    <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
-    <span className="section-divider-line" />
-  </div>
-)
+interface SectionDividerProps {
+  variant?: 'default' | 'light' | 'dark'
+}
+
+const SectionDivider = memo(function SectionDivider({ variant = 'default' }: SectionDividerProps) {
+  return (
+    <div className={`section-divider section-divider--${variant}`} aria-hidden="true">
+      <span className="section-divider-line" />
+      <span className="section-divider-flourish">❧</span>
+      <span className="section-divider-ornament">✦</span>
+      <span className="section-divider-flourish section-divider-flourish--flip">❧</span>
+      <span className="section-divider-line" />
+    </div>
+  )
+})
 
 // Compass rose for heritage trail
-const CompassRose = () => (
-  <svg
-    viewBox="0 0 60 60"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1"
-    className={styles['compass-rose']}
-  >
-    <circle cx="30" cy="30" r="26" opacity="0.3" />
-    <circle cx="30" cy="30" r="18" opacity="0.2" />
-    <circle cx="30" cy="30" r="8" opacity="0.15" />
-    {/* Cardinal directions */}
-    <path d="M30 4v10M30 46v10M4 30h10M46 30h10" strokeWidth="1.5" />
-    {/* North arrow */}
-    <path d="M30 4l-3 8h6l-3-8z" fill="currentColor" opacity="0.6" />
-    {/* Intercardinal directions */}
-    <path d="M12 12l6 6M42 42l6 6M12 48l6-6M42 18l6-6" opacity="0.4" />
-    {/* Center dot */}
-    <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.5" />
-    {/* Direction labels */}
-    <text
-      x="30"
-      y="18"
-      textAnchor="middle"
-      fontSize="6"
-      fill="currentColor"
-      opacity="0.7"
-      fontWeight="bold"
+const CompassRose = memo(function CompassRose() {
+  return (
+    <svg
+      viewBox="0 0 60 60"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      className={styles['compass-rose']}
+      aria-hidden="true"
+      role="img"
     >
-      N
-    </text>
-    <text x="30" y="56" textAnchor="middle" fontSize="5" fill="currentColor" opacity="0.5">
-      S
-    </text>
-    <text x="8" y="32" textAnchor="middle" fontSize="5" fill="currentColor" opacity="0.5">
-      W
-    </text>
-    <text x="52" y="32" textAnchor="middle" fontSize="5" fill="currentColor" opacity="0.5">
-      E
-    </text>
-  </svg>
-)
+      <circle cx="30" cy="30" r="26" opacity="0.3" />
+      <circle cx="30" cy="30" r="18" opacity="0.2" />
+      <circle cx="30" cy="30" r="8" opacity="0.15" />
+      {/* Cardinal directions */}
+      <path d="M30 4v10M30 46v10M4 30h10M46 30h10" strokeWidth="1.5" />
+      {/* North arrow */}
+      <path d="M30 4l-3 8h6l-3-8z" fill="currentColor" opacity="0.6" />
+      {/* Intercardinal directions */}
+      <path d="M12 12l6 6M42 42l6 6M12 48l6-6M42 18l6-6" opacity="0.4" />
+      {/* Center dot */}
+      <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.5" />
+      {/* Direction labels */}
+      <text
+        x="30"
+        y="18"
+        textAnchor="middle"
+        fontSize="6"
+        fill="currentColor"
+        opacity="0.7"
+        fontWeight="bold"
+      >
+        N
+      </text>
+      <text x="30" y="56" textAnchor="middle" fontSize="5" fill="currentColor" opacity="0.5">
+        S
+      </text>
+      <text x="8" y="32" textAnchor="middle" fontSize="5" fill="currentColor" opacity="0.5">
+        W
+      </text>
+      <text x="52" y="32" textAnchor="middle" fontSize="5" fill="currentColor" opacity="0.5">
+        E
+      </text>
+    </svg>
+  )
+})
 
 // Portrait frame for historical figures
-const PortraitFrame = ({ initials, highlight }: { initials: string; highlight: string }) => (
-  <div className={styles['portrait-frame']}>
-    <div className={styles['portrait-frame-outer']}>
-      <div className={styles['portrait-frame-inner']}>
-        <span className={styles['portrait-initials']}>{initials}</span>
+interface PortraitFrameProps {
+  initials: string
+  highlight: string
+}
+
+const PortraitFrame = memo(function PortraitFrame({ initials, highlight }: PortraitFrameProps) {
+  return (
+    <div className={styles['portrait-frame']}>
+      <div className={styles['portrait-frame-outer']}>
+        <div className={styles['portrait-frame-inner']}>
+          <span className={styles['portrait-initials']}>{initials}</span>
+        </div>
+      </div>
+      <div className={styles['portrait-badge']}>
+        <span className={styles['portrait-badge-seal']} aria-hidden="true">
+          ★
+        </span>
+        <span className={styles['portrait-badge-text']}>{highlight}</span>
       </div>
     </div>
-    <div className={styles['portrait-badge']}>
-      <span className={styles['portrait-badge-seal']}>★</span>
-      <span className={styles['portrait-badge-text']}>{highlight}</span>
-    </div>
-  </div>
-)
+  )
+})
 
 // Historical figures from siteInfo
 const { historicalFigures } = siteInfo
@@ -110,26 +129,6 @@ const experienceHighlights = [
     moment: 'Watch Demonstrations',
     description:
       'Costumed interpreters show blacksmithing, weaving, and frontier crafts (varies by day).',
-  },
-]
-
-// Heritage Trail - nearby historic sites with narrative connection
-const _heritageTrail = [
-  {
-    name: 'Sycamore Shoals State Historic Park',
-    distance: '30 min',
-    connection:
-      'Where the Overmountain Men gathered — the Army gathered at the Shoals, the State started here',
-  },
-  {
-    name: 'Downtown Bristol (State Street)',
-    distance: '20 min',
-    connection: 'Birthplace of Country Music',
-  },
-  {
-    name: 'Downtown Johnson City',
-    distance: '20 min',
-    connection: 'Historic downtown with local dining',
   },
 ]
 
@@ -171,8 +170,7 @@ const visitBreadcrumbs = [
 ]
 
 export default function VisitPage() {
-  const { location, admission, whatToExpect, contact, sisterSites } = siteInfo
-  const hours = useHours() // useHours returns a data object, can be used in server component
+  const { location, admission, whatToExpect, contact, sisterSites, hours } = siteInfo
 
   return (
     <>

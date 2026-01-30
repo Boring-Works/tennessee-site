@@ -1,7 +1,14 @@
+import { memo } from 'react'
 import Link from 'next/link'
 import { HOOKS, BUTTONS } from '@/lib/copy'
 
-export default function FinalCTA() {
+/**
+ * FinalCTA Component
+ *
+ * Page-closing call-to-action section. Memoized since it renders
+ * static content that doesn't change based on props or state.
+ */
+function FinalCTAComponent() {
   return (
     <section className="relative bg-primary overflow-hidden">
       {/* Background gradient matching hero */}
@@ -72,3 +79,5 @@ export default function FinalCTA() {
     </section>
   )
 }
+
+export default memo(FinalCTAComponent)

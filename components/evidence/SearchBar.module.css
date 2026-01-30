@@ -19,7 +19,6 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 0.125rem;
-  outline: none;
   transition:
     border-color 0.2s,
     background-color 0.2s;
@@ -30,8 +29,14 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.input:focus-visible {
+  outline: 2px solid var(--gold-leaf, #d4a853);
+  outline-offset: 2px;
+}
+
 .input::placeholder {
-  color: rgba(232, 224, 208, 0.5);
+  /* WCAG 2.1 AA: Increased from 0.5 to 0.65 for 4.5:1 contrast on dark bg */
+  color: rgba(232, 224, 208, 0.65);
 }
 
 .searchIcon {
@@ -48,7 +53,8 @@
   padding: 0.25rem;
   font-size: 1.25rem;
   line-height: 1;
-  color: rgba(232, 224, 208, 0.5);
+  /* WCAG 2.1 AA: Increased from 0.5 to 0.65 for 4.5:1 contrast */
+  color: rgba(232, 224, 208, 0.65);
   background: none;
   border: none;
   cursor: pointer;
@@ -57,6 +63,12 @@
 
 .clearButton:hover {
   color: var(--almanac-parchment, #e8e0d0);
+}
+
+.clearButton:focus-visible {
+  outline: 2px solid var(--gold-leaf, #d4a853);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .results {
@@ -91,6 +103,12 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+.result:focus-visible {
+  outline: 2px solid var(--gold-leaf, #d4a853);
+  outline-offset: -2px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .resultHeader {
   display: flex;
   justify-content: space-between;
@@ -107,7 +125,8 @@
 
 .resultDate {
   font-size: 0.75rem;
-  color: rgba(232, 224, 208, 0.5);
+  /* WCAG 2.1 AA: Increased from 0.5 to 0.65 for 4.5:1 contrast */
+  color: rgba(232, 224, 208, 0.65);
   white-space: nowrap;
 }
 
@@ -133,7 +152,8 @@
 
 .resultCollection {
   font-size: 0.75rem;
-  color: rgba(232, 224, 208, 0.5);
+  /* WCAG 2.1 AA: Increased from 0.5 to 0.65 for 4.5:1 contrast */
+  color: rgba(232, 224, 208, 0.65);
   text-transform: capitalize;
 }
 
@@ -148,6 +168,7 @@
 .noResults {
   padding: 1rem;
   text-align: center;
-  color: rgba(232, 224, 208, 0.5);
+  /* WCAG 2.1 AA: Increased from 0.5 to 0.65 for 4.5:1 contrast */
+  color: rgba(232, 224, 208, 0.65);
   font-size: 0.875rem;
 }

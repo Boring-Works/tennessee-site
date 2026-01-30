@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback, useMemo, memo } from 'react'
 
 interface OriginalSevenMapProps {
   variant?: 'hero' | 'inline' | 'compact'
@@ -71,7 +71,7 @@ const COUNTY_INFO: Record<string, CountyInfo> = {
   },
 }
 
-export function OriginalSevenMap({
+function OriginalSevenMapComponent({
   variant = 'inline',
   showLabels = true,
   showDistances = false,
@@ -81,51 +81,76 @@ export function OriginalSevenMap({
   const [hoveredCounty, setHoveredCounty] = useState<string | null>(null)
   const [selectedCounty, setSelectedCounty] = useState<string | null>(null)
 
-  // Size configurations
-  const sizes = {
-    hero: { width: 900, height: 500, fontSize: 14, starSize: 24 },
-    inline: { width: 700, height: 400, fontSize: 12, starSize: 20 },
-    compact: { width: 400, height: 280, fontSize: 10, starSize: 16 },
-  }
+  // Size configurations - memoized as they don't change
+  const sizes = useMemo(
+    () => ({
+      hero: { width: 900, height: 500, fontSize: 14, starSize: 24 },
+      inline: { width: 700, height: 400, fontSize: 12, starSize: 20 },
+      compact: { width: 400, height: 280, fontSize: 10, starSize: 16 },
+    }),
+    []
+  )
 
   const size = sizes[variant]
 
-  // Colors matching site design
-  const colors = {
-    eastTN: '#E8E0D4', // Warm cream for East TN counties
-    middleTN: '#D4DDD4', // Sage for Middle TN counties
-    eastTNHover: '#DDD4C4',
-    middleTNHover: '#C4D4C4',
-    border: '#8B7355', // Warm brown borders
-    borderHover: '#0a1628', // Primary on hover
-    text: '#0a1628', // Primary text
-    textLight: '#525252', // Lighter text
-    accent: '#c9a227', // Gold accent
-    star: '#c9a227', // Star color
-    defunct: '#F0EBE3', // Lighter for Tennessee County
-    defunctBorder: '#A89880', // Dashed border color
-  }
+  // Colors matching site design - memoized as they don't change
+  const colors = useMemo(
+    () => ({
+      eastTN: '#E8E0D4', // Warm cream for East TN counties
+      middleTN: '#D4DDD4', // Sage for Middle TN counties
+      eastTNHover: '#DDD4C4',
+      middleTNHover: '#C4D4C4',
+      border: '#8B7355', // Warm brown borders
+      borderHover: '#0a1628', // Primary on hover
+      text: '#0a1628', // Primary text
+      textLight: '#525252', // Lighter text
+      accent: '#c9a227', // Gold accent
+      star: '#c9a227', // Star color
+      defunct: '#F0EBE3', // Lighter for Tennessee County
+      defunctBorder: '#A89880', // Dashed border color
+    }),
+    []
+  )
 
-  const handleCountyClick = (county: string) => {
-    if (interactive) {
-      setSelectedCounty(selectedCounty === county ? null : county)
-    }
-  }
+  const handleCountyClick = useCallback(
+    (county: string) => {
+      if (interactive) {
+        setSelectedCounty((prev) => (prev === county ? null : county))
+      }
+    },
+    [interactive]
+  )
 
-  const getCountyFill = (county: string, isEastTN: boolean, isDefunct?: boolean) => {
-    if (isDefunct) return colors.defunct
-    if (hoveredCounty === county || selectedCounty === county) {
-      return isEastTN ? colors.eastTNHover : colors.middleTNHover
-    }
-    return isEastTN ? colors.eastTN : colors.middleTN
-  }
+  const handleCountyKeyDown = useCallback(
+    (county: string, event: React.KeyboardEvent) => {
+      if (interactive && (event.key === 'Enter' || event.key === ' ')) {
+        event.preventDefault()
+        setSelectedCounty((prev) => (prev === county ? null : county))
+      }
+    },
+    [interactive]
+  )
 
-  const getCountyStroke = (county: string) => {
-    if (hoveredCounty === county || selectedCounty === county) {
-      return colors.borderHover
-    }
-    return colors.border
-  }
+  const getCountyFill = useCallback(
+    (county: string, isEastTN: boolean, isDefunct?: boolean) => {
+      if (isDefunct) return colors.defunct
+      if (hoveredCounty === county || selectedCounty === county) {
+        return isEastTN ? colors.eastTNHover : colors.middleTNHover
+      }
+      return isEastTN ? colors.eastTN : colors.middleTN
+    },
+    [hoveredCounty, selectedCounty, colors]
+  )
+
+  const getCountyStroke = useCallback(
+    (county: string) => {
+      if (hoveredCounty === county || selectedCounty === county) {
+        return colors.borderHover
+      }
+      return colors.border
+    },
+    [hoveredCounty, selectedCounty, colors]
+  )
 
   return (
     <div className={`original-seven-map ${className}`}>
@@ -218,9 +243,13 @@ export function OriginalSevenMap({
 
           {/* HAWKINS - Top */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Hawkins County - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('hawkins')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('hawkins')}
+            onKeyDown={(e) => handleCountyKeyDown('hawkins', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -254,9 +283,13 @@ export function OriginalSevenMap({
 
           {/* SULLIVAN - Upper Left */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Sullivan County - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('sullivan')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('sullivan')}
+            onKeyDown={(e) => handleCountyKeyDown('sullivan', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -283,9 +316,13 @@ export function OriginalSevenMap({
 
           {/* WASHINGTON - Center (Contains Rocky Mount) */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Washington County - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('washington')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('washington')}
+            onKeyDown={(e) => handleCountyKeyDown('washington', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -312,9 +349,13 @@ export function OriginalSevenMap({
 
           {/* GREENE - Right */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Greene County - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('greene')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('greene')}
+            onKeyDown={(e) => handleCountyKeyDown('greene', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -393,9 +434,13 @@ export function OriginalSevenMap({
 
           {/* DAVIDSON - Bottom Left */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Davidson County - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('davidson')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('davidson')}
+            onKeyDown={(e) => handleCountyKeyDown('davidson', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -436,9 +481,13 @@ export function OriginalSevenMap({
 
           {/* SUMNER - Bottom Center */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Sumner County - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('sumner')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('sumner')}
+            onKeyDown={(e) => handleCountyKeyDown('sumner', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -465,9 +514,13 @@ export function OriginalSevenMap({
 
           {/* TENNESSEE COUNTY - Bottom Right (Defunct - dashed) */}
           <g
+            role={interactive ? 'button' : undefined}
+            tabIndex={interactive ? 0 : undefined}
+            aria-label={interactive ? 'Tennessee County (defunct) - click for details' : undefined}
             onMouseEnter={() => interactive && setHoveredCounty('tennessee')}
             onMouseLeave={() => interactive && setHoveredCounty(null)}
             onClick={() => handleCountyClick('tennessee')}
+            onKeyDown={(e) => handleCountyKeyDown('tennessee', e)}
             style={{ cursor: interactive ? 'pointer' : 'default' }}
           >
             <path
@@ -576,6 +629,9 @@ export function OriginalSevenMap({
       {/* Info panel for selected county */}
       {interactive && selectedCounty && COUNTY_INFO[selectedCounty] && (
         <div
+          role="region"
+          aria-live="polite"
+          aria-label={`Information about ${COUNTY_INFO[selectedCounty].name} County`}
           style={{
             marginTop: '1rem',
             padding: '1rem 1.25rem',
@@ -639,3 +695,6 @@ export function OriginalSevenMap({
     </div>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export const OriginalSevenMap = memo(OriginalSevenMapComponent)

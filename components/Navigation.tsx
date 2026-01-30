@@ -2,37 +2,83 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, memo } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import styles from './Header/Header.module.css'
 
-interface NavItem {
-  href?: string
+interface DropdownItem {
+  href: string
   label: string
-  dropdown?: Array<{ href: string; label: string }>
+}
+
+interface NavItem {
+  href: string
+  label: string
+  dropdown?: DropdownItem[]
+  badge?: string
 }
 
 const NAV_STRUCTURE: NavItem[] = [
-  { href: '/visit', label: 'Visit' },
   {
-    label: 'Events & Programs',
+    label: 'Visit',
+    href: '/visit',
     dropdown: [
-      { href: '/events', label: '2026 Events Calendar' },
-      { href: '/programs', label: 'Recurring Programs' },
-      { href: '/lectures', label: 'Lecture Series' },
+      { label: 'Plan Your Visit', href: '/visit' },
+      { label: 'Hours & Admission', href: '/visit#plan-your-visit' },
+      { label: 'Group Tours', href: '/groups' },
     ],
   },
-  { href: '/membership', label: 'Membership' },
   {
-    label: 'The Region',
-    dropdown: [{ href: '/explore', label: 'Explore the Original Seven' }],
+    label: 'Events',
+    href: '/events',
+    dropdown: [
+      { label: '2026 Calendar', href: '/events' },
+      { label: 'Lecture Series', href: '/lectures' },
+      { label: 'Programs', href: '/programs' },
+    ],
   },
-  { href: '/evidence', label: 'Evidence' },
-  { href: '/educators', label: 'Educators' },
-  { href: '/support', label: 'Support' },
+  {
+    label: 'Evidence Room',
+    href: '/evidence',
+    badge: 'New',
+    dropdown: [
+      { label: 'Documents', href: '/evidence/documents' },
+      { label: 'People', href: '/evidence/people' },
+      { label: 'Timeline', href: '/evidence/timeline' },
+      { label: 'Collections', href: '/evidence/collections' },
+    ],
+  },
+  {
+    label: 'Explore',
+    href: '/explore',
+    dropdown: [
+      { label: 'Our Story', href: '/our-story' },
+      { label: 'Original Seven', href: '/explore' },
+      { label: 'For Educators', href: '/educators' },
+    ],
+  },
+  {
+    label: 'Support',
+    href: '/support',
+    dropdown: [
+      { label: 'Membership', href: '/membership' },
+      { label: 'Donate', href: '/support' },
+      { label: 'First 250 Registry', href: '/first-250' },
+    ],
+  },
 ]
 
-export default function Navigation() {
+/**
+ * Navigation Component
+ *
+ * Main site navigation with desktop dropdown menus and mobile drawer.
+ * Features:
+ * - Keyboard navigation (arrow keys, escape, tab trap in mobile)
+ * - ARIA-compliant menu structure
+ * - Focus management on route changes
+ * - Scroll-based header styling
+ */
+function NavigationComponent() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
@@ -226,6 +272,53 @@ export default function Navigation() {
     })
   }, [])
 
+  // Desktop dropdown keyboard navigation
+  const handleDropdownKeyDown = useCallback(
+    (e: React.KeyboardEvent, item: NavItem) => {
+      const dropdownId = `dropdown-${item.label.replace(/\s+/g, '-').toLowerCase()}`
+      const dropdown = document.getElementById(dropdownId)
+      if (!dropdown) return
+
+      const items = Array.from(dropdown.querySelectorAll('[role="menuitem"]')) as HTMLElement[]
+      const currentIndex = items.indexOf(document.activeElement as HTMLElement)
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault()
+          if (openDropdown !== item.label) {
+            setOpenDropdown(item.label)
+            // Focus first item after dropdown opens
+            setTimeout(() => items[0]?.focus(), 50)
+          } else if (currentIndex < items.length - 1) {
+            items[currentIndex + 1].focus()
+          }
+          break
+        case 'ArrowUp':
+          e.preventDefault()
+          if (currentIndex > 0) {
+            items[currentIndex - 1].focus()
+          }
+          break
+        case 'Home':
+          e.preventDefault()
+          items[0]?.focus()
+          break
+        case 'End':
+          e.preventDefault()
+          items[items.length - 1]?.focus()
+          break
+        case 'Escape':
+          e.preventDefault()
+          setOpenDropdown(null)
+          // Return focus to trigger button
+          const trigger = document.querySelector(`[aria-controls="${dropdownId}"]`) as HTMLElement
+          trigger?.focus()
+          break
+      }
+    },
+    [openDropdown]
+  )
+
   return (
     <>
       <header
@@ -261,7 +354,12 @@ export default function Navigation() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className={styles.nav} aria-label="Main navigation" data-dropdown-menu>
+            <nav
+              id="main-navigation"
+              className={styles.nav}
+              aria-label="Main navigation"
+              data-dropdown-menu
+            >
               <ul className={styles['nav-list']} role="menubar">
                 {NAV_STRUCTURE.map((item) => (
                   <li key={item.label} role="none" className={styles['nav-item']}>
@@ -276,14 +374,24 @@ export default function Navigation() {
                           role="menuitem"
                           aria-haspopup="true"
                           aria-expanded={openDropdown === item.label}
+                          aria-controls={`dropdown-${item.label.replace(/\s+/g, '-').toLowerCase()}`}
+                          aria-label={`${item.label}, submenu`}
                           className={`${styles['dropdown-toggle']} ${
                             isDropdownActive(item.dropdown) ? styles['dropdown-toggle--active'] : ''
                           }`}
                           onClick={() =>
                             setOpenDropdown(openDropdown === item.label ? null : item.label)
                           }
+                          onKeyDown={(e) => handleDropdownKeyDown(e, item)}
                         >
-                          {item.label}
+                          <span className="flex items-center gap-2">
+                            {item.label}
+                            {item.badge && (
+                              <span className="inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-accent/20 text-accent border border-accent/30 rounded-sm">
+                                {item.badge}
+                              </span>
+                            )}
+                          </span>
                           <ChevronDown
                             size={14}
                             className={styles['dropdown-chevron']}
@@ -297,7 +405,9 @@ export default function Navigation() {
 
                         {/* Dropdown menu */}
                         <ul
+                          id={`dropdown-${item.label.replace(/\s+/g, '-').toLowerCase()}`}
                           role="menu"
+                          aria-label={`${item.label} submenu`}
                           className={styles['dropdown-menu']}
                           aria-hidden={openDropdown !== item.label}
                         >
@@ -306,11 +416,13 @@ export default function Navigation() {
                               <Link
                                 href={subitem.href}
                                 role="menuitem"
+                                tabIndex={openDropdown === item.label ? 0 : -1}
                                 aria-current={isActive(subitem.href) ? 'page' : undefined}
                                 className={`${styles['dropdown-item']} ${
                                   isActive(subitem.href) ? styles['dropdown-item--active'] : ''
                                 }`}
                                 onClick={() => setOpenDropdown(null)}
+                                onKeyDown={(e) => handleDropdownKeyDown(e, item)}
                               >
                                 {subitem.label}
                               </Link>
@@ -353,7 +465,7 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={mobileMenuOpen ? 'Close main menu' : 'Open main menu'}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -371,6 +483,21 @@ export default function Navigation() {
         </div>
       </header>
 
+      {/* Mobile FAB - Floating Action Button */}
+      <button
+        type="button"
+        className={styles['mobile-fab']}
+        onClick={() => setMobileMenuOpen(true)}
+        aria-label="Open main menu"
+      >
+        <Menu size={24} />
+      </button>
+
+      {/* ARIA live region for menu state announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {mobileMenuOpen ? 'Navigation menu opened' : ''}
+      </div>
+
       {/* Mobile Menu */}
       <div
         id="mobile-menu"
@@ -379,13 +506,23 @@ export default function Navigation() {
         aria-hidden={!mobileMenuOpen}
         role="dialog"
         aria-modal="true"
-        aria-label="Navigation menu"
+        aria-label="Main navigation menu"
       >
         {/* Backdrop */}
         <div className={styles['mobile-backdrop']} onClick={closeMobileMenu} />
 
         {/* Drawer */}
         <div className={styles['mobile-drawer']}>
+          {/* Close button in drawer */}
+          <button
+            type="button"
+            className={styles['mobile-close']}
+            onClick={closeMobileMenu}
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+
           {/* Content */}
           <nav className={styles['mobile-nav']}>
             <ul className={styles['mobile-list']}>
@@ -400,9 +537,17 @@ export default function Navigation() {
                         }`}
                         onClick={() => toggleMobileDropdown(item.label)}
                         aria-expanded={expandedMobileDropdowns.has(item.label)}
+                        aria-label={`Toggle ${item.label} submenu`}
                         style={{ transitionDelay: `${100 + index * 50}ms` }}
                       >
-                        <span className={styles['mobile-link-text']}>{item.label}</span>
+                        <span className={styles['mobile-link-text']}>
+                          {item.label}
+                          {item.badge && (
+                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-accent/20 text-accent border border-accent/30 rounded-sm">
+                              {item.badge}
+                            </span>
+                          )}
+                        </span>
                         <ChevronDown
                           size={16}
                           className={`${styles['mobile-dropdown-icon']} ${
@@ -471,3 +616,5 @@ export default function Navigation() {
     </>
   )
 }
+
+export default memo(NavigationComponent)

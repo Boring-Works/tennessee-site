@@ -1,5 +1,6 @@
 'use client'
 
+import { memo, useCallback } from 'react'
 import Link from 'next/link'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './Footer/Footer.module.css'
@@ -70,12 +71,17 @@ const TikTokIcon = () => (
   </svg>
 )
 
-// Back to top scroll function
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-export default function Footer() {
+/**
+ * Footer Component
+ *
+ * Site footer with navigation, contact info, social links, and newsletter signup.
+ * Memoized to prevent unnecessary re-renders.
+ */
+function FooterComponent() {
+  // Back to top scroll handler
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
   return (
     <footer className={styles['site-footer']} role="contentinfo">
       {/* Back to Top Button */}
@@ -471,3 +477,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default memo(FooterComponent)

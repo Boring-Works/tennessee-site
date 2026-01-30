@@ -1,8 +1,30 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, memo, useSyncExternalStore } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
 import { trackBeginCheckout } from '@/lib/analytics'
+
+// Hydration-safe client detection using useSyncExternalStore
+const emptySubscribe = () => () => {}
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
+
+/** Event pricing structure */
+interface EventPricing {
+  adult?: number | null
+  senior?: number | null
+  child?: number | null
+  underFive?: number | null
+  members?: number | null
+}
+
+/** Analytics event data */
+interface EventAnalyticsData {
+  id: string
+  title: string
+  fareHarborId?: string
+  pricing?: EventPricing | null
+}
 
 interface BookingButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
   /**
@@ -36,18 +58,7 @@ interface BookingButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'o
   /**
    * Event data for comprehensive analytics tracking (GA4 + Facebook Pixel)
    */
-  eventData?: {
-    id: string
-    title: string
-    fareHarborId?: string
-    pricing?: {
-      adult?: number | null
-      senior?: number | null
-      child?: number | null
-      underFive?: number | null
-      members?: number | null
-    } | null
-  }
+  eventData?: EventAnalyticsData
 }
 
 /**
@@ -63,7 +74,7 @@ interface BookingButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'o
  * </BookingButton>
  * ```
  */
-export function BookingButton({
+function BookingButtonComponent({
   shortname = 'rockymountmuseum',
   itemId,
   fallbackUrl,
@@ -74,15 +85,8 @@ export function BookingButton({
   className = '',
   ...props
 }: BookingButtonProps) {
-  const [isMounted, setIsMounted] = useState(false)
-
-  // Set mounted state after initial render
-  useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // Hydration-safe client detection - avoids useEffect setState pattern
+  const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot)
 
   // Construct the FareHarbor URLs
   const lightboxUrl = itemId
@@ -91,8 +95,8 @@ export function BookingButton({
 
   const directUrl = fallbackUrl || lightboxUrl
 
-  // Handle click for analytics
-  const handleClick = () => {
+  // Handle click for analytics - memoized to prevent recreating on each render
+  const handleClick = useCallback(() => {
     // New comprehensive analytics tracking
     if (eventData) {
       trackBeginCheckout(eventData)
@@ -105,7 +109,7 @@ export function BookingButton({
         event_label: itemId || 'general_calendar',
       })
     }
-  }
+  }, [eventData, analyticsEvent, itemId])
 
   // Base styles
   const baseStyles = `
@@ -157,3 +161,5 @@ export function BookingButton({
     </a>
   )
 }
+
+export const BookingButton = memo(BookingButtonComponent)

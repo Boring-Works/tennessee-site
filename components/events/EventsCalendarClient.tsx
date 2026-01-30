@@ -55,6 +55,7 @@ function formatDate(dateStr: string): string {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
+    timeZone: 'UTC',
   })
 }
 
@@ -64,11 +65,12 @@ function formatDateRange(start: string, end?: string | null): string {
   const startDate = new Date(start + 'T12:00:00')
   const endDate = new Date(end + 'T12:00:00')
 
-  if (startDate.getMonth() === endDate.getMonth()) {
+  if (startDate.getUTCMonth() === endDate.getUTCMonth()) {
     return `${startDate.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-    })}–${endDate.getDate()}`
+      timeZone: 'UTC',
+    })}–${endDate.getUTCDate()}`
   }
 
   return `${formatDate(start)} – ${formatDate(end)}`
@@ -223,10 +225,11 @@ export function EventsCalendarClient({
                               <span className={styles['calendar-event-date-month']}>
                                 {new Date(event.date + 'T12:00:00').toLocaleDateString('en-US', {
                                   month: 'short',
+                                  timeZone: 'UTC',
                                 })}
                               </span>
                               <span className={styles['calendar-event-date-day']}>
-                                {new Date(event.date + 'T12:00:00').getDate()}
+                                {new Date(event.date + 'T12:00:00').getUTCDate()}
                               </span>
                             </>
                           )}

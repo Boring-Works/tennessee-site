@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 
 interface OperatingStatus {
   isOpen: boolean
@@ -39,21 +39,56 @@ function getOperatingStatus(): OperatingStatus {
   }
 }
 
-export function SiteHeader() {
-  // Initialize with current operating status
-  const [status, setStatus] = useState<OperatingStatus | null>(() => getOperatingStatus())
+// Store for operating status - allows use with useSyncExternalStore
+let currentStatus: OperatingStatus | null = null
+const statusListeners = new Set<() => void>()
 
+function subscribeToStatus(callback: () => void) {
+  statusListeners.add(callback)
+  return () => statusListeners.delete(callback)
+}
+
+function getStatusSnapshot(): OperatingStatus | null {
+  return currentStatus
+}
+
+function getServerStatusSnapshot(): OperatingStatus | null {
+  return null // Return null on server to avoid hydration mismatch
+}
+
+function updateStatusStore() {
+  currentStatus = getOperatingStatus()
+  statusListeners.forEach((listener) => listener())
+}
+
+// Use useSyncExternalStore for client detection
+const emptySubscribe = () => () => {}
+
+function useIsClient() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
+}
+
+export function SiteHeader() {
+  const isClient = useIsClient()
+  const status = useSyncExternalStore(subscribeToStatus, getStatusSnapshot, getServerStatusSnapshot)
+
+  // Initialize status on mount and set up interval for updates
   useEffect(() => {
+    // Initialize the status store
+    updateStatusStore()
+
     // Update status every minute to catch opening/closing transitions
-    const interval = setInterval(() => {
-      setStatus(getOperatingStatus())
-    }, 60000)
+    const interval = setInterval(updateStatusStore, 60000)
 
     return () => clearInterval(interval)
   }, [])
 
-  // Show static version during SSR to avoid hydration mismatch
-  if (!status) {
+  // Show static version during SSR or before client hydration
+  if (!isClient || !status) {
     return (
       <Link
         href="/visit"

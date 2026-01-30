@@ -49,7 +49,7 @@ export default async function DocumentPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-midnight">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 pt-28 pb-12">
         <nav className="mb-8" aria-label="Breadcrumb">
           <ol className="flex items-center gap-2 text-sm flex-wrap text-gold-leaf/60">
             <li>

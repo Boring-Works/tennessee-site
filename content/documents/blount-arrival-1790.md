@@ -9,6 +9,7 @@ author: william-blount
 recipient: henry-knox
 people_mentioned: [william-cobb]
 responds_to: knox-to-washington-1790-08
+physical_location: 'Main House - The window Blount described'
 verification:
   status: verified
   source_count: 2

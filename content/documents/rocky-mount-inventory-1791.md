@@ -8,6 +8,7 @@ collection: maps
 author: william-cobb
 people_mentioned:
   - william-blount
+physical_location: 'Entire Site - Inventory of this property'
 verification:
   status: single-source
   source_count: 1

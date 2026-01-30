@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Script from 'next/script'
 import Navigation from '@/components/Navigation'
 import MobileStickyCTA from '@/components/MobileStickyCTA'
 import ScrollProgress from '@/components/ScrollProgress'
@@ -32,6 +33,12 @@ export default function MainLayout({
       </main>
       <Footer />
       <MobileStickyCTA />
+
+      {/* FareHarbor Lightframe Script - Enables booking modal overlay */}
+      <Script
+        src="https://fareharbor.com/embeds/script/calendar/rockymountmuseum/?fallback=simple"
+        strategy="lazyOnload"
+      />
     </>
   )
 }

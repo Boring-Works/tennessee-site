@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllPeople } from '@/lib/evidence/loader'
+import { CherokeeSignatories } from '@/components/evidence'
 import './people.css'
 
 export const metadata: Metadata = {
@@ -18,21 +19,11 @@ export default async function PeoplePage() {
   const allPeople = await getAllPeople()
 
   // Group people by category
-  const cherokeeSignatories = allPeople
-    .filter((p) => p.is_cherokee && p.is_signatory)
-    .sort((a, b) => {
-      // Sort by bio_type (full first), then alphabetically by name
-      if (a.bio_type === 'full' && b.bio_type !== 'full') return -1
-      if (a.bio_type !== 'full' && b.bio_type === 'full') return 1
-      return a.name.localeCompare(b.name)
-    })
+  const cherokeeSignatories = allPeople.filter((p) => p.is_cherokee && p.is_signatory)
 
   const otherFigures = allPeople
     .filter((p) => !p.is_signatory)
     .sort((a, b) => a.name.localeCompare(b.name))
-
-  // Count full bios vs basic
-  const fullBioCount = cherokeeSignatories.filter((p) => p.bio_type === 'full').length
 
   return (
     <div className="peoplePage">
@@ -44,89 +35,8 @@ export default async function PeoplePage() {
             <p className="peopleSubtitle">The people who shaped Tennessee&apos;s founding era</p>
           </header>
 
-          {/* Introduction */}
-          <p className="peopleIntro">
-            On July 2, 1791, forty-two Cherokee leaders gathered at White&apos;s Fort to sign the
-            Treaty of Holston with Governor William Blount. Their names, transliterated from the
-            original manuscript, are preserved here alongside the stories we have been able to
-            recover.
-          </p>
-
-          {/* Cherokee Signatories Section */}
-          <section className="peopleSection">
-            <h2 className="peopleSectionTitle">
-              <span>Cherokee Signatories</span>
-              <span className="peopleSectionCount">{cherokeeSignatories.length} of 42</span>
-            </h2>
-
-            <p className="peopleSectionIntro">
-              Leaders who signed the Treaty of Holston on behalf of the Cherokee Nation.
-              {fullBioCount > 0 && (
-                <span className="peopleSectionNote">
-                  {' '}
-                  Featured profiles ({fullBioCount}) appear first.
-                </span>
-              )}
-              {cherokeeSignatories.length < 42 && (
-                <span className="peopleSectionNote">
-                  {' '}
-                  Research ongoing for remaining {42 - cherokeeSignatories.length} signatories.
-                </span>
-              )}
-            </p>
-
-            <div className="peopleGrid">
-              {cherokeeSignatories.map((person) => (
-                <Link
-                  key={person.id}
-                  href={`/evidence/people/${person.id}`}
-                  className={`personCard ${person.bio_type === 'full' ? 'personCardFeatured' : ''}`}
-                >
-                  {person.bio_type === 'full' && (
-                    <span className="personCardBadge">Full Profile</span>
-                  )}
-                  <div className="personCardNames">
-                    {person.name_cherokee && (
-                      <span className="personCardCherokeeName">{person.name_cherokee}</span>
-                    )}
-                    <span
-                      className={
-                        person.name_cherokee ? 'personCardEnglishName' : 'personCardPrimaryName'
-                      }
-                    >
-                      {person.name}
-                    </span>
-                  </div>
-                  {person.role && person.role !== 'Signatory' && (
-                    <span className="personCardRole">{person.role}</span>
-                  )}
-                  {person.town && <span className="personCardTown">{person.town}</span>}
-                  <span className="personCardArrow" aria-hidden="true">
-                    &rarr;
-                  </span>
-                </Link>
-              ))}
-            </div>
-
-            {/* DigiTreaties Link */}
-            <div className="peopleTreatyLink">
-              <a
-                href="https://digitreaties.org/treaties/treaty/88697242/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="peopleTreatyLinkButton"
-              >
-                <span className="peopleTreatyIcon">&#x1F4DC;</span>
-                <span className="peopleTreatyText">
-                  <strong>View the Treaty Manuscript</strong>
-                  <span>See all signatures on the original document at DigiTreaties</span>
-                </span>
-                <span className="peopleTreatyArrow" aria-hidden="true">
-                  &rarr;
-                </span>
-              </a>
-            </div>
-          </section>
+          {/* Cherokee Signatories Memorial */}
+          <CherokeeSignatories signatories={cherokeeSignatories} />
 
           {/* Other Historical Figures Section (if any) */}
           {otherFigures.length > 0 && (

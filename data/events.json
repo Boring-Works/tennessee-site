@@ -28,9 +28,9 @@
       "pricing": {
         "adult": null,
         "senior": null,
-        "child": 180,
+        "child": 18000,
         "underFive": null,
-        "members": 150
+        "members": 15000
       },
       "featured": false
     },
@@ -49,9 +49,9 @@
       "pricing": {
         "adult": null,
         "senior": null,
-        "child": 135,
+        "child": 13500,
         "underFive": null,
-        "members": 115
+        "members": 11500
       },
       "featured": false
     },
@@ -66,8 +66,16 @@
       "speaker": "Dr. James P. Byrd",
       "speakerTitle": "Vanderbilt University",
       "description": "What did frontier settlers believe—and why did it matter? Dr. Byrd, author of 'Sacred Scripture, Sacred War,' reveals how Bible, pulpit, and prayer shaped the men who marched to Kings Mountain.",
-      "ticketUrl": null,
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -81,8 +89,16 @@
       "speaker": "Lisa Bennett",
       "speakerTitle": "Sycamore Shoals State Historic Park",
       "description": "500 pounds of gunpowder. One determined woman. Without Mary Patton's powder, there would be no victory at Kings Mountain. Through first-person interpretation, Lisa Bennett brings this overlooked heroine face-to-face with you.",
-      "ticketUrl": null,
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -118,9 +134,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562805/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -139,9 +155,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 8,
-        "senior": 6,
-        "child": 5,
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
         "underFive": 0,
         "members": 0
       },
@@ -158,8 +174,16 @@
       "speaker": "Thomas Bachelor",
       "speakerTitle": "Historian & Reenactor",
       "description": "They bet everything—their farms, their families, their lives. The 1780 march to Kings Mountain wasn't patriotic fervor. It was a desperate gamble by men who knew they might never come home. Thomas Bachelor strips away the myth.",
-      "ticketUrl": null,
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -175,9 +199,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/289142/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -194,8 +218,16 @@
       "speaker": "Dr. Caroline H. Whitfield",
       "speakerTitle": "Independent Scholar",
       "description": "George Washington sent William Blount west to govern the frontier. Blount chose Rocky Mount—this very ground—as his capitol. Dr. Whitfield reveals the political intrigue, land speculation, and unlikely friendships that birthed Tennessee.",
-      "ticketUrl": null,
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -222,8 +254,16 @@
       "speaker": "David Doan",
       "speakerTitle": "Flag Historian",
       "description": "Every star and stripe carries a story. From the Grand Union that flew at Boston to the banner that inspired Key's anthem, David Doan traces the flag's evolution. Followed by the dedication of Rocky Mount's America 250 commemorative flag.",
-      "ticketUrl": null,
+      "fareHarborId": null,
+      "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
       "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
       "featured": false
     },
     {
@@ -239,9 +279,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562806/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -262,9 +302,9 @@
       "pricing": {
         "adult": null,
         "senior": null,
-        "child": 225,
+        "child": 22500,
         "underFive": null,
-        "members": 180
+        "members": 18000
       },
       "featured": false
     },
@@ -282,11 +322,11 @@
       "requiresTicket": true,
       "capacity": 10,
       "pricing": {
-        "adult": 50,
+        "adult": 5000,
         "senior": null,
         "child": null,
         "underFive": null,
-        "members": 45
+        "members": 4500
       },
       "featured": false
     },
@@ -305,9 +345,9 @@
       "pricing": {
         "adult": null,
         "senior": null,
-        "child": 225,
+        "child": 22500,
         "underFive": null,
-        "members": 180
+        "members": 18000
       },
       "featured": false
     },
@@ -324,9 +364,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562810/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -345,9 +385,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562811/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -366,9 +406,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/258228/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 8,
-        "senior": 6,
-        "child": 5,
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
         "underFive": 0,
         "members": 0
       },
@@ -389,9 +429,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562812/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 15,
-        "senior": 12,
-        "child": 10,
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
         "underFive": 0,
         "members": 0
       },
@@ -405,14 +445,14 @@
       "time": "Various",
       "type": "new",
       "category": "signature",
-      "description": "Your family built Tennessee. Now come home. The first-ever gathering of descendants from founding families—Cobbs, Shelbys, Seaviers. Friday: registered descendants only. Sat-Sun: open to all. Oral histories. Genealogy help. Stories passed down 250 years.",
+      "description": "Your family built Tennessee. Now come home. The first-ever gathering of descendants from founding families—Cobbs, Shelbys, Seviers. Friday: registered descendants only. Sat-Sun: open to all. Oral histories. Genealogy help. Stories passed down 250 years.",
       "fareHarborId": "562813",
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562813/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 25,
-        "senior": 20,
-        "child": 15,
+        "adult": 2500,
+        "senior": 2000,
+        "child": 1500,
         "underFive": 0,
         "members": 0
       },
@@ -444,9 +484,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562814/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -466,9 +506,9 @@
       "requiresTicket": true,
       "ageRecommendation": "13+",
       "pricing": {
-        "adult": 15,
-        "senior": 12,
-        "child": 10,
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
         "underFive": null,
         "members": 0
       },
@@ -487,9 +527,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562816/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 12,
-        "senior": 10,
-        "child": 8,
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
         "underFive": 0,
         "members": 0
       },
@@ -508,9 +548,9 @@
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562817/",
       "requiresTicket": true,
       "pricing": {
-        "adult": 15,
-        "senior": 12,
-        "child": 10,
+        "adult": 1500,
+        "senior": 1200,
+        "child": 1000,
         "underFive": 0,
         "members": 0
       },
@@ -533,11 +573,11 @@
       "category": "workshop",
       "icon": "anvil",
       "pricing": {
-        "adult": 40,
-        "senior": 35,
+        "adult": 4000,
+        "senior": 3500,
         "child": null,
         "underFive": null,
-        "members": 30
+        "members": 3000
       },
       "highlights": [
         "Work alongside our master blacksmith",
@@ -570,11 +610,11 @@
       "category": "workshop",
       "icon": "flame",
       "pricing": {
-        "adult": 35,
-        "senior": 30,
+        "adult": 3500,
+        "senior": 3000,
         "child": null,
         "underFive": null,
-        "members": 25
+        "members": 2500
       },
       "highlights": [
         "Cook over open hearth fire",
@@ -599,9 +639,9 @@
       "category": "tour",
       "icon": "sunset",
       "pricing": {
-        "adult": 10,
-        "senior": 8,
-        "child": 6,
+        "adult": 1000,
+        "senior": 800,
+        "child": 600,
         "underFive": 0,
         "members": 0
       },
@@ -636,9 +676,9 @@
       "category": "education",
       "icon": "book",
       "pricing": {
-        "adult": 8,
-        "senior": 6,
-        "child": 5,
+        "adult": 800,
+        "senior": 600,
+        "child": 500,
         "underFive": 0,
         "members": 0
       },
@@ -666,11 +706,11 @@
       "icon": "key",
       "capacity": 10,
       "pricing": {
-        "adult": 45,
-        "senior": 40,
+        "adult": 4500,
+        "senior": 4000,
         "child": null,
         "underFive": null,
-        "members": 35
+        "members": 3500
       },
       "highlights": [
         "Handle real 18th-century artifacts",

@@ -54,6 +54,14 @@ export interface Event {
   description: string
   requiresTicket: boolean
   ticketUrl: string | null
+  fareHarborId?: string
+  pricing?: {
+    adult?: number | null
+    senior?: number | null
+    child?: number | null
+    underFive?: number | null
+    members?: number | null
+  } | null
   featured?: boolean
   speaker?: string
   speakerTitle?: string
@@ -72,6 +80,14 @@ export interface RecurringProgram {
   duration: string
   requiresTicket: boolean
   ticketUrl: string | null
+  fareHarborId?: string
+  pricing?: {
+    adult?: number | null
+    senior?: number | null
+    child?: number | null
+    underFive?: number | null
+    members?: number | null
+  } | null
   category: string
   icon: string
   highlights?: string[]

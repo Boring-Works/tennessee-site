@@ -15,8 +15,10 @@ export const MYSTERY_NARRATIVE = {
   },
   hero: {
     badge: 'Tennessee 230 · America 250',
-    headline: 'TENNESSEE STARTS HERE',
-    subhead: "Where Tennessee's government began.",
+    headline: "THE CONSTITUTION'S FIRST TEST",
+    subhead:
+      'In 1790, this ground became the first seat of Constitutional governance west of the Appalachians.',
+    supporting: 'The Constitution had to work here—or American expansion would fail. It worked.',
     timeline: [
       'In 1770, the Cobbs settled this ground.',
       'In 1780, they armed the Revolution.',
@@ -142,4 +144,66 @@ export const FIRST_250_CAMPAIGN = {
     'June 13-14: Stitching Independence / Tennessee 230',
     'July 4: Colonial Independence Day / America 250',
   ],
+} as const
+
+/**
+ * Look For This: Pre-Visit Discovery Moments
+ * Use for: Pre-visit guides, email campaigns, social teasers
+ * Creates physical-only reveals that make the in-person visit essential
+ */
+export const DISCOVERY_MOMENTS = {
+  intro: {
+    hook: 'Five discoveries that make the in-person visit essential.',
+    premise:
+      'Before there was a Tennessee, there was this ground. When you arrive at Rocky Mount, you will not simply see a historic site. You will stand where a state began.',
+  },
+  windowBlountDescribed: {
+    title: 'The Window Blount Described',
+    context:
+      'On October 20, 1790, Governor Blount wrote about "glass windows" that impressed him. On the frontier, glass windows marked a family of means.',
+    lookFor:
+      'The size and number of panes, the slight waviness of period glass, and how light enters the upstairs room.',
+    whyItMatters:
+      'These windows represented civilization pressing westward. When Blount saw them, he knew he had found the right place to establish federal authority.',
+  },
+  hearthGovernmentMeals: {
+    title: 'The Hearth Where Government Meals Were Cooked',
+    context:
+      'Mary Cobb fed the territorial government. Governor Blount, officials, surveyors, and forty-two Cherokee chiefs plus their attendants all ate meals prepared at Rocky Mount.',
+    lookFor:
+      'The scale of the hearth, the hanging points for pots and kettles, the wear patterns on hearth stones, and the distance from kitchen to main house.',
+    whyItMatters:
+      'Without food, there are no negotiations. Without hospitality, there are no alliances. Stand at that hearth and acknowledge the labor that made governance possible.',
+  },
+  doorCherokeeChiefs: {
+    title: 'The Door Forty-Two Cherokee Chiefs Entered',
+    context:
+      'In July 1791, forty-two Cherokee chiefs arrived to negotiate the Treaty of Holston. Protocol demanded hospitality before formal negotiations.',
+    lookFor:
+      'The width and height of the doorway, the wear on the threshold, and the transition from open grounds to enclosed space.',
+    whyItMatters:
+      'The Cherokee delegation negotiated as a sovereign nation. Their presence here shaped the borders of what would become Tennessee.',
+  },
+  roomTerritoryGoverned: {
+    title: 'The Room Where the Territory Was Governed',
+    context:
+      'From 1790 to 1792, Blount administered 77,000 square miles from this room. Treaties were drafted. Commissions were signed. Tennessee began here.',
+    lookFor:
+      'The natural light from those glass windows, the size of the space, the proximity to the stairs, and the view of the land Blount administered.',
+    whyItMatters:
+      'Every law Tennessee has ever passed traces its authority back to the government established in this room.',
+  },
+  groundTreatyCelebrated: {
+    title: 'The Ground Where the Treaty Was Celebrated',
+    context:
+      'On July 2, 1791, the Treaty of Holston was signed. The celebrations and initial gatherings occurred at Rocky Mount.',
+    lookFor:
+      'The space available for gathering, the sight lines, the terrain, and the paths of approach where delegates arrived.',
+    whyItMatters:
+      'The buildings evolved. The ground endures. Only your presence on this ground connects you to that moment.',
+  },
+  closing: {
+    hook: 'The ground is the artifact.',
+    tagline: 'Tennessee starts here. Will you?',
+  },
 } as const

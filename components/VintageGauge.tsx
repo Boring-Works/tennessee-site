@@ -1,55 +1,68 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 interface VintageGaugeProps {
-  current: number;
-  total: number;
-  label?: string;
-  showRemaining?: boolean;
-  size?: "small" | "medium" | "large";
-  theme?: "dark" | "light";
+  current: number
+  total: number
+  label?: string
+  showRemaining?: boolean
+  size?: 'small' | 'medium' | 'large'
+  theme?: 'dark' | 'light'
 }
 
 export default function VintageGauge({
   current,
   total,
-  label = "Registry Capacity",
+  label = 'Registry Capacity',
   showRemaining = true,
-  size = "medium",
-  theme = "dark",
+  size = 'medium',
+  theme = 'dark',
 }: VintageGaugeProps) {
-  const [animatedValue, setAnimatedValue] = useState(0);
-  const percentage = Math.min((current / total) * 100, 100);
-  const remaining = total - current;
+  const [animatedValue, setAnimatedValue] = useState(0)
+  const percentage = Math.min((current / total) * 100, 100)
+  const remaining = total - current
 
-  // Animate on mount
+  // Track if we're in the initial animation phase
+  const isAnimating = animatedValue !== percentage
+
+  // Animate on mount - only set the target value, CSS handles the transition
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAnimatedValue(percentage);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [percentage]);
+      setAnimatedValue(percentage)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [percentage])
 
   // Generate tick marks
-  const ticks = [0, 25, 50, 75, 100];
-  const tickLabels = [0, Math.round(total * 0.25), Math.round(total * 0.5), Math.round(total * 0.75), total];
+  const ticks = [0, 25, 50, 75, 100]
+  const tickLabels = [
+    0,
+    Math.round(total * 0.25),
+    Math.round(total * 0.5),
+    Math.round(total * 0.75),
+    total,
+  ]
 
   return (
-    <div className={`vintage-gauge vintage-gauge--${size} vintage-gauge--${theme}`}>
+    <div
+      className={`vintage-gauge vintage-gauge--${size} vintage-gauge--${theme}`}
+      aria-busy={isAnimating}
+    >
       {/* Label */}
-      <p className="vintage-gauge-label">{label}</p>
+      <p
+        className="vintage-gauge-label"
+        id={`gauge-label-${label.replace(/\s+/g, '-').toLowerCase()}`}
+      >
+        {label}
+      </p>
 
       {/* The gauge track */}
       <div className="vintage-gauge-track">
         {/* Tick marks */}
         <div className="vintage-gauge-ticks" aria-hidden="true">
           {ticks.map((tick, i) => (
-            <div
-              key={tick}
-              className="vintage-gauge-tick"
-              style={{ left: `${tick}%` }}
-            >
+            <div key={tick} className="vintage-gauge-tick" style={{ left: `${tick}%` }}>
               <span className="vintage-gauge-tick-line" />
               <span className="vintage-gauge-tick-label">{tickLabels[i]}</span>
             </div>
@@ -65,6 +78,12 @@ export default function VintageGauge({
             aria-valuenow={current}
             aria-valuemin={0}
             aria-valuemax={total}
+            aria-labelledby={`gauge-label-${label.replace(/\s+/g, '-').toLowerCase()}`}
+            aria-valuetext={
+              showRemaining
+                ? `${remaining} of ${total} spots remaining`
+                : `${current} of ${total} signatories enrolled`
+            }
           />
           {/* Needle indicator */}
           <div
@@ -84,14 +103,16 @@ export default function VintageGauge({
       <div className="vintage-gauge-status">
         {showRemaining ? (
           <p className="vintage-gauge-status-text">
-            <strong className="vintage-gauge-highlight">{remaining}</strong> of {total} spots remaining
+            <strong className="vintage-gauge-highlight">{remaining}</strong> of {total} spots
+            remaining
           </p>
         ) : (
           <p className="vintage-gauge-status-text">
-            <strong className="vintage-gauge-highlight">{current}</strong> of {total} signatories enrolled
+            <strong className="vintage-gauge-highlight">{current}</strong> of {total} signatories
+            enrolled
           </p>
         )}
       </div>
     </div>
-  );
+  )
 }

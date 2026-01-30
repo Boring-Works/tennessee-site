@@ -3,7 +3,7 @@ import { StoryHook } from '@/components/welcome/StoryHook'
 import { BrandStatement } from '@/components/welcome/BrandStatement'
 import { DualPeaks } from '@/components/welcome/DualPeaks'
 import { CTAGroup } from '@/components/welcome/CTAGroup'
-import { BUTTONS, PAGE_METADATA } from '@/lib/copy'
+import { BUTTONS, PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
 import './welcome.css'
 
 export const metadata = {
@@ -40,11 +40,16 @@ const peaks: [
 
 export default function WelcomePage() {
   return (
-    <main className="welcome-page">
+    <main id="main-content" className="welcome-page">
       <SiteHeader />
 
       <div className="welcome-container">
         <StoryHook line1="Before there was a Tennessee," line2="there was this ground." />
+
+        <blockquote className="washingtons-question">
+          <p>&ldquo;{PRIMARY_QUOTES.washingtonsQuestion.text}&rdquo;</p>
+          <cite>— {PRIMARY_QUOTES.washingtonsQuestion.attribution}</cite>
+        </blockquote>
 
         <BrandStatement
           headline="ROCKY MOUNT"

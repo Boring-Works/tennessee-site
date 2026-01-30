@@ -10,6 +10,7 @@ author: william-blount
 recipient: henry-knox
 people_mentioned: []
 responds_to: blount-arrival-1790
+physical_location: "Main House - Governor's office"
 verification:
   status: verified
   source_count: 2

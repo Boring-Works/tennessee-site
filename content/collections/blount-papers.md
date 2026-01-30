@@ -3,7 +3,7 @@ id: blount-papers
 name: 'The Blount Papers'
 description: "Governor William Blount's official correspondence during his administration of the Southwest Territory, documenting the establishment of federal government west of the Appalachians."
 why_it_matters: 'These letters are the primary record of how federal authority was established in what would become Tennessee. They document everything from the choice of Rocky Mount as the first capital to the negotiation of the Treaty of Holston.'
-document_count: 9
+document_count: 8
 date_range: '1790-1791'
 key_figures:
   - william-blount

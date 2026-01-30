@@ -3,6 +3,7 @@ import Link from 'next/link'
 import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
 import { getTicketUrl } from '@/lib/data'
+import { BookingButton } from '@/components/booking'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -197,14 +198,19 @@ export default function ProgramsPage() {
                   {/* CTA */}
                   <div className={styles['program-card-cta']}>
                     {program.requiresTicket ? (
-                      <a
-                        href={getTicketUrl(program) || '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <BookingButton
+                        itemId={program.fareHarborId || null}
+                        fallbackUrl={getTicketUrl(program) || '#'}
                         className={`${styles['program-card-btn']} btn-small`}
+                        eventData={{
+                          id: program.id,
+                          title: program.title,
+                          fareHarborId: program.fareHarborId,
+                          pricing: program.pricing,
+                        }}
                       >
                         Reserve Your Spot
-                      </a>
+                      </BookingButton>
                     ) : (
                       <a
                         href={`tel:${contact.phone.replace(/[^0-9]/g, '')}`}

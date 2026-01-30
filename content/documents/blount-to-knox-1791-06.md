@@ -12,6 +12,7 @@ people_mentioned:
   - hanging-maw
   - john-watts
   - doublehead
+physical_location: "Main House - Governor's office"
 verification:
   status: verified
   source_count: 2

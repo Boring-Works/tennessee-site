@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
-import { getTicketUrl } from '@/lib/data'
 import { JsonLd } from '@/components/JsonLd'
-import { generateEventsListSchema } from '@/lib/seo'
+import { generateEventsListSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { EventsToursBanner } from '@/components/events/EventsToursBanner'
 import { EventsHoursCTA } from '@/components/events/EventsHoursCTA'
+import { EventsCalendarClient } from '@/components/events/EventsCalendarClient'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -70,13 +69,6 @@ function groupEventsByMonth(
   return grouped
 }
 
-function getEventDuration(event: (typeof eventsData.events)[0]): number {
-  if (!event.endDate) return 1
-  const start = new Date(event.date + 'T12:00:00')
-  const end = new Date(event.endDate + 'T12:00:00')
-  return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1
-}
-
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + 'T12:00:00')
   return date.toLocaleDateString('en-US', {
@@ -86,20 +78,9 @@ function formatDate(dateStr: string): string {
   })
 }
 
-function formatDateRange(start: string, end?: string | null): string {
-  if (!end) return formatDate(start)
-
-  const startDate = new Date(start + 'T12:00:00')
-  const endDate = new Date(end + 'T12:00:00')
-
-  if (startDate.getMonth() === endDate.getMonth()) {
-    return `${startDate.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-    })}–${endDate.getDate()}`
-  }
-
-  return `${formatDate(start)} – ${formatDate(end)}`
+function formatPrice(cents: number): string {
+  const dollars = cents / 100
+  return dollars % 1 === 0 ? `$${dollars}` : `$${dollars.toFixed(2)}`
 }
 
 // Get next 3 upcoming events
@@ -122,22 +103,10 @@ function getUpcomingEvents(count: number = 3) {
   return upcoming
 }
 
-// Format full pricing details
-function formatPricingDetails(event: (typeof eventsData.events)[0]): string | null {
-  if (!event.requiresTicket || !('pricing' in event) || !event.pricing) {
-    return null
-  }
-
-  const prices: string[] = []
-
-  if (event.pricing.adult) prices.push(`Adult $${event.pricing.adult}`)
-  if (event.pricing.senior) prices.push(`Senior $${event.pricing.senior}`)
-  if (event.pricing.child) prices.push(`Child $${event.pricing.child}`)
-  if (event.pricing.underFive === 0) prices.push('Under 5 FREE')
-  if (event.pricing.members === 0) prices.push('Members FREE')
-
-  return prices.length > 0 ? prices.join(' • ') : null
-}
+const eventsBreadcrumbs = [
+  { name: 'Home', url: 'https://tennesseestartshere.com' },
+  { name: 'Events', url: 'https://tennesseestartshere.com/events' },
+]
 
 export default function EventsPage() {
   const groupedEvents = groupEventsByMonth(eventsData.events)
@@ -145,6 +114,7 @@ export default function EventsPage() {
 
   return (
     <>
+      <JsonLd data={generateBreadcrumbSchema(eventsBreadcrumbs)} />
       <JsonLd data={generateEventsListSchema(eventsData.events)} />
       {/* ============================================
           PAGE HEADER - The Commemorative Year
@@ -210,7 +180,7 @@ export default function EventsPage() {
                           : 'pricing' in item.event &&
                               item.event.pricing &&
                               item.event.pricing.adult
-                            ? `From $${item.event.pricing.adult}`
+                            ? `From ${formatPrice(item.event.pricing.adult)}`
                             : 'Ticketed'}
                       </span>
                     </span>
@@ -264,194 +234,13 @@ export default function EventsPage() {
       </nav>
 
       {/* ============================================
-          THE LIVING CALENDAR - Month by Month
+          FILTER BAR + LIVING CALENDAR (Client Component)
           ============================================ */}
-      <section className={styles['living-calendar']} aria-labelledby="living-calendar-heading">
-        <h2 id="living-calendar-heading" className="sr-only">
-          2026 Events by Month
-        </h2>
-
-        {Object.entries(groupedEvents).map(([month, events]) => {
-          const monthId = month.toLowerCase().replace(/\s+/g, '-')
-          const character = monthCharacters[month] || ''
-
-          return (
-            <article
-              key={month}
-              id={monthId}
-              className={styles['calendar-month']}
-              aria-labelledby={`${monthId}-heading`}
-            >
-              {/* Month header */}
-              <header className={styles['calendar-month-header']}>
-                <div className={styles['calendar-month-title-group']}>
-                  <h3 id={`${monthId}-heading`} className={styles['calendar-month-title']}>
-                    {month.split(' ')[0]}
-                  </h3>
-                  <p className={styles['calendar-month-character']}>{character}</p>
-                </div>
-                <span className={styles['calendar-month-count']}>
-                  {events.length} event{events.length !== 1 ? 's' : ''}
-                </span>
-              </header>
-
-              {/* Events grid */}
-              <div className={styles['calendar-month-events']}>
-                {events.map((event) => {
-                  const duration = getEventDuration(event)
-                  const isMultiDay = duration > 1
-                  const isLecture = event.category === 'lecture'
-                  const isSignature = event.category === 'signature'
-                  const isMilestone = event.type === 'milestone'
-
-                  // Determine card size class
-                  let sizeClass = styles['calendar-event--standard']
-                  if (isMultiDay && duration >= 3) {
-                    sizeClass = styles['calendar-event--large']
-                  } else if (isMultiDay || isSignature) {
-                    sizeClass = styles['calendar-event--medium']
-                  }
-
-                  // Determine type class
-                  let typeClass = ''
-                  if (isSignature) typeClass = styles['calendar-event--signature']
-                  else if (isLecture) typeClass = styles['calendar-event--lecture']
-                  else if (isMilestone) typeClass = styles['calendar-event--milestone']
-                  else if (event.type === 'new') typeClass = styles['calendar-event--new']
-
-                  return (
-                    <article
-                      key={event.id}
-                      id={event.id}
-                      className={`${styles['calendar-event']} ${sizeClass} ${typeClass}`}
-                    >
-                      {/* Date block */}
-                      <div className={styles['calendar-event-date']}>
-                        <time dateTime={event.date} className={styles['calendar-event-date-inner']}>
-                          {isMultiDay ? (
-                            <>
-                              <span className={styles['calendar-event-date-range']}>
-                                {formatDateRange(event.date, event.endDate)}
-                              </span>
-                              <span className={styles['calendar-event-date-duration']}>
-                                {duration} days
-                              </span>
-                            </>
-                          ) : (
-                            <>
-                              <span className={styles['calendar-event-date-month']}>
-                                {new Date(event.date + 'T12:00:00').toLocaleDateString('en-US', {
-                                  month: 'short',
-                                })}
-                              </span>
-                              <span className={styles['calendar-event-date-day']}>
-                                {new Date(event.date + 'T12:00:00').getDate()}
-                              </span>
-                            </>
-                          )}
-                        </time>
-                      </div>
-
-                      {/* Content */}
-                      <div className={styles['calendar-event-content']}>
-                        {/* Badge */}
-                        <span
-                          className={`${styles['calendar-event-badge']} ${styles[`calendar-event-badge--${event.type}`]}`}
-                        >
-                          {event.type === 'new' && 'New for 2026'}
-                          {event.type === 'enhanced' && 'Enhanced'}
-                          {event.type === 'recurring' && 'Annual Tradition'}
-                          {event.type === 'milestone' && 'Milestone'}
-                        </span>
-
-                        {/* Title */}
-                        <h4 className={styles['calendar-event-title']}>{event.title}</h4>
-
-                        {/* Time */}
-                        {event.time && (
-                          <p className={styles['calendar-event-time']}>{event.time}</p>
-                        )}
-
-                        {/* Pricing */}
-                        {!event.requiresTicket ? (
-                          <p className={styles['calendar-event-price']}>
-                            <span className={styles['calendar-event-price-free']}>
-                              Free Event — No Ticket Required
-                            </span>
-                          </p>
-                        ) : (
-                          formatPricingDetails(event) && (
-                            <p className={styles['calendar-event-price']}>
-                              {formatPricingDetails(event)}
-                            </p>
-                          )
-                        )}
-
-                        {/* Speaker (for lectures) */}
-                        {isLecture && 'speaker' in event && event.speaker && (
-                          <p className={styles['calendar-event-speaker']}>
-                            <span className={styles['calendar-event-speaker-name']}>
-                              {event.speaker}
-                            </span>
-                            {'speakerTitle' in event && event.speakerTitle && (
-                              <span className={styles['calendar-event-speaker-title']}>
-                                {event.speakerTitle}
-                              </span>
-                            )}
-                          </p>
-                        )}
-
-                        {/* Description */}
-                        <p className={styles['calendar-event-desc']}>{event.description}</p>
-
-                        {/* Subtle link for July 4 signature event - softened from hard CTA */}
-                        {isSignature && event.id === 'colonial-independence-day' && (
-                          <p className={styles['calendar-event-note']}>
-                            <Link href="/first-250" className={styles['calendar-event-note-link']}>
-                              Learn about the First 250 Registry
-                            </Link>
-                          </p>
-                        )}
-
-                        {/* Event CTA */}
-                        <div className={styles['calendar-event-cta']}>
-                          {event.category === 'digital' ? (
-                            <span className={styles['calendar-event-cta-btn-disabled']}>
-                              Online Event
-                            </span>
-                          ) : event.requiresTicket ? (
-                            <a
-                              href={getTicketUrl(event) || `/events/${event.id}`}
-                              className={styles['calendar-event-cta-btn']}
-                              target={
-                                getTicketUrl(event)?.includes('fareharbor') ? '_blank' : undefined
-                              }
-                              rel={
-                                getTicketUrl(event)?.includes('fareharbor')
-                                  ? 'noopener noreferrer'
-                                  : undefined
-                              }
-                            >
-                              Reserve Your Spot <span aria-hidden="true">→</span>
-                            </a>
-                          ) : (
-                            <Link
-                              href="/visit"
-                              className={styles['calendar-event-cta-btn-secondary']}
-                            >
-                              Plan Your Visit <span aria-hidden="true">→</span>
-                            </Link>
-                          )}
-                        </div>
-                      </div>
-                    </article>
-                  )
-                })}
-              </div>
-            </article>
-          )
-        })}
-      </section>
+      <EventsCalendarClient
+        groupedEvents={groupedEvents}
+        allEvents={eventsData.events}
+        monthCharacters={monthCharacters}
+      />
 
       {/* ============================================
           DAILY TOURS BANNER

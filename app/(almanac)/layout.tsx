@@ -8,10 +8,6 @@ export default function AlmanacLayout({
 }>) {
   return (
     <>
-      {/* Skip link for keyboard navigation */}
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
       <Link
         href="/"
         className="almanac-home-button"

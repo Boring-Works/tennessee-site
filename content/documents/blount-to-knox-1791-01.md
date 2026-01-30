@@ -9,6 +9,7 @@ collection: blount-papers
 author: william-blount
 recipient: henry-knox
 people_mentioned: []
+physical_location: "Main House - Governor's office"
 verification:
   status: verified
   source_count: 2

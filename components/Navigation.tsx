@@ -228,11 +228,6 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Skip link */}
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-
       <header
         className={`${styles.header} ${
           isScrolled || mobileMenuOpen || isLightBackgroundPage

@@ -4,6 +4,8 @@ import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 import { PAGE_METADATA, HOOKS } from '@/lib/copy'
 import { useHours } from '@/lib/hooks/useHours'
+import { JsonLd } from '@/components/JsonLd'
+import { generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: PAGE_METADATA.visit.title,
@@ -131,12 +133,54 @@ const _heritageTrail = [
   },
 ]
 
+// FAQ data for structured data
+const visitFAQs = [
+  {
+    question: "What are Rocky Mount's hours?",
+    answer: `Rocky Mount is open ${siteInfo.hours.formatted.days}, ${siteInfo.hours.formatted.time}. The season runs ${siteInfo.hours.season}. We are closed Sunday through Tuesday.`,
+  },
+  {
+    question: 'How much does admission cost?',
+    answer: `Admission is $${siteInfo.admission.adults.price} for adults, $${siteInfo.admission.seniors.price} for seniors (65+), $${siteInfo.admission.children.price} for children (6-17), and free for children under 6. Admission includes a guided living history tour.`,
+  },
+  {
+    question: 'Is Rocky Mount wheelchair accessible?',
+    answer:
+      'The Museum Gallery is fully ADA compliant with no stairs or inclines. The Historic Site Tour is an outdoor walking tour that includes stairs and uneven terrain, though the main house is accessible via ramp. Please call ahead to discuss specific accessibility needs.',
+  },
+  {
+    question: 'How long does a visit take?',
+    answer:
+      'A guided tour takes approximately 1 hour. Tours depart every hour, with the last tour at 4:00 PM. We recommend arriving at least 15 minutes before your desired tour time.',
+  },
+  {
+    question: 'Can I take photos?',
+    answer:
+      'Yes, photography is welcome throughout the site. We encourage visitors to capture their experience at this historic location.',
+  },
+  {
+    question: 'Is there parking available?',
+    answer:
+      'Yes, free parking is available on site for all visitors. The parking lot is located near the main entrance.',
+  },
+]
+
+const visitBreadcrumbs = [
+  { name: 'Home', url: 'https://tennesseestartshere.com' },
+  { name: 'Plan Your Visit', url: 'https://tennesseestartshere.com/visit' },
+]
+
 export default function VisitPage() {
   const { location, admission, whatToExpect, contact, sisterSites } = siteInfo
   const hours = useHours() // useHours returns a data object, can be used in server component
 
   return (
     <>
+      {/* Breadcrumb Structured Data for Search Navigation */}
+      <JsonLd data={generateBreadcrumbSchema(visitBreadcrumbs)} />
+      {/* FAQ Structured Data for Rich Search Results */}
+      <JsonLd data={generateFAQSchema(visitFAQs)} />
+
       {/* ============================================
           HERO - Heritage Significance
           ============================================ */}

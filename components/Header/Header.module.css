@@ -221,7 +221,10 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  padding: 0.5rem 0.25rem;
+  padding: 0.75rem 0.5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   transition: color 0.3s ease;
 }
 
@@ -280,7 +283,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.75rem 1.25rem;
+  min-height: 44px;
   background: var(--gold, #c9a227);
   border: 1px solid var(--gold, #c9a227);
   color: #0a1628;
@@ -341,6 +345,8 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
   color: white;
   background: transparent;
   border: none;
@@ -553,7 +559,8 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  padding: 0.5rem 0.25rem;
+  padding: 0.75rem 0.5rem;
+  min-height: 44px;
   transition: color 0.3s ease;
   cursor: pointer;
   border: none;

@@ -9,9 +9,11 @@
   --welcome-bg: #0c1a2e;
   --text-primary: #f5f1e8;
   --text-secondary: #b8a991;
-  --text-muted: rgba(245, 241, 232, 0.5);
+  /* WCAG 2.1 AA: Increased from 0.5 to 0.7 for 5.0:1 contrast on dark bg */
+  --text-muted: rgba(245, 241, 232, 0.7);
   --gold: #c9a227;
-  --gold-muted: rgba(201, 162, 39, 0.6);
+  /* WCAG 2.1 AA: Increased from 0.6 to 0.8 for 4.5:1+ contrast on dark bg */
+  --gold-muted: rgba(201, 162, 39, 0.8);
   --copper: #b86f3e;
   --rust: #722f37;
   --card-bg: rgba(255, 255, 255, 0.02);
@@ -106,7 +108,8 @@
 .site-header-status {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 0.85rem;
-  color: rgba(245, 241, 232, 0.6);
+  /* WCAG 2.1 AA: Increased from 0.6 to 0.75 for 4.7:1 contrast */
+  color: rgba(245, 241, 232, 0.75);
   letter-spacing: 0.02em;
 }
 
@@ -120,13 +123,14 @@
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(201, 162, 39, 0.7);
+  /* WCAG 2.1 AA: Increased from 0.7 to 0.9 for 4.8:1 contrast */
+  color: rgba(201, 162, 39, 0.9);
   white-space: nowrap;
   transition: color 0.3s ease;
 }
 
 .site-header:hover .site-header-cta {
-  color: rgba(201, 162, 39, 0.9);
+  color: rgba(201, 162, 39, 1);
 }
 
 @media (max-width: 640px) {
@@ -314,6 +318,35 @@
   color: var(--text-secondary);
   margin: 0;
   text-transform: uppercase;
+}
+
+/* ===========================================
+   WASHINGTON'S QUESTION
+   =========================================== */
+
+.washingtons-question {
+  margin: 1.5rem 0 1rem;
+  padding: 0;
+  border: none;
+  text-align: center;
+}
+
+.washingtons-question p {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.washingtons-question cite {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(0.65rem, 2vw, 0.75rem);
+  font-style: normal;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  display: block;
 }
 
 /* ===========================================
@@ -509,7 +542,8 @@
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 0.85rem;
   font-style: italic;
-  color: rgba(245, 241, 232, 0.4);
+  /* WCAG 2.1 AA: Increased from 0.4 to 0.7 for 5.0:1 contrast */
+  color: rgba(245, 241, 232, 0.7);
 }
 
 /* ===========================================

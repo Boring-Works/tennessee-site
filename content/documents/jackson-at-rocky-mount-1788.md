@@ -1,11 +1,10 @@
 ---
 id: jackson-at-rocky-mount-1788
 title: "Andrew Jackson's Stay at Rocky Mount"
-date: '1788-04-00'
+date: '1788-04-01'
 content_type: testimony
 source: 'Tennessee Encyclopedia, Rocky Mount State Historic Site, Andrew Jackson Papers'
 source_url: 'https://tennesseeencyclopedia.net/entries/rocky-mount/'
-collection: blount-papers
 people_mentioned:
   - william-cobb
 verification:

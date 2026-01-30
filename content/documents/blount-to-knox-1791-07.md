@@ -12,6 +12,7 @@ people_mentioned:
   - hanging-maw
   - bloody-fellow
   - john-watts
+physical_location: "Main House - Governor's office"
 verification:
   status: verified
   source_count: 3

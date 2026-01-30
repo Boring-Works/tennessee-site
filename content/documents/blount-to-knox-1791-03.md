@@ -11,6 +11,7 @@ recipient: henry-knox
 people_mentioned:
   - hanging-maw
   - bloody-fellow
+physical_location: "Main House - Governor's office"
 verification:
   status: verified
   source_count: 2

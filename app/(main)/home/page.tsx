@@ -5,14 +5,15 @@ import { MapPin, Clock, Ticket, GraduationCap, Users, BookOpen, Heart } from 'lu
 import { AnimatedCounter } from '@/components/home/AnimatedCounter'
 import { ScrollReveal } from '@/components/home/ScrollReveal'
 import { OriginalSevenMap } from '@/components/OriginalSevenMap'
+import { DocumentTeaser } from '@/components/evidence'
 import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
 import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
 
 export const metadata: Metadata = {
-  title: 'Tennessee Starts Here | Rocky Mount State Historic Site',
+  title: "The Constitution's First Test | Rocky Mount State Historic Site",
   description:
-    "Visit where Tennessee's government began. Rocky Mount served as the first capital of the Southwest Territory (1790-1792). America 250 commemorative events in 2026.",
+    'In 1790, this ground became the first seat of Constitutional governance west of the Appalachians. The Constitution had to work here—or American expansion would fail. America 250 commemorative events in 2026.',
 }
 
 // Static data
@@ -90,69 +91,76 @@ export default function HomePage() {
 
         {/* Hero Content */}
         <div className="relative z-10 flex-1 flex items-center pt-28 pb-16 px-6 lg:px-20">
-          <div className="w-full max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-              {/* Left Column - 60% */}
-              <div className="lg:col-span-3 text-center lg:text-left space-y-6">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-accent/30 rounded-sm animate-fade-in">
-                  <span className="text-base">🇺🇸</span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
-                    {hero.badge}
-                  </span>
-                </div>
-
-                {/* Eyebrow */}
-                <p className="text-[11px] uppercase tracking-[0.3em] text-accent/80 font-medium animate-fade-in animation-delay-100">
-                  First Constitutional Federal Seat West of the Appalachians
-                </p>
-
-                {/* Headline */}
-                <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight animate-fade-in animation-delay-200">
-                  {hero.headline}
-                </h1>
-
-                {/* Subhead */}
-                <p className="font-serif text-xl sm:text-2xl text-white/90 leading-relaxed max-w-xl animate-fade-in animation-delay-300">
-                  {hero.subhead}
-                </p>
-
-                {/* Social Proof */}
-                <div className="flex items-center justify-center lg:justify-start gap-4 animate-fade-in animation-delay-350">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-accent text-sm">★★★★★</span>
-                    <span className="text-white/50 text-xs">TripAdvisor</span>
+          <div className="w-full max-w-7xl mx-auto proclamation-frame">
+            <div className="proclamation-frame-inner">
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+                {/* Left Column - 60% */}
+                <div className="lg:col-span-3 text-center lg:text-left space-y-6">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-accent/30 rounded-sm animate-fade-in">
+                    <span className="text-base">🇺🇸</span>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
+                      {hero.badge}
+                    </span>
                   </div>
-                  <span className="text-white/20">·</span>
-                  <span className="text-white/60 text-xs">50,000+ visitors annually</span>
-                </div>
 
-                {/* CTA */}
-                <div className="animate-fade-in animation-delay-400">
-                  <Link
-                    href="/visit"
-                    className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-accent/35"
-                  >
-                    {BUTTONS.primary}
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Column - 40% - Commemorative Card */}
-              <div className="lg:col-span-2 flex justify-center animate-slide-in-right animation-delay-500">
-                <div className="w-full max-w-sm bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-sm">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-accent/80 mb-4">
-                    The Commemorative Year
+                  {/* Eyebrow */}
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-accent/80 font-medium animate-fade-in animation-delay-100">
+                    First Seat of Constitutional Governance West of the Appalachians
                   </p>
-                  <p className="font-serif text-2xl text-white mb-2">Tennessee turns 230.</p>
-                  <p className="font-serif text-2xl text-white mb-6">America turns 250.</p>
-                  <Link
-                    href="/first-250"
-                    className="inline-flex items-center gap-2 text-accent text-sm uppercase tracking-wider hover:text-white transition-colors"
-                  >
-                    Join the First 250
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
-                  </Link>
+
+                  {/* Headline */}
+                  <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight animate-fade-in animation-delay-200">
+                    {hero.headline}
+                  </h1>
+
+                  {/* Subhead */}
+                  <p className="font-serif text-xl sm:text-2xl text-white/90 leading-relaxed max-w-xl animate-fade-in animation-delay-300">
+                    {hero.subhead}
+                  </p>
+
+                  {/* Supporting */}
+                  <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-lg animate-fade-in animation-delay-350">
+                    {hero.supporting}
+                  </p>
+
+                  {/* Social Proof */}
+                  <div className="flex items-center justify-center lg:justify-start gap-4 animate-fade-in animation-delay-350">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-accent text-sm">★★★★★</span>
+                      <span className="text-white/50 text-xs">TripAdvisor</span>
+                    </div>
+                    <span className="text-white/20">·</span>
+                    <span className="text-white/60 text-xs">50,000+ visitors annually</span>
+                  </div>
+
+                  {/* CTA */}
+                  <div className="animate-fade-in animation-delay-400">
+                    <Link
+                      href="/visit"
+                      className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-accent/35"
+                    >
+                      {BUTTONS.primary}
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right Column - 40% - Commemorative Card */}
+                <div className="lg:col-span-2 flex justify-center animate-slide-in-right animation-delay-500">
+                  <div className="w-full max-w-sm bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-sm">
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-accent/80 mb-4">
+                      The Commemorative Year
+                    </p>
+                    <p className="font-serif text-2xl text-white mb-2">Tennessee turns 230.</p>
+                    <p className="font-serif text-2xl text-white mb-6">America turns 250.</p>
+                    <Link
+                      href="/first-250"
+                      className="inline-flex items-center gap-2 text-accent text-sm uppercase tracking-wider hover:text-white transition-colors"
+                    >
+                      Join the First 250
+                      <span className="transition-transform group-hover:translate-x-1">→</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -176,6 +184,29 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* ════════════════════════════════════════════════════════════════════
+          QUICK FACTS BAR
+          ════════════════════════════════════════════════════════════════════ */}
+      <div className="bg-cream dark:bg-primary/95 border-y border-secondary/10 dark:border-white/10 py-3">
+        <div className="max-w-5xl mx-auto px-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-text-light dark:text-white/70">
+          <span className="flex items-center gap-2">
+            <Clock className="w-4 h-4 text-accent" />
+            {siteInfo.hours.formatted.short}
+          </span>
+          <span className="hidden sm:block text-secondary/30 dark:text-white/30">|</span>
+          <span className="flex items-center gap-2">
+            <Ticket className="w-4 h-4 text-accent" />
+            Adults ${siteInfo.admission.adults.price}
+          </span>
+          <span className="hidden sm:block text-secondary/30 dark:text-white/30">|</span>
+          <span className="flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-accent" />
+            {siteInfo.location.drivingDistances[0].time} from{' '}
+            {siteInfo.location.drivingDistances[0].city.split(',')[0]}
+          </span>
+        </div>
+      </div>
 
       {/* ════════════════════════════════════════════════════════════════════
           ORIGINAL SEVEN COUNTIES
@@ -361,6 +392,13 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+      </ScrollReveal>
+
+      {/* ════════════════════════════════════════════════════════════════════
+          SEE THE EVIDENCE SECTION
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <DocumentTeaser />
       </ScrollReveal>
 
       {/* ════════════════════════════════════════════════════════════════════

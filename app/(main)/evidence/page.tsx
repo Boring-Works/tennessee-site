@@ -6,6 +6,8 @@ import { CardCatalog } from './CardCatalog'
 import { MobileGuide } from '@/components/evidence/MobileGuide'
 import { EntryRoom, Claim } from '@/components/evidence'
 import { Compass } from '@/components/ui/Compass'
+import { JsonLd } from '@/components/JsonLd'
+import { generateBreadcrumbSchema } from '@/lib/seo'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -203,9 +205,17 @@ function TimelineEvent({
   )
 }
 
+const evidenceBreadcrumbs = [
+  { name: 'Home', url: 'https://tennesseestartshere.com' },
+  { name: 'Evidence Room', url: 'https://tennesseestartshere.com/evidence' },
+]
+
 export default function EvidencePage() {
   return (
     <div className={styles.evidencePage}>
+      {/* Breadcrumb Structured Data for Search Navigation */}
+      <JsonLd data={generateBreadcrumbSchema(evidenceBreadcrumbs)} />
+
       {/* Card Catalog Navigation - Fixed on desktop */}
       <CardCatalog />
 

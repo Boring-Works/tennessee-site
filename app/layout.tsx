@@ -1,15 +1,29 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Cormorant_Garamond, Great_Vibes, Cinzel } from 'next/font/google'
+import {
+  Playfair_Display,
+  Cormorant_Garamond,
+  Great_Vibes,
+  Cinzel,
+  EB_Garamond,
+} from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { DEFAULT_METADATA } from '@/lib/copy'
+import { SkipLinks } from '@/components/SkipLinks'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-playfair',
   weight: ['400', '700'], // Reduced from 6 weights to 2 (50% reduction)
+})
+
+const ebGaramond = EB_Garamond({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-eb-garamond',
+  weight: ['400', '500', '600'],
 })
 
 const cormorant = Cormorant_Garamond({
@@ -77,9 +91,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} antialiased`}
+      className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} ${ebGaramond.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col">
+        <SkipLinks />
         {children}
         <Analytics />
         <SpeedInsights />

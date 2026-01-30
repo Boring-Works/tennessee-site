@@ -9,6 +9,7 @@ collection: treaties
 author: william-blount
 people_mentioned:
   [hanging-maw, bloody-fellow, doublehead, john-watts, black-fox, standing-turkey, the-boots]
+physical_location: 'Main House - Where negotiations were coordinated'
 verification:
   status: verified
   source_count: 3

@@ -17,6 +17,7 @@ export {
   HISTORICAL_FIGURES,
   STAFF_SCRIPTS,
   FIRST_250_CAMPAIGN,
+  DISCOVERY_MOMENTS,
 } from './narratives'
 
 // Metadata

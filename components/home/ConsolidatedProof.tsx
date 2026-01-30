@@ -175,9 +175,9 @@ export function ConsolidatedProof() {
                     <div
                       className="absolute -top-3 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
                       style={{
-                        background: 'linear-gradient(135deg, #c9a227 0%, #8b6914 100%)',
+                        background: 'linear-gradient(135deg, var(--gold-primary) 0%, #8b6914 100%)',
                         color: '#fff',
-                        boxShadow: '0 2px 8px rgba(201, 162, 39, 0.4)',
+                        boxShadow: '0 2px 8px var(--gold-shimmer)',
                       }}
                     >
                       {figure.badge}
@@ -315,7 +315,7 @@ export function ConsolidatedProof() {
               <p
                 className="font-serif text-xl md:text-2xl text-accent font-semibold"
                 style={{
-                  textShadow: '0 0 30px rgba(201, 162, 39, 0.2)',
+                  textShadow: '0 0 30px var(--gold-shimmer)',
                 }}
               >
                 The State started here.
@@ -453,8 +453,7 @@ export function ConsolidatedProof() {
               <div
                 className="relative bg-white/[0.03] border-2 border-accent/40 p-8 transition-all duration-300 hover:border-accent/60 hover:bg-white/[0.05]"
                 style={{
-                  boxShadow:
-                    'inset 0 1px 0 rgba(201, 162, 39, 0.1), 0 0 40px rgba(201, 162, 39, 0.05)',
+                  boxShadow: 'inset 0 1px 0 var(--gold-shimmer), 0 0 40px var(--gold-shimmer)',
                 }}
               >
                 {/* Corner accents - gold */}
@@ -493,7 +492,7 @@ export function ConsolidatedProof() {
                       className="float-left text-5xl font-serif text-accent mr-2 -mt-1"
                       style={{
                         lineHeight: '0.8',
-                        textShadow: '0 0 20px rgba(201, 162, 39, 0.3)',
+                        textShadow: '0 0 20px var(--gold-shimmer)',
                       }}
                     >
                       I
@@ -559,7 +558,7 @@ export function ConsolidatedProof() {
               className="relative p-8 md:p-10 border border-accent/30 rounded"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%)',
+                  'linear-gradient(135deg, var(--gold-shimmer) 0%, var(--gold-shimmer) 100%)',
               }}
             >
               {/* Info icon */}
@@ -708,9 +707,9 @@ export function ConsolidatedProof() {
                 <div
                   className={`absolute left-0 top-0 h-full rounded-full transition-all duration-1000 delay-500 ${distinctionVisible ? 'w-[8%]' : 'w-0'}`}
                   style={{
-                    background: 'linear-gradient(90deg, #c9a227 0%, #8b6914 100%)',
+                    background: 'linear-gradient(90deg, var(--gold-primary) 0%, #8b6914 100%)',
                     boxShadow: distinctionVisible
-                      ? '0 0 20px rgba(201, 162, 39, 0.5), 0 0 40px rgba(201, 162, 39, 0.2)'
+                      ? '0 0 20px var(--gold-shimmer), 0 0 40px var(--gold-shimmer)'
                       : 'none',
                   }}
                 />
@@ -745,8 +744,7 @@ export function ConsolidatedProof() {
               <div
                 className="px-4 py-2 border-2 border-accent/40 rounded"
                 style={{
-                  background:
-                    'linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, transparent 100%)',
+                  background: 'linear-gradient(135deg, var(--gold-shimmer) 0%, transparent 100%)',
                 }}
               >
                 <span className="text-xs font-bold uppercase tracking-wider text-accent">
@@ -765,7 +763,7 @@ export function ConsolidatedProof() {
               <span
                 className="font-serif font-bold text-xl text-accent"
                 style={{
-                  textShadow: '0 0 20px rgba(201, 162, 39, 0.3)',
+                  textShadow: '0 0 20px var(--gold-shimmer)',
                 }}
               >
                 1790–1792

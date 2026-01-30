@@ -97,7 +97,7 @@ const HeroSection = memo(function HeroSection() {
               <div className="opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
                 <Link
                   href="/visit"
-                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
+                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[var(--gold-hover)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,162,39,0.35)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
                   aria-label={`${BUTTONS.primary} - Plan your visit to Rocky Mount`}
                 >
                   {BUTTONS.primary}

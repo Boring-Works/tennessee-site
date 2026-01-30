@@ -23,7 +23,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   font-weight: 500;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   margin-bottom: 0.5rem;
 }
 
@@ -79,9 +79,9 @@
 }
 
 .documentsViewButton.active {
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   background: rgba(212, 168, 83, 0.1);
-  border-color: var(--gold-leaf, #d4a853);
+  border-color: var(--gold-leaf, var(--gold-primary));
 }
 
 /* List View */
@@ -100,7 +100,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   margin-bottom: 0.5rem;
 }
 
@@ -177,7 +177,7 @@
 
 .documentsItemPassages {
   font-size: 0.75rem;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
 }
 
 /* Grid View */
@@ -215,7 +215,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   margin: 0 0 auto;
 }
 

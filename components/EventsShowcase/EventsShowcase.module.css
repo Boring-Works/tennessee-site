@@ -17,17 +17,17 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(201, 162, 39, 0.4) 1px, transparent 1px),
+    radial-gradient(1px 1px at 10% 20%, var(--gold-shimmer) 1px, transparent 1px),
     radial-gradient(1.5px 1.5px at 25% 60%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-    radial-gradient(1px 1px at 40% 15%, rgba(201, 162, 39, 0.3) 1px, transparent 1px),
+    radial-gradient(1px 1px at 40% 15%, var(--gold-shimmer) 1px, transparent 1px),
     radial-gradient(2px 2px at 55% 45%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-    radial-gradient(1px 1px at 70% 80%, rgba(201, 162, 39, 0.35) 1px, transparent 1px),
+    radial-gradient(1px 1px at 70% 80%, var(--gold-shimmer) 1px, transparent 1px),
     radial-gradient(1.5px 1.5px at 85% 25%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-    radial-gradient(1px 1px at 15% 75%, rgba(201, 162, 39, 0.25) 1px, transparent 1px),
+    radial-gradient(1px 1px at 15% 75%, var(--gold-shimmer) 1px, transparent 1px),
     radial-gradient(1px 1px at 60% 10%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-    radial-gradient(1.5px 1.5px at 90% 70%, rgba(201, 162, 39, 0.3) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 90% 70%, var(--gold-shimmer) 1px, transparent 1px),
     radial-gradient(1px 1px at 35% 90%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-    radial-gradient(2px 2px at 5% 50%, rgba(201, 162, 39, 0.2) 1px, transparent 1px),
+    radial-gradient(2px 2px at 5% 50%, var(--gold-shimmer) 1px, transparent 1px),
     radial-gradient(1px 1px at 75% 35%, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
   background-size: 100% 100%;
   opacity: 0.8;
@@ -133,8 +133,8 @@
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(201, 162, 39, 0.3) 20%,
-      rgba(201, 162, 39, 0.3) 80%,
+      var(--gold-shimmer) 20%,
+      var(--gold-shimmer) 80%,
       transparent 100%
     );
   }
@@ -149,8 +149,8 @@
 /* Featured Event Card with ribbon and calendar */
 .showcase-featured {
   position: relative;
-  background: rgba(201, 162, 39, 0.08);
-  border: 1px solid rgba(201, 162, 39, 0.25);
+  background: var(--gold-shimmer);
+  border: 1px solid var(--gold-shimmer);
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -159,11 +159,9 @@
 }
 
 .showcase-featured:hover {
-  background: rgba(201, 162, 39, 0.12);
+  background: var(--gold-shimmer);
   transform: translateY(-4px);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(201, 162, 39, 0.1);
+  box-shadow: var(--shadow-lg), var(--shadow-gold-lg);
 }
 
 /* Ribbon badge - wraps around corner */
@@ -191,7 +189,7 @@
   color: var(--primary);
   background: var(--accent);
   transform: rotate(45deg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-xs);
 }
 
 /* Calendar-style date element */
@@ -200,9 +198,7 @@
   width: 80px;
   background: white;
   text-align: center;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .showcase-calendar-month {
@@ -298,9 +294,7 @@
 .showcase-category:hover {
   background: rgba(255, 255, 255, 0.08);
   transform: translateY(-4px);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.25),
-    0 0 30px rgba(201, 162, 39, 0.08);
+  box-shadow: var(--shadow-lg), var(--shadow-gold-sm);
 }
 
 /* Category icons */
@@ -435,7 +429,7 @@
 }
 
 .showcase-stat-divider {
-  color: rgba(201, 162, 39, 0.4);
+  color: var(--gold-shimmer);
   font-size: 0.6rem;
 }
 
@@ -476,5 +470,5 @@
   background: white;
   border-color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
 }

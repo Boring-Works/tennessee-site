@@ -15,7 +15,7 @@
   padding: 1.5rem;
   background: rgba(10, 22, 40, 0.6);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
 }
 
@@ -33,7 +33,7 @@
   position: absolute;
   width: 1rem;
   height: 1rem;
-  border-color: rgba(201, 162, 39, 0.5);
+  border-color: var(--gold-shimmer);
   border-style: solid;
   border-width: 0;
   pointer-events: none;
@@ -83,7 +83,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #c9a227;
+  color: var(--gold-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -155,12 +155,12 @@
 }
 
 .event:hover {
-  background: rgba(201, 162, 39, 0.08);
+  background: var(--gold-shimmer);
 }
 
 .eventHighlight {
-  background: rgba(201, 162, 39, 0.1);
-  border: 1px solid rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
+  border: 1px solid var(--gold-shimmer);
 }
 
 .eventIcon {
@@ -193,12 +193,12 @@
 .eventDate {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 0.75rem;
-  color: rgba(201, 162, 39, 0.8);
+  color: var(--gold-shimmer);
 }
 
 .arrow {
   display: none;
-  color: rgba(201, 162, 39, 0.5);
+  color: var(--gold-shimmer);
   font-size: 1rem;
 }
 
@@ -251,7 +251,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #c9a227;
+  color: var(--gold-primary);
 }
 
 @media (min-width: 640px) {
@@ -311,11 +311,11 @@
   flex: 1;
   max-width: 4rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
 }
 
 .dividerOrnament {
-  color: #c9a227;
+  color: var(--gold-primary);
   font-size: 0.75rem;
   opacity: 0.7;
 }
@@ -335,7 +335,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(201, 162, 39, 0.8);
+  color: var(--gold-shimmer);
   margin-bottom: 0.25rem;
 }
 
@@ -378,9 +378,9 @@
   gap: 0.5rem;
   padding: 0.625rem 1.25rem;
   background: transparent;
-  border: 1px solid #c9a227;
+  border: 1px solid var(--gold-primary);
   border-radius: 2px;
-  color: #c9a227;
+  color: var(--gold-primary);
   font-family: var(--font-cinzel), 'Cinzel', serif;
   font-size: 0.6875rem;
   font-weight: 600;
@@ -391,12 +391,12 @@
 }
 
 .reunionCta:hover {
-  background: #c9a227;
+  background: var(--gold-primary);
   color: #0a1628;
 }
 
 .reunionCta:focus-visible {
-  outline: 2px solid #c9a227;
+  outline: 2px solid var(--gold-primary);
   outline-offset: 2px;
 }
 

@@ -171,7 +171,7 @@
   font-weight: 300;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(201, 162, 39, 0.8);
+  color: var(--gold-shimmer);
   white-space: nowrap;
 }
 
@@ -428,7 +428,7 @@
   max-width: 24rem;
   height: 100%;
   background: var(--nav-bg-mobile-drawer);
-  border-left: 1px solid rgba(201, 162, 39, 0.2);
+  border-left: 1px solid var(--gold-shimmer);
   box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
   transition: transform var(--nav-duration-open) var(--nav-ease-spring);
@@ -512,7 +512,7 @@
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 2px;
-  box-shadow: 0 4px 20px rgba(201, 162, 39, 0.3);
+  box-shadow: 0 4px 20px var(--gold-shimmer);
   opacity: 0;
   transform: translateY(2rem);
   transition: all var(--nav-duration-open) var(--nav-ease-spring);
@@ -537,7 +537,7 @@
 .mobile-separator {
   width: 100%;
   height: 1px;
-  background: rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
   margin: 2rem 0 1.5rem;
 }
 
@@ -622,11 +622,11 @@
   min-width: 220px;
   background: rgba(10, 15, 20, 0.98);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(201, 162, 39, 0.2);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(201, 162, 39, 0.1);
+    0 0 0 1px var(--gold-shimmer);
   margin-top: 0.5rem;
   padding: 0.75rem 0;
   opacity: 0;
@@ -667,7 +667,7 @@
 }
 
 .dropdown-item:hover {
-  background: rgba(201, 162, 39, 0.08);
+  background: var(--gold-shimmer);
   color: var(--gold, var(--nav-gold));
   padding-left: 1.5rem;
 }
@@ -675,12 +675,12 @@
 .dropdown-item:focus-visible {
   outline: 2px solid var(--gold, var(--nav-gold));
   outline-offset: -2px;
-  background: rgba(201, 162, 39, 0.12);
+  background: var(--gold-shimmer);
 }
 
 .dropdown-item--active {
   color: var(--gold, var(--nav-gold));
-  background: rgba(201, 162, 39, 0.05);
+  background: var(--gold-shimmer);
 }
 
 .dropdown-item--active::before {
@@ -697,7 +697,7 @@
 /* Dropdown separator */
 .dropdown-separator {
   height: 1px;
-  background: rgba(201, 162, 39, 0.1);
+  background: var(--gold-shimmer);
   margin: 0.5rem 0;
 }
 

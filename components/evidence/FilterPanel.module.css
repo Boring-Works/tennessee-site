@@ -33,7 +33,7 @@
   padding: 0.125rem 0.5rem;
   font-size: 0.75rem;
   background: rgba(212, 168, 83, 0.2);
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   border-radius: 0.125rem;
 }
 
@@ -88,8 +88,8 @@
 
 .filterOptionActive {
   background: rgba(212, 168, 83, 0.15);
-  border-color: var(--gold-leaf, #d4a853);
-  color: var(--gold-leaf, #d4a853);
+  border-color: var(--gold-leaf, var(--gold-primary));
+  color: var(--gold-leaf, var(--gold-primary));
 }
 
 .clearButton {

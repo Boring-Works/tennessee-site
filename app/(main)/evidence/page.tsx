@@ -216,7 +216,7 @@ export default function EvidencePage() {
       {/* Skip to content link for keyboard navigation */}
       <a
         href="#blount-letter"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#c9a227] focus:text-[#2a1f1a] focus:rounded-sm focus:font-serif focus:text-sm"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--gold-primary)] focus:text-[#2a1f1a] focus:rounded-sm focus:font-serif focus:text-sm"
       >
         Skip to Evidence Room collections
       </a>

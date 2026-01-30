@@ -92,7 +92,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #d4af37;
+  color: var(--gold-hover);
   background: rgba(212, 175, 55, 0.15);
   padding: 0.375rem 0.875rem;
   border-radius: 2px;
@@ -118,7 +118,7 @@
   display: inline-block;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #d4af37;
+  color: var(--gold-hover);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -237,7 +237,7 @@
 }
 
 .tier-badge--value {
-  background: #d4af37;
+  background: var(--gold-hover);
   color: #1a1a1a;
 }
 

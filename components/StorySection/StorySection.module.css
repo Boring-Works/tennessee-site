@@ -29,7 +29,7 @@
 .story-chapter-rule {
   width: 60px;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.4) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--gold-shimmer) 50%, transparent 100%);
 }
 
 .story-chapter-number {
@@ -219,7 +219,7 @@
     180deg,
     var(--accent) 0%,
     var(--accent) 60%,
-    rgba(201, 162, 39, 0.3) 100%
+    var(--gold-shimmer) 100%
   );
   transition: height 1.5s ease-out;
   transition-delay: 0.3s;
@@ -294,7 +294,7 @@
   border: 3px solid var(--cream);
   box-shadow:
     0 0 0 2px var(--accent),
-    0 2px 8px rgba(201, 162, 39, 0.4);
+    0 2px 8px var(--gold-shimmer);
 }
 
 @media (min-width: 768px) {
@@ -382,16 +382,16 @@
     url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.02'/%3E%3C/svg%3E"),
     linear-gradient(
       135deg,
-      rgba(201, 162, 39, 0.1) 0%,
+      var(--gold-shimmer) 0%,
       #fffdf8 30%,
       #fefcf5 70%,
-      rgba(201, 162, 39, 0.05) 100%
+      var(--gold-shimmer) 100%
     );
   padding: 2rem 1.5rem;
-  border: 1px solid rgba(201, 162, 39, 0.2);
+  border: 1px solid var(--gold-shimmer);
   box-shadow:
     0 2px 12px rgba(0, 0, 0, 0.08),
-    inset 0 0 40px rgba(201, 162, 39, 0.03);
+    inset 0 0 40px var(--gold-shimmer);
 }
 
 .story-milestone-hero .story-milestone-year {

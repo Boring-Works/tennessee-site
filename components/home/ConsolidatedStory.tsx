@@ -94,9 +94,9 @@ export function ConsolidatedStory() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 162, 39, 0.03) 0%, transparent 50%),
+            radial-gradient(ellipse 80% 50% at 50% 0%, var(--gold-shimmer) 0%, transparent 50%),
             radial-gradient(ellipse 60% 40% at 30% 80%, rgba(139, 69, 19, 0.05) 0%, transparent 40%),
-            radial-gradient(ellipse 60% 40% at 70% 60%, rgba(201, 162, 39, 0.02) 0%, transparent 40%)
+            radial-gradient(ellipse 60% 40% at 70% 60%, var(--gold-shimmer) 0%, transparent 40%)
           `,
         }}
         aria-hidden="true"
@@ -124,7 +124,7 @@ export function ConsolidatedStory() {
             <span
               className="float-left text-[3em] leading-[0.8] mr-3 mt-1 font-serif font-bold text-accent/80"
               style={{
-                textShadow: '0 0 40px rgba(201, 162, 39, 0.3)',
+                textShadow: '0 0 40px var(--gold-shimmer)',
               }}
             >
               B
@@ -134,7 +134,7 @@ export function ConsolidatedStory() {
             <span
               className="text-accent font-semibold"
               style={{
-                textShadow: '0 0 60px rgba(201, 162, 39, 0.2)',
+                textShadow: '0 0 60px var(--gold-shimmer)',
               }}
             >
               there was this ground.
@@ -247,7 +247,7 @@ export function ConsolidatedStory() {
             <p
               className="font-serif text-[clamp(1.4rem,3.5vw,1.75rem)] text-accent font-semibold"
               style={{
-                textShadow: '0 0 30px rgba(201, 162, 39, 0.25)',
+                textShadow: '0 0 30px var(--gold-shimmer)',
               }}
             >
               Rocky Mount provided the answer.
@@ -273,11 +273,11 @@ export function ConsolidatedStory() {
               style={{
                 background: `linear-gradient(180deg,
                   transparent 0%,
-                  rgba(201, 162, 39, 0.4) 10%,
-                  rgba(201, 162, 39, 0.4) 90%,
+                  var(--gold-shimmer) 10%,
+                  var(--gold-shimmer) 90%,
                   transparent 100%
                 )`,
-                boxShadow: '0 0 20px rgba(201, 162, 39, 0.2)',
+                boxShadow: '0 0 20px var(--gold-shimmer)',
               }}
               aria-hidden="true"
             />
@@ -296,12 +296,12 @@ export function ConsolidatedStory() {
                     className="absolute left-0 md:left-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transform md:-translate-x-1/2 z-10"
                     style={{
                       background: `radial-gradient(circle, #0d1f35 0%, #0a1628 100%)`,
-                      border: '2px solid rgba(201, 162, 39, 0.5)',
+                      border: '2px solid var(--gold-shimmer)',
                       boxShadow: timelineVisible[index]
                         ? `
-                          0 0 20px rgba(201, 162, 39, 0.3),
-                          0 0 40px rgba(201, 162, 39, 0.1),
-                          inset 0 0 20px rgba(201, 162, 39, 0.1)
+                          0 0 20px var(--gold-shimmer),
+                          0 0 40px var(--gold-shimmer),
+                          inset 0 0 20px var(--gold-shimmer)
                         `
                         : 'none',
                       transition: 'box-shadow 0.5s ease',
@@ -372,7 +372,7 @@ export function ConsolidatedStory() {
           style={{
             background: `
               radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13, 31, 53, 0.8) 0%, rgba(5, 13, 24, 1) 70%),
-              radial-gradient(ellipse 50% 30% at 50% 50%, rgba(201, 162, 39, 0.05) 0%, transparent 50%)
+              radial-gradient(ellipse 50% 30% at 50% 50%, var(--gold-shimmer) 0%, transparent 50%)
             `,
           }}
           aria-hidden="true"
@@ -411,8 +411,8 @@ export function ConsolidatedStory() {
                     className="text-accent italic"
                     style={{
                       textShadow: `
-                        0 0 40px rgba(201, 162, 39, 0.4),
-                        0 0 80px rgba(201, 162, 39, 0.2)
+                        0 0 40px var(--gold-shimmer),
+                        0 0 80px var(--gold-shimmer)
                       `,
                     }}
                   >

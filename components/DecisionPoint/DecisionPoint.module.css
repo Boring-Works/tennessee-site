@@ -192,7 +192,7 @@
 
 .decision-cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5);
+  box-shadow: var(--shadow-gold-lg);
 }
 
 .decision-cta-primary:hover::before {

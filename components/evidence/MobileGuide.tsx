@@ -159,10 +159,10 @@ export function MobileGuide({ sections }: MobileGuideProps) {
             id="mobile-guide-menu"
             role="navigation"
             aria-label="Evidence Room navigation menu"
-            className="bg-[#faf7f0] border border-[#c9a227]/30 rounded-sm shadow-lg overflow-hidden"
+            className="bg-[#faf7f0] border border-[var(--gold-primary)]/30 rounded-sm shadow-lg overflow-hidden"
           >
-            <div className="px-3 py-2 border-b border-[#c9a227]/20 flex items-center justify-between">
-              <span className="text-xs font-serif text-[#c9a227] uppercase tracking-wider">
+            <div className="px-3 py-2 border-b border-[var(--gold-primary)]/20 flex items-center justify-between">
+              <span className="text-xs font-serif text-[var(--gold-primary)] uppercase tracking-wider">
                 Guide
               </span>
               <button
@@ -171,7 +171,7 @@ export function MobileGuide({ sections }: MobileGuideProps) {
                   setIsOpen(false)
                   toggleButtonRef.current?.focus()
                 }}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#3d3229]/50 hover:text-[#3d3229] -m-2 rounded transition-colors focus-visible:outline-2 focus-visible:outline-[#c9a227] focus-visible:outline-offset-2"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#3d3229]/50 hover:text-[#3d3229] -m-2 rounded transition-colors focus-visible:outline-2 focus-visible:outline-[var(--gold-primary)] focus-visible:outline-offset-2"
                 aria-label="Close guide"
               >
                 <svg
@@ -194,7 +194,7 @@ export function MobileGuide({ sections }: MobileGuideProps) {
                     onClick={() => handleSectionClick(section.id)}
                     className={`w-full text-left px-3 py-2 text-sm font-serif transition-colors flex items-center gap-2 ${
                       activeSection === section.id
-                        ? 'text-[#c9a227] bg-[#c9a227]/10'
+                        ? 'text-[var(--gold-primary)] bg-[var(--gold-primary)]/10'
                         : 'text-[#3d3229] hover:bg-[#3d3229]/5'
                     }`}
                     aria-current={activeSection === section.id ? 'true' : undefined}
@@ -202,7 +202,9 @@ export function MobileGuide({ sections }: MobileGuideProps) {
                   >
                     <span
                       className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                        activeSection === section.id ? 'bg-[#c9a227]' : 'bg-[#3d3229]/20'
+                        activeSection === section.id
+                          ? 'bg-[var(--gold-primary)]'
+                          : 'bg-[#3d3229]/20'
                       }`}
                     />
                     {section.label}
@@ -210,10 +212,10 @@ export function MobileGuide({ sections }: MobileGuideProps) {
                 </li>
               ))}
             </ul>
-            <div className="px-3 py-2 border-t border-[#c9a227]/20">
+            <div className="px-3 py-2 border-t border-[var(--gold-primary)]/20">
               <Link
                 href="/evidence/documents"
-                className="flex items-center gap-2 text-xs text-[#8b4513] hover:text-[#c9a227] transition-colors"
+                className="flex items-center gap-2 text-xs text-[#8b4513] hover:text-[var(--gold-primary)] transition-colors"
               >
                 <svg
                   width="14"
@@ -239,8 +241,8 @@ export function MobileGuide({ sections }: MobileGuideProps) {
           onClick={() => setIsOpen(!isOpen)}
           className={`w-12 h-12 rounded-sm shadow-lg transition-all duration-300 flex items-center justify-center ${
             isOpen
-              ? 'bg-[#c9a227] text-[#2a1f1a]'
-              : 'bg-[#2a1f1a] text-[#c9a227] border border-[#c9a227]/50'
+              ? 'bg-[var(--gold-primary)] text-[#2a1f1a]'
+              : 'bg-[#2a1f1a] text-[var(--gold-primary)] border border-[var(--gold-primary)]/50'
           }`}
           aria-expanded={isOpen}
           aria-label={isOpen ? 'Close navigation guide' : 'Open navigation guide'}

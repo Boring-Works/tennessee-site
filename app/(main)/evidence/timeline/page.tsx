@@ -32,7 +32,7 @@ export default function TimelinePage() {
           className="absolute bottom-0 left-0 right-0"
           style={{
             height: '6px',
-            background: 'linear-gradient(180deg, #4a3728 0%, #654321 50%, #b8860b 100%)',
+            background: 'linear-gradient(180deg, #4a3728 0%, #654321 50%, var(--gold-hover) 100%)',
             boxShadow: '0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
           }}
         />
@@ -43,7 +43,7 @@ export default function TimelinePage() {
             <Link
               href="/evidence"
               className="inline-flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity"
-              style={{ color: '#c9a227' }}
+              style={{ color: 'var(--gold-primary)' }}
             >
               <span aria-hidden="true">←</span>
               <span>Back to Evidence Room</span>
@@ -54,7 +54,7 @@ export default function TimelinePage() {
           <p
             className="inline-flex items-center gap-4 px-6 py-2 mb-6 text-xs uppercase tracking-[0.15em] rounded-sm"
             style={{
-              color: '#c9a227',
+              color: 'var(--gold-primary)',
               background:
                 'linear-gradient(180deg, rgba(201,162,39,0.12) 0%, rgba(184,134,11,0.08) 100%)',
               border: '1px solid rgba(201,162,39,0.3)',
@@ -96,7 +96,7 @@ export default function TimelinePage() {
           <p
             className="pt-4 text-xs uppercase tracking-[0.15em]"
             style={{
-              color: '#c9a227',
+              color: 'var(--gold-primary)',
               borderTop: '1px solid rgba(201,162,39,0.25)',
               fontFamily: 'var(--font-serif)',
               opacity: 0.8,

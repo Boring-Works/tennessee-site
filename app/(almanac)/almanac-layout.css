@@ -14,13 +14,8 @@
   height: 36px;
 
   /* Wax seal styling */
-  background: radial-gradient(
-    circle at 35% 35%,
-    #8B3A42,
-    #722F37 50%,
-    #5A2329
-  );
-  border: 2px solid rgba(201, 162, 39, 0.5);
+  background: radial-gradient(circle at 35% 35%, #8b3a42, #722f37 50%, #5a2329);
+  border: 2px solid var(--gold-shimmer);
   border-radius: 50%;
 
   /* Center content */
@@ -40,7 +35,7 @@
 }
 
 .almanac-home-button:hover {
-  border-color: rgba(201, 162, 39, 0.8);
+  border-color: var(--gold-shimmer);
   transform: scale(1.05);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.4),
@@ -48,7 +43,7 @@
 }
 
 .almanac-home-button:focus-visible {
-  outline: 2px solid #C9A227;
+  outline: 2px solid #c9a227;
   outline-offset: 2px;
 }
 

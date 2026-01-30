@@ -428,10 +428,10 @@ function ConsolidatedExperienceComponent() {
           <p
             className={`font-serif-elegant text-[clamp(2.25rem,6vw,4rem)] leading-tight italic font-semibold transition-all duration-1000 delay-500 ${groundVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             style={{
-              color: '#c9a227',
+              color: 'var(--gold-primary)',
               textShadow: `
-                0 0 40px rgba(201, 162, 39, 0.4),
-                0 0 80px rgba(201, 162, 39, 0.2),
+                0 0 40px var(--gold-shimmer),
+                0 0 80px var(--gold-shimmer),
                 0 4px 20px rgba(0, 0, 0, 0.4)
               `,
             }}
@@ -610,9 +610,9 @@ function ConsolidatedExperienceComponent() {
           >
             <Link
               href="/visit"
-              className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-12 py-5 text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-1 hover:shadow-xl"
+              className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-12 py-5 text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-[var(--gold-hover)] hover:-translate-y-1 hover:shadow-xl"
               style={{
-                boxShadow: '0 4px 20px rgba(201, 162, 39, 0.3)',
+                boxShadow: '0 4px 20px var(--gold-shimmer)',
               }}
             >
               <span className="text-lg transition-transform duration-300 group-hover:scale-110">

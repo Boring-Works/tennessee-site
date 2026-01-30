@@ -104,8 +104,8 @@ function OriginalSevenMapComponent({
       borderHover: '#0a1628', // Primary on hover
       text: '#0a1628', // Primary text
       textLight: '#525252', // Lighter text
-      accent: '#c9a227', // Gold accent
-      star: '#c9a227', // Star color
+      accent: 'var(--gold-primary)', // Gold accent
+      star: 'var(--gold-primary)', // Star color
       defunct: '#F0EBE3', // Lighter for Tennessee County
       defunctBorder: '#A89880', // Dashed border color
     }),

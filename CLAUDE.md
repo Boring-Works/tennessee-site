@@ -46,6 +46,28 @@ The validator checks `events.json`, `lectures.json`, and `siteInfo.json` against
 
 ## Key Systems
 
+### Design Token System (`app/globals.css`)
+
+Shadow and color design tokens for consistent visual hierarchy:
+
+**Shadow Tokens:**
+
+- `--shadow-xs` through `--shadow-xl` (5 neutral elevation levels)
+- `--shadow-gold-sm`, `--shadow-gold-lg` (2 brand accent glows)
+
+**Gold Color Tokens:**
+
+- `--gold-primary` (#c9a227) - main brand gold
+- `--gold-hover` (#d4af37) - interactive states
+- `--gold-shimmer` (rgba 0.4) - glows, borders
+
+**Documentation:**
+
+- `docs/DESIGN-TOKENS.md` - System architecture
+- `docs/TOKEN-QUICK-REFERENCE.md` - Developer quick guide
+- `docs/TOKEN-EXAMPLES.md` - Real-world usage patterns
+- `docs/TOKEN-VISUAL-REFERENCE.md` - Visual reference chart
+
 ### Brand Copy System (`lib/copy/`)
 
 All marketing copy is centralized in TypeScript constants:

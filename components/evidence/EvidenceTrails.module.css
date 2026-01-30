@@ -11,9 +11,9 @@
   --cream-dark: #f5f0e6;
   --cream-medium: #faf7f0;
   --cream-light: #fffef8;
-  --brass: #c9a227;
-  --brass-dark: #b8860b;
-  --brass-glow: rgba(201, 162, 39, 0.15);
+  --brass: var(--gold-primary);
+  --brass-dark: var(--gold-hover);
+  --brass-glow: var(--gold-shimmer);
   --ink: #1a1a1a;
   --ink-faded: #2d2926;
   --ink-light: #4a443e;
@@ -54,8 +54,8 @@
   letter-spacing: 0.15em;
   display: inline-block;
   padding: 0.375rem 1rem;
-  background: linear-gradient(180deg, rgba(201, 162, 39, 0.12) 0%, rgba(184, 134, 11, 0.08) 100%);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  background: linear-gradient(180deg, var(--gold-shimmer) 0%, rgba(184, 134, 11, 0.08) 100%);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
   margin-bottom: 1rem;
 }
@@ -110,14 +110,14 @@
 
 .trailTab:hover {
   color: var(--wood-dark);
-  background: rgba(201, 162, 39, 0.08);
+  background: var(--gold-shimmer);
 }
 
 .trailTabActive {
   color: var(--brass-dark);
-  background: rgba(201, 162, 39, 0.15);
+  background: var(--gold-shimmer);
   font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-xs);
 }
 
 .tabIcon {
@@ -140,16 +140,14 @@
   background: var(--paper-texture), var(--cream-light);
   border: 1px solid rgba(42, 31, 26, 0.08);
   border-radius: 4px;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    0 4px 16px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-sm);
 }
 
 .trailIntro {
   text-align: center;
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+  border-bottom: 1px solid var(--gold-shimmer);
 }
 
 .trailTitle {
@@ -312,9 +310,7 @@
 
 .documentLink:hover {
   border-color: var(--brass);
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(201, 162, 39, 0.15);
+  box-shadow: var(--shadow-xs);
   transform: translateX(4px);
 }
 
@@ -368,7 +364,7 @@
 .trailCTA {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(201, 162, 39, 0.2);
+  border-top: 1px solid var(--gold-shimmer);
   text-align: center;
 }
 
@@ -386,14 +382,14 @@
   text-decoration: none;
   transition: all var(--transition-dignified);
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.15),
+    var(--shadow-xs),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .startButton:hover {
   background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-medium) 100%);
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.2),
+    var(--shadow-sm),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
 }
@@ -451,16 +447,14 @@
 }
 
 .trailCard:hover {
-  border-color: rgba(201, 162, 39, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-color: var(--gold-shimmer);
+  box-shadow: var(--shadow-xs);
 }
 
 .trailCardActive {
   border-color: var(--brass);
   background: var(--paper-texture), #fffef8;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(201, 162, 39, 0.2);
+  box-shadow: var(--shadow-xs);
 }
 
 .cardIcon {

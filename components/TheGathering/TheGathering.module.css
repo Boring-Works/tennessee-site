@@ -52,12 +52,12 @@
 .gathering-event {
   background: linear-gradient(
     135deg,
-    rgba(201, 162, 39, 0.1) 0%,
+    var(--gold-shimmer) 0%,
     transparent 30%,
     transparent 70%,
-    rgba(201, 162, 39, 0.05) 100%
+    var(--gold-shimmer) 100%
   );
-  border: 1px solid rgba(201, 162, 39, 0.25);
+  border: 1px solid var(--gold-shimmer);
   padding: 2rem 1.5rem;
   text-align: center;
   margin-bottom: 3rem;
@@ -94,7 +94,7 @@
   font-weight: 700;
   line-height: 0.85;
   color: var(--accent);
-  text-shadow: 0 4px 30px rgba(201, 162, 39, 0.4);
+  text-shadow: 0 4px 30px var(--gold-shimmer);
 }
 
 .gathering-date-year {
@@ -128,7 +128,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
-  border: 1px solid rgba(201, 162, 39, 0.5);
+  border: 1px solid var(--gold-shimmer);
   padding: 0.375rem 1rem;
   margin-bottom: 1rem;
 }
@@ -271,7 +271,7 @@
 
 .gathering-cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
 }
 
 .gathering-cta-primary:hover::before {
@@ -340,7 +340,7 @@
 
 .gathering-event-card:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(201, 162, 39, 0.4);
+  border-color: var(--gold-shimmer);
 }
 
 .gathering-event-card:focus-visible {

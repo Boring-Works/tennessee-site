@@ -34,8 +34,7 @@ const AudienceCard = memo(function AudienceCard({
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(201, 162, 39, 0.05), transparent 70%)',
+          background: 'radial-gradient(ellipse at center, var(--gold-shimmer), transparent 70%)',
         }}
       />
 

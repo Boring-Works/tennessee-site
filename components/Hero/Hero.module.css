@@ -114,7 +114,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.35em;
-  color: rgba(201, 162, 39, 0.7);
+  color: var(--gold-shimmer);
   margin: 0 0 0.75rem 0;
   position: relative;
   display: inline-block;
@@ -145,7 +145,7 @@
     top: 50%;
     width: 2rem;
     height: 1px;
-    background: linear-gradient(90deg, rgba(201, 162, 39, 0.5), transparent);
+    background: linear-gradient(90deg, var(--gold-shimmer), transparent);
   }
 }
 
@@ -167,10 +167,10 @@
   font-size: clamp(2rem, 7vw, 3.5rem);
   font-style: italic;
   font-weight: 300;
-  color: var(--accent, #c9a227);
+  color: var(--accent, var(--gold-primary));
   margin: 0.25rem 0 1.25rem 0;
   line-height: 1.1;
-  text-shadow: 0 2px 20px rgba(201, 162, 39, 0.2);
+  text-shadow: 0 2px 20px var(--gold-shimmer);
 }
 
 /* Decorative divider - quill stroke */
@@ -180,8 +180,8 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(201, 162, 39, 0.6) 20%,
-    rgba(201, 162, 39, 0.6) 80%,
+    var(--gold-shimmer) 20%,
+    var(--gold-shimmer) 80%,
     transparent
   );
   margin: 0 auto 1.25rem;
@@ -195,7 +195,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.5rem;
-  color: var(--accent, #c9a227);
+  color: var(--accent, var(--gold-primary));
   background: var(--primary, #0a1628);
   padding: 0 0.5rem;
 }
@@ -205,8 +205,8 @@
     margin: 0 0 1.25rem 0;
     background: linear-gradient(
       90deg,
-      rgba(201, 162, 39, 0.6) 0%,
-      rgba(201, 162, 39, 0.6) 60%,
+      var(--gold-shimmer) 0%,
+      var(--gold-shimmer) 60%,
       transparent 100%
     );
   }
@@ -278,7 +278,12 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #d4af37 0%, var(--accent, #c9a227) 50%, #b8942a 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gold-hover) 0%,
+    var(--accent, var(--gold-primary)) 50%,
+    #b8942a 100%
+  );
   color: var(--primary, #0a1628);
   padding: 1rem 2rem;
   font-family: var(--font-cinzel), 'Cinzel', serif;
@@ -291,7 +296,7 @@
   position: relative;
   overflow: hidden;
   box-shadow:
-    0 2px 8px rgba(201, 162, 39, 0.3),
+    0 2px 8px var(--gold-shimmer),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
 }
@@ -305,10 +310,10 @@
 }
 
 .hero-cta-primary:hover {
-  background: linear-gradient(135deg, #e0c04a 0%, #d4af37 50%, #c9a227 100%);
+  background: linear-gradient(135deg, #e0c04a 0%, var(--gold-hover) 50%, var(--gold-primary) 100%);
   transform: translateY(-1px);
   box-shadow:
-    0 4px 16px rgba(201, 162, 39, 0.4),
+    0 4px 16px var(--gold-shimmer),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
@@ -320,7 +325,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(201, 162, 39, 0.4);
+  border: 1px solid var(--gold-shimmer);
   color: rgba(255, 255, 255, 0.85);
   padding: 1rem 2rem;
   font-family: var(--font-cinzel), 'Cinzel', serif;
@@ -338,13 +343,13 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), transparent);
+  background: linear-gradient(135deg, var(--gold-shimmer), transparent);
   opacity: 0;
   transition: opacity 0.25s ease;
 }
 
 .hero-cta-secondary:hover {
-  border-color: rgba(201, 162, 39, 0.7);
+  border-color: var(--gold-shimmer);
   color: #ffffff;
 }
 
@@ -365,7 +370,7 @@
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: rgba(201, 162, 39, 0.5);
+  color: var(--gold-shimmer);
   margin: 0;
   display: inline-flex;
   align-items: center;
@@ -577,7 +582,7 @@
   letter-spacing: 0.06em;
   color: var(--accent);
   margin-top: 0.15em;
-  text-shadow: 0 2px 40px rgba(201, 162, 39, 0.3);
+  text-shadow: 0 2px 40px var(--gold-shimmer);
   position: relative;
   background: linear-gradient(
     90deg,
@@ -674,7 +679,7 @@
   font-weight: 700;
   line-height: 1;
   color: var(--accent);
-  text-shadow: 0 2px 20px rgba(201, 162, 39, 0.3);
+  text-shadow: 0 2px 20px var(--gold-shimmer);
 }
 
 .hero-date-year {
@@ -727,8 +732,8 @@
   gap: 0.5rem;
   margin-bottom: 2rem;
   padding: 1.5rem 2rem;
-  background: rgba(201, 162, 39, 0.08);
-  border: 1px solid rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 4px;
 }
 
@@ -748,14 +753,14 @@
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
-  text-shadow: 0 2px 20px rgba(201, 162, 39, 0.3);
+  text-shadow: 0 2px 20px var(--gold-shimmer);
 }
 
 @media (min-width: 768px) {
   .hero-year-badge {
     font-size: 3.5rem;
     padding-right: 1.25rem;
-    border-right: 1px solid rgba(201, 162, 39, 0.3);
+    border-right: 1px solid var(--gold-shimmer);
   }
 }
 
@@ -877,8 +882,8 @@
 .hero-cta-primary:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 8px 30px rgba(201, 162, 39, 0.5),
-    0 0 0 1px rgba(201, 162, 39, 0.6),
+    0 8px 30px var(--gold-shimmer),
+    0 0 0 1px var(--gold-shimmer),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -1024,5 +1029,5 @@
 .scroll-indicator-line {
   width: 1px;
   height: 2.5rem;
-  background: linear-gradient(to bottom, rgba(201, 162, 39, 0.6) 0%, rgba(201, 162, 39, 0) 100%);
+  background: linear-gradient(to bottom, var(--gold-shimmer) 0%, var(--gold-shimmer) 100%);
 }

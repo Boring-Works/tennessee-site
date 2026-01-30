@@ -75,7 +75,7 @@ export default function LecturesLoading() {
                 gap: '2rem',
                 marginBottom: '3rem',
                 paddingBottom: '3rem',
-                borderBottom: '1px solid rgba(201, 162, 39, 0.2)',
+                borderBottom: '1px solid var(--gold-shimmer)',
               }}
             >
               {/* Date column */}

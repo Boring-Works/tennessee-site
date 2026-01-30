@@ -128,7 +128,7 @@
     120deg,
     transparent 0%,
     transparent 40%,
-    rgba(201, 162, 39, 0.3) 50%,
+    var(--gold-shimmer) 50%,
     transparent 60%,
     transparent 100%
   );
@@ -139,7 +139,7 @@
   background: var(--accent);
   color: var(--primary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
 }
 
 .legacy-hero-cta:hover::before {
@@ -393,7 +393,7 @@
 .legacy-tier--featured {
   border-color: var(--accent);
   border-width: 2px;
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.15);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
 }
 
 @media (min-width: 768px) {
@@ -834,7 +834,7 @@
 
 .legacy-closing-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
 }
 
 .legacy-closing-cta:hover::before {

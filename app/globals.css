@@ -5,7 +5,7 @@
   --primary: #0d1821;
   --primary-dark: #050d18;
   --secondary: #8b4513;
-  --accent: #b89d3a;
+  --accent: var(--gold-hover);
   --burgundy: #722f37;
   --background: #faf8f5;
   --foreground: #1a1a1a;
@@ -34,6 +34,36 @@
   --border-card-featured: 2px solid var(--accent);
 
   /* ============================================
+     SHADOW & ELEVATION SYSTEM
+     7-level shadow scale for consistent depth hierarchy
+     Usage: Use --shadow-{size} for standard elevations
+            Use --shadow-gold-{size} for brand accent shadows
+     ============================================ */
+
+  /* Standard Elevation Shadows (neutral) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+  /* Brand Gold Accent Shadows */
+  --shadow-gold-sm: 0 4px 12px var(--gold-shimmer);
+  --shadow-gold-lg: 0 8px 30px var(--gold-shimmer);
+
+  /* ============================================
+     GOLD COLOR STANDARDIZATION
+     8 gold variants consolidated to 3 semantic tokens
+     Primary source: var(--gold-primary) (used 98x across codebase)
+     Usage: --gold-primary (main brand), --gold-hover (interactions), --gold-shimmer (effects)
+     ============================================ */
+
+  /* Semantic Gold Tokens */
+  --gold-primary: var(--gold-primary); /* Main brand gold - use for primary brand elements */
+  --gold-hover: var(--gold-hover); /* Hover state - brighter for interactive feedback */
+  --gold-shimmer: var(--gold-shimmer); /* Glows, borders, overlays - 40% opacity */
+
+  /* ============================================
      NAVIGATION DESIGN TOKENS
      ============================================ */
 
@@ -41,8 +71,8 @@
   --nav-heritage-brown: #4a3728;
   --nav-parchment: #f5f1e8;
   --nav-ink: #2c2416;
-  --nav-gold: #c9a227;
-  --nav-gold-hover: #d4af37;
+  --nav-gold: var(--gold-primary);
+  --nav-gold-hover: var(--gold-hover);
   --nav-gold-rgb: 201, 162, 39;
 
   /* Background States */
@@ -198,7 +228,7 @@
   top: -100px;
   left: 50%;
   transform: translateX(-50%);
-  background: #c9a227;
+  background: var(--gold-primary);
   color: #0d1821;
   padding: 0.75rem 1.5rem;
   font-family: var(--font-cinzel), serif;
@@ -793,7 +823,7 @@ input[type='radio']:focus-visible {
   box-shadow:
     inset 0 0 30px rgba(139, 69, 19, 0.03),
     0 4px 20px rgba(139, 69, 19, 0.08);
-  border: 2px solid var(--accent, #b89d3a);
+  border: 2px solid var(--accent, var(--gold-hover));
   border-radius: var(--radius-card, 2px);
 }
 

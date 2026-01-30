@@ -310,7 +310,7 @@ export function PlanYourVisit() {
         >
           <Link
             href="/visit"
-            className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-10 py-5 text-base font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(201,162,39,0.4)]"
+            className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-10 py-5 text-base font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[var(--gold-hover)] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(201,162,39,0.4)]"
           >
             <span className="text-lg transition-transform duration-300 group-hover:scale-110">
               ★

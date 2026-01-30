@@ -16,7 +16,7 @@
   --cream-light: #fffef8;
 
   --brass: var(--nav-gold);
-  --brass-dark: #b8860b;
+  --brass-dark: var(--gold-hover);
   --brass-light: var(--nav-gold-hover);
   --brass-glow: rgba(var(--nav-gold-rgb), 0.15);
 

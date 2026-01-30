@@ -220,7 +220,7 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto px-6">
             {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-[#c9a227] mb-4 font-semibold">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold-primary)] mb-4 font-semibold">
                 Sullivan County · Heritage Trail
               </p>
               <h2
@@ -253,7 +253,7 @@ export default function HomePage() {
             <div className="text-center">
               <Link
                 href="/explore"
-                className="inline-flex items-center gap-2 bg-[#c9a227] text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[#b89020] hover:-translate-y-0.5 hover:shadow-lg"
+                className="inline-flex items-center gap-2 bg-[var(--gold-primary)] text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[#b89020] hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Explore the Original Seven
                 <span className="transition-transform duration-300 group-hover:translate-x-1">

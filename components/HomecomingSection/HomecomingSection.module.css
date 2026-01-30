@@ -19,7 +19,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(201, 162, 39, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 20%, var(--gold-shimmer) 0%, transparent 60%),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   opacity: 0.4;
   pointer-events: none;
@@ -67,7 +67,7 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  border-color: rgba(201, 162, 39, 0.3);
+  border-color: var(--gold-shimmer);
   border-style: solid;
   border-width: 0;
 }
@@ -470,17 +470,17 @@
 @keyframes ctaPulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4);
+    box-shadow: 0 0 0 0 var(--gold-shimmer);
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(201, 162, 39, 0);
+    box-shadow: 0 0 0 10px var(--gold-shimmer);
   }
 }
 
 .homecoming-cta:hover {
   background: white;
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+  box-shadow: 0 8px 30px var(--gold-shimmer);
   animation: none;
 }
 

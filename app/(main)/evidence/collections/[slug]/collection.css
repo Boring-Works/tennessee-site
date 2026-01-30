@@ -29,7 +29,7 @@
 }
 
 .collectionBackLink:hover {
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
 }
 
 /* Header */
@@ -46,7 +46,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   background: rgba(212, 168, 83, 0.15);
   border-radius: 0.125rem;
   margin-bottom: 1rem;
@@ -56,7 +56,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   font-weight: 500;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   margin-bottom: 1rem;
 }
 
@@ -82,7 +82,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   margin-bottom: 1rem;
 }
 
@@ -101,7 +101,7 @@
   color: rgba(232, 224, 208, 0.7);
   padding: 1.25rem;
   background: rgba(212, 168, 83, 0.05);
-  border-left: 3px solid var(--gold-leaf, #d4a853);
+  border-left: 3px solid var(--gold-leaf, var(--gold-primary));
   border-radius: 0.125rem;
 }
 
@@ -217,12 +217,12 @@
 
 .collectionFigureCard:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: var(--gold-leaf, #d4a853);
+  border-color: var(--gold-leaf, var(--gold-primary));
 }
 
 .collectionFigureName {
   font-size: 0.9375rem;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
 }
 
 .collectionFigureRole {
@@ -241,7 +241,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--gold-leaf, #d4a853);
+  color: var(--gold-leaf, var(--gold-primary));
   margin: 1.5rem 0 0.75rem;
 }
 

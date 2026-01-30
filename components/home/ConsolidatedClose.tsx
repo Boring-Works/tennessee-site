@@ -105,8 +105,8 @@ export function ConsolidatedClose() {
                 fontSize: i === 15 ? '1.25rem' : '0.75rem',
                 opacity: ctaVisible ? (i === 15 ? 0.6 : 0.15) : 0,
                 transition: `opacity 0.5s ease ${i * 0.05}s`,
-                textShadow: i === 15 ? '0 0 20px rgba(201, 162, 39, 0.5)' : 'none',
-                color: i === 15 ? '#c9a227' : undefined,
+                textShadow: i === 15 ? '0 0 20px var(--gold-shimmer)' : 'none',
+                color: i === 15 ? 'var(--gold-primary)' : undefined,
               }}
             >
               ★
@@ -119,7 +119,7 @@ export function ConsolidatedClose() {
             style={{
               background: `
                 radial-gradient(ellipse 100% 80% at 50% 100%, rgba(139, 69, 19, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 162, 39, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 50% at 50% 0%, var(--gold-shimmer) 0%, transparent 50%),
                 linear-gradient(175deg, #0d1f35 0%, #0a1628 50%, #050d18 100%)
               `,
             }}
@@ -164,7 +164,7 @@ export function ConsolidatedClose() {
               className={`font-serif leading-tight mb-6 fade-in-up stagger-2 ${ctaVisible ? 'visible' : ''}`}
               style={{
                 fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-                background: 'linear-gradient(180deg, #ffffff 0%, #c9a227 100%)',
+                background: 'linear-gradient(180deg, #ffffff 0%, var(--gold-primary) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -192,7 +192,7 @@ export function ConsolidatedClose() {
             <div className={`fade-in-up stagger-4 ${ctaVisible ? 'visible' : ''}`}>
               <Link
                 href="/visit"
-                className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-12 py-6 text-lg font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(201,162,39,0.5)]"
+                className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-12 py-6 text-lg font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-[var(--gold-hover)] hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(201,162,39,0.5)]"
               >
                 <span className="text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                   ★
@@ -207,7 +207,7 @@ export function ConsolidatedClose() {
                 className="font-serif-elegant text-lg md:text-xl italic"
                 style={{
                   background:
-                    'linear-gradient(180deg, rgba(201, 162, 39, 0.9) 0%, rgba(201, 162, 39, 0.6) 100%)',
+                    'linear-gradient(180deg, var(--gold-shimmer) 0%, var(--gold-shimmer) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

@@ -27,8 +27,8 @@ export function PersonCard({ person, showCherokeeName = true }: PersonCardProps)
         <span
           className="
             cursor-pointer
-            text-[#8b4513] hover:text-[#b8860b]
-            border-b border-dotted border-[#8b4513]/40 hover:border-[#b8860b]/60
+            text-[#8b4513] hover:text-[var(--gold-hover)]
+            border-b border-dotted border-[#8b4513]/40 hover:border-[var(--gold-hover)]/60
             transition-colors duration-300
           "
         >
@@ -41,7 +41,7 @@ export function PersonCard({ person, showCherokeeName = true }: PersonCardProps)
           className="
             w-80 p-5
             bg-gradient-to-br from-[#fffef8] via-[#faf7f0] to-[#f5f0e6]
-            border border-[#c9a227]/30
+            border border-[var(--gold-primary)]/30
             rounded-sm
             shadow-[0_4px_16px_rgba(42,31,26,0.12),0_8px_24px_rgba(201,162,39,0.08)]
             z-50
@@ -53,7 +53,7 @@ export function PersonCard({ person, showCherokeeName = true }: PersonCardProps)
           align="start"
         >
           {/* Brass accent line at top */}
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#b8860b] via-[#c9a227] to-[#b8860b] rounded-t-sm" />
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[var(--gold-hover)] via-[var(--gold-primary)] to-[var(--gold-hover)] rounded-t-sm" />
 
           {/* Name section */}
           <div className="mb-3 pb-3 border-b border-[#2a1f1a]/10">
@@ -82,7 +82,7 @@ export function PersonCard({ person, showCherokeeName = true }: PersonCardProps)
             <p
               className="
                 text-xs uppercase tracking-[0.15em]
-                text-[#c9a227] font-medium
+                text-[var(--gold-primary)] font-medium
                 mb-3
               "
             >
@@ -108,7 +108,7 @@ export function PersonCard({ person, showCherokeeName = true }: PersonCardProps)
             href={`/evidence/people/${person.id}`}
             className="
               inline-flex items-center gap-2
-              font-serif text-sm text-[#8b4513] hover:text-[#b8860b]
+              font-serif text-sm text-[#8b4513] hover:text-[var(--gold-hover)]
               transition-colors duration-300
               group
             "

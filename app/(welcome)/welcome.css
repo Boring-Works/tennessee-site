@@ -11,14 +11,14 @@
   --text-secondary: #b8a991;
   /* WCAG 2.1 AA: Increased from 0.5 to 0.7 for 5.0:1 contrast on dark bg */
   --text-muted: rgba(245, 241, 232, 0.7);
-  --gold: #c9a227;
+  --gold: var(--gold-primary);
   /* WCAG 2.1 AA: Increased from 0.6 to 0.8 for 4.5:1+ contrast on dark bg */
-  --gold-muted: rgba(201, 162, 39, 0.8);
+  --gold-muted: var(--gold-shimmer);
   --copper: #b86f3e;
   --rust: #722f37;
   --card-bg: rgba(255, 255, 255, 0.02);
-  --card-border: rgba(201, 162, 39, 0.15);
-  --card-hover-border: rgba(201, 162, 39, 0.4);
+  --card-border: var(--gold-shimmer);
+  --card-hover-border: var(--gold-shimmer);
   --disabled-opacity: 0.45;
 }
 
@@ -72,7 +72,7 @@
   gap: 1rem;
   padding: 0.75rem 1rem;
   background: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+  border-bottom: 1px solid var(--gold-shimmer);
   text-decoration: none;
   transition: background 0.3s ease;
 }
@@ -124,13 +124,13 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   /* WCAG 2.1 AA: Increased from 0.7 to 0.9 for 4.8:1 contrast */
-  color: rgba(201, 162, 39, 0.9);
+  color: var(--gold-shimmer);
   white-space: nowrap;
   transition: color 0.3s ease;
 }
 
 .site-header:hover .site-header-cta {
-  color: rgba(201, 162, 39, 1);
+  color: var(--gold-shimmer);
 }
 
 @media (max-width: 640px) {
@@ -252,7 +252,7 @@
     0 4px 20px rgba(0, 0, 0, 0.5),
     inset 0 2px 4px rgba(255, 255, 255, 0.15),
     inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  border: 3px solid rgba(201, 162, 39, 0.4);
+  border: 3px solid var(--gold-shimmer);
   flex-shrink: 0;
 }
 
@@ -367,12 +367,12 @@
 .brand-line-right {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.5), rgba(201, 162, 39, 0.5));
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer), var(--gold-shimmer));
   max-width: 100px;
 }
 
 .brand-line-right {
-  background: linear-gradient(90deg, rgba(201, 162, 39, 0.5), rgba(201, 162, 39, 0.5), transparent);
+  background: linear-gradient(90deg, var(--gold-shimmer), var(--gold-shimmer), transparent);
 }
 
 .brand-text {
@@ -461,11 +461,11 @@
   content: '';
   width: 80px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
 }
 
 .divider-ornament {
-  color: rgba(201, 162, 39, 0.5);
+  color: var(--gold-shimmer);
   font-size: 0.75rem;
 }
 

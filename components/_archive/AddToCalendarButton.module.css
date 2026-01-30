@@ -16,7 +16,7 @@
 }
 
 .calendarBtn:hover {
-  background: rgba(201, 162, 39, 0.1);
+  background: var(--gold-shimmer);
   border-color: var(--accent);
   color: var(--secondary);
 }

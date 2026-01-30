@@ -9,9 +9,9 @@
   --midnight: #0f1419;
   --midnight-light: #1a2028;
   --midnight-lighter: #242d38;
-  --gold-leaf: #c9a227;
+  --gold-leaf: var(--gold-primary);
   --gold-leaf-dark: #b8960b;
-  --gold-leaf-glow: rgba(201, 162, 39, 0.15);
+  --gold-leaf-glow: var(--gold-shimmer);
   --cream: #f5f0e6;
   --cream-muted: rgba(245, 240, 230, 0.85);
   --cream-faded: rgba(245, 240, 230, 0.6);
@@ -69,7 +69,7 @@
   text-align: center;
   margin-bottom: var(--section-gap);
   padding-bottom: var(--section-gap);
-  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+  border-bottom: 1px solid var(--gold-shimmer);
 }
 
 /* Badges */
@@ -100,7 +100,7 @@
 .personBadgeSignatory {
   background: var(--gold-leaf-glow);
   color: var(--gold-leaf);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  border: 1px solid var(--gold-shimmer);
 }
 
 /* Names */
@@ -116,6 +116,8 @@
   margin-bottom: 0.5rem;
   letter-spacing: 0.03em;
   line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .personEnglishName {
@@ -124,6 +126,8 @@
   color: var(--cream-muted);
   font-style: italic;
   margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .personPrimaryName {
@@ -182,7 +186,7 @@
   font-weight: 400;
   margin: 2rem 0 1rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(201, 162, 39, 0.15);
+  border-top: 1px solid var(--gold-shimmer);
 }
 
 .personBioHeading:first-child {
@@ -209,7 +213,7 @@
   padding: 1.5rem 2rem;
   background: var(--midnight-light);
   border-radius: 2px;
-  border: 1px solid rgba(201, 162, 39, 0.1);
+  border: 1px solid var(--gold-shimmer);
   margin: 0;
 }
 
@@ -231,7 +235,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
 }
 
 /* === Documents Section === */
@@ -249,7 +253,7 @@
 }
 
 .personDocumentItem {
-  border: 1px solid rgba(201, 162, 39, 0.15);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
   background: var(--midnight-light);
   transition: all 0.25s ease;
@@ -294,17 +298,17 @@
   gap: 1rem;
   padding: 1.25rem 1.5rem;
   background: var(--gold-leaf-glow);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
 .personSignatureLink:hover {
-  background: rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
   border-color: var(--gold-leaf);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.15);
+  box-shadow: 0 4px 12px var(--gold-shimmer);
 }
 
 .personSignatureIcon {
@@ -348,7 +352,7 @@
 .personFooter {
   margin-top: var(--section-gap);
   padding-top: var(--section-gap);
-  border-top: 1px solid rgba(201, 162, 39, 0.2);
+  border-top: 1px solid var(--gold-shimmer);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;

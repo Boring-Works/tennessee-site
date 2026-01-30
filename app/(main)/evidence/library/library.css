@@ -10,9 +10,9 @@
   --library-brown: #3d3229;
   --library-brown-light: #5c4a3d;
   --library-brown-muted: #7a6b5d;
-  --library-gold: #c9a227;
+  --library-gold: var(--gold-primary);
   --library-gold-muted: #b8960b;
-  --library-gold-light: rgba(201, 162, 39, 0.15);
+  --library-gold-light: var(--gold-shimmer);
   --library-rule: rgba(61, 50, 41, 0.15);
   --library-rule-dark: rgba(61, 50, 41, 0.25);
 
@@ -170,6 +170,8 @@
   font-weight: 400;
   margin-bottom: 0.5rem;
   line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .documentCardDescription {

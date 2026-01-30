@@ -46,7 +46,7 @@ export const Compass = memo(function Compass() {
           y1="5"
           x2="50"
           y2={i % 5 === 0 ? '10' : '7'}
-          stroke="#c9a227"
+          stroke="var(--gold-primary)"
           strokeWidth={i % 5 === 0 ? '1.5' : '0.5'}
           transform={`rotate(${i * 6} 50 50)`}
         />
@@ -59,14 +59,14 @@ export const Compass = memo(function Compass() {
       type="button"
       onClick={scrollToTop}
       onKeyDown={handleKeyDown}
-      className={`fixed bottom-6 left-6 z-[45] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-[#c9a227] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2a1f1a] rounded-full ${
+      className={`fixed bottom-6 left-6 z-[45] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2a1f1a] rounded-full ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
       }`}
       tabIndex={isVisible ? 0 : -1}
       aria-hidden={!isVisible}
       aria-label="Return to top"
     >
-      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] bg-[#2a1f1a] border-2 border-[#c9a227] overflow-hidden transform group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[0_0_25px_rgba(201,162,39,0.5)]">
+      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] bg-[#2a1f1a] border-2 border-[var(--gold-primary)] overflow-hidden transform group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[0_0_25px_rgba(201,162,39,0.5)]">
         {/* Compass Rose Background */}
         <div className="absolute inset-0 opacity-80">
           <svg viewBox="0 0 100 100" className="w-full h-full p-1">
@@ -76,7 +76,7 @@ export const Compass = memo(function Compass() {
               x="50"
               y="24"
               textAnchor="middle"
-              fill="#c9a227"
+              fill="var(--gold-primary)"
               fontSize="10"
               fontFamily="serif"
               fontWeight="bold"
@@ -87,7 +87,7 @@ export const Compass = memo(function Compass() {
               x="50"
               y="86"
               textAnchor="middle"
-              fill="#c9a227"
+              fill="var(--gold-primary)"
               fontSize="8"
               fontFamily="serif"
               fontWeight="bold"
@@ -99,7 +99,7 @@ export const Compass = memo(function Compass() {
               x="82"
               y="53"
               textAnchor="middle"
-              fill="#c9a227"
+              fill="var(--gold-primary)"
               fontSize="8"
               fontFamily="serif"
               fontWeight="bold"
@@ -111,7 +111,7 @@ export const Compass = memo(function Compass() {
               x="18"
               y="53"
               textAnchor="middle"
-              fill="#c9a227"
+              fill="var(--gold-primary)"
               fontSize="8"
               fontFamily="serif"
               fontWeight="bold"
@@ -137,13 +137,20 @@ export const Compass = memo(function Compass() {
               {/* South Half (Cream) */}
               <path d="M0,35 L4,0 L-4,0 Z" fill="#F3E5C2" />
               {/* Center Pin */}
-              <circle cx="0" cy="0" r="3" fill="#c9a227" stroke="#2a1f1a" strokeWidth="1" />
+              <circle
+                cx="0"
+                cy="0"
+                r="3"
+                fill="var(--gold-primary)"
+                stroke="#2a1f1a"
+                strokeWidth="1"
+              />
             </g>
           </svg>
         </div>
 
         {/* Tooltip */}
-        <div className="absolute left-full ml-4 top-1/2 -translate-y-1/2 bg-[#2a1f1a] text-[#c9a227] text-[10px] uppercase tracking-widest px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap border border-[#c9a227]/30 shadow-xl translate-x-2 group-hover:translate-x-0 pointer-events-none font-serif">
+        <div className="absolute left-full ml-4 top-1/2 -translate-y-1/2 bg-[#2a1f1a] text-[var(--gold-primary)] text-[10px] uppercase tracking-widest px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap border border-[var(--gold-primary)]/30 shadow-xl translate-x-2 group-hover:translate-x-0 pointer-events-none font-serif">
           Return North
         </div>
       </div>

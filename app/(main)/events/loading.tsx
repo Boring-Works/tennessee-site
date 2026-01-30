@@ -63,7 +63,7 @@ export default function EventsLoading() {
           position: 'sticky',
           top: '64px',
           background: 'var(--parchment)',
-          borderBottom: '1px solid rgba(201, 162, 39, 0.2)',
+          borderBottom: '1px solid var(--gold-shimmer)',
           padding: '1rem',
           zIndex: 40,
         }}
@@ -105,7 +105,7 @@ export default function EventsLoading() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'flex-end',
-                borderBottom: '1px solid rgba(201, 162, 39, 0.3)',
+                borderBottom: '1px solid var(--gold-shimmer)',
                 paddingBottom: '1rem',
                 marginBottom: '2rem',
               }}

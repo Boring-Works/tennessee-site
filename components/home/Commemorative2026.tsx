@@ -234,7 +234,7 @@ export function Commemorative2026() {
                   style={{
                     textShadow:
                       star.id === 15
-                        ? '0 0 20px rgba(201, 162, 39, 0.6), 0 0 40px rgba(201, 162, 39, 0.3)'
+                        ? '0 0 20px var(--gold-shimmer), 0 0 40px var(--gold-shimmer)'
                         : 'none',
                     animation: star.id === 15 ? 'pulse 2s ease-in-out infinite' : 'none',
                   }}
@@ -278,7 +278,7 @@ export function Commemorative2026() {
                 className={`font-serif leading-tight mb-6 fade-in-up stagger-1 ${isVisible ? 'visible' : ''}`}
                 style={{
                   fontSize: 'clamp(2rem, 7vw, 4rem)',
-                  background: 'linear-gradient(180deg, #ffffff 0%, #c9a227 100%)',
+                  background: 'linear-gradient(180deg, #ffffff 0%, var(--gold-primary) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -314,7 +314,7 @@ export function Commemorative2026() {
                 className="relative p-8 border border-accent/30 rounded-sm"
                 style={{
                   background: `
-                    linear-gradient(135deg, rgba(201, 162, 39, 0.05) 0%, transparent 50%),
+                    linear-gradient(135deg, var(--gold-shimmer) 0%, transparent 50%),
                     rgba(255, 255, 255, 0.02)
                   `,
                 }}
@@ -360,7 +360,7 @@ export function Commemorative2026() {
 
               <Link
                 href="/first-250"
-                className="group inline-flex items-center gap-3 bg-accent text-primary px-10 py-5 text-base font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-[#d4af37] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(201,162,39,0.4)]"
+                className="group inline-flex items-center gap-3 bg-accent text-primary px-10 py-5 text-base font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-[var(--gold-hover)] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(201,162,39,0.4)]"
               >
                 <span className="text-lg transition-transform duration-300 group-hover:rotate-12">
                   <ScrollIcon />
@@ -485,7 +485,8 @@ export function Commemorative2026() {
                       <span
                         className="text-3xl font-bold transition-colors duration-300"
                         style={{
-                          background: 'linear-gradient(180deg, #c9a227 0%, #d4af37 100%)',
+                          background:
+                            'linear-gradient(180deg, var(--gold-primary) 0%, var(--gold-hover) 100%)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
@@ -512,7 +513,8 @@ export function Commemorative2026() {
                 <span
                   className="text-4xl font-bold block transition-transform duration-300 group-hover:scale-110"
                   style={{
-                    background: 'linear-gradient(180deg, #c9a227 0%, #d4af37 100%)',
+                    background:
+                      'linear-gradient(180deg, var(--gold-primary) 0%, var(--gold-hover) 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -527,7 +529,8 @@ export function Commemorative2026() {
                 <span
                   className="text-4xl font-bold block transition-transform duration-300 group-hover:scale-110"
                   style={{
-                    background: 'linear-gradient(180deg, #c9a227 0%, #d4af37 100%)',
+                    background:
+                      'linear-gradient(180deg, var(--gold-primary) 0%, var(--gold-hover) 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -542,7 +545,8 @@ export function Commemorative2026() {
                 <span
                   className="text-4xl font-bold block transition-transform duration-300 group-hover:scale-110"
                   style={{
-                    background: 'linear-gradient(180deg, #c9a227 0%, #d4af37 100%)',
+                    background:
+                      'linear-gradient(180deg, var(--gold-primary) 0%, var(--gold-hover) 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -707,7 +711,7 @@ export function Commemorative2026() {
                 className="absolute inset-0 opacity-20 pointer-events-none"
                 style={{
                   background:
-                    'radial-gradient(ellipse at top right, rgba(201, 162, 39, 0.3), transparent 70%)',
+                    'radial-gradient(ellipse at top right, var(--gold-shimmer), transparent 70%)',
                 }}
               />
 
@@ -720,7 +724,7 @@ export function Commemorative2026() {
               <span
                 className="text-4xl md:text-5xl font-bold block mb-1"
                 style={{
-                  background: 'linear-gradient(180deg, #c9a227 0%, #8B4513 100%)',
+                  background: 'linear-gradient(180deg, var(--gold-primary) 0%, #8B4513 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

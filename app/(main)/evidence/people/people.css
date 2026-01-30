@@ -9,9 +9,9 @@
   --midnight: #0f1419;
   --midnight-light: #1a2028;
   --midnight-lighter: #242d38;
-  --gold-leaf: #c9a227;
+  --gold-leaf: var(--gold-primary);
   --gold-leaf-dark: #b8960b;
-  --gold-leaf-glow: rgba(201, 162, 39, 0.15);
+  --gold-leaf-glow: var(--gold-shimmer);
   --cream: #f5f0e6;
   --cream-muted: rgba(245, 240, 230, 0.85);
   --cream-faded: rgba(245, 240, 230, 0.6);
@@ -48,7 +48,7 @@
   text-align: center;
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+  border-bottom: 1px solid var(--gold-shimmer);
 }
 
 .peopleTitle {
@@ -102,7 +102,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
 }
 
 .peopleSectionCount {
@@ -141,7 +141,7 @@
   flex-direction: column;
   padding: 1.25rem 1.5rem;
   background: var(--midnight-light);
-  border: 1px solid rgba(201, 162, 39, 0.12);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
   text-decoration: none;
   transition: all 0.25s ease;
@@ -157,13 +157,13 @@
 
 /* Featured Card (full bio) */
 .personCardFeatured {
-  border-color: rgba(201, 162, 39, 0.25);
-  background: linear-gradient(135deg, var(--midnight-light) 0%, rgba(201, 162, 39, 0.05) 100%);
+  border-color: var(--gold-shimmer);
+  background: linear-gradient(135deg, var(--midnight-light) 0%, var(--gold-shimmer) 100%);
 }
 
 .personCardFeatured:hover {
   border-color: var(--gold-leaf);
-  background: linear-gradient(135deg, var(--midnight-lighter) 0%, rgba(201, 162, 39, 0.1) 100%);
+  background: linear-gradient(135deg, var(--midnight-lighter) 0%, var(--gold-shimmer) 100%);
 }
 
 .personCardBadge {
@@ -193,6 +193,8 @@
   color: var(--cream);
   margin-bottom: 0.25rem;
   line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .personCardEnglishName {
@@ -201,6 +203,8 @@
   font-size: 0.9375rem;
   color: var(--cream-muted);
   font-style: italic;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .personCardPrimaryName {
@@ -258,17 +262,17 @@
   gap: 1rem;
   padding: 1.25rem 1.5rem;
   background: var(--gold-leaf-glow);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  border: 1px solid var(--gold-shimmer);
   border-radius: 2px;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
 .peopleTreatyLinkButton:hover {
-  background: rgba(201, 162, 39, 0.2);
+  background: var(--gold-shimmer);
   border-color: var(--gold-leaf);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.15);
+  box-shadow: 0 4px 12px var(--gold-shimmer);
 }
 
 .peopleTreatyIcon {
@@ -319,7 +323,7 @@
   text-decoration: none;
   margin-top: var(--section-gap);
   padding-top: 2rem;
-  border-top: 1px solid rgba(201, 162, 39, 0.2);
+  border-top: 1px solid var(--gold-shimmer);
   transition: color 0.25s ease;
 }
 

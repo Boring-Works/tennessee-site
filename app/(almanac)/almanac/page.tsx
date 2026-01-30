@@ -444,6 +444,8 @@ export default function AlmanacPage() {
                     windSpeed={weather.current.windSpeed}
                     todayHigh={todayHigh}
                     todayLow={todayLow}
+                    precipitation={weather.current.precipitation}
+                    snowDepth={weather.current.snowDepth}
                   />
                 </CollapsibleDeck>
 
@@ -708,6 +710,8 @@ export default function AlmanacPage() {
                       windSpeed={weather.current.windSpeed}
                       todayHigh={todayHigh}
                       todayLow={todayLow}
+                      precipitation={weather.current.precipitation}
+                      snowDepth={weather.current.snowDepth}
                     />
                   </div>
                   <div className="mt-4">

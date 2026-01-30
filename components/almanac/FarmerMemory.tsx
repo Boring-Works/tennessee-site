@@ -14,6 +14,8 @@ interface FarmerMemoryProps {
   windSpeed: number
   todayHigh: number
   todayLow: number
+  precipitation?: number
+  snowDepth?: number
 }
 
 export default function FarmerMemory({
@@ -23,6 +25,8 @@ export default function FarmerMemory({
   windSpeed,
   todayHigh,
   todayLow,
+  precipitation = 0,
+  snowDepth = 0,
 }: FarmerMemoryProps) {
   const now = new Date()
   const month = now.getMonth() + 1
@@ -36,8 +40,8 @@ export default function FarmerMemory({
   const relevantDocs = getRelevantDocuments({
     temperature,
     month,
-    hasRain: false, // TODO: Get from weather data
-    hasSnow: false, // TODO: Get from weather data
+    hasRain: precipitation > 0,
+    hasSnow: snowDepth > 0,
     windSpeed,
   })
 

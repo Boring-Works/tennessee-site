@@ -93,6 +93,11 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} ${ebGaramond.variable} antialiased`}
     >
+      <head>
+        {/* DNS prefetch for FareHarbor booking modal - reduces connection latency */}
+        <link rel="dns-prefetch" href="https://fareharbor.com" />
+        <link rel="preconnect" href="https://fareharbor.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-screen flex flex-col">
         <SkipLinks />
         {children}

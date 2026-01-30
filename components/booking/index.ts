@@ -27,5 +27,6 @@
  */
 
 export { BookingButton } from './BookingButton'
+export { BookingOptions } from './BookingOptions'
 export { MobileStickyCTA } from './MobileStickyCTA'
 export { BookingLoadingSkeleton } from './BookingLoadingSkeleton'

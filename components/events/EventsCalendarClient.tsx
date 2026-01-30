@@ -4,8 +4,10 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { EventFilters } from './EventFilters'
 import { AddToCalendarButton } from './AddToCalendarButton'
+import { SmartBadges } from './SmartBadge'
 import { BookingButton } from '@/components/booking'
 import { filterEvents, getEventCounts } from '@/lib/events/filterEvents'
+import { getSmartBadges } from '@/lib/events/smartBadges'
 import { getTicketUrl } from '@/lib/data'
 import type { EventFilter } from '@/types/events'
 import styles from '@/app/(main)/events/page.module.css'
@@ -24,6 +26,7 @@ interface Event {
   requiresTicket: boolean
   ticketUrl?: string | null
   fareHarborId?: string | null
+  capacity?: number
   pricing?: {
     adult?: number | null
     senior?: number | null
@@ -254,6 +257,12 @@ export function EventsCalendarClient({
                           </span>
                         )}
 
+                        {/* Smart Badges - Urgency & Value signals */}
+                        <SmartBadges
+                          badges={getSmartBadges(event, { maxBadges: 2, includeTiming: true })}
+                          className="mt-1.5"
+                        />
+
                         {/* Title */}
                         <h4 className={styles['calendar-event-title']}>{event.title}</h4>
 
@@ -310,24 +319,36 @@ export function EventsCalendarClient({
                               Online Event
                             </span>
                           ) : event.requiresTicket ? (
-                            <BookingButton
-                              itemId={event.fareHarborId || null}
-                              fallbackUrl={
-                                getTicketUrl({
-                                  requiresTicket: event.requiresTicket,
-                                  ticketUrl: event.ticketUrl,
-                                }) || `/events/${event.id}`
-                              }
-                              className={styles['calendar-event-cta-btn']}
-                              eventData={{
-                                id: event.id,
-                                title: event.title,
-                                fareHarborId: event.fareHarborId || undefined,
-                                pricing: event.pricing || null,
-                              }}
-                            >
-                              Reserve Your Spot
-                            </BookingButton>
+                            <>
+                              <BookingButton
+                                itemId={event.fareHarborId || null}
+                                fallbackUrl={
+                                  getTicketUrl({
+                                    requiresTicket: event.requiresTicket,
+                                    ticketUrl: event.ticketUrl,
+                                  }) || `/events/${event.id}`
+                                }
+                                className={styles['calendar-event-cta-btn']}
+                                eventData={{
+                                  id: event.id,
+                                  title: event.title,
+                                  fareHarborId: event.fareHarborId || undefined,
+                                  pricing: event.pricing || null,
+                                }}
+                              >
+                                Reserve Your Spot
+                              </BookingButton>
+                              <p className="text-xs text-stone-500 mt-2">
+                                Questions?{' '}
+                                <a
+                                  href="tel:+14235387396"
+                                  className="text-amber-800 hover:text-amber-900 underline underline-offset-2"
+                                >
+                                  Call (423) 538-7396
+                                </a>{' '}
+                                — we&apos;ll call you back
+                              </p>
+                            </>
                           ) : (
                             <Link
                               href="/visit"

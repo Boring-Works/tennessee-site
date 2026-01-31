@@ -113,7 +113,8 @@ export const HOOKS = {
   governance: "Where Tennessee's government began.",
 
   // Fame Bridge (Tours, secondary marketing)
-  fameBridge: 'Governor Blount governed here. Andrew Jackson lodged here. The State started here.',
+  // Note: Jackson claim removed pending primary source verification (oral tradition only)
+  fameBridge: 'Governor Blount governed here. The State started here.',
 
   // Competitor Separation (Staff scripts, positioning)
   sycamoreSeparation: 'The Army gathered at the Shoals. The State started here.',

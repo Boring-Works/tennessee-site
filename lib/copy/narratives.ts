@@ -94,9 +94,10 @@ export const HISTORICAL_FIGURES = {
   andrewJackson: {
     name: 'Andrew Jackson',
     title: 'Future 7th President',
-    years: '1788',
-    hook: 'Lodged at Rocky Mount for six weeks while awaiting his law license. He was 21 years old.',
+    years: '1788 (oral tradition)',
+    hook: 'According to local tradition, lodged at Rocky Mount while awaiting his law license. He was 21 years old.',
     highlight: 'Future President',
+    note: 'Based on oral tradition, not primary documentation.',
   },
   williamCobb: {
     name: 'William Cobb',
@@ -124,7 +125,8 @@ export const STAFF_SCRIPTS = {
   },
   fameBridge: {
     context: 'Fame Bridge (Tours)',
-    script: 'Governor Blount governed here. Andrew Jackson lodged here. The State started here.',
+    script: 'Governor Blount governed here. The State started here.',
+    note: 'Jackson claim removed pending primary source verification.',
   },
   buildingAgeFAQ: {
     context: 'Building Age FAQ',

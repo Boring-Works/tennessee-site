@@ -10,7 +10,7 @@ export const DEFAULT_METADATA = {
   title: 'Tennessee Starts Here | Rocky Mount State Historic Site',
   titleTemplate: '%s | Tennessee Starts Here',
   description:
-    "Where Tennessee's government began. Stand where Governor Blount governed and Andrew Jackson lodged. Join us for America 250 and Tennessee 230 programming at Rocky Mount State Historic Site in Piney Flats, TN.",
+    "Where Tennessee's government began. Stand where Governor Blount governed the Southwest Territory. Join us for America 250 and Tennessee 230 programming at Rocky Mount State Historic Site in Piney Flats, TN.",
   siteName: 'Tennessee Starts Here',
   url: 'https://tennesseestartshere.com',
   locale: 'en_US',
@@ -24,14 +24,14 @@ export const PAGE_METADATA = {
   home: {
     title: 'Tennessee Starts Here | Rocky Mount State Historic Site',
     description:
-      "Where Tennessee's government began. Stand where Governor Blount governed and Andrew Jackson lodged at Rocky Mount State Historic Site.",
+      "Where Tennessee's government began. Stand where Governor Blount governed the Southwest Territory at Rocky Mount State Historic Site.",
     ogTitle: 'Tennessee Starts Here | Rocky Mount State Historic Site',
     ogDescription: "Where Tennessee's government began. Stand where they stood.",
   },
   visit: {
     title: 'Plan Your Visit',
     description:
-      "Visit Rocky Mount State Historic Site—where Tennessee's government began. Stand where Governor Blount governed and Andrew Jackson lodged. Living history tours daily.",
+      "Visit Rocky Mount State Historic Site—where Tennessee's government began. Stand where Governor Blount governed the Southwest Territory. Living history tours daily.",
     ogTitle: 'Plan Your Visit | Tennessee Starts Here',
     ogDescription:
       "Stand where Tennessee's government began. Living history tours at Rocky Mount State Historic Site.",

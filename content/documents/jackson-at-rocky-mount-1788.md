@@ -9,13 +9,16 @@ collection: standalone
 people_mentioned:
   - william-cobb
 verification:
-  status: verified
+  status: nuance
   source_count: 4
   method: 'Cross-referenced Tennessee Encyclopedia, Rocky Mount Museum, Miller Center, The Hermitage'
-  notes: 'Date narrowed to Spring 1788 based on biographical timelines. No primary documentation (letters or receipts) from Jackson actual stay has been identified. Six-week duration consistently cited across scholarly sources.'
+  notes: 'ORAL TRADITION ONLY - No primary documentation exists. No contemporary letters, receipts, or records from Jackson confirming this stay have been identified. 2006 THC dendrochronology study determined main house was built 1827-1830, decades after the claimed 1788 visit. Director approved removal from marketing 2026-01-30.'
+nuance: 'This account is based on oral tradition passed down through local history, not verified primary sources. Removed from main marketing pending primary source verification.'
 ---
 
 ## Andrew Jackson at Rocky Mount, 1788
+
+> **Note on Sources:** This account is based on oral tradition passed down through local history. No primary documentation (contemporary letters, receipts, or records from Jackson himself) confirming this stay has been identified. A 2006 dendrochronology study by the Tennessee Historical Commission and University of Tennessee determined that the main house at Rocky Mount was built between 1827-1830—decades after Jackson's 1788 journey west. While Jackson did travel through the region en route to Jonesborough, scholars have not verified his specific lodging at this location.
 
 In the spring of 1788, a young attorney named Andrew Jackson crossed the Appalachian Mountains seeking opportunity on the frontier. He had been admitted to the North Carolina bar in September 1787 after studying law under Spruce Macay and John Stokes in Salisbury.
 

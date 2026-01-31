@@ -1,11 +1,17 @@
 ---
+id: andrew-jackson
 slug: andrew-jackson
 name: Andrew Jackson
 birth_date: '1767-03-15'
 death_date: '1845-06-08'
+role: 'Attorney, Military Leader, 7th President of the United States'
+bio_type: territorial-figure
 is_cherokee: false
 is_signatory: false
 dignitary_title: '7th President of the United States'
+rocky_mount_connection:
+  status: oral-tradition
+  note: 'Jackson allegedly lodged at Rocky Mount in 1788, but this is based on oral tradition, not primary documentation. 2006 dendrochronology study shows main house built 1827-1830.'
 ---
 
 ## Andrew Jackson (1767–1845)
@@ -14,9 +20,11 @@ Andrew Jackson was born in the Waxhaws region on the border of North and South C
 
 ### Connection to Rocky Mount
 
-In the spring of 1788, at age twenty-one, Jackson traveled west seeking opportunity on the frontier. He lodged at Rocky Mount—the home of William Cobb—for six weeks while awaiting his license to practice law in the Western District.
+> **Note on Sources:** The following account is based on oral tradition, not primary documentation. No contemporary letters or records from Jackson confirming this stay have been identified.
 
-This stay occurred two years before Governor William Blount would arrive to establish Rocky Mount as the territorial capital.
+According to local tradition, in the spring of 1788, at age twenty-one, Jackson traveled west seeking opportunity on the frontier. He allegedly lodged at Rocky Mount—the home of William Cobb—for six weeks while awaiting his license to practice law in the Western District.
+
+This claimed stay would have occurred two years before Governor William Blount arrived to establish Rocky Mount as the territorial capital. However, a 2006 dendrochronology study by the Tennessee Historical Commission determined the main house was built between 1827-1830, raising questions about the oral tradition.
 
 ### Career Highlights
 

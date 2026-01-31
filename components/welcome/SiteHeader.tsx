@@ -2,46 +2,79 @@
 
 import Link from 'next/link'
 import { useEffect, useSyncExternalStore } from 'react'
-import { useHours } from '@/lib/hooks/useHours'
+import { getSiteStatus } from '@/lib/siteHours'
 
-interface OperatingStatus {
+interface DisplayStatus {
   isOpen: boolean
   message: string
+  cta: string
 }
 
 /**
- * Get current operating status for Rocky Mount
- * Uses hours from siteInfo.json: Wed-Sat 10am-5pm, Season: March 4 - mid-December
+ * Transform site status into positive, inviting display messages
+ * Never says "Closed" - focuses on when you CAN visit
  */
-function getOperatingStatus(hoursData: ReturnType<typeof useHours>): OperatingStatus {
-  const now = new Date()
-  const day = now.getDay() // 0 = Sunday, 6 = Saturday
-  const hour = now.getHours()
+function getDisplayStatus(): DisplayStatus {
+  const status = getSiteStatus()
 
-  // Check if we're open Wed-Sat (3-6)
-  const isOpenDay = day >= 3 && day <= 6
-
-  // Check if within operating hours (10am-5pm)
-  const isOpenHours = hour >= 10 && hour < 17
-
-  // Note: Season dates (March 4 - mid-December) not enforced in this component
-  // as the site should handle closed season messaging at a higher level
-
-  if (isOpenDay && isOpenHours) {
+  // Currently open - celebrate it
+  if (status.isOpen) {
+    const closeTime = status.message.match(/(\d+:\d+ [AP]M)/)?.[1] || '5:00 PM'
     return {
       isOpen: true,
-      message: `Open Today · ${hoursData.formatted.short}`,
+      message: `Open until ${closeTime}`,
+      cta: 'Visit today',
     }
   }
 
+  // Off-season - focus on season opening
+  if (status.reason === 'Before operating season' || status.reason === 'After operating season') {
+    if (status.nextOpen) {
+      const openDate = status.nextOpen.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })
+      return {
+        isOpen: false,
+        message: `Opens ${openDate}`,
+        cta: 'Start planning',
+      }
+    }
+    return {
+      isOpen: false,
+      message: 'Seasonal site',
+      cta: 'Plan ahead',
+    }
+  }
+
+  // Not an open day (Sun-Tue) - show regular hours
+  if (status.reason === 'Not an open day') {
+    return {
+      isOpen: false,
+      message: 'Wed–Sat 10am–5pm',
+      cta: 'Plan your visit',
+    }
+  }
+
+  // Special event prep - show the event info
+  if (status.reason.includes('Preparing')) {
+    return {
+      isOpen: false,
+      message: status.specialHours?.eventTitle || 'Special event tonight',
+      cta: 'See details',
+    }
+  }
+
+  // Default: show hours info positively
   return {
     isOpen: false,
-    message: `Open ${hoursData.formatted.short}`,
+    message: 'Wed–Sat 10am–5pm',
+    cta: 'Plan your visit',
   }
 }
 
-// Store for operating status - allows use with useSyncExternalStore
-let currentStatus: OperatingStatus | null = null
+// Store for display status - allows use with useSyncExternalStore
+let currentDisplay: DisplayStatus | null = null
 const statusListeners = new Set<() => void>()
 
 function subscribeToStatus(callback: () => void) {
@@ -49,11 +82,11 @@ function subscribeToStatus(callback: () => void) {
   return () => statusListeners.delete(callback)
 }
 
-function getStatusSnapshot(): OperatingStatus | null {
-  return currentStatus
+function getStatusSnapshot(): DisplayStatus | null {
+  return currentDisplay
 }
 
-function getServerStatusSnapshot(): OperatingStatus | null {
+function getServerStatusSnapshot(): DisplayStatus | null {
   return null // Return null on server to avoid hydration mismatch
 }
 
@@ -70,28 +103,29 @@ function useIsClient() {
 
 export function SiteHeader() {
   const isClient = useIsClient()
-  const status = useSyncExternalStore(subscribeToStatus, getStatusSnapshot, getServerStatusSnapshot)
-  const hours = useHours()
+  const display = useSyncExternalStore(
+    subscribeToStatus,
+    getStatusSnapshot,
+    getServerStatusSnapshot
+  )
 
   // Initialize status on mount and set up interval for updates
   useEffect(() => {
-    // Initialize the status store with hours data
-    const newStatus = getOperatingStatus(hours)
-    currentStatus = newStatus
+    // Initialize the status store
+    currentDisplay = getDisplayStatus()
     statusListeners.forEach((listener) => listener())
 
-    // Update status every minute to catch opening/closing transitions
+    // Update every minute to catch opening/closing transitions
     const interval = setInterval(() => {
-      const updatedStatus = getOperatingStatus(hours)
-      currentStatus = updatedStatus
+      currentDisplay = getDisplayStatus()
       statusListeners.forEach((listener) => listener())
     }, 60000)
 
     return () => clearInterval(interval)
-  }, [hours])
+  }, [])
 
   // Show static version during SSR or before client hydration
-  if (!isClient || !status) {
+  if (!isClient || !display) {
     return (
       <Link
         href="/visit"
@@ -99,9 +133,9 @@ export function SiteHeader() {
         aria-label="View visiting information for Rocky Mount"
       >
         <span className="site-header-content">
-          <span className="site-header-location">Sullivan County, Tennessee</span>
+          <span className="site-header-location">Sullivan County</span>
         </span>
-        <span className="site-header-cta">Plan Your Visit &rarr;</span>
+        <span className="site-header-cta">Plan your visit &rarr;</span>
       </Link>
     )
   }
@@ -113,15 +147,15 @@ export function SiteHeader() {
       aria-label="View visiting information for Rocky Mount"
     >
       <span className="site-header-content">
-        <span className="site-header-location">Sullivan County, Tennessee</span>
+        <span className="site-header-location">Sullivan County</span>
         <span className="site-header-separator" aria-hidden="true">
-          &middot;
+          ·
         </span>
-        <span className={`site-header-status ${status.isOpen ? 'site-header-status--open' : ''}`}>
-          {status.message}
+        <span className={`site-header-status ${display.isOpen ? 'site-header-status--open' : ''}`}>
+          {display.message}
         </span>
       </span>
-      <span className="site-header-cta">Plan Your Visit &rarr;</span>
+      <span className="site-header-cta">{display.cta} &rarr;</span>
     </Link>
   )
 }

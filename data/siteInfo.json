@@ -1,4 +1,99 @@
 {
+  "_meta": {
+    "description": "Site-wide information - hours, prices, locations, contact details, historical figures, and America 250 program details",
+    "updated": "2026-01-30",
+    "usage": "import siteInfo from '@/data/siteInfo.json'",
+    "staffInstructions": "This file contains all the basic information about Rocky Mount that appears throughout the website. Edit this file when admission prices change, contact info updates, or hours text needs adjustment. Always save a backup before editing. Changes go live automatically after saving.",
+    "fieldGuide": {
+      "site": "Basic site identity - name, tagline, historical dates. RARELY needs editing.",
+      "location": "Physical address, GPS coordinates, driving directions. Update only if address changes.",
+      "contact": "Phone, email, website, social media handles. Update when contact info changes.",
+      "hours": "Display text for hours shown on website. NOTE: This is DISPLAY ONLY - the actual open/closed logic comes from operatingSchedule.json",
+      "admission": "Current ticket prices by category. UPDATE ANNUALLY or when prices change.",
+      "admissionIncludes": "List of what's included with admission. Update if tour offerings change.",
+      "whatToExpect": "Tour details and accessibility info. Update if tour format changes.",
+      "sisterSites": "Nearby historic sites for cross-promotion. Rarely needs updates.",
+      "nearbyAttractions": "Local attractions for visitors. Update as needed.",
+      "first250": "America 250 founding program details. This is a one-time 2026 program.",
+      "america250": "2026 commemoration details and Rocky Mount's historical role.",
+      "historicalFigures": "Key people in Rocky Mount history. Content rarely changes."
+    },
+    "whenToUpdate": {
+      "annually": [
+        "admission prices (January, if changing)",
+        "hours.season text (if dates change)",
+        "hours.seasonNote (special notes for the year)"
+      ],
+      "asNeeded": [
+        "contact.phone or contact.email (when info changes)",
+        "contact.social handles (when accounts change)",
+        "hours.formatted text (if hours change)",
+        "whatToExpect.features (if tour offerings change)"
+      ],
+      "rarely": [
+        "site information (name, tagline)",
+        "location data (address, coordinates)",
+        "historicalFigures (historical content)"
+      ]
+    },
+    "rules": [
+      "Prices must be numbers, not text (12 not '$12')",
+      "Phone numbers use format: (XXX) XXX-XXXX",
+      "Dates use ISO format: YYYY-MM-DD",
+      "Social handles are just the username, no @ symbol",
+      "Always test the site after making changes"
+    ],
+    "commonMistakes": [
+      "WRONG: 'price': '$12' - Don't include dollar sign, use number only",
+      "WRONG: 'phone': '423-538-7396' - Use parentheses: '(423) 538-7396'",
+      "WRONG: 'facebook': '@rockymountmuseum' - No @ symbol needed",
+      "WRONG: Editing hours.regular days to change when we're open - Those are DISPLAY ONLY, actual logic is in operatingSchedule.json",
+      "WRONG: Forgetting the comma after a value - Every line except the last in a section needs a comma"
+    ],
+    "_priceUpdateChecklist": {
+      "description": "Follow these steps when updating admission prices",
+      "steps": [
+        "1. Update admission.adults.price (number only, no $)",
+        "2. Update admission.seniors.price",
+        "3. Update admission.children.price",
+        "4. Update _meta.updated to today's date (YYYY-MM-DD)",
+        "5. ALSO UPDATE: data/config/operatingSchedule.json pricing tiers",
+        "6. Save file and verify site builds correctly"
+      ],
+      "example": "To change adult price from $12 to $15: change '\"price\": 12' to '\"price\": 15'"
+    },
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS verify price changes with user before committing",
+        "NEVER change contact phone/email without explicit permission",
+        "NEVER modify location coordinates",
+        "NEVER fabricate historical figure information"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date",
+        "format": "YYYY-MM-DD"
+      },
+      "priceRules": [
+        "Prices in this file are in DOLLARS (not cents)",
+        "Always confirm price changes with user",
+        "If updating prices, also update operatingSchedule.json"
+      ],
+      "prohibited": [
+        "Do NOT change site.name or site.shortName",
+        "Do NOT modify address without verification",
+        "Do NOT remove historicalFigures entries",
+        "Do NOT change hours.formatted without updating operatingSchedule.json"
+      ],
+      "crossFileSync": {
+        "prices": "Must match data/config/operatingSchedule.json pricingSchedule",
+        "hours": "Display text only - actual logic in lib/siteHours.ts"
+      },
+      "whenUnsure": "Ask the user rather than making assumptions about site operations"
+    }
+  },
   "site": {
     "name": "Rocky Mount State Historic Site",
     "tagline": "Tennessee Starts Here",
@@ -66,6 +161,7 @@
     }
   },
   "hours": {
+    "_note": "These are DISPLAY values only. The actual open/closed logic is calculated from data/config/operatingSchedule.json",
     "regular": {
       "wednesday": "10:00 AM - 5:00 PM",
       "thursday": "10:00 AM - 5:00 PM",
@@ -95,6 +191,7 @@
     "Free parking"
   ],
   "admission": {
+    "_note": "Prices are numbers only (no dollar signs). These should match the tiers in operatingSchedule.json",
     "adults": {
       "price": 12,
       "label": "Adults"

@@ -4,11 +4,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useRef, memo } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import navigation from '@/data/navigation.json'
 import styles from './Header/Header.module.css'
 
 interface DropdownItem {
   href: string
   label: string
+  description?: string
+  featured?: boolean
+  badge?: string
 }
 
 interface NavItem {
@@ -18,54 +22,8 @@ interface NavItem {
   badge?: string
 }
 
-const NAV_STRUCTURE: NavItem[] = [
-  {
-    label: 'Visit',
-    href: '/visit',
-    dropdown: [
-      { label: 'Plan Your Visit', href: '/visit' },
-      { label: 'Hours & Admission', href: '/visit#plan-your-visit' },
-      { label: 'Group Tours', href: '/groups' },
-    ],
-  },
-  {
-    label: 'Events',
-    href: '/events',
-    dropdown: [
-      { label: '2026 Calendar', href: '/events' },
-      { label: 'Lecture Series', href: '/lectures' },
-      { label: 'Programs', href: '/programs' },
-    ],
-  },
-  {
-    label: 'Evidence Room',
-    href: '/evidence',
-    dropdown: [
-      { label: 'Documents', href: '/evidence/documents' },
-      { label: 'People', href: '/evidence/people' },
-      { label: 'Timeline', href: '/evidence/timeline' },
-      { label: 'Collections', href: '/evidence/collections' },
-    ],
-  },
-  {
-    label: 'Explore',
-    href: '/explore',
-    dropdown: [
-      { label: 'Our Story', href: '/our-story' },
-      { label: 'Original Seven', href: '/explore' },
-      { label: 'For Educators', href: '/educators' },
-    ],
-  },
-  {
-    label: 'Support',
-    href: '/support',
-    dropdown: [
-      { label: 'Membership', href: '/membership' },
-      { label: 'Donate', href: '/support' },
-      { label: 'First 250 Registry', href: '/first-250' },
-    ],
-  },
-]
+// Type-safe wrapper to ensure structure matches JSON
+const NAV_STRUCTURE: NavItem[] = navigation.mainNav as NavItem[]
 
 /**
  * Navigation Component

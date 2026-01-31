@@ -4,6 +4,7 @@ import { memo, useCallback } from 'react'
 import Link from 'next/link'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './Footer/Footer.module.css'
+import { ReviewCTA } from './ReviewCTA'
 
 // Period-authentic quill icon
 const QuillIcon = () => (
@@ -423,10 +424,17 @@ function FooterComponent() {
               </div>
             </div>
 
-            {/* Newsletter Signup */}
+            {/* Newsletter Signup - See data/integrations.json for setup */}
             <div className={styles['footer-newsletter']}>
               <h4 className={styles['footer-newsletter-title']}>Stay Informed</h4>
-              <p className={styles['footer-newsletter-desc']}>Receive news of events & lectures</p>
+              <p className={styles['footer-newsletter-desc']}>
+                Follow us on social media for event updates, or call{' '}
+                <a href="tel:+14235387396" className={styles['footer-newsletter-link']}>
+                  (423) 538-7396
+                </a>{' '}
+                to join our mailing list.
+              </p>
+              {/* Newsletter form - uncomment when email service is configured
               <form className={styles['footer-newsletter-form']} action="#" method="POST">
                 <div className={styles['footer-newsletter-input-wrapper']}>
                   <input
@@ -453,9 +461,18 @@ function FooterComponent() {
                   </button>
                 </div>
               </form>
+              */}
             </div>
           </div>
         </div>
+
+        {/* Review CTA - Data-driven from integrations.json */}
+        <ReviewCTA
+          variant="footer"
+          headline="Enjoyed Your Visit?"
+          subtext="Help future visitors discover Rocky Mount by sharing your experience."
+          className="border-t border-white/10 mt-8"
+        />
 
         {/* Bottom Bar with decorative rule */}
         <div className={styles['footer-bottom']}>

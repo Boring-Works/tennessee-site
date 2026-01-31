@@ -9,6 +9,7 @@
 // Core Display Components
 // ============================================================================
 export { AlmanacHero } from './AlmanacHero'
+export { VisitorStatusCard } from './VisitorStatusCard'
 export { default as CurrentConditionsCard } from './CurrentConditionsCard'
 export { WeatherDetails } from './WeatherDetails'
 export { default as HourlySparkline } from './HourlySparkline'

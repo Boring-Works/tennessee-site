@@ -59,6 +59,13 @@ interface BookingButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'o
    * Event data for comprehensive analytics tracking (GA4 + Facebook Pixel)
    */
   eventData?: EventAnalyticsData
+
+  /**
+   * Show phone booking alternative below the button
+   * Helpful for older visitors who prefer phone reservations
+   * @default false
+   */
+  showPhoneOption?: boolean
 }
 
 /**
@@ -81,6 +88,7 @@ function BookingButtonComponent({
   variant = 'primary',
   analyticsEvent,
   eventData,
+  showPhoneOption = false,
   children = 'Reserve Your Spot',
   className = '',
   ...props
@@ -138,27 +146,46 @@ function BookingButtonComponent({
 
   const combinedClassName = `${baseStyles} ${variantStyles[variant]} ${className}`.trim()
 
+  // Phone option component (shared between client and SSR renders)
+  const phoneOption = showPhoneOption ? (
+    <p className="mt-3 text-sm text-stone-600">
+      Prefer to book by phone?{' '}
+      <a
+        href="tel:+14235387396"
+        className="font-medium text-amber-800 hover:text-amber-900 underline underline-offset-2"
+      >
+        Call (423) 538-7396
+      </a>
+    </p>
+  ) : null
+
   // Client-side: render as button with FareHarbor Lightbox attributes
   if (isMounted) {
     return (
-      <button
-        type="button"
-        className={combinedClassName}
-        data-fh-open={shortname}
-        data-fh-item={itemId || undefined}
-        onClick={handleClick}
-        {...props}
-      >
-        {children} <span aria-hidden="true">→</span>
-      </button>
+      <div className="inline-flex flex-col items-center">
+        <button
+          type="button"
+          className={combinedClassName}
+          data-fh-open={shortname}
+          data-fh-item={itemId || undefined}
+          onClick={handleClick}
+          {...props}
+        >
+          {children} <span aria-hidden="true">→</span>
+        </button>
+        {phoneOption}
+      </div>
     )
   }
 
   // SSR: render as link (fallback for no-JS and server-side)
   return (
-    <a href={directUrl} className={combinedClassName} rel="noopener noreferrer" target="_blank">
-      {children} <span aria-hidden="true">→</span>
-    </a>
+    <div className="inline-flex flex-col items-center">
+      <a href={directUrl} className={combinedClassName} rel="noopener noreferrer" target="_blank">
+        {children} <span aria-hidden="true">→</span>
+      </a>
+      {phoneOption}
+    </div>
   )
 }
 

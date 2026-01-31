@@ -31,7 +31,10 @@ import { BrassBarometer } from '@/components/almanac/BrassBarometer'
 import { MercuryThermometer } from '@/components/almanac/MercuryThermometer'
 import { CopperWeathervane } from '@/components/almanac/CopperWeathervane'
 import { GovernorsBriefing } from '@/components/almanac/GovernorsBriefing'
+import { VisitorStatusCard } from '@/components/almanac/VisitorStatusCard'
+import { PlanningIntelligenceCard } from '@/components/almanac/PlanningIntelligenceCard'
 import { generateGovernorsBriefing } from '@/lib/almanac/generateBriefing'
+import { generateTLDRSummary, generatePlanningIntelligence } from '@/lib/almanac/governorContent'
 
 // 🚀 PERFORMANCE: Dynamic imports for heavy/below-fold components
 // Reduces initial bundle size by ~30%
@@ -378,10 +381,13 @@ export default function AlmanacPage() {
             </div>
 
             {/* ============================================================
-              MOBILE LAYOUT: Single column, organized vertically
+              MOBILE LAYOUT: Tourist-First Information Hierarchy
+              Single column, organized for visit planning (80% of mobile users)
               ============================================================ */}
             <div className="flex flex-col gap-4 lg:hidden">
-              {/* Quick Actions - Critical decisions only */}
+              {/* ===== ABOVE FOLD: Visitor Planning (3 screens) ===== */}
+
+              {/* 1. Quick Actions - Critical decisions only */}
               <QuickActions
                 hasActiveAlert={hasActiveAlert}
                 alertTitle={alertTitle}
@@ -389,7 +395,7 @@ export default function AlmanacPage() {
                 freezeInfo={freezeInfo}
               />
 
-              {/* NOW Display */}
+              {/* 2. NOW Display - Current conditions */}
               <NowDisplay
                 temperature={weather.current.temperature}
                 feelsLike={weather.current.feelsLike}
@@ -404,16 +410,32 @@ export default function AlmanacPage() {
                 lastUpdated={lastUpdated}
               />
 
-              {/* Next Change Hero */}
+              {/* 3. Visitor Status Card - Answers "Should I visit today?"
+                  Shows visit recommendation based on weather, alerts, and site status.
+                  Wired from: weather.current, hasActiveAlert */}
+              <VisitorStatusCard
+                temperature={weather.current.temperature}
+                weatherCode={weather.current.weatherCode}
+                hasAlerts={hasActiveAlert}
+                windSpeed={weather.current.windSpeed}
+                precipitation={weather.current.precipitation}
+              />
+
+              {/* 4. 7-Day Forecast - Tourist planning horizon (MOVED UP from position 8) */}
+              <CompactSevenDay days={compactDays} />
+
+              {/* 5. Hourly Forecast - Next 12 hours detail */}
+              <HourlySparkline hourly={weather.hourly} />
+
+              {/* 6. Next Change Hero - Upcoming significant changes */}
               <NextChangeHero hourly={weather.hourly} currentTemp={weather.current.temperature} />
+
+              {/* ===== BELOW FOLD: Detail sections (collapsed by default) ===== */}
 
               {/* Decision Rail - Climate Context */}
               <DecisionRail tempAnomaly={tempAnomaly} />
 
-              {/* Hourly Sparkline */}
-              <HourlySparkline hourly={weather.hourly} />
-
-              {/* Workability Scores */}
+              {/* Workability Scores - Useful for farmers/gardeners */}
               <TaskScores
                 sower={taskScores.sower}
                 shepherd={taskScores.shepherd}
@@ -422,7 +444,7 @@ export default function AlmanacPage() {
                 aqi={aqi}
               />
 
-              {/* Tomorrow + 7-Day */}
+              {/* Tomorrow + Burn Day Info */}
               <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
                 <TomorrowPreview tomorrow={tomorrowData} />
                 <BurnDayIndicator
@@ -431,7 +453,6 @@ export default function AlmanacPage() {
                   onStatusChange={setBurnDayStatus}
                 />
               </div>
-              <CompactSevenDay days={compactDays} />
 
               {/* Today Deck */}
               <div className="space-y-4 pt-4 border-t border-white/10">
@@ -577,8 +598,17 @@ export default function AlmanacPage() {
 
               {/* ========== ROW 2: Planning ========== */}
               <section aria-label="Planning" className="lg:col-span-12 grid lg:grid-cols-12 gap-4">
-                {/* Tomorrow + Burn Day */}
+                {/* Visitor Status + Tomorrow + Burn Day (3 cols) */}
                 <div className="lg:col-span-3 flex flex-col gap-3">
+                  {/* Visitor Status Card - Answers "Should I visit today?"
+                      Wired from: weather.current, hasActiveAlert */}
+                  <VisitorStatusCard
+                    temperature={weather.current.temperature}
+                    weatherCode={weather.current.weatherCode}
+                    hasAlerts={hasActiveAlert}
+                    windSpeed={weather.current.windSpeed}
+                    precipitation={weather.current.precipitation}
+                  />
                   <TomorrowPreview tomorrow={tomorrowData} />
                   <BurnDayIndicator
                     lat={location.latitude}
@@ -790,6 +820,12 @@ export default function AlmanacPage() {
                 windSpeed={weather.current.windSpeed}
               />
             </div>
+
+            {/* TL;DR Summary & Planning Intelligence */}
+            <PlanningIntelligenceCard
+              tldr={generateTLDRSummary(weather)}
+              planning={generatePlanningIntelligence(weather)}
+            />
 
             {/* Governor's Intelligence Briefing */}
             <GovernorsBriefing briefing={generateGovernorsBriefing(weather)} />

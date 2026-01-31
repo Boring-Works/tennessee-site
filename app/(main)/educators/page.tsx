@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Claim } from '@/components/evidence/Claim'
 import siteInfo from '@/data/siteInfo.json'
+import educatorPrograms from '@/data/educatorPrograms.json'
 import styles from './page.module.css'
 
 /** Section divider component for period-authentic transitions */
@@ -29,65 +30,26 @@ export const metadata: Metadata = {
   },
 }
 
-/** Program type definition */
-interface Program {
-  name: string
-  duration: string
-  capacity: string
-  description: string
+/** Icon name to emoji mapping for highlights */
+const ICON_MAP: Record<string, string> = {
+  CheckCircle: '📚',
+  Hands: '🎓',
+  Bus: '🚌',
 }
 
-/** Stat type definition */
-interface Stat {
-  label: string
-  icon: string
-}
+/** Map JSON programs to display format */
+const PROGRAMS = educatorPrograms.programs.map((program) => ({
+  name: program.name,
+  duration: program.duration,
+  capacity: program.capacity,
+  description: program.description,
+}))
 
-const PROGRAMS: Program[] = [
-  {
-    name: 'Living History Tour',
-    duration: '~2 hours',
-    capacity: 'Any group size',
-    description:
-      'Guided tour with costumed interpreters, introductory video, and museum gallery access.',
-  },
-  {
-    name: 'Tour & Craft',
-    duration: '~3.5 hours',
-    capacity: 'Up to 80 students',
-    description: 'Tour plus hands-on frontier craft activity.',
-  },
-  {
-    name: 'Living History Sampler',
-    duration: '3-4 hours',
-    capacity: '80+ students',
-    description: 'Multiple demonstration stations for larger groups.',
-  },
-  {
-    name: 'Preschool Program',
-    duration: '~1.5 hours',
-    capacity: 'Ages 3-5',
-    description: 'Stories, games, and sheep interaction.',
-  },
-  {
-    name: 'Kindergarten Program',
-    duration: '~1.5 hours',
-    capacity: 'Kindergarten',
-    description: 'Scavenger hunt, wool processing demo.',
-  },
-  {
-    name: 'Virtual Programs',
-    duration: '45-60 min',
-    capacity: 'Zoom/WebEx',
-    description: 'Bring Rocky Mount to your classroom remotely.',
-  },
-]
-
-const STATS: Stat[] = [
-  { label: 'TN Standards Aligned', icon: '📚' },
-  { label: 'Hands-On Learning', icon: '🎓' },
-  { label: 'Bus Parking Available', icon: '🚌' },
-]
+/** Map JSON highlights to stats format */
+const STATS = educatorPrograms.highlights.map((highlight) => ({
+  label: highlight.text,
+  icon: ICON_MAP[highlight.icon] || '📋',
+}))
 
 export default function EducatorsPage() {
   const phoneNumber = siteInfo.contact.phone.replace(/[^0-9]/g, '')
@@ -105,7 +67,7 @@ export default function EducatorsPage() {
             Give your students a tangible connection to Tennessee&apos;s founding.
           </p>
           <a
-            href="https://form.jotform.com/230155675460152"
+            href={educatorPrograms.bookingInfo.formUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={`${styles['cta-primary']} btn-medium`}
@@ -191,7 +153,7 @@ export default function EducatorsPage() {
             Book a Field Trip
           </h2>
           <a
-            href="https://form.jotform.com/230155675460152"
+            href={educatorPrograms.bookingInfo.formUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={`${styles['cta-primary']} btn-medium`}
@@ -203,8 +165,11 @@ export default function EducatorsPage() {
           </a>
           <p className={styles['booking-contact']}>
             Questions?{' '}
-            <a href="mailto:rockymountmuseum@gmail.com" aria-label="Email Rocky Mount Museum">
-              rockymountmuseum@gmail.com
+            <a
+              href={`mailto:${educatorPrograms.bookingInfo.email}`}
+              aria-label="Email Rocky Mount Museum"
+            >
+              {educatorPrograms.bookingInfo.email}
             </a>{' '}
             |{' '}
             <a href={`tel:+1${phoneNumber}`} aria-label={`Call ${siteInfo.contact.phone}`}>
@@ -221,16 +186,11 @@ export default function EducatorsPage() {
             Funding Your Trip
           </h2>
           <ul className={styles['funding-list']}>
-            <li>
-              <strong>TN Arts Commission:</strong> Student Ticket Subsidy Grants (30-day advance
-              application required)
-            </li>
-            <li>
-              <strong>OVTA:</strong> Needs-based funding for transportation and admission
-            </li>
-            <li>
-              <strong>Title I:</strong> Check with your district
-            </li>
+            {educatorPrograms.funding.sources.map((source) => (
+              <li key={source.name}>
+                <strong>{source.name}:</strong> {source.description}
+              </li>
+            ))}
           </ul>
         </div>
       </section>

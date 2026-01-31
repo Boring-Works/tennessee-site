@@ -195,7 +195,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
           <button
             type="button"
             onClick={() => setIsPlaying(!isPlaying)}
-            className="p-1.5 rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 transition-colors"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded bg-almanac-gold/10 hover:bg-almanac-gold/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold"
             title={isPlaying ? 'Pause animation' : 'Play animation'}
             aria-label={isPlaying ? 'Pause radar animation' : 'Play radar animation'}
           >
@@ -259,7 +259,7 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
       </div>
 
       {/* Timeline */}
-      <div className="flex gap-1 mb-3">
+      <div className="flex gap-1 mb-3 items-center">
         {frames.map((_, idx) => (
           <button
             key={idx}
@@ -267,13 +267,19 @@ export default function PrecipitationRadar({ latitude, longitude }: Precipitatio
               setIsPlaying(false)
               setCurrentFrame(idx)
             }}
-            className={`flex-1 h-1.5 rounded-full transition-colors ${
+            className={`flex-1 min-h-[44px] py-4 px-0.5 rounded-full transition-colors flex items-center justify-center ${
               idx === currentFrame
                 ? 'bg-almanac-gold'
                 : 'bg-almanac-gold/20 hover:bg-almanac-gold/40'
             }`}
             aria-label={`Frame ${idx + 1} of ${frames.length}`}
-          />
+          >
+            <span
+              className={`w-full h-1.5 rounded-full transition-colors ${
+                idx === currentFrame ? 'bg-almanac-gold' : 'bg-almanac-gold/20'
+              }`}
+            />
+          </button>
         ))}
       </div>
 

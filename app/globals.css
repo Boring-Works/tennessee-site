@@ -64,6 +64,64 @@
   --gold-shimmer: rgba(201, 162, 39, 0.4); /* Glows, borders, overlays - 40% opacity */
 
   /* ============================================
+     OVERLAY & OPACITY SYSTEM
+     Standardized opacity variants for backgrounds, borders, and overlays
+     Usage: Replace hardcoded rgba values with these tokens
+     ============================================ */
+
+  /* Dark Overlays (navy/primary) */
+  --overlay-dark-subtle: rgba(10, 22, 40, 0.05);
+  --overlay-dark-light: rgba(10, 22, 40, 0.1);
+  --overlay-dark-medium: rgba(10, 22, 40, 0.2);
+  --overlay-dark-strong: rgba(10, 22, 40, 0.3);
+
+  /* White Overlays */
+  --overlay-white-subtle: rgba(255, 255, 255, 0.05);
+  --overlay-white-light: rgba(255, 255, 255, 0.1);
+  --overlay-white-medium: rgba(255, 255, 255, 0.2);
+
+  /* Brown/Wood Overlays (for inset shadows, document cards) */
+  --overlay-brown-subtle: rgba(139, 69, 19, 0.03);
+  --overlay-brown-light: rgba(139, 69, 19, 0.05);
+  --overlay-brown-medium: rgba(139, 69, 19, 0.08);
+
+  /* Gold Overlays */
+  --overlay-gold-subtle: rgba(201, 162, 39, 0.04);
+  --overlay-gold-light: rgba(201, 162, 39, 0.08);
+  --overlay-gold-medium: rgba(201, 162, 39, 0.15);
+  --overlay-gold-strong: rgba(201, 162, 39, 0.25);
+
+  /* ============================================
+     GRADIENT TOKENS
+     Reusable gradient patterns across components
+     ============================================ */
+
+  /* Fade gradients */
+  --gradient-dark-fade: linear-gradient(
+    to bottom,
+    rgba(10, 22, 40, 1) 0%,
+    rgba(10, 22, 40, 0.95) 100%
+  );
+  --gradient-dark-overlay: linear-gradient(to bottom, transparent 0%, rgba(10, 22, 40, 0.8) 100%);
+
+  /* Decorative gold lines */
+  --gradient-gold-line: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
+  --gradient-gold-subtle: linear-gradient(
+    135deg,
+    var(--overlay-gold-light) 0%,
+    var(--overlay-gold-subtle) 100%
+  );
+
+  /* Divider lines */
+  --gradient-divider: linear-gradient(
+    90deg,
+    transparent,
+    var(--secondary) 20%,
+    var(--secondary) 80%,
+    transparent
+  );
+
+  /* ============================================
      NAVIGATION DESIGN TOKENS
      ============================================ */
 

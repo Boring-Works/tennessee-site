@@ -170,7 +170,7 @@
 }
 
 .visit-hero-season {
-  margin-top: 1rem;
+  margin-top: var(--space-md);
   font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.02em;
@@ -262,13 +262,13 @@
 @media (min-width: 768px) {
   .visit-figures-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: var(--gap-xl);
   }
 }
 
 .visit-figures-fame-bridge {
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
+  margin-top: var(--space-xl);
+  padding: var(--space-lg) 1.5rem;
   background: rgba(0, 0, 0, 0.02);
   border-left: 3px solid var(--accent);
   font-family: var(--font-serif-elegant);
@@ -281,14 +281,14 @@
 @media (min-width: 768px) {
   .visit-figures-fame-bridge {
     font-size: 1.25rem;
-    padding: 1.5rem 2rem;
+    padding: var(--space-lg) var(--space-xl);
   }
 }
 
 .visit-figure {
   background: white;
-  padding: 1.75rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
   position: relative;
 }
 
@@ -301,7 +301,7 @@
   color: white;
   background: var(--secondary);
   padding: 0.25rem 0.625rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .visit-figure-name {
@@ -309,13 +309,13 @@
   font-size: 1.375rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-2xs);
 }
 
 .visit-figure-title {
   font-size: 0.875rem;
   color: var(--text-light);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .visit-figure-years {
@@ -368,7 +368,7 @@
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .visit-experience-intro {
@@ -394,7 +394,7 @@
 .visit-moment {
   display: flex;
   gap: var(--gap-md);
-  padding: 1.25rem;
+  padding: var(--space-lg);
   background: var(--cream);
   border-left: 3px solid var(--accent);
 }
@@ -414,7 +414,7 @@
   font-size: 1.0625rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-2xs);
 }
 
 .visit-moment-desc {
@@ -425,7 +425,7 @@
 
 .visit-experience-footer {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 .visit-experience-note {
@@ -464,7 +464,7 @@
   text-transform: uppercase;
   color: var(--accent);
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 @media (min-width: 768px) {
@@ -541,7 +541,7 @@
   font-size: 0.8125rem;
   font-style: italic;
   color: var(--text-light);
-  margin-top: 1rem;
+  margin-top: var(--space-md);
 }
 
 .visit-card--featured .visit-card-note {
@@ -616,13 +616,13 @@
 .visit-book-desc {
   font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--space-lg);
 }
 
 .visit-book-includes {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--gap-xs);
@@ -647,7 +647,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   width: 100%;
   font-weight: 700;
   text-transform: uppercase;
@@ -670,15 +670,15 @@
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
   text-align: center;
-  margin-top: 0.75rem;
+  margin-top: var(--space-sm);
 }
 
 /* Before You Arrive */
 .visit-prepare {
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
   padding: var(--space-lg);
   background: white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 @media (min-width: 768px) {
@@ -692,7 +692,7 @@
   font-size: 1.125rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .visit-prepare-list {
@@ -701,13 +701,13 @@
   gap: var(--gap-sm) var(--gap-xl);
   list-style: none;
   padding: 0;
-  margin: 0 0 1.25rem;
+  margin: 0 0 var(--space-lg);
 }
 
 .visit-prepare-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--gap-xs);
   font-size: 0.9375rem;
   color: var(--foreground);
 }
@@ -760,7 +760,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 @media (min-width: 768px) {
@@ -774,7 +774,7 @@
   font-size: clamp(1.75rem, 5vw, 2.25rem);
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .visit-journey-intro {
@@ -804,7 +804,7 @@
 
 .visit-address {
   font-style: normal;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .visit-address strong {
@@ -812,7 +812,7 @@
   font-family: var(--font-serif);
   font-size: 1.125rem;
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .visit-address span {
@@ -824,13 +824,13 @@
 .visit-journey-directions {
   font-size: 0.9375rem;
   color: var(--text-light);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
 }
 
 .visit-journey-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
 }
 
 .visit-journey-btn {
@@ -861,7 +861,7 @@
 
 .visit-journey-btn--secondary:hover {
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .visit-journey-btn:focus-visible {
@@ -885,7 +885,7 @@
   text-align: center;
   padding: var(--space-md) var(--space-lg);
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 768px) {
@@ -942,7 +942,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--secondary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .visit-trail-headline {
@@ -950,7 +950,7 @@
   font-size: clamp(1.75rem, 5vw, 2.25rem);
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .visit-trail-intro {
@@ -983,8 +983,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .visit-trail-site-name {
@@ -1010,7 +1010,7 @@
   text-align: center;
   font-size: 0.9375rem;
   color: var(--text-light);
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 /* Groups Contact */
@@ -1059,7 +1059,7 @@
   font-size: clamp(1.25rem, 3vw, 1.5rem);
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .visit-groups-desc {
@@ -1071,7 +1071,7 @@
 .visit-groups-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--gap-sm);
   justify-content: center;
 }
 
@@ -1154,7 +1154,7 @@
 .visit-closing-lead {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .visit-closing-headline {
@@ -1363,8 +1363,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-lg);
 }
 
 .visit-hero-rule-line {
@@ -1382,7 +1382,7 @@
 .visit-hero-mid-rule {
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin: var(--space-md) 0;
 }
 
 .visit-hero-mid-rule-flourish {
@@ -1407,7 +1407,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .portrait-frame-outer {
@@ -1416,7 +1416,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent) 0%, #a88920 100%);
   padding: 3px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .portrait-frame-inner {
@@ -1440,8 +1440,8 @@
 .portrait-badge {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  margin-top: 0.5rem;
+  gap: var(--space-2xs);
+  margin-top: var(--space-xs);
   padding: 0.25rem 0.625rem;
   background: var(--secondary);
   border-radius: 2px;
@@ -1467,7 +1467,7 @@
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
     linear-gradient(180deg, #faf8f5 0%, #f5f0e6 100%);
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: var(--space-xl) 1.5rem;
 }
 
 .visit-figure-corner {
@@ -1503,8 +1503,8 @@
 /* Experience Moments with Period Numbers */
 .visit-moment {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: var(--gap-md);
+  padding: var(--space-lg);
   background:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
     var(--cream);
@@ -1541,8 +1541,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-md);
 }
 
 .visit-experience-footer-line {
@@ -1563,9 +1563,7 @@
   background:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
     white;
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-md);
 }
 
 .visit-card-corner {
@@ -1595,6 +1593,12 @@
   overflow: visible;
 }
 
+/* Book Seal - Decorative 3D Effect */
+/* EXCEPTION: Inset shadows (0 2px 4px, 0 -2px 4px) are intentional decorative effects
+   to create the 3D embossed appearance of a historical book seal. These are not
+   elevation shadows and must remain custom to preserve the specific light/shadow
+   simulation on the circular seal element. The outer shadow (0 3px 8px) provides
+   the elevation effect below the seal. */
 .visit-book-seal {
   position: absolute;
   top: -16px;
@@ -1638,7 +1642,7 @@
 .visit-trail-compass {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .compass-rose {
@@ -1657,8 +1661,8 @@
 
 .visit-trail-site {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: var(--gap-md);
+  padding: var(--space-lg);
   background:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.015'/%3E%3C/svg%3E"),
     var(--cream);
@@ -1738,13 +1742,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-xl);
 }
 
 .visit-closing-rule--bottom {
   margin-bottom: 0;
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 .visit-closing-rule-line {
@@ -1781,6 +1785,88 @@
 }
 
 /* ============================================
+   TESTIMONIALS - Visitor Experiences
+   ============================================ */
+.visit-testimonials {
+  padding: var(--space-4xl) var(--layout-page-padding-mobile);
+  background: var(--cream);
+}
+
+@media (min-width: 768px) {
+  .visit-testimonials {
+    padding: var(--space-5xl) var(--layout-page-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit-testimonials {
+    padding: var(--space-6xl) var(--layout-page-padding-desktop);
+  }
+}
+
+.visit-testimonials-inner {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.visit-testimonials-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+}
+
+.visit-testimonials-grid {
+  display: grid;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 768px) {
+  .visit-testimonials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap-xl);
+  }
+}
+
+.visit-testimonial {
+  position: relative;
+  padding: var(--space-lg);
+  background: white;
+  border-left: 4px solid var(--accent);
+  font-style: italic;
+}
+
+.visit-testimonial::before {
+  content: '"';
+  position: absolute;
+  top: 0;
+  left: var(--space-md);
+  font-size: 3rem;
+  color: var(--accent);
+  opacity: 0.3;
+  font-family: var(--font-serif);
+}
+
+.visit-testimonial-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.visit-testimonial-source {
+  display: block;
+  font-size: 0.875rem;
+  font-style: normal;
+  color: var(--text-light);
+  margin-top: var(--space-md);
+  padding-left: 1rem;
+}
+
+/* ============================================
    REDUCED MOTION - Accessibility
    Disables animations for users who prefer reduced motion
    ============================================ */
@@ -1807,7 +1893,8 @@
   .visit-groups-btn:hover,
   .visit-closing-cta--primary:hover,
   .visit-figure:hover,
-  .portrait-frame:hover {
+  .portrait-frame:hover,
+  .visit-book-btn:hover {
     transform: none;
   }
 }

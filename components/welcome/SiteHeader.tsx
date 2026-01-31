@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useSyncExternalStore } from 'react'
+import { useHours } from '@/lib/hooks/useHours'
 
 interface OperatingStatus {
   isOpen: boolean
@@ -10,9 +11,9 @@ interface OperatingStatus {
 
 /**
  * Get current operating status for Rocky Mount
- * Open Wed-Sat 10am-5pm, Season: March 4 - mid-December
+ * Uses hours from siteInfo.json: Wed-Sat 10am-5pm, Season: March 4 - mid-December
  */
-function getOperatingStatus(): OperatingStatus {
+function getOperatingStatus(hoursData: ReturnType<typeof useHours>): OperatingStatus {
   const now = new Date()
   const day = now.getDay() // 0 = Sunday, 6 = Saturday
   const hour = now.getHours()
@@ -29,13 +30,13 @@ function getOperatingStatus(): OperatingStatus {
   if (isOpenDay && isOpenHours) {
     return {
       isOpen: true,
-      message: 'Open Today · Wed-Sat 10am-5pm',
+      message: `Open Today · ${hoursData.formatted.short}`,
     }
   }
 
   return {
     isOpen: false,
-    message: 'Open Wed-Sat 10am-5pm',
+    message: `Open ${hoursData.formatted.short}`,
   }
 }
 
@@ -56,11 +57,6 @@ function getServerStatusSnapshot(): OperatingStatus | null {
   return null // Return null on server to avoid hydration mismatch
 }
 
-function updateStatusStore() {
-  currentStatus = getOperatingStatus()
-  statusListeners.forEach((listener) => listener())
-}
-
 // Use useSyncExternalStore for client detection
 const emptySubscribe = () => () => {}
 
@@ -75,17 +71,24 @@ function useIsClient() {
 export function SiteHeader() {
   const isClient = useIsClient()
   const status = useSyncExternalStore(subscribeToStatus, getStatusSnapshot, getServerStatusSnapshot)
+  const hours = useHours()
 
   // Initialize status on mount and set up interval for updates
   useEffect(() => {
-    // Initialize the status store
-    updateStatusStore()
+    // Initialize the status store with hours data
+    const newStatus = getOperatingStatus(hours)
+    currentStatus = newStatus
+    statusListeners.forEach((listener) => listener())
 
     // Update status every minute to catch opening/closing transitions
-    const interval = setInterval(updateStatusStore, 60000)
+    const interval = setInterval(() => {
+      const updatedStatus = getOperatingStatus(hours)
+      currentStatus = updatedStatus
+      statusListeners.forEach((listener) => listener())
+    }, 60000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [hours])
 
   // Show static version during SSR or before client hydration
   if (!isClient || !status) {

@@ -16,6 +16,37 @@ All features deploy together as one package.
 
 ---
 
+## CRITICAL: Source of Truth Hierarchy
+
+**READ THIS BEFORE MODIFYING HISTORICAL CONTENT**
+
+See `SOURCE-OF-TRUTH-HIERARCHY.md` for full details. Quick reference:
+
+| Level         | Location                                  | AI Can Modify?   |
+| ------------- | ----------------------------------------- | ---------------- |
+| 1 - IMMUTABLE | `/Historical/raw/`                        | NO - Never touch |
+| 2 - VERIFIED  | `/Historical/processed/`                  | Drafts only      |
+| 3 - WEBSITE   | `/content/documents/`, `/content/people/` | Formatting only  |
+| 4 - DISPLAY   | `/app/`, `/data/`                         | Yes              |
+
+**Key Rules:**
+
+1. **Level 2 is the source of truth** for historical facts
+2. **Never change historical facts** in Level 3 without Level 2 update first
+3. **Never change verification status** - humans only
+4. **New historical claims** require Level 2 documentation first
+
+**When editing historical content, include in commit:**
+
+```
+[CONTENT] Description
+
+Source: Level 2 file reference
+Reviewed-by: pending-human-review
+```
+
+---
+
 ## Owner Commands
 
 ### HOTFIX
@@ -123,6 +154,63 @@ const bookingUrl = getTicketUrl(event)
 
 **Validation:** Run `npm run validate:data` to check all JSON files against standards.
 
+### JSON Data Architecture
+
+All dynamic site data uses JSON files as single source of truth.
+
+| File                                 | Purpose                      | Used By                              |
+| ------------------------------------ | ---------------------------- | ------------------------------------ |
+| `data/siteInfo.json`                 | Hours, prices, contact       | useHours hook, Footer, PlanYourVisit |
+| `data/events.json`                   | 2026 events calendar         | Events page, QuickBookingCard        |
+| `data/navigation.json`               | Site nav structure           | Navigation.tsx                       |
+| `data/testimonials.json`             | Verified visitor quotes      | TestimonialCarousel                  |
+| `data/timeline.json`                 | Historical timeline          | Homepage story section               |
+| `data/experiences.json`              | Visitor experience moments   | Experience section                   |
+| `data/integrations.json`             | External service configs     | ReviewCTA, booking                   |
+| `data/config/operatingSchedule.json` | Year-agnostic hours/closures | lib/siteHours.ts                     |
+
+### Marketing Components
+
+Reusable components that pull from JSON data:
+
+| Component             | Data Source       | Purpose                                   |
+| --------------------- | ----------------- | ----------------------------------------- |
+| `SiteStatusBanner`    | lib/siteHours.ts  | Open/closed status with friendly messages |
+| `TestimonialCarousel` | testimonials.json | Rotating visitor quotes                   |
+| `QuickBookingCard`    | events.json       | Next event with Book Now CTA              |
+| `ReviewCTA`           | integrations.json | Encourage reviews with platform links     |
+
+**Component Registry:** `data/config/components.json` - Master documentation of all components, props, and data flows.
+
+### Staff Content Updates
+
+Non-technical staff can update website content by editing JSON files on GitHub:
+
+| Content      | File                                 | Guide                                      |
+| ------------ | ------------------------------------ | ------------------------------------------ |
+| Events       | `data/events.json`                   | [Staff Guide](docs/STAFF-CONTENT-GUIDE.md) |
+| Testimonials | `data/testimonials.json`             | [Staff Guide](docs/STAFF-CONTENT-GUIDE.md) |
+| Hours/Prices | `data/siteInfo.json`                 | [Staff Guide](docs/STAFF-CONTENT-GUIDE.md) |
+| Closures     | `data/config/operatingSchedule.json` | [Staff Guide](docs/STAFF-CONTENT-GUIDE.md) |
+
+**Staff Guide:** `docs/STAFF-CONTENT-GUIDE.md` - Step-by-step instructions for non-developers.
+
+### Site Hours System
+
+The `lib/siteHours.ts` utility calculates site status automatically:
+
+- Season: First week of March through December 20
+- Hours: Wed-Sat 10am-5pm
+- Closures: Thanksgiving (Thu+Fri), calculated by pattern
+- Special events: Evening hours replace regular hours
+
+```typescript
+import { getSiteStatus } from '@/lib/siteHours'
+
+const status = getSiteStatus() // Returns current status
+// { isOpen: true, message: "Open until 5pm", ... }
+```
+
 ---
 
 ## Code Standards
@@ -187,12 +275,17 @@ data/
 scripts/
 └── validate-data.ts     # JSON validation script
 
+data/config/
+├── operatingSchedule.json  # Year-agnostic hours/closures
+└── components.json         # Master component registry
+
 docs/
-├── COPY.md              # Brand guide (references lib/copy/)
-├── ALMANAC.md           # Weather feature docs
-├── DATA-STANDARDS.md    # JSON schemas & validation rules
-├── PROJECT.md           # Technical specification
-└── STYLE-GUIDE.md       # Visual design system
+├── STAFF-CONTENT-GUIDE.md  # Non-developer content update guide
+├── COPY.md                 # Brand guide (references lib/copy/)
+├── ALMANAC.md              # Weather feature docs
+├── DATA-STANDARDS.md       # JSON schemas & validation rules
+├── PROJECT.md              # Technical specification
+└── STYLE-GUIDE.md          # Visual design system
 ```
 
 ---

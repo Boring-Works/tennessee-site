@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import siteInfo from '@/data/siteInfo.json'
+import membershipData from '@/data/membership.json'
 import styles from './page.module.css'
+
+// Get lowest membership price from tiers
+const lowestTier = membershipData.tiers.reduce((min, tier) => (tier.price < min.price ? tier : min))
+const membershipStartPrice = lowestTier.price
 
 // Section divider variant type
 type DividerVariant = 'default' | 'light' | 'dark'
@@ -78,7 +83,7 @@ const SUPPORT_OPTIONS: SupportOption[] = [
   {
     title: 'Become a Member',
     description: 'Join our community of history supporters',
-    price: 'Memberships from $40/year',
+    price: `Memberships from $${membershipStartPrice}/year`,
     cta: 'View Options',
     href: '/membership',
     external: false,
@@ -89,7 +94,7 @@ const SUPPORT_OPTIONS: SupportOption[] = [
     description: 'Support preservation and education',
     price: 'Gifts of any amount welcome',
     cta: 'Donate',
-    href: 'https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/donation.jsp',
+    href: membershipData.urls.donate,
     external: true,
     trustLabel: 'Secure checkout',
   },

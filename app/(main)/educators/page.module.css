@@ -281,3 +281,35 @@
 .history-link:hover {
   opacity: 0.8;
 }
+
+/* ============================================
+   ACCESSIBILITY - Reduced Motion
+   Disables animations for users who prefer reduced motion
+   WCAG 2.2.2 Pause, Stop, Hide (Level A)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .cta-primary,
+  .program-card,
+  .contact-btn-primary,
+  .contact-btn-secondary,
+  .history-link {
+    transition: none;
+  }
+
+  .cta-primary:hover,
+  .contact-btn-primary:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - Touch Targets
+   Ensures minimum 44px touch targets
+   WCAG 2.5.8 Target Size Minimum (Level AA)
+   ============================================ */
+.cta-primary,
+.contact-btn-primary,
+.contact-btn-secondary {
+  min-height: 44px;
+  min-width: 44px;
+}

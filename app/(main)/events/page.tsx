@@ -6,6 +6,7 @@ import { generateEventsListSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { EventsToursBanner } from '@/components/events/EventsToursBanner'
 import { EventsHoursCTA } from '@/components/events/EventsHoursCTA'
 import { EventsCalendarClient } from '@/components/events/EventsCalendarClient'
+import { TestimonialCarousel } from '@/components/TestimonialCarousel'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -196,6 +197,18 @@ export default function EventsPage() {
           <p className={styles['calendar-pricing-note']}>
             Most events require advance tickets · Separate from regular site admission
           </p>
+        </div>
+      </section>
+
+      {/* ============================================
+          TESTIMONIALS - Why People Love Rocky Mount Events
+          ============================================ */}
+      <section className={styles['testimonials']} aria-labelledby="testimonials-heading">
+        <div className={styles['testimonials-inner']}>
+          <h2 id="testimonials-heading" className={styles['testimonials-heading']}>
+            Why People Love Rocky Mount Events
+          </h2>
+          <TestimonialCarousel filter="events" interval={7000} showSource />
         </div>
       </section>
 

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState, memo } from 'react'
+import { useHours } from '@/lib/hooks/useHours'
 import { BUTTONS, HOOKS } from '@/lib/copy'
 import siteInfo from '@/data/siteInfo.json'
 
@@ -165,6 +166,7 @@ function ConsolidatedExperienceComponent() {
   const { ref: sectionRef, isVisible } = useIntersectionObserver<HTMLElement>(0.2)
   const { ref: groundRef, isVisible: groundVisible } = useIntersectionObserver<HTMLDivElement>(0.4)
   const { ref: visitRef, isVisible: visitVisible } = useIntersectionObserver<HTMLDivElement>(0.3)
+  const hours = useHours()
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
@@ -549,9 +551,9 @@ function ConsolidatedExperienceComponent() {
                 Hours
               </div>
               <div className="pt-2">
-                <p className="font-serif text-xl text-primary mb-1">Wed–Sat</p>
-                <p className="font-serif text-lg text-primary/80">10am–5pm</p>
-                <p className="text-xs text-accent mt-2 font-medium">Last tour 4pm</p>
+                <p className="font-serif text-xl text-primary mb-1">{hours.formatted.days}</p>
+                <p className="font-serif text-lg text-primary/80">{hours.formatted.time}</p>
+                <p className="text-xs text-accent mt-2 font-medium">Last tour {hours.lastTour}</p>
               </div>
             </div>
 

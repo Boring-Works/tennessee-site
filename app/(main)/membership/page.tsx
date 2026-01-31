@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FoundingBanner } from './FoundingBanner'
 import styles from './page.module.css'
+import membershipData from '@/data/membership.json'
 
 export const metadata: Metadata = {
   title: 'Membership | Rocky Mount State Historic Site',
@@ -16,9 +17,8 @@ export const metadata: Metadata = {
   },
 }
 
-// NeonCRM membership portal URL
-const NEONCRM_URL =
-  'https://rockymountmuseum.z2systems.com/np/clients/rockymountmuseum/membershipJoin.jsp'
+// NeonCRM membership portal URL from JSON data
+const NEONCRM_URL = membershipData.urls.join
 
 // Badge type for membership tiers
 type BadgeType = 'value' | 'popular'
@@ -36,103 +36,27 @@ interface MembershipTier {
   highlighted: boolean
 }
 
-// Membership tiers data - ordered high to low
-const MEMBERSHIP_TIERS: MembershipTier[] = [
-  {
-    id: 'governors-circle',
-    name: "Governor's Circle",
-    tagline: 'Your name alongside history',
-    price: 2500,
-    badge: null,
-    benefits: [
-      'Unlimited admission for household',
-      'All festivals FREE',
-      'All premium events FREE',
-      'Behind the Scenes: Unlimited',
-      'Unlimited guest passes',
-      'Name on permanent Founders Wall',
-      'Private tour with Executive Director',
-      "Exclusive Governor's Circle dinner",
-      '2026 Event Passport',
-      'Newsletter + early registration',
-    ],
-    cta: "Join Governor's Circle",
-    highlighted: false,
-  },
-  {
-    id: 'patriot-pass',
-    name: 'Patriot Pass',
-    tagline: 'For the devoted',
-    price: 200,
-    badge: 'BEST VALUE',
-    badgeType: 'value',
-    benefits: [
-      'Admission: 2 adults + up to 4 children',
-      'All festivals FREE',
-      'All premium events FREE',
-      'Behind the Scenes: 2 FREE',
-      '4 guest passes per year',
-      '2026 Event Passport',
-      'Newsletter + early registration',
-    ],
-    cta: 'Join as Patriot',
-    highlighted: false,
-  },
-  {
-    id: 'frontier-family',
-    name: 'Frontier Family',
-    tagline: 'For the whole crew',
-    price: 100,
-    badge: 'MOST POPULAR',
-    badgeType: 'popular',
-    benefits: [
-      'Admission: 2 adults + up to 4 children',
-      'All festivals FREE',
-      'Premium events 50% off',
-      'Behind the Scenes: 1 FREE',
-      '2 guest passes per year',
-      '2026 Event Passport',
-      'Newsletter + early registration',
-    ],
-    cta: 'Join as Family',
-    highlighted: true,
-  },
-  {
-    id: 'explorers-pass',
-    name: "Explorer's Pass",
-    tagline: 'For two',
-    price: 75,
-    badge: null,
-    benefits: [
-      'Admission: 2 adults',
-      'All festivals FREE',
-      'Premium events 50% off',
-      'Behind the Scenes: 50% off',
-      '1 guest pass per year',
-      '2026 Event Passport',
-      'Newsletter + early registration',
-    ],
-    cta: 'Join as Explorer',
-    highlighted: false,
-  },
-  {
-    id: 'settlers-pass',
-    name: "Settler's Pass",
-    tagline: 'For the curious',
-    price: 50,
-    badge: null,
-    benefits: [
-      'Admission: 1 adult',
-      'All festivals FREE',
-      'Premium events 50% off',
-      'Behind the Scenes: 50% off',
-      '2026 Event Passport',
-      'Newsletter + early registration',
-    ],
-    cta: 'Join as Settler',
-    highlighted: false,
-  },
-]
+// Badge mapping: tier id -> display badge and type
+const BADGE_MAP: Record<string, { badge: string; badgeType: BadgeType }> = {
+  'patriot-pass': { badge: 'BEST VALUE', badgeType: 'value' },
+  'frontier-family': { badge: 'MOST POPULAR', badgeType: 'popular' },
+}
+
+// Transform JSON tiers to page format
+const MEMBERSHIP_TIERS: MembershipTier[] = membershipData.tiers.map((tier) => {
+  const badgeInfo = BADGE_MAP[tier.id]
+  return {
+    id: tier.id,
+    name: tier.name,
+    tagline: tier.tagline,
+    price: tier.price,
+    badge: badgeInfo?.badge ?? null,
+    badgeType: badgeInfo?.badgeType,
+    benefits: tier.benefits,
+    cta: tier.cta,
+    highlighted: tier.featured,
+  }
+})
 
 // FAQ item interface
 interface FAQItemData {
@@ -140,44 +64,11 @@ interface FAQItemData {
   answer: string
 }
 
-// FAQ data
-const FAQ_ITEMS: FAQItemData[] = [
-  {
-    question: 'Are membership benefits good at other historic sites?',
-    answer:
-      'Rocky Mount membership provides unlimited free admission to Rocky Mount only. Every member also receives the 2026 Event Passport to track your participation in our commemorative year events.',
-  },
-  {
-    question: "What's the 2026 Event Passport?",
-    answer:
-      "A commemorative booklet for America's 250th anniversary year. Attend Rocky Mount events, get your passport stamped at each one, and earn recognition for your participation in this historic year.",
-  },
-  {
-    question: 'Can I upgrade my membership later?',
-    answer:
-      "Yes. Contact us any time and we'll credit your current membership toward an upgrade. The difference in price is prorated based on your remaining membership period.",
-  },
-  {
-    question: 'Is my membership tax-deductible?',
-    answer:
-      'Rocky Mount is a 501(c)(3) nonprofit. The tax-deductible portion is the amount that exceeds the fair market value of benefits received. We provide a receipt for your records.',
-  },
-  {
-    question: 'How do I use my membership when I visit?',
-    answer:
-      'Present your membership card at the admissions desk. First-time members can show their confirmation email until their card arrives by mail (typically 2-3 weeks after joining).',
-  },
-  {
-    question: 'Does my membership auto-renew?',
-    answer:
-      'No. Rocky Mount memberships do not auto-renew. We will send you a renewal reminder before your membership expires, and you can renew online or in person.',
-  },
-  {
-    question: "What's the difference between membership tiers?",
-    answer:
-      'All memberships include unlimited admission, free festivals, and the 2026 Event Passport. Higher tiers add premium event access, Behind the Scenes experiences, guest passes, and exclusive benefits. Frontier Family ($100) is our most popular choice for families. Patriot Pass ($200) includes free premium events—attend just two and the upgrade pays for itself.',
-  },
-]
+// Transform JSON FAQs to page format
+const FAQ_ITEMS: FAQItemData[] = membershipData.faqs.map((faq) => ({
+  question: faq.question,
+  answer: faq.answer,
+}))
 
 // Section divider variant type
 type DividerVariant = 'default' | 'light' | 'dark'

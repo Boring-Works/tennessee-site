@@ -1,4 +1,224 @@
 {
+  "_meta": {
+    "description": "Rocky Mount's 2026 Lecture Series - Five speakers exploring Tennessee's founding story",
+    "updated": "2026-01-30",
+    "usage": "import { lectures } from '@/data/lectures.json'",
+    "relatedFile": "data/events.json - Lectures also appear there for the main calendar",
+
+    "staffInstructions": "HOW TO ADD OR EDIT LECTURES: 1) Copy the template from the '_templates' section below. 2) Fill in the speaker details and lecture information. 3) Add to the 'lectures' array in DATE ORDER. 4) IMPORTANT: Also add this lecture to events.json! Lectures appear in both files. 5) Save and commit your changes.",
+
+    "fieldGuide": {
+      "id": "Sequential number (1, 2, 3...). Just use the next number in sequence.",
+      "title": "Lecture title - keep it engaging but informative. This appears as the headline.",
+      "date": "Date in YYYY-MM-DD format. Example: '2026-05-15'. Lectures are typically scheduled for Fridays or Saturdays.",
+      "time": "Start time. Our lectures typically start at 2:00 PM, but can vary (see David Doan at 11:00 AM).",
+      "speaker": {
+        "name": "Full name with title if applicable. Examples: 'Dr. James P. Byrd', 'Lisa Bennett'",
+        "title": "Their role or position. Examples: 'Professor', 'Living History Interpreter', 'Historian & Reenactor'",
+        "institution": "Where they work or are affiliated. Examples: 'Vanderbilt University', 'Independent Scholar', 'OVTA'",
+        "bio": "2-3 sentences about their background and expertise. What makes them qualified to give this talk?",
+        "portraying": "ONLY for first-person interpretation. Example: 'Mary Patton'. Omit this field for standard lectures."
+      },
+      "description": "1-3 sentences summarizing what attendees will learn. Make it compelling - this sells the ticket!",
+      "topics": "Array of 3 bullet points highlighting key themes. These appear as a preview list.",
+      "format": "Optional - only add if the lecture has a special format like 'First-person interpretation'. Omit for standard lectures.",
+      "note": "Optional - any special context like 'Part of Stitching Independence weekend' or connections to other events."
+    },
+
+    "rules": [
+      "Lectures must be on a day Rocky Mount is open (Wed-Sat)",
+      "Keep lectures in DATE ORDER (earliest first)",
+      "Every lecture here MUST also be added to events.json with full event details",
+      "Speaker bios should be 2-3 sentences max - enough for credibility without being overwhelming",
+      "Topics array should have exactly 3 items",
+      "Standard lecture time is 2:00 PM unless there's a reason to change it"
+    ],
+
+    "commonMistakes": [
+      "Adding a lecture here but forgetting to add it to events.json",
+      "Using wrong date format (use 2026-05-15, not 05/15/2026)",
+      "Scheduling on Sunday-Tuesday (we're closed)",
+      "Writing overly long bios (keep to 2-3 sentences)",
+      "Forgetting to update the id to the next sequential number"
+    ],
+
+    "validation": {
+      "checklist": [
+        "Is the date format correct? (YYYY-MM-DD)",
+        "Is the lecture on a day we're open? (Wed-Sat)",
+        "Is the id the next number in sequence?",
+        "Have you also added this to events.json?",
+        "Does the speaker bio establish their credibility?",
+        "Are there exactly 3 topics listed?"
+      ],
+      "crossReference": "After editing, check events.json to ensure the lecture appears there too with matching details."
+    },
+
+    "speakerTitleExamples": {
+      "academics": "Professor, Assistant Professor, Associate Professor",
+      "independentScholars": "Independent Scholar, Historian",
+      "interpreters": "Living History Interpreter, Reenactor, Historian & Reenactor",
+      "organizations": "President, Director, Curator"
+    },
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS update _meta.updated when making changes",
+        "ALWAYS read _meta.staffInstructions first",
+        "ALWAYS verify changes with user before committing"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)"
+      },
+      "prohibited": [
+        "Do NOT remove _meta or _aiRules sections",
+        "Do NOT make changes without user awareness"
+      ],
+      "fileSpecific": [
+        "Speaker information must be accurate - verify with user",
+        "Also update events.json when adding lectures",
+        "Cross-reference with events.json for date consistency"
+      ],
+      "whenUnsure": "Ask the user for clarification"
+    }
+  },
+
+  "_templates": {
+    "_instructions": "Copy this template, fill in your details, and add to the 'lectures' array in date order. Remember to also add to events.json!",
+
+    "standardLecture": {
+      "_description": "Use for typical academic or expert lectures",
+      "id": 0,
+      "title": "Your Lecture Title Here",
+      "date": "2026-MM-DD",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Dr. First Last",
+        "title": "Professor",
+        "institution": "University Name",
+        "bio": "Write 2-3 sentences about the speaker's background, expertise, and notable works or accomplishments."
+      },
+      "description": "Write 1-3 compelling sentences about what attendees will learn or experience during this lecture.",
+      "topics": [
+        "First key theme or question the lecture addresses",
+        "Second key theme or takeaway",
+        "Third key theme or perspective"
+      ]
+    },
+
+    "firstPersonInterpretation": {
+      "_description": "Use when the speaker portrays a historical figure in character",
+      "id": 0,
+      "title": "Speaker Name as Character Name: Subtitle",
+      "date": "2026-MM-DD",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Performer Name",
+        "title": "Living History Interpreter",
+        "institution": "Their home site or organization",
+        "bio": "How long they've portrayed this character, where they've performed, their research background.",
+        "portraying": "Character Name"
+      },
+      "description": "Write 1-3 sentences that capture the historical figure's story and what makes this portrayal special.",
+      "topics": [
+        "The historical figure's main contribution",
+        "A lesser-known aspect of their story",
+        "Why their story matters today"
+      ],
+      "format": "First-person interpretation"
+    },
+
+    "specialEventLecture": {
+      "_description": "Use when lecture is part of a larger event weekend",
+      "id": 0,
+      "title": "Your Lecture Title Here",
+      "date": "2026-MM-DD",
+      "time": "2:00 PM",
+      "speaker": {
+        "name": "Speaker Name",
+        "title": "Their Title",
+        "institution": "Their Organization",
+        "bio": "2-3 sentences about their background and expertise."
+      },
+      "description": "What will attendees learn? Make it compelling.",
+      "topics": ["First key theme", "Second key theme", "Third key theme"],
+      "note": "Part of [Event Name] weekend"
+    }
+  },
+
+  "_examples": {
+    "_instructions": "These are real lectures from our series showing different types. Use them as reference.",
+
+    "academicLecture": {
+      "_explanation": "A standard lecture by a university professor. Note the academic credentials in title and bio.",
+      "example": {
+        "id": 1,
+        "title": "Colonial Religion on the Frontier",
+        "date": "2026-03-27",
+        "time": "2:00 PM",
+        "speaker": {
+          "name": "Dr. James P. Byrd",
+          "title": "Professor",
+          "institution": "Vanderbilt University",
+          "bio": "Author of 'Sacred Scripture, Sacred War: The Bible and the American Revolution,' Dr. Byrd has appeared on PBS and C-SPAN. He teaches American religious history at Vanderbilt Divinity School."
+        },
+        "description": "What did frontier settlers believe—and why did it matter? Dr. Byrd reveals how Bible, pulpit, and prayer shaped the men who marched to Kings Mountain, turning religious conviction into Revolutionary action.",
+        "topics": [
+          "How preachers fueled revolution",
+          "Religious diversity on the frontier",
+          "Faith that moved men to fight"
+        ]
+      }
+    },
+
+    "firstPersonLecture": {
+      "_explanation": "A living history interpretation where the speaker portrays a historical figure. Note the 'portraying' field and 'format' field.",
+      "example": {
+        "id": 2,
+        "title": "Powder for Kings Mountain",
+        "date": "2026-04-18",
+        "time": "2:00 PM",
+        "speaker": {
+          "name": "Lisa Bennett",
+          "title": "Living History Interpreter",
+          "institution": "Sycamore Shoals State Historic Park",
+          "bio": "Lisa Bennett has portrayed Mary Patton for over 15 years at Sycamore Shoals and historic sites across the Southeast. Her interpretation is based on extensive research into 18th-century powder production.",
+          "portraying": "Mary Patton"
+        },
+        "description": "500 pounds of gunpowder. One determined woman. Without Mary Patton's powder, there would be no victory at Kings Mountain. She walks into the room and tells you her story—face to face, in her own words.",
+        "topics": [
+          "How one woman changed the Revolution",
+          "The dangerous art of making gunpowder",
+          "Women who stayed—and women who fought"
+        ],
+        "format": "First-person interpretation"
+      }
+    },
+
+    "communityHistorianLecture": {
+      "_explanation": "A lecture by a community historian/reenactor rather than an academic. Note the different style of bio.",
+      "example": {
+        "id": 3,
+        "title": "All In: The Overmountain Men's Gamble",
+        "date": "2026-05-15",
+        "time": "2:00 PM",
+        "speaker": {
+          "name": "Thomas Bachelor",
+          "title": "Historian & Reenactor",
+          "institution": "Independent Scholar",
+          "bio": "A 20-year veteran of Revolutionary War reenactment and OVTA-affiliated historian, Thomas Bachelor has walked the Overmountain Victory Trail multiple times and published research on the Southern Campaign."
+        },
+        "description": "They bet everything—farms, families, lives. The textbooks call it patriotism. Thomas Bachelor calls it what it was: a desperate gamble by men who knew they might never come home. He strips away the myth.",
+        "topics": [
+          "Why 1780 was the darkest hour",
+          "What they left behind—undefended",
+          "The odds they faced"
+        ],
+        "note": "Presented one week before Early Frontier Days"
+      }
+    }
+  },
+
   "series": {
     "title": "Rocky Mount Lecture Series",
     "subtitle": "Tennessee's Founding Story",
@@ -90,9 +310,9 @@
       "time": "11:00 AM",
       "speaker": {
         "name": "David Doan",
-        "title": "Flag Historian",
-        "institution": "Independent Scholar",
-        "bio": "David Doan has spent 30 years researching American flags, consulting for the Smithsonian and state historical societies. His collection includes rare Revolutionary-era flag fragments."
+        "title": "President, Overmountain Victory Trail Association",
+        "institution": "OVTA",
+        "bio": "David Doan of Blountville, Tennessee serves as President of the Overmountain Victory Trail Association and Rocky Mount Chapter President. A University of Tennessee Knoxville graduate and eight-year National Guard veteran, his lectures bring Revolutionary War history to life at sites across the region."
       },
       "description": "Every star and stripe carries a story. From the Grand Union at Boston to the banner that inspired Key's anthem—David Doan traces 250 years of stars and stripes. Followed by Rocky Mount's commemorative flag dedication.",
       "topics": [
@@ -102,17 +322,5 @@
       ],
       "note": "Part of Stitching Independence weekend"
     }
-  ],
-  "additionalProgramming": {
-    "title": "Cherokee Heritage Weekend",
-    "date": "2026-08-22",
-    "endDate": "2026-08-23",
-    "speaker": {
-      "name": "Dr. Daniel Redbird Wolfe",
-      "title": "Cherokee Historian",
-      "bio": "Dr. Wolfe, of Cherokee descent, holds a PhD in American Studies and serves as cultural consultant to museums interpreting pre-colonial and contact-era history in the Southeast."
-    },
-    "description": "The Overmountain settlements sat within Cherokee territory. Treaties were signed, broken, tested. Hear the other side of the frontier story—told by Cherokee scholars and artisans.",
-    "note": "This is a weekend festival, not a single lecture"
-  }
+  ]
 }

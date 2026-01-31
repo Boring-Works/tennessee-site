@@ -302,3 +302,14 @@
     transition: none;
   }
 }
+
+/* ============================================
+   ACCESSIBILITY - Touch Targets
+   Ensures minimum 44px touch targets
+   WCAG 2.5.8 Target Size Minimum (Level AA)
+   ============================================ */
+.option-cta,
+.first250-cta {
+  min-height: 44px;
+  min-width: 44px;
+}

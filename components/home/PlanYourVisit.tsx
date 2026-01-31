@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { useHours } from '@/lib/hooks/useHours'
 import { BUTTONS } from '@/lib/copy'
 import siteInfo from '@/data/siteInfo.json'
 
@@ -20,6 +21,7 @@ import siteInfo from '@/data/siteInfo.json'
 
 export function PlanYourVisit() {
   const { ref, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.2 })
+  const hours = useHours()
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden bg-white">
@@ -168,10 +170,10 @@ export function PlanYourVisit() {
               <h3 className="font-serif text-xl text-primary text-center mb-2">Visiting Hours</h3>
               <div className="space-y-1 text-center">
                 <p className="text-sm text-text-light">
-                  <span className="font-medium">Wed–Sat</span> 10am–5pm
+                  <span className="font-medium">{hours.formatted.days}</span> {hours.formatted.time}
                 </p>
                 <p className="text-sm text-text-light">
-                  <span className="font-medium">Last tour</span> at 4pm
+                  <span className="font-medium">Last tour</span> at {hours.lastTour}
                 </p>
                 <p className="text-xs text-text-light/60 mt-2">Closed Sun–Tue</p>
               </div>

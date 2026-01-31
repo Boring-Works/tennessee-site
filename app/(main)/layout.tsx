@@ -5,6 +5,7 @@ import MobileStickyCTA from '@/components/MobileStickyCTA'
 import ScrollProgress from '@/components/ScrollProgress'
 import Analytics from '@/components/Analytics'
 import SkipLinks from '@/components/SkipLinks'
+import { SiteStatusBanner } from '@/components/SiteStatusBanner'
 
 // Dynamic import for Footer (code splitting, SSR enabled)
 const Footer = dynamic(() => import('@/components/Footer'), {
@@ -30,6 +31,8 @@ export default function MainLayout({
       <Analytics />
       <ScrollProgress />
       <Navigation />
+      {/* Live site status - updates every minute */}
+      <SiteStatusBanner className="bg-white border-b border-secondary/10 sticky top-[var(--nav-height)] z-40" />
       <main id="main-content" className="flex-1 pb-20 md:pb-0">
         {children}
       </main>

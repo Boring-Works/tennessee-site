@@ -6,6 +6,7 @@ import styles from './page.module.css'
 import { PAGE_METADATA, HOOKS } from '@/lib/copy'
 import { JsonLd } from '@/components/JsonLd'
 import { generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo'
+import { TestimonialCarousel } from '@/components/TestimonialCarousel'
 
 export const metadata: Metadata = {
   title: PAGE_METADATA.visit.title,
@@ -389,6 +390,21 @@ export default function VisitPage() {
             </p>
           </footer>
         </div>
+      </section>
+
+      <SectionDivider variant="default" />
+
+      {/* ============================================
+          TESTIMONIALS - Data-Driven Carousel
+          ============================================ */}
+      <section className={styles['visit-testimonials']} aria-labelledby="testimonials-heading">
+        <div className={styles['visit-testimonials-inner']}>
+          <h2 id="testimonials-heading" className={styles['visit-testimonials-headline']}>
+            What Visitors Say
+          </h2>
+        </div>
+        {/* Data-driven carousel from testimonials.json */}
+        <TestimonialCarousel interval={7000} showSource />
       </section>
 
       <SectionDivider variant="default" />

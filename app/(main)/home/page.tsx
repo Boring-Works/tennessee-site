@@ -6,6 +6,8 @@ import { AnimatedCounter } from '@/components/home/AnimatedCounter'
 import { ScrollReveal } from '@/components/home/ScrollReveal'
 import { OriginalSevenMap } from '@/components/OriginalSevenMap'
 import { DocumentTeaser } from '@/components/evidence'
+import { TestimonialCarousel } from '@/components/TestimonialCarousel'
+import { QuickBookingCard } from '@/components/QuickBookingCard'
 import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
 import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
@@ -16,19 +18,13 @@ export const metadata: Metadata = {
     'In 1790, this ground became the first seat of Constitutional governance west of the Appalachians. The Constitution had to work here—or American expansion would fail. America 250 commemorative events in 2026.',
 }
 
-// Static data
+// Static data for category counters
 const lectures = eventsData.events.filter((e) => e.category === 'lecture')
 const festivals = eventsData.events.filter(
   (e) => e.category === 'festival' || e.category === 'signature'
 )
 const seasonal = eventsData.events.filter((e) => e.category === 'seasonal')
-const nextEvent = eventsData.events[0]
 const eventCount = eventsData.events.length
-
-// Parse event date using UTC to avoid hydration mismatch between server/client
-const eventDate = new Date(nextEvent.date + 'T12:00:00Z')
-const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
-const dayNum = eventDate.getUTCDate()
 
 const AUDIENCE_CARDS = [
   {
@@ -315,6 +311,49 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
+          VISITORS SAY IT BEST - TESTIMONIALS (Data-Driven Carousel)
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <section
+          className="relative bg-white dark:bg-primary/50 border-t border-secondary/10 dark:border-white/10"
+          aria-labelledby="testimonials-heading"
+        >
+          <div className="max-w-5xl mx-auto px-6 pt-20 md:pt-28">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-secondary/50 dark:text-white/50 mb-4">
+                Visitor Experiences
+              </p>
+              <h2
+                id="testimonials-heading"
+                className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary dark:text-white mb-6 font-bold"
+              >
+                Visitors Say It Best
+              </h2>
+              <p className="text-lg text-primary/70 dark:text-white/70 leading-relaxed max-w-2xl mx-auto">
+                From immersive historical experiences to convincing period authenticity, guests
+                consistently praise their journey through Tennessee&apos;s founding story.
+              </p>
+            </div>
+          </div>
+
+          {/* Data-driven testimonial carousel from testimonials.json */}
+          <TestimonialCarousel interval={6000} showSource />
+
+          {/* CTA */}
+          <div className="text-center pb-20 md:pb-28">
+            <Link
+              href="/visit"
+              className="inline-flex items-center gap-2 bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              Plan Your Visit
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ════════════════════════════════════════════════════════════════════
           2026 COMMEMORATIVE SECTION
           ════════════════════════════════════════════════════════════════════ */}
       <ScrollReveal>
@@ -436,33 +475,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Events Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
-            {/* Featured Event */}
-            <div className="md:col-span-2 lg:col-span-1 group">
-              <div className="h-full bg-white/5 border border-white/10 p-6 transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.07]">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-accent/80 mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  Coming Up
-                </p>
-
-                <div className="flex items-start gap-4">
-                  <div className="text-center bg-white/10 p-3 min-w-[70px] border border-white/5">
-                    <span className="block text-xs text-accent/90 uppercase tracking-wider">
-                      {monthShort}
-                    </span>
-                    <span className="block text-3xl font-bold text-white">{dayNum}</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-serif text-white text-lg mb-2 group-hover:text-accent transition-colors">
-                      {nextEvent.title}
-                    </h3>
-                    <p className="text-sm text-white/50 line-clamp-2">
-                      {nextEvent.description.split('. ')[0]}.
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {/* Events Grid with QuickBookingCard */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-5 mb-14">
+            {/* Quick Booking Card - Data-driven from events.json */}
+            <div className="md:col-span-2 lg:col-span-2">
+              <QuickBookingCard className="h-full" />
             </div>
 
             {/* Category Cards */}

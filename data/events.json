@@ -1,4 +1,545 @@
 {
+  "_meta": {
+    "description": "2026 events calendar including signature events, workshops, lectures, camps, and recurring programs",
+    "updated": "2026-01-30",
+    "usage": "import { events } from '@/data/events.json'",
+    "schemaReference": "docs/DATA-STANDARDS.md",
+
+    "_aiRules": {
+      "description": "Rules for AI assistants editing this file",
+      "beforeEditing": [
+        "ALWAYS read the full _meta section before making changes",
+        "ALWAYS check today's date and compare to event dates",
+        "ALWAYS verify the event is on Wed-Sat (open days)",
+        "ALWAYS use YYYY-MM-DD date format",
+        "ALWAYS use prices in CENTS (multiply dollars by 100)",
+        "NEVER fabricate event details - ask the user if unsure",
+        "NEVER delete events without explicit user permission",
+        "NEVER change fareHarborId without verifying with user"
+      ],
+      "autoUpdates": {
+        "onEdit": "Update _meta.updated to today's date (YYYY-MM-DD)",
+        "dateFormat": "YYYY-MM-DD (e.g., 2026-01-30)",
+        "example": "When editing on January 30, 2026, set: \"updated\": \"2026-01-30\""
+      },
+      "validation": [
+        "After editing, mentally verify: Is the date on Wed-Sat?",
+        "After editing, mentally verify: Is the price in cents?",
+        "After editing, mentally verify: Is the ID unique?",
+        "After editing, mentally verify: Is the event in date order?",
+        "Suggest running: npm run validate:data"
+      ],
+      "prohibited": [
+        "Do NOT schedule events on Sunday, Monday, or Tuesday",
+        "Do NOT use dollar amounts for prices (use cents)",
+        "Do NOT duplicate event IDs",
+        "Do NOT add events outside the season (March 4 - Dec 20 for 2026)",
+        "Do NOT mark more than 10 events as featured: true",
+        "Do NOT remove the _meta, _templates, or _aiRules sections"
+      ],
+      "whenUnsure": "Ask the user for clarification rather than guessing"
+    },
+
+    "_autoDate": {
+      "instruction": "AI: Update this field whenever you edit this file",
+      "field": "_meta.updated",
+      "format": "YYYY-MM-DD"
+    },
+
+    "staffInstructions": "HOW TO ADD OR EDIT EVENTS: 1) Scroll down to find the '_templates' section and copy the template that matches your event type. 2) Fill in your event details, replacing the placeholder text. 3) Add your new event to the 'events' array in DATE ORDER (earliest first). 4) Save and commit your changes. The website will update automatically after your commit is approved.",
+
+    "fieldGuide": {
+      "id": "Unique identifier using lowercase letters and dashes. Example: 'harvest-festival-2026' or 'spring-break-camp-1'. No spaces allowed.",
+      "title": "Event name as it appears on the website. Keep it concise but descriptive.",
+      "date": "Start date in YYYY-MM-DD format. Example: '2026-05-15' for May 15, 2026. MUST be on a day Rocky Mount is open (Wed-Sat) for single-day events.",
+      "endDate": "End date for multi-day events in YYYY-MM-DD format. Set to null for single-day events.",
+      "time": "Event time as displayed to visitors. Examples: '10:00 AM', '2:00 PM', '10:00 AM - 4:00 PM'. Set to null if all-day or varies.",
+      "type": "Event classification - 'new' (first time), 'recurring' (annual), 'enhanced' (expanded existing), 'milestone' (significant date)",
+      "category": "One of: 'signature', 'festival', 'lecture', 'workshop', 'camp', 'education', 'family', 'seasonal', 'tour', 'digital'",
+      "description": "Marketing description (1-3 sentences). Make it vivid and engaging. This appears on event cards and detail pages.",
+      "speaker": "For lectures only - the presenter's name",
+      "speakerTitle": "For lectures only - the presenter's affiliation/title",
+      "fareHarborId": "The numeric ID from your FareHarbor item. Find it in the FareHarbor dashboard URL when editing an item (Dashboard > Items > click item > look at URL), or in any booking URL. Example: if the booking URL is fareharbor.com/rockymountmuseum/items/236456/, the ID is 236456. When set, the website automatically generates the correct booking URL. Leave as null for free events or if using the general booking page.",
+      "ticketUrl": "Full URL for ticket purchase. Usually leave as null - the website auto-generates from fareHarborId. Only set a custom URL if tickets are sold on a different platform (Eventbrite, external partner, etc.).",
+      "requiresTicket": "true if visitors must book/pay in advance, false if free drop-in",
+      "featured": "true to highlight on homepage and featured sections, false for regular listing",
+      "capacity": "Optional - maximum attendees. Only add for limited-capacity events.",
+      "ageRecommendation": "Optional - age restriction. Example: '13+' or 'Ages 7-12'",
+      "pricing": "Ticket prices in CENTS (multiply dollars by 100). null means not applicable for that ticket type. 0 means free for that category."
+    },
+
+    "pricingGuide": {
+      "howItWorks": "All prices are in CENTS, not dollars. This prevents decimal errors.",
+      "conversion": "Multiply dollar amount by 100. So $12.00 = 1200, $8.50 = 850, $225.00 = 22500",
+      "examples": {
+        "$12.00": 1200,
+        "$10.00": 1000,
+        "$8.00": 800,
+        "$45.00": 4500,
+        "$180.00 (camp)": 18000,
+        "Free": 0
+      },
+      "categories": {
+        "adult": "Standard adult admission (ages 13-64 typically)",
+        "senior": "Senior discount (65+ typically)",
+        "child": "Child rate (ages 5-12 typically)",
+        "underFive": "Under 5 years old - usually free (0) or null",
+        "members": "Rocky Mount members rate - often free (0)"
+      },
+      "nullVsZero": "null = that ticket type doesn't exist for this event. 0 = that ticket type exists but is free."
+    },
+
+    "fareHarborGuide": {
+      "_purpose": "How to connect events to FareHarbor online booking",
+
+      "whatIsFareHarborId": "The fareHarborId is the unique number FareHarbor assigns to each bookable item. When you add this ID to an event, the website automatically creates the correct booking link.",
+
+      "whereToFindTheId": {
+        "method1_dashboard": "Log into FareHarbor Dashboard > Items > Click on the item you want > Look at the URL in your browser. Example: dashboard.fareharbor.com/rockymountmuseum/items/562814/edit - the ID is 562814",
+        "method2_booking_url": "If you have a booking link, the ID is in the URL. Example: fareharbor.com/rockymountmuseum/items/562814/ - the ID is 562814",
+        "method3_copy_button": "In the FareHarbor Dashboard, some views show a 'Copy Link' button next to items. The ID is the number in that link."
+      },
+
+      "whenToUseFareHarborId": [
+        "Ticketed events that should have a 'Buy Tickets' button",
+        "Workshops and camps with registration",
+        "Any event where visitors book/pay through FareHarbor"
+      ],
+
+      "whenToUseTicketUrl": [
+        "Event tickets sold on Eventbrite or another platform",
+        "Partner events where booking goes to their website",
+        "Special registrations handled outside FareHarbor"
+      ],
+
+      "whenToUseNeither": [
+        "Free events with no registration (set requiresTicket: false)",
+        "Community events where visitors just show up",
+        "Digital/milestone events with no physical attendance"
+      ],
+
+      "howItWorks": "The website uses fareHarborId to automatically build the booking URL: https://fareharbor.com/rockymountmuseum/items/{fareHarborId}/. You don't need to type the full URL - just the number.",
+
+      "commonMistakes": [
+        "Putting the full URL in fareHarborId - just use the number",
+        "Forgetting to set requiresTicket: true when adding fareHarborId",
+        "Using a fareHarborId from a different FareHarbor account",
+        "Setting fareHarborId for free events (leave it null instead)"
+      ]
+    },
+
+    "rules": [
+      "Single-day events MUST be on Wednesday, Thursday, Friday, or Saturday (Rocky Mount is closed Sun-Tue)",
+      "Multi-day events can span any days, but main activities should fall on open days",
+      "Keep events sorted by date - earliest first, then by start time if same day",
+      "Prices are ALWAYS in cents - multiply dollars by 100",
+      "Event IDs must be unique across all events",
+      "Use YYYY-MM-DD format for all dates (2026-05-15, not May 15 or 5/15/26)",
+      "Season runs from March 4 through December 20 for 2026",
+      "Featured events appear on homepage - limit to 8-10 total",
+      "Lectures should also appear in lectures.json with full speaker details"
+    ],
+
+    "commonMistakes": [
+      "Scheduling events on Sunday, Monday, or Tuesday (we're closed those days!)",
+      "Entering prices in dollars instead of cents ($12 should be 1200)",
+      "Using wrong date format (use 2026-05-15, not 05/15/2026 or May 15)",
+      "Forgetting to set requiresTicket: true for paid events",
+      "Adding events out of date order (scroll to find the right spot)",
+      "Using spaces in event IDs (use-dashes-instead)",
+      "Leaving featured: true on too many events (dilutes the impact)",
+      "Copying a template but forgetting to update the ID"
+    ],
+
+    "validation": {
+      "howToCheck": "Run 'npm run validate:data' in terminal to check for errors",
+      "manualChecklist": [
+        "Is the date format correct? (YYYY-MM-DD)",
+        "Is the single-day event on Wed-Sat?",
+        "Is requiresTicket set correctly?",
+        "Are prices in cents (1200 not 12)?",
+        "Is the ID unique?",
+        "Is the event in the right date order in the list?"
+      ],
+      "afterCommit": "Website preview deploys automatically. Check the Events page to verify your changes look correct."
+    },
+
+    "quickReference": {
+      "eventTypes": ["new", "recurring", "enhanced", "milestone"],
+      "categories": [
+        "signature",
+        "festival",
+        "lecture",
+        "workshop",
+        "camp",
+        "education",
+        "family",
+        "seasonal",
+        "tour",
+        "digital"
+      ],
+      "typicalPricing": {
+        "standardEvent": {
+          "adult": 1200,
+          "senior": 1000,
+          "child": 800,
+          "underFive": 0,
+          "members": 0
+        },
+        "premiumEvent": {
+          "adult": 1500,
+          "senior": 1200,
+          "child": 1000,
+          "underFive": 0,
+          "members": 0
+        },
+        "workshop": {
+          "adult": 4000,
+          "senior": 3500,
+          "child": null,
+          "underFive": null,
+          "members": 3000
+        },
+        "camp": {
+          "adult": null,
+          "senior": null,
+          "child": 18000,
+          "underFive": null,
+          "members": 15000
+        }
+      }
+    }
+  },
+
+  "_templates": {
+    "_instructions": "Copy one of these templates, fill in your details, and paste into the 'events' array in date order.",
+    "_fareHarborNote": "For ticketed events, you only need the fareHarborId (the number from FareHarbor). The website automatically builds the booking URL. Find the ID in FareHarbor Dashboard: Items > click your item > look at the number in the URL.",
+
+    "simpleEvent": {
+      "_description": "Use for free events that don't require tickets",
+      "_fareHarborTip": "Leave fareHarborId and ticketUrl as null for free events",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": null,
+      "ticketUrl": null,
+      "requiresTicket": false,
+      "featured": false
+    },
+
+    "ticketedEvent": {
+      "_description": "Use for standard paid events with general admission",
+      "_fareHarborTip": "Replace '000000' with your actual FareHarbor item ID. Delete the ticketUrl line - it's auto-generated from the ID.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+
+    "multiDayEvent": {
+      "_description": "Use for events spanning multiple days (festivals, camps, etc.)",
+      "_fareHarborTip": "Replace '000000' with your actual FareHarbor item ID. The booking URL is auto-generated.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": "2026-MM-DD",
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+
+    "lectureEvent": {
+      "_description": "Use for lectures - remember to also add to lectures.json!",
+      "_fareHarborTip": "If the lecture has its own FareHarbor item, add the ID. Otherwise, leave fareHarborId as null - visitors will go to the general booking page.",
+      "id": "lecture-speaker-lastname",
+      "title": "Speaker Name: Lecture Title",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "2:00 PM",
+      "type": "new",
+      "category": "lecture",
+      "speaker": "Dr. First Last",
+      "speakerTitle": "Title, Institution",
+      "description": "Write 1-3 engaging sentences about the lecture topic.",
+      "fareHarborId": null,
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    },
+
+    "campEvent": {
+      "_description": "Use for kids camps - note pricing is child-only",
+      "_fareHarborTip": "Each camp week should have its own FareHarbor item ID for proper tracking.",
+      "id": "camp-name-week-number",
+      "title": "Camp Name Week X",
+      "date": "2026-MM-DD",
+      "endDate": "2026-MM-DD",
+      "time": "9:00 AM - 3:00 PM",
+      "type": "new",
+      "category": "camp",
+      "description": "Describe the camp experience. What activities? What ages? Lunch included?",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "pricing": {
+        "adult": null,
+        "senior": null,
+        "child": 18000,
+        "underFive": null,
+        "members": 15000
+      },
+      "featured": false
+    },
+
+    "limitedCapacityEvent": {
+      "_description": "Use for workshops or special events with limited spots",
+      "_fareHarborTip": "Make sure FareHarbor item has capacity limits set to match the 'capacity' field here.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 2:00 PM",
+      "type": "new",
+      "category": "workshop",
+      "description": "Describe the experience. Mention limited capacity to create urgency.",
+      "fareHarborId": "000000",
+      "ticketUrl": null,
+      "requiresTicket": true,
+      "capacity": 10,
+      "pricing": {
+        "adult": 4000,
+        "senior": 3500,
+        "child": null,
+        "underFive": null,
+        "members": 3000
+      },
+      "featured": false
+    },
+
+    "externalTicketEvent": {
+      "_description": "Use when tickets are sold on another platform (Eventbrite, partner site, etc.)",
+      "_fareHarborTip": "Set fareHarborId to null and provide the full external URL in ticketUrl.",
+      "id": "your-event-name-2026",
+      "title": "Your Event Name",
+      "date": "2026-MM-DD",
+      "endDate": null,
+      "time": "10:00 AM - 4:00 PM",
+      "type": "new",
+      "category": "festival",
+      "description": "Write 1-3 engaging sentences about your event. What will visitors experience?",
+      "fareHarborId": null,
+      "ticketUrl": "https://www.eventbrite.com/e/your-event-tickets-123456",
+      "requiresTicket": true,
+      "pricing": {
+        "adult": 1200,
+        "senior": 1000,
+        "child": 800,
+        "underFive": 0,
+        "members": 0
+      },
+      "featured": false
+    }
+  },
+
+  "_examples": {
+    "_instructions": "These are real events from our calendar showing different scenarios. Use them as reference.",
+
+    "freePublicEvent": {
+      "_explanation": "A free community event - no tickets, open to all. Note requiresTicket: false and no pricing object.",
+      "example": {
+        "id": "sullivan-co-250",
+        "title": "Sullivan County 250",
+        "date": "2026-04-17",
+        "endDate": null,
+        "time": "10:00 AM - 4:00 PM",
+        "type": "new",
+        "category": "festival",
+        "description": "Sullivan County men left these fields for Kings Mountain. Their wives and children stayed behind, undefended. Hear the stories the textbooks left out.",
+        "ticketUrl": null,
+        "requiresTicket": false,
+        "pricing": {
+          "adult": 0,
+          "senior": 0,
+          "child": 0,
+          "underFive": 0,
+          "members": 0
+        },
+        "featured": false
+      }
+    },
+
+    "standardTicketedEvent": {
+      "_explanation": "A typical paid event with tiered pricing. Note prices are in CENTS (1200 = $12.00). Members get in free.",
+      "example": {
+        "id": "harvest-fest",
+        "title": "Harvest Fest",
+        "date": "2026-10-10",
+        "endDate": "2026-10-11",
+        "time": "10:00 AM - 4:00 PM",
+        "type": "enhanced",
+        "category": "festival",
+        "description": "The smell of wood smoke and simmering apple butter. Experience the autumn harvest the way Tennesseans did it for 200 years.",
+        "fareHarborId": "562814",
+        "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562814/",
+        "requiresTicket": true,
+        "pricing": {
+          "adult": 1200,
+          "senior": 1000,
+          "child": 800,
+          "underFive": 0,
+          "members": 0
+        },
+        "featured": true
+      }
+    },
+
+    "childOnlyCamp": {
+      "_explanation": "A camp with ONLY child pricing. Adult/senior are null because they can't attend. Note the high price (18000 = $180.00 for a week).",
+      "example": {
+        "id": "summer-camp-1",
+        "title": "Summer Camp Week 1",
+        "date": "2026-06-15",
+        "endDate": "2026-06-19",
+        "time": "9:00 AM - 3:00 PM",
+        "type": "new",
+        "category": "camp",
+        "description": "Five days as a frontier kid. Fire a flintlock (blanks!). Cook over an open hearth. Ages 7-12. Lunch provided.",
+        "fareHarborId": "562807",
+        "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562807/",
+        "requiresTicket": true,
+        "pricing": {
+          "adult": null,
+          "senior": null,
+          "child": 22500,
+          "underFive": null,
+          "members": 18000
+        },
+        "featured": false
+      }
+    },
+
+    "ageRestrictedEvent": {
+      "_explanation": "An event with age restrictions. Note ageRecommendation field and underFive: null (they can't attend).",
+      "example": {
+        "id": "haunting",
+        "title": "Haunting on the Mount",
+        "date": "2026-10-15",
+        "endDate": "2026-10-24",
+        "time": "6:00 PM - 9:00 PM",
+        "type": "recurring",
+        "category": "seasonal",
+        "description": "Candlelight flickers. Shadows move. Six evenings of spooky tours. Ages 13+.",
+        "fareHarborId": "562815",
+        "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562815/",
+        "requiresTicket": true,
+        "ageRecommendation": "13+",
+        "pricing": {
+          "adult": 1500,
+          "senior": 1200,
+          "child": 1000,
+          "underFive": null,
+          "members": 0
+        },
+        "featured": true
+      }
+    }
+  },
+
+  "_fareHarborExamples": {
+    "_instructions": "These examples show the THREE ways to handle event ticketing. Choose the approach that matches your situation.",
+
+    "withFareHarborId": {
+      "_explanation": "MOST COMMON: Event booked through FareHarbor. Just add the item ID number - the website builds the booking URL automatically. You found the ID '562814' in FareHarbor Dashboard for Harvest Fest.",
+      "_bookingUrlGenerated": "https://fareharbor.com/rockymountmuseum/items/562814/",
+      "example": {
+        "id": "harvest-fest",
+        "title": "Harvest Fest",
+        "date": "2026-10-10",
+        "fareHarborId": "562814",
+        "ticketUrl": null,
+        "requiresTicket": true
+      }
+    },
+
+    "withCustomTicketUrl": {
+      "_explanation": "EXTERNAL BOOKING: Event tickets sold on another platform (Eventbrite, partner site, etc.). Set fareHarborId to null and provide the full external URL.",
+      "_whenToUse": "Partner events, co-sponsored programs, or events using a different ticketing system",
+      "example": {
+        "id": "partner-event",
+        "title": "Regional History Conference",
+        "date": "2026-09-20",
+        "fareHarborId": null,
+        "ticketUrl": "https://www.eventbrite.com/e/regional-history-conference-tickets-123456",
+        "requiresTicket": true
+      }
+    },
+
+    "freeEvent": {
+      "_explanation": "FREE EVENT: No tickets or registration needed. Both fareHarborId and ticketUrl are null. No booking button appears on the website.",
+      "_whenToUse": "Community days, free admission events, digital announcements",
+      "example": {
+        "id": "sullivan-co-250",
+        "title": "Sullivan County 250",
+        "date": "2026-04-17",
+        "fareHarborId": null,
+        "ticketUrl": null,
+        "requiresTicket": false
+      }
+    },
+
+    "lectureWithGeneralBooking": {
+      "_explanation": "GENERAL BOOKING PAGE: For events where you want visitors to go to the main booking page (not a specific item). Set fareHarborId to null but keep requiresTicket: true. The website uses the default booking URL.",
+      "_whenToUse": "Lectures that share a general admission item, events added to FareHarbor later",
+      "example": {
+        "id": "lecture-byrd",
+        "title": "James P. Byrd Guest Lecture",
+        "date": "2026-03-27",
+        "fareHarborId": null,
+        "ticketUrl": null,
+        "requiresTicket": true
+      }
+    }
+  },
+
   "events": [
     {
       "id": "road-to-250",
@@ -252,7 +793,7 @@
       "type": "new",
       "category": "lecture",
       "speaker": "David Doan",
-      "speakerTitle": "Flag Historian",
+      "speakerTitle": "President, Overmountain Victory Trail Association",
       "description": "Every star and stripe carries a story. From the Grand Union that flew at Boston to the banner that inspired Key's anthem, David Doan traces the flag's evolution. Followed by the dedication of Rocky Mount's America 250 commemorative flag.",
       "fareHarborId": null,
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
@@ -413,29 +954,6 @@
         "members": 0
       },
       "featured": false
-    },
-    {
-      "id": "cherokee-heritage",
-      "title": "Cherokee Heritage Weekend",
-      "date": "2026-08-22",
-      "endDate": "2026-08-23",
-      "time": "10:00 AM - 4:00 PM",
-      "type": "new",
-      "category": "festival",
-      "speaker": "Dr. Daniel Redbird Wolfe",
-      "speakerTitle": "Cherokee Historian",
-      "description": "The Overmountain settlements sat within Cherokee territory. Treaties were signed, broken, and tested. Hear the other side of the frontier story—told by Cherokee scholars and artisans. Two days of demonstrations, lectures, and perspectives rarely heard.",
-      "fareHarborId": "562812",
-      "ticketUrl": "https://fareharbor.com/rockymountmuseum/items/562812/",
-      "requiresTicket": true,
-      "pricing": {
-        "adult": 1500,
-        "senior": 1200,
-        "child": 1000,
-        "underFive": 0,
-        "members": 0
-      },
-      "featured": true
     },
     {
       "id": "first-families-reunion",

@@ -477,3 +477,18 @@
     transition: none;
   }
 }
+
+/* ============================================
+   ACCESSIBILITY - Touch Targets
+   Ensures minimum 44px touch targets
+   WCAG 2.5.8 Target Size Minimum (Level AA)
+   ============================================ */
+.program-card-btn,
+.program-card-btn--secondary,
+.programs-groups-btn,
+.programs-groups-btn--primary,
+.programs-groups-btn--secondary,
+.programs-education-btn {
+  min-height: 44px;
+  min-width: 44px;
+}

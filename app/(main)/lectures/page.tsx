@@ -71,7 +71,7 @@ function formatShortDate(dateStr: string): { month: string; day: string } {
 // This is now a Client Component due to useContact() hook usage
 
 export default function LecturesPage() {
-  const { lectures, additionalProgramming } = typedLecturesData
+  const { lectures } = typedLecturesData
   const contact = useContact()
 
   // Memoize formatted dates to prevent recalculation on every render
@@ -320,56 +320,6 @@ export default function LecturesPage() {
               </article>
             )
           })}
-        </div>
-      </section>
-
-      {/* ============================================
-          BEYOND THE SERIES - Cherokee Heritage
-          ============================================ */}
-      <section className={styles['series-beyond']} aria-labelledby="beyond-heading">
-        <div className={styles['series-beyond-inner']}>
-          <header className={styles['series-beyond-header']}>
-            <p className={styles['series-beyond-eyebrow']}>Beyond the Series</p>
-            <h2 id="beyond-heading" className={styles['series-beyond-headline']}>
-              The Story Continues
-            </h2>
-            <p className={styles['series-beyond-intro']}>
-              The founding story includes voices not in this lecture series. Cherokee Heritage
-              Weekend explores the perspectives of those who called this land home long before
-              European settlement.
-            </p>
-          </header>
-
-          <article className={styles['series-beyond-event']}>
-            <div className={styles['series-beyond-event-date']}>
-              <time dateTime={additionalProgramming.date}>
-                <span className={styles['series-beyond-event-month']}>Aug</span>
-                <span className={styles['series-beyond-event-days']}>22–23</span>
-              </time>
-            </div>
-
-            <div className={styles['series-beyond-event-content']}>
-              <span className={styles['series-beyond-event-badge']}>Weekend Festival</span>
-              <h3 className={styles['series-beyond-event-title']}>{additionalProgramming.title}</h3>
-              <p className={styles['series-beyond-event-desc']}>
-                {additionalProgramming.description}
-              </p>
-
-              <div className={styles['series-beyond-event-speaker']}>
-                <p className={styles['series-beyond-event-speaker-name']}>
-                  Featuring {additionalProgramming.speaker.name}
-                </p>
-                <p className={styles['series-beyond-event-speaker-title']}>
-                  {additionalProgramming.speaker.title}
-                </p>
-              </div>
-
-              <Link href="/events#cherokee-heritage" className={styles['series-beyond-event-link']}>
-                View Event Details
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </article>
         </div>
       </section>
 

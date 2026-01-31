@@ -153,7 +153,7 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
               type="button"
               key={r}
               onClick={() => setRange(r)}
-              className={`px-2 py-1 text-xs rounded transition-colors ${
+              className={`min-w-[44px] min-h-[44px] flex items-center justify-center text-xs rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold ${
                 range === r
                   ? 'bg-almanac-gold/20 text-almanac-gold border border-almanac-gold/30'
                   : 'text-almanac-parchment/50 hover:text-almanac-parchment/70'
@@ -227,13 +227,13 @@ export default function HourlySparkline({ hourly }: HourlySparklineProps) {
           strokeLinejoin="round"
         />
 
-        {/* Data points (invisible hit targets) */}
+        {/* Data points (invisible hit targets - 44px minimum) */}
         {chartData.dataPoints.map((point, i) => (
           <circle
             key={`point-${i}`}
             cx={point.x}
             cy={point.y}
-            r={8}
+            r={22}
             fill="transparent"
             onMouseEnter={() => setHoveredIndex(i)}
             onTouchStart={() => setHoveredIndex(i)}

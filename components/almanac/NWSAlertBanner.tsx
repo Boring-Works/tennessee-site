@@ -170,16 +170,18 @@ export default function NWSAlertBanner({ lat, lon, onAlertChange }: NWSAlertBann
                         e.stopPropagation()
                         handleDismiss(alert.id)
                       }}
-                      className="p-1 hover:bg-white/10 rounded transition-colors"
+                      className="min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-white/10 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-almanac-gold -m-2"
                       aria-label={`Dismiss ${alert.event} alert`}
                     >
-                      <X size={16} className="text-almanac-parchment/50" />
+                      <X size={18} className="text-almanac-parchment/50" />
                     </button>
-                    <ChevronDown
-                      size={18}
-                      className={`text-almanac-parchment/70 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                      aria-hidden="true"
-                    />
+                    <div className="w-[44px] h-[44px] flex items-center justify-center -m-2">
+                      <ChevronDown
+                        size={18}
+                        className={`text-almanac-parchment/70 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        aria-hidden="true"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

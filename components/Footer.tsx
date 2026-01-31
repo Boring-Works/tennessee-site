@@ -160,6 +160,26 @@ function FooterComponent() {
               </span>
             </address>
 
+            {/* Hours Display */}
+            <div className={styles['footer-hours']}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className={styles['footer-icon']}
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+              <span>
+                {siteInfo.hours.formatted.days}
+                <br />
+                {siteInfo.hours.formatted.time}
+              </span>
+            </div>
+
             {/* Phone Number Link */}
             <a
               href={`tel:${siteInfo.contact.phone.replace(/[^\d]/g, '')}`}

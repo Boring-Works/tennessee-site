@@ -92,7 +92,7 @@ Five years after signing the Treaty of Holston, Cherokee leader John Watts addre
 
 **Why This Matters:**
 
-John Watts was one of the 42 Cherokee leaders who negotiated the Treaty of Holston at Rocky Mount in 1791. This speech shows:
+John Watts was one of the 42 Cherokee leaders who signed the Treaty of Holston at White's Fort (Knoxville) in 1791, following preliminary diplomatic visits to Rocky Mount. This speech shows:
 
 - Cherokee remembered specific terms negotiated at Rocky Mount
 - Cherokee tracked whether U.S. honored those terms (they didn't)
@@ -211,11 +211,11 @@ Both documents include:
 
 ### 3. They Connect to Rocky Mount
 
-Both documents reference the Treaty of Holston negotiated at Rocky Mount:
+Both documents reference the Treaty of Holston, for which Cherokee leaders visited Rocky Mount in December 1790 before formal negotiations at White's Fort in July 1791:
 
-- 1792 delegation protested terms agreed to at Rocky Mount 6 months earlier
-- 1796 Watts speech demands enforcement of "boundary line established with Governor Blount" at Rocky Mount
-- Shows Rocky Mount as one step in ongoing Cherokee diplomatic efforts, not final settlement
+- 1792 delegation protested terms agreed to 6 months earlier
+- 1796 Watts speech demands enforcement of "boundary line established with Governor Blount"
+- Shows Rocky Mount as the site of preliminary diplomacy, with White's Fort as the negotiation venue
 
 ### 4. They're Teacher-Friendly
 

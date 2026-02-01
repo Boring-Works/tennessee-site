@@ -112,11 +112,11 @@ The Papers of the War Department project has made these documents freely accessi
 
 ## Connection to Rocky Mount
 
-This speech references the boundary line "established with Governor Blount"—the same William Blount who negotiated the Treaty of Holston at Rocky Mount in 1791. John Watts was one of the 42 Cherokee leaders who traveled to Rocky Mount to negotiate that treaty.
+This speech references the boundary line "established with Governor Blount"—the same William Blount who planned treaty negotiations from Rocky Mount (his headquarters) and concluded them at White's Fort (Knoxville) in July 1791. John Watts was one of the 42 Cherokee leaders who signed that treaty.
 
 Five years later, Watts's speech demonstrates that Cherokee leaders:
 
-- Remembered the specific terms negotiated at Rocky Mount
+- Remembered the specific terms negotiated with Blount in 1791
 - Tracked whether the United States honored those terms
 - Used diplomatic channels to demand compliance
 - Possessed the technical knowledge to specify enforcement mechanisms

@@ -160,7 +160,7 @@ export const documents: HistoricalDocument[] = [
       'I do hereby enjoin and require all officers of the United States, civil and military, and all citizens and inhabitants thereof, to govern themselves according to the said treaty, as they will answer the contrary at their peril.',
     keyQuoteAttribution: 'George Washington, November 11, 1791',
     whyThisMatters:
-      'This proclamation, signed by President Washington and countersigned by Secretary of State Thomas Jefferson, made the Treaty of Holston binding federal law. Every U.S. officer—civil and military—was required to enforce its terms "at their peril." It transformed Blount\'s negotiations at Rocky Mount into the supreme law of the land.',
+      'This proclamation, signed by President Washington and countersigned by Secretary of State Thomas Jefferson, made the Treaty of Holston binding federal law. Every U.S. officer—civil and military—was required to enforce its terms "at their peril." It transformed Blount\'s diplomatic work—planned from Rocky Mount and negotiated at White\'s Fort—into the supreme law of the land.',
     content: `<p>President George Washington's formal proclamation ratifying the Treaty of Holston, negotiated by Governor William Blount with the Cherokee Nation on July 2, 1791. This document made the treaty binding U.S. law and required all federal officers and citizens to comply with its terms.</p>
 
 <h3>Treaty Negotiation Details</h3>

@@ -70,6 +70,77 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'primary',
     confidence: 'verified',
   },
+  {
+    id: 'gov-006',
+    category: 'governance',
+    claim: 'Blount took measures to organize territorial government by November 1790',
+    source: 'Blount to Knox, November 3, 1790 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-007',
+    category: 'governance',
+    claim:
+      'Territorial militia described as good marksmen accustomed to woods but requiring systematic officer training',
+    source: 'Blount to Knox, November 3, 1790',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-008',
+    category: 'governance',
+    claim:
+      'Hanging Maw visited Blount at Rocky Mount in December 1790 for preliminary peace discussions',
+    source: 'Blount to Knox, December 15, 1790',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-009',
+    category: 'governance',
+    claim:
+      'Cherokee chiefs agreed to restrain young warriors from hostility if settlers refrained from land encroachments',
+    source: 'Blount to Knox, December 15, 1790',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-010',
+    category: 'governance',
+    claim:
+      'Blount issued proclamations forbidding settler encroachments beyond established boundaries',
+    source: 'Blount to Knox, December 15, 1790',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-011',
+    category: 'governance',
+    claim:
+      'Courts of law established throughout territory with judges entering duties by January 1791',
+    source: 'Blount to Knox, January 8, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-012',
+    category: 'governance',
+    claim:
+      'New settlements forming and farms being cleared with commerce increasing by January 1791',
+    source: 'Blount to Knox, January 8, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-013',
+    category: 'governance',
+    claim:
+      'Tennessee and Holston rivers provided convenient transportation for territorial produce',
+    source: 'Blount to Knox, January 8, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
 
   // === CONSTRUCTION ===
   {
@@ -120,6 +191,31 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
       'farm.{0,15}since.{0,15}1770',
       'oldest farm.{0,15}1770',
     ],
+  },
+  {
+    id: 'con-005',
+    category: 'construction',
+    claim: 'Dining Room structure built 1829-1830 per dendrochronology study',
+    source: 'Grissino-Mayer & van de Gevel 2007 dendrochronology study',
+    sourceType: 'archaeological',
+    confidence: 'verified',
+  },
+  {
+    id: 'con-006',
+    category: 'construction',
+    claim: 'William Cobb sold Rocky Mount to son-in-law Hal Massengill in 1796',
+    source: 'Washington County deed 1796',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'con-007',
+    category: 'construction',
+    claim:
+      'Property valued at $2,000 with 60 acres and barn for 30 horses in October 1791 inventory',
+    source: 'Rocky Mount Inventory, October 15, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
   },
 
   // === PEOPLE ===
@@ -180,6 +276,66 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'archaeological',
     confidence: 'verified',
   },
+  {
+    id: 'ppl-006',
+    category: 'people',
+    claim: 'William Cobb Sr. born circa 1732 in Isle of Wight County, Virginia',
+    source: 'WikiTree Cobb-3509, genealogical records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'ppl-007',
+    category: 'people',
+    claim: 'William Cobb Sr. died circa 1803 in Knox County, Tennessee',
+    source: 'WikiTree Cobb-3509, genealogical records',
+    sourceType: 'scholarly',
+    confidence: 'high',
+  },
+  {
+    id: 'ppl-008',
+    category: 'people',
+    claim:
+      'William Cobb and sons (William Jr., Pharaoh, Jerry, Arthur) supplied Overmountain Men with gunpowder, horses, blankets, and food for Kings Mountain campaign (October 1780)',
+    source: 'WikiTree, Tennessee Encyclopedia, Revolutionary War records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'ppl-009',
+    category: 'people',
+    claim: "William Cobb moved from Rocky Mount to Bean's Station (Knox/Grainger County) in 1795",
+    source: 'TN Gen Web, WikiTree, Washington County deed 1796',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'ppl-010',
+    category: 'people',
+    claim:
+      'Hal Massengill (Henry Massengill Jr.) married Penelope Cobb at Fort Womack during Indian siege',
+    source: "WikiTree Massengill-88, Goodspeed's History of Tennessee",
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'ppl-011',
+    category: 'people',
+    claim: 'Hal Massengill served 2 years, 3 months in Revolutionary War',
+    source: 'WikiTree Massengill-88',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'ppl-012',
+    category: 'people',
+    claim:
+      'Barsheba Whitehead Cobb fed 42 Cherokee chiefs and attendants during Treaty of Holston negotiations (July 1791)',
+    source: 'COBB-FAMILY-RESEARCH.md citing historical records',
+    sourceType: 'scholarly',
+    confidence: 'high',
+    wrongVariants: ['mary cobb.{0,15}fed.{0,15}cherokee', 'mary cobb.{0,15}42 chiefs'],
+  },
 
   // === TREATY ===
   {
@@ -234,6 +390,142 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'primary',
     confidence: 'high',
   },
+  {
+    id: 'trt-006',
+    category: 'treaty',
+    claim:
+      'Treaty of Holston signed by seven principal Cherokee chiefs: Chuleoah (The Boots), Squollecuttah (Hanging Maw), Enoleh (Black Fox), Kanetetoka (Standing Turkey), Kunoskeskie (John Watts), Nenetooyah (Bloody Fellow), and Chuquilatague (Doublehead)',
+    source:
+      'Treaty of Holston document, Article signatories section, verified against War Department Papers',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: ['six chiefs signed', 'five chiefs signed', 'eight principal chiefs'],
+  },
+  {
+    id: 'trt-007',
+    category: 'treaty',
+    claim:
+      'Treaty of Holston included approximately 35 additional Cherokee signatories beyond the seven principal chiefs',
+    source:
+      'Treaty of Holston document, signatory list verified against National Archives 88697242',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-008',
+    category: 'treaty',
+    claim: 'John Thompson and James Carey served as interpreters for the Treaty of Holston',
+    source: 'Treaty of Holston document, signatories section',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-009',
+    category: 'treaty',
+    claim:
+      'United States agreed to pay Cherokee Nation $1,000 in goods plus $1,000 annually under original Treaty of Holston terms',
+    source: 'Treaty of Holston, Article IV',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-010',
+    category: 'treaty',
+    claim:
+      'Cherokee Nation acknowledged protection of United States and agreed not to hold treaties with foreign powers, individual states, or state citizens',
+    source: 'Treaty of Holston, Article II',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-011',
+    category: 'treaty',
+    claim:
+      'United States guaranteed Cherokee Nation exclusive regulation of trade under Treaty of Holston',
+    source: 'Treaty of Holston, Article VI',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-012',
+    category: 'treaty',
+    claim:
+      'United States citizens settling on Cherokee lands would forfeit federal protection, and Cherokee could punish them as they saw fit',
+    source: 'Treaty of Holston, Article VIII',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-013',
+    category: 'treaty',
+    claim:
+      'United States agreed to furnish Cherokee Nation with useful implements of husbandry and appoint up to four interpreters',
+    source: 'Treaty of Holston, Article XIV',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-014',
+    category: 'treaty',
+    claim:
+      'Additional Article signed February 17, 1792 increased Cherokee annuity from $1,000 to $1,500',
+    source: 'Treaty of Holston, Additional Article (February 17, 1792)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-015',
+    category: 'treaty',
+    claim: 'Senate advised and consented to Treaty of Holston ratification on October 11, 1791',
+    source: 'Washington Proclamation, November 11, 1791 (Founders Online)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-016',
+    category: 'treaty',
+    claim:
+      "Thomas Jefferson countersigned Washington's Treaty of Holston proclamation as Secretary of State",
+    source: 'Washington Proclamation, November 11, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-017',
+    category: 'treaty',
+    claim:
+      'Five Cherokee chiefs traveled by ship from Charleston to Philadelphia, arriving December 29, 1791 to address treaty dissatisfaction',
+    source: 'Cherokee Delegation to Philadelphia report, January 1792 (Founders Online)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-018',
+    category: 'treaty',
+    claim:
+      'Cherokee delegation led by Bloody Fellow met with Secretary Knox on January 7, 9, and 11, 1792',
+    source: 'Cherokee Delegation to Philadelphia report, Knox to Washington January 17, 1792',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-019',
+    category: 'treaty',
+    claim:
+      'Cherokee delegation members were Nenetooyah (Bloody Fellow), Chutloh (Kingfisher), Nontuaka (the Northward), Teesteke (the Disturber), and Katigoslah (the Prince)',
+    source: 'Cherokee Delegation to Philadelphia report, January 1792',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-020',
+    category: 'treaty',
+    claim:
+      'Cherokee requested $1,500 annuity during original negotiations, but Blount claimed lack of authority; Washington and Senate approved increase on January 20, 1792',
+    source: 'Knox report to Washington, January 17, 1792; Senate Executive Journal',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
 
   // === TIMELINE ===
   {
@@ -260,6 +552,24 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'scholarly',
     confidence: 'high',
     dateRange: { start: '1791-12', end: '1792-06' },
+  },
+  {
+    id: 'tim-004',
+    category: 'timeline',
+    claim:
+      '15-acre parcel purchased by Rocky Mount Historical Association for $365,000 in October 2021',
+    source: 'WJHL news article, October 14, 2021',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'tim-005',
+    category: 'timeline',
+    claim:
+      'John Michael Massengill transferred property to State of Tennessee in 1958, opened to public April 1, 1962',
+    source: 'Bristol Herald Courier, January 13, 2023; Tennessee Historical Commission records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
   },
 ]
 

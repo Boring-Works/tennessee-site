@@ -2,7 +2,34 @@
 
 **Purpose:** Master reference mapping website claims to verified source documents
 **Maintained by:** Document Audit Team
-**Last Updated:** 2026-01-30
+**Last Updated:** 2026-01-31
+
+---
+
+## Master Truth Documents
+
+**Location:** `docs/truth-documents/`
+
+These are the definitive reference documents for all Rocky Mount communications:
+
+| Document                                            | Purpose                                                            | Size |
+| --------------------------------------------------- | ------------------------------------------------------------------ | ---- |
+| **Rocky_Mount_Historical_Truth_Master_Document.md** | Historical fact-checking reference, corrects common misinformation | 16KB |
+| **Rocky_Mount_Grants_Master_Reference.md**          | NEH & TN250 grant applications, budgets, strategy                  | 16KB |
+| **Sullivan_County_Heritage_Tourism_Strategy.md**    | "Where Tennessee Began" positioning, marketing framework           | 18KB |
+
+### How to Use Master Documents
+
+1. **Before writing ANY marketing copy** → Check Historical Truth Master Document
+2. **Before grant applications** → Use Grants Master Reference
+3. **For regional tourism positioning** → Consult Heritage Tourism Strategy
+
+### External Truth Documents
+
+| Document                                   | Location             | Purpose                          |
+| ------------------------------------------ | -------------------- | -------------------------------- |
+| rocky-mount-master-source-of-truth-v4.docx | ~/Downloads/         | Original research compilation    |
+| independence-day-rocky-mount-250.md        | ~/Desktop/Documents/ | July 4, 2026 event marketing kit |
 
 ---
 
@@ -126,7 +153,7 @@
 
 ### Historical Sources (Primary)
 
-**Location:** `/Users/codyboring/CodyML/projects/TNRocky/Historical/processed/`
+**Location:** `/Users/codyboring/CodyML/projects/rocky-mount/Historical/processed/`
 
 | Document                                       | Date      | Type         | Status   |
 | ---------------------------------------------- | --------- | ------------ | -------- |
@@ -145,7 +172,7 @@
 
 ### Website Evidence Room Documents
 
-**Location:** `/Users/codyboring/CodyML/projects/TNRocky/tennessee-starts-here/content/documents/`
+**Location:** `/Users/codyboring/CodyML/projects/rocky-mount/tennessee-starts-here/content/documents/`
 
 | Document                                 | Type            | Status   |
 | ---------------------------------------- | --------------- | -------- |
@@ -170,7 +197,7 @@
 
 ### Research Documents
 
-**Location:** `/Users/codyboring/CodyML/projects/TNRocky/tennessee-starts-here/content/`
+**Location:** `/Users/codyboring/CodyML/projects/rocky-mount/tennessee-starts-here/content/`
 
 | Document                                   | Topic             | Size  | Status   |
 | ------------------------------------------ | ----------------- | ----- | -------- |
@@ -191,7 +218,7 @@
 
 ### People Profiles
 
-**Location:** `/Users/codyboring/CodyML/projects/TNRocky/tennessee-starts-here/content/people/`
+**Location:** `/Users/codyboring/CodyML/projects/rocky-mount/tennessee-starts-here/content/people/`
 
 **50 biographical profiles including:**
 
@@ -206,7 +233,7 @@
 
 ## Marketing/Strategy Documents
 
-**Location:** `/Users/codyboring/CodyML/projects/TNRocky/tennessee-starts-here/content/`
+**Location:** `/Users/codyboring/CodyML/projects/rocky-mount/tennessee-starts-here/content/`
 
 | Document                           | Purpose         | Size |
 | ---------------------------------- | --------------- | ---- |
@@ -220,7 +247,7 @@
 
 ## Master Index Documents
 
-**Location:** `/Users/codyboring/CodyML/projects/TNRocky/Historical/`
+**Location:** `/Users/codyboring/CodyML/projects/rocky-mount/Historical/`
 
 | Document                  | Purpose                 | Size |
 | ------------------------- | ----------------------- | ---- |
@@ -261,7 +288,13 @@
 ```
 TRUTH DOCUMENTS HIERARCHY
 
-Level 1: Primary Sources (Highest Authority)
+Level 0: Master Truth Documents (Ultimate Authority)
+└── docs/truth-documents/*.md (3 files)
+    ├── Rocky_Mount_Historical_Truth_Master_Document.md
+    ├── Rocky_Mount_Grants_Master_Reference.md
+    └── Sullivan_County_Heritage_Tourism_Strategy.md
+
+Level 1: Primary Sources (High Authority)
 ├── Historical/processed/*.md (35 files)
 │   └── Original transcriptions, letters, treaties
 └── content/documents/*.md (41 files)
@@ -288,9 +321,10 @@ Level 4: Strategy & Marketing (Implementation)
 
 ## Version History
 
-| Date       | Change           | Author              |
-| ---------- | ---------------- | ------------------- |
-| 2026-01-30 | Initial creation | Document Audit Team |
+| Date       | Change                                              | Author              |
+| ---------- | --------------------------------------------------- | ------------------- |
+| 2026-01-31 | Added master truth documents section, updated paths | Document Audit Team |
+| 2026-01-30 | Initial creation                                    | Document Audit Team |
 
 ---
 

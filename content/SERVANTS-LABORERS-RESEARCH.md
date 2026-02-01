@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Mary Cobb could not have cooked alone for 42 Cherokee chiefs, government officials, surveyors, and visiting dignitaries from 1790 to 1792. The detached kitchen building at Rocky Mount—described in the 1791 inventory as containing "quarters for domestic servants"—reveals the existence of non-enslaved and enslaved household laborers whose work sustained the territorial capital.
+Barsheba Cobb could not have cooked alone for 42 Cherokee chiefs, government officials, surveyors, and visiting dignitaries from 1790 to 1792. The detached kitchen building at Rocky Mount—described in the 1791 inventory as containing "quarters for domestic servants"—reveals the existence of non-enslaved and enslaved household laborers whose work sustained the territorial capital.
 
 However, the historical record provides **limited but revealing evidence** of these workers:
 
@@ -54,26 +54,26 @@ This research summarizes what is known about Rocky Mount's non-elite labor force
    - Storage for provisions indicates significant food management responsibilities
    - Physical evidence: wear patterns on hearth stones would indicate intensity of use
 
-### 1.2 Mary Cobb's Labor in Historical Narrative
+### 1.2 Barsheba Cobb's Labor in Historical Narrative
 
 **Source:** guides/look-for-this.md (Pre-visit interpretation guide)
 
 **Documented Facts:**
 
-> "Mary Cobb, wife of William Cobb, did not simply feed her family from 1790 to 1792. She fed the territorial government. Governor Blount boarded at Rocky Mount. Government officials, surveyors, and visiting dignitaries came and went. The Cherokee delegation that arrived for treaty negotiations numbered forty-two chiefs plus their attendants. All of them ate meals prepared at Rocky Mount."
+> "Barsheba Cobb, wife of William Cobb, did not simply feed her family from 1790 to 1792. She fed the territorial government. Governor Blount boarded at Rocky Mount. Government officials, surveyors, and visiting dignitaries came and went. The Cherokee delegation that arrived for treaty negotiations numbered forty-two chiefs plus their attendants. All of them ate meals prepared at Rocky Mount."
 
-> "Here, Mary Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory."
+> "Here, Barsheba Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory."
 
 **Interpretation Notes:**
 
-- Contemporary documentation acknowledges Mary Cobb's work
+- Contemporary documentation acknowledges Barsheba Cobb's work
 - Document explicitly states she worked "alongside" others ("those who worked alongside her")
 - Implies but does not name her assistants
-- Distinguishes between Mary Cobb's supervision and the broader kitchen operation
+- Distinguishes between Barsheba Cobb's supervision and the broader kitchen operation
 
 **Why This Matters:**
 
-This is a rare instance of a woman's labor being acknowledged in primary historical interpretation. However, it illustrates the central problem: **we know Mary Cobb's name but not the names of those she worked with**.
+This is a rare instance of a woman's labor being acknowledged in primary historical interpretation. However, it illustrates the central problem: **we know Barsheba Cobb's name but not the names of those she worked with**.
 
 ### 1.3 Rocky Mount's Capacity & Hospitality Requirements
 
@@ -189,7 +189,7 @@ For comparison, contemporary frontier households:
 
 **What We Know:**
 
-- Mary Cobb worked in the kitchen
+- Barsheba Cobb worked in the kitchen
 - William Cobb owned the property
 - Children likely contributed to household labor (common practice)
 - Extended family members may have assisted with hospitality operations
@@ -219,7 +219,7 @@ For comparison, contemporary frontier households:
 A prosperous frontier household of 1790s typically maintained:
 
 - Owner/overseer: William Cobb
-- Owner's spouse: Mary Cobb (household management)
+- Owner's spouse: Barsheba Cobb (household management)
 - Children: Variable number (labor contribution)
 - Enslaved workers: 3-10 (based on property value)
 - Indentured servants: 0-2 (if available)
@@ -346,15 +346,15 @@ To feed and house 42 Cherokee chiefs, plus government officials, for treaty nego
 
 **This work was performed by people whose names were not recorded.**
 
-### 5.2 Who Mary Cobb Actually Was
+### 5.2 Who Barsheba Cobb Actually Was
 
-The historical record documents Mary Cobb as a notable figure—unusual for a frontier woman. But this documentation erases more than it reveals:
+The historical record documents Barsheba Cobb as a notable figure—unusual for a frontier woman. But this documentation erases more than it reveals:
 
 - We know she worked in the kitchen
 - We know she managed government hospitality
-- We don't know her age, her background, her skills, her agency
+- We don't know her age, her background before marriage, her skills, her agency
 - We don't know who worked alongside her
-- We don't know if she was enslaved or free, compensated or obligated
+- We know she was free (William Cobb's wife), but not details of her autonomy
 - We don't know what happened to her after 1792
 
 The "Look for This" guide appropriately elevates her labor as essential to governance. But it also contains the erasure: naming her accomplishes visibility while rendering her co-workers invisible.
@@ -364,7 +364,7 @@ The "Look for This" guide appropriately elevates her labor as essential to gover
 Rocky Mount exemplifies broader patterns:
 
 1. **Elite men's actions are documented:** Blount's letters, official correspondence, policy decisions
-2. **Elite women's work is partially acknowledged:** Mary Cobb's kitchen labor is mentioned
+2. **Elite women's work is partially acknowledged:** Barsheba Cobb's kitchen labor is mentioned
 3. **Non-elite workers are architectural:** Only visible through buildings ("quarters for domestic servants")
 4. **Enslaved people are absent:** No names, no agency, no documented humanity
 
@@ -439,7 +439,7 @@ Recent academic work recognizes that:
 
 ### 7.2 Gender & Labor History
 
-- Frontier women's work was typically undocumented (except as exceptions like Mary Cobb)
+- Frontier women's work was typically undocumented (except as exceptions like Barsheba Cobb)
 - Household labor—cooking, water, cleaning—was essential but invisible
 - Women's economic contribution to frontier settlements was substantial but unacknowledged in official records
 - The "household" was actually a workplace with complex labor organization
@@ -462,7 +462,7 @@ The "quarters for domestic servants" is itself archaeological evidence—a built
 ### 8.1 Public Interpretation
 
 1. **Expand kitchen interpretation to include workers**
-   - Current: Focus on Mary Cobb and food preparation
+   - Current: Focus on Barsheba Cobb and food preparation
    - Add: Discussion of scale requiring multiple workers
    - Add: Acknowledgment of enslaved and hired labor
    - Add: Architecture as evidence of worker presence
@@ -519,7 +519,7 @@ The "quarters for domestic servants" is itself archaeological evidence—a built
 ### What We Know (Documentary Evidence)
 
 1. **Kitchen building with servant quarters** explicitly mentioned in 1791 inventory
-2. **Mary Cobb's work** documented in interpretation guides and historical references
+2. **Barsheba Cobb's work** documented in interpretation guides and historical references
 3. **Scale of operations** required multiple workers (42+ people to feed simultaneously)
 4. **Economic capacity** of Rocky Mount ($2,000 valuation) supports significant staff
 5. **Frontier context** where enslaved, indentured, and wage labor coexisted
@@ -545,9 +545,9 @@ The missing documentation itself is historically significant. It demonstrates th
 
 ---
 
-## Conclusion: Mary Cobb Wasn't Alone
+## Conclusion: Barsheba Cobb Wasn't Alone
 
-The opening question—"Mary Cobb couldn't cook for 42 Cherokee chiefs alone—who helped her?"—has no answer because we have chosen not to record those answers.
+The opening question—"Barsheba Cobb couldn't cook for 42 Cherokee chiefs alone—who helped her?"—has no answer because we have chosen not to record those answers.
 
 The architectural evidence is clear: "quarters for domestic servants" explicitly states that workers were present. But no document names them, no ledger records their wages, no letter from William Cobb or Governor Blount acknowledges their names or accomplishments.
 
@@ -561,7 +561,7 @@ The path forward requires:
 4. **Humility:** Recognize that full recovery of these stories may be impossible
 5. **Obligation:** Continue asking the question, even when answers remain elusive
 
-Mary Cobb's kitchen was the engine of territorial government. But it could not have run on her labor alone. Until we name those who worked beside her, our history remains incomplete.
+Barsheba Cobb's kitchen was the engine of territorial government. But it could not have run on her labor alone. Until we name those who worked beside her, our history remains incomplete.
 
 ---
 
@@ -574,7 +574,7 @@ Mary Cobb's kitchen was the engine of territorial government. But it could not h
 | Rocky Mount Inventory            | Oct 15, 1791 | Sullivan County Records        | "Quarters for domestic servants"              |
 | Blount to Knox (correspondence)  | Oct-Dec 1790 | Blount Papers, Rocky Mount SHS | Cherokee delegation visits, hospitality scale |
 | Blount Arrival Letter            | Oct 20, 1790 | Blount Papers, Rocky Mount SHS | Description of Rocky Mount accommodations     |
-| "Look for This" Guide            | Jan 2026     | Rocky Mount SHS                | Mary Cobb and kitchen interpretation          |
+| "Look for This" Guide            | Jan 2026     | Rocky Mount SHS                | Barsheba Cobb and kitchen interpretation      |
 | ENSLAVED-PEOPLE-RESEARCH.md      | Jan 30, 2026 | Tennessee Starts Here Project  | Archival evidence of enslaved people          |
 | NEW-DOCUMENTS-RECOMMENDATIONS.md | Jan 30, 2026 | Tennessee Starts Here Project  | Identified labor records gaps                 |
 

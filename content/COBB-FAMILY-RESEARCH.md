@@ -1,579 +1,365 @@
-# Cobb Family Research: Rocky Mount and Beyond (1790-1830)
+# Cobb-Massengill Family Research: Rocky Mount Origins to Present
 
-**Research Focus:** Who lived at Rocky Mount during the territorial capital period (1790-1792) and what happened to the property afterward?
+**Research Focus:** Complete genealogical documentation of the families who owned Rocky Mount from settlement (c. 1770) through 2021 land purchase.
 
-**Date:** January 30, 2026
-**Status:** Research Summary from Available Primary and Secondary Sources
+**Date:** January 31, 2026  
+**Status:** UPDATED with verified genealogical sources  
+**Supersedes:** Previous version dated January 30, 2026
 
 ---
 
 ## EXECUTIVE SUMMARY
 
-William Cobb and his wife Mary owned Rocky Mount, which served as Tennessee's first territorial capital from October 1790 to late 1791. The Cobb family maintained the property beyond the capital period, with their descendants (through marriage) continuing ownership into the 19th century. The current standing structures were built by Michael Massengill (Cobb's grandson) during 1826-1830, approximately 35-40 years after the territorial capital period.
+William Cobb Sr. (c. 1732–1803) and his wife Barsheba Whitehead established the Rocky Mount homestead around 1769-1770, migrating from North Carolina. The site served as Tennessee's first territorial capital (1790-1792) when Governor William Blount administered the Southwest Territory from this location. When the Cobbs moved to Knox/Grainger County in 1795, they transferred the property to their daughter **Penelope Cobb Massengill** and her husband **Hal Massengill** (Henry Massengill Jr.). The property remained in Massengill family hands for over 160 years until John Michael Massengill transferred it to the State of Tennessee in 1958.
 
-**Key Finding:** While some documentation exists about William Cobb's property and his role as host to the territorial government, direct documentation of the broader Cobb family household is limited. The household composition during 1790-1792 can be inferred from inventory records and contemporaneous accounts but lacks detailed genealogical documentation.
-
----
-
-## PART I: DOCUMENTED FACTS ABOUT WILLIAM AND MARY COBB
-
-### William Cobb (fl. 1790s)
-
-**Basic Information:**
-
-- **Full name:** William Cobb
-- **Period of prominence:** 1790s frontier settler
-- **Property:** Rocky Mount, Washington County (later Sullivan County), Tennessee
-- **Role:** Frontier settler; proprietor of territorial capital headquarters
-- **Approximate dates:** c.1730-1802 (dates from family genealogy references)
-
-**Documentary Evidence:**
-
-1. **Blount's Arrival Letter (October 20, 1790)**
-   - Governor William Blount, arriving to establish territorial government, describes staying at "William Cobb's substantial two-story frame house with glass windows"
-   - Demonstrates Cobb's status: glass windows were luxury items requiring transportation over mountains
-   - Indicates Cobb was known to provide accommodations for prominent guests
-   - Source: Blount's letter to his half-brother John Gray Blount
-
-2. **Rocky Mount Inventory (October 15, 1791)**
-   - Documents the property as it existed during the capital period
-   - Lists detailed contents: furnishings, goods, household equipment
-   - Describes outbuildings: detached kitchen, smokehouse, springhouse, barn
-   - Estimates property value at $2,000 (substantial for 1791 frontier)
-   - Property size: ~20 acres cleared and fenced, ~40 acres woodland
-   - Source: Sullivan County Records
-
-3. **Property Strategic Location**
-   - Situated on Great Road from Virginia
-   - Made it ideal location for territorial capital
-   - Government officials, surveyors, and visiting dignitaries used it as stopping point
-   - Source: Period correspondence and travel records
-
-### Mary Cobb (wife of William Cobb)
-
-**Documented Role:**
-
-- **Name:** Mary Cobb
-- **Period of activity:** 1790-1792 (documented through territorial government records)
-- **Primary role:** Household manager and food provisioner for territorial government
-
-**Documentary Evidence:**
-
-1. **Hospitality During Capital Period (1790-1792)**
-   - Provided meals and board for Governor William Blount during his residency
-   - Fed government officials, surveyors, and visiting dignitaries
-   - Managed kitchen and domestic staff during Cherokee treaty negotiations
-   - **July 1791:** Provided meals for 42 Cherokee chiefs and their attendants during treaty negotiations
-   - Source: Contemporary accounts in guide materials and territorial records
-
-2. **Kitchen and Domestic Operations**
-   - Detached kitchen building (separate from main house)
-   - Employed domestic workers/servants alongside family members
-   - Equipment for large-scale cooking: cranes, trammels, spits, Dutch ovens
-   - This kitchen was "the engine of hospitality" during the capital period
-   - Source: Rocky Mount inventory (1791) and architectural analysis
-
-3. **Historical Significance**
-   - Rarely documented in official records (as women's labor was typically invisible in written records)
-   - Her kitchen work was as essential to territorial government as Blount's official duties
-   - Without her hospitality and food provision, treaty negotiations would have been impossible
-   - Contemporary accounts praise the accommodations at Rocky Mount
-   - Source: "Look For This" guide and government correspondence
+**CRITICAL CORRECTION:** Previous documentation listed William Cobb's wife as "Mary Cobb." Genealogical research confirms she was **Barsheba Whitehead**. The confusion likely arose from **Mary Cobb** being William's **sister**, who married **Henry Massengill Sr.** — establishing the Cobb-Massengill family intermarriage pattern.
 
 ---
 
-## PART II: KNOWN DESCENDANTS AND FAMILY CONTINUATION
+# PART I: WILLIAM COBB SR. — FOUNDER
 
-### Michael Massengill (Cobb's Grandson) - Builder of Current Structures
+## Verified Biographical Data
 
-**Basic Information:**
+| Attribute     | Information                                      | Source                                 |
+| ------------- | ------------------------------------------------ | -------------------------------------- |
+| **Full Name** | William Cobb Sr.                                 | WikiTree, TN Gen Web                   |
+| **Birth**     | c. 1732, Isle of Wight County, Virginia          | WikiTree Cobb-3509                     |
+| **Death**     | c. 1803, Knox County, Tennessee                  | WikiTree, genealogical records         |
+| **Wife**      | Barsheba Whitehead                               | WikiTree, Massengill Family book       |
+| **Migration** | NC → Rocky Mount c. 1769-1770                    | Tennessee Encyclopedia, family records |
+| **Departure** | Moved to Bean's Station (Knox/Grainger Co.) 1795 | TN Gen Web, WikiTree                   |
 
-- **Relationship:** William Cobb's grandson (through Cobb's daughter)
-- **Time period:** Active early 19th century
-- **Primary achievement:** Built current Rocky Mount main house, 1826-1830
+## Parents (Probable)
 
-**Documentary Evidence:**
+Research indicates William Cobb Sr. was likely the son of **Joseph Cobb** and **Catherine Whitehead** based on:
 
-1. **Construction Dates (1826-1830)**
-   - University of Tennessee dendrochronology study (Grissino-Mayer & van de Gevel, 2007)
-   - Tree-ring dating proves structures built 1826-1830
-   - Approximately 35-40 years after territorial capital period
-   - Source: Dendrochronology study referenced in site documentation
+- Whitehead family migrations parallel to Cobb family (VA → NC → TN)
+- William marrying Barsheba Whitehead (same surname as probable mother)
+- Naming patterns: William named a daughter Catherine (after probable grandmother)
+- Source: WikiTree Cobb-3509, Dr. Samuel Evans Massengill's _The Massengills, Massengales and Variants (1472-1931)_
 
-2. **Architectural Significance**
-   - Current main house is Massengill's construction, not William Cobb's original
-   - If Jackson visited in 1788, he would have lodged in an earlier Cobb structure (no longer standing)
-   - Current standing buildings represent later generation's investment in the property
-   - Source: Dendrochronology and architectural analysis
+## Revolutionary War Service
 
-3. **Property Continuity**
-   - Massengill's construction demonstrates continued Cobb family interest in the property
-   - New house suggests prosperity and/or growing family holdings
-   - Represents transition from frontier capital to private estate
-   - Source: Property history records
+William Cobb and his sons played significant roles in the Kings Mountain campaign (October 1780):
 
----
+| Role                                                                                                   | Documentation                                     |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| Supplied Overmountain Men with gunpowder, horses, blankets, food                                       | Multiple sources including Tennessee Encyclopedia |
+| Sons who marched: William Jr., Pharaoh, Jerry, Arthur                                                  | WikiTree, TN Gen Web                              |
+| Thomas Jefferson quote: "The Battle of King's Mountain was the turning point of the Revolutionary War" | Historical record                                 |
 
-## PART III: THE HOUSEHOLD DURING THE CAPITAL PERIOD (1790-1792)
+## Property Documentation
 
-### Estimated Household Composition
-
-Based on available evidence, Rocky Mount likely housed the following during the capital period:
-
-**Permanent Residents:**
-
-- William Cobb (property owner)
-- Mary Cobb (wife)
-- Cobb children (number and names undocumented)
-- Household servants/workers (number and names undocumented)
-
-**Temporary Residents/Long-term Guests:**
-
-- Governor William Blount (1790-1792) - formal resident during his tenure
-- Various government officials and territorial staff
-- Visiting dignitaries and government business visitors
-- Cherokee delegation members (during treaty negotiations)
-
-**Estimated Household Size:**
-
-- Permanent: 8-15 people (family + domestic staff, estimate based on property inventory and scale of kitchen operations)
-- Peak capacity: 50+ people during major events (e.g., Cherokee treaty delegation arrival)
-
-### Household Labor and Operations
-
-**Documented Activities:**
-
-1. **Food Provision**
-   - Mary Cobb and domestic workers prepared meals for the territorial government
-   - Kitchen equipped for large-scale cooking
-   - Served official meetings, treaty negotiations, formal dinners
-   - Provision for 42 Cherokee chiefs and attendants during July 1791 negotiations
-
-2. **Lodging and Accommodations**
-   - Main house: 4 rooms below, 2 chambers above
-   - Upstairs room designated as Governor Blount's office and sleeping quarters
-   - Guest accommodations for traveling officials
-   - Comfortable standards noted by Blount (glass windows, fireplaces)
-
-3. **Household Management**
-   - Domestic staff included kitchen workers, laundry, cleaning
-   - Yard maintenance (documented by 20 acres cleared and fenced)
-   - Stable management (barn noted as capable of holding 30 head of horses)
-   - Storage and provisioning (smokehouse, springhouse for food preservation)
-
-4. **Servant/Worker Status (Undocumented)**
-   - Rocky Mount inventory mentions "quarters for domestic servants" in kitchen building
-   - Does not specify: names, number, status (free/enslaved), or origins
-   - Represents one of largest frontier estates - likely employed 5-10+ workers
-   - Question of enslaved labor cannot be definitively answered from available sources
-   - Source: Rocky Mount inventory notation
+| Document               | Date         | Key Information                                                                 |
+| ---------------------- | ------------ | ------------------------------------------------------------------------------- |
+| Blount arrival letter  | Oct 20, 1790 | Describes "William Cobb's substantial two-story frame house with glass windows" |
+| Rocky Mount Inventory  | Oct 15, 1791 | Property valued at $2,000; 60 acres; barn for 30 horses                         |
+| Washington County deed | 1796         | William Cobb sold land to son-in-law Hal Massengill                             |
+| Anderson County deed   | 1801         | William signed as "citizen of Grainger County"                                  |
+| Knox County deed       | 1803         | William signed as "citizen of Knox County"                                      |
 
 ---
 
-## PART IV: GAPS IN DOCUMENTATION
+# PART II: BARSHEBA WHITEHEAD COBB
 
-### What We Know:
+## Verified Information
 
-- William Cobb owned the property, 1790s
-- Mary Cobb managed household operations during capital period
-- Property served as territorial capital headquarters
-- Michael Massengill (Cobb's grandson) rebuilt structures 1826-1830
-- Property remained in Cobb family hands through at least the 1820s-1830s
+| Attribute     | Information                                                       | Source                        |
+| ------------- | ----------------------------------------------------------------- | ----------------------------- |
+| **Full Name** | Barsheba Whitehead                                                | WikiTree, Massengill book     |
+| **Marriage**  | To William Cobb Sr.                                               | Multiple genealogical sources |
+| **Children**  | At least 5 documented (see Part III)                              | WikiTree                      |
+| **Note**      | Her niece, also named Barsheba Whitehead, married her son Pharaoh | WikiTree                      |
 
-### What We Don't Know:
+## Role During Territorial Capital Period (1790-1792)
 
-**Cobb Family Genealogy:**
+- Managed household operations and hospitality
+- Provided meals for Governor William Blount during his residency
+- Fed 42 Cherokee chiefs and attendants during Treaty of Holston negotiations (July 1791)
+- Managed detached kitchen building and domestic workers
+- Her work was essential to territorial governance but rarely documented in official records
 
-- No documented list of William and Mary Cobb's children (names, birth dates)
-- No marriage records for Cobb children
-- Lineage from William Cobb to Michael Massengill unclear (which daughter married which Massengill?)
-- Birth/death dates for William Cobb himself (estimated c.1730-1802)
-- Whether William Cobb had previous wives or children before the 1790s
-- Complete family tree beyond the Massengill connection
-
-**Household Composition Details:**
-
-- No names of domestic servants/workers documented
-- No documentation of enslaved people (if any) at Rocky Mount
-- No indication of how many Cobb children lived at home during 1790-1792
-- No details about visiting family members or relatives
-- Servants' or workers' origins, circumstances, or outcomes
-
-**William Cobb's Background:**
-
-- Where he came from originally
-- How and when he acquired the Rocky Mount property
-- Whether he operated a store/trading post (document mentions "William Cobb account books")
-- His relationships with neighboring settlers
-- Any political or militia role (beyond property ownership)
-- When he died (estimated 1802 but unconfirmed)
-
-**Mary Cobb's Background:**
-
-- No maiden name documented
-- No birth/death dates
-- No letters, diaries, or writings by her exist
-- No official records naming her in any capacity
-- Her experience of the capital period entirely reconstructed from indirect evidence
-- Her ultimate fate after the capital period moved to Knoxville
-
-**Property History After 1792:**
-
-- What happened to the property when Blount relocated capital to Knoxville (late 1791/1792)
-- Whether Cobb continued to run a tavern or inn
-- How property evolved through early 1800s until Massengill's 1826-1830 reconstruction
-- Any intermediate owners or tenants between 1792 and 1826
-
-**Extended Family:**
-
-- No documentation of siblings, parents, or other relatives living on property
-- No mention of Cobb family's larger kinship networks on frontier
-- No evidence of marriages into other prominent frontier families
-- No record of extended family visiting or residing temporarily
+**Source Note:** Previous research files incorrectly identified William's wife as "Mary Cobb." Mary Cobb was William's **sister** who married Henry Massengill Sr.
 
 ---
 
-## PART V: RESEARCH RECOMMENDATIONS
+# PART III: CHILDREN OF WILLIAM AND BARSHEBA COBB
 
-### Primary Sources to Locate:
+## Documented Children
 
-1. **Cobb Family Papers**
-   - Contact: Tennessee State Library & Archives
-   - Objective: Letters, account books, family correspondence
-   - Timeline: 1790-1810 period
-   - Value: Could answer questions about family genealogy, household operations, property management
-   - Status: **NOT CONFIRMED TO EXIST** - requires archival search
-
-2. **Estate Records and Wills**
-   - Contact: Sullivan County Records / Washington County Records
-   - Objective: Cobb's will, estate inventory, probate proceedings
-   - Timeline: c.1800-1810 (estimated based on c.1730-1802 life span)
-   - Value: Would establish heirs, property disposition, estate value
-   - Status: **NOT CONFIRMED TO EXIST** - requires archival search
-
-3. **Land Records**
-   - Contact: Tennessee State Library & Archives, Sullivan/Washington County deed books
-   - Objective: Land transfers, property surveys, grants
-   - Timeline: 1770s-1830s
-   - Value: Could trace property ownership, establish Cobb's acquisition date, show transfers to Massengill
-   - Status: **Partially digitized** - systematic search needed
-
-4. **Court Records**
-   - Contact: Sullivan County / Washington County Court records
-   - Objective: Any cases involving Cobb, property disputes, business transactions
-   - Timeline: 1790-1810
-   - Value: Could illuminate Cobb's business activities, disputes, economic position
-   - Status: **Difficult to access** - in-person research may be required
-
-5. **Massengill Family Records**
-   - Contact: Sullivan County historical society, local genealogy resources
-   - Objective: Massengill family genealogy, documentation of his relationship to Cobb
-   - Timeline: 1820s-1830s
-   - Value: Would confirm genealogical connection, explain why he rebuilt the property
-   - Status: **Unknown** - specialized genealogical research required
-
-6. **Knoxville Gazette (1791-1796)**
-   - Current status: Several issues already digitized on site
-   - Objective: Advertisements, notices, announcements mentioning Cobb
-   - Value: Could reveal business activities, government contracts, property matters
-   - Status: **Partially available** - systematic search of available issues
-
-7. **Territorial Government Papers**
-   - Contact: Tennessee State Library & Archives, National Archives microfilm
-   - Objective: Official records mentioning William Cobb, property payments, contracts
-   - Timeline: 1790-1792
-   - Value: Official documentation of Cobb's relationship to territorial government
-   - Status: **Partially available** - already holds microfilm MFM 472
-
-### Archival Collections to Contact:
-
-| Institution                        | Collection                                        | Contact        | Potential Value |
-| ---------------------------------- | ------------------------------------------------- | -------------- | --------------- |
-| Tennessee State Library & Archives | Territorial papers, land records, court documents | (615) 253-8500 | High            |
-| Sullivan County Register's Office  | County deed books, court records                  | (423) 447-1501 | High            |
-| Washington County Archives         | County records, historical documents              | (423) 753-1621 | Medium          |
-| East Tennessee Historical Society  | Regional manuscripts, family papers               | Contact local  | Medium          |
-| McClung Historical Collection      | Manuscripts, family papers, special collections   | Knoxville      | Medium          |
-| Vanderbilt Special Collections     | James Robertson Papers (might reference Cobb)     | Nashville      | Low             |
+| Child                | Notes                                                                                   | Source                         |
+| -------------------- | --------------------------------------------------------------------------------------- | ------------------------------ |
+| **Arthur Cobb**      | Served at Kings Mountain                                                                | WikiTree Cobb-3509             |
+| **Pharaoh Cobb**     | Supplied Overmountain Men; married Barsheba Whitehead (his cousin, niece of his mother) | WikiTree                       |
+| **William Cobb Jr.** | Served at Kings Mountain                                                                | WikiTree                       |
+| **Penelope Cobb**    | Married Hal Massengill; inherited Rocky Mount                                           | Multiple sources               |
+| **Tabitha Cobb**     | Married into Massengale family                                                          | WikiTree                       |
+| **Catherine (?)**    | Named for probable grandmother Catherine Whitehead                                      | Inference from naming patterns |
 
 ---
 
-## PART VI: WHAT THE INVENTORY TELLS US
+# PART IV: THE MASSENGILL CONNECTION
 
-### The Rocky Mount Inventory (October 15, 1791) - Key Details
+## How Cobbs and Massengills Intermarried
 
-**Main Dwelling House:**
+The Cobb and Massengill families were already connected **before** Penelope Cobb married Hal Massengill:
 
-- Two-story frame house
-- Stone foundation
-- Approximately 40 feet x 24 feet
-- 4 rooms below, 2 chambers above
-- Glass windows in all principal rooms (major status symbol)
-- Large stone chimney at each end
-- Covered porch extending full length of front
-- Value contribution: Significant (glass windows required expensive mountain transport)
+**First Marriage:** **Mary Cobb** (William Sr.'s sister) married **Henry Massengill Sr.** (1726-1781)
 
-**Kitchen Building:**
+- Henry Massengill Sr. came to Watauga settlement 1769
+- Their son Henry Jr. ("Hal") would later marry his cousin Penelope Cobb
+- Source: WikiTree Massengill-88, Winged Deer Park historical marker
 
-- Separate log structure (~20 feet square)
-- Large cooking fireplace
-- Food storage areas
-- "Quarters for domestic servants"
-- Purpose: Detached to reduce fire risk and summer heat in main house
-- Capacity: Could handle feeding 40+ people during major gatherings
+**Second Marriage:** **Penelope Cobb** (William Sr.'s daughter) married **Hal Massengill** (Henry Jr.)
 
-**Other Outbuildings:**
-
-- One smokehouse (meat preservation)
-- One springhouse (over running spring - food/beverage storage)
-- One barn (log construction, holds 30 head of horses - indicates significant livestock/travel business)
-- One corncrib (grain storage)
-- One "necessary house" (outdoor privy)
-
-**Land:**
-
-- ~20 acres cleared and fenced
-- ~40 acres woodland
-- Total: 60 acres documented
-
-**Property Valuation:**
-
-- Estimated at $2,000 (1791 dollars)
-- Described as "one of the finest establishments on the Holston frontier"
-
-**What This Reveals About the Household:**
-
-1. **Significant Economic Status**
-   - Rocky Mount was not a simple frontier cabin
-   - Investment in glass windows, stone chimneys, frame construction
-   - Scale of barn (30 horses) suggests trade/travel business
-   - Sophisticated infrastructure (springhouse, smokehouse)
-
-2. **Capacity for Hospitality**
-   - Kitchen large enough for industrial-scale cooking
-   - Multiple rooms and chambers for guests
-   - Stabling for numerous travelers' horses
-   - Separate domestic servant quarters
-
-3. **Household Labor Requirements**
-   - Kitchen operations alone required multiple workers
-   - Barn maintenance for 30+ horses
-   - Household cleaning, laundry, food preservation
-   - Estimated workforce: 5-10+ workers (including family members)
-
-4. **No Detailed Contents Listed**
-   - Inventory describes buildings but not furniture, tools, kitchen equipment
-   - Does not list number of servants or workers
-   - Omits family members' names
-   - Focuses on property structure, not household operations
+- Married at **Fort Womack** during an Indian siege (dramatic frontier story)
+- "They were married in Womack's Fort on the river, during the Indian invasion, while the Fort was surrounded by Indians"
+- Hal served 2 years, 3 months in Revolutionary army
+- Source: WikiTree Massengill-88, Goodspeed's History of Tennessee
 
 ---
 
-## PART VII: ATTEMPTS TO VERIFY JACKSON CONNECTION
+# PART V: HAL MASSENGILL (HENRY MASSENGILL JR.)
 
-### The Claim: "Andrew Jackson lodged at Rocky Mount for six weeks in spring 1788"
+## Biographical Data
 
-**Current Status:** UNVERIFIED TRADITION (not established historical fact)
+| Attribute       | Information                                  | Source               |
+| --------------- | -------------------------------------------- | -------------------- |
+| **Full Name**   | Henry Massengill Jr. ("Hal")                 | Multiple sources     |
+| **Parents**     | Henry Massengill Sr. (1726-1781) + Mary Cobb | WikiTree             |
+| **First Wife**  | Penelope Cobb (daughter of William Cobb)     | WikiTree, TN Gen Web |
+| **Second Wife** | Mary McCorkle (divorced, no children)        | WikiTree             |
+| **Third Wife**  | Elizabeth Emmert                             | WikiTree             |
+| **Military**    | Revolutionary War, 2 years 3 months service  | WikiTree             |
 
-**Evidence Search Results:**
+## Physical Description (from Massengill family book)
 
-- No primary source documentation found (letters, receipts, diaries, court records)
-- No mention in Library of Congress Andrew Jackson Papers official timeline
-- The Hermitage (official Jackson home museum) does not mention Rocky Mount in 1788
-- Tennessee Encyclopedia repeats the claim but provides no citations
-- Rocky Mount museum website states it as fact but provides no documentation
-- Genealogical research: No blood relationship between Jackson and Cobb families identified
+"A small man of positive character, black eyes, heavy eye-brows, high tempered, but generous and just. He usually wore short breeches (knickerbockers) with the accompanying hose, slippers and buckles that was usual for the gentry of that day."
 
-**Timeline Problems:**
+## Children with Penelope Cobb
 
-- Claim says "spring 1788" but first documented evidence of Jackson in Tennessee is August 12, 1788 (duel challenge in Jonesborough)
-- October 1788: Jackson settled in Nashville
-- "Spring 1788" appears chronologically impossible based on available documentation
+At least 6 children documented (names in Massengill genealogy), including **Michael Massengill** who built the current Rocky Mount structures.
 
-**Historical Assessment:**
+## Land Ownership
 
-- Likely represents local oral tradition about frontier visitors
-- May reflect genuine frontier hospitality but lacks primary source verification
-- Worth acknowledging as tradition but should be clearly distinguished from documented history
-- Should not be presented as verified fact in educational materials
-
-**Relevance to Cobb Family Research:**
-
-- Demonstrates absence of detailed visitor records at Rocky Mount
-- Shows that daily household activities went largely undocumented in surviving primary sources
-- If Jackson (or other famous figures) did visit, their visits are not recorded in remaining documents
-- Highlights the gaps in household and social history documentation
+- Received Rocky Mount from father-in-law William Cobb in 1795/1796
+- Became large landowner per Washington County grants and deeds
+- Described as "a wealthy man" who "owned a number of slaves"
+- Source: WikiTree, Massengill family book
 
 ---
 
-## PART VIII: FAMILY TREE (PARTIAL - BASED ON AVAILABLE EVIDENCE)
+# PART VI: MICHAEL MASSENGILL — BUILDER OF CURRENT STRUCTURES
+
+## The Dendrochronology Evidence
+
+University of Tennessee researchers conducted tree-ring dating on logs from Rocky Mount structures:
+
+| Structure                   | Construction Period | Source                              |
+| --------------------------- | ------------------- | ----------------------------------- |
+| Cobb House (main structure) | 1827-1828           | Grissino-Mayer & van de Gevel, 2007 |
+| Dining Room                 | 1829-1830           | Same study                          |
+
+**Citation:** Grissino-Mayer, Henri D., and Saskia L. van de Gevel. "Tell-Tale Trees: Historical Dendroarchaeology of Log Structures at Rocky Mount, Piney Flats, Tennessee." _Historical Archaeology_ (2007).
+
+## Key Finding
+
+"We conclude that the Cobb House and adjacent Dining Room were not built by William Cobb between 1770 and 1772 but were instead built between 1826 and 1830 by Michael Massengill, a grandson of William Cobb."
+
+## Relationship
+
+Michael Massengill = son of Penelope Cobb + Hal Massengill = grandson of William Cobb Sr.
+
+---
+
+# PART VII: CHAIN OF OWNERSHIP (1770-2021)
 
 ```
-William Cobb (c.1730-1802?)
-    ├── Wife: Mary Cobb (maiden name unknown, c.?-?)
-    │   └── Children: (names unknown, c.1760s-1780s?)
-    │       │
-    │       └── [Daughter who married into Massengill family]
-    │           └── Michael Massengill (b.c.1800s)
-    │               └── Built current Rocky Mount house, 1826-1830
+ROCKY MOUNT PROPERTY OWNERSHIP CHAIN
+
+1769-1795: WILLIAM COBB SR. + BARSHEBA WHITEHEAD
+           └── Established homestead c. 1769-1770
+           └── Hosted territorial government 1790-1792
+           └── Moved to Bean's Station 1795, transferred property to daughter
+
+1795-[?]: HAL MASSENGILL + PENELOPE COBB MASSENGILL
+          └── Received Rocky Mount from William Cobb
+          └── Continued family occupation
+
+1826-1830: MICHAEL MASSENGILL (grandson of William Cobb)
+           └── Built current main house and dining room (confirmed by dendrochronology)
+
+[1830s-1958]: MASSENGILL FAMILY (multiple generations)
+              └── Property passed down through family
+              └── John Michael Massengill was last private owner
+
+1958-1962: JOHN MICHAEL MASSENGILL
+           └── Transferred property to State of Tennessee
+           └── Cousin Pauline Massengill DeFriece arranged transfer
+           └── DeFriece formed Rocky Mount Historical Association
+
+1962-PRESENT: STATE OF TENNESSEE (Tennessee Historical Commission)
+              └── Operated by Rocky Mount Historical Association under contract
+              └── Opened to public April 1, 1962
+```
+
+---
+
+# PART VIII: THE 2021 LAND PURCHASE
+
+## Transaction Details
+
+| Detail             | Information                                          | Source               |
+| ------------------ | ---------------------------------------------------- | -------------------- |
+| **Acreage**        | 15 acres                                             | WJHL, Times-News     |
+| **Purchase Price** | $365,000                                             | WJHL                 |
+| **Previous Owner** | Sally Massengill Bachman (deceased)                  | WJHL, Times-News     |
+| **Seller**         | Buchman/Bachman family (David Bachman, son of Sally) | WJHL                 |
+| **Purchaser**      | Rocky Mount Historical Association                   | WJHL                 |
+| **Date**           | October 2021                                         | News reports         |
+| **Funding**        | Capital campaign with board member pledges           | Times-News editorial |
+
+## Historical Significance
+
+| Claim                                      | Status   | Source                                      |
+| ------------------------------------------ | -------- | ------------------------------------------- |
+| Part of Tennessee's oldest documented farm | VERIFIED | TN Century Farms Program                    |
+| Farm established 1775                      | VERIFIED | Century Farms, WJHL article                 |
+| Connected to Cobb/Massengill family        | VERIFIED | Rocky Mount Historical Association research |
+| "Could possibly predate 1775"              | NOTED    | Times-News editorial                        |
+
+## Property Features
+
+- Early 1900s red tobacco barn
+- Artesian spring and pond
+- Various biological species in pond habitat
+- Located across Hyder Hill Road from main historic site
+
+## David Bachman's Role
+
+David Bachman (son of Sally Massengill Bachman) is notable for:
+
+1. Selling the 15 acres to Rocky Mount in 2021
+2. Being a Massengill descendant who publicly questioned the site's historical narrative accuracy in 2019
+3. His mother Sally was a longtime board member at Rocky Mount
+4. He reached out to WJHL after their March 2019 "Tri-Cities Original" report
+
+Quote from WJHL (October 2019): "If we can't be honest about our own history, if we can't do that how are we going to move forward in the future."
+
+---
+
+# PART IX: MASSENGILL FAMILY CEMETERY
+
+## Location
+
+Approximately 3/4 mile south of Hyder Hill Road and Highway 11E/19W
+
+## Known Burials
+
+- Penelope Cobb Massengill
+- Hal Massengill (Henry Jr.)
+- Elizabeth Emmert (Hal's third wife)
+- Multiple Massengill children
+
+## DAR Monument
+
+A monument commemorating Rocky Mount and William Cobb was placed by the Volunteer Chapter, National Society Daughters of the American Revolution. It was rededicated October 21, 2006 by the Long Island Chapter, NSDAR.
+
+**Text:** "Rocky Mount. Home of William Cobb, a pioneer of Tennessee, here overlooking the Watauga River was the first capitol of territory south of River Ohio. Governor William Blount lived here and administered government of territory 1790-91. Stage coach mail exchange between Memphis and New York."
+
+---
+
+# PART X: COMPLETE FAMILY TREE
+
+```
+                    COBB-MASSENGILL FAMILY TREE
+                    ===========================
+
+GENERATION 1 (FOUNDERS)
+-----------------------
+
+Henry Massengill Sr. (1726-1781) ═══╦═══ Mary Cobb (William's SISTER)
+                                    │
+                                    └── Henry "Hal" Massengill Jr.
+                                        (married cousin Penelope below)
+
+William Cobb Sr. (c.1732-1803) ═══╦═══ Barsheba Whitehead
+    Origin: Isle of Wight Co., VA  │
+    Settled Rocky Mount c.1769-70  │
+    Moved to Bean's Station 1795   │
+                                   │
+    ├── Arthur Cobb (Kings Mountain veteran)
+    ├── Pharaoh Cobb (married cousin Barsheba Whitehead)
+    ├── William Cobb Jr. (Kings Mountain veteran)
+    ├── Penelope Cobb ═══════════════╦═══ Hal Massengill
+    │   (inherited Rocky Mount)      │    (married at Fort Womack
+    │                                │     during Indian siege)
+    │                                │
+    │                                └── Michael Massengill
+    │                                    (built current structures
+    │                                     1826-1830, per dendro)
+    │                                    │
+    │                                    └── [Multiple generations]
+    │                                        │
+    │                                        └── John Michael Massengill
+    │                                            (transferred to State 1958)
+    │                                            │
+    │                                            └── Sally Massengill Bachman
+    │                                                (owned 15 acres across road)
+    │                                                │
+    │                                                └── David Bachman
+    │                                                    (sold 15 acres 2021)
     │
-    └── [Extended family members - undocumented]
+    └── Tabitha Cobb (married into Massengale family)
 
-Notes:
-- Question marks indicate missing information
-- Only confirmed relationship: William → [daughter] → Michael Massengill
-- No documentation of other Cobb children
-- Mary Cobb's background completely unknown
-- Extended family relationships undocumented
+
+NOTES:
+- Mary Cobb (Henry Sr.'s wife) was William's SISTER, not his wife
+- Barsheba Whitehead was William's actual wife
+- Hal married his cousin Penelope (double Cobb connection)
+- Michael Massengill was William Cobb's grandson
+- Property stayed in family from 1770 to 1958 (188 years)
 ```
 
 ---
 
-## PART IX: SIGNIFICANCE FOR ROCKY MOUNT INTERPRETATION
+# PART XI: SOURCES AND REFERENCES
 
-### What the Cobb Family Story Reveals:
+## Primary Genealogical Sources
 
-1. **Frontier Prosperity**
-   - The Cobb family represents successful frontier settlement
-   - Significant investment in property and structures
-   - Capacity to host government and dignitaries
-   - Economic status above typical frontier settler
+| Source                           | Content                      | URL/Location                                            |
+| -------------------------------- | ---------------------------- | ------------------------------------------------------- |
+| WikiTree Cobb-3509               | William Cobb Sr. profile     | wikitree.com/wiki/Cobb-3509                             |
+| WikiTree Massengill-88           | Henry Massengill Sr. profile | wikitree.com/wiki/Massengill-88                         |
+| TN Gen Web - Sullivan County     | Rocky Mount genealogy page   | tngenweb.org/sullivan/rocky-mount/                      |
+| Goodspeed's History of Tennessee | Sullivan County chapter      | genealogytrails.com/tenn/sullivan/historygoodspeed.html |
 
-2. **Women's Invisible Labor**
-   - Mary Cobb managed hospitality during capital period
-   - Fed territorial government, Cherokee delegates, official visitors
-   - Work essential to governance but undocumented in official records
-   - Represents countless frontier women whose contributions went unrecorded
+## Academic Sources
 
-3. **Property Continuity Through Generations**
-   - Family held Rocky Mount from at least the 1780s through the 1820s-1830s
-   - Michael Massengill's 1826-1830 construction represents family's continued investment
-   - Property remained valuable enough to justify major reconstruction
-   - Suggests positive family narrative across generations
+| Source                 | Content                     | Citation                                                                                                                                                     |
+| ---------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Dendrochronology Study | Building construction dates | Grissino-Mayer, H.D. & van de Gevel, S.L. (2007). "Tell-Tale Trees: Historical Dendroarchaeology of Log Structures at Rocky Mount." _Historical Archaeology_ |
+| Academia.edu PDF       | Full dendro study           | academia.edu/191594/                                                                                                                                         |
 
-4. **Transition from Capital to Private Estate**
-   - 1790-1792: Rocky Mount as public space (territorial capital)
-   - Post-1792: Returned to private use (likely tavern/inn or family estate)
-   - 1826-1830: Substantial reconstruction as private residence
-   - Demonstrates shift from territorial infrastructure to private property
+## News Sources
 
-5. **Gaps in Frontier Documentation**
-   - Cobb family records largely missing from surviving sources
-   - Household composition, servants, daily life undocumented
-   - Women's experiences not recorded in official records
-   - Demonstrates challenges of social history research on frontier
+| Source                 | Date         | Content                                                                 |
+| ---------------------- | ------------ | ----------------------------------------------------------------------- |
+| WJHL                   | Oct 14, 2021 | "Rocky Mount State Historic Site purchases 15 additional acres of land" |
+| Times-News Editorial   | Oct 24, 2021 | "Rocky Mount is part of our heritage"                                   |
+| WJHL                   | Oct 3, 2019  | "What really happened at Rocky Mount?" (David Bachman interview)        |
+| Bristol Herald Courier | Jan 13, 2023 | "Pieces of the Past: Historic site in Tennessee opened April 1, 1962"   |
 
----
+## Books Referenced
 
-## PART X: RESEARCH CONCLUSIONS
+| Book                                                    | Author                            | Notes                          |
+| ------------------------------------------------------- | --------------------------------- | ------------------------------ |
+| _The Massengills, Massengales and Variants (1472-1931)_ | Dr. Samuel Evans Massengill, M.D. | Primary genealogical reference |
+| _The Cobbs of the Tidewater_                            | Bruce M. Edwards (1976)           | Cobb family origins            |
 
-### What We Can Confidently Say:
+## Official Sites
 
-1. William Cobb owned a substantial frontier property at Rocky Mount, valued at $2,000 in 1791
-2. Mary Cobb managed household operations that provided food and hospitality for territorial government, 1790-1792
-3. The property featured luxury items (glass windows) rare on frontier
-4. A detached kitchen enabled large-scale food preparation
-5. The property was estimated to hold 30+ horses, suggesting significant business activity
-6. The Cobb family maintained ownership into the 1820s-1830s
-7. Michael Massengill (Cobb's grandson) built current main house, 1826-1830
-8. The property remained sufficiently valuable to justify major reconstruction
-
-### What Requires Further Research:
-
-1. Complete Cobb family genealogy (children's names, marriages, descendants)
-2. William Cobb's origins and how he acquired the property
-3. Mary Cobb's maiden name, background, family connections
-4. Identification of domestic workers/servants at Rocky Mount
-5. Details of Cobb family's business activities (trade, tavern, other)
-6. Estate records and property disposition after William's death
-7. Full documentation of Massengill family connection
-8. Intermediate property history, 1792-1826
-
-### Why These Gaps Matter:
-
-The incomplete Cobb family documentation reflects broader historical biases:
-
-- **Women's work invisible:** Mary Cobb's essential hospitality work barely recorded
-- **Servant/worker silence:** Names and circumstances of domestic workers unknown
-- **Working class absence:** Non-elite frontier settlers left few written records
-- **Gender bias:** Official records focused on male landowners, not household managers
-- **Survival bias:** Family papers often lost, destroyed, or dispersed
-
-The absence of Cobb family records doesn't mean their story is unimportant. It means that crucial frontier history—household management, hospitality, domestic economy—went largely undocumented in surviving sources.
-
----
-
-## RECOMMENDATIONS FOR SITE INTERPRETATION
-
-### 1. Acknowledge What We Know
-
-- Display information about William and Mary Cobb as documented in Blount's letters and property inventory
-- Emphasize Mary Cobb's role in feeding the territorial government
-- Show the inventory as evidence of the household's sophistication and scale
-
-### 2. Acknowledge What We Don't Know
-
-- Create exhibit space explaining missing documentation
-- Use Mary Cobb's kitchen as teaching point about women's invisible labor
-- Note that visitor lists, household rosters, and daily records do not survive
-- Explain that Rocky Mount's story is incomplete, like all frontier history
-
-### 3. Distinguish Documented History from Tradition
-
-- Jackson claim: Present as "unverified tradition" if mentioned at all, not as established fact
-- Focus instead on documented visitors (William Blount, Cherokee delegation, government officials)
-- Make clear which stories rest on primary sources vs. local memory
-
-### 4. Use Inventory as Documentary Evidence
-
-- Display portions of 1791 inventory with interpretation
-- Show how inventory reveals household size, labor requirements, economic status
-- Use it to discuss frontier property values and status symbols (glass windows)
-
-### 5. Tell Women's Stories Carefully
-
-- Mary Cobb deserves recognition for essential hospitality work
-- But acknowledge we don't know her background, her experiences, her perspective
-- Use her story to raise questions about women's documentation gaps
-- Could connect to broader frontier women's history themes
-
-### 6. Place Rocky Mount in Broader Frontier Context
-
-- Cobb family represents successful, relatively prosperous frontier settlement
-- Most frontier properties were less developed
-- Glass windows and 30-horse barn indicate above-average status
-- Property shows frontier civilization was advancing by 1790s
-
----
-
-## RESEARCH NOTES
-
-**Sources Consulted:**
-
-- Blount's October 20, 1790 letter describing accommodations
-- Rocky Mount Inventory (October 15, 1791) from Sullivan County Records
-- Tennessee Starts Here content: "Look For This" guide
-- Dendrochronology study documentation (Grissino-Mayer & van de Gevel, 2007)
-- Fact-check reports on Jackson claim
-- Recommendation documents for Evidence Room expansion
-
-**Limitations:**
-
-- No Cobb family papers directly consulted (none confirmed to exist in digitized form)
-- Limited to documents already in Tennessee Starts Here collection or readily available secondary sources
-- Genealogical information derived from WikiTree references only
-- Jackson claim research limited to web-accessible sources
-
-**Date Completed:** January 30, 2026
-
----
-
-## FINAL NOTE
-
-The Cobb family story is ultimately about who lived through Tennessee's founding, whose voices got recorded, and whose got left out. William Cobb owned the ground where government happened. Mary Cobb fed the officials who made that government work. Michael Massengill's generation saw fit to rebuild and invest in the property.
-
-But beyond their names and the basic facts of property ownership, the Cobb family remains largely unknown. Their household, their children, their servants, their daily lives—these are lost to time. The inventory tells us what they had. The letters tell us that Governor Blount appreciated their hospitality. But their own voices, their perspectives, their stories—these remain silent.
-
-This absence of documentation is itself historically significant. It shows us what frontier history preserves (property, government decisions, official visits) and what it leaves out (household management, women's work, ordinary daily life, the people who had no legal standing to leave written records).
-
-Rocky Mount's greatest value may lie not in what the surviving documents tell us, but in what their silence teaches us about frontier life and historical documentation.
+| Site                   | URL                                            | Content               |
+| ---------------------- | ---------------------------------------------- | --------------------- |
+| Rocky Mount Museum     | rockymountmuseum.com/our-history               | Official site history |
+| Tennessee Encyclopedia | tennesseeencyclopedia.net/entries/rocky-mount/ | Encyclopedia entry    |

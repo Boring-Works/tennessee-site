@@ -35,7 +35,7 @@ The Tennessee Starts Here content repository is a **sophisticated research opera
 | **William Cobb Military Service**    | From MARY-PATTON-MASTER-RESEARCH-REPORT.md            | NO evidence found for Cobb's King's Mountain service; age plausible (~50 in 1780) but no pension apps, militia rolls, or documentation located; property records incomplete                                                                                                                     | NO EVIDENCE                 | N/A                                                         |
 | **Free Black People**                | FREE-BLACK-PEOPLE-RESEARCH.md                         | 361 free Black people in 1790 territory (10% of Black population); Margaret Lee freedom case (1795) documented; Sullivan County had 245 free people of color by 1830 suggesting continuity; archival pathway available but not yet pursued                                                      | RESEARCH PATHWAY IDENTIFIED | NO                                                          |
 | **Enslaved People at Rocky Mount**   | ENSLAVED-PEOPLE-RESEARCH.md                           | Rocky Mount inventory explicitly mentions "quarters for domestic servants" (1791); Blount was significant slaveholder; estimated 3,417 enslaved in territory; economic evidence suggests enslaved labor, but NO NAMED INDIVIDUALS documented; architectural evidence strong but silent archives | DOCUMENTED (Architectural)  | NO (Only mentioned in inventory quotes)                     |
-| **Women's Voices**                   | EVIDENCE-REVIEW-DIVERSITY-INCLUSION.md (Gap analysis) | 0 women currently in Evidence Room; Mary Cobb managed household/kitchen feeding 42 Cherokee chiefs (1791); Mary Blount existed; ~17,846 women in territory (50% of population); no first-person documents survive for any woman of period                                                       | REPRESENTATION GAP          | NO                                                          |
+| **Women's Voices**                   | EVIDENCE-REVIEW-DIVERSITY-INCLUSION.md (Gap analysis) | 0 women currently in Evidence Room; Barsheba Cobb managed household/kitchen feeding 42 Cherokee chiefs (1791); Mary Blount existed; ~17,846 women in territory (50% of population); no first-person documents survive for any woman of period                                                   | REPRESENTATION GAP          | NO                                                          |
 | **Scots-Irish Heritage**             | SCOTS-IRISH-RESEARCH.md                               | [Not yet read - but listed in research inventory]                                                                                                                                                                                                                                               | [Status unknown]            | [Unknown]                                                   |
 | **Religious Minorities**             | RELIGIOUS-MINORITIES-RESEARCH.md                      | [Not yet read - but listed in research inventory]                                                                                                                                                                                                                                               | [Status unknown]            | [Unknown]                                                   |
 | **Mixed-Race Individuals**           | MIXED-RACE-RESEARCH.md                                | [Not yet read - but listed in research inventory]                                                                                                                                                                                                                                               | [Status unknown]            | [Unknown]                                                   |
@@ -142,7 +142,7 @@ These reports diagnose what's **missing** from the public site:
 
 **Completely Missing:**
 
-- Mary Cobb (William Cobb's wife)
+- Barsheba Cobb (William Cobb's wife)
 - Mary Blount (Governor's wife)
 - Unnamed enslaved people (impossible to document)
 - Free Black individuals (1 case identified—Margaret Lee—but not profiled)
@@ -202,7 +202,7 @@ Based on comparison of research reports vs. public website implementation:
    - Impact: Reveals labor behind Rocky Mount's $2,000 valuation and glass windows
 
 3. **Women's Contributions**
-   - Research: Mary Cobb documented managing household/kitchen feeding 42 Cherokee chiefs (July 1791)
+   - Research: Barsheba Cobb documented managing household/kitchen feeding 42 Cherokee chiefs (July 1791)
    - Documents: Only indirect (Blount letters, inventory mentions)
    - Status: Research complete; primary source gap (no women's correspondence survives)
    - Impact: Would explain 50% of population's labor and agency
@@ -387,7 +387,7 @@ This is the most significant "buried gold":
 
 Should include:
 
-- Mary Cobb (household manager, 1790-1792)
+- Barsheba Cobb (household manager, 1790-1792)
 - Mary Blount (governor's wife, 1790-1796)
 - Unnamed enslaved workers (with architectural/economic evidence framework)
 - Free Black people (Margaret Lee freedom case + others via tax/militia records)
@@ -399,7 +399,7 @@ Should include:
 
 - Digitize Margaret Lee freedom case: 1-2 hours
 - Contextualize enslaved people evidence: 2-3 hours
-- Profile Mary Cobb (from Blount letters): 1-2 hours
+- Profile Barsheba Cobb (from Blount letters): 1-2 hours
 - Add working-class petitions (5 key petitions): 5-8 hours
 - Expand 12 stub profiles: 5-10 hours
 - Create educator guide: 4-6 hours
@@ -413,7 +413,7 @@ Should include:
 
 1. **Free Black People Research** - Complete archival pathway identified; Margaret Lee case ready to digitize; 361 people in territory documented
 2. **Enslaved People Evidence** - Rocky Mount inventory explicitly documents "quarters for domestic servants"; architectural analysis done; ethical framework needed
-3. **Women's Contributions** - Mary Cobb managing household/kitchen with detailed Blount letter evidence; framework identified but not yet emphasized
+3. **Women's Contributions** - Barsheba Cobb managing household/kitchen with detailed Blount letter evidence; framework identified but not yet emphasized
 4. **Working-Class Agency** - Territorial petitions available showing settlers as political actors; militia records with names available; narrative of resistance/participation possible
 5. **Diversity Gap Diagnosis** - 10 reports thoroughly analyzing what's missing and why; archival pathways clear; recommendations specific
 6. **Educator Materials** - Needs identified; not yet created; lesson plan templates outlined
@@ -438,7 +438,7 @@ Should include:
 
 - Contextualize enslaved people evidence (inventory quotes + architectural framework)
 - Create "Voices We're Still Finding" interpretive panel
-- Profile Mary Cobb with Blount letter evidence
+- Profile Barsheba Cobb with Blount letter evidence
 
 **Week 3+ (15+ hours):**
 

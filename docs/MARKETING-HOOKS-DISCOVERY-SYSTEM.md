@@ -87,7 +87,7 @@ Daily life, personal stories, relatable human experiences
 
 #### Story Angles by Character
 
-##### Mary Cobb: "The Woman Who Fed a Nation's Birth"
+##### Barsheba Cobb: "The Woman Who Fed a Nation's Birth"
 
 **What we know:**
 
@@ -111,7 +111,7 @@ Daily life, personal stories, relatable human experiences
 
 **Marketing copy:**
 
-> "While men debated treaties, Mary Cobb fed 42 Cherokee chiefs in her kitchen. Her invisible labor made history possible."
+> "While men debated treaties, Barsheba Cobb fed 42 Cherokee chiefs in her kitchen. Her invisible labor made history possible."
 
 **Where to research:**
 
@@ -576,15 +576,15 @@ Rocky Mount sits on the Great Road from Virginia. Strategic position.
 
 Rate each potential hook across audience types:
 
-| Hook                           | Elementary | Middle School | High School | College | Tourists | Genealogists |
-| ------------------------------ | ---------- | ------------- | ----------- | ------- | -------- | ------------ |
-| Mary Cobb "fed nation's birth" | ★★★        | ★★★           | ★★          | ★       | ★★★      | ★★           |
-| Glass windows in wilderness    | ★★         | ★★★           | ★★          | ★       | ★★       | ★            |
-| Treaty negotiations site       | ★          | ★★            | ★★★         | ★★★     | ★★       | ★            |
-| Cherokee diplomacy             | ★★         | ★★★           | ★★★         | ★★★     | ★★       | ★            |
-| Cobb children's experience     | ★★★        | ★★★           | ★★          | ★       | ★★       | ★★★          |
-| 30 horses = travel hub         | ★★         | ★★★           | ★★          | ★       | ★★★      | ★            |
-| Invisible labor (servants)     | ★          | ★★            | ★★★         | ★★★     | ★★       | ★★★          |
+| Hook                               | Elementary | Middle School | High School | College | Tourists | Genealogists |
+| ---------------------------------- | ---------- | ------------- | ----------- | ------- | -------- | ------------ |
+| Barsheba Cobb "fed nation's birth" | ★★★        | ★★★           | ★★          | ★       | ★★★      | ★★           |
+| Glass windows in wilderness        | ★★         | ★★★           | ★★          | ★       | ★★       | ★            |
+| Treaty negotiations site           | ★          | ★★            | ★★★         | ★★★     | ★★       | ★            |
+| Cherokee diplomacy                 | ★★         | ★★★           | ★★★         | ★★★     | ★★       | ★            |
+| Cobb children's experience         | ★★★        | ★★★           | ★★          | ★       | ★★       | ★★★          |
+| 30 horses = travel hub             | ★★         | ★★★           | ★★          | ★       | ★★★      | ★            |
+| Invisible labor (servants)         | ★          | ★★            | ★★★         | ★★★     | ★★       | ★★★          |
 
 **Rating Scale:**
 
@@ -599,7 +599,7 @@ Rate each potential hook across audience types:
 ### Q1 2026 (Jan-Mar): Foundation
 
 - [x] Verify core documents (Blount, Treaty, Jackson)
-- [ ] Research Mary Cobb kitchen operations
+- [ ] Research Barsheba Cobb kitchen operations
 - [ ] Identify Cobb children (names, ages, fates)
 - [ ] Document glass window inventory
 - [ ] Map Great Road traffic patterns

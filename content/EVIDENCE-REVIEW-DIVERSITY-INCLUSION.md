@@ -46,7 +46,7 @@ This review:
 
 #### Elite Women
 
-- **Mary Cobb (Wife of William Cobb, Rocky Mount proprietor)**
+- **Barsheba Cobb (Wife of William Cobb, Rocky Mount proprietor)**
   - Operated kitchen feeding 42 Cherokee chiefs (July 1791)
   - Managed household during territorial capital period (1790-1792)
   - **Documentary Status:** Zero first-person documents
@@ -606,7 +606,7 @@ What This Document Doesn't Tell Us:
 
 Research Opportunities:
 - Rocky Mount inventory documents "quarters for domestic servants"—research shows enslaved labor likely
-- Mary Cobb's role can be documented through household records and Blount's descriptions
+- Barsheba Cobb's role can be documented through household records and Blount's descriptions
 - Local oral history may preserve community memories
 
 Partnership Opportunities:
@@ -700,7 +700,7 @@ Add to Evidence Room:
 **Add to Evidence Room:**
 
 - Essay: "Invisible Labor: Women's Roles in Territorial Capital"
-- Mary Cobb's kitchen operations
+- Barsheba Cobb's kitchen operations
 - Women's domestic labor that enabled diplomatic functions
 - Gap acknowledgment: Zero women's voices, but their labor is documented
 - Research opportunities: Descendant oral history
@@ -948,7 +948,7 @@ This is the central ethical challenge of inclusive history.
 
 - Blount's letter describes "comfortable accommodations" = women's labor created them
 - Property inventory lists "kitchen building" = someone cooked and cleaned there
-- Interpretation: "Mary Cobb's labor was essential even though her voice isn't preserved"
+- Interpretation: "Barsheba Cobb's labor was essential even though her voice isn't preserved"
 
 **Example 3—Ordinary Settlers:**
 

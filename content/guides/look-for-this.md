@@ -35,9 +35,9 @@ These windows represented civilization pressing westward. They were a statement 
 
 ### What We Know
 
-Mary Cobb, wife of William Cobb, did not simply feed her family from 1790 to 1792. She fed the territorial government. Governor Blount boarded at Rocky Mount. Government officials, surveyors, and visiting dignitaries came and went. The Cherokee delegation that arrived for treaty negotiations numbered forty-two chiefs plus their attendants. All of them ate meals prepared at Rocky Mount.
+Barsheba Cobb, wife of William Cobb, did not simply feed her family from 1790 to 1792. She fed the territorial government. Governor Blount boarded at Rocky Mount. Government officials, surveyors, and visiting dignitaries came and went. The Cherokee delegation that arrived for treaty negotiations numbered forty-two chiefs plus their attendants. All of them ate meals prepared at Rocky Mount.
 
-The detached kitchen was the engine of this hospitality. On a working frontier estate, the kitchen operated as a separate building to reduce fire risk and keep heat away from the main house during summer months. Here, Mary Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory.
+The detached kitchen was the engine of this hospitality. On a working frontier estate, the kitchen operated as a separate building to reduce fire risk and keep heat away from the main house during summer months. Here, Barsheba Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory.
 
 ### What to Look For
 
@@ -51,7 +51,7 @@ When you visit the detached kitchen, observe:
 
 ### Why It Matters
 
-History books record the decisions made in Rocky Mount. They rarely record who fed the decision-makers. Mary Cobb's kitchen was as essential to the functioning of territorial government as Governor Blount's quill and paper. Without food, there are no negotiations. Without hospitality, there are no alliances. Stand at that hearth and acknowledge the labor that made governance possible.
+History books record the decisions made in Rocky Mount. They rarely record who fed the decision-makers. Barsheba Cobb's kitchen was as essential to the functioning of territorial government as Governor Blount's quill and paper. Without food, there are no negotiations. Without hospitality, there are no alliances. Stand at that hearth and acknowledge the labor that made governance possible.
 
 ---
 

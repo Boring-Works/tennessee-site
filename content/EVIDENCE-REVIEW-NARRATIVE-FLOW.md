@@ -525,7 +525,7 @@ Cherokee communities whose lands were negotiated away, women whose labor sustain
   whose names are mostly lost
 - The Cherokee communities whose lands were negotiated away at Holston,
   reducing their territory from 43,000 to 24,000 square miles
-- Women like Mary Cobb whose hospitality fed negotiations, but whose political voice
+- Women like Barsheba Cobb whose hospitality fed negotiations, but whose political voice
   wasn't recorded"
 ```
 
@@ -851,7 +851,7 @@ In a physical museum, small explanatory panels appear near artifacts. In the Evi
 
 **Examples to emphasize more:**
 
-- "Mary Cobb fed 42 Cherokee chiefs negotiating a treaty"
+- "Barsheba Cobb fed 42 Cherokee chiefs negotiating a treaty"
 - "Blount wrote at a desk looking out those glass windows"
 - "The treaty document was 23 pages long—handwritten"
 

@@ -113,7 +113,7 @@ const { historicalFigures } = siteInfo
 // Tour experience highlights
 const experienceHighlights = [
   {
-    moment: 'Meet Mary Cobb',
+    moment: 'Meet Barsheba Cobb',
     description:
       'At the weaving cabin, learn the skills that kept frontier families clothed and warm.',
   },

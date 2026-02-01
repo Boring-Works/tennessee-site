@@ -171,7 +171,7 @@ export const DISCOVERY_MOMENTS = {
   hearthGovernmentMeals: {
     title: 'The Hearth Where Government Meals Were Cooked',
     context:
-      'Mary Cobb fed the territorial government. Governor Blount, officials, surveyors, and forty-two Cherokee chiefs plus their attendants all ate meals prepared at Rocky Mount.',
+      'Barsheba Cobb fed the territorial government. Governor Blount, officials, surveyors, and forty-two Cherokee chiefs plus their attendants all ate meals prepared at Rocky Mount.',
     lookFor:
       'The scale of the hearth, the hanging points for pots and kettles, the wear patterns on hearth stones, and the distance from kitchen to main house.',
     whyItMatters:

@@ -192,7 +192,7 @@ This log records ALL searches, whether productive or not. Negative results are v
 
 ### Documents NOT Found:
 
-- Searched for: Mary Cobb letters (wife of William Cobb)
+- Searched for: Barsheba Cobb letters (wife of William Cobb)
 - Result: No matches in LOC collections
 - Next steps: Try Tennessee State Archives (family papers)
 
@@ -218,7 +218,7 @@ Not every discovered document should be acquired. Use this matrix:
 
 | Priority   | Criteria                                                                                                                                              | Examples                                                                                                                 | Action                                                    |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
-| **HIGH**   | - Fills major gap in collection<br>- Cherokee voices<br>- Women's perspectives<br>- Contradicts existing narrative<br>- Directly mentions Rocky Mount | - Bloody Fellow letters<br>- Mary Cobb documents<br>- Land deed for property<br>- Document challenging Jackson claim     | Acquire immediately                                       |
+| **HIGH**   | - Fills major gap in collection<br>- Cherokee voices<br>- Women's perspectives<br>- Contradicts existing narrative<br>- Directly mentions Rocky Mount | - Bloody Fellow letters<br>- Barsheba Cobb documents<br>- Land deed for property<br>- Document challenging Jackson claim | Acquire immediately                                       |
 | **MEDIUM** | - Adds context to known events<br>- New perspective on known people<br>- Local governance records<br>- Frontier daily life details                    | - County court records<br>- Merchant ledgers<br>- Letters between Blount associates<br>- Territorial legislation         | Acquire if resources permit                               |
 | **LOW**    | - Duplicates existing material<br>- Tangentially related<br>- Poor condition/illegible<br>- Already well-documented                                   | - Third copy of Treaty of Holston<br>- Blount letter about unrelated topic<br>- Damaged document with existing good copy | Note existence, do not acquire unless exceptional quality |
 

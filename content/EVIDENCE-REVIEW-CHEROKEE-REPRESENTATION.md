@@ -125,7 +125,7 @@ verification:
 
 3. **Heritage Meal Context (Lines 169-177):**
 
-   > "Mary Cobb fed the territorial government. Governor Blount, officials, surveyors, and forty-two Cherokee chiefs plus their attendants all ate meals prepared at Rocky Mount."
+   > "Barsheba Cobb fed the territorial government. Governor Blount, officials, surveyors, and forty-two Cherokee chiefs plus their attendants all ate meals prepared at Rocky Mount."
 
    **Assessment:** Humanizing (acknowledges they needed food), but:
    - Centers settler woman's labor, not Cherokee presence
@@ -523,7 +523,7 @@ Example: Bloody Fellow profile should include:
 | "negotiated the Treaty of Holston **with** 42 Cherokee leaders" | Passive, unclear agency  | "42 Cherokee leaders **negotiated** the Treaty of Holston to establish boundaries and preserve remaining lands"                                           |
 | "Cherokee chiefs were present"                                  | Objects in scene         | "Cherokee leaders **traveled to Rocky Mount** to negotiate territorial boundaries"                                                                        |
 | "Blount made peace with Cherokee"                               | Settler achievement      | "Cherokee and American leaders **agreed** to the Treaty of Holston after weeks of negotiation"                                                            |
-| "Mary Cobb fed forty-two Cherokee chiefs"                       | Settler generosity focus | "The **Cherokee delegation required diplomatic hospitality**—meals, lodging, formal protocol—to conduct treaty negotiations as sovereign representatives" |
+| "Barsheba Cobb fed forty-two Cherokee chiefs"                   | Settler generosity focus | "The **Cherokee delegation required diplomatic hospitality**—meals, lodging, formal protocol—to conduct treaty negotiations as sovereign representatives" |
 | "Signatories on the treaty"                                     | Legal status only        | "These Cherokee leaders **signed the treaty to**... [their specific objectives]"                                                                          |
 
 ### Evidence Room Navigation Changes

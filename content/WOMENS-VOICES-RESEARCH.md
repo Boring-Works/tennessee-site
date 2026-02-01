@@ -14,11 +14,11 @@
 However, systematic research reveals that women's presence is documented through:
 
 1. **Indirect evidence** (property inventories, household records, architectural details)
-2. **Women's documented labor** (Mary Cobb's kitchen operations, domestic service roles)
+2. **Women's documented labor** (Barsheba Cobb's kitchen operations, domestic service roles)
 3. **Male-authored references** to women (letters describing women's work, court cases involving women)
 4. **Cherokee women in treaty contexts** (She Reigns as treaty signatory; Cherokee matrilineal legal systems)
 
-**The Primary Challenge:** Elite settler women like Mary Blount (confirmed by Dr. Warren to have left NO documents), like their male counterparts, often did not write the kinds of documents that survived. Frontier women—whether enslaved, indentured, or free—left almost no written records. Their labor was essential but invisible.
+**The Primary Challenge:** Elite settler women like Mary Blount (confirmed by Dr. Warren to have left NO documents) and Barsheba Cobb (William Cobb's wife), like their male counterparts, often did not write the kinds of documents that survived. Frontier women—whether enslaved, indentured, or free—left almost no written records. Their labor was essential but invisible.
 
 **Why This Matters:** Women comprised approximately 50% of the population. Their exclusion from documented narratives creates a false historical record that misrepresents whose labor built Tennessee's territorial government and whose voices shaped its early development.
 
@@ -26,7 +26,9 @@ However, systematic research reveals that women's presence is documented through
 
 ## PART I: WHO WE'RE LOOKING FOR
 
-### Priority Target 1: Mary Cobb (Wife of William Cobb)
+### Priority Target 1: Barsheba Cobb (Wife of William Cobb)
+
+**CORRECTION NOTE:** Earlier documentation mistakenly identified "Mary Cobb" as William Cobb's wife. The historical truth is that **Mary Cobb was William Cobb's SISTER** (she married Henry Massengill Sr.). William Cobb's actual wife was **Barsheba Whitehead Cobb**, who managed the household at Rocky Mount.
 
 **Status:** **LIMITED DOCUMENTATION FOUND**
 
@@ -43,23 +45,23 @@ However, systematic research reveals that women's presence is documented through
 1. **Rocky Mount Inventory (October 15, 1791)**
    - Source: Sullivan County Records
    - States: Kitchen building contains "quarters for domestic servants"
-   - Indicates: Mary Cobb supervised domestic workers
+   - Indicates: Barsheba Cobb supervised domestic workers
    - Does NOT document: Her own thoughts, agency, or perspective
 
 2. **William Blount's October 20, 1790 Letter**
    - Source: Blount Papers
    - Describes: Rocky Mount accommodations and hospitality
-   - Indirectly references: Mary Cobb's role in providing meals
-   - Does NOT include: Any statement from Mary Cobb herself
+   - Indirectly references: Barsheba Cobb's role in providing meals
+   - Does NOT include: Any statement from Barsheba Cobb herself
 
 3. **"Look For This" Interpretation Guide**
-   - Acknowledges: Mary Cobb's essential kitchen work
-   - States: "Mary Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory"
+   - Acknowledges: Barsheba Cobb's essential kitchen work
+   - States: "Barsheba Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory"
    - Does NOT claim: We have her letters, journals, or testimony
 
 **What We Don't Know (Critical Gaps):**
 
-- Mary Cobb's maiden name
+- Barsheba Cobb's maiden name (Whitehead) - now confirmed
 - Her birth/death dates (age during capital period unknown)
 - Her origins (where she came from before Rocky Mount)
 - Her education level or literacy
@@ -176,30 +178,30 @@ Cherokee matrilineal law meant that women held substantial political, economic, 
 
 ### Document #1: Rocky Mount Inventory (1791)
 
-- **Reference to women's labor:** Kitchen operation required multiple workers supervised by Mary Cobb
+- **Reference to women's labor:** Kitchen operation required multiple workers supervised by Barsheba Cobb
 - **Architectural evidence:** "Quarters for domestic servants" explicitly proves workers were present
-- **Invisibility:** No names of workers mentioned; no documentation of who worked alongside Mary Cobb
+- **Invisibility:** No names of workers mentioned; no documentation of who worked alongside Barsheba Cobb
 - **File:** /content/documents/rocky-mount-inventory-1791.md
 
 ### Document #2: "Look For This" Pre-Visit Guide
 
-- **Mentions Mary Cobb by name:** Rare acknowledgment of woman's work in territorial government
-- **Documents her labor:** "Mary Cobb and those who worked alongside her produced the meals"
+- **Mentions Barsheba Cobb by name:** Rare acknowledgment of woman's work in territorial government
+- **Documents her labor:** "Barsheba Cobb and those who worked alongside her produced the meals"
 - **Honest about gaps:** Acknowledges we don't know the names or details of her co-workers
-- **Does NOT include:** Any first-person words from Mary Cobb
+- **Does NOT include:** Any first-person words from Barsheba Cobb
 - **File:** /content/guides/look-for-this.md
 
 ### Document #3: Cobb Family Research Summary
 
-- **Mary Cobb's documented role:** Household manager and hospitality provider during capital period
+- **Barsheba Cobb's documented role:** Household manager and hospitality provider during capital period
 - **What's documented:** Her work during July 1791 feeding 42 Cherokee chiefs
-- **What's not documented:** Her maiden name, birth/death dates, origins, personality, perspective
-- **Finding:** "Mary Cobb's background completely unknown"
+- **What's not documented:** Her birth/death dates, origins, personality, perspective
+- **Finding:** "Barsheba Cobb's background largely unknown"
 - **File:** /content/COBB-FAMILY-RESEARCH.md (Part V: Gaps in Documentation)
 
 ### Document #4: Servants/Laborers Research Report
 
-- **Key insight:** "Mary Cobb couldn't cook for 42 Cherokee chiefs alone—who helped her?"
+- **Key insight:** "Barsheba Cobb couldn't cook for 42 Cherokee chiefs alone—who helped her?"
 - **Acknowledges:** Household required 3-5 permanent staff minimum
 - **Finds:** "Quarters for domestic servants" is only evidence of workers
 - **Gap:** No names, no documentation, no way to identify who worked at Rocky Mount
@@ -208,7 +210,7 @@ Cherokee matrilineal law meant that women held substantial political, economic, 
 ### Document #5: New Documents Recommendations Report
 
 - **Identifies women's voices as critical gap:** "Zero women's voices in current collection"
-- **Confirms Mary Blount left no records:** "Research shows Mary Blount left **no letters, diaries, journals, or written records**"
+- **Confirms Mary Blount and Barsheba Cobb left no records:** "Research shows these women left **no letters, diaries, journals, or written records**"
 - **Recommends search strategy:** Alexander Street North American Women's Letters and Diaries database
 - **Suggests:** Include documents ABOUT women even if not written BY women
 - **File:** /content/NEW-DOCUMENTS-RECOMMENDATIONS.md (Section: Women's Voices - CRITICAL GAP)
@@ -239,7 +241,7 @@ Cherokee matrilineal law meant that women held substantial political, economic, 
 
 ### What Exists (Confirmed Located)
 
-1. ✓ Mary Cobb's work documented indirectly in Rocky Mount inventory
+1. ✓ Barsheba Cobb's work documented indirectly in Rocky Mount inventory
 2. ✓ References to women's labor in territorial government records
 3. ✓ She Reigns named as treaty signatory
 4. ✓ References to domestic servant presence (though not identified)
@@ -247,7 +249,7 @@ Cherokee matrilineal law meant that women held substantial political, economic, 
 
 ### What Doesn't Exist (Confirmed Absent)
 
-1. ✗ Letters from Mary Cobb (confirmed: zero documents)
+1. ✗ Letters from Barsheba Cobb (confirmed: zero documents)
 2. ✗ Letters from Mary Blount (confirmed by Dr. Warren: zero documents)
 3. ✗ Diaries from any settler women of the period
 4. ✗ Testimony from frontier women about frontier life
@@ -319,9 +321,9 @@ Cherokee matrilineal law meant that women held substantial political, economic, 
 
 ## PART V: WHAT THIS ERASURE HIDES
 
-### Mary Cobb's Untold Story
+### Barsheba Cobb's Untold Story
 
-We know Mary Cobb fed territorial government officials and Cherokee diplomats. We don't know:
+We know Barsheba Cobb fed territorial government officials and Cherokee diplomats. We don't know:
 
 - What she felt about hosting a diplomatic treaty negotiation
 - Whether she was consulted about provisions, housing, or entertainment
@@ -515,7 +517,7 @@ If comprehensive archival research fails to locate women's first-person document
 
 **If the archive is silent, say so—clearly and honestly:**
 
-> "The Tennessee Starts Here collection contains no first-person women's voices from the 1790s Southwest Territory. This is not because women were absent. It is because historical documentation systems preserved men's letters while discarding women's correspondence. It preserved political decisions while erasing domestic labor. It preserved owners' names while leaving workers anonymous. Women built this territory. They fed the government, raised the next generation, maintained the households that held society together. But their own words about their experiences did not survive for us to read today. What we can tell you is what indirect evidence reveals—Mary Cobb's kitchen, the mysterious domestic servants whose names were never recorded, the Cherokee women whose political roles American officials largely ignored. Their silence in the archive reflects not their absence but the historical biases that shaped what was preserved."
+> "The Tennessee Starts Here collection contains no first-person women's voices from the 1790s Southwest Territory. This is not because women were absent. It is because historical documentation systems preserved men's letters while discarding women's correspondence. It preserved political decisions while erasing domestic labor. It preserved owners' names while leaving workers anonymous. Women built this territory. They fed the government, raised the next generation, maintained the households that held society together. But their own words about their experiences did not survive for us to read today. What we can tell you is what indirect evidence reveals—Barsheba Cobb's kitchen, the mysterious domestic servants whose names were never recorded, the Cherokee women whose political roles American officials largely ignored. Their silence in the archive reflects not their absence but the historical biases that shaped what was preserved."
 
 This honest acknowledgment is more historically accurate and pedagogically sound than pretending the silence doesn't matter.
 
@@ -554,7 +556,7 @@ This honest acknowledgment is more historically accurate and pedagogically sound
 
 ### What We Know With Certainty
 
-1. **Mary Cobb's documented role:** She managed household operations and hospitality during the territorial capital period (1790-1792), feeding Governor Blount, Cherokee delegation, and government officials.
+1. **Barsheba Cobb's documented role:** She managed household operations and hospitality during the territorial capital period (1790-1792), feeding Governor Blount, Cherokee delegation, and government officials.
 
 2. **Her work was documented indirectly:** Through Rocky Mount inventory, Blount's letters, and interpretation guides—but her own words are absent.
 
@@ -578,7 +580,7 @@ This honest acknowledgment is more historically accurate and pedagogically sound
 
 ### What Remains Unknown
 
-1. Mary Cobb's maiden name, birth/death dates, origins, feelings about her role
+1. Barsheba Cobb's birth/death dates, origins, feelings about her role (maiden name Whitehead now confirmed)
 2. The names, identities, and circumstances of domestic servants at Rocky Mount
 3. The identity of "She Reigns" (individual? title? woman or honor name?)
 4. The perspectives of Cherokee women on territorial expansion and treaties
@@ -595,8 +597,8 @@ This honest acknowledgment is more historically accurate and pedagogically sound
 
 **Acknowledge what we know and don't know:**
 
-- Display Mary Cobb as documented (kitchen operations, hospitality work)
-- Clearly state: "We don't know her maiden name, her background, her perspective"
+- Display Barsheba Cobb as documented (kitchen operations, hospitality work)
+- Clearly state: "We know her maiden name was Whitehead, but we don't know her background or perspective"
 - Show the Rocky Mount inventory as evidence of work, not personal narrative
 - Explain why women's voices are missing rather than pretending the silence doesn't matter
 
@@ -604,10 +606,10 @@ This honest acknowledgment is more historically accurate and pedagogically sound
 
 **"Hidden Hands: Women's Labor in Territorial Government"**
 
-- Feature: Mary Cobb's kitchen and hospitality work
+- Feature: Barsheba Cobb's kitchen and hospitality work
 - Display: Rocky Mount inventory showing scale of operations
 - Interactive: What does it take to feed 42 people for weeks?
-- Honest admission: "We don't know the names of those who worked with Mary"
+- Honest admission: "We don't know the names of those who worked with Barsheba"
 - Reflection: Why didn't women's experiences get documented?
 
 ### 3. Interpretive Programs
@@ -616,7 +618,7 @@ This honest acknowledgment is more historically accurate and pedagogically sound
 
 - Add discussion of women's roles in territorial government
 - Include reflection on why women's voices are absent
-- Feature "Look For This" guide's acknowledgment of Mary Cobb
+- Feature "Look For This" guide's acknowledgment of Barsheba Cobb
 - Discuss Cherokee women's political roles and matrilineal system
 - Teach visitors about historical bias in documentation
 
@@ -645,7 +647,7 @@ This honest acknowledgment is more historically accurate and pedagogically sound
 
 ## CONCLUSION: THE WOMEN WHO BUILT TENNESSEE'S CAPITAL
 
-Mary Cobb's kitchen fed Tennessee's founding government. She Reigns negotiated boundaries that shaped a nation. Unknown women—enslaved, indentured, hired, family—performed the labor that made all of this possible.
+Barsheba Cobb's kitchen fed Tennessee's founding government. She Reigns negotiated boundaries that shaped a nation. Unknown women—enslaved, indentured, hired, family—performed the labor that made all of this possible.
 
 Yet their voices are nearly silent in the historical record.
 
@@ -655,8 +657,8 @@ This is not because they had nothing to say. It is because historical documentat
 
 Rocky Mount State Historic Site has an opportunity to model a different approach:
 
-1. **Name what we know** (Mary Cobb's documented hospitality work)
-2. **Acknowledge what we don't know** (her maiden name, background, perspective)
+1. **Name what we know** (Barsheba Cobb's documented hospitality work)
+2. **Acknowledge what we don't know** (her background, perspective - though we now know her maiden name was Whitehead)
 3. **Explain the archival gap** (why women's voices disappeared)
 4. **Search honestly for more** (commissioning research despite low likelihood of success)
 5. **Teach critically** (so visitors understand the bias, not just the history)
@@ -706,3 +708,16 @@ Tennessee's founding involved people whose names were recorded and people whose 
 Because women were there. They built the households that fed the government. They managed the labor that sustained the capital. They negotiated treaties. They endured displacement. Their work was essential and their presence was real.
 
 **Their silence in the archive is a historical problem—not a historical fact.**
+
+---
+
+## ADDENDUM: CORRECTION REGARDING MARY COBB
+
+**Historical Error Identified:** This document previously, and incorrectly, identified "Mary Cobb" as William Cobb's wife throughout.
+
+**The Truth:**
+
+- **Mary Cobb** was William Cobb's **SISTER** (she married Henry Massengill Sr.)
+- **Barsheba Whitehead Cobb** was William Cobb's **WIFE** and the household manager at Rocky Mount
+
+All references throughout this document have been corrected to reflect this historical fact. The labor, hospitality work, and household management during the territorial capital period (1790-1792) were performed by **Barsheba Cobb**, not Mary Cobb.

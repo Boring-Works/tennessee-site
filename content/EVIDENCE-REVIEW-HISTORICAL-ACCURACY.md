@@ -386,7 +386,7 @@ Add to Evidence Room:
 
 1. Any letters mentioning women by name
 2. Household inventories showing "female labor" items
-3. Note about Mary Cobb (William Cobb's wife) if records exist
+3. Note about Barsheba Cobb (William Cobb's wife) if records exist
 
 **Where to Add:** New section "Women's Roles" or expanded biography
 

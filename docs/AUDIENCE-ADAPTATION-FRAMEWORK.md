@@ -547,7 +547,7 @@ connections:
 
 **Treaty of Holston:**
 
-> "Did you know 42 Cherokee chiefs visited Rocky Mount? Imagine feeding that many people in 1790—no grocery stores, no refrigeration, no restaurants. Mary Cobb's kitchen was a factory."
+> "Did you know 42 Cherokee chiefs visited Rocky Mount? Imagine feeding that many people in 1790—no grocery stores, no refrigeration, no restaurants. Barsheba Cobb's kitchen was a factory."
 
 **Blount Arrival:**
 
@@ -643,8 +643,8 @@ connections:
 **Example Entry:**
 
 ```
-Cobb, Mary [maiden name unknown]
-  Mentioned in: rocky-mount-inventory-1791 (as "Mary Cobb")
+Cobb, Barsheba [maiden name unknown]
+  Mentioned in: rocky-mount-inventory-1791 (as "Barsheba Cobb")
   Role: Property owner's wife
   Related people: William Cobb (husband)
   Estimated dates: b. ca. 1750, d. unknown

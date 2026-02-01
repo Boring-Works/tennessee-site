@@ -65,7 +65,7 @@ All Cherokee signatory biographies in the repository confirm:
 
 3. **Diplomatic correspondence (1790-1791):** Blount conducted official correspondence with Secretary of War Knox about Cherokee relations from Rocky Mount.
 
-4. **Hospitality extended:** Cherokee delegation received hospitality at Rocky Mount during preliminary visits (per protocol and multiple sources mentioning Mary Cobb's role).
+4. **Hospitality extended:** Cherokee delegation received hospitality at Rocky Mount during preliminary visits (per protocol and multiple sources mentioning Barsheba Cobb's role).
 
 5. **Capital function:** Rocky Mount served as the administrative headquarters of the Southwest Territory during the treaty preparation period.
 

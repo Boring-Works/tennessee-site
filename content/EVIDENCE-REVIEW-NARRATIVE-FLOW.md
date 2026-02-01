@@ -669,7 +669,7 @@ p.heroSubtitle: "Primary documents from the founding of Tennessee's government"
 
 ```
 p.heroSubtitle: "When the Constitution came west of the mountains in 1790,
-this ground became the first federal capital. These documents prove it happened."
+this ground became the first capital of the Southwest Territory. These documents prove it happened."
 ```
 
 ---
@@ -918,7 +918,7 @@ These changes would transform the Evidence Room from a **credible archive** to a
 
 ```
 "When the U.S. Constitution came west of the mountains in 1790,
-this ground became the first federal capital west of the Appalachians.
+this ground became the first capital of the Southwest Territory.
 These documents prove it happened."
 ```
 

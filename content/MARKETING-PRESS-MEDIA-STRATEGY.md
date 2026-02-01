@@ -75,7 +75,7 @@ The archive is built on **open standards** and structured data, enabling integra
 
 **Funding Partners:** [List academic partners, grant sources, sponsors]
 
-**Historical Significance:** The Southwest Territory (1790-1796) predates all existing state capitals west of the Appalachians. Washington established it to govern frontier territories before statehood. Rocky Mount served as the territorial seat of government—making it the first constitutional federal government center in that region.
+**Historical Significance:** The Southwest Territory (1790-1796) was the federal government's administrative center for what would become Tennessee. Rocky Mount served as the first territorial seat of government for this region from 1790-1792.
 
 **About Rocky Mount:** Founded 1770. Seat of Southwest Territory 1790-1796. Preserved by Tennessee State Parks. Currently hosting America 250 / Tennessee 230 programming in 2026.
 
@@ -900,8 +900,7 @@ commemorations. Demonstrates federal investment in territorial governance on
 southwestern frontier.
 
 HISTORICAL CLAIM:
-Rocky Mount was the first federal seat of government established under the
-U.S. Constitution west of the Appalachian Mountains (1790-1796).
+Rocky Mount was the first seat of government for the Southwest Territory (1790-1792), the federal administrative center for what would become Tennessee.
 
 SCHOLARLY PARTNERSHIPS:
 [List academic partners, grant sources, collaborators]

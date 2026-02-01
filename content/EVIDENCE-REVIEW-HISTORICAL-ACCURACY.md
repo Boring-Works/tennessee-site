@@ -682,7 +682,7 @@ These five signers represent different Cherokee perspectives and political facti
 ### Strengthen the "Glass Windows" Quote
 
 **Current Context:**
-"Glass windows were rare even in settler communities east of the mountains—most used oiled paper or wooden shutters. At Rocky Mount, they signaled federal authority and investment in the first constitutional capital west of Appalachia."
+"Glass windows were rare even in settler communities east of the mountains—most used oiled paper or wooden shutters. At Rocky Mount, they signaled federal authority and investment in the Southwest Territory's first capital."
 
 **Recommendation to Enhance:**
 

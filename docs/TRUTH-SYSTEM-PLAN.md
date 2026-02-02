@@ -1,7 +1,7 @@
 # Rocky Mount Truth System Plan
 
-**Last Updated:** 2026-02-01
-**Status:** Phases 1-4 Complete, Future Work Optional
+**Last Updated:** 2026-02-02
+**Status:** Phases 1-3 Complete + /Historical/ Integration Complete, Future Work Optional
 
 > This plan tracks work across multiple Claude sessions. The operational deliverable is `scripts/check-facts.ts` — run it before every deploy.
 
@@ -42,21 +42,21 @@
 **Deliverables:**
 | File | Purpose |
 |------|---------|
-| `lib/dredge/reference-library.ts` | 22 verified facts with sources |
+| `lib/dredge/reference-library.ts` | 90 verified facts with sources (57 base + 33 from /Historical/) |
 | `lib/dredge/confidence-gate.ts` | Gemini Flash → Claude Sonnet escalation |
 | `lib/dredge/extraction-prompt.ts` | AI prompts for document parsing |
 | `lib/dredge/parser.ts` | OCR cleanup, date extraction, relevance scoring |
 | `lib/dredge/types.ts` | TypeScript interfaces |
 
-**Commit:** `653382f`
+**Commits:** `653382f` (initial), integration commit (2026-02-02)
 
 ### Phase 3: Automated Detection
 
 **Deliverables:**
 
-- 36 error patterns with `wrongVariants` field in reference library
+- 166 error patterns with `wrongVariants` field in reference library
 - `scripts/check-facts.ts` — pre-deploy scanner
-- Categories covered: governance, construction, people, treaty, timeline
+- Categories covered: governance (17), construction (7), people (15), treaty (21), timeline (7), cherokee (5), administration (10), violence (8)
 
 **Error Patterns Detect:**
 
@@ -64,8 +64,13 @@
 - Construction dates before 1827
 - Treaty of Holston "negotiated at Rocky Mount" (was at White's Fort)
 - "First federal capital" claims
+- Cherokee leader dates and titles
+- Territorial ordinance dates
+- Frontier violence incidents
+- Federal establishment timeline
+- Newspaper founding details
 
-**Commit:** `e8ced2b`
+**Commits:** `e8ced2b` (initial 36 patterns), integration commit (2026-02-02, 166 total patterns)
 
 ---
 
@@ -157,7 +162,7 @@ npx tsx scripts/check-facts.ts
 ```
 tennessee-starts-here/          ← DEPLOYED (GitHub → Vercel)
 ├── lib/dredge/                 ← Truth system utilities
-│   ├── reference-library.ts    22 facts, 36 error patterns
+│   ├── reference-library.ts    90 facts, 166 error patterns
 │   ├── confidence-gate.ts      AI model escalation
 │   ├── extraction-prompt.ts    Document parsing prompts
 │   ├── parser.ts               OCR cleanup, relevance scoring
@@ -173,7 +178,7 @@ tennessee-starts-here/          ← DEPLOYED (GitHub → Vercel)
     └── app/(admin)/dredge/     Mock admin UI
 
 rocky-mount/                    ← LOCAL RESEARCH (no git remote)
-├── Historical/                 36 processed docs + 9 raw directories
+├── Historical/                 36 processed docs + 9 raw directories (33 facts integrated)
 ├── docs/                       Protocol documents
 └── tennessee-starts-here/      ↑ Deployed app (subdir)
 ```
@@ -182,15 +187,16 @@ rocky-mount/                    ← LOCAL RESEARCH (no git remote)
 
 ## Success Metrics
 
-| Metric                         | Before                  | After                   |
-| ------------------------------ | ----------------------- | ----------------------- |
-| Mary Cobb errors               | 161 mentions / 37 files | 0                       |
-| "First federal capital" errors | 6 locations             | 0                       |
-| Building date errors           | 2 data files            | 0                       |
-| Farm establishment date        | Wrong (1770)            | Correct (1775)          |
-| Automated error detection      | None                    | 36 patterns             |
-| Pre-deploy checker             | None                    | `check-facts.ts`        |
-| Verified facts documented      | Scattered               | 22 in reference library |
+| Metric                         | Before                  | After                               |
+| ------------------------------ | ----------------------- | ----------------------------------- |
+| Mary Cobb errors               | 161 mentions / 37 files | 0                                   |
+| "First federal capital" errors | 6 locations             | 0                                   |
+| Building date errors           | 2 data files            | 0                                   |
+| Farm establishment date        | Wrong (1770)            | Correct (1775)                      |
+| Automated error detection      | None                    | 166 patterns                        |
+| Pre-deploy checker             | None                    | `check-facts.ts`                    |
+| Verified facts documented      | Scattered               | 90 in reference library             |
+| Categories covered             | 5                       | 8 (added cherokee, admin, violence) |
 
 ---
 

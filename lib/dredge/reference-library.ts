@@ -1,12 +1,25 @@
 /**
  * Reference Library
- * The 25 most important verified facts about Rocky Mount
+ * 90 verified facts about Rocky Mount and the Southwest Territory
  * Used by The Dredge to cross-reference new documents
+ *
+ * Categories: governance (17), construction (7), people (15), treaty (21),
+ *            timeline (7), cherokee (5), administration (10), violence (8)
+ *
+ * Error Detection: 43 facts with 166 wrongVariant patterns
  */
 
 export interface VerifiedFact {
   id: string
-  category: 'governance' | 'construction' | 'people' | 'treaty' | 'timeline'
+  category:
+    | 'governance'
+    | 'construction'
+    | 'people'
+    | 'treaty'
+    | 'timeline'
+    | 'cherokee'
+    | 'administration'
+    | 'violence'
   claim: string
   source: string
   sourceType: 'primary' | 'scholarly' | 'archaeological'
@@ -140,6 +153,65 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     source: 'Blount to Knox, January 8, 1791',
     sourceType: 'primary',
     confidence: 'verified',
+  },
+  {
+    id: 'gov-014',
+    category: 'governance',
+    claim:
+      'North Carolina ceded approximately 43,000 square miles to the federal government on December 22, 1789, creating the land base for the Southwest Territory',
+    source: 'MASTER_INDEX.md (North Carolina state act/deed)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'north carolina.{0,20}cession.{0,20}178\\d', // Wrong year (was 1789)
+      'north carolina.{0,20}cession.{0,20}179[0-9]', // Wrong year
+      'north carolina.{0,20}cession.{0,20}december [1-9]\\,', // Wrong day (was Dec 22)
+      'north carolina.{0,20}4[0-2]\\,000', // Wrong size (was ~43,000)
+      'north carolina.{0,20}4[4-9]\\,000', // Wrong size
+    ],
+  },
+  {
+    id: 'gov-015',
+    category: 'governance',
+    claim:
+      'Congress created the Territory of the United States South of the River Ohio (Southwest Territory) by statute on May 26, 1790, applying the Ordinance of 1787 with slavery permitted',
+    source: 'MASTER_INDEX.md + 001-jefferson-to-blount-1790-08-01.md (Congressional statute)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'southwest territory.{0,20}created.{0,20}178\\d', // Wrong year (was 1790)
+      'southwest territory.{0,20}created.{0,20}179[1-9]', // Wrong year
+      'southwest territory.{0,20}may [1-9]\\,', // Wrong day (was May 26)
+      'southwest territory.{0,20}slavery.{0,20}prohibited', // WRONG - slavery was PERMITTED (unlike Northwest Territory)
+    ],
+  },
+  {
+    id: 'gov-016',
+    category: 'governance',
+    claim:
+      'President Washington sent nominations for territorial positions to the Senate on June 7, 1790, including William Blount as governor and Daniel Smith as secretary',
+    source: 'MASTER_INDEX.md (Washington Papers, Founders Online)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'blount.{0,20}nominated.{0,20}179[1-9]', // Wrong year (was 1790)
+      'blount.{0,20}nominated.{0,20}june [1-6]\\,', // Wrong day (was June 7)
+      'blount.{0,20}nominated.{0,20}june [8-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'gov-017',
+    category: 'governance',
+    claim:
+      'Articles of agreement were signed between William Blount and David Moore on October 12, 1794, regarding tribal goods transport',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive p15138coll30/4364)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'blount.{0,20}moore.{0,20}agreement.{0,20}179[0-3]', // Wrong year (was 1794)
+      'blount.{0,20}moore.{0,20}agreement.{0,20}179[5-9]', // Wrong year
+      'blount.{0,20}moore.{0,20}october [1-9]\\,', // Wrong day (was Oct 12)
+    ],
   },
 
   // === CONSTRUCTION ===
@@ -336,6 +408,47 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     confidence: 'high',
     wrongVariants: ['mary cobb.{0,15}fed.{0,15}cherokee', 'mary cobb.{0,15}42 chiefs'],
   },
+  {
+    id: 'ppl-013',
+    category: 'people',
+    claim:
+      'Daniel Smith was officially appointed as Territorial Secretary on June 23, 1790, by President Washington',
+    source: 'MASTER_INDEX.md (Founders Online)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'daniel smith.{0,20}secretary.{0,20}179[1-9]', // Wrong year (was 1790)
+      'daniel smith.{0,20}secretary.{0,20}june [1-9]\\,', // Wrong day (was June 23)
+    ],
+  },
+  {
+    id: 'ppl-014',
+    category: 'people',
+    claim:
+      'Henry Knox served as Secretary of War from 1789 to 1794, serving as the primary federal contact for territorial administration and Indian affairs',
+    source: 'MASTER_INDEX.md + PROSOPOGRAPHY-ANALYSIS.md (federal records)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'henry knox.{0,20}secretary.{0,20}178[0-8]', // Wrong year (started 1789)
+      'henry knox.{0,20}secretary.{0,20}179[5-9]', // Wrong year (ended 1794)
+      'henry knox.{0,20}secretary of state', // Wrong position (was Secretary of WAR)
+    ],
+  },
+  {
+    id: 'ppl-015',
+    category: 'people',
+    claim:
+      "George Roulstone founded the Knoxville Gazette with Robert Ferguson in 1791, establishing Tennessee's first newspaper",
+    source: 'MASTER_INDEX.md + 018-george-roulstone-biography.md (Tennessee Encyclopedia)',
+    sourceType: 'scholarly',
+    confidence: 'high',
+    wrongVariants: [
+      'george roulstone.{0,20}179[0]', // Wrong year (was 1791)
+      'george roulstone.{0,20}179[2-9]', // Wrong year
+      'george roulstone.{0,20}sole founder', // Had co-founder Robert Ferguson
+    ],
+  },
 
   // === TREATY ===
   {
@@ -526,6 +639,20 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'primary',
     confidence: 'verified',
   },
+  {
+    id: 'trt-021',
+    category: 'treaty',
+    claim:
+      'A trade agreement was signed on October 12, 1794, between David Moore (boat captain) and tribal representatives including Opoca Mingo, facilitating goods transport with Chickasaw and Choctaw assistance',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive p15138coll18)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'chickasaw.{0,20}trade.{0,20}179[0-3]', // Wrong year (was 1794)
+      'chickasaw.{0,20}trade.{0,20}179[5-9]', // Wrong year
+      'chickasaw.{0,20}october [1-9]\\,', // Wrong day (was Oct 12)
+    ],
+  },
 
   // === TIMELINE ===
   {
@@ -570,6 +697,385 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     source: 'Bristol Herald Courier, January 13, 2023; Tennessee Historical Commission records',
     sourceType: 'scholarly',
     confidence: 'verified',
+  },
+  {
+    id: 'tim-006',
+    category: 'timeline',
+    claim:
+      "The Knoxville Gazette, Tennessee's first newspaper, published its first issue on November 5, 1791, founded by George Roulstone and Robert Ferguson",
+    source: 'MASTER_INDEX.md + knoxville-gazette-transcriptions.md',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'knoxville gazette.{0,20}179[0]', // Wrong year (was 1791)
+      'knoxville gazette.{0,20}179[2-9]', // Wrong year
+      'knoxville gazette.{0,20}november [1-4]\\,', // Wrong day (was Nov 5)
+      'knoxville gazette.{0,20}november [6-9]\\,', // Wrong day
+      'knoxville gazette.{0,20}first.{0,20}knoxville', // Initially published in ROGERSVILLE, not Knoxville
+    ],
+  },
+  {
+    id: 'tim-007',
+    category: 'timeline',
+    claim:
+      'The Knoxville Gazette was initially published in Rogersville, Tennessee, before moving to Knoxville',
+    source: 'MASTER_INDEX.md + knoxville-gazette-transcriptions.md',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'knoxville gazette.{0,20}always.{0,20}knoxville', // Initially in Rogersville
+      'knoxville gazette.{0,20}founded.{0,20}knoxville', // Founded in Rogersville
+      'knoxville gazette.{0,20}never.{0,20}moved', // DID move to Knoxville
+    ],
+  },
+
+  // === CHEROKEE ===
+  {
+    id: 'chr-001',
+    category: 'cherokee',
+    claim:
+      'Hanging Maw (Uskwa\'li-gu\'ta, "his stomach hangs down") served as Principal Chief of the Upper Towns (Overhill Cherokee) from 1788 to 1794',
+    source: '025-cherokee-treaty-signatories.md (War Department Papers)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'hanging maw.{0,20}178[0-7]', // Wrong years before 1788
+      'hanging maw.{0,20}179[5-9]', // Wrong years after 1794
+      'hanging maw.{0,20}180\\d', // Wrong century
+    ],
+  },
+  {
+    id: 'chr-002',
+    category: 'cherokee',
+    claim:
+      'Bloody Fellow (Nenetooyah/Iskagua) received the title of "General" from President George Washington during a Philadelphia delegation visit in early 1792 - perhaps the only Cherokee to receive this honor prior to the Civil War',
+    source: '025-cherokee-treaty-signatories.md (federal correspondence)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'bloody fellow.{0,20}general.{0,20}179[0-1]', // Wrong year (was 1792)
+      'bloody fellow.{0,20}general.{0,20}179[3-9]', // Wrong year
+      'bloody fellow.{0,20}colonel', // Wrong rank
+      'bloody fellow.{0,20}captain', // Wrong rank
+    ],
+  },
+  {
+    id: 'chr-003',
+    category: 'cherokee',
+    claim:
+      "John Watts led an attack on Buchanan's Station in September 1792 with over 1,000 Cherokee, Muscogee, and Shawnee warriors - one of the largest Native forces seen in the region",
+    source: '025-cherokee-treaty-signatories.md (military records) + Knoxville Gazette No. 13',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'buchanan.{0,20}179[0-1]', // Wrong year (was Sept 1792)
+      'buchanan.{0,20}179[3-9]', // Wrong year
+      'buchanan.{0,20}500 warriors', // Wrong count (was 1,000+)
+      'buchanan.{0,20}200 warriors', // Wrong count
+    ],
+  },
+  {
+    id: 'chr-004',
+    category: 'cherokee',
+    claim:
+      'Doublehead was killed on August 9, 1807, by Major Ridge, Alex Saunders, and John Rogers, either for control of cotton trade or for ceding Indian lands',
+    source: '025-cherokee-treaty-signatories.md (Cherokee Nation records)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'doublehead.{0,20}killed.{0,20}180[0-6]', // Wrong year (was 1807)
+      'doublehead.{0,20}killed.{0,20}180[8-9]', // Wrong year
+      'doublehead.{0,20}august [1-8]', // Wrong day (was August 9)
+      'doublehead.{0,20}murdered.{0,20}john watts', // Wrong killer
+    ],
+  },
+  {
+    id: 'chr-005',
+    category: 'cherokee',
+    claim:
+      'Black Fox (Enola/Inali) served as Principal Chief of the Cherokee Nation from 1801 to 1811, succeeding Little Turkey',
+    source: '025-cherokee-treaty-signatories.md (Cherokee Nation records)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'black fox.{0,20}chief.{0,20}179\\d', // Wrong century (was 1801-1811)
+      'black fox.{0,20}chief.{0,20}180[0]', // Before his chiefdom
+      'black fox.{0,20}chief.{0,20}181[2-9]', // After his chiefdom
+      'black fox.{0,20}succeeded.{0,20}hanging maw', // Wrong predecessor (was Little Turkey)
+    ],
+  },
+
+  // === ADMINISTRATION ===
+  {
+    id: 'adm-001',
+    category: 'administration',
+    claim:
+      'An Ordinance for Circumscribing Counties was signed on June 11, 1792, defining the boundaries of Greene and Hawkins Counties, with William Blount and Daniel Smith as signatories',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive tfd/528)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'greene.{0,20}hawkins.{0,20}counties.{0,20}179[0-1]', // Wrong year (was 1792)
+      'greene.{0,20}hawkins.{0,20}counties.{0,20}179[3-9]', // Wrong year
+      'ordinance.{0,20}june [1-9]\\,', // Wrong day (was June 11)
+    ],
+  },
+  {
+    id: 'adm-002',
+    category: 'administration',
+    claim:
+      'An Act for District Jail Funding was passed on September 27, 1794, providing for construction of a district jail and stocks in Nashville',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive tfd/540)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'nashville.{0,20}jail.{0,20}179[0-3]', // Wrong year (was 1794)
+      'nashville.{0,20}jail.{0,20}179[5-9]', // Wrong year
+      'nashville.{0,20}jail.{0,20}september [1-9]\\,', // Wrong day (was Sept 27)
+    ],
+  },
+  {
+    id: 'adm-003',
+    category: 'administration',
+    claim:
+      'An Act to Cut and Clear Wagon Road was passed on September 27, 1794, authorizing construction of a wagon road to Cumberland River settlements from Washington District',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive tfd/535)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'wagon road.{0,20}cumberland.{0,20}179[0-3]', // Wrong year (was 1794)
+      'wagon road.{0,20}cumberland.{0,20}179[5-9]', // Wrong year
+      'wagon road.{0,20}september [1-9]\\,', // Wrong day (was Sept 27)
+    ],
+  },
+  {
+    id: 'adm-004',
+    category: 'administration',
+    claim:
+      "An Act for Washington College Establishment was passed on July 10, 1795, renaming St. Martin's Academy to honor President Washington",
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive tfd/22)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'washington college.{0,20}179[0-4]', // Wrong year (was 1795)
+      'washington college.{0,20}179[6-9]', // Wrong year
+      'washington college.{0,20}july [1-9]\\,', // Wrong day (was July 10)
+    ],
+  },
+  {
+    id: 'adm-005',
+    category: 'administration',
+    claim:
+      'An Act for Enumeration of Inhabitants was passed on July 11, 1795, establishing a territorial census framework, signed by William Blount and Joseph Hardin',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive tfd/550)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'census.{0,20}act.{0,20}179[0-4]', // Wrong year (was 1795)
+      'census.{0,20}act.{0,20}179[6-9]', // Wrong year
+      'enumeration.{0,20}july [1-9]\\,', // Wrong day (was July 11)
+    ],
+  },
+  {
+    id: 'adm-006',
+    category: 'administration',
+    claim:
+      'The first General Assembly of the Southwest Territory convened on February 24, 1794, at Knoxville',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'first.{0,20}assembly.{0,20}179[0-3]', // Wrong year (was 1794)
+      'first.{0,20}assembly.{0,20}179[5-9]', // Wrong year
+      'first.{0,20}assembly.{0,20}february [1-9]\\,', // Wrong day (was Feb 24)
+      'first.{0,20}assembly.{0,20}rocky mount', // Wrong location (was Knoxville)
+    ],
+  },
+  {
+    id: 'adm-007',
+    category: 'administration',
+    claim:
+      'Elections for constitutional convention delegates were called on January 11, 1796, by Governor Blount',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'convention.{0,20}elections.{0,20}179[0-5]', // Wrong year (was 1796)
+      'convention.{0,20}elections.{0,20}january [1-9]\\,', // Wrong day (was Jan 11)
+    ],
+  },
+  {
+    id: 'adm-008',
+    category: 'administration',
+    claim:
+      'The Tennessee Constitutional Convention convened on February 6, 1796, with fifty-five delegates who adopted the Tennessee Constitution',
+    source: 'MASTER_INDEX.md (Tennessee Virtual Archive tfd/681)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'constitutional.{0,20}convention.{0,20}179[0-5]', // Wrong year (was 1796)
+      'constitutional.{0,20}convention.{0,20}february [1-5]\\,', // Wrong day (was Feb 6)
+      'constitutional.{0,20}convention.{0,20}5[0-4] delegates', // Wrong count (was 55)
+      'constitutional.{0,20}convention.{0,20}5[6-9] delegates', // Wrong count
+    ],
+  },
+  {
+    id: 'adm-009',
+    category: 'administration',
+    claim:
+      'The territorial census of November 28, 1795, documented 77,262 inhabitants across eleven counties, exceeding the 60,000 requirement for statehood',
+    source: 'MASTER_INDEX.md (territorial census records)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      '1795.{0,20}census.{0,20}7[0-6]\\,\\d{3}', // Wrong count (was 77,262)
+      '1795.{0,20}census.{0,20}7[8-9]\\,\\d{3}', // Wrong count
+      '1795.{0,20}census.{0,20}[1-9]\\d\\,\\d{3}', // Wrong magnitude
+      'census.{0,20}179[0-4]', // Wrong year (was 1795)
+    ],
+  },
+  {
+    id: 'adm-010',
+    category: 'administration',
+    claim: 'The territorial population in 1791 was estimated at approximately 35,691 residents',
+    source: 'MASTER_INDEX.md (Tennessee Encyclopedia citing period estimates)',
+    sourceType: 'scholarly',
+    confidence: 'high',
+    wrongVariants: [
+      '1791.{0,20}population.{0,20}3[0-4]\\,\\d{3}', // Wrong count (was ~35,691)
+      '1791.{0,20}population.{0,20}3[6-9]\\,\\d{3}', // Wrong count
+      '1791.{0,20}population.{0,20}[1-2]\\d\\,\\d{3}', // Wrong magnitude
+      '1791.{0,20}population.{0,20}[4-9]\\d\\,\\d{3}', // Wrong magnitude
+    ],
+  },
+
+  // === VIOLENCE ===
+  {
+    id: 'vio-001',
+    category: 'violence',
+    claim:
+      'James Kilpatrick was killed by Indians on September 5, 1791, on Poor Valley Creek, about 17 miles from Hawkins Courthouse',
+    source: 'Knoxville Gazette Vol. I, No. 1, November 5, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'kilpatrick.{0,20}killed.{0,20}179[0]', // Wrong year (was 1791)
+      'kilpatrick.{0,20}killed.{0,20}179[2-9]', // Wrong year
+      'kilpatrick.{0,20}september [1-4]\\,', // Wrong day (was Sept 5)
+      'kilpatrick.{0,20}september [6-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'vio-002',
+    category: 'violence',
+    claim:
+      "General St. Clair's army was defeated on November 4, 1791, with 46 commissioned officers killed, 25 wounded, and approximately 600 privates lost",
+    source: 'Knoxville Gazette Vol. I, No. 2, December 3, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'st\\.? clair.{0,20}179[0]', // Wrong year (was 1791)
+      'st\\.? clair.{0,20}179[2-9]', // Wrong year
+      'st\\.? clair.{0,20}november [1-3]\\,', // Wrong day (was Nov 4)
+      'st\\.? clair.{0,20}november [5-9]\\,', // Wrong day
+      'st\\.? clair.{0,20}[1-3]\\d officers', // Wrong count (was 46 killed)
+      'st\\.? clair.{0,20}[5-9]\\d officers', // Wrong count
+    ],
+  },
+  {
+    id: 'vio-003',
+    category: 'violence',
+    claim:
+      'Captain Jacob Tipton, from Washington in the territory, was mortally wounded at St. Clair\'s Defeat and reportedly said "My brave fellows, I am a dead man; do you fight on..." before dying',
+    source: 'Knoxville Gazette Vol. I, No. 3, December 17, 1791',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'jacob tipton.{0,20}killed.{0,20}179[0]', // Wrong year (was 1791)
+      'jacob tipton.{0,20}killed.{0,20}179[2-9]', // Wrong year
+      'captain tipton.{0,20}virginia', // Wrong location (was from Washington territory)
+      'captain tipton.{0,20}kentucky', // Wrong location
+    ],
+  },
+  {
+    id: 'vio-004',
+    category: 'violence',
+    claim:
+      "Harper Ratcliff's family was attacked in Stanley Valley on April 5, 1792, with his wife and three children killed by Indians",
+    source: 'Knoxville Gazette Vol. I, No. 5, April 21, 1792',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'ratcliff.{0,20}attack.{0,20}179[0-1]', // Wrong year (was 1792)
+      'ratcliff.{0,20}attack.{0,20}179[3-9]', // Wrong year
+      'ratcliff.{0,20}april [1-4]\\,', // Wrong day (was April 5)
+      'ratcliff.{0,20}april [6-9]\\,', // Wrong day
+      'ratcliff.{0,20}[1-2] children', // Wrong count (was 3 children)
+      'ratcliff.{0,20}[4-9] children', // Wrong count
+    ],
+  },
+  {
+    id: 'vio-005',
+    category: 'violence',
+    claim:
+      "Buchanan's Station (near Nashville) was besieged on September 30, 1792, by approximately 300 Creek and Cherokee warriors, with the fort successfully defended",
+    source: 'Knoxville Gazette Vol. I, No. 13, October 6, 1792',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'buchanan.{0,20}station.{0,20}179[0-1]', // Wrong year (was 1792)
+      'buchanan.{0,20}station.{0,20}179[3-9]', // Wrong year
+      'buchanan.{0,20}september [1-9]\\,', // Wrong day (was Sept 30)
+      'buchanan.{0,20}october', // Wrong month (was September)
+      'buchanan.{0,20}station.{0,20}captured', // Station was NOT captured (successfully defended)
+      'buchanan.{0,20}station.{0,20}fell', // Station did NOT fall
+    ],
+  },
+  {
+    id: 'vio-006',
+    category: 'violence',
+    claim:
+      'Nickajack and Running Water (Cherokee towns in the Chickamauga region) were attacked on September 24, 1794, by militia under James Ore, with 50+ Indians killed',
+    source: 'MASTER_INDEX.md (War Department Papers)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'nickajack.{0,20}179[0-3]', // Wrong year (was 1794)
+      'nickajack.{0,20}179[5-9]', // Wrong year
+      'running water.{0,20}179[0-3]', // Wrong year (was 1794)
+      'running water.{0,20}179[5-9]', // Wrong year
+      'nickajack.{0,20}september [1-9]\\,', // Wrong day (was Sept 24)
+    ],
+  },
+  {
+    id: 'vio-007',
+    category: 'violence',
+    claim:
+      "Mr. Wells's two sons were killed by Indians on June 16, 1792, approximately 12 miles from Knoxville",
+    source: 'Knoxville Gazette Vol. I, No. 7, June 2, 1792',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'wells.{0,20}sons.{0,20}179[0-1]', // Wrong year (was 1792)
+      'wells.{0,20}sons.{0,20}179[3-9]', // Wrong year
+      'wells.{0,20}june [1-9]\\,', // Wrong day (was June 16)
+      'wells.{0,20}[1] son', // Wrong count (was 2 sons)
+      'wells.{0,20}[3-9] sons', // Wrong count
+    ],
+  },
+  {
+    id: 'vio-008',
+    category: 'violence',
+    claim:
+      'Greenfield Station in Sumner County was attacked on April 28, 1794, with multiple casualties',
+    source: 'MASTER_INDEX.md (Tennessee Encyclopedia)',
+    sourceType: 'primary',
+    confidence: 'high',
+    wrongVariants: [
+      'greenfield.{0,20}station.{0,20}179[0-3]', // Wrong year (was 1794)
+      'greenfield.{0,20}station.{0,20}179[5-9]', // Wrong year
+      'greenfield.{0,20}april [1-9]\\,', // Wrong day (was April 28)
+    ],
   },
 ]
 

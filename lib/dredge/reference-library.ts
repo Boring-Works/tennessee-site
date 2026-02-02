@@ -1,12 +1,12 @@
 /**
  * Reference Library
- * 101 verified facts about Rocky Mount and the Southwest Territory
+ * 102 verified facts about Rocky Mount and the Southwest Territory
  * Used by The Dredge to cross-reference new documents
  *
- * Categories: governance (17), construction (7), people (25), treaty (21),
+ * Categories: governance (17), construction (7), people (26), treaty (21),
  *            timeline (7), cherokee (5), administration (10), violence (8), geography (1)
  *
- * Error Detection: 54 facts with 223 wrongVariant patterns
+ * Error Detection: 55 facts with 227 wrongVariant patterns
  */
 
 export interface VerifiedFact {
@@ -1232,6 +1232,21 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
       'james robertson.{0,20}cumberland.{0,20}179[1-9]', // Wrong year for Compact (was 1780)
       'james robertson.{0,20}cumberland.{0,20}177[0-9]', // Wrong decade
       'james robertson.{0,20}washington district', // Wrong district (was Mero District)
+    ],
+  },
+  {
+    id: 'ppl-026',
+    category: 'people',
+    claim:
+      'William Cobb was appointed magistrate by the North Carolina legislature in 1777 and served as county magistrate',
+    source: 'additional-articles.md (Tennessee Encyclopedia); PROSOPOGRAPHY-ANALYSIS.md',
+    sourceType: 'scholarly',
+    confidence: 'high',
+    wrongVariants: [
+      'william cobb.{0,20}magistrate.{0,20}177[0-6]', // Wrong year (was 1777)
+      'william cobb.{0,20}magistrate.{0,20}178\\d', // Wrong decade
+      'william cobb.{0,20}magistrate.{0,20}179\\d', // Wrong decade
+      'william cobb.{0,20}virginia.{0,20}magistrate', // Wrong state (was NC legislature)
     ],
   },
 

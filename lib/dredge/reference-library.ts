@@ -718,10 +718,10 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'primary',
     confidence: 'verified',
     wrongVariants: [
-      'knoxville gazette.{0,20}179[0]', // Wrong year (was 1791)
-      'knoxville gazette.{0,20}179[2-9]', // Wrong year
-      'knoxville gazette.{0,20}november [1-4]\\,', // Wrong day (was Nov 5)
-      'knoxville gazette.{0,20}november [6-9]\\,', // Wrong day
+      'knoxville gazette.{0,20}(founded|established|started|began|first issued).{0,20}179[0]', // Wrong founding year (was 1791)
+      'knoxville gazette.{0,20}(founded|established|started|began|first issued).{0,20}179[2-9]', // Wrong founding year
+      'knoxville gazette.{0,20}(founded|established|started|began|first issued).{0,20}november [1-4]\\,', // Wrong founding day (was Nov 5)
+      'knoxville gazette.{0,20}(founded|established|started|began|first issued).{0,20}november [6-9]\\,', // Wrong founding day
       'knoxville gazette.{0,20}first.{0,20}knoxville', // Initially published in ROGERSVILLE, not Knoxville
     ],
   },
@@ -1326,7 +1326,7 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
       'oldest territorial capital', // Wrong (Marietta 1788 predates Rocky Mount 1790)
       'first territorial capital in america', // Wrong
       'first u\\.?s\\.? territorial capital', // Wrong
-      'rocky mount.{0,20}first.{0,20}territorial capital', // Misleading without "Southwest Territory" qualifier
+      'rocky mount.{0,20}first(?!.*southwest).{0,30}territorial capital', // Misleading without "Southwest Territory" qualifier
     ],
   },
   {

@@ -25,7 +25,7 @@ const DEFAULT_SCAN_DIRS = ['content', 'lib', 'app', 'components', 'data']
 const SCAN_EXTENSIONS = ['.md', '.ts', '.tsx', '.json']
 
 // Directories to skip
-const SKIP_DIRS = ['node_modules', '.next', '.git', 'dist', 'build']
+const SKIP_DIRS = ['node_modules', '.next', '.git', 'dist', 'build', '_archive']
 
 // Files to skip (contain the patterns themselves or document error corrections)
 const SKIP_FILES = [

@@ -22,7 +22,7 @@ export function DistinctionSection() {
               1790–1792
             </span>
             <span className="text-primary font-serif text-lg">
-              Rocky Mount: First Southwest territorial capital
+              Rocky Mount: First Southwest Territorial Capital
             </span>
           </div>
           <div className="inline-flex items-center gap-4 text-left">

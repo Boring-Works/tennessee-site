@@ -770,7 +770,7 @@ export function ConsolidatedProof() {
               </span>
               <div className="w-3 h-3 rotate-45 bg-accent" />
               <span className="font-serif text-lg text-primary font-medium">
-                Rocky Mount: First Southwest territorial capital
+                Rocky Mount: First Southwest Territorial Capital
               </span>
             </div>
 

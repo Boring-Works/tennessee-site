@@ -1,6 +1,12 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getPerson, getPersonSlugs, getDocumentsMentioning } from '@/lib/evidence/loader'
+import {
+  getVerifiedFactsForPerson,
+  groupFactsByCategory,
+  formatCategoryName,
+  getConfidenceBadgeColor,
+} from '@/lib/evidence/reference-integration'
 import './person.css'
 
 interface PageProps {
@@ -93,6 +99,14 @@ export default async function PersonPage({ params }: PageProps) {
   // Get documents mentioning this person
   const relatedDocuments = await getDocumentsMentioning(person.id)
 
+  // Get verified facts from reference library
+  const verifiedFacts = getVerifiedFactsForPerson(
+    person.name,
+    person.id,
+    person.documents || relatedDocuments.map((d) => d.id)
+  )
+  const factsByCategory = groupFactsByCategory(verifiedFacts)
+
   return (
     <div className="personPage">
       <div className="personContainer">
@@ -145,18 +159,52 @@ export default async function PersonPage({ params }: PageProps) {
             </section>
           )}
 
+          {/* Verified Facts from Reference Library */}
+          {verifiedFacts.length > 0 && (
+            <section className="personSourcesSection">
+              <h2 className="personSectionTitle">
+                <span>Verified Historical Facts</span>
+              </h2>
+              <div className="personVerifiedFacts">
+                {Object.entries(factsByCategory).map(([category, facts]) => (
+                  <div key={category} className="factCategory">
+                    <h3 className="factCategoryTitle">{formatCategoryName(category)}</h3>
+                    <ul className="factsList">
+                      {facts.map((fact) => (
+                        <li key={fact.id} className="factItem">
+                          <div className="factClaim">{fact.claim}</div>
+                          <div className="factMeta">
+                            <cite className="factSource">{fact.source}</cite>
+                            <span
+                              className={`factConfidenceBadge ${getConfidenceBadgeColor(fact.confidence)}`}
+                            >
+                              {fact.confidence}
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Documents Section */}
           {relatedDocuments.length > 0 && (
             <section className="personDocumentsSection">
               <h2 className="personSectionTitle">
-                <span>Related Documents</span>
+                <span>Primary Source Documents</span>
               </h2>
               <ul className="personDocumentsList">
                 {relatedDocuments.map((doc) => (
                   <li key={doc.id} className="personDocumentItem">
                     <Link href={`/evidence/documents/${doc.id}`} className="personDocumentLink">
-                      <span className="personDocumentTitle">{doc.title}</span>
-                      <span className="personDocumentDate">{doc.date}</span>
+                      <div className="personDocumentHeader">
+                        <span className="personDocumentTitle">{doc.title}</span>
+                        <span className="personDocumentDate">{doc.date}</span>
+                      </div>
+                      {doc.source && <cite className="personDocumentSource">{doc.source}</cite>}
                     </Link>
                   </li>
                 ))}

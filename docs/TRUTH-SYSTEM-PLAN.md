@@ -42,7 +42,7 @@
 **Deliverables:**
 | File | Purpose |
 |------|---------|
-| `lib/dredge/reference-library.ts` | 90 verified facts with sources (57 base + 33 from /Historical/) |
+| `lib/dredge/reference-library.ts` | 111 verified facts with sources (57 base + 45 from /Historical/ + 9 from Phase 0 Rescue) |
 | `lib/dredge/confidence-gate.ts` | Gemini Flash → Claude Sonnet escalation |
 | `lib/dredge/extraction-prompt.ts` | AI prompts for document parsing |
 | `lib/dredge/parser.ts` | OCR cleanup, date extraction, relevance scoring |
@@ -54,9 +54,9 @@
 
 **Deliverables:**
 
-- 166 error patterns with `wrongVariants` field in reference library
+- 233 error patterns with `wrongVariants` field in reference library
 - `scripts/check-facts.ts` — pre-deploy scanner
-- Categories covered: governance (17), construction (7), people (15), treaty (21), timeline (7), cherokee (5), administration (10), violence (8)
+- Categories covered: governance (19), construction (7), people (29), treaty (21), timeline (9), cherokee (5), administration (11), violence (8), geography (2)
 
 **Error Patterns Detect:**
 
@@ -70,7 +70,7 @@
 - Federal establishment timeline
 - Newspaper founding details
 
-**Commits:** `e8ced2b` (initial 36 patterns), integration commit (2026-02-02, 166 total patterns)
+**Commits:** `e8ced2b` (initial 36 patterns), integration commits (2026-02-02, 233 total patterns after Phase 0 Rescue)
 
 ---
 

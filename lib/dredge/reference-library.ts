@@ -1,7 +1,15 @@
 /**
- * Reference Library
+ * Reference Library - SINGLE SOURCE OF TRUTH
  * 102 verified facts about Rocky Mount and the Southwest Territory
  * Used by The Dredge to cross-reference new documents
+ *
+ * CRITICAL: This library is the SOURCE OF TRUTH, backed by external primary sources.
+ * The website (tennesseestartshere.com) is OUTPUT to be verified AGAINST this library.
+ * NEVER use website content as a source - it must be verified with external documentation.
+ *
+ * Data Flow:
+ *   External Sources (primary/scholarly) → Reference Library → Website Content
+ *   NOT: Website → Reference Library (this would be circular)
  *
  * Categories: governance (17), construction (7), people (26), treaty (21),
  *            timeline (7), cherokee (5), administration (10), violence (8), geography (1)

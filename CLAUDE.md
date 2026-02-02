@@ -8,8 +8,33 @@
 ## Status
 
 **Phase:** Production
-**Last Updated:** 2026-01-30
+**Last Updated:** 2026-02-02
 **Version:** 0.2.0
+
+## CRITICAL: Truth System Hierarchy
+
+**SOURCE OF TRUTH:** `lib/dredge/reference-library.ts` (102 verified facts backed by external primary sources)
+
+**NOT A SOURCE:** The website (tennesseestartshere.com) is OUTPUT to be verified, NOT input
+
+**Data Flow:**
+
+```
+External Sources → Reference Library → Website Content
+(primary/scholarly)   (102 facts)      (to be verified)
+```
+
+**Never:**
+
+- Use website content as a source of truth
+- Add facts to reference library without external verification
+- Trust published content without checking against reference library
+
+**Always:**
+
+- Verify all facts against external primary/scholarly sources
+- Run fact checker before deployment: `npm run check:facts`
+- Update reference library when new external sources are verified
 
 ---
 

@@ -1,12 +1,12 @@
 /**
  * Reference Library
- * 90 verified facts about Rocky Mount and the Southwest Territory
+ * 101 verified facts about Rocky Mount and the Southwest Territory
  * Used by The Dredge to cross-reference new documents
  *
- * Categories: governance (17), construction (7), people (15), treaty (21),
- *            timeline (7), cherokee (5), administration (10), violence (8)
+ * Categories: governance (17), construction (7), people (25), treaty (21),
+ *            timeline (7), cherokee (5), administration (10), violence (8), geography (1)
  *
- * Error Detection: 43 facts with 166 wrongVariant patterns
+ * Error Detection: 54 facts with 223 wrongVariant patterns
  */
 
 export interface VerifiedFact {
@@ -20,6 +20,7 @@ export interface VerifiedFact {
     | 'cherokee'
     | 'administration'
     | 'violence'
+    | 'geography'
   claim: string
   source: string
   sourceType: 'primary' | 'scholarly' | 'archaeological'
@@ -1075,6 +1076,179 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
       'greenfield.{0,20}station.{0,20}179[0-3]', // Wrong year (was 1794)
       'greenfield.{0,20}station.{0,20}179[5-9]', // Wrong year
       'greenfield.{0,20}april [1-9]\\,', // Wrong day (was April 28)
+    ],
+  },
+
+  // === PEOPLE (Extended Biographies - MEDIUM Priority Extraction) ===
+  {
+    id: 'ppl-016',
+    category: 'people',
+    claim:
+      'Daniel Smith (1748-1818) served as Territorial Secretary and was a surveyor and cartographer who published a boundary survey journal from August 1779 to July 1780',
+    source:
+      'MASTER_INDEX.md citing Library of Congress; Daniel Smith boundary survey journal (1779-1780)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'daniel smith.{0,20}survey.{0,20}178[0-8]', // Wrong year range (was 1779-1780)
+      'daniel smith.{0,20}survey.{0,20}179[1-9]', // Wrong year range
+    ],
+  },
+  {
+    id: 'ppl-017',
+    category: 'people',
+    claim:
+      "Daniel Smith created 'A Map of the Tennessee government' in 1794 showing the territorial boundaries and surveys",
+    source:
+      'MASTER_INDEX.md (Tennessee Virtual Archive maps p15138coll23/73); map artifact exists in TeVA',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'daniel smith.{0,20}map.{0,20}179[0-3]', // Wrong year (was 1794)
+      'daniel smith.{0,20}map.{0,20}179[5-9]', // Wrong year
+      'daniel smith.{0,20}map.{0,20}180\\d', // Wrong decade
+    ],
+  },
+  {
+    id: 'ppl-018',
+    category: 'people',
+    claim:
+      'Daniel Smith chaired the committee drafting the Tennessee Constitution and Bill of Rights and presided over the 32-provision Declaration of Rights',
+    source: 'MASTER_INDEX.md (Tennessee Encyclopedia); constitutional convention records',
+    sourceType: 'scholarly',
+    confidence: 'high',
+    wrongVariants: [
+      'daniel smith.{0,20}vice chair', // He was CHAIR, not vice chair
+      'daniel smith.{0,20}3[0-1] provision', // Wrong count (was 32)
+      'daniel smith.{0,20}3[3-9] provision', // Wrong count
+    ],
+  },
+  {
+    id: 'ppl-019',
+    category: 'people',
+    claim:
+      'John Sevier was born on September 23, 1745, near New Market, Shenandoah Valley, Virginia, to Valentine Sevier and Joanna Goade',
+    source: '026-john-sevier-biography.md (genealogical records)',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'john sevier.{0,20}born.{0,20}174[0-4]', // Wrong year (was 1745)
+      'john sevier.{0,20}born.{0,20}174[6-9]', // Wrong year
+      'john sevier.{0,20}september [1-9]\\,', // Wrong day (was Sept 23)
+      'john sevier.{0,20}september 2[4-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'ppl-020',
+    category: 'people',
+    claim: 'John Sevier died on September 24, 1815, near Fort Decatur, Alabama Territory',
+    source: '026-john-sevier-biography.md (historical death records)',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'john sevier.{0,20}died.{0,20}181[0-4]', // Wrong year (was 1815)
+      'john sevier.{0,20}died.{0,20}181[6-9]', // Wrong year
+      'john sevier.{0,20}september [1-9]\\,', // Wrong day (was Sept 24)
+      'john sevier.{0,20}september 2[5-9]\\,', // Wrong day
+      'john sevier.{0,20}died.{0,20}tennessee', // Wrong location (was Alabama Territory)
+    ],
+  },
+  {
+    id: 'ppl-021',
+    category: 'people',
+    claim:
+      'John Sevier married Sarah Hawkins in 1761 when he was 16 years old; she was the daughter of Joseph and Sarah Marlin Hawkins, a wealthy Virginia trader',
+    source: '026-john-sevier-biography.md (genealogical records)',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'john sevier.{0,20}married.{0,20}176[0]', // Wrong year (was 1761)
+      'john sevier.{0,20}married.{0,20}176[2-9]', // Wrong year
+      'john sevier.{0,20}age [1-9]\\D', // Wrong age (was 16)
+      'john sevier.{0,20}age 1[0-5]', // Wrong age
+      'john sevier.{0,20}age 1[7-9]', // Wrong age
+    ],
+  },
+  {
+    id: 'ppl-022',
+    category: 'people',
+    claim:
+      'John Sevier married Catherine "Bonny Kate" Sherrill in 1780 following Sarah Hawkins\'s death; he had rescued her during the 1776 Siege of Fort Watauga by pulling her over the palisade while being chased by a Cherokee warrior',
+    source:
+      '026-john-sevier-biography.md (marriage documented; rescue story is frontier tradition, properly noted)',
+    sourceType: 'scholarly',
+    confidence: 'high',
+    wrongVariants: [
+      'john sevier.{0,20}catherine.{0,20}177[0-9]', // Wrong year (was 1780)
+      'john sevier.{0,20}catherine.{0,20}179[1-9]', // Wrong year
+      'john sevier.{0,20}catherine.{0,20}178[1-9]', // Wrong year
+    ],
+  },
+  {
+    id: 'ppl-023',
+    category: 'people',
+    claim: 'John Sevier had 18 children total: 10 with Sarah Hawkins and 8 with Catherine Sherrill',
+    source:
+      '026-john-sevier-biography.md (complete genealogical list with names: Joseph, James, John, Elizabeth, Sarah, Mary Ann, Valentine, Rebecca, Richard, Nancy [Sarah]; Catherine, Ruthe, George Washington, Samuel, Polly, Eliza, Joanna, Robert [Catherine])',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'john sevier.{0,20}1[0-7] children', // Wrong total (was 18)
+      'john sevier.{0,20}1[9]\\+ children', // Wrong total
+      'john sevier.{0,20}[0-9] children.{0,20}sarah', // Wrong count with Sarah (was 10)
+      'john sevier.{0,20}1[1-9] children.{0,20}sarah', // Wrong count
+      'john sevier.{0,20}[0-7] children.{0,20}catherine', // Wrong count with Catherine (was 8)
+      'john sevier.{0,20}[9]\\+ children.{0,20}catherine', // Wrong count
+    ],
+  },
+  {
+    id: 'ppl-024',
+    category: 'people',
+    claim:
+      "John Sevier was one of the leaders of the Overmountain Men at the Battle of King's Mountain (October 7, 1780), a turning point in the Revolutionary War's Southern Campaign",
+    source:
+      "026-john-sevier-biography.md (Revolutionary War records); 'The victory, a turning point in the Revolution in the South, brought widespread recognition to Sevier'",
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'king.{0,5}mountain.{0,20}177[0-9]', // Wrong year (was 1780)
+      'king.{0,5}mountain.{0,20}179[1-9]', // Wrong year
+      'king.{0,5}mountain.{0,20}178[1-9]', // Wrong year
+      'king.{0,5}mountain.{0,20}october [1-6]\\,', // Wrong day (was Oct 7)
+      'king.{0,5}mountain.{0,20}october [8-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'ppl-025',
+    category: 'people',
+    claim:
+      'James Robertson, Brigadier General of Militia for Mero District, was known as the "Father of Tennessee" and was a Cumberland Compact signatory in 1780',
+    source:
+      "PROSOPOGRAPHY-ANALYSIS.md + MASTER_INDEX.md; multiple sources document Robertson's foundational role",
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'james robertson.{0,20}father.{0,20}kentucky', // Wrong state (was Tennessee)
+      'james robertson.{0,20}cumberland.{0,20}179[1-9]', // Wrong year for Compact (was 1780)
+      'james robertson.{0,20}cumberland.{0,20}177[0-9]', // Wrong decade
+      'james robertson.{0,20}washington district', // Wrong district (was Mero District)
+    ],
+  },
+
+  // === GEOGRAPHY ===
+  {
+    id: 'geo-001',
+    category: 'geography',
+    claim:
+      'Rocky Mount was strategically located at the fork of the Holston and Watauga Rivers, controlling access to the Tennessee frontier',
+    source:
+      'GEOGRAPHIC-ANALYSIS.md; "At the fork of the Holston and Watauga Rivers (Washington County in 1790)"',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'rocky mount.{0,20}tennessee river', // Wrong rivers (was Holston and Watauga)
+      'rocky mount.{0,20}cumberland river', // Wrong river
+      'rocky mount.{0,20}french broad', // Wrong river
     ],
   },
 ]

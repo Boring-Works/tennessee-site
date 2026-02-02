@@ -748,7 +748,7 @@ export function ConsolidatedProof() {
                 }}
               >
                 <span className="text-xs font-bold uppercase tracking-wider text-accent">
-                  ★ First Territorial Capital ★
+                  ★ First Southwest Territorial Capital (1790-1792) ★
                 </span>
               </div>
             </div>

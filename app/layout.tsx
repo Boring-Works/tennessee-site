@@ -97,6 +97,28 @@ export default function RootLayout({
         {/* DNS prefetch for FareHarbor booking modal - reduces connection latency */}
         <link rel="dns-prefetch" href="https://fareharbor.com" />
         <link rel="preconnect" href="https://fareharbor.com" crossOrigin="anonymous" />
+
+        {/* Schema.org structured data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'LandmarksOrHistoricalBuildings',
+              name: 'Rocky Mount State Historic Site',
+              description:
+                'The first capital of the Territory of the United States South of the River Ohio (1790–1792), where Governor William Blount established the territorial government.',
+              foundingDate: '1790',
+              publicAccess: true,
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Piney Flats',
+                addressRegion: 'TN',
+                postalCode: '37686',
+              },
+            }),
+          }}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         <SkipLinks />

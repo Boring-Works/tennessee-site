@@ -69,7 +69,7 @@ const IMPACT_STATEMENTS: ImpactStatement[] = [
     stat: '250 Years',
     label: 'Preserving History',
     description:
-      'From 1770s frontier home to the Southwest Territory&apos;s first capital (1790–1792)—maintained for future generations.',
+      'From 1770s frontier home to the first capital of the Territory of the United States South of the River Ohio (1790–1792)—maintained for future generations.',
   },
   {
     stat: '5,000+',

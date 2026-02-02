@@ -1,0 +1,196 @@
+
+Scanning 485 files for historical errors...
+Reference library: 102 facts, 213 error patterns
+
+Found errors in 20 files:
+
+=== HIGH PRIORITY ===
+
+  content/NEW-DOCUMENTS-RECOMMENDATIONS.md
+    Line 389: "north carolina cession terms (1789"
+      Context: ...Lands**
+
+- **Potential documents:**
+  - North Carolina cession terms (1789)
+  - Federal policy on honoring NC land...
+      Correct: North Carolina ceded approximately 43,000 square miles to the federal government on December 22, 1789, creating the land base for the Southwest Territory
+
+=== MEDIUM PRIORITY ===
+
+  content/CHEROKEE-RELATIONS-CONSOLIDATED-INDEX.md
+    Line 593: "hanging maw died around 1796"
+      Context: ...ctual outcomes.
+
+**Note on Timeline:**
+
+Hanging Maw died around 1796—approximately the same time John Watts ...
+
+  content/CHILDREN-RESEARCH.md
+    Line 17: "knoxville gazette (july 7, 1792"
+      Context: ...individual phenomenon:
+
+**Evidence from Knoxville Gazette (July 7, 1792):**
+
+> "The population of the territory...
+    Line 66: "knoxville gazette (june 7, 1794"
+      Context: ...rs into the territorial period:
+
+**From Knoxville Gazette (June 7, 1794):**
+
+> "We are happy to announce that a...
+    Line 242: "knoxville gazette (april 14, 1792"
+      Context: ...t meant child labor in farming:
+
+**From Knoxville Gazette (April 14, 1792):**
+
+> "The season for planting is now ...
+    Line 463: "knoxville gazette newspaper (1791-1796"
+      Context: ...e with War Secretary Knox (1790-1791)
+- Knoxville Gazette newspaper (1791-1796 issues)
+- Rocky Mount property inventor...
+    Line 46: "census data from 1793"
+      Context: ...rangements.
+
+### C. Demographic Growth
+
+Census data from 1793 indicates rapid population expansion:
+
+...
+
+  content/ENSLAVED-PEOPLE-RESEARCH.md
+    Line 251: "knoxville gazette for 1790"
+      Context: ...liam Cobb, and contemporaries
+- Examine Knoxville Gazette for 1790-1796 slave sale advertisements
+
+### Pri...
+
+  content/MARY-PATTON-MASTER-RESEARCH-REPORT.md
+    Line 155: "king's mountain campaign), 1776"
+      Context: ...
+- **Search:** Militia rolls from 1780 (King's Mountain campaign), 1776-1783 (general Revolutionary service)
+- ...
+
+  content/METADATA-VERIFICATION-REPORT.md
+    Line 139: "knoxville gazette from june 7, 1794"
+      Context: ...-1794-06-07** (84 chars)
+   - Current: "Knoxville Gazette from June 7, 1794, covering territorial news and events f...
+    Line 141: "knoxville gazette from june 7, 1794"
+      Context: ...d 13+ more characters
+   - Suggestion: "Knoxville Gazette from June 7, 1794, covering territorial news and events f...
+    Line 144: "knoxville gazette from june 6, 1796"
+      Context: ...-1796-06-06** (92 chars)
+   - Current: "Knoxville Gazette from June 6, 1796, covering territorial events and develo...
+    Line 146: "knoxville gazette from june 6, 1796"
+      Context: ...dd 5+ more characters
+   - Suggestion: "Knoxville Gazette from June 6, 1796, covering territorial events and develo...
+
+  content/RELIGIOUS-MINORITIES-RESEARCH.md
+    Line 70: "knoxville gazette (1791-1796"
+      Context: ...olic sentiment
+
+**Where We Looked:**
+
+- Knoxville Gazette (1791-1796) - 13 issues examined
+- Governor's corr...
+    Line 628: "knoxville gazette issues (1791-1796"
+      Context: ...on and Jefferson letters on territory
+- Knoxville Gazette issues (1791-1796)
+- Rocky Mount property inventory (1791...
+
+  content/SERVANTS-LABORERS-RESEARCH.md
+    Line 288: "knoxville gazette archives (1791-1796"
+      Context: ...nces, wage payments, staff hiring
+
+5. **Knoxville Gazette Archives (1791-1796)**
+   - Newspaper likely contains slave...
+    Line 309: "knoxville gazette for 1791-1796"
+      Context: ...x records 1790-1796
+- Search UT digital Knoxville Gazette for 1791-1796 labor advertisements
+
+**Priority 2: Med...
+
+  content/WORKING-CLASS-RESEARCH.md
+    Line 191: "knoxville gazette (1791-1796"
+      Context: ...per Records (Beyond current gazette)
+
+**Knoxville Gazette (1791-1796)** — Expand current documentation
+
+- **...
+    Line 486: "knoxville gazette (1791-1796"
+      Context: ...ertisements, business notices
+- Source: Knoxville Gazette (1791-1796)
+- Content: 15-25 ads showing ordinary ...
+    Line 636: "knoxville gazette (1791-1796"
+      Context: ...nections to Rocky Mount area
+
+3. **Mine Knoxville Gazette (1791-1796)**
+   - Review digital or microfilm cop...
+
+  content/documents/knoxville-gazette-1792-01-07.md
+    Line 15: "knoxville gazette from january 7, 1792"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from January 7, 1792, reporting on territorial administratio...
+
+  content/documents/knoxville-gazette-1792-02-25.md
+    Line 16: "knoxville gazette from february 25, 1792"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from February 25, 1792, covering news and announcements
+  from...
+
+  content/documents/knoxville-gazette-1792-04-14.md
+    Line 14: "knoxville gazette from april 14, 1792"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from April 14, 1792, reporting on events and developments
+ ...
+
+  content/documents/knoxville-gazette-1792-07-07.md
+    Line 15: "knoxville gazette from july 7, 1792"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from July 7, 1792, documenting summer territorial news
+  ...
+
+  content/documents/knoxville-gazette-1792-10-06.md
+    Line 14: "knoxville gazette from october 6, 1792"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from October 6, 1792, covering territorial news and
+  develo...
+
+  content/documents/knoxville-gazette-1793-03-16.md
+    Line 15: "knoxville gazette from march 16, 1793"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from March 16, 1793, reporting on territorial affairs
+  and...
+
+  content/documents/knoxville-gazette-1793-08-24.md
+    Line 15: "knoxville gazette from august 24, 1793"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from August 24, 1793, documenting territorial developments
+ ...
+
+  content/documents/knoxville-gazette-1794-06-07.md
+    Line 15: "knoxville gazette from june 7, 1794"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from June 7, 1794, covering territorial news and events
+ ...
+
+  content/documents/knoxville-gazette-1795-02-14.md
+    Line 15: "knoxville gazette from february 14, 1795"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from February 14, 1795, reporting on territorial affairs
+  and...
+
+  content/documents/knoxville-gazette-1796-01-17.md
+    Line 15: "knoxville gazette from january 17, 1796"
+      Context: ...storical newspaper records
+description: Knoxville Gazette from January 17, 1796, documenting territorial news
+  and ann...
+
+  content/documents/knoxville-gazette-1796-06-06.md
+    Line 15: "knoxville gazette from june 6, 1796"
+      Context: ...dia and historical records
+description: Knoxville Gazette from June 6, 1796, covering territorial events and
+  deve...
+
+
+Summary: 31 error(s) in 20 file(s)
+Run with --verbose to see full context

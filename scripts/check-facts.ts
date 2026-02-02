@@ -25,12 +25,22 @@ const DEFAULT_SCAN_DIRS = ['content', 'lib', 'app', 'components', 'data']
 const SCAN_EXTENSIONS = ['.md', '.ts', '.tsx', '.json']
 
 // Directories to skip
-const SKIP_DIRS = ['node_modules', '.next', '.git', 'dist', 'build', '_archive']
+const SKIP_DIRS = [
+  'node_modules',
+  '.next',
+  '.git',
+  'dist',
+  'build',
+  '_archive',
+  'Historical', // Primary source transcriptions (external directory)
+  'verified-sources', // Primary source documents (external directory)
+]
 
 // Files to skip (contain the patterns themselves or document error corrections)
 const SKIP_FILES = [
   'reference-library.ts', // Contains the wrongVariants patterns
   'check-facts.ts', // This script
+  'PROTECTED-FILES.md', // Documentation of primary sources
 ]
 
 // File name patterns that indicate research/fact-check documents (skip these)
@@ -38,6 +48,12 @@ const SKIP_FILE_PATTERNS = [
   /fact-check/i, // Fact-checking documents
   /ADVISORY/i, // Advisory documents (research notes)
   /WOW-IMPLEMENTATION/i, // Implementation review documents
+  /transcription/i, // Primary source transcriptions
+  /\bletter-/i, // Historical letters
+  /correspondence/i, // Historical correspondence
+  /treaty-.*-\d{4}/i, // Treaty documents (e.g., treaty-holston-1791)
+  /gazette-\d{4}/i, // Newspaper excerpts (e.g., knoxville-gazette-1791)
+  /knoxville-gazette/i, // Knoxville Gazette articles (primary sources)
 ]
 
 // Content patterns that indicate we're DOCUMENTING an error, not making it
@@ -81,7 +97,10 @@ function getAllFiles(dir: string, files: string[] = []): string[] {
     const fullPath = path.join(dir, entry.name)
 
     if (entry.isDirectory()) {
-      if (!SKIP_DIRS.includes(entry.name)) {
+      // Skip primary source directories
+      const shouldSkipDir = SKIP_DIRS.includes(entry.name) || fullPath.includes('content/documents')
+
+      if (!shouldSkipDir) {
         getAllFiles(fullPath, files)
       }
     } else if (entry.isFile()) {

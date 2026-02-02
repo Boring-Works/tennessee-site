@@ -146,7 +146,7 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
   {
     id: 'con-001',
     category: 'construction',
-    claim: 'The current main house (Cobb House) was built between 1827-1830',
+    claim: 'The current main house (Cobb House) was built between 1826-1828',
     source: '2006 Tennessee Historical Commission dendrochronology study',
     sourceType: 'archaeological',
     confidence: 'verified',

@@ -152,7 +152,7 @@ From the Cobb Family Research Report (January 30, 2026):
 **Priority 2: Sullivan/Washington County Militia Muster Rolls**
 
 - **Location:** Tennessee State Library & Archives; Virginia State Library; North Carolina State Archives
-- **Search:** Militia rolls from 1780 (King's Mountain campaign), 1776-1783 (general Revolutionary service)
+- **Search:** Militia rolls from 1780 (King's Mountain campaign, October 1780), 1777-1783 (general Revolutionary service)
 - **Estimated Effort:** 10-15 hours
 
 **Priority 3: State of Franklin Records**

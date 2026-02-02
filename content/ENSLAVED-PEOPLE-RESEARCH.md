@@ -248,7 +248,7 @@ Research at similar frontier sites (Fort Severn, Danville settlements, Harrodsbu
 - Contact University of Tennessee Special Collections (Blount Papers complete set)
 - Request copies of Sullivan County Tax Records for 1790-1800
 - Search County Records for wills of William Blount, William Cobb, and contemporaries
-- Examine Knoxville Gazette for 1790-1796 slave sale advertisements
+- Examine Knoxville Gazette for 1791-1796 slave sale advertisements
 
 ### Priority 2: Comparative Research
 

@@ -590,7 +590,7 @@ This quote suggests Hanging Maw kept records or made statements about treaty pro
 
 **Note on Timeline:**
 
-Hanging Maw died around 1796—approximately the same time John Watts was delivering his boundary speech demanding enforcement. This suggests that the peace faction (Hanging Maw) and war faction (John Watts) had both shifted to legal/diplomatic pressure by mid-1790s, but the peace faction may have given up first (Hanging Maw's death suggests declining health/spirit after 1793 betrayal).
+Hanging Maw's chieftainship ended in 1794—approximately the same time John Watts was delivering his boundary speech demanding enforcement. This suggests that the peace faction (Hanging Maw) and war faction (John Watts) had both shifted to legal/diplomatic pressure by mid-1790s, but the peace faction may have given up first (Hanging Maw's death suggests declining health/spirit after 1793 betrayal).
 
 ---
 

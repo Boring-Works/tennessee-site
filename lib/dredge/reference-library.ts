@@ -1,6 +1,6 @@
 /**
  * Reference Library - SINGLE SOURCE OF TRUTH
- * 102 verified facts about Rocky Mount and the Southwest Territory
+ * 111 verified facts about Rocky Mount and the Southwest Territory
  * Used by The Dredge to cross-reference new documents
  *
  * CRITICAL: This library is the SOURCE OF TRUTH, backed by external primary sources.
@@ -11,10 +11,12 @@
  *   External Sources (primary/scholarly) → Reference Library → Website Content
  *   NOT: Website → Reference Library (this would be circular)
  *
- * Categories: governance (17), construction (7), people (26), treaty (21),
- *            timeline (7), cherokee (5), administration (10), violence (8), geography (1)
+ * Categories: governance (19), construction (7), people (29), treaty (21),
+ *            timeline (9), cherokee (5), administration (11), violence (8), geography (2)
  *
- * Error Detection: 55 facts with 227 wrongVariant patterns
+ * Error Detection: 64 facts with 248+ wrongVariant patterns
+ *
+ * LAST UPDATED: 2026-02-02 (Phase 0 Rescue: Added 9 facts from Comprehensive Fact-Check 2024)
  */
 
 export interface VerifiedFact {
@@ -1263,15 +1265,128 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     id: 'geo-001',
     category: 'geography',
     claim:
-      'Rocky Mount was strategically located at the fork of the Holston and Watauga Rivers, controlling access to the Tennessee frontier',
+      'Rocky Mount was strategically located between the Holston and Watauga Rivers (the actual confluence/fork is at Kingsport, approximately 15+ miles distant)',
     source:
-      'GEOGRAPHIC-ANALYSIS.md; "At the fork of the Holston and Watauga Rivers (Washington County in 1790)"',
+      'GEOGRAPHIC-ANALYSIS.md; Comprehensive Fact-Check 2024 (corrects earlier "at fork" error)',
     sourceType: 'scholarly',
     confidence: 'verified',
     wrongVariants: [
       'rocky mount.{0,20}tennessee river', // Wrong rivers (was Holston and Watauga)
       'rocky mount.{0,20}cumberland river', // Wrong river
       'rocky mount.{0,20}french broad', // Wrong river
+      'at.{0,10}fork.{0,10}holston.{0,10}watauga', // Wrong location (fork is 15+ miles away at Kingsport)
+      'confluence.{0,10}holston.{0,10}watauga', // Confluence is at Kingsport, not Rocky Mount
+      'where.{0,10}rivers.{0,10}meet', // Rivers don't meet at Rocky Mount
+    ],
+  },
+  {
+    id: 'geo-002',
+    category: 'geography',
+    claim:
+      "The 150-mile journey between Rocky Mount (Washington District) and Daniel Smith's residence in Sumner County (Mero District) crossed active Cherokee conflict zones, illustrating the administrative challenges of governing the territory's two disconnected population centers",
+    source: 'Comprehensive Fact-Check 2024; Territorial geography analysis',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+
+  // === NEW FACTS FROM 2024 FACT-CHECK ===
+  {
+    id: 'gov-018',
+    category: 'governance',
+    claim:
+      'Blount\'s wife Mary "Molsey" Blount and their children arrived at Rocky Mount in December 1791 (not December 1790), over a year after William arrived; Mary had refused to move unless William built her a "mansion"',
+    source: 'Blount Mansion scholarly documents; Comprehensive Fact-Check 2024',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'family.*arrived.*december.*1790', // Wrong year (was December 1791)
+      'wife.*arrived.*1790', // Wrong year
+      'mary.*blount.*arrived.*1790', // Wrong year
+      'molsey.*1790', // Wrong year
+    ],
+  },
+  {
+    id: 'gov-019',
+    category: 'governance',
+    claim:
+      'William Blount governed the Southwest Territory autocratically for over three years, refusing to call the territorial legislature into session and ruling by edict or direct order with minimal oversight',
+    source: 'Comprehensive Fact-Check 2024; Territorial governance analysis',
+    sourceType: 'scholarly',
+    confidence: 'high',
+  },
+  {
+    id: 'tim-008',
+    category: 'timeline',
+    claim:
+      'Marietta, Ohio served as the Northwest Territory capital starting in July 1788, predating Rocky Mount as a U.S. territorial capital by over two years',
+    source: 'Comprehensive Fact-Check 2024; Ohio Historical Society',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'oldest territorial capital', // Wrong (Marietta 1788 predates Rocky Mount 1790)
+      'first territorial capital in america', // Wrong
+      'first u\\.?s\\.? territorial capital', // Wrong
+      'rocky mount.{0,20}first.{0,20}territorial capital', // Misleading without "Southwest Territory" qualifier
+    ],
+  },
+  {
+    id: 'tim-009',
+    category: 'timeline',
+    claim:
+      'Corn was first planted in Tennessee settlements in the Cumberland region (1778-1779) and Nolichucky settlements (early 1770s), not in 1790',
+    source: 'Comprehensive Fact-Check 2024; Settlement histories',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'corn.*first.*planted.*1790', // Wrong (was 1770s-1779)
+      '1790.*corn.*first', // Wrong year
+      'first crop.*1790', // Misleading if referring to corn
+    ],
+  },
+  {
+    id: 'ppl-027',
+    category: 'people',
+    claim:
+      "Willie Blount served as William Blount's private secretary; Daniel Smith was the official Territorial Secretary appointed by President George Washington",
+    source: 'Comprehensive Fact-Check 2024; Territorial appointment records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'willie.*blount.*territorial secretary', // Wrong (was private secretary)
+      'willie blount.*official.*secretary', // Wrong
+      'willie.*appointed.*washington', // Wrong (William was appointed, Willie was private secretary)
+    ],
+  },
+  {
+    id: 'ppl-028',
+    category: 'people',
+    claim:
+      'Andrew Jackson lodged at Rocky Mount for approximately six weeks while awaiting his law license in nearby Jonesborough, making him one of the notable guests alongside Daniel Boone, John Sevier, and Richard Henderson',
+    source: 'Comprehensive Fact-Check 2024; Tennessee historical records',
+    sourceType: 'scholarly',
+    confidence: 'high',
+  },
+  {
+    id: 'ppl-029',
+    category: 'people',
+    claim:
+      'George Farragut served as William Blount\'s militia muster-master and was the father of Admiral David Farragut, who became America\'s first admiral (famous for "Damn the torpedoes, full speed ahead!")',
+    source: 'Comprehensive Fact-Check 2024; Naval historical records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'adm-011',
+    category: 'administration',
+    claim:
+      'The 1791 territorial census, initiated from Rocky Mount, counted 35,691 total residents including 3,417 enslaved people and 361 free people of color, exceeding the 5,000 threshold required for an elected territorial legislature',
+    source: 'Comprehensive Fact-Check 2024; 1791 territorial census records',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'census.*179[02]', // Wrong year (was 1791)
+      '1791.*5,?000.*residents', // Understates actual count (was 35,691)
+      '1791.*30,?000.*residents', // Approximates but lacks precision
     ],
   },
 ]

@@ -201,34 +201,41 @@ export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerP
 
   // Initialize audio element with Next.js optimizations
   useEffect(() => {
+    // Reset auto-play flag on mount to allow re-attempts
+    hasAttemptedAutoplay.current = false
+
     const audio = new Audio(currentTrack.src)
     audio.loop = true
     audio.volume = 0
-    audio.preload = 'metadata' // Load metadata only, not full file
+    audio.preload = 'auto' // Preload full file for better auto-play success
     audio.crossOrigin = 'anonymous' // Enable CORS if needed
     audioRef.current = audio
 
-    // Attempt auto-play after audio is initialized
-    if (!hasAttemptedAutoplay.current) {
-      // Small delay to ensure audio is fully initialized
-      const timer = setTimeout(() => {
+    // Attempt auto-play after audio is fully loaded
+    const handleCanPlayThrough = () => {
+      if (!hasAttemptedAutoplay.current && shouldShowPlayer) {
         attemptAutoPlay()
-      }, 1000) // Increased to 1s for better reliability
-
-      return () => {
-        clearTimeout(timer)
-        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
-        audio.pause()
-        audio.src = ''
       }
     }
 
+    // Listen for when audio is ready to play
+    audio.addEventListener('canplaythrough', handleCanPlayThrough)
+
+    // Fallback: Try auto-play after delay if canplaythrough doesn't fire
+    const timer = setTimeout(() => {
+      if (!hasAttemptedAutoplay.current && shouldShowPlayer) {
+        attemptAutoPlay()
+      }
+    }, 1500)
+
     return () => {
+      clearTimeout(timer)
+      audio.removeEventListener('canplaythrough', handleCanPlayThrough)
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
       audio.pause()
       audio.src = ''
     }
-  }, [currentTrack.src, attemptAutoPlay])
+  }, [currentTrack.src, attemptAutoPlay, shouldShowPlayer])
 
   // Toggle playback
   const togglePlay = useCallback(async () => {

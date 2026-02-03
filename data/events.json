@@ -598,15 +598,15 @@
     },
     {
       "id": "lecture-byrd",
-      "title": "James P. Byrd Guest Lecture: Colonial Religion",
+      "title": "Sacred Scripture, Sacred War: The Bible and the American Revolution",
       "date": "2026-03-27",
       "endDate": null,
       "time": "2:00 PM",
       "type": "new",
       "category": "lecture",
       "speaker": "Dr. James P. Byrd",
-      "speakerTitle": "Vanderbilt University",
-      "description": "What did frontier settlers believe—and why did it matter? Dr. Byrd, author of 'Sacred Scripture, Sacred War,' reveals how Bible, pulpit, and prayer shaped the men who marched to Kings Mountain.",
+      "speakerTitle": "Vanderbilt University Divinity School",
+      "description": "America 250 Special Program. Dr. Byrd, author of the Christianity Today Award-winning book 'Sacred Scripture, Sacred War,' offers the first comprehensive analysis of how American revolutionaries defended their patriotic convictions through scripture. Explore the role of religion during the Revolutionary War. Co-sponsored by Bristol Historical Association, King University, and Rocky Mount.",
       "fareHarborId": null,
       "ticketUrl": "https://fareharbor.com/rockymountmuseum/",
       "requiresTicket": true,
@@ -617,7 +617,7 @@
         "underFive": 0,
         "members": 0
       },
-      "featured": false
+      "featured": true
     },
     {
       "id": "lecture-patton",

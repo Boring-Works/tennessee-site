@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Rocky Mount's 2026 Lecture Series - Five speakers exploring Tennessee's founding story",
-    "updated": "2026-02-03",
+    "updated": "2026-02-04",
     "usage": "import { lectures } from '@/data/lectures.json'",
     "relatedFile": "data/events.json - Lectures also appear there for the main calendar",
 
@@ -229,21 +229,22 @@
   "lectures": [
     {
       "id": 1,
-      "title": "Colonial Religion on the Frontier",
+      "title": "Sacred Scripture, Sacred War: The Bible and the American Revolution",
       "date": "2026-03-27",
       "time": "2:00 PM",
       "speaker": {
         "name": "Dr. James P. Byrd",
-        "title": "Professor",
-        "institution": "Vanderbilt University",
-        "bio": "Author of 'Sacred Scripture, Sacred War: The Bible and the American Revolution,' Dr. Byrd has appeared on PBS and C-SPAN. He teaches American religious history at Vanderbilt Divinity School."
+        "title": "Professor of American Religious History",
+        "institution": "Vanderbilt University Divinity School",
+        "bio": "Dr. Byrd is the author of 'Sacred Scripture, Sacred War: The Bible and the American Revolution' (2017), winner of the Christianity Today Book Award for History/Biography. He has appeared on PBS and C-SPAN and teaches American religious history at Vanderbilt Divinity School."
       },
-      "description": "What did frontier settlers believe—and why did it matter? Dr. Byrd reveals how Bible, pulpit, and prayer shaped the men who marched to Kings Mountain, turning religious conviction into Revolutionary action.",
+      "description": "As part of America's 250th anniversary, Dr. Byrd offers the first comprehensive analysis of how American revolutionaries defended their patriotic convictions through scripture. This special program explores the role of religion during the Revolutionary War and how Bible, pulpit, and prayer shaped the men who marched to Kings Mountain. Co-sponsored by Bristol Historical Association, King University Institute of Faith & Culture, and Rocky Mount Historic Site.",
       "topics": [
-        "How preachers fueled revolution",
-        "Religious diversity on the frontier",
-        "Faith that moved men to fight"
-      ]
+        "How revolutionaries used scripture to defend patriotic convictions",
+        "The role of religion during the trials of the Revolutionary War",
+        "Faith that turned conviction into action on the frontier"
+      ],
+      "note": "Part of America 250 commemoration. Final event in a 3-part series (also March 26 in Bristol, March 27 at King University)"
     },
     {
       "id": 2,

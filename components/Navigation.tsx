@@ -2,10 +2,17 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useCallback, useRef, memo } from 'react'
+import { useState, useEffect, useCallback, memo } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import * as NavigationMenu from '@radix-ui/react-navigation-menu'
+import * as Dialog from '@radix-ui/react-dialog'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import navigation from '@/data/navigation.json'
 import styles from './Header/Header.module.css'
+
+// ============================================
+// Types
+// ============================================
 
 interface DropdownItem {
   href: string
@@ -13,6 +20,9 @@ interface DropdownItem {
   description?: string
   featured?: boolean
   badge?: string
+  variant?: 'primary' | 'secondary'
+  tagline?: string
+  icon?: 'map' | 'scroll' | 'calendar' | 'heart'
 }
 
 interface NavItem {
@@ -22,35 +32,21 @@ interface NavItem {
   badge?: string
 }
 
-// Type-safe wrapper to ensure structure matches JSON
 const NAV_STRUCTURE: NavItem[] = navigation.mainNav as NavItem[]
 
-/**
- * Navigation Component
- *
- * Main site navigation with desktop dropdown menus and mobile drawer.
- * Features:
- * - Keyboard navigation (arrow keys, escape, tab trap in mobile)
- * - ARIA-compliant menu structure
- * - Focus management on route changes
- * - Scroll-based header styling
- */
-function NavigationComponent() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [expandedMobileDropdowns, setExpandedMobileDropdowns] = useState<Set<string>>(new Set())
-  const pathname = usePathname()
-  const menuRef = useRef<HTMLDivElement>(null)
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+// ============================================
+// Utility Hooks
+// ============================================
 
-  // Throttled scroll listener
+function useScrollState(threshold = 20) {
+  const [isScrolled, setIsScrolled] = useState(false)
+
   useEffect(() => {
     let ticking = false
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 20)
+          setIsScrolled(window.scrollY > threshold)
           ticking = false
         })
         ticking = true
@@ -58,167 +54,196 @@ function NavigationComponent() {
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [threshold])
 
-  // Scroll to top + focus management on route change
+  return isScrolled
+}
+
+function useRouteChange() {
+  const pathname = usePathname()
+
   useEffect(() => {
-    // Scroll to top immediately on route change
+    // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'instant' })
 
-    // Move focus to main heading for better keyboard navigation
-    // Give page time to render, then focus first h1
+    // Focus main heading for keyboard navigation
     const focusHeading = () => {
       const mainHeading = document.querySelector('main h1, main [role="heading"][aria-level="1"]')
       if (mainHeading instanceof HTMLElement) {
         mainHeading.setAttribute('tabindex', '-1')
         mainHeading.focus({ preventScroll: true })
-        // Remove tabindex after focus to preserve natural tab order
-        mainHeading.addEventListener(
-          'blur',
-          () => {
-            mainHeading.removeAttribute('tabindex')
-          },
-          { once: true }
-        )
+        mainHeading.addEventListener('blur', () => mainHeading.removeAttribute('tabindex'), {
+          once: true,
+        })
       }
     }
 
-    // Small delay to let page content render
     const timeoutId = setTimeout(focusHeading, 100)
     return () => clearTimeout(timeoutId)
   }, [pathname])
 
-  // Close mobile menu on resize to desktop
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768 && mobileMenuOpen) {
-        setMobileMenuOpen(false)
-      }
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [mobileMenuOpen])
+  return pathname
+}
 
-  // Scroll lock + escape key + focus trap
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-      document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = `${scrollbarWidth}px`
+// ============================================
+// Desktop Navigation (Radix NavigationMenu)
+// ============================================
 
-      // Focus first interactive element
-      const firstFocusable = menuRef.current?.querySelector('a, button')
-      if (firstFocusable) (firstFocusable as HTMLElement).focus()
-    } else {
-      document.body.style.overflow = ''
-      document.body.style.paddingRight = ''
-    }
+interface DesktopNavProps {
+  pathname: string
+}
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Escape closes dropdown or mobile menu
-      if (e.key === 'Escape') {
-        setOpenDropdown(null)
-        if (mobileMenuOpen) {
-          setMobileMenuOpen(false)
-        }
-      }
-
-      // Focus trap in mobile menu
-      if (e.key === 'Tab' && mobileMenuOpen && menuRef.current) {
-        const focusables = menuRef.current.querySelectorAll('a, button')
-        const first = focusables[0] as HTMLElement
-        const last = focusables[focusables.length - 1] as HTMLElement
-
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault()
-          last.focus()
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault()
-          first.focus()
-        }
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
-      document.body.style.paddingRight = ''
-    }
-  }, [mobileMenuOpen])
-
+function DesktopNav({ pathname }: DesktopNavProps) {
   const isActive = useCallback(
     (href?: string) => {
       if (!href) return false
       if (href === '/') return pathname === '/' || pathname === '/home'
-      // Exact match or starts with href followed by /
       return pathname === href || pathname.startsWith(href + '/')
     },
     [pathname]
   )
 
-  // Check if any item in dropdown is active
   const isDropdownActive = useCallback(
-    (items?: Array<{ href: string; label: string }>) => {
-      if (!items) return false
-      return items.some((item) => isActive(item.href))
-    },
+    (items?: DropdownItem[]) => items?.some((item) => isActive(item.href)) ?? false,
     [isActive]
   )
 
-  // Pages with light backgrounds need dark header
-  const isLightBackgroundPage = pathname.startsWith('/evidence/documents')
+  return (
+    <NavigationMenu.Root className={styles.nav} aria-label="Main navigation">
+      <NavigationMenu.List className={styles['nav-list']}>
+        {NAV_STRUCTURE.map((item) => (
+          <NavigationMenu.Item key={item.label} className={styles['nav-item']}>
+            {item.dropdown ? (
+              <>
+                <NavigationMenu.Trigger
+                  className={`${styles['dropdown-toggle']} ${
+                    isDropdownActive(item.dropdown) ? styles['dropdown-toggle--active'] : ''
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    {item.label}
+                    {item.badge && (
+                      <span className="inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-accent/20 text-accent border border-accent/30 rounded-sm">
+                        {item.badge}
+                      </span>
+                    )}
+                  </span>
+                  <ChevronDown
+                    size={14}
+                    className={styles['dropdown-chevron']}
+                    aria-hidden="true"
+                  />
+                  <span className={styles['dropdown-toggle-underline']} aria-hidden="true" />
+                </NavigationMenu.Trigger>
 
-  const closeMobileMenu = useCallback(() => {
-    setMobileMenuOpen(false)
-  }, [])
+                <NavigationMenu.Content className={styles['dropdown-menu']}>
+                  <ul>
+                    {item.dropdown.map((subitem) => (
+                      <li key={subitem.href}>
+                        <NavigationMenu.Link asChild>
+                          {subitem.variant === 'primary' ? (
+                            <Link
+                              href={subitem.href}
+                              aria-current={isActive(subitem.href) ? 'page' : undefined}
+                              className={`${styles['dropdown-tile']} ${
+                                subitem.icon === 'scroll' ? styles['dropdown-tile--evidence'] : ''
+                              }`}
+                            >
+                              <span className={styles['dropdown-tile-icon']}>
+                                {subitem.icon === 'map' && '🗺️'}
+                                {subitem.icon === 'scroll' && '📜'}
+                              </span>
+                              <span className={styles['dropdown-tile-content']}>
+                                <span className={styles['dropdown-tile-label']}>
+                                  {subitem.label}
+                                </span>
+                                {subitem.tagline && (
+                                  <span className={styles['dropdown-tile-tagline']}>
+                                    {subitem.tagline}
+                                  </span>
+                                )}
+                              </span>
+                              <span className={styles['dropdown-tile-arrow']}>→</span>
+                            </Link>
+                          ) : (
+                            <Link
+                              href={subitem.href}
+                              aria-current={isActive(subitem.href) ? 'page' : undefined}
+                              className={`${styles['dropdown-item']} ${
+                                isActive(subitem.href) ? styles['dropdown-item--active'] : ''
+                              }`}
+                            >
+                              {subitem.label}
+                            </Link>
+                          )}
+                        </NavigationMenu.Link>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenu.Content>
+              </>
+            ) : (
+              <NavigationMenu.Link asChild>
+                <Link
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={`${styles['nav-link']} ${
+                    isActive(item.href) ? styles['nav-link--active'] : ''
+                  }`}
+                >
+                  {item.label}
+                  <span className={styles['nav-link-underline']} aria-hidden="true" />
+                  <span className={styles['nav-link-glow']} aria-hidden="true" />
+                </Link>
+              </NavigationMenu.Link>
+            )}
+          </NavigationMenu.Item>
+        ))}
+      </NavigationMenu.List>
 
-  // Click outside to close dropdown
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (!target.closest('[data-dropdown-menu]')) {
-        setOpenDropdown(null)
-      }
-    }
+      {/* Divider */}
+      <span className={styles['nav-divider']} aria-hidden="true" />
 
-    if (openDropdown) {
-      document.addEventListener('click', handleClickOutside)
-      return () => document.removeEventListener('click', handleClickOutside)
-    }
-  }, [openDropdown])
+      {/* CTA */}
+      <Link href="/visit" className={styles.cta}>
+        <span className={styles['cta-text']}>Plan Your Visit</span>
+      </Link>
 
-  // Cleanup dropdown timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (dropdownTimeoutRef.current) {
-        clearTimeout(dropdownTimeoutRef.current)
-      }
-    }
-  }, [])
+      {/* Viewport for dropdown positioning */}
+      <NavigationMenu.Viewport className={styles['nav-viewport']} />
+    </NavigationMenu.Root>
+  )
+}
 
-  // Hover handlers for desktop dropdowns
-  const handleDropdownHover = useCallback((label: string, isEntering: boolean) => {
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current)
-    }
+// ============================================
+// Mobile Navigation (Radix Dialog as Sheet)
+// ============================================
 
-    if (isEntering) {
-      // Small delay to prevent accidental opens
-      dropdownTimeoutRef.current = setTimeout(() => {
-        setOpenDropdown(label)
-      }, 150)
-    } else {
-      // Delay to allow moving to dropdown
-      dropdownTimeoutRef.current = setTimeout(() => {
-        setOpenDropdown(null)
-      }, 100)
-    }
-  }, [])
+interface MobileNavProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  pathname: string
+}
 
-  // Mobile dropdown toggle
-  const toggleMobileDropdown = useCallback((label: string) => {
-    setExpandedMobileDropdowns((prev) => {
+function MobileNav({ open, onOpenChange, pathname }: MobileNavProps) {
+  const [expandedDropdowns, setExpandedDropdowns] = useState<Set<string>>(new Set())
+
+  const isActive = useCallback(
+    (href?: string) => {
+      if (!href) return false
+      if (href === '/') return pathname === '/' || pathname === '/home'
+      return pathname === href || pathname.startsWith(href + '/')
+    },
+    [pathname]
+  )
+
+  const isDropdownActive = useCallback(
+    (items?: DropdownItem[]) => items?.some((item) => isActive(item.href)) ?? false,
+    [isActive]
+  )
+
+  const toggleDropdown = useCallback((label: string) => {
+    setExpandedDropdowns((prev) => {
       const newSet = new Set(prev)
       if (newSet.has(label)) {
         newSet.delete(label)
@@ -229,52 +254,175 @@ function NavigationComponent() {
     })
   }, [])
 
-  // Desktop dropdown keyboard navigation
-  const handleDropdownKeyDown = useCallback(
-    (e: React.KeyboardEvent, item: NavItem) => {
-      const dropdownId = `dropdown-${item.label.replace(/\s+/g, '-').toLowerCase()}`
-      const dropdown = document.getElementById(dropdownId)
-      if (!dropdown) return
+  const closeMenu = useCallback(() => {
+    onOpenChange(false)
+  }, [onOpenChange])
 
-      const items = Array.from(dropdown.querySelectorAll('[role="menuitem"]')) as HTMLElement[]
-      const currentIndex = items.indexOf(document.activeElement as HTMLElement)
-
-      switch (e.key) {
-        case 'ArrowDown':
-          e.preventDefault()
-          if (openDropdown !== item.label) {
-            setOpenDropdown(item.label)
-            // Focus first item after dropdown opens
-            setTimeout(() => items[0]?.focus(), 50)
-          } else if (currentIndex < items.length - 1) {
-            items[currentIndex + 1].focus()
-          }
-          break
-        case 'ArrowUp':
-          e.preventDefault()
-          if (currentIndex > 0) {
-            items[currentIndex - 1].focus()
-          }
-          break
-        case 'Home':
-          e.preventDefault()
-          items[0]?.focus()
-          break
-        case 'End':
-          e.preventDefault()
-          items[items.length - 1]?.focus()
-          break
-        case 'Escape':
-          e.preventDefault()
-          setOpenDropdown(null)
-          // Return focus to trigger button
-          const trigger = document.querySelector(`[aria-controls="${dropdownId}"]`) as HTMLElement
-          trigger?.focus()
-          break
+  // Close on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && open) {
+        onOpenChange(false)
       }
-    },
-    [openDropdown]
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [open, onOpenChange])
+
+  return (
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Portal>
+        {/* Backdrop */}
+        <Dialog.Overlay className={styles['mobile-backdrop']} />
+
+        {/* Drawer Content */}
+        <Dialog.Content className={styles['mobile-drawer']} aria-describedby={undefined}>
+          <VisuallyHidden.Root asChild>
+            <Dialog.Title>Main navigation menu</Dialog.Title>
+          </VisuallyHidden.Root>
+
+          {/* Close Button */}
+          <Dialog.Close asChild>
+            <button type="button" className={styles['mobile-close']} aria-label="Close menu">
+              <X size={24} />
+            </button>
+          </Dialog.Close>
+
+          {/* Nav Content */}
+          <nav className={styles['mobile-nav']}>
+            <ul className={styles['mobile-list']}>
+              {NAV_STRUCTURE.map((item, index) => (
+                <li key={item.label}>
+                  {item.dropdown ? (
+                    <div className={styles['mobile-dropdown-wrapper']}>
+                      <button
+                        type="button"
+                        className={`${styles['mobile-link']} ${
+                          isDropdownActive(item.dropdown) ? styles['mobile-link--active'] : ''
+                        }`}
+                        onClick={() => toggleDropdown(item.label)}
+                        aria-expanded={expandedDropdowns.has(item.label)}
+                        aria-label={`Toggle ${item.label} submenu`}
+                        style={{ transitionDelay: `${100 + index * 50}ms` }}
+                      >
+                        <span className={styles['mobile-link-text']}>
+                          {item.label}
+                          {item.badge && (
+                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-accent/20 text-accent border border-accent/30 rounded-sm">
+                              {item.badge}
+                            </span>
+                          )}
+                        </span>
+                        <ChevronDown
+                          size={16}
+                          className={`${styles['mobile-dropdown-icon']} ${
+                            expandedDropdowns.has(item.label)
+                              ? styles['mobile-dropdown-icon--open']
+                              : ''
+                          }`}
+                          aria-hidden="true"
+                        />
+                      </button>
+
+                      <ul
+                        className={`${styles['mobile-dropdown-list']} ${
+                          expandedDropdowns.has(item.label)
+                            ? styles['mobile-dropdown-list--open']
+                            : ''
+                        }`}
+                      >
+                        {item.dropdown.map((subitem) => (
+                          <li key={subitem.href}>
+                            {subitem.variant === 'primary' ? (
+                              <Link
+                                href={subitem.href}
+                                className={`${styles['mobile-featured-card']} ${
+                                  subitem.icon === 'scroll'
+                                    ? styles['mobile-featured-card--evidence']
+                                    : ''
+                                }`}
+                                onClick={closeMenu}
+                                aria-current={isActive(subitem.href) ? 'page' : undefined}
+                              >
+                                <span className={styles['mobile-featured-card-icon']}>
+                                  {subitem.icon === 'map' && '🗺️'}
+                                  {subitem.icon === 'scroll' && '📜'}
+                                </span>
+                                <span className={styles['mobile-featured-card-content']}>
+                                  <span className={styles['mobile-featured-card-label']}>
+                                    {subitem.label}
+                                  </span>
+                                  {subitem.tagline && (
+                                    <span className={styles['mobile-featured-card-tagline']}>
+                                      {subitem.tagline}
+                                    </span>
+                                  )}
+                                </span>
+                                <span className={styles['mobile-featured-card-arrow']}>→</span>
+                              </Link>
+                            ) : (
+                              <Link
+                                href={subitem.href}
+                                className={`${styles['mobile-dropdown-link']} ${
+                                  isActive(subitem.href)
+                                    ? styles['mobile-dropdown-link--active']
+                                    : ''
+                                }`}
+                                onClick={closeMenu}
+                                aria-current={isActive(subitem.href) ? 'page' : undefined}
+                              >
+                                {subitem.label}
+                              </Link>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                      className={`${styles['mobile-link']} ${
+                        isActive(item.href) ? styles['mobile-link--active'] : ''
+                      }`}
+                      onClick={closeMenu}
+                      style={{ transitionDelay: `${100 + index * 50}ms` }}
+                    >
+                      <span className={styles['mobile-link-text']}>{item.label}</span>
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {/* Separator */}
+            <div className={styles['mobile-separator']} aria-hidden="true" />
+
+            {/* Mobile CTA */}
+            <Link href="/visit" className={styles['mobile-cta']} onClick={closeMenu}>
+              <span>Plan Your Visit</span>
+            </Link>
+
+            {/* Tagline */}
+            <p className={styles['mobile-tagline']}>Tennessee starts here</p>
+          </nav>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   )
+}
+
+// ============================================
+// Main Navigation Component
+// ============================================
+
+function NavigationComponent() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const isScrolled = useScrollState(20)
+  const pathname = useRouteChange()
+
+  // Pages with light backgrounds need dark header
+  const isLightBackgroundPage = pathname.startsWith('/evidence/documents')
 
   return (
     <>
@@ -286,7 +434,7 @@ function NavigationComponent() {
         }`}
         role="banner"
       >
-        {/* Tricolor stripe - appears on scroll or light backgrounds */}
+        {/* Tricolor stripe */}
         <div
           className={`${styles.stripe} ${isScrolled || isLightBackgroundPage ? styles['stripe--visible'] : ''}`}
           aria-hidden="true"
@@ -311,124 +459,22 @@ function NavigationComponent() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav
-              id="main-navigation"
-              className={styles.nav}
-              aria-label="Main navigation"
-              data-dropdown-menu
-            >
-              <ul className={styles['nav-list']} role="menubar">
-                {NAV_STRUCTURE.map((item) => (
-                  <li key={item.label} role="none" className={styles['nav-item']}>
-                    {item.dropdown ? (
-                      // Dropdown item
-                      <div
-                        className={styles['dropdown-wrapper']}
-                        onMouseEnter={() => handleDropdownHover(item.label, true)}
-                        onMouseLeave={() => handleDropdownHover(item.label, false)}
-                      >
-                        <button
-                          role="menuitem"
-                          aria-haspopup="true"
-                          aria-expanded={openDropdown === item.label}
-                          aria-controls={`dropdown-${item.label.replace(/\s+/g, '-').toLowerCase()}`}
-                          aria-label={`${item.label}, submenu`}
-                          className={`${styles['dropdown-toggle']} ${
-                            isDropdownActive(item.dropdown) ? styles['dropdown-toggle--active'] : ''
-                          }`}
-                          onClick={() =>
-                            setOpenDropdown(openDropdown === item.label ? null : item.label)
-                          }
-                          onKeyDown={(e) => handleDropdownKeyDown(e, item)}
-                        >
-                          <span className="flex items-center gap-2">
-                            {item.label}
-                            {item.badge && (
-                              <span className="inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-accent/20 text-accent border border-accent/30 rounded-sm">
-                                {item.badge}
-                              </span>
-                            )}
-                          </span>
-                          <ChevronDown
-                            size={14}
-                            className={styles['dropdown-chevron']}
-                            aria-hidden="true"
-                          />
-                          <span
-                            className={styles['dropdown-toggle-underline']}
-                            aria-hidden="true"
-                          />
-                        </button>
-
-                        {/* Dropdown menu */}
-                        <ul
-                          id={`dropdown-${item.label.replace(/\s+/g, '-').toLowerCase()}`}
-                          role="menu"
-                          aria-label={`${item.label} submenu`}
-                          className={styles['dropdown-menu']}
-                          aria-hidden={openDropdown !== item.label}
-                        >
-                          {item.dropdown.map((subitem) => (
-                            <li key={subitem.href} role="none">
-                              <Link
-                                href={subitem.href}
-                                role="menuitem"
-                                tabIndex={openDropdown === item.label ? 0 : -1}
-                                aria-current={isActive(subitem.href) ? 'page' : undefined}
-                                className={`${styles['dropdown-item']} ${
-                                  isActive(subitem.href) ? styles['dropdown-item--active'] : ''
-                                }`}
-                                onClick={() => setOpenDropdown(null)}
-                                onKeyDown={(e) => handleDropdownKeyDown(e, item)}
-                              >
-                                {subitem.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : (
-                      // Regular link item
-                      <Link
-                        href={item.href!}
-                        role="menuitem"
-                        aria-current={isActive(item.href) ? 'page' : undefined}
-                        className={`${styles['nav-link']} ${
-                          isActive(item.href) ? styles['nav-link--active'] : ''
-                        }`}
-                      >
-                        {item.label}
-                        <span className={styles['nav-link-underline']} aria-hidden="true" />
-                        <span className={styles['nav-link-glow']} aria-hidden="true" />
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Divider */}
-              <span className={styles['nav-divider']} aria-hidden="true" />
-
-              {/* CTA - Primary */}
-              <Link href="/visit" className={styles.cta}>
-                <span className={styles['cta-text']}>Plan Your Visit</span>
-              </Link>
-            </nav>
+            <DesktopNav pathname={pathname} />
 
             {/* Mobile Toggle */}
             <button
               type="button"
               className={styles['mobile-toggle']}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen(true)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={mobileMenuOpen ? 'Close main menu' : 'Open main menu'}
+              aria-label="Open main menu"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <Menu size={24} />
             </button>
           </div>
 
-          {/* Decorative bottom rule - appears on scroll */}
+          {/* Bottom rule (hidden by CSS) */}
           <div
             className={`${styles['bottom-rule']} ${isScrolled ? styles['bottom-rule--visible'] : ''}`}
             aria-hidden="true"
@@ -440,135 +486,24 @@ function NavigationComponent() {
         </div>
       </header>
 
-      {/* Mobile FAB - Floating Action Button */}
-      <button
-        type="button"
-        className={styles['mobile-fab']}
-        onClick={() => setMobileMenuOpen(true)}
-        aria-label="Open main menu"
-      >
-        <Menu size={24} />
-      </button>
+      {/* Mobile FAB - hidden when menu is open */}
+      {!mobileMenuOpen && (
+        <button
+          type="button"
+          className={styles['mobile-fab']}
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open main menu"
+        >
+          <Menu size={24} />
+        </button>
+      )}
 
-      {/* ARIA live region for menu state announcements */}
+      {/* Mobile Sheet Menu (Radix Dialog) */}
+      <MobileNav open={mobileMenuOpen} onOpenChange={setMobileMenuOpen} pathname={pathname} />
+
+      {/* Live region for screen readers */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {mobileMenuOpen ? 'Navigation menu opened' : ''}
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        id="mobile-menu"
-        ref={menuRef}
-        className={`${styles.mobile} ${mobileMenuOpen ? styles['mobile--open'] : ''}`}
-        aria-hidden={!mobileMenuOpen}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Main navigation menu"
-      >
-        {/* Backdrop */}
-        <div className={styles['mobile-backdrop']} onClick={closeMobileMenu} />
-
-        {/* Drawer */}
-        <div className={styles['mobile-drawer']}>
-          {/* Close button in drawer */}
-          <button
-            type="button"
-            className={styles['mobile-close']}
-            onClick={closeMobileMenu}
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
-
-          {/* Content */}
-          <nav className={styles['mobile-nav']}>
-            <ul className={styles['mobile-list']}>
-              {NAV_STRUCTURE.map((item, index) => (
-                <li key={item.label}>
-                  {item.dropdown ? (
-                    // Mobile dropdown (accordion)
-                    <div className={styles['mobile-dropdown-wrapper']}>
-                      <button
-                        className={`${styles['mobile-link']} ${
-                          isDropdownActive(item.dropdown) ? styles['mobile-link--active'] : ''
-                        }`}
-                        onClick={() => toggleMobileDropdown(item.label)}
-                        aria-expanded={expandedMobileDropdowns.has(item.label)}
-                        aria-label={`Toggle ${item.label} submenu`}
-                        style={{ transitionDelay: `${100 + index * 50}ms` }}
-                      >
-                        <span className={styles['mobile-link-text']}>
-                          {item.label}
-                          {item.badge && (
-                            <span className="ml-2 inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-accent/20 text-accent border border-accent/30 rounded-sm">
-                              {item.badge}
-                            </span>
-                          )}
-                        </span>
-                        <ChevronDown
-                          size={16}
-                          className={`${styles['mobile-dropdown-icon']} ${
-                            expandedMobileDropdowns.has(item.label)
-                              ? styles['mobile-dropdown-icon--open']
-                              : ''
-                          }`}
-                          aria-hidden="true"
-                        />
-                      </button>
-
-                      {/* Mobile accordion items */}
-                      <ul
-                        className={`${styles['mobile-dropdown-list']} ${
-                          expandedMobileDropdowns.has(item.label)
-                            ? styles['mobile-dropdown-list--open']
-                            : ''
-                        }`}
-                      >
-                        {item.dropdown.map((subitem) => (
-                          <li key={subitem.href}>
-                            <Link
-                              href={subitem.href}
-                              className={`${styles['mobile-dropdown-link']} ${
-                                isActive(subitem.href) ? styles['mobile-dropdown-link--active'] : ''
-                              }`}
-                              onClick={closeMobileMenu}
-                            >
-                              {subitem.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : (
-                    // Regular mobile link
-                    <Link
-                      href={item.href!}
-                      aria-current={isActive(item.href) ? 'page' : undefined}
-                      className={`${styles['mobile-link']} ${
-                        isActive(item.href) ? styles['mobile-link--active'] : ''
-                      }`}
-                      onClick={closeMobileMenu}
-                      style={{ transitionDelay: `${100 + index * 50}ms` }}
-                    >
-                      <span className={styles['mobile-link-text']}>{item.label}</span>
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-
-            {/* Separator */}
-            <div className={styles['mobile-separator']} aria-hidden="true" />
-
-            {/* Mobile CTA - Primary */}
-            <Link href="/visit" className={styles['mobile-cta']} onClick={closeMobileMenu}>
-              <span>Plan Your Visit</span>
-            </Link>
-
-            {/* Tagline - plain text, no flourishes */}
-            <p className={styles['mobile-tagline']}>Tennessee starts here</p>
-          </nav>
-        </div>
       </div>
     </>
   )

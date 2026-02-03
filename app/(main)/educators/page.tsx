@@ -18,14 +18,14 @@ function SectionDivider({ variant = 'default' }: { variant?: 'default' | 'light'
   )
 }
 
+import { PAGE_METADATA } from '@/lib/copy/metadata'
+
 export const metadata: Metadata = {
-  title: 'For Educators | Tennessee Starts Here',
-  description:
-    'Field trip programs at Rocky Mount State Historic Site. TN Standards aligned, hands-on learning for all ages.',
+  title: PAGE_METADATA.educators.title,
+  description: PAGE_METADATA.educators.description,
   openGraph: {
-    title: 'For Educators | Tennessee Starts Here',
-    description:
-      'Field trip programs at Rocky Mount State Historic Site. TN Standards aligned, hands-on learning for all ages.',
+    title: PAGE_METADATA.educators.ogTitle,
+    description: PAGE_METADATA.educators.ogDescription,
     url: 'https://tennesseestartshere.com/educators',
   },
 }

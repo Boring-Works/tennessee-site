@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllPeople } from '@/lib/evidence/loader'
 import { CherokeeSignatories } from '@/components/evidence'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 import './people.css'
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default async function PeoplePage() {
 
   return (
     <div className="peoplePage">
+      <EvidenceNav />
       <div className="peopleContainer">
         <main className="peopleContent">
           {/* Header */}
@@ -80,11 +82,6 @@ export default async function PeoplePage() {
               </p>
             </div>
           )}
-
-          {/* Back Link */}
-          <Link href="/evidence" className="peopleBackLink">
-            <span aria-hidden="true">&larr;</span> Back to Evidence Room
-          </Link>
         </main>
       </div>
     </div>

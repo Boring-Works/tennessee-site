@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Timeline } from '@/components/evidence/Timeline'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 
 export const metadata: Metadata = {
   title: 'Timeline | Evidence Room | Tennessee Starts Here',
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export default function TimelinePage() {
   return (
     <div className="min-h-screen">
+      <EvidenceNav />
       {/* Header Section */}
       <header
         className="relative overflow-hidden text-center"
@@ -38,18 +39,6 @@ export default function TimelinePage() {
         />
 
         <div className="max-w-3xl mx-auto px-4 relative z-10">
-          {/* Back Link */}
-          <nav className="mb-6">
-            <Link
-              href="/evidence"
-              className="inline-flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity"
-              style={{ color: 'var(--gold-primary)' }}
-            >
-              <span aria-hidden="true">←</span>
-              <span>Back to Evidence Room</span>
-            </Link>
-          </nav>
-
           {/* Badge */}
           <p
             className="inline-flex items-center gap-4 px-6 py-2 mb-6 text-xs uppercase tracking-[0.15em] rounded-sm"

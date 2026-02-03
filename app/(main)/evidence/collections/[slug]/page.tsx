@@ -6,6 +6,7 @@ import {
   getDocumentsByCollection,
   getPerson,
 } from '@/lib/evidence/loader'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 import './collection.css'
 
 interface PageProps {
@@ -137,12 +138,7 @@ export default async function CollectionPage({ params }: PageProps) {
     <div className="collectionPage">
       <div className="collectionContainer">
         <main className="collectionContent">
-          {/* Back Link */}
-          <nav className="collectionNav">
-            <Link href="/evidence/collections" className="collectionBackLink">
-              <span aria-hidden="true">&larr;</span> All Collections
-            </Link>
-          </nav>
+          <EvidenceNav />
 
           {/* Header */}
           <header className="collectionHeader">
@@ -225,16 +221,6 @@ export default async function CollectionPage({ params }: PageProps) {
           {collection.content && (
             <section className="collectionAbout">{renderContent(collection.content)}</section>
           )}
-
-          {/* Footer Navigation */}
-          <footer className="collectionFooter">
-            <Link href="/evidence/collections" className="collectionFooterLink">
-              <span aria-hidden="true">&larr;</span> All Collections
-            </Link>
-            <Link href="/evidence" className="collectionFooterLink">
-              Evidence Room <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </footer>
         </main>
       </div>
     </div>

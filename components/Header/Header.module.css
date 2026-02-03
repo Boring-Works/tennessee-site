@@ -203,6 +203,16 @@
   }
 }
 
+/* Radix NavigationMenu Viewport */
+.nav-viewport {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  perspective: 2000px;
+  z-index: 100;
+}
+
 .nav-list {
   display: flex;
   align-items: center;
@@ -415,7 +425,8 @@
   transition: opacity var(--nav-duration-open) ease;
 }
 
-.mobile--open .mobile-backdrop {
+.mobile--open .mobile-backdrop,
+.mobile-backdrop[data-state='open'] {
   opacity: 1;
 }
 
@@ -435,7 +446,8 @@
   overflow: hidden;
 }
 
-.mobile--open .mobile-drawer {
+.mobile--open .mobile-drawer,
+.mobile-drawer[data-state='open'] {
   transform: translateX(0);
 }
 
@@ -467,7 +479,8 @@
   transition: all var(--nav-duration-open) var(--nav-ease-spring);
 }
 
-.mobile--open .mobile-link {
+.mobile--open .mobile-link,
+.mobile-drawer[data-state='open'] .mobile-link {
   opacity: 1;
   transform: translateX(0);
 }
@@ -519,7 +532,8 @@
   transition-delay: 0.3s;
 }
 
-.mobile--open .mobile-cta {
+.mobile--open .mobile-cta,
+.mobile-drawer[data-state='open'] .mobile-cta {
   opacity: 1;
   transform: translateY(0);
 }
@@ -610,7 +624,8 @@
   font-size: 0.5rem;
 }
 
-.dropdown-toggle[aria-expanded='true'] .dropdown-chevron {
+.dropdown-toggle[aria-expanded='true'] .dropdown-chevron,
+.dropdown-toggle[data-state='open'] .dropdown-chevron {
   transform: rotate(180deg);
 }
 
@@ -641,7 +656,8 @@
 
 .nav-item:hover .dropdown-menu,
 .nav-item:focus-within .dropdown-menu,
-.dropdown-menu[aria-hidden='false'] {
+.dropdown-menu[aria-hidden='false'],
+.dropdown-menu[data-state='open'] {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -1035,4 +1051,138 @@
   .mobile-dropdown-list--open {
     max-height: 500px;
   }
+}
+
+/* ============================================
+   FEATURED TILES - Desktop Dropdown
+   ============================================ */
+
+.dropdown-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  margin: 0.5rem 0.75rem;
+  background: var(--territorial-blue, #1a365d);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all var(--nav-duration-hover) ease;
+  min-height: 60px;
+}
+
+.dropdown-tile:hover {
+  background: var(--territorial-blue-hover, #234876);
+  transform: translateX(2px);
+}
+
+.dropdown-tile--evidence {
+  background: var(--log-cabin-brown, #4a3728);
+}
+
+.dropdown-tile--evidence:hover {
+  background: var(--log-cabin-brown-hover, #5d4632);
+}
+
+.dropdown-tile-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.dropdown-tile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+}
+
+.dropdown-tile-label {
+  font-family: var(--nav-font-desktop);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.dropdown-tile-tagline {
+  font-family: var(--nav-font-mobile);
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+}
+
+.dropdown-tile-arrow {
+  color: var(--gold, var(--nav-gold));
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-0.5rem);
+  transition: all var(--nav-duration-hover) ease;
+}
+
+.dropdown-tile:hover .dropdown-tile-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dropdown-tile:focus-visible {
+  outline: 2px solid var(--gold, var(--nav-gold));
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE FEATURED CARDS
+   ============================================ */
+
+.mobile-featured-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0;
+  background: var(--territorial-blue, #1a365d);
+  border-radius: 6px;
+  text-decoration: none;
+  min-height: var(--nav-touch-min);
+  transition: transform 0.1s ease;
+}
+
+.mobile-featured-card--evidence {
+  background: var(--log-cabin-brown, #4a3728);
+}
+
+.mobile-featured-card:active {
+  transform: scale(0.98);
+}
+
+.mobile-featured-card-icon {
+  font-size: 1.75rem;
+}
+
+.mobile-featured-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-featured-card-label {
+  font-family: var(--nav-font-desktop);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.mobile-featured-card-tagline {
+  font-family: var(--nav-font-mobile);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mobile-featured-card-arrow {
+  margin-left: auto;
+  color: var(--gold, var(--nav-gold));
+  font-size: 1.25rem;
 }

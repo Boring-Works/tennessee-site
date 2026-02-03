@@ -8,12 +8,14 @@
 ## Status
 
 **Phase:** Production
-**Last Updated:** 2026-02-02
-**Version:** 0.2.0
+**Last Updated:** 2026-02-03
+**Version:** 0.2.1
 
 ## CRITICAL: Truth System Hierarchy
 
-**SOURCE OF TRUTH:** `lib/dredge/reference-library.ts` (102 verified facts backed by external primary sources)
+**SOURCE OF TRUTH:** `lib/dredge/reference-library.ts` (136 verified facts backed by external primary sources)
+
+**BIBLIOGRAPHY:** `content/truth/BIBLIOGRAPHY.md` (Chicago-style citations for all sources)
 
 **NOT A SOURCE:** The website (tennesseestartshere.com) is OUTPUT to be verified, NOT input
 
@@ -21,7 +23,10 @@
 
 ```
 External Sources → Reference Library → Website Content
-(primary/scholarly)   (102 facts)      (to be verified)
+(primary/scholarly)   (136 facts)      (to be verified)
+         ↓
+    Bibliography
+  (Chicago citations)
 ```
 
 **Never:**
@@ -35,6 +40,26 @@ External Sources → Reference Library → Website Content
 - Verify all facts against external primary/scholarly sources
 - Run fact checker before deployment: `npm run check:facts`
 - Update reference library when new external sources are verified
+
+---
+
+## Active Plans (February 2026)
+
+| Plan                          | File                                       | Status     |
+| ----------------------------- | ------------------------------------------ | ---------- |
+| **Navigation Implementation** | `docs/plans/NAVIGATION-IMPLEMENTATION.md`  | **READY**  |
+| Navigation Restructure        | `docs/plans/NAVIGATION-PLAN.md`            | APPROVED   |
+| Evidence Room Sub-Nav         | `docs/plans/EVIDENCE-ROOM-NAV.md`          | APPROVED   |
+| Homepage Options              | `content/marketing/HOMEPAGE-BRAINSTORM.md` | Draft      |
+| StoryBrand Analysis           | `content/marketing/STORYBRAND-SITEMAP.md`  | Reference  |
+| Sitemap Options               | `content/marketing/SITEMAP-BRAINSTORM.md`  | Superseded |
+
+**Implementation Status:**
+
+- **Phase 1** (data updates): Ready — navigation.json changes
+- **Phase 2** (featured tiles): Ready — dropdown styling + mobile cards
+- **Phase 3** (Evidence sub-nav): Ready — EvidenceNav component
+- **Phase 4** (polish): Ready — footer, metadata, testing
 
 ---
 

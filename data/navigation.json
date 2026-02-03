@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Site navigation structure - single source of truth for all menus",
-    "updated": "2026-01-30",
+    "updated": "2026-02-03",
     "usage": "import navigation from '@/data/navigation.json'",
     "_aiRules": {
       "description": "Rules for AI assistants editing this file",
@@ -143,19 +143,24 @@
 
   "mainNav": [
     {
-      "label": "Visit",
+      "label": "Plan Your Visit",
       "href": "/visit",
       "dropdown": [
         {
-          "label": "Plan Your Visit",
+          "label": "Hours & What to Expect",
           "href": "/visit",
           "description": "Hours, admission & directions"
         },
-        { "label": "Group Visits", "href": "/groups", "description": "School groups & tours" },
+        { "label": "Group Tours", "href": "/groups", "description": "Tour operators & bus groups" },
         {
-          "label": "Accessibility",
-          "href": "/visit#accessibility",
-          "description": "Accommodations available"
+          "label": "Field Trips & Education",
+          "href": "/educators",
+          "description": "Curriculum & standards"
+        },
+        {
+          "label": "Programs & Living History",
+          "href": "/programs",
+          "description": "Demonstrations & activities"
         }
       ]
     },
@@ -163,8 +168,8 @@
       "label": "Events",
       "href": "/events",
       "dropdown": [
-        { "label": "Full Calendar", "href": "/events", "description": "All 2026 events" },
-        { "label": "Lectures", "href": "/lectures", "description": "Speaker series" },
+        { "label": "Events Calendar", "href": "/events", "description": "All 2026 events" },
+        { "label": "Lecture Series", "href": "/lectures", "description": "Speaker series" },
         {
           "label": "Colonial Independence Day",
           "href": "/events/colonial-independence-day",
@@ -175,20 +180,49 @@
           "label": "First Families Reunion",
           "href": "/events/first-families-reunion",
           "description": "Annual homecoming"
+        },
+        {
+          "label": "Stitching Independence",
+          "href": "/events/stitching-independence",
+          "description": "Textile arts event"
         }
       ]
     },
     {
-      "label": "Discover",
-      "href": "/our-story",
+      "label": "Explore",
+      "href": "/explore",
       "dropdown": [
-        { "label": "Our Story", "href": "/our-story", "description": "The history of Rocky Mount" },
+        {
+          "label": "The Original Seven",
+          "href": "/explore",
+          "description": "Interactive heritage map",
+          "variant": "primary",
+          "tagline": "It All Started Here.",
+          "icon": "map"
+        },
+        {
+          "label": "Where Tennessee Began",
+          "href": "/our-story",
+          "description": "The history of Rocky Mount"
+        },
+        {
+          "label": "The 1775 Almanac",
+          "href": "/almanac",
+          "description": "Weather & farming wisdom"
+        },
         {
           "label": "Evidence Room",
           "href": "/evidence",
-          "description": "Primary sources & documents"
+          "description": "Primary sources & documents",
+          "variant": "primary",
+          "tagline": "The proof is in the documents.",
+          "icon": "scroll"
         },
-        { "label": "For Educators", "href": "/educators", "description": "Curriculum resources" }
+        {
+          "label": "Historical Timeline",
+          "href": "/evidence/timeline",
+          "description": "Chronological view"
+        }
       ]
     },
     {
@@ -218,17 +252,19 @@
   "footerNav": {
     "visit": [
       { "label": "Plan Your Visit", "href": "/visit" },
-      { "label": "Group Visits", "href": "/groups" },
-      { "label": "Contact", "href": "mailto:info@rockymountmuseum.com" }
+      { "label": "Group Tours", "href": "/groups" },
+      { "label": "Field Trips", "href": "/educators" },
+      { "label": "Programs", "href": "/programs" }
     ],
     "events": [
-      { "label": "Full Calendar", "href": "/events" },
-      { "label": "Lectures", "href": "/lectures" }
+      { "label": "Events Calendar", "href": "/events" },
+      { "label": "Lecture Series", "href": "/lectures" }
     ],
-    "discover": [
-      { "label": "Our Story", "href": "/our-story" },
+    "explore": [
+      { "label": "The Original Seven", "href": "/explore" },
+      { "label": "Where Tennessee Began", "href": "/our-story" },
       { "label": "Evidence Room", "href": "/evidence" },
-      { "label": "For Educators", "href": "/educators" }
+      { "label": "The 1775 Almanac", "href": "/almanac" }
     ],
     "support": [
       { "label": "Membership", "href": "/membership", "external": true },

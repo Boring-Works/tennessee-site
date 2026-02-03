@@ -145,11 +145,6 @@ export default function LibraryIndexPage() {
               </Link>
             ))}
           </div>
-
-          {/* Back Link */}
-          <Link href="/evidence" className="backLink">
-            <span aria-hidden="true">←</span> Back to Evidence Room
-          </Link>
         </main>
       </div>
     </div>

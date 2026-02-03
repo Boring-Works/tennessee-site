@@ -66,6 +66,76 @@ export const PAGE_METADATA = {
     ogDescription:
       "Primary source documents proving Rocky Mount was where Tennessee's government began.",
   },
+  explore: {
+    title: 'The Original Seven',
+    description:
+      'Explore the seven counties that became Tennessee. Rocky Mount is your gateway to Sullivan County heritage and the founding story of the Volunteer State.',
+    ogTitle: 'The Original Seven | Tennessee Starts Here',
+    ogDescription: 'It all started here. Explore the seven counties that became Tennessee.',
+  },
+  ourStory: {
+    title: 'Where Tennessee Began',
+    description:
+      'The history of Rocky Mount State Historic Site—first capital of the Southwest Territory. Stand where Governor William Blount governed from 1790-1792.',
+    ogTitle: 'Where Tennessee Began | Tennessee Starts Here',
+    ogDescription: "First capital of the Southwest Territory. Where Tennessee's government began.",
+  },
+  almanac: {
+    title: 'The 1775 Almanac',
+    description:
+      'Weather and farming wisdom in the tradition of 18th-century almanacs. Plan your visit to Rocky Mount with period-appropriate agricultural guidance.',
+    ogTitle: 'The 1775 Almanac | Tennessee Starts Here',
+    ogDescription: 'Weather and farming wisdom in the tradition of the founders.',
+  },
+  programs: {
+    title: 'Programs & Living History',
+    description:
+      'Experience history through demonstrations, workshops, and living history programs at Rocky Mount State Historic Site.',
+    ogTitle: 'Programs & Living History | Tennessee Starts Here',
+    ogDescription: 'Living history demonstrations and programs at Rocky Mount.',
+  },
+  educators: {
+    title: 'Field Trips & Education',
+    description:
+      'Curriculum-aligned field trips and educational programs for K-12 students. Tennessee state standards supported at Rocky Mount State Historic Site.',
+    ogTitle: 'Field Trips & Education | Tennessee Starts Here',
+    ogDescription: 'Curriculum-aligned field trips for K-12 students.',
+  },
+  groups: {
+    title: 'Group Tours',
+    description:
+      'Plan a group visit to Rocky Mount State Historic Site. Tour operators, bus groups, and private tours welcome.',
+    ogTitle: 'Group Tours | Tennessee Starts Here',
+    ogDescription: 'Group tours and private visits at Rocky Mount.',
+  },
+  lectures: {
+    title: 'Lecture Series',
+    description:
+      'Speaker series and educational lectures at Rocky Mount State Historic Site. Expert historians and engaging presentations.',
+    ogTitle: 'Lecture Series | Tennessee Starts Here',
+    ogDescription: 'Expert historians and educational lectures at Rocky Mount.',
+  },
+  membership: {
+    title: 'Membership',
+    description:
+      'Join the Rocky Mount Historical Association. Support preservation and enjoy exclusive member benefits.',
+    ogTitle: 'Membership | Tennessee Starts Here',
+    ogDescription: 'Join the Rocky Mount Historical Association.',
+  },
+  support: {
+    title: 'Support Rocky Mount',
+    description:
+      'Support the preservation of Rocky Mount State Historic Site. Donations help maintain the first capital of the Southwest Territory.',
+    ogTitle: 'Support Rocky Mount | Tennessee Starts Here',
+    ogDescription: 'Support the preservation of Tennessee history.',
+  },
+  timeline: {
+    title: 'Historical Timeline',
+    description:
+      'Chronological view of Rocky Mount history from 1770 to statehood. Key events in the founding of Tennessee.',
+    ogTitle: 'Historical Timeline | Tennessee Starts Here',
+    ogDescription: 'Key events in the founding of Tennessee.',
+  },
 } as const
 
 /**

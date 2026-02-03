@@ -8,6 +8,7 @@ import {
 } from '@/lib/evidence/loader'
 import { DocumentViewerClient } from '@/components/evidence/DocumentViewerClient'
 import { ConnectionsPanel, DocumentNavigation } from '@/components/evidence'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -69,6 +70,8 @@ export default async function DocumentPage({ params }: PageProps) {
             </li>
           </ol>
         </nav>
+
+        <EvidenceNav />
 
         <DocumentViewerClient document={document} />
 

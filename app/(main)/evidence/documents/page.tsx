@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getAllDocuments } from '@/lib/evidence/loader'
 import { buildSearchIndex } from '@/lib/evidence/search'
 import { DocumentsClient } from './DocumentsClient'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 
 export const metadata: Metadata = {
   title: 'Document Archive | Evidence Room | Rocky Mount',
@@ -24,5 +25,10 @@ export default async function DocumentsPage() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
-  return <DocumentsClient documents={sortedDocuments} searchIndex={searchIndex} />
+  return (
+    <>
+      <EvidenceNav />
+      <DocumentsClient documents={sortedDocuments} searchIndex={searchIndex} />
+    </>
+  )
 }

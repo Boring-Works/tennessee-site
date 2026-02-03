@@ -1,17 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Claim } from '@/components/evidence/Claim'
+import { PAGE_METADATA } from '@/lib/copy/metadata'
 import groupsData from '@/data/groups.json'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'Group Visits | Tennessee Starts Here',
-  description:
-    'Special rates for bus tours, reunions, scouts, and groups of 10+ at Rocky Mount State Historic Site.',
+  title: PAGE_METADATA.groups.title,
+  description: PAGE_METADATA.groups.description,
   openGraph: {
-    title: 'Group Visits | Tennessee Starts Here',
-    description:
-      'Special rates for bus tours, reunions, scouts, and groups of 10+ at Rocky Mount State Historic Site.',
+    title: PAGE_METADATA.groups.ogTitle,
+    description: PAGE_METADATA.groups.ogDescription,
     url: 'https://tennesseestartshere.com/groups',
   },
 }

@@ -6,16 +6,15 @@ import {
   ConsolidatedClose,
 } from '@/components/home'
 import { OriginalSevenMap } from '@/components/OriginalSevenMap'
+import { PAGE_METADATA } from '@/lib/copy/metadata'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'Our Story | Tennessee Starts Here',
-  description:
-    "The story of Rocky Mount — from frontier settlement to territorial capital. Where the Constitution's promise was proven west of the Appalachians.",
+  title: PAGE_METADATA.ourStory.title,
+  description: PAGE_METADATA.ourStory.description,
   openGraph: {
-    title: 'Our Story | Tennessee Starts Here',
-    description:
-      "The story of Rocky Mount — from frontier settlement to territorial capital. Where the Constitution's promise was proven.",
+    title: PAGE_METADATA.ourStory.ogTitle,
+    description: PAGE_METADATA.ourStory.ogDescription,
     url: 'https://tennesseestartshere.com/our-story',
   },
 }

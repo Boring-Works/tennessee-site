@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllCollections, getDocumentsByCollection } from '@/lib/evidence/loader'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 import './collections.css'
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default async function CollectionsPage() {
 
   return (
     <div className="collectionsPage">
+      <EvidenceNav />
       <div className="collectionsContainer">
         <main className="collectionsContent">
           {/* Header */}
@@ -74,11 +76,6 @@ export default async function CollectionsPage() {
               </Link>
             ))}
           </div>
-
-          {/* Back Link */}
-          <Link href="/evidence" className="collectionsBackLink">
-            <span aria-hidden="true">←</span> Back to Evidence Room
-          </Link>
         </main>
       </div>
     </div>

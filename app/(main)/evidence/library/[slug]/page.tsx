@@ -284,9 +284,6 @@ export default async function DocumentPage({ params }: { params: Promise<{ slug:
               <Link href="/evidence/library" className="footerNavLink">
                 <span aria-hidden="true">←</span> Back to Document Library
               </Link>
-              <Link href="/evidence" className="footerNavLink">
-                <span aria-hidden="true">←</span> Back to Evidence Room
-              </Link>
             </nav>
           </footer>
         </article>

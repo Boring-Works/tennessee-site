@@ -7,6 +7,7 @@ import {
   formatCategoryName,
   getConfidenceBadgeColor,
 } from '@/lib/evidence/reference-integration'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 import './person.css'
 
 interface PageProps {
@@ -111,12 +112,7 @@ export default async function PersonPage({ params }: PageProps) {
     <div className="personPage">
       <div className="personContainer">
         <main className="personContent">
-          {/* Back Link */}
-          <nav className="personNav">
-            <Link href="/evidence/people" className="personBackLink">
-              <span aria-hidden="true">&larr;</span> All People
-            </Link>
-          </nav>
+          <EvidenceNav />
 
           {/* Header */}
           <header className="personHeader">
@@ -235,16 +231,6 @@ export default async function PersonPage({ params }: PageProps) {
               </a>
             </section>
           )}
-
-          {/* Footer Navigation */}
-          <footer className="personFooter">
-            <Link href="/evidence/people" className="personFooterLink">
-              <span aria-hidden="true">&larr;</span> Back to All People
-            </Link>
-            <Link href="/evidence" className="personFooterLink">
-              Evidence Room <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </footer>
         </main>
       </div>
     </div>

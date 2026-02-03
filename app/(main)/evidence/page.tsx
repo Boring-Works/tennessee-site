@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
+import { getAllDocuments, getAllCollections } from '@/lib/evidence/loader'
 import { ContextPanel } from './ContextPanel'
 import { CardCatalog } from './CardCatalog'
+import { TreatySigners } from './TreatySigners'
+import { LazySection, SectionSkeleton } from './LazySection'
 import { MobileGuide } from '@/components/evidence/MobileGuide'
-import { EntryRoom, Claim } from '@/components/evidence'
+import { EntryRoom, Claim, BackToTop } from '@/components/evidence'
+import { EvidenceNav } from '@/components/evidence/EvidenceNav'
 import { Compass } from '@/components/ui/Compass'
 import { JsonLd } from '@/components/JsonLd'
 import { generateBreadcrumbSchema } from '@/lib/seo'
@@ -52,61 +56,36 @@ const MOBILE_GUIDE_SECTIONS = [
   { id: 'sources', label: 'Sources' },
 ]
 
-// Treaty of Holston signatories - Cherokee leaders
-const TREATY_SIGNERS = [
-  {
-    cherokeeName: 'Squollecuttah',
-    englishName: 'Hanging Maw',
-    role: 'Principal Chief of the Overhill Cherokee',
-  },
-  {
-    cherokeeName: 'Nenetooyah',
-    englishName: 'Bloody Fellow',
-    role: 'War chief, given name "Clear Sky" by President Washington',
-  },
-  {
-    cherokeeName: 'Kunoskeskie',
-    englishName: 'John Watts',
-    role: 'Succeeded Dragging Canoe as head of the war council',
-  },
-  {
-    cherokeeName: 'Chuquilatague',
-    englishName: 'Doublehead',
-    role: 'One of the most feared warriors of the Cherokee-American wars',
-  },
-  {
-    cherokeeName: 'Enoleh',
-    englishName: 'Black Fox',
-    role: 'Later served as Principal Chief, 1801-1811',
-  },
-] as const
+// Compute date range from documents
+function computeDateRange(documents: { date: string }[]): { minYear: number; maxYear: number } {
+  if (documents.length === 0) {
+    return { minYear: 1790, maxYear: 1796 }
+  }
+
+  let minYear = 9999
+  let maxYear = 0
+
+  for (const doc of documents) {
+    const year = parseInt(doc.date.split('-')[0], 10)
+    if (!isNaN(year)) {
+      if (year < minYear) minYear = year
+      if (year > maxYear) maxYear = year
+    }
+  }
+
+  return {
+    minYear: minYear === 9999 ? 1790 : minYear,
+    maxYear: maxYear === 0 ? 1796 : maxYear,
+  }
+}
 
 // Curator's Note component
-function CuratorNote({ children }: { children: React.ReactNode }) {
+function _CuratorNote({ children }: { children: React.ReactNode }) {
   return (
     <aside className={styles.curatorNote}>
       <span className={styles.curatorLabel}>Curator&apos;s Note</span>
       <p>{children}</p>
     </aside>
-  )
-}
-
-// Signer card component
-function SignerCard({
-  cherokeeName,
-  englishName,
-  role,
-}: {
-  cherokeeName: string
-  englishName: string
-  role: string
-}) {
-  return (
-    <div className={styles.signerCard}>
-      <p className={styles.signerCherokeeName}>{cherokeeName}</p>
-      <p className={styles.signerEnglishName}>{englishName}</p>
-      <p className={styles.signerRole}>{role}</p>
-    </div>
   )
 }
 
@@ -210,7 +189,15 @@ const evidenceBreadcrumbs = [
   { name: 'Evidence Room', url: 'https://tennesseestartshere.com/evidence' },
 ]
 
-export default function EvidencePage() {
+export default async function EvidencePage() {
+  // Load data at build time
+  const [documents, collections] = await Promise.all([getAllDocuments(), getAllCollections()])
+
+  // Compute stats
+  const totalDocuments = documents.length
+  const totalCollections = collections.length
+  const { minYear, maxYear } = computeDateRange(documents)
+
   return (
     <div className={styles.evidencePage}>
       {/* Skip to content link for keyboard navigation */}
@@ -233,7 +220,7 @@ export default function EvidencePage() {
           <p className={styles.heroBadge}>The Rocky Mount Archives</p>
           <h1 className={styles.heroTitle}>The Evidence Room</h1>
           <p className={styles.heroSubtitle}>
-            Primary documents from the founding of Tennessee&apos;s government
+            {totalDocuments} documents · {minYear}-{maxYear}
           </p>
         </div>
 
@@ -276,8 +263,11 @@ export default function EvidencePage() {
         </div>
       </section>
 
+      {/* Navigation Bar */}
+      <EvidenceNav />
+
       {/* Entry Room - Collection Overview */}
-      <EntryRoom />
+      <EntryRoom totalDocuments={totalDocuments} totalCollections={totalCollections} />
 
       <SectionDivider variant="default" />
 
@@ -322,10 +312,6 @@ export default function EvidencePage() {
             Glass windows at Rocky Mount signaled federal commitment to permanence—this was not
             temporary settlement, but a capital built to last.
           </ContextPanel>
-          <CuratorNote>
-            This letter, written nine days after Blount&apos;s arrival, is the earliest surviving
-            description of Rocky Mount as a seat of government.
-          </CuratorNote>
         </div>
       </section>
 
@@ -431,290 +417,244 @@ export default function EvidencePage() {
 
       <SectionDivider variant="default" />
 
-      {/* Treaty Signers Section */}
-      <section
-        id="treaty-signers"
-        className={styles.signersSection}
-        aria-labelledby="treaty-signers-heading"
-      >
-        <div className={styles.container}>
-          <span className={styles.collectionLabel}>TREATY.1791.001 — Holston Signatories</span>
-          <h2 id="treaty-signers-heading" className={styles.sectionTitle}>
-            Those Who Signed
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Five featured signatories from the forty-two Cherokee leaders who signed the Treaty of
-            Holston
-          </p>
-
-          <div className={styles.signersIntro}>
-            <p>
-              On July 2, 1791, after weeks of negotiation at White&apos;s Fort, these leaders signed
-              on behalf of the Cherokee Nation. Their names are preserved in the treaty record.
-            </p>
-          </div>
-
-          <CuratorNote>
-            The names below are transliterated from the original treaty manuscript. Spellings vary
-            across historical sources.
-          </CuratorNote>
-
-          <div className={styles.signersList}>
-            {TREATY_SIGNERS.map((signer) => (
-              <SignerCard
-                key={signer.cherokeeName}
-                cherokeeName={signer.cherokeeName}
-                englishName={signer.englishName}
-                role={signer.role}
-              />
-            ))}
-          </div>
-
-          <div className={styles.signersFooter}>
-            <Link href="/evidence/people" className={styles.signersLink}>
-              View all 42 signatories
-            </Link>
-            <a
-              href={SOURCE_LINKS.digiTreatiesHolston}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.signersLink}
-            >
-              View treaty manuscript at DigiTreaties
-            </a>
-
-            <p className={styles.signersDescendants}>
-              The Cherokee Nation, Eastern Band of Cherokee Indians, and United Keetoowah Band carry
-              these names forward today.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Treaty Signers Section - Expandable */}
+      <TreatySigners />
 
       <SectionDivider variant="default" />
 
-      {/* Timeline Section */}
-      <section id="timeline" className={styles.timelineSection} aria-labelledby="timeline-heading">
-        <div className={styles.container}>
-          <span className={styles.collectionLabel}>CHRON.1790-1796 — Territory Chronology</span>
-          <h2 id="timeline-heading" className={styles.sectionTitle}>
-            Verified Timeline
-          </h2>
-          <p className={styles.sectionSubtitle}>Key dates confirmed by primary sources</p>
+      {/* Timeline Section - Lazy Loaded */}
+      <LazySection minHeight="600px" fallback={<SectionSkeleton height="600px" />}>
+        <section
+          id="timeline"
+          className={styles.timelineSection}
+          aria-labelledby="timeline-heading"
+        >
+          <div className={styles.container}>
+            <span className={styles.collectionLabel}>CHRON.1790-1796 — Territory Chronology</span>
+            <h2 id="timeline-heading" className={styles.sectionTitle}>
+              Verified Timeline
+            </h2>
+            <p className={styles.sectionSubtitle}>Key dates confirmed by primary sources</p>
 
-          <div className={styles.timeline}>
-            <TimelineEvent
-              date="May 28, 1790"
-              event="Hugh Williamson recommends Blount to Washington"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0268"
-            />
-            <TimelineEvent
-              date="Jun 7, 1790"
-              event="Washington nominates Blount as Governor"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0258"
-            />
-            <TimelineEvent
-              date="Jun 8, 1790"
-              event="Senate confirms Blount's appointment"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0259"
-            />
-            <TimelineEvent
-              date="Aug 13, 1790"
-              event="Washington asks Knox: 'Where ought the Governor to reside?'"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-06-02-0076"
-            />
-            <TimelineEvent
-              date="Oct 11, 1790"
-              event="Blount arrives at Rocky Mount"
-              sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
-            />
-            <TimelineEvent
-              date="Oct 20, 1790"
-              event="Blount writes 'Glass Windows' letter describing his accommodations"
-              sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
-            />
-            <TimelineEvent
-              date="Jul 2, 1791"
-              event="Treaty of Holston signed with Cherokee Nation"
-              sourceUrl="https://avalon.law.yale.edu/18th_century/chr1791.asp"
-              featured
-              manuscriptUrl="https://digitreaties.org/treaties/treaty/88697242/"
-              manuscriptLabel="View the original 23-page manuscript"
-            />
-            <TimelineEvent
-              date="Nov 5, 1791"
-              event="Knoxville Gazette becomes first Tennessee newspaper"
-              sourceUrl="https://tennesseeencyclopedia.net/entries/knoxville-gazette/"
-            />
-            <TimelineEvent
-              date="Nov 11, 1791"
-              event="Washington proclaims Treaty of Holston as law"
-              sourceUrl="https://founders.archives.gov/documents/Washington/05-09-02-0100"
-            />
-            <TimelineEvent
-              date="Late 1791"
-              event="Blount family arrives in territory"
-              sourceUrl="https://www.blountmansion.org/"
-            />
-            <TimelineEvent
-              date="Early 1792"
-              event="Capital moves to Knoxville"
-              sourceUrl="https://tennesseeencyclopedia.net/entries/southwest-territory/"
-            />
-            <TimelineEvent
-              date="Jun 1, 1796"
-              event="Tennessee admitted to the Union as 16th state"
-              sourceUrl="https://tennesseeencyclopedia.net/entries/statehood/"
-            />
+            <div className={styles.timeline}>
+              <TimelineEvent
+                date="May 28, 1790"
+                event="Hugh Williamson recommends Blount to Washington"
+                sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0268"
+              />
+              <TimelineEvent
+                date="Jun 7, 1790"
+                event="Washington nominates Blount as Governor"
+                sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0258"
+              />
+              <TimelineEvent
+                date="Jun 8, 1790"
+                event="Senate confirms Blount's appointment"
+                sourceUrl="https://founders.archives.gov/documents/Washington/05-05-02-0259"
+              />
+              <TimelineEvent
+                date="Aug 13, 1790"
+                event="Washington asks Knox: 'Where ought the Governor to reside?'"
+                sourceUrl="https://founders.archives.gov/documents/Washington/05-06-02-0076"
+              />
+              <TimelineEvent
+                date="Oct 11, 1790"
+                event="Blount arrives at Rocky Mount"
+                sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
+              />
+              <TimelineEvent
+                date="Oct 20, 1790"
+                event="Blount writes 'Glass Windows' letter describing his accommodations"
+                sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
+              />
+              <TimelineEvent
+                date="Jul 2, 1791"
+                event="Treaty of Holston signed with Cherokee Nation"
+                sourceUrl="https://avalon.law.yale.edu/18th_century/chr1791.asp"
+                featured
+                manuscriptUrl="https://digitreaties.org/treaties/treaty/88697242/"
+                manuscriptLabel="View the original 23-page manuscript"
+              />
+              <TimelineEvent
+                date="Nov 5, 1791"
+                event="Knoxville Gazette becomes first Tennessee newspaper"
+                sourceUrl="https://tennesseeencyclopedia.net/entries/knoxville-gazette/"
+              />
+              <TimelineEvent
+                date="Nov 11, 1791"
+                event="Washington proclaims Treaty of Holston as law"
+                sourceUrl="https://founders.archives.gov/documents/Washington/05-09-02-0100"
+              />
+              <TimelineEvent
+                date="Late 1791"
+                event="Blount family arrives in territory"
+                sourceUrl="https://www.blountmansion.org/"
+              />
+              <TimelineEvent
+                date="Early 1792"
+                event="Capital moves to Knoxville"
+                sourceUrl="https://tennesseeencyclopedia.net/entries/southwest-territory/"
+              />
+              <TimelineEvent
+                date="Jun 1, 1796"
+                event="Tennessee admitted to the Union as 16th state"
+                sourceUrl="https://tennesseeencyclopedia.net/entries/statehood/"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </LazySection>
 
       <SectionDivider variant="light" />
 
-      {/* Source Repositories */}
-      <section id="sources" className={styles.sourcesSection} aria-labelledby="sources-heading">
-        <div className={styles.container}>
-          <span className={styles.collectionLabel}>REF — Repository Index</span>
-          <h2 id="sources-heading" className={styles.sectionTitle}>
-            Our Sources
-          </h2>
-          <p className={styles.sectionSubtitle}>Where we verify our history</p>
+      {/* Source Repositories - Lazy Loaded */}
+      <LazySection minHeight="500px" fallback={<SectionSkeleton height="500px" />}>
+        <section id="sources" className={styles.sourcesSection} aria-labelledby="sources-heading">
+          <div className={styles.container}>
+            <span className={styles.collectionLabel}>REF — Repository Index</span>
+            <h2 id="sources-heading" className={styles.sectionTitle}>
+              Our Sources
+            </h2>
+            <p className={styles.sectionSubtitle}>Where we verify our history</p>
 
-          {/* Document Library link - featured */}
-          <Link href="/evidence/documents" className={styles.libraryPromo}>
-            <span className={styles.libraryPromoIcon}>✦</span>
-            <div className={styles.libraryPromoText}>
-              <strong>Document Library</strong>
-              <span>Read complete transcriptions with full citations</span>
+            {/* Document Library link - featured */}
+            <Link href="/evidence/documents" className={styles.libraryPromo}>
+              <span className={styles.libraryPromoIcon}>✦</span>
+              <div className={styles.libraryPromoText}>
+                <strong>Document Library</strong>
+                <span>Read complete transcriptions with full citations</span>
+              </div>
+              <span className={styles.libraryPromoArrow}>→</span>
+            </Link>
+
+            <div className={styles.sourcesGrid}>
+              <a
+                href={SOURCE_LINKS.foundersOnline}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceCard}
+              >
+                <h3 className={styles.sourceCardTitle}>Founders Online</h3>
+                <p className={styles.sourceCardDescription}>
+                  National Archives collection of correspondence from Washington, Jefferson, and the
+                  Founding Fathers.
+                </p>
+              </a>
+
+              <a
+                href={SOURCE_LINKS.tennesseeEncyclopedia}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceCard}
+              >
+                <h3 className={styles.sourceCardTitle}>Tennessee Encyclopedia</h3>
+                <p className={styles.sourceCardDescription}>
+                  Scholarly reference for Tennessee history, including Rocky Mount and Southwest
+                  Territory articles.
+                </p>
+              </a>
+
+              <a
+                href="https://avalon.law.yale.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceCard}
+              >
+                <h3 className={styles.sourceCardTitle}>Avalon Project</h3>
+                <p className={styles.sourceCardDescription}>
+                  Yale Law School&apos;s digital archive of treaties, legal documents, and
+                  diplomatic papers from the founding era.
+                </p>
+              </a>
+
+              <a
+                href="https://wardepartmentpapers.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceCard}
+              >
+                <h3 className={styles.sourceCardTitle}>Papers of the War Department</h3>
+                <p className={styles.sourceCardDescription}>
+                  Reconstructed federal records from 1784-1800, recovered after the 1800 Washington
+                  fire destroyed the originals.
+                </p>
+              </a>
+
+              <a
+                href={SOURCE_LINKS.digiTreaties}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceCard}
+              >
+                <h3 className={styles.sourceCardTitle}>DigiTreaties</h3>
+                <p className={styles.sourceCardDescription}>
+                  Digitized treaty manuscripts including the full 23-page Treaty of Holston.
+                </p>
+              </a>
+
+              <a
+                href={SOURCE_LINKS.blountMansion}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceCard}
+              >
+                <h3 className={styles.sourceCardTitle}>Blount Mansion</h3>
+                <p className={styles.sourceCardDescription}>
+                  Governor Blount&apos;s later residence in Knoxville, with family history and
+                  primary documents.
+                </p>
+              </a>
             </div>
-            <span className={styles.libraryPromoArrow}>→</span>
-          </Link>
-
-          <div className={styles.sourcesGrid}>
-            <a
-              href={SOURCE_LINKS.foundersOnline}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.sourceCard}
-            >
-              <h3 className={styles.sourceCardTitle}>Founders Online</h3>
-              <p className={styles.sourceCardDescription}>
-                National Archives collection of correspondence from Washington, Jefferson, and the
-                Founding Fathers.
-              </p>
-            </a>
-
-            <a
-              href={SOURCE_LINKS.tennesseeEncyclopedia}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.sourceCard}
-            >
-              <h3 className={styles.sourceCardTitle}>Tennessee Encyclopedia</h3>
-              <p className={styles.sourceCardDescription}>
-                Scholarly reference for Tennessee history, including Rocky Mount and Southwest
-                Territory articles.
-              </p>
-            </a>
-
-            <a
-              href="https://avalon.law.yale.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.sourceCard}
-            >
-              <h3 className={styles.sourceCardTitle}>Avalon Project</h3>
-              <p className={styles.sourceCardDescription}>
-                Yale Law School&apos;s digital archive of treaties, legal documents, and diplomatic
-                papers from the founding era.
-              </p>
-            </a>
-
-            <a
-              href="https://wardepartmentpapers.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.sourceCard}
-            >
-              <h3 className={styles.sourceCardTitle}>Papers of the War Department</h3>
-              <p className={styles.sourceCardDescription}>
-                Reconstructed federal records from 1784-1800, recovered after the 1800 Washington
-                fire destroyed the originals.
-              </p>
-            </a>
-
-            <a
-              href={SOURCE_LINKS.digiTreaties}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.sourceCard}
-            >
-              <h3 className={styles.sourceCardTitle}>DigiTreaties</h3>
-              <p className={styles.sourceCardDescription}>
-                Digitized treaty manuscripts including the full 23-page Treaty of Holston.
-              </p>
-            </a>
-
-            <a
-              href={SOURCE_LINKS.blountMansion}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.sourceCard}
-            >
-              <h3 className={styles.sourceCardTitle}>Blount Mansion</h3>
-              <p className={styles.sourceCardDescription}>
-                Governor Blount&apos;s later residence in Knoxville, with family history and primary
-                documents.
-              </p>
-            </a>
           </div>
-        </div>
-      </section>
+        </section>
+      </LazySection>
 
       <SectionDivider variant="default" />
 
-      {/* Bias Disclosure Section */}
-      <section className={styles.biasDisclosure}>
-        <div className={styles.container}>
-          <span className={styles.collectionLabel}>EDITORIAL — Historical Interpretation</span>
-          <h2 className={styles.sectionTitle}>About This Archive</h2>
+      {/* Bias Disclosure Section - Lazy Loaded */}
+      <LazySection minHeight="400px" fallback={<SectionSkeleton height="400px" />}>
+        <section className={styles.biasDisclosure}>
+          <div className={styles.container}>
+            <span className={styles.collectionLabel}>EDITORIAL — Historical Interpretation</span>
+            <h2 className={styles.sectionTitle}>About This Archive</h2>
 
-          <div className={styles.biasDisclosureContent}>
-            <p className={styles.biasDisclosureLede}>
-              Every historical archive reflects choices made by those who created it. We acknowledge
-              the limitations and perspectives embedded in this collection.
-            </p>
+            <div className={styles.biasDisclosureContent}>
+              <p className={styles.biasDisclosureLede}>
+                Every historical archive reflects choices made by those who created it. We
+                acknowledge the limitations and perspectives embedded in this collection.
+              </p>
 
-            <div className={styles.biasDisclosureGrid}>
-              <div className={styles.biasDisclosureCard}>
-                <h3 className={styles.biasDisclosureCardTitle}>Primary Sources</h3>
-                <p className={styles.biasDisclosureCardText}>
-                  The documents here were created by government officials—predominantly white men of
-                  property. They reflect the viewpoints and biases of that group.
-                </p>
-              </div>
+              <div className={styles.biasDisclosureGrid}>
+                <div className={styles.biasDisclosureCard}>
+                  <h3 className={styles.biasDisclosureCardTitle}>Primary Sources</h3>
+                  <p className={styles.biasDisclosureCardText}>
+                    The documents here were created by government officials—predominantly white men
+                    of property. They reflect the viewpoints and biases of that group.
+                  </p>
+                </div>
 
-              <div className={styles.biasDisclosureCard}>
-                <h3 className={styles.biasDisclosureCardTitle}>Missing Voices</h3>
-                <p className={styles.biasDisclosureCardText}>
-                  Many perspectives are absent: enslaved people who worked this ground, Cherokee
-                  communities whose lands were negotiated away, women whose labor sustained
-                  households.
-                </p>
-              </div>
+                <div className={styles.biasDisclosureCard}>
+                  <h3 className={styles.biasDisclosureCardTitle}>Missing Voices</h3>
+                  <p className={styles.biasDisclosureCardText}>
+                    Many perspectives are absent: enslaved people who worked this ground, Cherokee
+                    communities whose lands were negotiated away, women whose labor sustained
+                    households.
+                  </p>
+                </div>
 
-              <div className={styles.biasDisclosureCard}>
-                <h3 className={styles.biasDisclosureCardTitle}>Our Commitment</h3>
-                <p className={styles.biasDisclosureCardText}>
-                  We strive to present these documents accurately while acknowledging whose stories
-                  they tell—and whose they exclude. History requires both preservation and honesty.
-                </p>
+                <div className={styles.biasDisclosureCard}>
+                  <h3 className={styles.biasDisclosureCardTitle}>Our Commitment</h3>
+                  <p className={styles.biasDisclosureCardText}>
+                    We strive to present these documents accurately while acknowledging whose
+                    stories they tell—and whose they exclude. History requires both preservation and
+                    honesty.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </LazySection>
 
       <SectionDivider variant="default" />
 
@@ -734,6 +674,7 @@ export default function EvidencePage() {
 
       {/* Navigation Aids */}
       <MobileGuide sections={MOBILE_GUIDE_SECTIONS} />
+      <BackToTop />
       <Compass />
     </div>
   )

@@ -1,14 +1,13 @@
 import type { Metadata } from 'next'
 import { ProgramsContent } from './ProgramsContent'
+import { PAGE_METADATA } from '@/lib/copy/metadata'
 
 export const metadata: Metadata = {
-  title: 'Programs | Rocky Mount State Historic Site',
-  description:
-    'Hands-on workshops, exclusive tours, and educational programs at Rocky Mount. Blacksmithing, hearth cooking, twilight tours, and more.',
+  title: PAGE_METADATA.programs.title,
+  description: PAGE_METADATA.programs.description,
   openGraph: {
-    title: 'Programs & Workshops | Tennessee Starts Here',
-    description:
-      'Experience history hands-on with blacksmithing workshops, hearth cooking classes, twilight tours, and exclusive behind-the-scenes experiences.',
+    title: PAGE_METADATA.programs.ogTitle,
+    description: PAGE_METADATA.programs.ogDescription,
     url: 'https://tennesseestartshere.com/programs',
   },
 }

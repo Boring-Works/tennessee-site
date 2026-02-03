@@ -1,17 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { OriginalSevenMap } from '@/components/OriginalSevenMap'
+import { PAGE_METADATA } from '@/lib/copy/metadata'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'Explore the Region | Tennessee Starts Here',
-  description:
-    'Discover the heritage trail through the Original Seven Counties. Partner historic sites, suggested itineraries, and visitor resources for exploring the birthplace of Tennessee.',
+  title: PAGE_METADATA.explore.title,
+  description: PAGE_METADATA.explore.description,
   openGraph: {
-    title: 'Explore the Original Seven | Tennessee Starts Here',
-    description:
-      'A heritage trail through the seven counties that became Tennessee. Historic sites, state parks, and the stories that shaped a nation.',
+    title: PAGE_METADATA.explore.ogTitle,
+    description: PAGE_METADATA.explore.ogDescription,
     url: 'https://tennesseestartshere.com/explore',
   },
 }

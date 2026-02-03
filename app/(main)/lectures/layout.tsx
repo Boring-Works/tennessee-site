@@ -1,17 +1,16 @@
 import type { Metadata } from 'next'
+import { PAGE_METADATA } from '@/lib/copy/metadata'
 
 export const metadata: Metadata = {
-  title: 'Lecture Series | Rocky Mount State Historic Site',
-  description:
-    'Join us for the 2026 Commemorative Lecture Series exploring the founding of Tennessee and the Southwest Territory.',
+  title: PAGE_METADATA.lectures.title,
+  description: PAGE_METADATA.lectures.description,
   openGraph: {
-    title: 'Lecture Series | Tennessee Starts Here',
-    description:
-      'Join us for the 2026 Commemorative Lecture Series exploring the founding of Tennessee and the Southwest Territory.',
+    title: PAGE_METADATA.lectures.ogTitle,
+    description: PAGE_METADATA.lectures.ogDescription,
     url: 'https://tennesseestartshere.com/lectures',
   },
 }
 
 export default function LecturesLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return <>{children}</>
 }

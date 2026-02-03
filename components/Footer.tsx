@@ -328,10 +328,10 @@ function FooterComponent() {
           </nav>
 
           {/* DISCOVER Column */}
-          <nav className={styles['footer-nav']} aria-label="Discover navigation">
+          <nav className={styles['footer-nav']} aria-label="Explore navigation">
             <h3 className={styles['footer-nav-title']}>
               <QuillIcon />
-              Discover
+              Explore
             </h3>
             <ul className={styles['footer-nav-list']}>
               <li>

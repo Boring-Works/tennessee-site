@@ -12,7 +12,12 @@ const EVIDENCE_NAV_ITEMS = [
   { label: 'Overview', href: '/evidence' },
 ]
 
-export function EvidenceNav() {
+interface EvidenceNavProps {
+  /** Set to true when nav is at top of page (needs padding for fixed header) */
+  isPageTop?: boolean
+}
+
+export function EvidenceNav({ isPageTop = false }: EvidenceNavProps) {
   const pathname = usePathname()
 
   const isActive = (href: string) => {
@@ -23,7 +28,10 @@ export function EvidenceNav() {
   }
 
   return (
-    <nav className={styles.evidenceNav} aria-label="Evidence Room navigation">
+    <nav
+      className={`${styles.evidenceNav} ${isPageTop ? styles['evidenceNav--pageTop'] : ''}`}
+      aria-label="Evidence Room navigation"
+    >
       <div className={styles.evidenceNavHeader}>
         <span className={styles.evidenceNavIcon}>📜</span>
         <span className={styles.evidenceNavTitle}>EVIDENCE ROOM</span>

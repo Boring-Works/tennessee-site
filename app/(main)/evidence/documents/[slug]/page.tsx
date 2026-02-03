@@ -71,7 +71,7 @@ export default async function DocumentPage({ params }: PageProps) {
           </ol>
         </nav>
 
-        <EvidenceNav />
+        <EvidenceNav isPageTop />
 
         <DocumentViewerClient document={document} />
 

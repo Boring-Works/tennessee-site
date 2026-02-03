@@ -36,7 +36,7 @@ export default async function CollectionsPage() {
 
   return (
     <div className="collectionsPage">
-      <EvidenceNav />
+      <EvidenceNav isPageTop />
       <div className="collectionsContainer">
         <main className="collectionsContent">
           {/* Header */}

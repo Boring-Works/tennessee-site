@@ -27,7 +27,7 @@ export default async function DocumentsPage() {
 
   return (
     <>
-      <EvidenceNav />
+      <EvidenceNav isPageTop />
       <DocumentsClient documents={sortedDocuments} searchIndex={searchIndex} />
     </>
   )

@@ -112,7 +112,7 @@ export default async function PersonPage({ params }: PageProps) {
     <div className="personPage">
       <div className="personContainer">
         <main className="personContent">
-          <EvidenceNav />
+          <EvidenceNav isPageTop />
 
           {/* Header */}
           <header className="personHeader">

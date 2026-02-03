@@ -28,7 +28,7 @@ export default async function PeoplePage() {
 
   return (
     <div className="peoplePage">
-      <EvidenceNav />
+      <EvidenceNav isPageTop />
       <div className="peopleContainer">
         <main className="peopleContent">
           {/* Header */}

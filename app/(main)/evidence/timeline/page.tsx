@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function TimelinePage() {
   return (
     <div className="min-h-screen">
-      <EvidenceNav />
+      <EvidenceNav isPageTop />
       {/* Header Section */}
       <header
         className="relative overflow-hidden text-center"

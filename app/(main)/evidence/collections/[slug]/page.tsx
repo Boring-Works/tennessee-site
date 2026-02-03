@@ -138,7 +138,7 @@ export default async function CollectionPage({ params }: PageProps) {
     <div className="collectionPage">
       <div className="collectionContainer">
         <main className="collectionContent">
-          <EvidenceNav />
+          <EvidenceNav isPageTop />
 
           {/* Header */}
           <header className="collectionHeader">

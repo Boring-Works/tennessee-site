@@ -114,7 +114,7 @@ export default function LecturesPage() {
           {/* Main headline */}
           <h1 id="series-heading" className={styles['series-headline']}>
             <span className={styles['series-headline-small']}>The Founding Story</span>
-            <span className={styles['series-headline-large']}>In Five Lectures</span>
+            <span className={styles['series-headline-large']}>In {lectures.length} Lectures</span>
           </h1>
 
           {/* Journey framing */}
@@ -126,7 +126,7 @@ export default function LecturesPage() {
           {/* Quick stats */}
           <div className={styles['series-stats']}>
             <div className={styles['series-stat']}>
-              <span className={styles['series-stat-number']}>5</span>
+              <span className={styles['series-stat-number']}>{lectures.length}</span>
               <span className={styles['series-stat-label']}>Lectures</span>
             </div>
             <div className={styles['series-stat-divider']} aria-hidden="true" />
@@ -329,7 +329,7 @@ export default function LecturesPage() {
       <section className={styles['series-cta']} aria-labelledby="series-cta-heading">
         <div className={styles['series-cta-inner']}>
           <h2 id="series-cta-heading" className={styles['series-cta-headline']}>
-            5 Lectures. One Historic Year.
+            {lectures.length} Lectures. One Historic Year.
           </h2>
           <p className={styles['series-cta-subheadline']}>
             Seating is limited. Join us at Rocky Mount.

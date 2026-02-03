@@ -60,47 +60,87 @@ export function QuickBookingCard({ className = '' }: QuickBookingCardProps) {
 
   return (
     <div
-      className={`overflow-hidden rounded-lg border-2 border-[--gold-primary] bg-white shadow-[var(--shadow-md)] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(201,162,39,0.15)] ${className}`}
+      className={`group relative overflow-hidden rounded-lg border-2 border-[--gold-primary] bg-white shadow-[var(--shadow-lg)] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(201,162,39,0.25)] hover:-translate-y-1 ${className}`}
     >
-      {/* Gold accent bar at top */}
-      <div className="h-1 bg-gradient-to-r from-[--gold-primary] to-[--gold-hover]" />
+      {/* Gold accent bar at top with shimmer effect */}
+      <div className="h-2 bg-gradient-to-r from-[--gold-primary] via-[--gold-hover] to-[--gold-primary] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+      </div>
 
-      <div className="p-6">
-        {/* This Week Badge */}
-        {isThisWeekend && (
-          <div className="mb-3 inline-block rounded-full bg-[--gold-shimmer] px-3 py-1">
-            <span className="text-sm font-semibold text-[--primary]">This Weekend!</span>
+      {/* Subtle background pattern */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[--gold-primary] opacity-[0.03] rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative p-8">
+        {/* Event Category Badge */}
+        <div className="mb-4 flex items-center gap-2">
+          {isThisWeekend && (
+            <div className="inline-block rounded-full bg-gradient-to-r from-[--gold-primary] to-[--gold-hover] px-3 py-1 shadow-sm">
+              <span className="text-xs font-bold text-white uppercase tracking-wider">
+                This Weekend!
+              </span>
+            </div>
+          )}
+          <span className="text-2xl">🎟️</span>
+        </div>
+
+        {/* Event Title — Larger, more prominent */}
+        <h3 className="mb-3 text-2xl md:text-3xl font-bold text-[--primary] leading-tight">
+          {nextEvent.title}
+        </h3>
+
+        {/* Date with icon */}
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[--gold-primary]">📅</span>
+          <p className="text-base text-[--text-light] font-medium">{formattedDate}</p>
+        </div>
+
+        {/* Days Until with countdown styling */}
+        {daysUntil > 0 && (
+          <div className="mb-5 inline-flex items-center gap-2 px-3 py-1.5 bg-[--cream] rounded-full">
+            <span className="w-2 h-2 bg-[--gold-primary] rounded-full animate-pulse" />
+            <p className="text-sm text-[--primary] font-semibold">
+              {daysUntil === 1 ? 'Tomorrow' : `In ${daysUntil} days`}
+            </p>
           </div>
         )}
 
-        {/* Event Title */}
-        <h3 className="mb-2 text-xl font-bold text-[--primary]">{nextEvent.title}</h3>
-
-        {/* Date */}
-        <p className="mb-1 text-sm text-[--text-light]">{formattedDate}</p>
-
-        {/* Days Until */}
-        {daysUntil > 0 && (
-          <p className="mb-4 text-xs text-[--text-light] font-medium">
-            In {daysUntil} {daysUntil === 1 ? 'day' : 'days'}
+        {/* Event Description (if available) */}
+        {nextEvent.description && (
+          <p className="mb-5 text-sm text-[--text-light] leading-relaxed line-clamp-2">
+            {nextEvent.description}
           </p>
         )}
 
-        {/* Price */}
+        {/* Price with emphasis */}
         {displayPrice && (
-          <p className="mb-4 text-lg font-bold text-[--gold-primary]">{displayPrice}</p>
+          <div className="mb-6">
+            <span className="text-xs uppercase tracking-wider text-[--text-light] block mb-1">
+              From
+            </span>
+            <p className="text-3xl font-bold text-[--gold-primary]">{displayPrice}</p>
+          </div>
         )}
 
-        {/* CTA Button */}
+        {/* Enhanced CTA Button */}
         {ticketUrl && (
           <Link
             href={ticketUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-full items-center justify-center rounded-md bg-[--gold-primary] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[--gold-hover] hover:shadow-[var(--shadow-gold-lg)] active:scale-95"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[--gold-primary] px-6 py-4 text-base font-bold text-white uppercase tracking-wider transition-all duration-300 hover:bg-[--gold-hover] hover:shadow-[0_8px_30px_rgba(201,162,39,0.4)] active:scale-95 group-hover:gap-3"
           >
-            Book Now
+            Book Your Tickets
+            <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
           </Link>
+        )}
+
+        {/* Booking note */}
+        {ticketUrl && (
+          <p className="mt-3 text-center text-xs text-[--text-light]">
+            Secure online booking · Limited availability
+          </p>
         )}
       </div>
     </div>

@@ -9,6 +9,7 @@ import { TestimonialCarousel } from '@/components/TestimonialCarousel'
 import { QuickBookingCard } from '@/components/QuickBookingCard'
 import { NextEventBadge } from '@/components/home/NextEventBadge'
 import { WeatherBadge } from '@/components/home/WeatherBadge'
+import { GradientCategoryCard } from '@/components/home/GradientCategoryCard'
 import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
 import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
@@ -473,76 +474,114 @@ export default function HomePage() {
       </ScrollReveal>
 
       {/* ════════════════════════════════════════════════════════════════════
-          EVENTS CALENDAR SECTION
+          EVENTS CALENDAR SECTION — Redesigned for Visual Impact
           ════════════════════════════════════════════════════════════════════ */}
-      <section
-        className="relative bg-primary border-t border-white/10 py-20 md:py-24"
-        aria-labelledby="events-heading"
-      >
-        <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none bg-noise"
-          aria-hidden="true"
-        />
+      <ScrollReveal>
+        <section
+          className="relative bg-primary border-t border-white/10 py-20 md:py-24"
+          aria-labelledby="events-heading"
+        >
+          {/* Subtle star field background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/95 to-primary" />
+          <div
+            className="absolute inset-0 opacity-[0.015] pointer-events-none bg-noise"
+            aria-hidden="true"
+          />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          {/* Header */}
-          <div className="text-center mb-14">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-accent/70 mb-4">
-              The Commemorative Year
-            </p>
-            <h2 id="events-heading" className="sr-only">
-              2026 Events Calendar
-            </h2>
-            <p className="text-white/60 text-sm">
-              <AnimatedCounter end={eventCount} duration={1500} /> events celebrating America&apos;s
-              250th and Tennessee&apos;s 230th
-            </p>
-          </div>
+          <div className="relative z-10 max-w-6xl mx-auto px-6">
+            {/* Header — Enhanced with commemorative messaging */}
+            <div className="text-center mb-12">
+              {/* Decorative line */}
+              <div className="flex items-center justify-center gap-4 mb-6" aria-hidden="true">
+                <span className="w-12 h-px bg-accent/30" />
+                <span className="text-accent/60 text-sm tracking-[0.5em]">2026</span>
+                <span className="w-12 h-px bg-accent/30" />
+              </div>
 
-          {/* Events Grid with QuickBookingCard */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-5 mb-14">
-            {/* Quick Booking Card - Data-driven from events.json */}
-            <div className="md:col-span-2 lg:col-span-2">
-              <QuickBookingCard className="h-full" />
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/70 mb-3">
+                The Commemorative Year
+              </p>
+              <h2
+                id="events-heading"
+                className="font-serif text-3xl md:text-4xl text-white mb-4 font-bold"
+              >
+                Experience Where Tennessee Began
+              </h2>
+              <p className="text-base text-white/70 mb-2">
+                <AnimatedCounter end={eventCount} duration={1500} /> signature events celebrating
+              </p>
+              <p className="text-lg text-white/90 font-serif italic">
+                America&apos;s 250th · Tennessee&apos;s 230th
+              </p>
             </div>
 
-            {/* Category Cards */}
-            {[
-              { count: lectures.length, label: 'Lecture Series', icon: '📜' },
-              { count: festivals.length, label: 'Festivals & Events', icon: '🎭' },
-              { count: seasonal.length, label: 'Seasonal Programs', icon: '🕯️' },
-            ].map((cat, i) => (
-              <div
-                key={i}
-                className="group bg-white/5 border border-white/10 p-6 transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.07]"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl opacity-80 transition-transform duration-300 group-hover:scale-110">
-                    {cat.icon}
-                  </span>
-                  <div>
-                    <span className="text-3xl font-bold bg-gradient-to-b from-accent to-accent-light bg-clip-text text-transparent">
-                      {cat.count}
-                    </span>
-                    <p className="text-xs text-white/40">{cat.label}</p>
-                  </div>
-                </div>
+            {/* Magazine-Style Event Grid — Asymmetric Layout */}
+            <div className="grid lg:grid-cols-5 gap-5 mb-10">
+              {/* Large Featured Booking Card — 60% width (3 columns) */}
+              <div className="lg:col-span-3">
+                <QuickBookingCard className="h-full min-h-[280px]" />
               </div>
-            ))}
-          </div>
 
-          {/* Calendar Link */}
-          <div className="text-center">
-            <Link
-              href="/events"
-              className="group inline-flex items-center gap-2 text-sm text-accent hover:text-white transition-colors uppercase tracking-[0.15em]"
-            >
-              View Full 2026 Calendar
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
+              {/* Vertical Category Stack — 40% width (2 columns) */}
+              <div className="lg:col-span-2 flex flex-col gap-5">
+                <GradientCategoryCard
+                  count={lectures.length}
+                  label="Lecture Series"
+                  icon="📜"
+                  gradient="gold-burgundy"
+                  href="/events?category=lecture"
+                />
+                <GradientCategoryCard
+                  count={festivals.length}
+                  label="Festivals & Events"
+                  icon="🎭"
+                  gradient="burgundy-navy"
+                  href="/events?category=festival"
+                />
+                <GradientCategoryCard
+                  count={seasonal.length}
+                  label="Seasonal Programs"
+                  icon="🕯️"
+                  gradient="gold-navy"
+                  href="/events?category=seasonal"
+                />
+              </div>
+            </div>
+
+            {/* Dual CTA Banner — Improved engagement */}
+            <div className="relative border-t border-white/10 pt-10">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/events"
+                  className="group inline-flex items-center gap-3 bg-white/10 hover:bg-white/[0.15] border border-white/20 hover:border-accent/50 text-white px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  <span className="text-accent">📅</span>
+                  View Full Calendar
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+
+                <Link
+                  href="/visit"
+                  className="group inline-flex items-center gap-3 bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(201,162,39,0.4)]"
+                >
+                  <span className="text-lg">★</span>
+                  Plan Your Visit
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
+
+              {/* Subtext */}
+              <p className="text-center text-xs text-white/40 mt-6">
+                Join 50,000+ annual visitors · Open Wed–Sat, March 4–December 20
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* ════════════════════════════════════════════════════════════════════
           PLAN YOUR VISIT

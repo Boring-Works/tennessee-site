@@ -141,7 +141,7 @@ function DesktopNav({ pathname }: DesktopNavProps) {
                   <span className={styles['dropdown-toggle-underline']} aria-hidden="true" />
                 </NavigationMenu.Trigger>
 
-                <NavigationMenu.Content className={styles['dropdown-menu']} forceMount>
+                <NavigationMenu.Content className={styles['dropdown-menu']}>
                   <ul>
                     {item.dropdown.map((subitem) => (
                       <li key={subitem.href}>
@@ -214,7 +214,7 @@ function DesktopNav({ pathname }: DesktopNavProps) {
         <span className={styles['cta-text']}>Plan Your Visit</span>
       </Link>
 
-      {/* Viewport removed - using forceMount on Content for CSS compatibility */}
+      {/* Radix NavigationMenu handles content mounting automatically */}
     </NavigationMenu.Root>
   )
 }

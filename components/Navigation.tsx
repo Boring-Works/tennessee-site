@@ -474,7 +474,8 @@ function NavigationComponent() {
               aria-controls="mobile-menu"
               aria-label="Open main menu"
             >
-              <Menu size={24} />
+              <Menu size={20} />
+              <span>Menu</span>
             </button>
           </div>
 

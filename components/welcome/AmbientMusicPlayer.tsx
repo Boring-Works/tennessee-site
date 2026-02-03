@@ -208,23 +208,27 @@ export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerP
     audio.crossOrigin = 'anonymous' // Enable CORS if needed
     audioRef.current = audio
 
+    // Attempt auto-play after audio is initialized
+    if (!hasAttemptedAutoplay.current) {
+      // Small delay to ensure audio is fully initialized
+      const timer = setTimeout(() => {
+        attemptAutoPlay()
+      }, 1000) // Increased to 1s for better reliability
+
+      return () => {
+        clearTimeout(timer)
+        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
+        audio.pause()
+        audio.src = ''
+      }
+    }
+
     return () => {
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
       audio.pause()
       audio.src = ''
     }
-  }, [currentTrack.src])
-
-  // Attempt auto-play on mount (after audio is initialized)
-  useEffect(() => {
-    if (audioRef.current && !hasAttemptedAutoplay.current) {
-      // Small delay to ensure audio is fully initialized
-      const timer = setTimeout(() => {
-        attemptAutoPlay()
-      }, 500)
-      return () => clearTimeout(timer)
-    }
-  }, [attemptAutoPlay])
+  }, [currentTrack.src, attemptAutoPlay])
 
   // Toggle playback
   const togglePlay = useCallback(async () => {

@@ -342,19 +342,19 @@ export default function HomePage() {
           className="relative bg-white dark:bg-primary/50 border-t border-secondary/10 dark:border-white/10"
           aria-labelledby="testimonials-heading"
         >
-          <div className="max-w-5xl mx-auto px-6 pt-20 md:pt-28">
+          <div className="max-w-5xl mx-auto px-6 pt-16 md:pt-20">
             {/* Header */}
-            <div className="text-center mb-8">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-secondary/50 dark:text-white/50 mb-4">
+            <div className="text-center mb-12">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 dark:text-accent mb-4 font-semibold">
                 Visitor Experiences
               </p>
               <h2
                 id="testimonials-heading"
-                className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary dark:text-white mb-6 font-bold"
+                className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary dark:text-white mb-4 font-bold"
               >
                 Visitors Say It Best
               </h2>
-              <p className="text-lg text-primary/70 dark:text-white/70 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-base text-primary/80 dark:text-white/80 leading-relaxed max-w-2xl mx-auto">
                 Visitors consistently describe their experience as &ldquo;immersive,&rdquo;
                 &ldquo;authentic,&rdquo; and &ldquo;unlike any other historic site.&rdquo;
               </p>
@@ -365,7 +365,7 @@ export default function HomePage() {
           <TestimonialCarousel interval={6000} showSource />
 
           {/* CTA */}
-          <div className="text-center pb-20 md:pb-28">
+          <div className="text-center pt-8 pb-16 md:pb-20">
             <Link
               href="/visit"
               className="inline-flex items-center gap-2 bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-lg"

@@ -62,10 +62,10 @@ export function DocumentTeaser() {
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         {/* Washington's Question */}
         <div className="text-center mb-10">
-          <blockquote className="font-serif text-lg md:text-xl italic text-primary/70 dark:text-white/60 mb-2">
+          <blockquote className="font-serif text-xl md:text-2xl italic text-primary dark:text-white/95 mb-3 leading-relaxed">
             &ldquo;Where ought the Governor to reside?&rdquo;
           </blockquote>
-          <cite className="not-italic text-xs uppercase tracking-[0.2em] text-secondary/50 dark:text-accent/60">
+          <cite className="not-italic text-sm uppercase tracking-[0.15em] text-secondary dark:text-accent font-medium">
             — President George Washington, August 13, 1790
           </cite>
         </div>
@@ -73,11 +73,11 @@ export function DocumentTeaser() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-4 mb-6" aria-hidden="true">
-            <span className="w-12 h-px bg-secondary/20 dark:bg-white/20" />
-            <span className="text-secondary/40 dark:text-accent/60 text-sm tracking-[0.3em]">
+            <span className="w-16 h-px bg-accent/40 dark:bg-accent/40" />
+            <span className="text-accent dark:text-accent text-sm font-semibold tracking-[0.3em]">
               PRIMARY SOURCES
             </span>
-            <span className="w-12 h-px bg-secondary/20 dark:bg-white/20" />
+            <span className="w-16 h-px bg-accent/40 dark:bg-accent/40" />
           </div>
 
           <h2

@@ -18,11 +18,18 @@ interface AmbientMusicPlayerProps {
 // Curated frontier ambiance tracks
 const TRACKS: Track[] = [
   {
-    id: 'the-morning',
-    name: 'Dawn on the Frontier',
-    artist: 'PaulYudin',
-    src: '/audio/the-morning.mp3',
-    license: 'Royalty-Free via Pixabay',
+    id: 'rocky-mount-ambient',
+    name: 'Rocky Mount Ambiance',
+    artist: 'Ambient Music',
+    src: '/audio/rocky-mount-ambient.mp3',
+    license: 'Licensed via Envato Elements',
+  },
+  {
+    id: 'beautiful-nature',
+    name: 'Beautiful Nature',
+    artist: 'SFmusic',
+    src: '/audio/beautiful-nature.mp3',
+    license: 'Licensed via Envato Elements',
   },
 ]
 
@@ -52,22 +59,23 @@ function WaveformBars({ playing }: { playing: boolean }) {
  * An elegant, expandable music player for period-appropriate ambient sounds.
  * Features animated waveform visualization and colonial-themed styling.
  */
-export function AmbientMusicPlayer({ initialVolume = 0.3 }: AmbientMusicPlayerProps) {
+export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTrackIndex] = useState(0)
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [volume, setVolume] = useState(initialVolume)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const currentTrack = TRACKS[currentTrackIndex]
 
-  // Initialize audio element
+  // Initialize audio element with Next.js optimizations
   useEffect(() => {
     const audio = new Audio(currentTrack.src)
     audio.loop = true
     audio.volume = 0
-    audio.preload = 'none'
+    audio.preload = 'metadata' // Load metadata only, not full file
+    audio.crossOrigin = 'anonymous' // Enable CORS if needed
     audioRef.current = audio
 
     return () => {
@@ -142,6 +150,38 @@ export function AmbientMusicPlayer({ initialVolume = 0.3 }: AmbientMusicPlayerPr
     [isPlaying]
   )
 
+  // Switch to next track
+  const nextTrack = useCallback(() => {
+    const wasPlaying = isPlaying
+    if (wasPlaying) {
+      fadeAudio(false)
+      setIsPlaying(false)
+    }
+
+    setTimeout(() => {
+      setCurrentTrackIndex((prev) => (prev + 1) % TRACKS.length)
+      if (wasPlaying) {
+        setTimeout(() => togglePlay(), 300)
+      }
+    }, 300)
+  }, [isPlaying, fadeAudio, togglePlay])
+
+  // Switch to previous track
+  const prevTrack = useCallback(() => {
+    const wasPlaying = isPlaying
+    if (wasPlaying) {
+      fadeAudio(false)
+      setIsPlaying(false)
+    }
+
+    setTimeout(() => {
+      setCurrentTrackIndex((prev) => (prev - 1 + TRACKS.length) % TRACKS.length)
+      if (wasPlaying) {
+        setTimeout(() => togglePlay(), 300)
+      }
+    }, 300)
+  }, [isPlaying, fadeAudio, togglePlay])
+
   return (
     <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
       {/* Expanded Panel */}
@@ -188,8 +228,22 @@ export function AmbientMusicPlayer({ initialVolume = 0.3 }: AmbientMusicPlayerPr
             </p>
           </div>
 
-          {/* Play/Pause Control */}
-          <div className="flex items-center gap-3 mb-4">
+          {/* Playback Controls */}
+          <div className="flex items-center gap-2 mb-4">
+            {/* Previous Track */}
+            <button
+              type="button"
+              onClick={prevTrack}
+              className="flex items-center justify-center w-8 h-8 text-[var(--gold-shimmer)] hover:text-[var(--gold-primary)] transition-colors"
+              aria-label="Previous track"
+              disabled={TRACKS.length === 1}
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+              </svg>
+            </button>
+
+            {/* Play/Pause */}
             <button
               type="button"
               onClick={togglePlay}
@@ -216,11 +270,33 @@ export function AmbientMusicPlayer({ initialVolume = 0.3 }: AmbientMusicPlayerPr
               )}
             </button>
 
+            {/* Next Track */}
+            <button
+              type="button"
+              onClick={nextTrack}
+              className="flex items-center justify-center w-8 h-8 text-[var(--gold-shimmer)] hover:text-[var(--gold-primary)] transition-colors"
+              aria-label="Next track"
+              disabled={TRACKS.length === 1}
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+              </svg>
+            </button>
+
             {/* Waveform Visualization */}
             <div className="flex-1 flex justify-center">
               <WaveformBars playing={isPlaying} />
             </div>
           </div>
+
+          {/* Track Counter */}
+          {TRACKS.length > 1 && (
+            <div className="text-center mb-3">
+              <span className="text-[9px] text-[var(--text-secondary)]/60 font-cormorant">
+                Track {currentTrackIndex + 1} of {TRACKS.length}
+              </span>
+            </div>
+          )}
 
           {/* Volume Control */}
           <div className="flex items-center gap-2">

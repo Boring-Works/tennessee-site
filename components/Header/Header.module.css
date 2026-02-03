@@ -1167,7 +1167,7 @@
   gap: 0.75rem;
   padding: 1rem 1.25rem;
   margin: 0.5rem 0.75rem;
-  background: var(--territorial-blue, #1a365d);
+  background: transparent;
   border-radius: 4px;
   text-decoration: none;
   transition: all var(--nav-duration-hover) ease;
@@ -1176,18 +1176,18 @@
 }
 
 .dropdown-tile:hover {
-  background: var(--territorial-blue-hover, #234876);
+  background: rgba(255, 255, 255, 0.05);
   transform: translateX(2px);
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-tile--evidence {
-  background: var(--log-cabin-brown, #4a3728);
+  background: transparent;
 }
 
 .dropdown-tile--evidence:hover {
-  background: var(--log-cabin-brown-hover, #5d4632);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .dropdown-tile-content {
@@ -1243,7 +1243,7 @@
   gap: 1rem;
   padding: 1.125rem 1.5rem;
   margin: 0.5rem 0;
-  background: var(--territorial-blue, #1a365d);
+  background: transparent;
   border-radius: 6px;
   text-decoration: none;
   min-height: var(--nav-touch-min);
@@ -1252,7 +1252,7 @@
 }
 
 .mobile-featured-card--evidence {
-  background: var(--log-cabin-brown, #4a3728);
+  background: transparent;
 }
 
 .mobile-featured-card:active {

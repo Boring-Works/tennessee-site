@@ -13,7 +13,9 @@
     "prepare": "husky",
     "validate:data": "npx tsx scripts/validate-data.ts",
     "validate:facts": "npx tsx scripts/validate-facts.ts",
-    "check:facts": "npx tsx scripts/validate-facts.ts"
+    "check:facts": "npx tsx scripts/validate-facts.ts",
+    "check:facts:fast": "npx tsx scripts/check-facts-parallel.ts",
+    "check:all": "npm run check:facts:fast"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

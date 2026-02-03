@@ -4,16 +4,22 @@
   gap: 1rem;
   padding: 0.75rem 1.5rem;
   background: var(--cream, #f5f1e8);
-  border-bottom: 1px solid var(--gold-shimmer, rgba(212, 175, 55, 0.2));
+  border-bottom: 2px solid var(--gold-shimmer, rgba(212, 175, 55, 0.3));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 60px; /* Below fixed header */
-  z-index: 40;
+  z-index: 45; /* Above content, below main header (50) */
+  transition: box-shadow 0.2s ease;
+}
+
+.evidenceNav:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* When at top of page (no hero above), add padding for fixed header */
 .evidenceNav--pageTop {
-  padding-top: calc(0.75rem + 80px);
-  top: 0;
+  margin-top: 80px; /* Space for header instead of padding */
+  top: 60px; /* Still below header when scrolling */
 }
 
 .evidenceNavHeader {

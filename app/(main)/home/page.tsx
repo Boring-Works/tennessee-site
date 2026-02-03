@@ -7,6 +7,8 @@ import { ScrollReveal } from '@/components/home/ScrollReveal'
 import { DocumentTeaser } from '@/components/evidence'
 import { TestimonialCarousel } from '@/components/TestimonialCarousel'
 import { QuickBookingCard } from '@/components/QuickBookingCard'
+import { NextEventBadge } from '@/components/home/NextEventBadge'
+import { WeatherBadge } from '@/components/home/WeatherBadge'
 import { MYSTERY_NARRATIVE, HOOKS, BUTTONS } from '@/lib/copy'
 import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
@@ -130,14 +132,22 @@ export default function HomePage() {
                     <span className="text-white/60 text-xs">50,000+ visitors annually</span>
                   </div>
 
+                  {/* Next Event Badge */}
+                  <div className="animate-fade-in animation-delay-375">
+                    <NextEventBadge />
+                  </div>
+
                   {/* CTA */}
-                  <div className="animate-fade-in animation-delay-400">
+                  <div className="flex flex-col sm:flex-row items-center gap-3 animate-fade-in animation-delay-400">
                     <Link
                       href="/visit"
                       className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-accent/35"
                     >
                       {BUTTONS.primary}
                     </Link>
+                    <span className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium">
+                      Opens March 4
+                    </span>
                   </div>
                 </div>
 
@@ -174,10 +184,11 @@ export default function HomePage() {
         </div>
 
         {/* Footer Note */}
-        <div className="relative z-10 py-4 px-6 lg:px-20">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-white/25 text-center lg:text-left">
+        <div className="relative z-10 py-4 px-6 lg:px-20 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-white/25 text-center sm:text-left">
             Part of the America 250 National Commemoration
           </p>
+          <WeatherBadge />
         </div>
       </section>
 

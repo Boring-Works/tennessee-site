@@ -24,6 +24,8 @@ export interface SearchEntry {
   collection: string
   /** Content type */
   content_type: string
+  /** Author ID (for filtering) */
+  author?: string
   /** Searchable text content */
   text: string
   /** Preview text for results */
@@ -65,6 +67,7 @@ export function buildSearchIndex(documents: Document[]): SearchIndex {
       date: doc.date,
       collection: doc.collection,
       content_type: doc.content_type,
+      author: doc.author,
       text: `${doc.title} ${stripMarkdown(doc.content)}`.toLowerCase(),
       preview: truncateText(stripMarkdown(doc.content), 150),
       url: `/evidence/documents/${doc.id}`,
@@ -79,6 +82,7 @@ export function buildSearchIndex(documents: Document[]): SearchIndex {
         date: doc.date,
         collection: doc.collection,
         content_type: doc.content_type,
+        author: doc.author,
         text: passage.text.toLowerCase(),
         preview: truncateText(passage.text, 150),
         url: `/evidence/documents/${doc.id}#${passage.anchor}`,
@@ -110,10 +114,12 @@ export function search(
   options: {
     collection?: string
     content_type?: string
+    author?: string
+    year?: number
     limit?: number
   } = {}
 ): SearchResult[] {
-  const { collection, content_type, limit = 20 } = options
+  const { collection, content_type, author, year, limit = 20 } = options
 
   // Normalize query
   const normalizedQuery = query.toLowerCase().trim()
@@ -129,6 +135,11 @@ export function search(
     // Apply filters
     if (collection && entry.collection !== collection) continue
     if (content_type && entry.content_type !== content_type) continue
+    if (author && entry.author !== author) continue
+    if (year && entry.date) {
+      const entryYear = parseInt(entry.date.split('-')[0], 10)
+      if (entryYear !== year) continue
+    }
 
     // Calculate score
     const { score, matches } = calculateScore(entry.text, terms)
@@ -337,4 +348,116 @@ export function getDateRange(index: SearchIndex): { min: string; max: string } {
   }
 
   return { min, max }
+}
+
+// =============================================================================
+// Filter Helpers with Counts (Standard Archive Interface)
+// =============================================================================
+
+export interface FilterOption {
+  value: string
+  label: string
+  count: number
+}
+
+/**
+ * Get collections with document counts
+ * Only counts document-level entries (not passages)
+ */
+export function getCollectionsWithCounts(index: SearchIndex): FilterOption[] {
+  const counts = new Map<string, number>()
+
+  for (const entry of index.entries) {
+    // Only count document-level entries (no passage_id)
+    if (!entry.passage_id) {
+      counts.set(entry.collection, (counts.get(entry.collection) || 0) + 1)
+    }
+  }
+
+  return Array.from(counts.entries())
+    .map(([value, count]) => ({ value, label: value, count }))
+    .sort((a, b) => b.count - a.count) // Sort by count descending
+}
+
+/**
+ * Get content types with document counts
+ */
+export function getContentTypesWithCounts(index: SearchIndex): FilterOption[] {
+  const counts = new Map<string, number>()
+
+  for (const entry of index.entries) {
+    if (!entry.passage_id) {
+      counts.set(entry.content_type, (counts.get(entry.content_type) || 0) + 1)
+    }
+  }
+
+  return Array.from(counts.entries())
+    .map(([value, count]) => ({ value, label: value, count }))
+    .sort((a, b) => b.count - a.count)
+}
+
+/**
+ * Get unique years from documents
+ */
+export function getYears(index: SearchIndex): number[] {
+  const years = new Set<number>()
+
+  for (const entry of index.entries) {
+    if (!entry.passage_id && entry.date) {
+      const year = parseInt(entry.date.split('-')[0], 10)
+      if (!isNaN(year)) {
+        years.add(year)
+      }
+    }
+  }
+
+  return Array.from(years).sort((a, b) => a - b)
+}
+
+/**
+ * Get years with document counts
+ */
+export function getYearsWithCounts(index: SearchIndex): FilterOption[] {
+  const counts = new Map<number, number>()
+
+  for (const entry of index.entries) {
+    if (!entry.passage_id && entry.date) {
+      const year = parseInt(entry.date.split('-')[0], 10)
+      if (!isNaN(year)) {
+        counts.set(year, (counts.get(year) || 0) + 1)
+      }
+    }
+  }
+
+  return Array.from(counts.entries())
+    .map(([year, count]) => ({ value: String(year), label: String(year), count }))
+    .sort((a, b) => parseInt(a.value) - parseInt(b.value))
+}
+
+/**
+ * Get authors with document counts
+ */
+export function getAuthorsWithCounts(index: SearchIndex): FilterOption[] {
+  const counts = new Map<string, number>()
+
+  for (const entry of index.entries) {
+    if (!entry.passage_id && entry.author) {
+      counts.set(entry.author, (counts.get(entry.author) || 0) + 1)
+    }
+  }
+
+  return Array.from(counts.entries())
+    .map(([value, count]) => ({ value, label: value, count }))
+    .sort((a, b) => b.count - a.count)
+}
+
+/**
+ * Get total document count (excluding passages)
+ */
+export function getTotalDocumentCount(index: SearchIndex): number {
+  let count = 0
+  for (const entry of index.entries) {
+    if (!entry.passage_id) count++
+  }
+  return count
 }

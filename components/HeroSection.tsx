@@ -67,7 +67,7 @@ const HeroSection = memo(function HeroSection() {
 
               {/* Eyebrow - Strengthened Value Prop */}
               <p className="text-[11px] uppercase tracking-[0.3em] text-accent/80 mb-3 font-medium opacity-0 animate-[fadeUp_0.6s_ease-out_0.1s_forwards]">
-                First Constitutional Federal Seat West of the Appalachians
+                First Capital of the Southwest Territory · 1790
               </p>
 
               {/* Main Headline */}

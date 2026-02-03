@@ -510,7 +510,7 @@ The Constitution had to work here—or American expansion would fail. It worked.
 
 ### 4. The Room Where the Territory Was Governed
 
-**Context:** From 1790 to 1792, Blount administered 77,000 square miles from this room. Treaties were drafted. Commissions were signed. Tennessee began here.
+**Context:** From 1790 to 1792, Blount administered the Southwest Territory from this room. Commissions were signed. Tennessee began here.
 
 **Look For:** The natural light from those glass windows, the size of the space, the proximity to the stairs, and the view of the land Blount administered.
 

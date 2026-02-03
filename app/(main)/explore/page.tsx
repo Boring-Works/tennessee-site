@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { OriginalSevenMap } from '@/components/OriginalSevenMap'
+import Image from 'next/image'
 import { PAGE_METADATA } from '@/lib/copy/metadata'
 import siteInfo from '@/data/siteInfo.json'
 import styles from './page.module.css'
@@ -195,12 +195,12 @@ const itineraries: Itinerary[] = [
     duration: '2 days',
     icon: <WeekendIcon />,
     description:
-      'Follow in the footsteps of three presidents who passed through the Original Seven. Andrew Jackson, James K. Polk, and Andrew Johnson all have connections to these grounds.',
+      'Follow in the footsteps of presidents who shaped this region. Andrew Johnson governed in Greeneville. James K. Polk practiced law nearby. The Original Seven produced leaders who shaped America.',
     stops: [
       {
         name: 'Day 1: Rocky Mount & Johnson City',
         time: 'Full day',
-        note: 'Rocky Mount (Jackson stayed here), Tipton-Haynes, Gray Fossil Site',
+        note: 'Rocky Mount (territorial capital), Tipton-Haynes, Gray Fossil Site',
       },
       {
         name: 'Day 2: Greeneville & Beyond',
@@ -282,7 +282,33 @@ export default function ExplorePage() {
         </div>
 
         <div className={styles['explore-hero-map']}>
-          <OriginalSevenMap variant="hero" showLabels showDistances interactive />
+          <figure style={{ margin: 0 }}>
+            <Image
+              src="/images/original-seven-map-1790.png"
+              alt="Map of Tennessee at the beginning of 1790, showing the seven original counties: Sullivan, Washington, Hawkins, Greene in the east, and Davidson, Sumner, Tennessee in the west. The western portion shows Indian Lands."
+              width={900}
+              height={500}
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: 900,
+                borderRadius: '4px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+              }}
+              priority
+            />
+            <figcaption
+              style={{
+                marginTop: '0.75rem',
+                fontSize: '0.8125rem',
+                color: 'var(--text-light, #666)',
+                fontStyle: 'italic',
+                textAlign: 'center',
+              }}
+            >
+              Tennessee at the beginning of 1790 — Map by L. Pork Danville
+            </figcaption>
+          </figure>
         </div>
       </section>
 

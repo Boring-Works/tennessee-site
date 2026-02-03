@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation'
 import styles from './EvidenceNav.module.css'
 
 const EVIDENCE_NAV_ITEMS = [
-  { label: 'Overview', href: '/evidence' },
-  { label: 'Documents', href: '/evidence/documents' },
+  { label: 'Full Document Library', href: '/evidence/documents', primary: true },
   { label: 'Collections', href: '/evidence/collections' },
   { label: 'People', href: '/evidence/people' },
   { label: 'Timeline', href: '/evidence/timeline' },
+  { label: 'Overview', href: '/evidence' },
 ]
 
 export function EvidenceNav() {
@@ -36,7 +36,7 @@ export function EvidenceNav() {
               href={item.href}
               className={`${styles.evidenceNavLink} ${
                 isActive(item.href) ? styles['evidenceNavLink--active'] : ''
-              }`}
+              } ${'primary' in item && item.primary ? styles['evidenceNavLink--primary'] : ''}`}
               aria-current={isActive(item.href) ? 'page' : undefined}
             >
               {item.label}

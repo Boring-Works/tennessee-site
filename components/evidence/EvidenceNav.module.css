@@ -82,6 +82,28 @@
   background: var(--gold-primary, #d4af37);
 }
 
+/* Primary link - Full Document Library */
+.evidenceNavLink--primary {
+  background: var(--log-cabin-brown, #4a3728);
+  color: var(--cream, #f5f1e8) !important;
+  border-radius: 2px;
+  margin-right: 0.5rem;
+}
+
+.evidenceNavLink--primary:hover {
+  background: var(--gold-primary, #d4af37);
+  color: var(--log-cabin-brown, #4a3728) !important;
+}
+
+.evidenceNavLink--primary.evidenceNavLink--active {
+  background: var(--gold-primary, #d4af37);
+  color: var(--log-cabin-brown, #4a3728) !important;
+}
+
+.evidenceNavLink--primary::after {
+  display: none;
+}
+
 .evidenceNavLink:focus-visible {
   outline: 2px solid var(--gold-primary, #d4af37);
   outline-offset: 2px;

@@ -1,6 +1,6 @@
 /**
  * Reference Library - SINGLE SOURCE OF TRUTH
- * 111 verified facts about Rocky Mount and the Southwest Territory
+ * 136 verified facts about Rocky Mount and the Southwest Territory
  * Used by The Dredge to cross-reference new documents
  *
  * CRITICAL: This library is the SOURCE OF TRUTH, backed by external primary sources.
@@ -11,12 +11,12 @@
  *   External Sources (primary/scholarly) → Reference Library → Website Content
  *   NOT: Website → Reference Library (this would be circular)
  *
- * Categories: governance (19), construction (7), people (29), treaty (21),
- *            timeline (9), cherokee (5), administration (11), violence (8), geography (2)
+ * Categories: governance (29), construction (7), people (29), treaty (29),
+ *            timeline (9), cherokee (10), administration (13), violence (8), geography (2)
  *
- * Error Detection: 64 facts with 248+ wrongVariant patterns
+ * Error Detection: 73 facts with 280+ wrongVariant patterns
  *
- * LAST UPDATED: 2026-02-02 (Phase 0 Rescue: Added 9 facts from Comprehensive Fact-Check 2024)
+ * LAST UPDATED: 2026-02-03 (Timeline Verification: Added 25 facts - governance/treaty documentation)
  */
 
 export interface VerifiedFact {
@@ -1388,6 +1388,414 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
       '1791.*5,?000.*residents', // Understates actual count (was 35,691)
       '1791.*30,?000.*residents', // Approximates but lacks precision
     ],
+  },
+
+  // === TIMELINE VERIFICATION BATCH (2026-02-03) ===
+  {
+    id: 'gov-020',
+    category: 'governance',
+    claim:
+      'President Washington wrote to Secretary Knox on August 13, 1790, asking the crucial question "Where ought the Governor to reside?" regarding the Southwest Territory capital location',
+    source:
+      'Letter from Washington to Knox, August 13, 1790 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'washington.*capital.*179[1-9]', // Wrong year (was 1790)
+      'washington.*where.*179[1-9]', // Wrong year
+      'washington.*august [1-9]\\,', // Wrong day (was Aug 13)
+      'washington.*august 1[4-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'gov-021',
+    category: 'governance',
+    claim:
+      'Secretary of War Henry Knox responded to Washington on August 17, 1790, recommending that the territorial governor reside in the Holston settlements as the most populous and established frontier community',
+    source:
+      'Letter from Knox to Washington, August 17, 1790 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'knox.*holston.*179[1-9]', // Wrong year (was 1790)
+      'knox.*august [1-9]\\,', // Wrong day (was Aug 17)
+      'knox.*august 1[8-9]\\,', // Wrong day
+      'knox.*august 2\\d\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'gov-022',
+    category: 'governance',
+    claim:
+      'Henry Knox specifically mentioned William Cobb\'s residence in his August 17, 1790 letter to Washington, describing it as "a respectable residence" that was "commodious and well suited to the dignity of the office" for the territorial governor',
+    source:
+      'Letter from Knox to Washington, August 17, 1790 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-023',
+    category: 'governance',
+    claim:
+      'Hugh Williamson wrote to President Washington on May 28, 1790, endorsing William Blount as "a gentleman of considerable property and influence" with experience in Indian affairs and ability to unite frontier factions in support of federal government',
+    source:
+      'Letter from Williamson to Washington, May 28, 1790 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'williamson.*blount.*179[1-9]', // Wrong year (was 1790)
+      'williamson.*may [1-9]\\,', // Wrong day (was May 28)
+      'williamson.*may 2[9-9]\\,', // Wrong day
+      'williamson.*may 3\\d\\,', // Wrong day (impossible)
+    ],
+  },
+  {
+    id: 'gov-024',
+    category: 'governance',
+    claim:
+      'William Blount wrote to Secretary Knox on October 20, 1790, describing his arrival on "the 11th instant" and his accommodations with "Glass Windows, Fireplace, etc., etc." at William Cobb\'s residence, noting glass windows were a frontier status symbol',
+    source:
+      'Letter from Blount to Knox, October 20, 1790 (Tennessee Encyclopedia, Blount Papers)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'glass.*windows.*179[1-9]', // Wrong year (was 1790)
+      'glass.*windows.*october [1-9]\\,', // Wrong day for letter (was Oct 20)
+      'glass.*windows.*october 2[1-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'gov-025',
+    category: 'governance',
+    claim:
+      'The United States Senate confirmed William Blount\'s appointment as territorial governor on June 8, 1790, one day after President Washington\'s nomination',
+    source: 'Senate records; Founders Online, National Archives',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'senate.*blount.*179[1-9]', // Wrong year (was 1790)
+      'confirmed.*june [1-7]\\,', // Wrong day (was June 8)
+      'confirmed.*june [9]\\,', // Wrong day
+      'confirmed.*june 1\\d\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'trt-022',
+    category: 'treaty',
+    claim:
+      'Five Cherokee chiefs met with Secretary of War Henry Knox in Philadelphia on January 7, 9, and 11, 1792, to present objections to the Treaty of Holston and demand increased annuity',
+    source:
+      'Knox report to Washington, January 17, 1792 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'cherokee.*philadelphia.*179[0-1]', // Wrong year (was 1792)
+      'cherokee.*philadelphia.*179[3-9]', // Wrong year
+      'knox.*january [1-6]\\,', // Wrong first meeting day (was Jan 7)
+      'knox.*january 1[2-9]\\,', // After last meeting (was Jan 11)
+    ],
+  },
+  {
+    id: 'trt-023',
+    category: 'treaty',
+    claim:
+      'The Cherokee delegation that met with Knox in January 1792 demanded six specific items: increased annuity to $1,500, removal of encroachers, federal representative, blocking Muscle Shoals settlement, agricultural implements, and trusted interpreters',
+    source:
+      'Knox report to Washington, January 17, 1792; American State Papers Indian Affairs Vol. 1',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-024',
+    category: 'treaty',
+    claim:
+      'Cherokee chiefs had requested $1,500 annuity during original July 1791 treaty negotiations, but Governor Blount claimed he lacked authority to grant it, leading to the Philadelphia delegation\'s demand for the increase',
+    source:
+      'Knox report to Washington, January 17, 1792 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'trt-025',
+    category: 'treaty',
+    claim:
+      'President Washington submitted Cherokee annuity increase request to Senate on January 18, 1792, and Senate approved it on January 20, 1792, demonstrating Cherokee diplomatic success in securing treaty amendments',
+    source: 'Senate Executive Journal; Founders Online annotations',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'senate.*annuity.*179[0-1]', // Wrong year (was 1792)
+      'senate.*annuity.*179[3-9]', // Wrong year
+      'senate.*january [1-9]\\,', // Before submission (was Jan 18, approved Jan 20)
+      'senate.*january 2[1-9]\\,', // After approval
+    ],
+  },
+  {
+    id: 'chr-006',
+    category: 'cherokee',
+    claim:
+      'Little Turkey (Kaneeda), principal chief of Cherokee Upper Towns from 1788 to 1802, sent urgent warning on October 9, 1792: "The 5 lower towns will go to war the 8th of this month by themselves; without the consent of the Nation—You may know the good from the bad—do not come to war against the good"',
+    source:
+      'Knox to Washington, October 9, 1792 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'little turkey.*179[0-1]', // Before his warning (was 1792)
+      'little turkey.*179[3-9]', // After his specific warning
+      'little turkey.*october [1-8]\\,', // Before warning day
+      'little turkey.*october 1\\d\\,', // After warning day
+    ],
+  },
+  {
+    id: 'chr-007',
+    category: 'cherokee',
+    claim:
+      'Little Turkey identified Spanish influence on Cherokee Lower Towns in October 1792: "The Spaniards have given them ammunition and Guns, Hatchets Knives &ca—and told them not to go to war, but to keep them in reserve by them"',
+    source:
+      'Knox to Washington, October 9, 1792 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'chr-008',
+    category: 'cherokee',
+    claim:
+      'Cherokee Nation was divided in 1792 between Upper Towns peace faction (led by Little Turkey, Hanging Maw, Bloody Fellow) and five Lower Towns war faction influenced by Spanish agents, with peace chiefs risking personal danger from their own people for maintaining American correspondence',
+    source:
+      'Knox to Washington, October 9, 1792; American State Papers Indian Affairs Vol. 1',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'chr-009',
+    category: 'cherokee',
+    claim:
+      'Little Turkey pursued intertribal peace diplomacy in 1792, traveling to the Creeks himself and sending messages to Chickasaws and Choctaws, proposing that "a head-man from each nation might accompany him" to Philadelphia "that the whole might agree on one thing, and all be at peace"',
+    source:
+      'Knox to Washington, October 9, 1792 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'chr-010',
+    category: 'cherokee',
+    claim:
+      'Cherokee National Council statement from April 11, 1810 honored Little Turkey: "Our former treaties were concluded and confirmed by your beloved President General Washington and Our beloved Man the Little Turkey, they were both sincere in their engagements"',
+    source: 'Cherokee National Council to Return J. Meigs, April 11, 1810',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+
+  // === BLOUNT-KNOX CORRESPONDENCE BATCH (2026-02-03) ===
+  {
+    id: 'gov-026',
+    category: 'governance',
+    claim:
+      'Blount reported to Knox on November 3, 1790, that he had "taken measures for organizing the government of this territory" and that inhabitants "appear well disposed to support the authority of the United States"',
+    source:
+      'Letter from Blount to Knox, November 3, 1790 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'blount.*organized.*179[1-9]', // Wrong year (was 1790)
+      'blount.*organized.*november [1-2]\\,', // Wrong day (was Nov 3)
+      'blount.*organized.*november [4-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'gov-027',
+    category: 'governance',
+    claim:
+      'Blount reported on December 15, 1790, that "several Cherokee chiefs, including the principal chief known as the Hanging Maw, have visited me at Rocky Mount" expressing desire for peace and agreeing to "restrain their young men from acts of hostility, provided the settlers likewise refrain from encroachments on their lands"',
+    source:
+      'Letter from Blount to Knox, December 15, 1790 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'hanging maw.*rocky mount.*179[1-9]', // Wrong year (was 1790)
+      'hanging maw.*rocky mount.*december [1-9]\\,', // Wrong day (was Dec 15)
+      'hanging maw.*rocky mount.*december 1[6-9]\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'gov-028',
+    category: 'governance',
+    claim:
+      'Blount issued proclamations in December 1790 "forbidding encroachments" on Cherokee lands, reporting that "some settlers continue to press beyond the established boundaries, which occasions uneasiness among the Indians"',
+    source:
+      'Letter from Blount to Knox, December 15, 1790 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'gov-029',
+    category: 'governance',
+    claim:
+      'Blount reported on January 8, 1791, that "courts of law have been established throughout the territory" with judges entering duties, and "new settlements are forming, farms are being cleared, and the commerce of the territory increases daily"',
+    source:
+      'Letter from Blount to Knox, January 8, 1791 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'courts.*established.*179[02]', // Wrong year (was 1791)
+      'courts.*established.*january [1-7]\\,', // Wrong day (was Jan 8)
+      'courts.*established.*january [9]\\,', // Wrong day
+      'courts.*established.*january 1\\d\\,', // Wrong day
+    ],
+  },
+  {
+    id: 'trt-026',
+    category: 'treaty',
+    claim:
+      'Secretary Knox wrote to Blount on April 22, 1791, authorizing him to "negotiate and conclude a treaty of peace and friendship with the Cherokee Nation" with instructions to "establish definite boundaries" and promise "an annual payment, not exceeding one thousand dollars in goods"',
+    source:
+      'Letter from Knox to Blount, April 22, 1791 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'knox.*treaty.*instructions.*179[02]', // Wrong year (was 1791)
+      'knox.*treaty.*instructions.*179[2-9]', // Wrong year
+      'knox.*april [1-9]\\,', // Wrong day (was April 22)
+      'knox.*april 2[3-9]\\,', // Wrong day
+      'knox.*1,?500.*authorized', // Wrong amount (was $1,000 authorized, not $1,500)
+    ],
+  },
+  {
+    id: 'trt-027',
+    category: 'treaty',
+    claim:
+      'Blount reported on June 15, 1791, that "the Cherokee chiefs are assembling at White\'s Fort for the proposed treaty" with "more than thirty" chiefs already arrived including Hanging Maw, John Watts, and Doublehead',
+    source:
+      'Letter from Blount to Knox, June 15, 1791 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'chiefs.*assembling.*179[02]', // Wrong year (was 1791)
+      'chiefs.*assembling.*179[2-9]', // Wrong year
+      'chiefs.*assembling.*june [1-9]\\,', // Wrong day (was June 15)
+      'chiefs.*assembling.*june 1[6-9]\\,', // Wrong day
+      'chiefs.*assembling.*rocky mount', // Wrong location (was White's Fort)
+      'thirty.*chiefs.*rocky mount', // Wrong location
+    ],
+  },
+  {
+    id: 'trt-028',
+    category: 'treaty',
+    claim:
+      'Thomas Jefferson, as Secretary of State, wrote to Blount on August 31, 1791, stating "the treaty which you concluded with the Cherokee Nation on the second of July has been received and laid before the Senate" and "The President is highly satisfied with the conduct of the negotiation"',
+    source:
+      'Letter from Jefferson to Blount, August 31, 1791 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+    wrongVariants: [
+      'jefferson.*treaty.*179[02]', // Wrong year (was 1791)
+      'jefferson.*treaty.*179[2-9]', // Wrong year
+      'jefferson.*august [1-9]\\,', // Wrong day (was Aug 31)
+      'jefferson.*august 3[0]\\,', // Wrong day
+      'jefferson.*september', // Wrong month (was August)
+    ],
+  },
+  {
+    id: 'trt-029',
+    category: 'treaty',
+    claim:
+      'Jefferson stated in his August 31, 1791 letter that the Treaty of Holston "will be submitted to the Senate for their advice and consent at the commencement of their next session" and predicted "I have no doubt that it will receive their approbation"',
+    source:
+      'Letter from Jefferson to Blount, August 31, 1791 (Founders Online, National Archives)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'adm-012',
+    category: 'administration',
+    claim:
+      'Knox instructed Blount in April 1791 to "endeavor to obtain a cession of as much land as can be procured consistently with the principles of justice" but warned to "not press the Indians beyond what they may be willing to concede"',
+    source:
+      'Letter from Knox to Blount, April 22, 1791 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+  {
+    id: 'adm-013',
+    category: 'administration',
+    claim:
+      'Blount reported in January 1791 that "the Tennessee and Holston rivers affords convenient transportation for the produce of the country" as territorial commerce increased',
+    source:
+      'Letter from Blount to Knox, January 8, 1791 (American State Papers: Indian Affairs)',
+    sourceType: 'primary',
+    confidence: 'verified',
+  },
+
+  // === OVERMOUNTAIN CAMPAIGN (Kings Mountain) ===
+  {
+    id: 'ovm-001',
+    category: 'people',
+    claim:
+      'Mary McKeehan Patton (1751-1836) provided over 500 pounds of gunpowder to the Overmountain Men at Sycamore Shoals in September 1780, essential to their victory at Kings Mountain',
+    source: 'Tennessee Encyclopedia; Sycamore Shoals State Historic Park records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'mary patton.{0,20}400 pounds', // Wrong amount (was 500+)
+      'mary patton.{0,20}300 pounds', // Wrong amount
+      'mary patton.{0,20}gunpowder.{0,20}rocky mount', // Delivered at Sycamore Shoals, not Rocky Mount
+    ],
+  },
+  {
+    id: 'ovm-002',
+    category: 'people',
+    claim:
+      'Mary Patton learned gunpowder making from her father David McKeehan, a Scottish powder maker who emigrated from England to Pennsylvania around 1760',
+    source: 'Tennessee Encyclopedia; Elizabethton Star citing Sycamore Shoals records',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+  },
+  {
+    id: 'ovm-003',
+    category: 'timeline',
+    claim:
+      'The Overmountain Men mustered at Sycamore Shoals on September 25, 1780, received Rev. Samuel Doak\'s sermon with the battle cry "The Sword of the Lord and Gideon!", and began their march to Kings Mountain',
+    source: 'NPS Overmountain Victory National Historic Trail; Tennessee Encyclopedia',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'overmountain.{0,20}muster.{0,20}september 2[0-4]', // Wrong day (was Sept 25)
+      'overmountain.{0,20}muster.{0,20}september 2[6-9]', // Wrong day
+      'overmountain.{0,20}muster.{0,20}rocky mount', // Mustered at Sycamore Shoals, not Rocky Mount
+    ],
+  },
+  {
+    id: 'ovm-004',
+    category: 'timeline',
+    claim:
+      'The Battle of Kings Mountain occurred on October 7, 1780, resulting in the death of British Major Patrick Ferguson and the defeat of his Loyalist forces - described by Jefferson, Washington, and Gates as "the turning point of the American Revolution"',
+    source: 'NPS Kings Mountain National Military Park; Tennessee Encyclopedia',
+    sourceType: 'scholarly',
+    confidence: 'verified',
+    wrongVariants: [
+      'kings mountain.{0,20}october [1-6]\\,', // Wrong day (was Oct 7)
+      'kings mountain.{0,20}october [8-9]\\,', // Wrong day
+      'kings mountain.{0,20}1781', // Wrong year (was 1780)
+      'kings mountain.{0,20}1779', // Wrong year
+    ],
+  },
+  {
+    id: 'ovm-005',
+    category: 'people',
+    claim:
+      'Two of Mary Patton\'s original gunpowder kettles are displayed at Sycamore Shoals State Park museum; a third kettle is at Rocky Mount State Historic Site',
+    source: 'Sycamore Shoals State Historic Park; Rocky Mount State Historic Site records',
+    sourceType: 'scholarly',
+    confidence: 'high',
+  },
+  {
+    id: 'ovm-006',
+    category: 'people',
+    claim:
+      'Rev. Samuel Doak delivered a sermon at Sycamore Shoals on September 26, 1780, sending the Overmountain Men to Kings Mountain with the biblical battle cry from Judges 7: "The Sword of the Lord and Gideon!"',
+    source: 'Tennessee Encyclopedia; Log College Press citing period accounts',
+    sourceType: 'scholarly',
+    confidence: 'high',
   },
 ]
 

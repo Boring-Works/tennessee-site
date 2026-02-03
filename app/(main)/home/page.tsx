@@ -13,9 +13,9 @@ import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
 
 export const metadata: Metadata = {
-  title: "The Constitution's First Test | Rocky Mount State Historic Site",
+  title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
   description:
-    'In 1790, this ground became the first seat of Constitutional governance west of the Appalachians. The Constitution had to work here—or American expansion would fail. America 250 commemorative events in 2026.',
+    "In 1790, Governor Blount made this ground the first capital of the Southwest Territory. Stand where they stood. America 250 and Tennessee 230 commemorative events in 2026.",
 }
 
 // Static data for category counters
@@ -103,7 +103,7 @@ export default function HomePage() {
 
                   {/* Eyebrow */}
                   <p className="text-[11px] uppercase tracking-[0.3em] text-accent/80 font-medium animate-fade-in animation-delay-100">
-                    First Seat of Constitutional Governance West of the Appalachians
+                    First Capital of the Southwest Territory · 1790
                   </p>
 
                   {/* Headline */}
@@ -384,7 +384,7 @@ export default function HomePage() {
                 {/* Declarations */}
                 <div className="space-y-4 mb-10">
                   {[
-                    'First federal seat of government under the Constitution, west of the Appalachians.',
+                    'First capital of the Southwest Territory.',
                     'Where one of 39 Constitution signers governed the frontier.',
                     'The ground where Tennessee began.',
                   ].map((text, i) => (

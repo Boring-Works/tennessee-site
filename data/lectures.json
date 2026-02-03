@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Rocky Mount's 2026 Lecture Series - Five speakers exploring Tennessee's founding story",
-    "updated": "2026-01-30",
+    "updated": "2026-02-03",
     "usage": "import { lectures } from '@/data/lectures.json'",
     "relatedFile": "data/events.json - Lectures also appear there for the main calendar",
 
@@ -196,19 +196,19 @@
     },
 
     "communityHistorianLecture": {
-      "_explanation": "A lecture by a community historian/reenactor rather than an academic. Note the different style of bio.",
+      "_explanation": "A lecture by a state park interpreter rather than an academic. Note the different style of bio.",
       "example": {
         "id": 3,
         "title": "All In: The Overmountain Men's Gamble",
         "date": "2026-05-15",
         "time": "2:00 PM",
         "speaker": {
-          "name": "Thomas Bachelor",
-          "title": "Historian & Reenactor",
-          "institution": "Independent Scholar",
-          "bio": "A 20-year veteran of Revolutionary War reenactment and OVTA-affiliated historian, Thomas Bachelor has walked the Overmountain Victory Trail multiple times and published research on the Southern Campaign."
+          "name": "Thomas Batchelor",
+          "title": "Interpretive Ranger",
+          "institution": "David Crockett Birthplace State Park",
+          "bio": "Thomas Batchelor is an interpretive ranger at David Crockett Birthplace State Park in Limestone, Tennessee. A skilled living historian, he participated in the 2025 OVTA commemorative march to Kings Mountain for the 245th anniversary."
         },
-        "description": "They bet everything—farms, families, lives. The textbooks call it patriotism. Thomas Bachelor calls it what it was: a desperate gamble by men who knew they might never come home. He strips away the myth.",
+        "description": "They bet everything—farms, families, lives. The textbooks call it patriotism. Thomas Batchelor calls it what it was: a desperate gamble by men who knew they might never come home. He strips away the myth.",
         "topics": [
           "Why 1780 was the darkest hour",
           "What they left behind—undefended",
@@ -271,12 +271,12 @@
       "date": "2026-05-15",
       "time": "2:00 PM",
       "speaker": {
-        "name": "Thomas Bachelor",
-        "title": "Historian & Reenactor",
-        "institution": "Independent Scholar",
-        "bio": "A 20-year veteran of Revolutionary War reenactment and OVTA-affiliated historian, Thomas Bachelor has walked the Overmountain Victory Trail multiple times and published research on the Southern Campaign."
+        "name": "Thomas Batchelor",
+        "title": "Interpretive Ranger",
+        "institution": "David Crockett Birthplace State Park",
+        "bio": "Thomas Batchelor is an interpretive ranger at David Crockett Birthplace State Park in Limestone, Tennessee. A skilled living historian, he participated in the 2025 OVTA commemorative march to Kings Mountain for the 245th anniversary."
       },
-      "description": "They bet everything—farms, families, lives. The textbooks call it patriotism. Thomas Bachelor calls it what it was: a desperate gamble by men who knew they might never come home. He strips away the myth.",
+      "description": "They bet everything—farms, families, lives. The textbooks call it patriotism. Thomas Batchelor calls it what it was: a desperate gamble by men who knew they might never come home. He strips away the myth.",
       "topics": [
         "Why 1780 was the darkest hour",
         "What they left behind—undefended",
@@ -286,22 +286,23 @@
     },
     {
       "id": 4,
-      "title": "William Blount and the Birth of Tennessee Government",
-      "date": "2026-05-29",
-      "time": "2:00 PM",
+      "title": "Women Who Marched: The Untold Stories of the Overmountain Victory Trail",
+      "date": "2026-05-23",
+      "time": "12:00 PM",
+      "duration": "45 minutes",
       "speaker": {
-        "name": "Dr. Caroline H. Whitfield",
+        "name": "Jane Doan",
         "title": "Historian",
-        "institution": "Independent Scholar",
-        "bio": "Dr. Whitfield's dissertation examined William Blount's network of political alliances in the Southwest Territory. She has consulted for museums and historic sites across Tennessee."
+        "institution": "Overmountain Victory Trail Association",
+        "bio": "Jane Doan is a historian from Blountville, Tennessee and active member of the Overmountain Victory Trail Association. Her research focuses on the often-overlooked contributions of women during the frontier period and the march to Kings Mountain."
       },
-      "description": "George Washington sent William Blount west. Blount chose this ground—Rocky Mount—as his capitol. Dr. Whitfield reveals the political intrigue, land speculation, and unlikely friendships that birthed Tennessee.",
+      "description": "While history remembers the Overmountain Men who marched to Kings Mountain, this lecture reveals the women who made that march possible—the wives, mothers, and daughters who kept farms running, supplied provisions, and in some cases, rode alongside the militia. Jane Doan shares stories of frontier women whose courage matched that of any soldier.",
       "topics": [
         "Why Blount chose Rocky Mount",
         "Land deals and political maneuvers",
         "The road from territory to state"
       ],
-      "note": "This is Rocky Mount's story—where Tennessee's government began"
+      "note": "This is Rocky Mount's story—where Tennessee's government began. SPEAKER NEEDED: Contact Tennessee Historical Society, Blount Mansion, or UT Knoxville for referrals."
     },
     {
       "id": 5,
@@ -310,9 +311,9 @@
       "time": "11:00 AM",
       "speaker": {
         "name": "David Doan",
-        "title": "President, Overmountain Victory Trail Association",
-        "institution": "OVTA",
-        "bio": "David Doan of Blountville, Tennessee serves as President of the Overmountain Victory Trail Association and Rocky Mount Chapter President. A University of Tennessee Knoxville graduate and eight-year National Guard veteran, his lectures bring Revolutionary War history to life at sites across the region."
+        "title": "President & Grand Marshal",
+        "institution": "Overmountain Victory Trail Association",
+        "bio": "David Doan of Blountville, Tennessee serves as President and Grand Marshal of the Overmountain Victory Trail Association. A University of Tennessee Knoxville graduate and eight-year Tennessee National Guard veteran, he leads the annual commemorative march retracing the 330-mile Overmountain route."
       },
       "description": "Every star and stripe carries a story. From the Grand Union at Boston to the banner that inspired Key's anthem—David Doan traces 250 years of stars and stripes. Followed by Rocky Mount's commemorative flag dedication.",
       "topics": [

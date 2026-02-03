@@ -18,7 +18,11 @@ function useUrlHash(): string | undefined {
 
   const getSnapshot = () => {
     const hash = window.location.hash.slice(1)
-    return hash || undefined
+    // Validate: only allow alphanumeric, hyphens, underscores (passage IDs)
+    if (hash && /^[a-zA-Z0-9_-]+$/.test(hash)) {
+      return hash
+    }
+    return undefined
   }
 
   const getServerSnapshot = () => undefined

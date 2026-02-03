@@ -16,7 +16,7 @@ export const documents: HistoricalDocument[] = [
       'There shall be perpetual peace and friendship between all the citizens of the United States of America, and all the individuals composing the whole Cherokee nation of Indians.',
     keyQuoteAttribution: 'Article I, Treaty of Holston',
     whyThisMatters:
-      'This treaty, negotiated by Governor William Blount during his tenure at Rocky Mount, established the boundary between the United States and Cherokee Nation. Signed by 42 Cherokee chiefs and ratified by President Washington, it became the foundation of federal-Cherokee relations for the next decade and shaped the future borders of Tennessee.',
+      "This treaty was negotiated by Governor William Blount at White's Fort (Knoxville) in July 1791, following preliminary diplomatic meetings at Rocky Mount in December 1790. Signed by 42 Cherokee chiefs and ratified by President Washington, it established boundaries between the United States and Cherokee Nation and shaped the future borders of Tennessee.",
     content: `<p>The treaty was negotiated by William Blount, Governor of the Territory south of the Ohio River, representing the United States, and Cherokee Chiefs and Warriors representing their nation. It aimed to establish permanent peace and remove causes of war through boundary clarification and friendly arrangements.</p>
 
 <h3>Articles of the Treaty</h3>

@@ -236,9 +236,9 @@ export default function VisitPage() {
 
           {/* Experience promise */}
           <p className={styles['visit-hero-promise']}>
-            This is where federal power first reached west of the Appalachians. Walk the same
-            grounds where Governor Blount governed the Southwest Territory and negotiated the Treaty
-            of Holston with forty-one Cherokee chiefs.
+            Walk the grounds where Governor Blount governed the Southwest Territory and conducted
+            preliminary diplomatic talks with Cherokee chiefs that led to the Treaty of Holston,
+            negotiated at White&apos;s Fort (Knoxville) in July 1791.
           </p>
 
           {/* Quick facts row */}

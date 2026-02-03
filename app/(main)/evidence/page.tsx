@@ -224,36 +224,37 @@ export default async function EvidencePage() {
           </p>
         </div>
 
-        {/* Navigation Grid - All options visible immediately */}
+        {/* Primary CTA - Full Document Library */}
         <nav className={styles.heroNav} aria-label="Evidence Room sections">
+          {/* Document Library - Primary CTA - FIRST */}
+          <Link href="/evidence/documents" className={styles.heroLibraryLinkPrimary}>
+            <span className={styles.heroLibraryIcon}>📜</span>
+            <span className={styles.heroLibraryText}>
+              <strong>Browse the Full Document Library</strong>
+              <span>Primary source transcriptions with archival citations</span>
+            </span>
+            <span className={styles.heroLibraryArrow}>→</span>
+          </Link>
+
+          {/* Secondary Navigation */}
           <div className={styles.heroNavGrid}>
-            <a href="#blount-letter" className={styles.heroNavCard}>
-              <span className={styles.heroNavIcon}>✦</span>
-              <span className={styles.heroNavName}>Letters</span>
-            </a>
-            <a href="#treaty-signers" className={styles.heroNavCard}>
-              <span className={styles.heroNavIcon}>★</span>
-              <span className={styles.heroNavName}>Treaty Signers</span>
-            </a>
-            <a href="#timeline" className={styles.heroNavCard}>
+            <Link href="/evidence/collections" className={styles.heroNavCard}>
+              <span className={styles.heroNavIcon}>📁</span>
+              <span className={styles.heroNavName}>Collections</span>
+            </Link>
+            <Link href="/evidence/people" className={styles.heroNavCard}>
+              <span className={styles.heroNavIcon}>👤</span>
+              <span className={styles.heroNavName}>People</span>
+            </Link>
+            <Link href="/evidence/timeline" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>⏱</span>
               <span className={styles.heroNavName}>Timeline</span>
-            </a>
+            </Link>
             <a href="#sources" className={styles.heroNavCard}>
               <span className={styles.heroNavIcon}>❧</span>
               <span className={styles.heroNavName}>Sources</span>
             </a>
           </div>
-
-          {/* Document Library - Primary CTA */}
-          <Link href="/evidence/documents" className={styles.heroLibraryLink}>
-            <span className={styles.heroLibraryIcon}>✦</span>
-            <span className={styles.heroLibraryText}>
-              <strong>Full Document Library</strong>
-              <span>Read complete transcriptions with archival citations</span>
-            </span>
-            <span className={styles.heroLibraryArrow}>→</span>
-          </Link>
         </nav>
 
         {/* Scroll indicator */}
@@ -289,7 +290,7 @@ export default async function EvidencePage() {
             quote={PRIMARY_QUOTES.glassWindowsFull.text}
             attribution={PRIMARY_QUOTES.glassWindowsFull.attribution}
             source={PRIMARY_QUOTES.glassWindowsFull.source}
-            context="Glass windows were rare even in settler communities east of the mountains—most used oiled paper or wooden shutters. At Rocky Mount, they signaled federal authority and investment in the first constitutional capital west of Appalachia."
+            context="Glass windows were rare even in settler communities east of the mountains—most used oiled paper or wooden shutters. At Rocky Mount, they signaled federal authority and investment in the first capital of the Southwest Territory."
             sourceUrl="https://tennesseeencyclopedia.net/entries/rocky-mount/"
             featured
           />

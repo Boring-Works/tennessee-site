@@ -1306,9 +1306,9 @@ Cherokee history in this period is much more complex than these documents reveal
 
 **For the Rocky Mount State Historic Site:**
 
-The Treaty of Holston was negotiated at Rocky Mount. This site can tell visitors:
+The Treaty of Holston was negotiated at White's Fort (Knoxville) in July 1791, following preliminary diplomatic talks at Rocky Mount in December 1790. This site can tell visitors:
 
-> "Here, in 1791, Cherokee leaders came to negotiate peace. Within months, they returned to protest unfair terms and won changes. Five years later, they were still holding America accountable to the promises made at this place. Cherokee were not victims—they were negotiators. They were diplomats. They understood power and how to use it."
+> "Here, in December 1790, Cherokee leaders came to meet Governor Blount and secured his promise of a formal treaty. Seven months later, they negotiated the Treaty of Holston at White's Fort. Within months, they traveled to Philadelphia to protest unfair terms and won changes. Five years later, they were still holding America accountable to the promises made during these negotiations. Cherokee were not victims—they were negotiators. They were diplomats. They understood power and how to use it."
 
 ---
 

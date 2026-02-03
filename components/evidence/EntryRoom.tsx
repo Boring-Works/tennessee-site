@@ -13,6 +13,13 @@ interface Collection {
   featured?: boolean
 }
 
+interface EntryRoomProps {
+  /** Total document count - computed from actual data when available */
+  totalDocuments?: number
+  /** Total collection count */
+  totalCollections?: number
+}
+
 const COLLECTIONS: Collection[] = [
   {
     id: 'blount-papers',
@@ -65,7 +72,7 @@ const COLLECTIONS: Collection[] = [
   },
 ]
 
-export function EntryRoom() {
+export function EntryRoom({ totalDocuments = 97, totalCollections = 6 }: EntryRoomProps) {
   const handleCollectionClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // If it's a hash link, handle smooth scroll
     if (href.startsWith('#')) {
@@ -81,10 +88,7 @@ export function EntryRoom() {
   return (
     <section className={styles.entryRoom}>
       <div className={styles.entryRoomInner}>
-        <p className={styles.welcome}>
-          Welcome to the archive. Six collections await your exploration.
-        </p>
-        <p className={styles.readingTime}>Browse by topic or scroll to read in sequence</p>
+        <p className={styles.welcome}>{totalCollections} Collections · {totalDocuments} Documents</p>
 
         <div className={styles.collectionGrid}>
           {COLLECTIONS.map((collection) => (
@@ -112,10 +116,6 @@ export function EntryRoom() {
           <span className={styles.libraryArrow}>→</span>
         </Link>
 
-        <p className={styles.scrollHint}>
-          <span className={styles.scrollArrow}>↓</span>
-          Or scroll to begin reading
-        </p>
       </div>
     </section>
   )

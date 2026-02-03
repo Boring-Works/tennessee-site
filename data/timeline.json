@@ -197,7 +197,7 @@
       },
       "keyEvents": {
         "southwestTerritory": "Created by Congress in 1790 from land ceded by North Carolina",
-        "treatyOfHolston": "1791 treaty between US and Cherokee Nation, negotiated from Rocky Mount",
+        "treatyOfHolston": "1791 treaty negotiated at White's Fort (Knoxville), following preliminary talks at Rocky Mount (Dec 1790)",
         "kingsmountain": "1780 battle where Overmountain Men defeated British forces"
       }
     }
@@ -256,7 +256,7 @@
     {
       "year": "1791",
       "title": "Treaty of Holston",
-      "description": "Major treaty negotiations with Cherokee Nation",
+      "description": "Treaty signed at White's Fort (Knoxville), following preliminary talks at Rocky Mount",
       "category": "diplomacy"
     },
     {

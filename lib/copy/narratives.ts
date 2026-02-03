@@ -15,20 +15,20 @@ export const MYSTERY_NARRATIVE = {
   },
   hero: {
     badge: 'Tennessee 230 · America 250',
-    headline: "THE CONSTITUTION'S FIRST TEST",
-    subhead:
-      'In 1790, this ground became the first seat of Constitutional governance west of the Appalachians.',
-    supporting: 'The Constitution had to work here—or American expansion would fail. It worked.',
+    headline: 'STAND WHERE THEY STOOD',
+    subhead: "In 1790, Governor Blount made this ground the first capital of the Southwest Territory.",
+    supporting:
+      "Where Tennessee's government began. The ground that became a state.",
     timeline: [
       'In 1770, the Cobbs settled this ground.',
       'In 1780, they armed the Revolution.',
-      'In 1790, Governor Blount made it the seat of federal power—and negotiated the Treaty of Holston with 42 Cherokee leaders.',
+      'In 1790, Governor Blount made it the seat of territorial power—and conducted preliminary diplomatic talks with 42 Cherokee leaders that led to the Treaty of Holston.',
     ],
     contrast:
       'This is not where they gathered. This is not where they farmed. This is where they governed.',
     bridge:
-      'For approximately 16 months, this was the seat of power for everything that would become Tennessee.',
-    cta: 'Stand where they stood.',
+      'For approximately 14-16 months, this was the seat of power for everything that would become Tennessee.',
+    cta: 'Plan your visit.',
   },
 } as const
 
@@ -39,8 +39,8 @@ export const MYSTERY_NARRATIVE = {
  */
 export const SCARCITY_NARRATIVE = {
   welcome: {
-    hook: 'For approximately 16 months, this ground was the capital of everything west of the mountains.',
-    subhook: 'Then the moment passed. The ground remained.',
+    hook: 'For approximately 14-16 months, this ground was the first capital of the Southwest Territory.',
+    subhook: 'Then the capital moved to Knoxville. The ground remained.',
   },
   hero: {
     badge: 'Tennessee 230 · America 250',
@@ -51,7 +51,7 @@ export const SCARCITY_NARRATIVE = {
       'Letters went to Washington. A territory was governed.',
       'A state was born.',
     ],
-    bridge: 'Then the capital moved. The moment passed. The ground remained.',
+    bridge: 'Then the capital moved to Knoxville. The moment passed. The ground remained.',
     cta: 'Stand where they stood.',
   },
 } as const
@@ -62,7 +62,7 @@ export const SCARCITY_NARRATIVE = {
  */
 export const AUTHORITY_NARRATIVE = {
   welcome: {
-    hook: 'The first federal seat of government under the Constitution, west of the Appalachians.',
+    hook: 'The first capital of the Southwest Territory.',
     subhook: "The ground where Tennessee's government began.",
   },
   hero: {
@@ -71,8 +71,8 @@ export const AUTHORITY_NARRATIVE = {
     subhead: "Where Tennessee's government began.",
     timeline: [
       'In 1787, William Blount signed the U.S. Constitution in Philadelphia.',
-      'In 1790, President Washington sent him here to govern the frontier.',
-      'From this ground, he corresponded with Washington and conducted the federal business that would become Tennessee.',
+      'In 1790, President Washington appointed him Governor of the Southwest Territory.',
+      'From this ground, he governed the territory that would become Tennessee.',
     ],
     bridge: 'The buildings have evolved. The ground endures.',
     cta: 'Stand where they stood.',
@@ -180,7 +180,7 @@ export const DISCOVERY_MOMENTS = {
   doorCherokeeChiefs: {
     title: 'The Door Forty-Two Cherokee Chiefs Entered',
     context:
-      'In July 1791, forty-two Cherokee chiefs arrived to negotiate the Treaty of Holston. Protocol demanded hospitality before formal negotiations.',
+      'In December 1790, Cherokee chiefs traveled to Rocky Mount to meet Governor Blount and discuss peace. Protocol demanded hospitality before diplomatic talks. These preliminary meetings led to the Treaty of Holston, negotiated at White\'s Fort in July 1791.',
     lookFor:
       'The width and height of the doorway, the wear on the threshold, and the transition from open grounds to enclosed space.',
     whyItMatters:
@@ -189,20 +189,20 @@ export const DISCOVERY_MOMENTS = {
   roomTerritoryGoverned: {
     title: 'The Room Where the Territory Was Governed',
     context:
-      'From 1790 to 1792, Blount administered 77,000 square miles from this room. Treaties were drafted. Commissions were signed. Tennessee began here.',
+      'From 1790 to 1792, Blount administered the Southwest Territory from this room. Commissions were signed. Tennessee began here.',
     lookFor:
       'The natural light from those glass windows, the size of the space, the proximity to the stairs, and the view of the land Blount administered.',
     whyItMatters:
       'Every law Tennessee has ever passed traces its authority back to the government established in this room.',
   },
-  groundTreatyCelebrated: {
-    title: 'The Ground Where the Treaty Was Celebrated',
+  groundTreatyBegan: {
+    title: 'The Ground Where the Treaty Journey Began',
     context:
-      'On July 2, 1791, the Treaty of Holston was signed. The celebrations and initial gatherings occurred at Rocky Mount.',
+      'In December 1790, Cherokee chiefs stood on this ground and met Governor Blount. He promised them a formal treaty. Seven months later, at White\'s Fort (Knoxville), that promise became the Treaty of Holston.',
     lookFor:
-      'The space available for gathering, the sight lines, the terrain, and the paths of approach where delegates arrived.',
+      'The space available for gathering, the sight lines, the terrain, and the paths of approach where Cherokee delegates arrived.',
     whyItMatters:
-      'The buildings evolved. The ground endures. Only your presence on this ground connects you to that moment.',
+      'Treaties are not signed in one moment—they are negotiated over months. This is where that process began. The buildings evolved. The ground endures.',
   },
   closing: {
     hook: 'The ground is the artifact.',

@@ -9,9 +9,7 @@ import { z } from 'zod'
 
 export const VerificationSchema = z.object({
   status: z.enum(['verified', 'nuance', 'unverified', 'single-source'], {
-    errorMap: () => ({
-      message: 'Verification status must be "verified", "nuance", "unverified", or "single-source"',
-    }),
+    message: 'Verification status must be "verified", "nuance", "unverified", or "single-source"',
   }),
   source_count: z.number().min(1, {
     message: 'Verification must include at least 1 source',
@@ -56,10 +54,8 @@ export const DocumentFrontmatterSchema = z
         'document',
       ],
       {
-        errorMap: () => ({
-          message:
-            'Content type must be one of: letter, speech, testimony, treaty, proclamation, map, newspaper, inventory, report, legal, act, or document',
-        }),
+        message:
+          'Content type must be one of: letter, speech, testimony, treaty, proclamation, map, newspaper, inventory, report, legal, act, or document',
       }
     ),
     source: z.string().min(1, { message: 'Primary source is required' }),

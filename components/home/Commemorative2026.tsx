@@ -292,7 +292,7 @@ export function Commemorative2026() {
               {/* Three declarations with quill marks */}
               <div className={`space-y-4 mb-10 fade-in-up stagger-2 ${isVisible ? 'visible' : ''}`}>
                 {[
-                  'First federal seat of government under the Constitution, west of the Appalachians.',
+                  'First capital of the Southwest Territory.',
                   'Where one of 39 Constitution signers governed the frontier.',
                   'The ground where Tennessee began.',
                 ].map((text, i) => (
@@ -744,7 +744,7 @@ export function Commemorative2026() {
               <p className="text-text-light leading-relaxed">
                 Action on the frontier. A promise kept.
                 <span className="block mt-2 text-sm italic text-accent/80">
-                  The Constitution&apos;s first reach west of the mountains.
+                  Where Tennessee&apos;s government began.
                 </span>
               </p>
             </div>

@@ -28,7 +28,7 @@ The Evidence Room has gone from **0% Cherokee-authored content to having TWO fou
 
 **Historical Significance:**
 
-This document captures the moment when Cherokee leaders traveled hundreds of miles by ship from Charleston to Philadelphia to protest the Treaty of Holston signed just 6 months earlier at Rocky Mount. The delegation demonstrates:
+This document captures the moment when Cherokee leaders traveled hundreds of miles by ship from Charleston to Philadelphia to protest the Treaty of Holston signed just 6 months earlier at White's Fort (Knoxville). The delegation demonstrates:
 
 1. **Cherokee Diplomatic Initiative:** They didn't wait for Americans to summon them—they initiated contact with President Washington
 2. **Strategic Navigation:** They understood the federal system and appealed over Governor Blount's head directly to the President

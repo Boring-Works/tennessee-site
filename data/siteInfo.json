@@ -98,6 +98,7 @@
     "name": "Rocky Mount State Historic Site",
     "tagline": "Tennessee Starts Here",
     "established": "1775",
+    "established_note": "Farm established per Century Farms certification; William Cobb settled the property c. 1770",
     "territorialCapital": {
       "start": 1790,
       "end": 1792,
@@ -390,11 +391,11 @@
       "hook": "Staked his claim on this land six years before the Declaration of Independence was signed.",
       "highlight": "Pioneer",
       "details": [
-        "Established the homestead c. 1770 (current structures built 1826-1830 by grandson Michael Massengill)",
+        "Established the homestead c. 1770 (current structures built 1826-1828 main house, 1829-1830 dining room by grandson Michael Massengill per dendrochronology)",
         "Brought his family from North Carolina to establish the estate",
         "He and his sons responded to John Sevier's call for volunteers in September 1780",
         "Supplied the Overmountain Men with gunpowder, horses, blankets, and food for the Battle of King's Mountain",
-        "In 1795, transferred Rocky Mount to his daughter Penelope Massengill"
+        "In 1796, transferred Rocky Mount to his son-in-law Hal Massengill (husband of daughter Penelope)"
       ]
     }
   ]

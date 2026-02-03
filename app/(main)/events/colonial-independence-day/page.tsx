@@ -152,8 +152,8 @@ export default function ColonialIndependenceDayPage() {
           </h2>
 
           <p className={styles['ind-famous-subtext']}>
-            Three men stood on this ground and shaped a nation. William Blount. Andrew Jackson. John
-            Sevier. On July 4, you&apos;ll stand where they stood.
+            The men who shaped Tennessee walked this ground. Governor Blount governed from here.
+            Colonel Sevier rallied troops here. On July 4, you&apos;ll stand where they stood.
           </p>
 
           <div className={styles['ind-famous-grid']}>
@@ -171,16 +171,15 @@ export default function ColonialIndependenceDayPage() {
             </article>
 
             <article className={styles['ind-famous-card']}>
-              <h3 className={styles['ind-famous-card-name']}>Andrew Jackson</h3>
-              <p className={styles['ind-famous-card-title']}>Future President</p>
+              <h3 className={styles['ind-famous-card-name']}>Barsheba Cobb</h3>
+              <p className={styles['ind-famous-card-title']}>Frontier Matriarch</p>
               <p className={styles['ind-famous-card-text']}>
-                Before becoming America&apos;s 7th President, Jackson traveled through this region
-                in 1788, documented in Jonesborough that August. He practiced law and shaped
-                politics as the frontier transitioned to statehood—part of the same Tennessee that
-                began at Rocky Mount.
+                Barsheba Cobb fed the territorial government. Governor Blount, officials, surveyors,
+                and forty-two Cherokee chiefs all ate meals she prepared. Without her labor, there
+                would have been no negotiations, no treaties, no Tennessee.
               </p>
               <p className={styles['ind-famous-card-hook']}>
-                You&apos;ll stand where Tennessee&apos;s story unfolded.
+                You&apos;ll stand where hospitality made history.
               </p>
             </article>
 

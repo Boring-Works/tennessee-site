@@ -132,7 +132,7 @@ export const HOOKS = {
 
   // Grants/Academic
   grantsLine:
-    'The first federal seat of government established under the U.S. Constitution west of the Appalachians.',
+    'The first capital of the Southwest Territory, established under the U.S. Constitution.',
 
   // Scarcity (2026 only)
   scarcityLine: 'The capital that made a state.',

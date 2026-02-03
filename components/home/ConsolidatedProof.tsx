@@ -535,7 +535,7 @@ export function ConsolidatedProof() {
             </div>
           </div>
 
-          {/* Timeline connector - "67 Days Later" */}
+          {/* Timeline connector - "68 Days Later" */}
           <div
             className={`flex items-center justify-center gap-4 mb-10 transition-all duration-700 ${letterVisible ? 'opacity-100' : 'opacity-0'}`}
             style={{ transitionDelay: '0.6s' }}
@@ -543,7 +543,7 @@ export function ConsolidatedProof() {
             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-white/20 max-w-32" />
             <div className="px-5 py-2 bg-white/5 border border-white/10 rounded-full">
               <span className="text-sm text-white/60">
-                <span className="text-accent font-semibold">67 days</span> later
+                <span className="text-accent font-semibold">68 days</span> later
               </span>
             </div>
             <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/20 to-white/20 max-w-32" />

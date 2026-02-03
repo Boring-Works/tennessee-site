@@ -10,7 +10,7 @@ Before there was a Tennessee, there was this ground. When you arrive at Rocky Mo
 
 ### What We Know
 
-On October 20, 1790, Governor William Blount wrote to his half-brother John Gray Blount from Rocky Mount. In that letter, he described his new accommodations with evident satisfaction:
+On October 20, 1790, Governor William Blount wrote to Secretary of War Henry Knox from Rocky Mount. In that letter, he described his new accommodations with evident satisfaction:
 
 > "I am very well accommodated with a Room with Glass Windows, Fire Place &c &c at this place."
 
@@ -35,7 +35,7 @@ These windows represented civilization pressing westward. They were a statement 
 
 ### What We Know
 
-Barsheba Cobb, wife of William Cobb, did not simply feed her family from 1790 to 1792. She fed the territorial government. Governor Blount boarded at Rocky Mount. Government officials, surveyors, and visiting dignitaries came and went. The Cherokee delegation that arrived for treaty negotiations numbered forty-two chiefs plus their attendants. All of them ate meals prepared at Rocky Mount.
+Barsheba Cobb, wife of William Cobb, did not simply feed her family from 1790 to 1792. She fed the territorial government. Governor Blount boarded at Rocky Mount. Government officials, surveyors, and visiting dignitaries came and went. Cherokee delegations visited Rocky Mount multiple times during the diplomatic process. When chiefs came in December 1790 for preliminary talks with Governor Blount, Barsheba Cobb fed them at Rocky Mount. When the Treaty of Holston was negotiated at White's Fort in July 1791, forty-two Cherokee chiefs signed.
 
 The detached kitchen was the engine of this hospitality. On a working frontier estate, the kitchen operated as a separate building to reduce fire risk and keep heat away from the main house during summer months. Here, Barsheba Cobb and those who worked alongside her produced the meals that sustained the administrative machinery of the Southwest Territory.
 
@@ -59,9 +59,9 @@ History books record the decisions made in Rocky Mount. They rarely record who f
 
 ### What We Know
 
-In July 1791, forty-two Cherokee chiefs arrived at Rocky Mount to negotiate what became the Treaty of Holston. They came to discuss boundaries, to secure their lands, to establish terms of peace with the new federal government. The negotiations took place on the grounds at Rocky Mount before moving to a treaty grounds site on the Holston River.
+In December 1790, Cherokee chiefs visited Rocky Mount for preliminary diplomatic talks with Governor Blount. In July 1791, forty-two Cherokee chiefs traveled to White's Fort (present-day Knoxville) and negotiated what became the Treaty of Holston. They came to discuss boundaries, to secure their lands, to establish terms of peace with the new federal government. The treaty was signed at White's Fort on July 2, 1791.
 
-Before entering formal negotiations, these chiefs would have been received at the Cobb House. Protocol demanded hospitality. The Cherokee leaders entered through the same door you will enter, walking into a space where the future of their nation and the future of Tennessee were both being shaped.
+Before the formal negotiations at White's Fort, Cherokee chiefs had been received at the Cobb House during their December 1790 visit. Protocol demanded hospitality. The Cherokee leaders entered through the same door you will enter, walking into a space where the future of their nation and the future of Tennessee were both being shaped.
 
 ### What to Look For
 
@@ -83,7 +83,7 @@ This doorway witnessed one of the most consequential diplomatic encounters in ea
 
 ### What We Know
 
-From 1790 to 1792, Rocky Mount served as the first seat of government for the Southwest Territory. This was not a symbolic designation. Actual governing happened here. Blount administered a territory covering approximately 77,000 square miles. From his quarters at Rocky Mount, he:
+From 1790 to 1792, Rocky Mount served as the first capital of the Southwest Territory. This was not a symbolic designation. Actual governing happened here. Blount administered the territory that would become Tennessee. From his quarters at Rocky Mount, he:
 
 - Issued proclamations establishing civil government
 - Appointed sheriffs, judges, and militia officers
@@ -113,7 +113,7 @@ Before this room, there was no Tennessee government. The decisions made in this 
 
 ### What We Know
 
-On July 2, 1791, the Treaty of Holston was signed. While the formal signing took place at a treaty grounds site along the Holston River, the celebrations and initial gatherings occurred at Rocky Mount. The treaty established peace between the United States and the Cherokee Nation and defined boundaries for settlement.
+On July 2, 1791, the Treaty of Holston was signed at White's Fort (present-day Knoxville). Cherokee chiefs had visited Rocky Mount in December 1790 for preliminary diplomatic talks with Governor Blount, where he promised a formal treaty. Those negotiations culminated at White's Fort seven months later. The treaty established peace between the United States and the Cherokee Nation and defined boundaries for settlement.
 
 George Washington himself later ratified the treaty, writing:
 

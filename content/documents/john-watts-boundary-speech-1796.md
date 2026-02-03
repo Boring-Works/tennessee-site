@@ -13,7 +13,7 @@ people_mentioned:
   - james-mchenry
   - william-blount
 verification:
-  status: verified
+  status: single-source
   source_count: 1
   method: 'Transcribed from Papers of the War Department digital collection'
   notes: 'Full speech appears on pages 57-60 of War Department records'

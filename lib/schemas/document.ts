@@ -8,10 +8,9 @@ import { z } from 'zod'
  */
 
 export const VerificationSchema = z.object({
-  status: z.enum(['verified', 'nuance', 'unverified'], {
+  status: z.enum(['verified', 'nuance', 'unverified', 'single-source'], {
     errorMap: () => ({
-      message:
-        'Verification status must be "verified", "nuance", or "unverified"',
+      message: 'Verification status must be "verified", "nuance", "unverified", or "single-source"',
     }),
   }),
   source_count: z.number().min(1, {
@@ -27,15 +26,39 @@ export const DocumentFrontmatterSchema = z
   .object({
     id: z.string().min(1, { message: 'Document ID is required' }),
     title: z.string().min(1, { message: 'Document title is required' }),
-    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
-      message: 'Date must be in YYYY-MM-DD format',
-    }),
+    date: z
+      .union([
+        z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+          message: 'Date must be in YYYY-MM-DD format',
+        }),
+        z.date(),
+      ])
+      .transform((val) => {
+        // Convert Date objects to YYYY-MM-DD strings
+        if (val instanceof Date) {
+          return val.toISOString().split('T')[0]
+        }
+        return val
+      }),
     content_type: z.enum(
-      ['letter', 'speech', 'testimony', 'treaty', 'proclamation', 'map'],
+      [
+        'letter',
+        'speech',
+        'testimony',
+        'treaty',
+        'proclamation',
+        'map',
+        'newspaper',
+        'inventory',
+        'report',
+        'legal',
+        'act',
+        'document',
+      ],
       {
         errorMap: () => ({
           message:
-            'Content type must be: letter, speech, testimony, treaty, proclamation, or map',
+            'Content type must be one of: letter, speech, testimony, treaty, proclamation, map, newspaper, inventory, report, legal, act, or document',
         }),
       }
     ),
@@ -48,7 +71,8 @@ export const DocumentFrontmatterSchema = z
     verification: VerificationSchema,
     description: z
       .string()
-      .min(10, { message: 'Description must be at least 10 characters' }),
+      .min(10, { message: 'Description must be at least 10 characters' })
+      .optional(),
   })
   .refine(
     (data) => {
@@ -56,11 +80,15 @@ export const DocumentFrontmatterSchema = z
       if (data.verification.status === 'verified') {
         return data.verification.source_count >= 2
       }
+      // If status is "single-source", require exactly 1 source
+      if (data.verification.status === 'single-source') {
+        return data.verification.source_count === 1
+      }
       return true
     },
     {
       message:
-        'VERIFICATION ERROR: "verified" status requires source_count >= 2. Use "nuance" or "unverified" for single-sourced claims.',
+        'VERIFICATION ERROR: "verified" requires source_count >= 2. "single-source" requires source_count === 1.',
       path: ['verification', 'source_count'],
     }
   )

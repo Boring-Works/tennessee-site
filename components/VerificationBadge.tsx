@@ -1,7 +1,7 @@
 import { AlertTriangle, CheckCircle2, Info } from 'lucide-react'
 
 interface VerificationBadgeProps {
-  status: 'verified' | 'nuance' | 'unverified'
+  status: 'verified' | 'nuance' | 'unverified' | 'single-source'
   notes?: string
   sourceCount?: number
   method?: string
@@ -24,6 +24,22 @@ export function VerificationBadge({
         <span>Verified</span>
         {sourceCount && sourceCount > 0 && (
           <span className="text-xs opacity-75">({sourceCount} sources)</span>
+        )}
+      </div>
+    )
+  }
+
+  if (status === 'single-source') {
+    return (
+      <div
+        className={`inline-flex items-center gap-2 rounded-md bg-yellow-50 px-3 py-1.5 text-sm font-medium text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400 ${className}`}
+      >
+        <AlertTriangle className="h-4 w-4" />
+        <span>Single Source</span>
+        {notes && (
+          <span className="text-xs opacity-75" title={notes}>
+            (1 source only)
+          </span>
         )}
       </div>
     )
@@ -89,6 +105,18 @@ export function VerificationBadgeCompact({
       >
         <CheckCircle2 className="h-3 w-3" />
         Verified
+      </span>
+    )
+  }
+
+  if (status === 'single-source') {
+    return (
+      <span
+        className={`inline-flex items-center gap-1 text-xs font-medium text-yellow-700 dark:text-yellow-400 ${className}`}
+        title="Verified by single source only"
+      >
+        <AlertTriangle className="h-3 w-3" />
+        Single Source
       </span>
     )
   }

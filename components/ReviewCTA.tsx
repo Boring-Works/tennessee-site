@@ -98,25 +98,25 @@ export function ReviewCTA({
         {/* Decorative top flourish for standalone */}
         {isStandalone && (
           <div className="flex items-center justify-center gap-3 mb-8" aria-hidden="true">
-            <span className="w-12 h-px bg-[--gold-primary]/30" />
-            <span className="text-[--gold-primary] text-sm">✦</span>
-            <span className="w-12 h-px bg-[--gold-primary]/30" />
+            <span className="w-12 h-px bg-gold/30" />
+            <span className="text-gold text-sm">✦</span>
+            <span className="w-12 h-px bg-gold/30" />
           </div>
         )}
 
         {/* Headline */}
         <h2
           id="review-heading"
-          className="font-serif text-2xl md:text-3xl font-bold text-[--primary] mb-3"
+          className="font-serif text-2xl md:text-3xl font-bold text-navy-dark mb-3"
         >
           {headline}
         </h2>
 
         {/* Supporting message */}
-        <p className="text-base md:text-lg text-[--text-light] mb-8">{subtext}</p>
+        <p className="text-base md:text-lg text-gray-600 mb-8">{subtext}</p>
 
         {/* CTA text */}
-        <p className="text-sm font-semibold text-[--primary] mb-6 uppercase tracking-wider">
+        <p className="text-sm font-semibold text-navy-dark mb-6 uppercase tracking-wider">
           Leave a review on:
         </p>
 
@@ -131,11 +131,11 @@ export function ReviewCTA({
               className={`
                 inline-flex items-center justify-center gap-2
                 px-6 py-3 rounded-lg
-                bg-white border-2 border-[--gold-primary]/20
-                text-[--primary] font-semibold
+                bg-white border-2 border-gold/20
+                text-navy-dark font-semibold
                 transition-all duration-300 ease-out
                 hover:shadow-lg hover:-translate-y-1
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--gold-primary] focus-visible:ring-offset-2
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2
                 ${platform.color}
               `}
               aria-label={`Leave a review on ${platform.name}`}
@@ -149,14 +149,14 @@ export function ReviewCTA({
         {/* Closing tagline for standalone */}
         {isStandalone && (
           <div className="mt-10">
-            <p className="text-sm italic text-[--gold-primary]/80">
+            <p className="text-sm italic text-gold/80">
               Thank you for visiting Rocky Mount State Historic Site.
             </p>
             {/* Decorative bottom flourish */}
             <div className="flex items-center justify-center gap-3 mt-6" aria-hidden="true">
-              <span className="text-[--gold-primary]/40 text-xs">❧</span>
-              <span className="w-8 h-px bg-[--gold-primary]/20" />
-              <span className="text-[--gold-primary]/40 text-xs">❧</span>
+              <span className="text-gold/40 text-xs">❧</span>
+              <span className="w-8 h-px bg-gold/20" />
+              <span className="text-gold/40 text-xs">❧</span>
             </div>
           </div>
         )}

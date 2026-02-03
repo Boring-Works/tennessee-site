@@ -138,7 +138,7 @@
   background: var(--color-almanac-gold);
   color: var(--color-almanac-midnight);
   padding: 0.5rem 1rem;
-  z-index: 100;
+  z-index: 9999; /* Skip links should be topmost for accessibility */
   transition: top 0.2s;
 }
 

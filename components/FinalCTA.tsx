@@ -44,7 +44,7 @@ function FinalCTAComponent() {
 
           {/* Headline */}
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-            Ready to Visit Rocky Mount?
+            Stand Where Tennessee Began
           </h2>
 
           {/* Subheading */}

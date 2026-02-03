@@ -196,6 +196,22 @@ export default function EventsPage() {
           <p className={styles['calendar-pricing-note']}>
             Most events require advance tickets · Separate from regular site admission
           </p>
+
+          {/* Booking CTA - Prominent call to action */}
+          <div className="text-center mb-8 max-w-2xl mx-auto mt-8">
+            <a
+              href="https://fareharbor.com/embeds/book/rockymountmuseum/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              Reserve Your Spot for 2026 Events
+              <span aria-hidden="true">→</span>
+            </a>
+            <p className="text-sm text-secondary dark:text-white/60 mt-3">
+              Most events require advance tickets · Book early to secure your place
+            </p>
+          </div>
         </div>
       </section>
 

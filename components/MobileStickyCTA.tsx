@@ -43,7 +43,7 @@ export default function MobileStickyCTA() {
             href="/events"
             className="flex-1 bg-white/10 text-white text-center py-3 rounded-sm font-semibold text-sm hover:bg-white/20 transition-colors border border-white/30 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
           >
-            2026 Events
+            Anniversary Events
           </Link>
           <Link
             href="/visit"

@@ -192,13 +192,16 @@ export function DocumentTeaser() {
             href="/evidence"
             className="inline-flex items-center gap-3 bg-primary dark:bg-accent text-white dark:text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-secondary dark:hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-lg"
           >
-            Be Among the First to Explore the Evidence Room
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              &rarr;
+            Explore the Full Evidence Room
+            <span
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
             </span>
           </Link>
           <p className="text-xs text-secondary/50 dark:text-white/40 mt-3 italic">
-            Discover the documents that shaped the American frontier
+            40+ primary source documents from the National Archives
           </p>
         </div>
       </div>

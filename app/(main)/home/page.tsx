@@ -315,12 +315,12 @@ export default function HomePage() {
         <section className="relative bg-cream py-20 md:py-28">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 mb-4 font-semibold">
-                2026 America 250 Season
-              </p>
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-6 font-bold">
-                Don&apos;t Just Read History. Be There.
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-4 font-bold">
+                Experience America 250 at Rocky Mount
               </h2>
+              <p className="text-lg md:text-xl text-text-light max-w-3xl mx-auto">
+                Three signature programs in 2026—the year Tennessee turns 230 and America turns 250.
+              </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">

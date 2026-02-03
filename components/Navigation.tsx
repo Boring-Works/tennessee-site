@@ -490,18 +490,6 @@ function NavigationComponent() {
         </div>
       </header>
 
-      {/* Mobile FAB - hidden when menu is open */}
-      {!mobileMenuOpen && (
-        <button
-          type="button"
-          className={styles['mobile-fab']}
-          onClick={() => setMobileMenuOpen(true)}
-          aria-label="Open main menu"
-        >
-          <Menu size={24} />
-        </button>
-      )}
-
       {/* Mobile Sheet Menu (Radix Dialog) */}
       <MobileNav open={mobileMenuOpen} onOpenChange={setMobileMenuOpen} pathname={pathname} />
 

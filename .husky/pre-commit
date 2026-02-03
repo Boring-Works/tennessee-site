@@ -1,1 +1,10 @@
-npx lint-staged
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run pre-commit fact-checker
+npx tsx scripts/pre-commit-fact-check.ts
+
+# Run lint-staged (if exists)
+if command -v npx &> /dev/null && [ -f "package.json" ]; then
+  npx lint-staged
+fi

@@ -32,7 +32,7 @@ G. Washington
 
 ---
 
-_Note: The Senate confirmed Blount's nomination the following day, June 8, 1790. He became the first and only Governor of the Southwest Territory, serving until Tennessee achieved statehood in 1796._
+_Note: The United States Senate confirmed William Blount's appointment as territorial governor on June 8, 1790, one day after President Washington's nomination. Blount served as the first and only Governor of the Southwest Territory until Tennessee achieved statehood._
 
 ---
 

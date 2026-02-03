@@ -19,7 +19,7 @@ verification:
   source_count: 3
   method: Cross-referenced with Founders Online, American State Papers Indian Affairs Vol. 1, and Knox Papers
   notes: 'Cherokee objections documented in Knox report to Washington. Delegation meetings occurred January 7, 9, and 11, 1792 in Philadelphia.'
-description: Cherokee chiefs traveled to Philadelphia in late 1791 to express dissatisfaction with the Treaty of Holston, resulting in amendments that increased their annuity.
+description: Five Cherokee chiefs met with Secretary of War Henry Knox in Philadelphia on January 7, 9, and 11, 1792, to express dissatisfaction with the Treaty of Holston, resulting in amendments that increased their annuity.
 ---
 
 ## Cherokee Delegation to Philadelphia
@@ -32,7 +32,7 @@ _January 1792_
 
 ### Background
 
-Following the ratification of the Treaty of Holston on November 11, 1791, a delegation of five Cherokee chiefs traveled by ship from Charleston to Philadelphia, arriving on December 29, 1791. The delegation sought to address their dissatisfaction with treaty terms and ongoing encroachments on their lands.
+Following the ratification of the Treaty of Holston on November 11, 1791, a delegation of five Cherokee chiefs traveled by ship from Charleston to Philadelphia. They met with Secretary of War Henry Knox on January 7, 9, and 11, 1792, to present objections to the treaty and demand increased annuity.
 
 ### The Delegation
 

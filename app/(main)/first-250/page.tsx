@@ -42,6 +42,14 @@ export default function First250Page() {
           ============================================ */}
       <section className={styles['legacy-hero']} aria-labelledby="legacy-heading">
         <div className={styles['legacy-hero-content']}>
+          {/* Scarcity Alert - Moved to Top */}
+          <div className={styles['legacy-scarcity-alert']}>
+            <span className={styles['legacy-scarcity-number']}>
+              {TOTAL_SPOTS - CURRENT_ENROLLED}
+            </span>
+            <span className={styles['legacy-scarcity-text']}>Spots Remaining</span>
+          </div>
+
           {/* Eyebrow */}
           <p className={styles['legacy-eyebrow']}>
             <time dateTime="2026-07-04">July 4, 2026</time> · America&apos;s 250th Birthday
@@ -57,18 +65,6 @@ export default function First250Page() {
           <p className={styles['legacy-hook']}>
             Your name, read aloud at Tennessee&apos;s first capital, on the day America turns 250.
           </p>
-
-          {/* Vintage gauge - scarcity signal */}
-          <div className={styles['legacy-gauge-wrapper']}>
-            <VintageGauge
-              current={CURRENT_ENROLLED}
-              total={TOTAL_SPOTS}
-              label="Registry Capacity"
-              showRemaining={true}
-              size="medium"
-              theme="dark"
-            />
-          </div>
 
           {/* Early CTA */}
           <a href="#choose-your-legacy" className={styles['legacy-hero-cta']}>
@@ -185,18 +181,6 @@ export default function First250Page() {
             <p className={styles['legacy-tiers-subtitle']}>
               Every signatory&apos;s name will be read aloud. Choose how you&apos;ll be remembered.
             </p>
-
-            {/* Vintage gauge */}
-            <div className={styles['legacy-tiers-gauge']}>
-              <VintageGauge
-                current={CURRENT_ENROLLED}
-                total={TOTAL_SPOTS}
-                label="Capacity Status"
-                showRemaining={true}
-                size="small"
-                theme="light"
-              />
-            </div>
           </header>
 
           <div className={styles['legacy-tiers-grid']}>
@@ -217,16 +201,23 @@ export default function First250Page() {
                   <header className={styles['legacy-tier-header']}>
                     <p className={styles['legacy-tier-tagline']}>{framing.tagline}</p>
                     <h3 className={styles['legacy-tier-name']}>{framing.name}</h3>
-                    <p className={styles['legacy-tier-price']}>
-                      {tier.price === 0 ? (
-                        <span className={styles['legacy-tier-price-free']}>Free</span>
-                      ) : (
-                        <>
-                          <span className={styles['legacy-tier-price-currency']}>$</span>
-                          <span className={styles['legacy-tier-price-amount']}>{tier.price}</span>
-                        </>
+                    <div className={styles['legacy-tier-price-wrapper']}>
+                      <p className={styles['legacy-tier-price']}>
+                        {tier.price === 0 ? (
+                          <span className={styles['legacy-tier-price-free']}>Free</span>
+                        ) : (
+                          <>
+                            <span className={styles['legacy-tier-price-currency']}>$</span>
+                            <span className={styles['legacy-tier-price-amount']}>{tier.price}</span>
+                          </>
+                        )}
+                      </p>
+                      {tier.price > 0 && (
+                        <p className={styles['legacy-tier-value-prop']}>
+                          {tier.price === 25 ? 'Make it memorable' : 'Create a lasting legacy'}
+                        </p>
                       )}
-                    </p>
+                    </div>
                   </header>
 
                   <ul className={styles['legacy-tier-benefits']}>
@@ -447,6 +438,34 @@ export default function First250Page() {
       </section>
 
       {/* ============================================
+          SOCIAL PROOF - Trust Building
+          ============================================ */}
+      <section className={styles['legacy-social-proof']} aria-labelledby="proof-heading">
+        <div className={styles['legacy-social-proof-inner']}>
+          <h2 id="proof-heading" className={styles['legacy-social-proof-headline']}>
+            Join Fellow Tennesseans in Honoring Our Founding
+          </h2>
+
+          <div className={styles['legacy-social-proof-grid']}>
+            <div className={styles['legacy-social-proof-stat']}>
+              <span className={styles['legacy-social-proof-number']}>{CURRENT_ENROLLED}</span>
+              <span className={styles['legacy-social-proof-label']}>Already Enrolled</span>
+            </div>
+            <div className={styles['legacy-social-proof-stat']}>
+              <span className={styles['legacy-social-proof-number']}>
+                {Math.round(((TOTAL_SPOTS - CURRENT_ENROLLED) / TOTAL_SPOTS) * 100)}%
+              </span>
+              <span className={styles['legacy-social-proof-label']}>Spots Available</span>
+            </div>
+            <div className={styles['legacy-social-proof-stat']}>
+              <span className={styles['legacy-social-proof-number']}>1</span>
+              <span className={styles['legacy-social-proof-label']}>Chance in a Lifetime</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
           FINAL CTA - Closing
           ============================================ */}
       <section className={styles['legacy-closing']} aria-labelledby="closing-heading">
@@ -458,14 +477,12 @@ export default function First250Page() {
             Will yours be one of them?
           </h2>
 
-          <div className={styles['legacy-closing-gauge']}>
-            <VintageGauge
-              current={CURRENT_ENROLLED}
-              total={TOTAL_SPOTS}
-              showRemaining={true}
-              size="small"
-              theme="dark"
-            />
+          {/* Scarcity reminder */}
+          <div className={styles['legacy-closing-scarcity']}>
+            <p className={styles['legacy-closing-scarcity-text']}>
+              Only <strong>{TOTAL_SPOTS - CURRENT_ENROLLED} spots</strong> remain in the First 250
+              Registry
+            </p>
           </div>
 
           <a href="#choose-your-legacy" className={styles['legacy-closing-cta']}>

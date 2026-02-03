@@ -17,8 +17,8 @@ interface VintageGaugeProps {
   theme?: 'dark' | 'light'
 }
 
-/** Tick mark positions as percentages */
-const TICK_POSITIONS = [0, 25, 50, 75, 100] as const
+/** Simplified tick mark positions - only start and end */
+const TICK_POSITIONS = [0, 100] as const
 
 export default function VintageGauge({
   current,
@@ -46,11 +46,8 @@ export default function VintageGauge({
     return () => clearTimeout(timer)
   }, [percentage])
 
-  // Memoize tick labels calculation
-  const tickLabels = useMemo(
-    () => [0, Math.round(total * 0.25), Math.round(total * 0.5), Math.round(total * 0.75), total],
-    [total]
-  )
+  // Simplified tick labels - only start and end
+  const tickLabels = useMemo(() => [0, total], [total])
 
   // Generate a stable, unique ID for aria-labelledby
   const labelId = `gauge-label-${uniqueId}`
@@ -67,14 +64,24 @@ export default function VintageGauge({
       role="group"
       aria-label={`${label}: ${statusText}`}
     >
-      {/* Label */}
-      <p className="vintage-gauge-label" id={labelId}>
-        {label}
-      </p>
+      {/* Status text - MOVED TO TOP - This is the most important info */}
+      <div className="vintage-gauge-status">
+        {showRemaining ? (
+          <p className="vintage-gauge-status-text">
+            <span className="vintage-gauge-highlight">{remaining}</span>
+            <span className="vintage-gauge-status-suffix"> of {total} spots remaining</span>
+          </p>
+        ) : (
+          <p className="vintage-gauge-status-text">
+            <span className="vintage-gauge-highlight">{current}</span>
+            <span className="vintage-gauge-status-suffix"> of {total} signatories enrolled</span>
+          </p>
+        )}
+      </div>
 
       {/* The gauge track */}
       <div className="vintage-gauge-track">
-        {/* Tick marks */}
+        {/* Simplified tick marks - only start and end */}
         <div className="vintage-gauge-ticks" aria-hidden="true">
           {TICK_POSITIONS.map((tick, i) => (
             <div key={tick} className="vintage-gauge-tick" style={{ left: `${tick}%` }}>
@@ -96,7 +103,7 @@ export default function VintageGauge({
             aria-labelledby={labelId}
             aria-valuetext={statusText}
           />
-          {/* Needle indicator */}
+          {/* Enhanced needle indicator */}
           <div
             className="vintage-gauge-needle"
             style={{ left: `${animatedValue}%` }}
@@ -110,20 +117,10 @@ export default function VintageGauge({
         <div className="vintage-gauge-texture" aria-hidden="true" />
       </div>
 
-      {/* Status text - hidden from screen readers since we have aria-label */}
-      <div className="vintage-gauge-status" aria-hidden="true">
-        {showRemaining ? (
-          <p className="vintage-gauge-status-text">
-            <strong className="vintage-gauge-highlight">{remaining}</strong> of {total} spots
-            remaining
-          </p>
-        ) : (
-          <p className="vintage-gauge-status-text">
-            <strong className="vintage-gauge-highlight">{current}</strong> of {total} signatories
-            enrolled
-          </p>
-        )}
-      </div>
+      {/* Label - MOVED TO BOTTOM - Less important than the actual numbers */}
+      <p className="vintage-gauge-label" id={labelId}>
+        {label}
+      </p>
     </div>
   )
 }

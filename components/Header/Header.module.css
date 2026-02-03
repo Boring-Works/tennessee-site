@@ -26,8 +26,10 @@
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   background: var(--nav-bg-scrolled);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05); /* Subtle single-pixel line */
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================
@@ -54,17 +56,27 @@
 
 .stripe--crimson {
   flex: 1;
-  background: #8d0801;
+  background: linear-gradient(90deg, #8d0801 0%, #a82820 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .stripe--gold {
   flex: 1;
-  background: var(--nav-gold);
+  background: linear-gradient(
+    90deg,
+    var(--gold-primary) 0%,
+    var(--gold-hover) 50%,
+    var(--gold-primary) 100%
+  );
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0 8px var(--gold-shimmer);
 }
 
 .stripe--federal {
   flex: 1;
-  background: #1a365d;
+  background: linear-gradient(90deg, #1a365d 0%, #234876 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
@@ -95,11 +107,12 @@
   gap: var(--nav-mobile-gap);
   text-decoration: none;
   border-radius: 2px;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .logo:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .logo:focus-visible {
@@ -126,9 +139,11 @@
   font-family: var(--nav-font-desktop);
   font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.28em;
   color: var(--nav-text-light-hover);
-  transition: color var(--nav-duration-hover) ease;
+  transition: all var(--nav-duration-hover) ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 @media (min-width: 768px) {
@@ -138,7 +153,10 @@
 }
 
 .logo:hover .logo-text {
-  color: var(--gold, var(--nav-gold));
+  color: var(--gold-hover);
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px var(--gold-shimmer);
 }
 
 .logo-tagline {
@@ -167,12 +185,14 @@
 .logo-tagline-text {
   font-family: var(--nav-font-desktop);
   font-size: var(--nav-size-desktop);
-  font-style: normal;
+  font-style: italic;
   font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold-shimmer);
+  letter-spacing: 0.24em;
+  text-transform: lowercase;
+  color: var(--gold-primary);
   white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
 }
 
 @media (min-width: 768px) {
@@ -183,8 +203,15 @@
 
   .logo-tagline-text {
     font-size: var(--nav-size-desktop);
-    letter-spacing: 0.22em;
+    letter-spacing: 0.26em;
   }
+}
+
+.logo:hover .logo-tagline-text {
+  color: var(--gold-hover);
+  text-shadow:
+    0 1px 6px rgba(0, 0, 0, 0.3),
+    0 0 12px var(--gold-shimmer);
 }
 
 /* ============================================
@@ -235,11 +262,13 @@
   min-height: var(--nav-touch-min);
   display: inline-flex;
   align-items: center;
-  transition: color var(--nav-duration-hover) ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover {
   color: var(--nav-text-light-hover);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
 .nav-link--active {
@@ -249,6 +278,7 @@
 /* Current page text should be full white, not muted */
 .nav-link[aria-current='page'] {
   color: var(--nav-text-light-hover);
+  font-weight: 600;
 }
 
 .nav-link:focus-visible {
@@ -257,23 +287,36 @@
   border-radius: 2px;
 }
 
-/* Underline animation */
+/* Underline animation with shimmer effect */
 .nav-link-underline {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--gold, var(--nav-gold));
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-hover), var(--gold-primary));
+  background-size: 200% 100%;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform var(--nav-duration-hover) ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px var(--gold-shimmer);
 }
 
-/* Current page indicator - ALWAYS visible */
+/* Current page indicator - ALWAYS visible with shimmer animation */
 .nav-link[aria-current='page'] .nav-link-underline {
   transform: scaleX(1);
   opacity: 1;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Hover still works for non-current items */
@@ -307,26 +350,62 @@
   gap: 0.5rem;
   padding: var(--nav-dropdown-padding);
   min-height: var(--nav-touch-min);
-  background: var(--gold, var(--nav-gold));
-  border: 1px solid var(--gold, var(--nav-gold));
+  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-hover) 100%);
+  background-size: 200% 200%;
+  border: 1px solid var(--gold-primary);
   color: var(--nav-text-dark);
   font-family: var(--nav-font-desktop);
   font-size: var(--nav-size-desktop);
-  font-weight: var(--nav-weight-desktop);
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all var(--nav-duration-hover) ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 2px 8px var(--gold-shimmer),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .cta:hover {
-  background: var(--nav-gold-hover);
-  border-color: var(--nav-gold-hover);
+  background-position: 100% 100%;
+  border-color: var(--gold-hover);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 16px var(--gold-shimmer),
+    0 8px 24px rgba(201, 162, 39, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.cta:hover::before {
+  left: 100%;
+}
+
+.cta:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 8px var(--gold-shimmer),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .cta:focus-visible {
-  outline: 2px solid var(--gold, var(--nav-gold));
+  outline: 2px solid white;
   outline-offset: 2px;
+  box-shadow:
+    0 4px 16px var(--gold-shimmer),
+    0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
 .cta-icon {
@@ -602,7 +681,7 @@
   text-decoration: none;
   padding: var(--nav-item-padding);
   min-height: var(--nav-touch-min);
-  transition: color var(--nav-duration-hover) ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   background: var(--nav-bg-transparent);
@@ -610,10 +689,13 @@
 
 .dropdown-toggle:hover {
   color: var(--nav-text-light-hover);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
 .dropdown-toggle--active {
   color: var(--nav-text-light-hover);
+  font-weight: 600;
 }
 
 .dropdown-toggle:focus-visible {
@@ -622,7 +704,7 @@
   border-radius: 2px;
 }
 
-/* Chevron icon for dropdown toggle */
+/* Chevron icon for dropdown toggle with smooth animation */
 .dropdown-chevron {
   width: 1.25rem;
   height: 1.25rem;
@@ -630,34 +712,43 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform var(--nav-duration-hover) var(--nav-ease-spring);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 0.5rem;
+  color: var(--gold-primary);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.dropdown-toggle:hover .dropdown-chevron {
+  color: var(--gold-hover);
+  filter: drop-shadow(0 2px 4px var(--gold-shimmer));
 }
 
 .dropdown-toggle[aria-expanded='true'] .dropdown-chevron,
 .dropdown-toggle[data-state='open'] .dropdown-chevron {
   transform: rotate(180deg);
+  color: var(--gold-hover);
 }
 
-/* Dropdown container */
+/* Dropdown container with premium styling */
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
   min-width: 220px;
   background: rgba(10, 15, 20, 0.98);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--gold-shimmer);
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px var(--gold-shimmer);
+    0 12px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--gold-shimmer),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   margin-top: 0.5rem;
   padding: 0.75rem 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-0.5rem);
-  transition: all var(--nav-duration-close) var(--nav-ease-spring);
+  transform: translateY(-0.5rem) scale(0.98);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 110;
   list-style: none;
@@ -670,7 +761,7 @@
 .dropdown-menu[data-state='open'] {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   pointer-events: auto;
 }
 
@@ -727,23 +818,26 @@
   margin: 0.5rem 0;
 }
 
-/* Underline animation for dropdown toggle */
+/* Underline animation for dropdown toggle with shimmer effect */
 .dropdown-toggle-underline {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--gold, var(--nav-gold));
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-hover), var(--gold-primary));
+  background-size: 200% 100%;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform var(--nav-duration-hover) ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px var(--gold-shimmer);
 }
 
-/* Current page indicator for dropdown - ALWAYS visible */
+/* Current page indicator for dropdown - ALWAYS visible with shimmer animation */
 .dropdown-toggle--active .dropdown-toggle-underline {
   transform: scaleX(1);
   opacity: 1;
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 .dropdown-toggle:hover .dropdown-toggle-underline,

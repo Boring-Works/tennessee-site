@@ -106,7 +106,7 @@ export default function AboutModal({ iconOnly = false }: AboutModalProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/80 z-50"
+              className="fixed inset-0 bg-black/80 z-45"
             />
 
             {/* Modal Content */}

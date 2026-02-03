@@ -176,7 +176,7 @@ export default function LocationPicker({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/60 z-40"
+              className="fixed inset-0 bg-black/60 z-45"
               aria-hidden="true"
             />
 

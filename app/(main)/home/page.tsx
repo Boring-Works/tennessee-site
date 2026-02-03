@@ -122,66 +122,21 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
-          THE PROBLEM — Why Visitors Are Searching
-          StoryBrand: External, Internal, Philosophical Problems
+          CONSTITUTION CONNECTION
+          StoryBrand: Establishing Authority + Historical Timeline
           ════════════════════════════════════════════════════════════════════ */}
       <ScrollReveal>
-        <section className="relative bg-cream py-16 md:py-24">
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="text-center mb-12">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 mb-4 font-semibold">
-                The Question Everyone Asks
-              </p>
-              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6 font-bold">
-                Where Did Tennessee Really Begin?
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">❓</span>
-                </div>
-                <h3 className="font-serif text-xl text-primary mb-3 font-semibold">
-                  External Problem
-                </h3>
-                <p className="text-text-light leading-relaxed">
-                  Textbooks say &ldquo;Southwest Territory&rdquo; but don&apos;t show you where it
-                  actually happened.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">💭</span>
-                </div>
-                <h3 className="font-serif text-xl text-primary mb-3 font-semibold">
-                  Internal Problem
-                </h3>
-                <p className="text-text-light leading-relaxed">
-                  You&apos;re tired of tourist sites that oversimplify history into plaques and gift
-                  shops.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">⚖️</span>
-                </div>
-                <h3 className="font-serif text-xl text-primary mb-3 font-semibold">
-                  Philosophical Problem
-                </h3>
-                <p className="text-text-light leading-relaxed">
-                  Real history—with all its complexity—deserves serious treatment.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-12 text-center">
-              <p className="font-serif text-xl md:text-2xl text-primary italic">
-                This ground holds the answer. The documents prove it.
-              </p>
-            </div>
+        <section className="relative bg-primary py-12 md:py-16">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <p className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed mb-6">
+              In 1787, William Blount signed the U.S. Constitution in Philadelphia.
+            </p>
+            <p className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed mb-6">
+              In 1790, President Washington appointed him Governor of the Southwest Territory.
+            </p>
+            <p className="font-serif text-2xl md:text-3xl text-white font-bold">
+              From this ground, he governed the territory that would become Tennessee.
+            </p>
           </div>
         </section>
       </ScrollReveal>
@@ -195,14 +150,11 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto px-6">
             {/* Header */}
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 mb-4 font-semibold">
-                Three Ways to Experience
-              </p>
               <h2
                 id="paths-heading"
                 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-6 font-bold"
               >
-                How Will You Stand Where They Stood?
+                Choose Your Experience
               </h2>
             </div>
 
@@ -217,7 +169,7 @@ export default function HomePage() {
                   <Calendar className="w-8 h-8 text-accent" />
                 </div>
                 <h3 className="font-serif text-2xl text-primary text-center mb-4 group-hover:text-accent transition-colors">
-                  Visit This Week
+                  Visit in Person
                 </h3>
                 <p className="text-base text-text-light leading-relaxed text-center mb-6">
                   Tours start at 10am Wed–Sat. Book online or walk in. See the room where Governor
@@ -252,7 +204,7 @@ export default function HomePage() {
                   <FileText className="w-8 h-8 text-accent" />
                 </div>
                 <h3 className="font-serif text-2xl text-white text-center mb-4 group-hover:text-accent transition-colors">
-                  Explore the Evidence
+                  Enter the Evidence Room
                 </h3>
                 <p className="text-base text-white/70 leading-relaxed text-center mb-6">
                   Original letters, treaties, and documents. See Blount&apos;s words. Read Cherokee
@@ -310,15 +262,12 @@ export default function HomePage() {
         <section className="relative bg-primary py-20 md:py-28">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/70 mb-4 font-semibold">
-                Why This Ground Matters
-              </p>
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 font-bold">
-                The Ground Is the Artifact
+                Federal Authority on the Frontier
               </h2>
-              <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto italic">
-                Like Gettysburg. Like Independence Hall. The building is proof. But the ground is
-                what endures.
+              <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+                From 1790–1792, this site served as the seat of government for the Southwest
+                Territory.
               </p>
             </div>
 

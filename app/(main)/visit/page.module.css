@@ -1598,6 +1598,8 @@
 .visit-card--featured {
   position: relative;
   overflow: visible;
+  background: var(--primary);
+  color: white;
 }
 
 /* Book Seal - Decorative 3D Effect */

@@ -154,10 +154,6 @@ function DesktopNav({ pathname }: DesktopNavProps) {
                                 subitem.icon === 'scroll' ? styles['dropdown-tile--evidence'] : ''
                               }`}
                             >
-                              <span className={styles['dropdown-tile-icon']}>
-                                {subitem.icon === 'map' && '🗺️'}
-                                {subitem.icon === 'scroll' && '📜'}
-                              </span>
                               <span className={styles['dropdown-tile-content']}>
                                 <span className={styles['dropdown-tile-label']}>
                                   {subitem.label}
@@ -348,10 +344,6 @@ function MobileNav({ open, onOpenChange, pathname }: MobileNavProps) {
                                 onClick={closeMenu}
                                 aria-current={isActive(subitem.href) ? 'page' : undefined}
                               >
-                                <span className={styles['mobile-featured-card-icon']}>
-                                  {subitem.icon === 'map' && '🗺️'}
-                                  {subitem.icon === 'scroll' && '📜'}
-                                </span>
                                 <span className={styles['mobile-featured-card-content']}>
                                   <span className={styles['mobile-featured-card-label']}>
                                     {subitem.label}

@@ -4,7 +4,6 @@ import { StoryHook } from '@/components/welcome/StoryHook'
 import { BrandStatement } from '@/components/welcome/BrandStatement'
 import { DualPeaks } from '@/components/welcome/DualPeaks'
 import { CTAGroup } from '@/components/welcome/CTAGroup'
-import { AmbientMusicPlayer } from '@/components/welcome/AmbientMusicPlayer'
 import { BUTTONS, PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
 import './welcome.css'
 
@@ -80,9 +79,6 @@ export default function WelcomePage() {
           ☀ The 1775 Almanac
         </Link>
       </div>
-
-      {/* Frontier Ambiance Music Player */}
-      <AmbientMusicPlayer />
     </main>
   )
 }

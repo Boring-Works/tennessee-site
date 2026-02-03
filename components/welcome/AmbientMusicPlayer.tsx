@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface Track {
   id: string
@@ -33,6 +34,33 @@ const TRACKS: Track[] = [
   },
 ]
 
+// localStorage keys for persisting user preferences
+const STORAGE_KEYS = {
+  VOLUME: 'ambient-music-volume',
+  TRACK_INDEX: 'ambient-music-track-index',
+  HAS_INTERACTED: 'ambient-music-has-interacted',
+} as const
+
+// Safe localStorage helpers (handles SSR, private mode, quota exceeded)
+const storage = {
+  get: (key: string): string | null => {
+    if (typeof window === 'undefined') return null
+    try {
+      return localStorage.getItem(key)
+    } catch {
+      return null
+    }
+  },
+  set: (key: string, value: string): void => {
+    if (typeof window === 'undefined') return
+    try {
+      localStorage.setItem(key, value)
+    } catch {
+      // Silently fail in private mode, quota exceeded, or when localStorage disabled
+    }
+  },
+}
+
 // Waveform bars animation - defined outside component to avoid re-creation on render
 function WaveformBars({ playing }: { playing: boolean }) {
   return (
@@ -58,44 +86,71 @@ function WaveformBars({ playing }: { playing: boolean }) {
  *
  * An elegant, expandable music player for period-appropriate ambient sounds.
  * Features animated waveform visualization and colonial-themed styling.
+ *
+ * Persists across all pages but only visible on welcome, home, and our-story pages.
+ * Music continues playing when navigating between pages (maintains state).
+ * Auto-plays on mount with 2.5s fade-in (gracefully handles browser restrictions).
  */
 export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerProps) {
+  const pathname = usePathname()
   const [isExpanded, setIsExpanded] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
-  const [volume, setVolume] = useState(initialVolume)
+  const [showClickHint, setShowClickHint] = useState(false)
+
+  // Lazy initialization: Load saved preferences from localStorage
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(() => {
+    const savedIndex = storage.get(STORAGE_KEYS.TRACK_INDEX)
+    if (savedIndex !== null) {
+      const parsedIndex = parseInt(savedIndex, 10)
+      // Validate index is within bounds (handles case where tracks were removed)
+      if (!isNaN(parsedIndex) && parsedIndex >= 0 && parsedIndex < TRACKS.length) {
+        return parsedIndex
+      }
+    }
+    return 0
+  })
+
+  const [volume, setVolume] = useState(() => {
+    const savedVolume = storage.get(STORAGE_KEYS.VOLUME)
+    if (savedVolume !== null) {
+      const parsedVolume = parseFloat(savedVolume)
+      if (!isNaN(parsedVolume) && parsedVolume >= 0 && parsedVolume <= 1) {
+        return parsedVolume
+      }
+    }
+    return initialVolume
+  })
+
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const hasAttemptedAutoplay = useRef(false)
 
   const currentTrack = TRACKS[currentTrackIndex]
 
-  // Initialize audio element with Next.js optimizations
+  // Show player on welcome, home, and our-story pages (ambient experience pages)
+  const shouldShowPlayer = pathname === '/' || pathname === '/home' || pathname === '/our-story'
+
+  // Save volume to localStorage when it changes
   useEffect(() => {
-    const audio = new Audio(currentTrack.src)
-    audio.loop = true
-    audio.volume = 0
-    audio.preload = 'metadata' // Load metadata only, not full file
-    audio.crossOrigin = 'anonymous' // Enable CORS if needed
-    audioRef.current = audio
+    storage.set(STORAGE_KEYS.VOLUME, volume.toString())
+  }, [volume])
 
-    return () => {
-      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
-      audio.pause()
-      audio.src = ''
-    }
-  }, [currentTrack.src])
+  // Save track index to localStorage when it changes
+  useEffect(() => {
+    storage.set(STORAGE_KEYS.TRACK_INDEX, currentTrackIndex.toString())
+  }, [currentTrackIndex])
 
-  // Smooth fade function
+  // Smooth fade function (2-3 seconds for auto-play, 1 second for manual)
   const fadeAudio = useCallback(
-    (fadeIn: boolean) => {
+    (fadeIn: boolean, isAutoPlay = false) => {
       const audio = audioRef.current
       if (!audio) return
 
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
 
       const targetVolume = fadeIn ? volume : 0
-      const step = fadeIn ? 0.02 : -0.02
-      const duration = 1000
+      const duration = fadeIn && isAutoPlay ? 2500 : 1000 // Longer fade-in for auto-play
+      const step = fadeIn ? 0.01 : -0.02
       const steps = Math.abs(targetVolume - audio.volume) / Math.abs(step)
       const interval = duration / steps
 
@@ -119,6 +174,58 @@ export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerP
     [volume]
   )
 
+  // Attempt auto-play with fade-in
+  const attemptAutoPlay = useCallback(async () => {
+    const audio = audioRef.current
+    if (!audio || hasAttemptedAutoplay.current) return
+
+    hasAttemptedAutoplay.current = true
+
+    // Check if user has interacted before
+    const hasInteracted = storage.get(STORAGE_KEYS.HAS_INTERACTED) === 'true'
+
+    try {
+      await audio.play()
+      fadeAudio(true, true) // Smooth 2.5s fade-in for auto-play
+      setIsPlaying(true)
+      storage.set(STORAGE_KEYS.HAS_INTERACTED, 'true')
+    } catch (error) {
+      // Auto-play blocked by browser - show hint if user hasn't interacted before
+      if (!hasInteracted) {
+        setShowClickHint(true)
+        // Hide hint after 5 seconds
+        setTimeout(() => setShowClickHint(false), 5000)
+      }
+    }
+  }, [fadeAudio])
+
+  // Initialize audio element with Next.js optimizations
+  useEffect(() => {
+    const audio = new Audio(currentTrack.src)
+    audio.loop = true
+    audio.volume = 0
+    audio.preload = 'metadata' // Load metadata only, not full file
+    audio.crossOrigin = 'anonymous' // Enable CORS if needed
+    audioRef.current = audio
+
+    return () => {
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
+      audio.pause()
+      audio.src = ''
+    }
+  }, [currentTrack.src])
+
+  // Attempt auto-play on mount (after audio is initialized)
+  useEffect(() => {
+    if (audioRef.current && !hasAttemptedAutoplay.current) {
+      // Small delay to ensure audio is fully initialized
+      const timer = setTimeout(() => {
+        attemptAutoPlay()
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [attemptAutoPlay])
+
   // Toggle playback
   const togglePlay = useCallback(async () => {
     const audio = audioRef.current
@@ -130,8 +237,10 @@ export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerP
     } else {
       try {
         await audio.play()
-        fadeAudio(true)
+        fadeAudio(true) // Standard 1s fade-in for manual play
         setIsPlaying(true)
+        storage.set(STORAGE_KEYS.HAS_INTERACTED, 'true')
+        setShowClickHint(false) // Hide hint once user manually plays
       } catch {
         // Audio playback requires user interaction - silently handle
       }
@@ -183,7 +292,22 @@ export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerP
   }, [isPlaying, fadeAudio, togglePlay])
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
+    <div
+      className={`fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6 transition-opacity duration-300 ${
+        shouldShowPlayer ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+    >
+      {/* Click Hint - Shows when auto-play is blocked */}
+      {showClickHint && !isPlaying && (
+        <div className="absolute bottom-full right-0 mb-16 animate-in fade-in slide-in-from-bottom-2 duration-300">
+          <div className="bg-[#0c1a2e]/95 backdrop-blur-lg border border-[var(--gold-shimmer)] rounded-lg p-3 min-w-[180px] shadow-xl">
+            <p className="font-cormorant text-xs text-[var(--text-primary)] text-center">
+              Click to start ambient music
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Expanded Panel */}
       <div
         className={`absolute bottom-full right-0 mb-3 transition-all duration-300 ease-out origin-bottom-right ${

@@ -11,6 +11,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import { DEFAULT_METADATA } from '@/lib/copy'
 import { SkipLinks } from '@/components/SkipLinks'
+import { AmbientMusicPlayer } from '@/components/welcome/AmbientMusicPlayer'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -123,6 +124,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
         <SkipLinks />
         {children}
+        <AmbientMusicPlayer />
         <Analytics />
         <SpeedInsights />
       </body>

@@ -4,13 +4,13 @@ import { BookingButton } from '@/components/booking'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'First Families of Tennessee Reunion | Tennessee Starts Here',
+  title: 'First Families Reunion | America 250 Signature Event | Tennessee Starts Here',
   description:
-    'Your family built Tennessee. Now come home. The first-ever gathering of descendants from founding families—Cobbs, Shelbys, Seviers. September 11-13, 2026 at Rocky Mount.',
+    'October 11-13, 2026. Descendants of Revolutionary patriots and early frontier families gather at Rocky Mount. America 250 signature event hosted by the Cobb, Massingale & Defriece families.',
   openGraph: {
-    title: 'First Families of Tennessee Reunion | Tennessee Starts Here',
+    title: 'First Families Reunion | America 250 Signature Event',
     description:
-      'Your family built Tennessee. Now come home. The first-ever gathering of descendants from founding families at Rocky Mount.',
+      'October 11-13, 2026. Revolutionary patriots and frontier families gather where Tennessee began. SAR/DAR members welcome.',
     url: 'https://tennesseestartshere.com/events/first-families-reunion',
   },
 }
@@ -50,8 +50,7 @@ export default function FirstFamiliesReunionPage() {
         <div className={styles['reunion-hero-content']}>
           {/* Eyebrow */}
           <p className={styles['reunion-eyebrow']}>
-            <time dateTime="2026-09-11">September 11–13, 2026</time> · Rocky Mount State Historic
-            Site
+            <time dateTime="2026-10-11">October 11–13, 2026</time> · America 250 Signature Event
           </p>
 
           {/* Main headline */}
@@ -62,8 +61,16 @@ export default function FirstFamiliesReunionPage() {
 
           {/* Emotional hook */}
           <p className={styles['reunion-hook']}>
-            The first-ever gathering of descendants from Tennessee&apos;s founding families. Three
-            days of genealogy, oral histories, and stories passed down through 236 years.
+            As America celebrates its 250th anniversary, Rocky Mount invites all descendants of
+            Revolutionary patriots and early frontier families to gather at the place where southern
+            expansion formally began under federal authority.
+          </p>
+
+          {/* Host families note */}
+          <p className={styles['reunion-hook']}>
+            <strong>Hosted by the original Cobb, Massingale & Defriece Families.</strong> As the
+            families who literally opened their home to create Tennessee, they now invite all First
+            Families to gather at the place where it all began.
           </p>
 
           {/* Scarcity signal */}
@@ -145,14 +152,44 @@ export default function FirstFamiliesReunionPage() {
         aria-labelledby="surnames-heading"
       >
         <div className={styles['reunion-surnames-inner']}>
-          <p className={styles['reunion-surnames-eyebrow']}>Do You Belong?</p>
+          <p className={styles['reunion-surnames-eyebrow']}>Who Is Invited?</p>
           <h2 id="surnames-heading" className={styles['reunion-surnames-headline']}>
             Am I a First Family?
           </h2>
           <p className={styles['reunion-surnames-intro']}>
-            If your family tree includes any of these surnames, you may be descended from
-            Tennessee&apos;s founding generation. Don&apos;t see your name? You may still qualify—
-            our genealogists can help you trace your roots.
+            <strong>You&apos;re invited if your ancestors:</strong>
+          </p>
+          <ul className={styles['reunion-eligibility-list']}>
+            <li>
+              <strong>Served in the American Revolution</strong> (SAR/DAR members welcome!)
+            </li>
+            <li>
+              <strong>Lived in the Southwest Territory</strong> before Tennessee statehood (June 1,
+              1796)
+            </li>
+            <li>
+              <strong>Settled the American frontier</strong> from the Appalachians westward before
+              1800
+            </li>
+            <li>
+              <strong>Served in territorial government, militia, or early state positions</strong>
+            </li>
+            <li>
+              <strong>Established homesteads, businesses, or churches</strong> in early settlements
+            </li>
+            <li>
+              <strong>Descend from any of America&apos;s founding families</strong> who pushed
+              westward
+            </li>
+          </ul>
+          <p className={styles['reunion-surnames-intro']}>
+            <em>
+              If you&apos;re eligible for SAR, DAR, or similar patriotic societies, you&apos;re part
+              of our First Families story.
+            </em>
+          </p>
+          <p className={styles['reunion-surnames-intro']}>
+            Common founding family surnames include:
           </p>
 
           <div className={styles['reunion-surnames-grid']}>
@@ -189,21 +226,21 @@ export default function FirstFamiliesReunionPage() {
             {/* Friday */}
             <article className={styles['reunion-day']}>
               <header className={styles['reunion-day-header']}>
-                <time dateTime="2026-09-11" className={styles['reunion-day-date']}>
+                <time dateTime="2026-10-11" className={styles['reunion-day-date']}>
                   <span className={styles['reunion-day-weekday']}>Friday</span>
-                  <span className={styles['reunion-day-number']}>Sep 11</span>
+                  <span className={styles['reunion-day-number']}>Oct 11</span>
                 </time>
-                <span className={styles['reunion-day-badge']}>Descendants Only</span>
+                <span className={styles['reunion-day-badge']}>By Invitation</span>
               </header>
               <div className={styles['reunion-day-content']}>
-                <h3 className={styles['reunion-day-title']}>Heritage Evening</h3>
-                <ul className={styles['reunion-day-list']}>
-                  <li>5:00 PM — Registration & welcome reception</li>
-                  <li>6:00 PM — Oral history circle (share your family&apos;s stories)</li>
-                  <li>7:30 PM — Candlelit dinner on the grounds</li>
-                </ul>
+                <h3 className={styles['reunion-day-title']}>Host Family Evening</h3>
+                <p className={styles['reunion-day-time']}>6:00 PM – 9:00 PM</p>
+                <p className={styles['reunion-day-description']}>
+                  Private reception for Cobb, Massingale, and Defriece family descendants. Special
+                  recognition ceremony and intimate gathering at Rocky Mount.
+                </p>
                 <p className={styles['reunion-day-note']}>
-                  This intimate evening is reserved for registered descendants only.
+                  <strong>By invitation only</strong> (Cobb/Massingale/Defriece descendants)
                 </p>
               </div>
             </article>
@@ -211,49 +248,55 @@ export default function FirstFamiliesReunionPage() {
             {/* Saturday */}
             <article className={`${styles['reunion-day']} ${styles['reunion-day--featured']}`}>
               <header className={styles['reunion-day-header']}>
-                <time dateTime="2026-09-12" className={styles['reunion-day-date']}>
+                <time dateTime="2026-10-12" className={styles['reunion-day-date']}>
                   <span className={styles['reunion-day-weekday']}>Saturday</span>
-                  <span className={styles['reunion-day-number']}>Sep 12</span>
+                  <span className={styles['reunion-day-number']}>Oct 12</span>
                 </time>
                 <span
                   className={`${styles['reunion-day-badge']} ${styles['reunion-day-badge--public']}`}
                 >
-                  Open to All
+                  Registered Families
                 </span>
               </header>
               <div className={styles['reunion-day-content']}>
-                <h3 className={styles['reunion-day-title']}>Genealogy Day</h3>
+                <h3 className={styles['reunion-day-title']}>Main Gathering</h3>
+                <p className={styles['reunion-day-time']}>10:00 AM – 5:00 PM</p>
                 <ul className={styles['reunion-day-list']}>
-                  <li>10:00 AM — Grounds open to the public</li>
-                  <li>10:30 AM — Genealogy help desk opens (bring your records!)</li>
-                  <li>1:00 PM — &ldquo;Tracing Tennessee Roots&rdquo; workshop</li>
-                  <li>3:00 PM — Family photo archive viewing</li>
-                  <li>5:00 PM — Descendants ceremony at the Cobb cabin</li>
+                  <li>Living history demonstrations with period interpreters</li>
+                  <li>Genealogy workshops with SAR/DAR representatives</li>
+                  <li>Historical presentations on Revolutionary ideals & westward expansion</li>
+                  <li>Family connection sessions with fellow descendants</li>
+                  <li>Period music and traditional crafts</li>
+                  <li>Family photo sessions</li>
+                  <li>Catered frontier-style meal</li>
                 </ul>
+                <p className={styles['reunion-day-note']}>Open to all registered First Families</p>
               </div>
             </article>
 
             {/* Sunday */}
             <article className={styles['reunion-day']}>
               <header className={styles['reunion-day-header']}>
-                <time dateTime="2026-09-13" className={styles['reunion-day-date']}>
+                <time dateTime="2026-10-13" className={styles['reunion-day-date']}>
                   <span className={styles['reunion-day-weekday']}>Sunday</span>
-                  <span className={styles['reunion-day-number']}>Sep 13</span>
+                  <span className={styles['reunion-day-number']}>Oct 13</span>
                 </time>
                 <span
                   className={`${styles['reunion-day-badge']} ${styles['reunion-day-badge--public']}`}
                 >
-                  Open to All
+                  Free & Open
                 </span>
               </header>
               <div className={styles['reunion-day-content']}>
-                <h3 className={styles['reunion-day-title']}>Stories & Celebration</h3>
-                <ul className={styles['reunion-day-list']}>
-                  <li>11:00 AM — Period worship service (optional)</li>
-                  <li>12:30 PM — Founding families luncheon</li>
-                  <li>2:00 PM — Living history demonstrations</li>
-                  <li>4:00 PM — Closing ceremony & group photo</li>
-                </ul>
+                <h3 className={styles['reunion-day-title']}>Frontier Worship Service</h3>
+                <p className={styles['reunion-day-time']}>10:00 AM – 12:00 PM</p>
+                <p className={styles['reunion-day-description']}>
+                  Optional 1791-style worship service in the historic tradition of early Tennessee
+                  congregations.
+                </p>
+                <p className={styles['reunion-day-note']}>
+                  <strong>Free admission</strong> · Open to the public
+                </p>
               </div>
             </article>
           </div>

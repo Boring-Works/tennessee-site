@@ -87,7 +87,7 @@ const KEY_FIGURES = [
     name: 'Barsheba Whitehead Cobb',
     role: 'Household Manager',
     description:
-      "William Cobb's wife managed the household during the territorial period. She famously fed 42 Cherokee chiefs and their attendants during Treaty of Holston preliminary negotiations in July 1791.",
+      "William Cobb's wife managed the household during the territorial period. She famously fed 42 Cherokee chiefs and their attendants during Treaty of Holston negotiations in July 1791.",
     refIds: ['ppl-002', 'ppl-012'],
   },
   {
@@ -135,7 +135,7 @@ export default function OurStoryPage() {
         {/* Hero Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
           <p className="text-[10px] uppercase tracking-[0.3em] text-accent/80 mb-4 font-semibold">
-            Est. 1770 · Tennessee&apos;s Oldest Documented Farm
+            Est. 1770 · Site of Tennessee&apos;s Government
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
             Where Tennessee&apos;s Government Began
@@ -209,9 +209,9 @@ export default function OurStoryPage() {
                       land intimately.
                     </p>
                     <p>
-                      In 1775, the farm was formally established, making Rocky Mount
-                      Tennessee&apos;s oldest documented farm (certified by the Tennessee Century
-                      Farms Program).
+                      In 1775, the farm was formally established. The property would later be
+                      certified by the Tennessee Century Farms Program as part of Tennessee&apos;s
+                      agricultural heritage.
                     </p>
                     <p>
                       When the Revolution came, the Cobbs answered the call. In October 1780,

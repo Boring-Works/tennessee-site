@@ -1402,9 +1402,9 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     confidence: 'verified',
     wrongVariants: [
       'washington.*capital.*179[1-9]', // Wrong year (was 1790)
-      'washington.*where.*179[1-9]', // Wrong year
-      'washington.*august [1-9]\\,', // Wrong day (was Aug 13)
-      'washington.*august 1[4-9]\\,', // Wrong day
+      'washington.*where.*reside.*179[1-9]', // Wrong year for capital question
+      'washington.{1,20}asked.{1,20}august [1-9]\\,', // Wrong day (was Aug 13)
+      'washington.{1,20}asked.{1,20}august 1[4-9]\\,', // Wrong day (Washington asked on Aug 13)
     ],
   },
   {
@@ -1417,10 +1417,9 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     sourceType: 'primary',
     confidence: 'verified',
     wrongVariants: [
-      'knox.*holston.*179[1-9]', // Wrong year (was 1790)
-      'knox.*august [1-9]\\,', // Wrong day (was Aug 17)
-      'knox.*august 1[8-9]\\,', // Wrong day
-      'knox.*august 2\\d\\,', // Wrong day
+      'knox.*recommend.*reside.*179[1-9]', // Wrong year for recommendation (was 1790)
+      'knox.{1,15}responded.{1,20}august [1-9]\\,', // Wrong day (was Aug 17)
+      'knox.{1,15}responded.{1,20}august 1[8-9]\\,', // Wrong day
     ],
   },
   {
@@ -1491,8 +1490,8 @@ export const REFERENCE_LIBRARY: VerifiedFact[] = [
     wrongVariants: [
       'cherokee.*philadelphia.*179[0-1]', // Wrong year (was 1792)
       'cherokee.*philadelphia.*179[3-9]', // Wrong year
-      'knox.*january [1-6]\\,', // Wrong first meeting day (was Jan 7)
-      'knox.*january 1[2-9]\\,', // After last meeting (was Jan 11)
+      'cherokee.{1,20}met.{1,20}january [1-6]\\,', // Wrong first meeting day (was Jan 7)
+      'cherokee.{1,20}met.{1,20}january 1[2-9]\\,', // After last meeting (was Jan 11, report was Jan 17)
     ],
   },
   {

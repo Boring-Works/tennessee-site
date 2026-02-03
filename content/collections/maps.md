@@ -16,8 +16,8 @@ This small but significant collection includes cartographic and material documen
 ## Key Documents
 
 - **Bradley Map (1796):** One of the earliest detailed maps of the new state, showing boundaries, settlements, and major geographic features
-- **Rocky Mount Inventory (1791):** A detailed inventory of the property that served as Tennessee's first capital, including the famous "glass windows" that impressed Governor Blount
+- **Rocky Mount Inventory (1791):** A detailed inventory of the property that served as the capital of the Southwest Territory, including the famous "glass windows" that impressed Governor Blount
 
 ## Historical Significance
 
-The inventory of Rocky Mount is particularly valuable as it provides the most detailed contemporary description of the building that served as Tennessee's first capital. It confirms details mentioned in Blount's letters and helps us understand what a substantial frontier dwelling looked like in 1790.
+The inventory of Rocky Mount is particularly valuable as it provides the most detailed contemporary description of the building that served as the capital of the Southwest Territory. It confirms details mentioned in Blount's letters and helps us understand what a substantial frontier dwelling looked like in 1790.

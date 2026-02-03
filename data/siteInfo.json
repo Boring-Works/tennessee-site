@@ -296,6 +296,14 @@
       "time": "32 min",
       "description": "970-acre park on Fort Patrick Henry Lake, named for the Great Indian Warpath",
       "website": "https://tnstateparks.com/parks/warriors-path"
+    },
+    {
+      "name": "Holston Heritage Museum",
+      "city": "Bluff City",
+      "miles": 8,
+      "time": "10 min",
+      "description": "Showcasing the historical and cultural heritage of the Holston River Valley region",
+      "website": "https://holstonheritagemuseum.com"
     }
   ],
   "nearbyAttractions": [

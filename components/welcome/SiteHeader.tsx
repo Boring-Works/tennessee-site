@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useSyncExternalStore } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { getSiteStatus } from '@/lib/siteHours'
+import { getConditionText, getWeatherIcon } from '@/lib/weather-helpers/weatherUtils'
 
 interface DisplayStatus {
   isOpen: boolean
@@ -101,8 +102,43 @@ function useIsClient() {
   )
 }
 
+interface WeatherData {
+  temp: number
+  condition: string
+  icon: string
+}
+
+function useWeather() {
+  const [weather, setWeather] = useState<WeatherData | null>(null)
+
+  useEffect(() => {
+    const lat = 36.4539
+    const lon = -82.3109
+
+    fetch(`/api/weather?lat=${lat}&lon=${lon}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Weather fetch failed')
+        return res.json()
+      })
+      .then((data) => {
+        const code = data.current.weather_code
+        setWeather({
+          temp: Math.round(data.current.temperature_2m),
+          condition: getConditionText(code),
+          icon: getWeatherIcon(code),
+        })
+      })
+      .catch(() => {
+        // Silently fail - weather is optional
+      })
+  }, [])
+
+  return weather
+}
+
 export function SiteHeader() {
   const isClient = useIsClient()
+  const weather = useWeather()
   const display = useSyncExternalStore(
     subscribeToStatus,
     getStatusSnapshot,
@@ -127,6 +163,23 @@ export function SiteHeader() {
   // Show static version during SSR or before client hydration
   if (!isClient || !display) {
     return (
+      <div className="site-header-wrapper">
+        <Link
+          href="/visit"
+          className="site-header"
+          aria-label="View visiting information for Rocky Mount"
+        >
+          <span className="site-header-content">
+            <span className="site-header-location">Sullivan County</span>
+          </span>
+          <span className="site-header-cta">Plan your visit &rarr;</span>
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <div className="site-header-wrapper">
       <Link
         href="/visit"
         className="site-header"
@@ -134,28 +187,31 @@ export function SiteHeader() {
       >
         <span className="site-header-content">
           <span className="site-header-location">Sullivan County</span>
+          <span className="site-header-separator" aria-hidden="true">
+            ·
+          </span>
+          <span
+            className={`site-header-status ${display.isOpen ? 'site-header-status--open' : ''}`}
+          >
+            {display.message}
+          </span>
         </span>
-        <span className="site-header-cta">Plan your visit &rarr;</span>
+        <span className="site-header-cta">{display.cta} &rarr;</span>
       </Link>
-    )
-  }
 
-  return (
-    <Link
-      href="/visit"
-      className="site-header"
-      aria-label="View visiting information for Rocky Mount"
-    >
-      <span className="site-header-content">
-        <span className="site-header-location">Sullivan County</span>
-        <span className="site-header-separator" aria-hidden="true">
-          ·
-        </span>
-        <span className={`site-header-status ${display.isOpen ? 'site-header-status--open' : ''}`}>
-          {display.message}
-        </span>
-      </span>
-      <span className="site-header-cta">{display.cta} &rarr;</span>
-    </Link>
+      {/* Weather Link to Almanac */}
+      {weather && (
+        <Link
+          href="/almanac"
+          className="weather-link"
+          aria-label={`Current weather: ${weather.temp}°F ${weather.condition}. View Blount's Weather Station`}
+        >
+          <span className="weather-link-icon" aria-hidden="true">
+            {weather.icon}
+          </span>
+          <span className="weather-link-temp">{weather.temp}°</span>
+        </Link>
+      )}
+    </div>
   )
 }

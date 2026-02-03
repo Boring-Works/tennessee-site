@@ -194,7 +194,8 @@ export function EventsCalendarClient({
                   let sizeClass = styles['calendar-event--standard']
                   if (isMultiDay && duration >= 3) {
                     sizeClass = styles['calendar-event--large']
-                  } else if (isMultiDay || isSignature) {
+                  } else if (isMultiDay || isSignature || isLecture) {
+                    // Lectures get medium size to stand out as important programming
                     sizeClass = styles['calendar-event--medium']
                   }
 
@@ -241,21 +242,20 @@ export function EventsCalendarClient({
 
                       {/* Content */}
                       <div className={styles['calendar-event-content']}>
-                        {/* Badge - Wax seal for signature events, standard for others */}
-                        {isSignature ? (
-                          <span className={styles['calendar-event-badge--signature']}>
-                            <span className={styles['wax-seal-text']}>Signature</span>
-                          </span>
-                        ) : (
-                          <span
-                            className={`${styles['calendar-event-badge']} ${styles[`calendar-event-badge--${event.type}`]}`}
-                          >
-                            {event.type === 'new' && 'New for 2026'}
-                            {event.type === 'enhanced' && 'Enhanced'}
-                            {event.type === 'recurring' && 'Annual Tradition'}
-                            {event.type === 'milestone' && 'Milestone'}
-                          </span>
-                        )}
+                        {/* Event type badge */}
+                        <span
+                          className={`${styles['calendar-event-badge']} ${
+                            isSignature
+                              ? styles['calendar-event-badge--signature']
+                              : styles[`calendar-event-badge--${event.type}`]
+                          }`}
+                        >
+                          {isSignature && 'Signature Event'}
+                          {!isSignature && event.type === 'new' && 'New for 2026'}
+                          {!isSignature && event.type === 'enhanced' && 'Enhanced'}
+                          {!isSignature && event.type === 'recurring' && 'Annual Tradition'}
+                          {!isSignature && event.type === 'milestone' && 'Milestone'}
+                        </span>
 
                         {/* Smart Badges - Urgency & Value signals */}
                         <SmartBadges

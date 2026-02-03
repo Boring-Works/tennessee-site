@@ -185,10 +185,7 @@ export function TestimonialCarousel({
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Testimonial card with fade transition */}
-          <div
-            key={current.id}
-            className="fade-in-up animate-fade-in transition-opacity duration-500 ease-in-out"
-          >
+          <div key={current.id} className="transition-opacity duration-500 ease-in-out opacity-100">
             {/* Large decorative opening quote mark */}
             <div
               className="text-6xl md:text-7xl text-accent/20 font-serif leading-none mb-4"
@@ -308,22 +305,6 @@ export function TestimonialCarousel({
           <span className="text-accent/30 text-sm">❧</span>
         </div>
       </div>
-
-      {/* CSS for fade animation */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 500ms ease-in-out;
-        }
-      `}</style>
     </section>
   )
 }

@@ -723,10 +723,28 @@
 
 .calendar-event--lecture {
   border-left: 4px solid var(--burgundy);
+  background: linear-gradient(135deg, #fff 0%, #faf8f5 100%);
 }
 
 .calendar-event--lecture .calendar-event-date {
-  background: var(--burgundy);
+  background: linear-gradient(180deg, #8b3a42 0%, var(--burgundy) 50%, #5a252b 100%);
+  min-width: 7rem;
+}
+
+@media (min-width: 768px) {
+  .calendar-event--lecture .calendar-event-date {
+    min-width: 8rem;
+  }
+}
+
+.calendar-event--lecture .calendar-event-title {
+  font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .calendar-event--lecture .calendar-event-title {
+    font-size: 1.5rem;
+  }
 }
 
 .calendar-event--milestone {
@@ -741,10 +759,11 @@
   background: var(--secondary);
 }
 
-/* Event Date Block */
+/* Event Date Block - Consistent sizing for all events */
 .calendar-event-date {
   flex-shrink: 0;
-  width: 5rem;
+  width: 6rem;
+  min-height: 5rem;
   background: var(--secondary);
   color: white;
   display: flex;
@@ -755,7 +774,8 @@
 
 @media (min-width: 768px) {
   .calendar-event-date {
-    width: 6rem;
+    width: 7rem;
+    min-height: 6rem;
     padding: var(--space-lg) var(--space-sm);
   }
 }
@@ -765,42 +785,54 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  gap: var(--space-3xs);
 }
 
+/* Single-day: Month label */
 .calendar-event-date-month {
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   opacity: 0.9;
 }
 
+/* Single-day: Large day number */
 .calendar-event-date-day {
   font-family: var(--font-serif);
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1;
-  margin-top: var(--space-3xs);
 }
 
 @media (min-width: 768px) {
   .calendar-event-date-day {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 }
 
+/* Multi-day: Date range - styled to match single-day visual weight */
 .calendar-event-date-range {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  line-height: 1.3;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
+@media (min-width: 768px) {
+  .calendar-event-date-range {
+    font-size: 1.125rem;
+  }
+}
+
+/* Multi-day: Duration label */
 .calendar-event-date-duration {
-  font-size: 0.6rem;
-  font-weight: 500;
-  opacity: 0.8;
-  margin-top: var(--space-2xs);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 /* Event Content */
@@ -847,6 +879,14 @@
 .calendar-event-badge--milestone {
   background: var(--primary);
   color: white;
+}
+
+/* Lecture series badge - distinguished academic styling */
+.calendar-event--lecture .calendar-event-badge {
+  background: var(--burgundy);
+  color: white;
+  font-size: 0.65rem;
+  padding: var(--space-2xs) var(--space-sm);
 }
 
 /* ============================================
@@ -928,28 +968,20 @@
   z-index: 2;
 }
 
-/* Signature badge variant using wax seal style */
+/* Signature badge - elegant ribbon style */
 .calendar-event-badge--signature {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 3rem;
-  height: 3rem;
-  padding: 0 var(--space-xs);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #a04048 0%, #722f37 50%, #4d1f26 100%);
-  box-shadow:
-    inset 1px 1px 3px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 3px rgba(0, 0, 0, 0.3),
-    2px 3px 6px rgba(0, 0, 0, 0.25);
-  color: #f5e6d3;
-  font-size: 0.55rem;
+  padding: var(--space-2xs) var(--space-md);
+  background: var(--burgundy);
+  color: white;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.3),
-    0 -1px 0 rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.12em;
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 4px rgba(114, 47, 55, 0.3);
 }
 
 .calendar-event-title {
@@ -979,18 +1011,23 @@
 .calendar-event-speaker {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-xs);
-  margin: 0;
+  gap: var(--gap-2xs);
+  margin: var(--space-sm) 0;
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(135deg, rgba(114, 47, 55, 0.08) 0%, rgba(114, 47, 55, 0.03) 100%);
+  border-left: 3px solid var(--burgundy);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
 }
 
 .calendar-event-speaker-name {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--burgundy);
 }
 
 .calendar-event-speaker-title {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-style: italic;
   color: var(--text-light);
 }

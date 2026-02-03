@@ -109,7 +109,12 @@ function DesktopNav({ pathname }: DesktopNavProps) {
   )
 
   return (
-    <NavigationMenu.Root className={styles.nav} aria-label="Main navigation">
+    <NavigationMenu.Root
+      className={styles.nav}
+      aria-label="Main navigation"
+      delayDuration={150}
+      skipDelayDuration={50}
+    >
       <NavigationMenu.List className={styles['nav-list']}>
         {NAV_STRUCTURE.map((item) => (
           <NavigationMenu.Item key={item.label} className={styles['nav-item']}>
@@ -136,7 +141,7 @@ function DesktopNav({ pathname }: DesktopNavProps) {
                   <span className={styles['dropdown-toggle-underline']} aria-hidden="true" />
                 </NavigationMenu.Trigger>
 
-                <NavigationMenu.Content className={styles['dropdown-menu']}>
+                <NavigationMenu.Content className={styles['dropdown-menu']} forceMount>
                   <ul>
                     {item.dropdown.map((subitem) => (
                       <li key={subitem.href}>
@@ -209,8 +214,7 @@ function DesktopNav({ pathname }: DesktopNavProps) {
         <span className={styles['cta-text']}>Plan Your Visit</span>
       </Link>
 
-      {/* Viewport for dropdown positioning */}
-      <NavigationMenu.Viewport className={styles['nav-viewport']} />
+      {/* Viewport removed - using forceMount on Content for CSS compatibility */}
     </NavigationMenu.Root>
   )
 }

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import {
   ConsolidatedStory,
   ConsolidatedProof,
   ConsolidatedExperience,
   ConsolidatedClose,
 } from '@/components/home'
-import { OriginalSevenMap } from '@/components/OriginalSevenMap'
 import { PAGE_METADATA } from '@/lib/copy/metadata'
 import styles from './page.module.css'
 
@@ -53,7 +53,20 @@ export default function OurStoryPage() {
           </header>
 
           <div className={styles['story-governing-map']}>
-            <OriginalSevenMap variant="inline" showDistances interactive />
+            <figure className="relative max-w-4xl mx-auto">
+              <div className="relative rounded-lg overflow-hidden shadow-xl border border-primary/10">
+                <Image
+                  src="/images/original-seven-map-1790.png"
+                  alt="Map of Tennessee at the beginning of 1790, showing the seven original counties: Sullivan, Washington, Hawkins, Greene in the east, and Davidson, Sumner, Tennessee in the west."
+                  width={900}
+                  height={500}
+                  className="w-full h-auto"
+                />
+              </div>
+              <figcaption className="mt-3 text-center text-sm text-primary/60 italic">
+                Tennessee at the beginning of 1790 — Map by L. Pork Danville
+              </figcaption>
+            </figure>
           </div>
 
           <div className={styles['story-governing-content']}>

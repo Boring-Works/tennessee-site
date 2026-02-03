@@ -4,6 +4,7 @@ import { StoryHook } from '@/components/welcome/StoryHook'
 import { BrandStatement } from '@/components/welcome/BrandStatement'
 import { DualPeaks } from '@/components/welcome/DualPeaks'
 import { CTAGroup } from '@/components/welcome/CTAGroup'
+import { AmbientMusicPlayer } from '@/components/welcome/AmbientMusicPlayer'
 import { BUTTONS, PAGE_METADATA, PRIMARY_QUOTES } from '@/lib/copy'
 import './welcome.css'
 
@@ -44,12 +45,14 @@ const upcomingExperiences = [
   {
     title: 'Early Frontier Days',
     date: 'May 22-24',
-    description: 'Musket smoke, militia camps, and colonial traders. The largest Revolutionary-era gathering in the region.',
+    description:
+      'Musket smoke, militia camps, and colonial traders. The largest Revolutionary-era gathering in the region.',
   },
   {
     title: 'Stitching Independence',
     date: 'June 13-14',
-    description: "Tennessee's 230th birthday. Period demonstrations, music, and the First 250 reading.",
+    description:
+      "Tennessee's 230th birthday. Period demonstrations, music, and the First 250 reading.",
   },
 ]
 
@@ -80,8 +83,9 @@ export default function WelcomePage() {
             Step Into 1791
           </h2>
           <p className="living-history-description">
-            Costumed interpreters bring the territorial capital to life. Watch wool spun into thread.
-            Smell bread baking in the hearth. Hear the stories of the families who built Tennessee.
+            Costumed interpreters bring the territorial capital to life. Watch wool spun into
+            thread. Smell bread baking in the hearth. Hear the stories of the families who built
+            Tennessee.
           </p>
           <div className="upcoming-events-grid">
             {upcomingExperiences.map((event) => (
@@ -116,6 +120,9 @@ export default function WelcomePage() {
           ☀ The 1775 Almanac
         </Link>
       </div>
+
+      {/* Frontier Ambiance Music Player */}
+      <AmbientMusicPlayer />
     </main>
   )
 }

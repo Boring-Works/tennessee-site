@@ -146,16 +146,19 @@
 }
 
 .visit-hero-cta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   min-height: 44px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--primary);
   background: var(--accent);
   transition: all var(--duration-base) var(--ease-smooth);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .visit-hero-cta:hover {
@@ -187,9 +190,13 @@
 }
 
 .visit-hero-scroll {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-xs);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;

@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { MapPin, Clock, Ticket, GraduationCap, Users, BookOpen, Heart } from 'lucide-react'
 import { AnimatedCounter } from '@/components/home/AnimatedCounter'
 import { ScrollReveal } from '@/components/home/ScrollReveal'
-import { OriginalSevenMap } from '@/components/OriginalSevenMap'
 import { DocumentTeaser } from '@/components/evidence'
 import { TestimonialCarousel } from '@/components/TestimonialCarousel'
 import { QuickBookingCard } from '@/components/QuickBookingCard'
@@ -15,7 +14,7 @@ import siteInfo from '@/data/siteInfo.json'
 export const metadata: Metadata = {
   title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
   description:
-    "In 1790, Governor Blount made this ground the first capital of the Southwest Territory. Stand where they stood. America 250 and Tennessee 230 commemorative events in 2026.",
+    'In 1790, Governor Blount made this ground the first capital of the Southwest Territory. Stand where they stood. America 250 and Tennessee 230 commemorative events in 2026.',
 }
 
 // Static data for category counters
@@ -31,7 +30,7 @@ const AUDIENCE_CARDS = [
     href: '/educators',
     icon: GraduationCap,
     title: 'Educators',
-    description: 'Curriculum-aligned field trips with Tennessee history standards.',
+    description: 'Bring students to where Tennessee began. Curriculum-aligned to state standards.',
     cta: 'Plan a Field Trip',
   },
   {
@@ -45,7 +44,7 @@ const AUDIENCE_CARDS = [
     href: '/our-story',
     icon: BookOpen,
     title: 'Our Story',
-    description: 'The complete narrative: settlement to territorial capital.',
+    description: 'From frontier settlement to seat of power. The complete founding story.',
     cta: 'Read the Full Story',
   },
   {
@@ -223,13 +222,13 @@ export default function HomePage() {
                 id="original-seven-heading"
                 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-6 font-bold"
               >
-                Governing Seat of the Original Seven
+                Where Blount Governed the Original Seven Counties
               </h2>
               <p className="text-lg text-primary/80 leading-relaxed mb-4">
-                From 1790 to 1792, Governor William Blount administered seven counties from this
-                ground—Sullivan, Washington, Greene, and Hawkins in the east; Davidson, Sumner, and
-                Tennessee in the Cumberland settlements. Rocky Mount was the center of territorial
-                government. The heritage trail connecting these founding places begins here.
+                From 1790 to 1792, Governor William Blount administered seven counties from Rocky
+                Mount—Sullivan, Washington, Greene, and Hawkins in the east; Davidson, Sumner, and
+                Tennessee in the Cumberland settlements. The heritage trail connecting these
+                founding places begins here.
               </p>
               {/* Cherokee Context */}
               <div className="mt-6 pt-6 border-t border-primary/10">
@@ -242,7 +241,21 @@ export default function HomePage() {
 
             {/* Map */}
             <div className="mb-10">
-              <OriginalSevenMap variant="hero" showLabels showDistances interactive />
+              <figure className="relative max-w-4xl mx-auto">
+                <div className="relative rounded-lg overflow-hidden shadow-xl border border-primary/10">
+                  <Image
+                    src="/images/original-seven-map-1790.png"
+                    alt="Map of Tennessee at the beginning of 1790, showing the seven original counties: Sullivan, Washington, Hawkins, Greene in the east, and Davidson, Sumner, Tennessee in the west."
+                    width={900}
+                    height={500}
+                    className="w-full h-auto"
+                    priority
+                  />
+                </div>
+                <figcaption className="mt-3 text-center text-sm text-primary/60 italic">
+                  Tennessee at the beginning of 1790 — Map by L. Pork Danville
+                </figcaption>
+              </figure>
             </div>
 
             {/* CTA */}
@@ -331,8 +344,8 @@ export default function HomePage() {
                 Visitors Say It Best
               </h2>
               <p className="text-lg text-primary/70 dark:text-white/70 leading-relaxed max-w-2xl mx-auto">
-                From immersive historical experiences to convincing period authenticity, guests
-                consistently praise their journey through Tennessee&apos;s founding story.
+                Visitors consistently describe their experience as &ldquo;immersive,&rdquo;
+                &ldquo;authentic,&rdquo; and &ldquo;unlike any other historic site.&rdquo;
               </p>
             </div>
           </div>
@@ -730,8 +743,8 @@ export default function HomePage() {
 
               {/* Social Proof */}
               <p className="text-sm text-white/40 mb-10">
-                Join <span className="text-accent">50,000+</span> annual visitors discovering
-                Tennessee&apos;s founding story
+                Join <span className="text-accent">50,000+</span> annual visitors who stand where
+                Tennessee began
               </p>
 
               {/* CTA */}

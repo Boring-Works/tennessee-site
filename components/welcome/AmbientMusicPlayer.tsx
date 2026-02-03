@@ -460,23 +460,25 @@ export function AmbientMusicPlayer({ initialVolume = 0.25 }: AmbientMusicPlayerP
         </div>
       </div>
 
-      {/* Main Toggle Button */}
+      {/* Main Toggle Button - Enhanced contrast for desktop */}
       <button
         type="button"
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`flex items-center justify-center w-12 h-12 rounded-full border backdrop-blur-md transition-all duration-300 ${
+        className={`flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full border-2 backdrop-blur-md transition-all duration-300 ${
           isPlaying
-            ? 'bg-[var(--gold-primary)]/15 border-[var(--gold-primary)] shadow-[0_0_20px_rgba(201,162,39,0.3)]'
-            : 'bg-[#0c1a2e]/80 border-[var(--gold-shimmer)] hover:border-[var(--gold-primary)] hover:bg-[#0c1a2e]/90'
+            ? 'bg-[var(--gold-primary)]/20 border-[var(--gold-primary)] shadow-[0_0_30px_rgba(201,162,39,0.5),0_0_60px_rgba(201,162,39,0.2)] ring-2 ring-[var(--gold-primary)]/30 ring-offset-2 ring-offset-[#0a1628]'
+            : 'bg-[#0c1a2e]/90 border-[var(--gold-shimmer)] hover:border-[var(--gold-primary)] hover:bg-[var(--gold-primary)]/10 hover:shadow-[0_0_20px_rgba(201,162,39,0.3)] hover:ring-2 hover:ring-[var(--gold-shimmer)]/20'
         }`}
         aria-label={isExpanded ? 'Close music player' : 'Open music player'}
         aria-expanded={isExpanded}
       >
         {isPlaying ? (
-          <WaveformBars playing={true} />
+          <div className="scale-125">
+            <WaveformBars playing={true} />
+          </div>
         ) : (
           <svg
-            className="w-5 h-5 text-[var(--gold-shimmer)]"
+            className="w-6 h-6 md:w-7 md:h-7 text-[var(--gold-primary)]"
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}

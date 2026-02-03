@@ -66,7 +66,7 @@ function InfoModal({ content, onClose }: InfoModalProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 bg-black/70 z-50"
+        className="fixed inset-0 bg-black/70 z-[70]"
       />
 
       {/* Mobile: Bottom sheet / Desktop: Centered modal */}
@@ -75,7 +75,7 @@ function InfoModal({ content, onClose }: InfoModalProps) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: '100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="fixed inset-x-0 bottom-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-lg md:w-full md:mx-4 bg-midnight border border-almanac-gold/30 rounded-t-2xl md:rounded-lg shadow-2xl z-50 overflow-hidden"
+        className="fixed inset-x-0 bottom-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-lg md:w-full md:mx-4 bg-midnight border border-almanac-gold/30 rounded-t-2xl md:rounded-lg shadow-2xl z-[70] overflow-hidden"
       >
         {/* Header */}
         <div className="flex items-start justify-between p-4 border-b border-almanac-gold/20">

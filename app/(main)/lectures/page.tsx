@@ -119,8 +119,8 @@ export default function LecturesPage() {
 
           {/* Journey framing */}
           <p className={styles['series-journey']}>
-            From frontier faith to founding government — five distinguished speakers trace the path
-            that led to Tennessee.
+            From frontier faith to founding government — {lectures.length} distinguished speakers
+            trace the path that led to Tennessee.
           </p>
 
           {/* Quick stats */}

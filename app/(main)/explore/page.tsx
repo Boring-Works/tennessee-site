@@ -313,19 +313,166 @@ export default function ExplorePage() {
       </section>
 
       {/* ============================================
+          THE ORIGINAL SEVEN COUNTIES
+          ============================================ */}
+      <section className={styles['explore-counties']} aria-labelledby="counties-heading">
+        <div className={styles['explore-trail-inner']}>
+          <header className={styles['explore-trail-header']}>
+            <h2 id="counties-heading" className={styles['explore-trail-headline']}>
+              The Original Seven Counties
+            </h2>
+            <p className={styles['explore-trail-intro']}>
+              From 1790 to 1792, Governor William Blount governed seven counties from Rocky
+              Mount—four in the east around this site, three in the west near the Cumberland
+              settlements. These counties became the foundation of Tennessee statehood in 1796.
+            </p>
+          </header>
+
+          {/* County Cards */}
+          <div className={styles['explore-counties-grid']}>
+            {/* Sullivan County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Sullivan County</h3>
+                <span className={styles['explore-county-badge']}>Rocky Mount Location</span>
+              </div>
+              <p className={styles['explore-county-role']}>
+                Seat of Territorial Government, 1790–1792
+              </p>
+              <p className={styles['explore-county-description']}>
+                Home to Rocky Mount, the first capital. Governor Blount lived and worked here,
+                establishing the territorial government from the Cobb family&apos;s home.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Rocky Mount State Historic Site (capital)</li>
+                <li>Holston Heritage Museum</li>
+                <li>Warriors&apos; Path State Park</li>
+              </ul>
+            </article>
+
+            {/* Washington County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Washington County</h3>
+                <span className={styles['explore-county-badge']}>15 min</span>
+              </div>
+              <p className={styles['explore-county-role']}>
+                Site of the Watauga Association & Treaty Grounds
+              </p>
+              <p className={styles['explore-county-description']}>
+                Home to the 1775 Treaty of Sycamore Shoals and Fort Watauga, where frontier settlers
+                established self-governance before the Revolution.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Sycamore Shoals State Historic Park</li>
+                <li>Carter Mansion (1780, oldest frame house)</li>
+                <li>Tipton-Haynes State Historic Site</li>
+              </ul>
+            </article>
+
+            {/* Greene County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Greene County</h3>
+                <span className={styles['explore-county-badge']}>45 min</span>
+              </div>
+              <p className={styles['explore-county-role']}>Home of President Andrew Johnson</p>
+              <p className={styles['explore-county-description']}>
+                Andrew Johnson served as U.S. President during Reconstruction. Greeneville preserves
+                his home, tailor shop, and legacy.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Andrew Johnson National Historic Site</li>
+                <li>General Morgan Inn (historic hotel)</li>
+                <li>Greeneville historic district</li>
+              </ul>
+            </article>
+
+            {/* Hawkins County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Hawkins County</h3>
+                <span className={styles['explore-county-badge']}>20 min</span>
+              </div>
+              <p className={styles['explore-county-role']}>Home to Tennessee&apos;s Oldest Town</p>
+              <p className={styles['explore-county-description']}>
+                Jonesborough, established 1779, is Tennessee&apos;s oldest town. The Chester Inn
+                hosted three U.S. Presidents and remains a living history site.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Chester Inn State Historic Site</li>
+                <li>Jonesborough historic district</li>
+                <li>National Storytelling Center</li>
+              </ul>
+            </article>
+
+            {/* Davidson County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Davidson County</h3>
+                <span className={styles['explore-county-badge']}>West</span>
+              </div>
+              <p className={styles['explore-county-role']}>
+                Cumberland Settlement & Future State Capital
+              </p>
+              <p className={styles['explore-county-description']}>
+                Home to Nashville, which became Tennessee&apos;s permanent capital in 1826. Fort
+                Nashborough anchored the western territory.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Fort Nashborough (replica)</li>
+                <li>Tennessee State Museum</li>
+                <li>The Hermitage (Andrew Jackson)</li>
+              </ul>
+            </article>
+
+            {/* Sumner County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Sumner County</h3>
+                <span className={styles['explore-county-badge']}>West</span>
+              </div>
+              <p className={styles['explore-county-role']}>Northern Cumberland Settlement</p>
+              <p className={styles['explore-county-description']}>
+                Established as part of the western settlements, Sumner County played a key role in
+                connecting the eastern and western territories.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Bledsoe&apos;s Station Historic Site</li>
+                <li>Cragfont State Historic Site</li>
+                <li>Historic downtown Gallatin</li>
+              </ul>
+            </article>
+
+            {/* Tennessee County */}
+            <article className={styles['explore-county-card']}>
+              <div className={styles['explore-county-header']}>
+                <h3 className={styles['explore-county-name']}>Tennessee County</h3>
+                <span className={styles['explore-county-badge']}>West</span>
+              </div>
+              <p className={styles['explore-county-role']}>Original Western Territory County</p>
+              <p className={styles['explore-county-description']}>
+                One of the original seven counties, later dissolved and absorbed into surrounding
+                counties as the state grew and reorganized.
+              </p>
+              <ul className={styles['explore-county-sites']}>
+                <li>Territory absorbed into modern counties</li>
+                <li>Historical markers throughout region</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
           HERITAGE TRAIL - Partner Sites
           ============================================ */}
       <section className={styles['explore-trail']} aria-labelledby="trail-heading">
         <div className={styles['explore-trail-inner']}>
           <header className={styles['explore-trail-header']}>
             <h2 id="trail-heading" className={styles['explore-trail-headline']}>
-              The Heritage Trail
+              Heritage Sites Near Rocky Mount
             </h2>
-            <p className={styles['explore-trail-intro']}>
-              From 1790 to 1792, Rocky Mount governed seven counties—four surrounding this site in
-              East Tennessee, three more in the Cumberland settlements. Today, the heritage trail
-              that connects these founding places begins here.
-            </p>
             <p className={styles['explore-trail-intro']}>
               Rocky Mount is the anchor of a regional network of historic sites. Each tells part of
               the story of how wilderness became a state.

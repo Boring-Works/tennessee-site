@@ -12,7 +12,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 100;
   transition: all var(--nav-duration-open) var(--nav-ease-spring);
 }
 
@@ -659,7 +659,7 @@
   transform: translateY(-0.5rem);
   transition: all var(--nav-duration-close) var(--nav-ease-spring);
   pointer-events: none;
-  z-index: 100;
+  z-index: 110;
   list-style: none;
   margin: 0;
 }

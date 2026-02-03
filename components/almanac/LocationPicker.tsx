@@ -119,7 +119,7 @@ export default function LocationPicker({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed top-4 left-1/2 -translate-x-1/2 z-[70] bg-amber-900/90 border border-amber-500/50 text-amber-200 px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow-lg"
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[80] bg-amber-900/90 border border-amber-500/50 text-amber-200 px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow-lg"
           >
             <AlertCircle className="w-4 h-4" />
             <span>Location won&apos;t persist after refresh (storage full)</span>
@@ -187,7 +187,7 @@ export default function LocationPicker({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-[70] p-6"
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-[80] p-6"
               role="dialog"
               aria-modal="true"
               aria-labelledby="location-picker-title"

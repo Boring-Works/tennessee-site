@@ -83,7 +83,7 @@ export default function OnboardingModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleDismiss}
-            className="fixed inset-0 bg-black/70 z-[70]"
+            className="fixed inset-0 bg-black/70 z-[80]"
           />
 
           {/* Modal */}
@@ -93,7 +93,7 @@ export default function OnboardingModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:w-full bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-[70] overflow-hidden"
+            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:w-full bg-almanac-midnight border border-almanac-gold/30 rounded-lg shadow-2xl z-[80] overflow-hidden"
             role="dialog"
             aria-modal="true"
             aria-labelledby="onboarding-title"

@@ -395,22 +395,21 @@ export default function HomePage() {
       </ScrollReveal>
 
       {/* ════════════════════════════════════════════════════════════════════
-          THE STAKES — What You Miss If You Don't Visit
-          StoryBrand: Avoiding Failure
+          HISTORICAL SIGNIFICANCE
+          Focus on substantive claims rather than visitor pressure
           ════════════════════════════════════════════════════════════════════ */}
       <ScrollReveal>
         <section className="relative bg-white py-16 md:py-24 border-t border-b border-secondary/10">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="font-serif text-2xl md:text-3xl text-primary mb-6 font-bold">
-              Every Year, 50,000 People Find What You&apos;re Looking For
+              Where Tennessee&apos;s Government Began
             </h2>
-            <p className="text-lg text-text-light leading-relaxed mb-8">
-              They stop asking where Tennessee began. They stop wondering if there&apos;s more to
-              history than textbooks. They stand on the ground and feel the weight of what happened
-              here.
+            <p className="text-lg text-text-light leading-relaxed mb-6">
+              This is where Blount established territorial authority. Where courts were organized.
+              Where Cherokee leaders came for preliminary peace talks in December 1790.
             </p>
-            <p className="font-serif text-xl text-primary italic">
-              The question is: Will you be one of them this year?
+            <p className="font-serif text-xl text-primary">
+              The seat of government for the territory that became Tennessee.
             </p>
           </div>
         </section>

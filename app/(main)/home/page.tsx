@@ -122,6 +122,71 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
+          THE PROBLEM — Why Visitors Are Searching
+          StoryBrand: External, Internal, Philosophical Problems
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <section className="relative bg-cream py-16 md:py-24">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 mb-4 font-semibold">
+                The Question Everyone Asks
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6 font-bold">
+                Where Did Tennessee Really Begin?
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">❓</span>
+                </div>
+                <h3 className="font-serif text-xl text-primary mb-3 font-semibold">
+                  External Problem
+                </h3>
+                <p className="text-text-light leading-relaxed">
+                  Textbooks say &ldquo;Southwest Territory&rdquo; but don&apos;t show you where it
+                  actually happened.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">💭</span>
+                </div>
+                <h3 className="font-serif text-xl text-primary mb-3 font-semibold">
+                  Internal Problem
+                </h3>
+                <p className="text-text-light leading-relaxed">
+                  You&apos;re tired of tourist sites that oversimplify history into plaques and gift
+                  shops.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⚖️</span>
+                </div>
+                <h3 className="font-serif text-xl text-primary mb-3 font-semibold">
+                  Philosophical Problem
+                </h3>
+                <p className="text-text-light leading-relaxed">
+                  Real history—with all its complexity—deserves serious treatment.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="font-serif text-xl md:text-2xl text-primary italic">
+                This ground holds the answer. The documents prove it.
+              </p>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ════════════════════════════════════════════════════════════════════
           ACT 2: THE PLAN — THREE HERO PATHS
           Replaces the 4-card Audience Router with 3 clear paths forward
           ════════════════════════════════════════════════════════════════════ */}
@@ -238,6 +303,171 @@ export default function HomePage() {
       </ScrollReveal>
 
       {/* ════════════════════════════════════════════════════════════════════
+          AUTHORITY — Why Rocky Mount Is the Real Deal
+          StoryBrand: Guide Credentials (Empathy + Authority)
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <section className="relative bg-primary py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/70 mb-4 font-semibold">
+                Why This Ground Matters
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 font-bold">
+                The Ground Is the Artifact
+              </h2>
+              <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto italic">
+                Like Gettysburg. Like Independence Hall. The building is proof. But the ground is
+                what endures.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white/5 border border-white/10 p-8 rounded-sm">
+                <div className="text-4xl mb-4 text-accent">📜</div>
+                <h3 className="font-serif text-xl text-white mb-3 font-semibold">
+                  Constitution Signer
+                </h3>
+                <p className="text-white/70 leading-relaxed">
+                  William Blount signed the U.S. Constitution, was appointed by George Washington,
+                  and made this his headquarters.
+                </p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 p-8 rounded-sm">
+                <div className="text-4xl mb-4 text-accent">🏛️</div>
+                <h3 className="font-serif text-xl text-white mb-3 font-semibold">First Capital</h3>
+                <p className="text-white/70 leading-relaxed">
+                  The first seat of government for the Southwest Territory. Not a replica. The
+                  actual buildings where it happened.
+                </p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 p-8 rounded-sm">
+                <div className="text-4xl mb-4 text-accent">📚</div>
+                <h3 className="font-serif text-xl text-white mb-3 font-semibold">
+                  Original Documents
+                </h3>
+                <p className="text-white/70 leading-relaxed">
+                  Read Blount&apos;s actual letters. See Cherokee treaties. Touch history through
+                  primary sources.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ════════════════════════════════════════════════════════════════════
+          UPCOMING EVENTS — Don't Just Read History. Be There.
+          StoryBrand: Calls to Action (Specific Opportunities)
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <section className="relative bg-cream py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 mb-4 font-semibold">
+                2026 America 250 Season
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-6 font-bold">
+                Don&apos;t Just Read History. Be There.
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <Link
+                href="/events/colonial-independence-day"
+                className="group bg-white border-2 border-primary/10 p-8 transition-all duration-300 hover:border-accent hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="text-sm uppercase tracking-wider text-accent mb-2 font-semibold">
+                  July 4, 2026
+                </div>
+                <h3 className="font-serif text-2xl text-primary mb-4 group-hover:text-accent transition-colors">
+                  Colonial Independence Day
+                </h3>
+                <p className="text-text-light leading-relaxed mb-4">
+                  First 250 founding ceremony. Living history. Period music. The way 1776 was
+                  celebrated on the frontier.
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-accent font-semibold">
+                  Learn More →
+                </span>
+              </Link>
+
+              <Link
+                href="/events/first-families-reunion"
+                className="group bg-white border-2 border-primary/10 p-8 transition-all duration-300 hover:border-accent hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="text-sm uppercase tracking-wider text-accent mb-2 font-semibold">
+                  August 22-24, 2026
+                </div>
+                <h3 className="font-serif text-2xl text-primary mb-4 group-hover:text-accent transition-colors">
+                  First Families Reunion
+                </h3>
+                <p className="text-text-light leading-relaxed mb-4">
+                  If your ancestors were here before 1796, this is your homecoming. Genealogy
+                  research. Heritage celebration.
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-accent font-semibold">
+                  Learn More →
+                </span>
+              </Link>
+
+              <Link
+                href="/events/harvest-fest"
+                className="group bg-white border-2 border-primary/10 p-8 transition-all duration-300 hover:border-accent hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="text-sm uppercase tracking-wider text-accent mb-2 font-semibold">
+                  October 11-12, 2026
+                </div>
+                <h3 className="font-serif text-2xl text-primary mb-4 group-hover:text-accent transition-colors">
+                  Harvest Fest
+                </h3>
+                <p className="text-text-light leading-relaxed mb-4">
+                  1790s harvest traditions. Demonstrations. Craft sales. Apple butter stirring. The
+                  whole frontier experience.
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-accent font-semibold">
+                  Learn More →
+                </span>
+              </Link>
+            </div>
+
+            <div className="text-center mt-12">
+              <Link
+                href="/events"
+                className="inline-flex items-center gap-2 text-accent hover:text-accent-light transition-colors font-semibold"
+              >
+                View Full Event Calendar →
+              </Link>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ════════════════════════════════════════════════════════════════════
+          THE STAKES — What You Miss If You Don't Visit
+          StoryBrand: Avoiding Failure
+          ════════════════════════════════════════════════════════════════════ */}
+      <ScrollReveal>
+        <section className="relative bg-white py-16 md:py-24 border-t border-b border-secondary/10">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <h2 className="font-serif text-2xl md:text-3xl text-primary mb-6 font-bold">
+              Every Year, 50,000 People Find What You&apos;re Looking For
+            </h2>
+            <p className="text-lg text-text-light leading-relaxed mb-8">
+              They stop asking where Tennessee began. They stop wondering if there&apos;s more to
+              history than textbooks. They stand on the ground and feel the weight of what happened
+              here.
+            </p>
+            <p className="font-serif text-xl text-primary italic">
+              The question is: Will you be one of them this year?
+            </p>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ════════════════════════════════════════════════════════════════════
           ACT 3: SUCCESS — SOCIAL PROOF + FINAL CTA
           Simplified testimonials (static, no carousel) + compact visit info
           ════════════════════════════════════════════════════════════════════ */}
@@ -318,6 +548,49 @@ export default function HomePage() {
                     {siteInfo.location.drivingDistances[0].time} from{' '}
                     {siteInfo.location.drivingDistances[0].city.split(',')[0]}
                   </span>
+                </div>
+              </div>
+            </div>
+
+            {/* ════════════════════════════════════════════════════════════════
+                SUCCESS VISION — The Transformation
+                StoryBrand: Ending in Success
+                ════════════════════════════════════════════════════════════════ */}
+            <div className="bg-white/5 border border-white/10 rounded-sm p-12 mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h3 className="font-serif text-2xl md:text-3xl text-white mb-8 text-center font-bold">
+                  Before and After
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="text-accent mb-3 text-sm uppercase tracking-wider font-semibold">
+                      Before Your Visit
+                    </div>
+                    <p className="text-white/70 leading-relaxed">
+                      You know Tennessee has a founding story. But it feels distant. Abstract.
+                      Something that happened &ldquo;somewhere out there&rdquo; in the past.
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="text-accent mb-3 text-sm uppercase tracking-wider font-semibold">
+                      After Your Visit
+                    </div>
+                    <p className="text-white/90 leading-relaxed font-medium">
+                      You&apos;ll know where you&apos;re from. You&apos;ll have walked the same
+                      ground where Blount governed. You&apos;ll have stood in the room where it
+                      happened.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-white/10 text-center">
+                  <p className="font-serif text-xl text-white italic">
+                    History stops being something you read about.
+                    <br />
+                    It becomes something you&apos;ve witnessed.
+                  </p>
                 </div>
               </div>
             </div>

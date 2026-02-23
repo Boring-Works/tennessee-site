@@ -11,6 +11,8 @@
 
 import { readFileSync } from 'fs'
 import { join } from 'path'
+import { EventsDataSchema } from '../lib/schemas/events'
+import type { ZodError } from 'zod'
 
 // ANSI colors for terminal output
 const colors = {
@@ -38,20 +40,6 @@ interface ValidationResult {
   info: string[]
 }
 
-// Valid enum values
-const VALID_TYPES = ['new', 'enhanced', 'recurring', 'milestone']
-const VALID_CATEGORIES = [
-  'signature',
-  'festival',
-  'lecture',
-  'workshop',
-  'camp',
-  'education',
-  'tour',
-  'family',
-  'seasonal',
-  'digital',
-]
 const CLOSED_DAYS = [0, 1, 2] // Sunday, Monday, Tuesday
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -59,69 +47,38 @@ const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frid
 const SEASON_START = new Date('2026-03-04')
 const SEASON_END = new Date('2026-12-20')
 
-function validateEvents(eventsData: {
-  events: unknown[]
-  recurringPrograms?: Record<string, unknown>
-}): ValidationResult {
+function validateEvents(eventsData: unknown): ValidationResult {
   const result: ValidationResult = { errors: [], warnings: [], info: [] }
 
-  if (!Array.isArray(eventsData.events)) {
-    result.errors.push('events.json: "events" must be an array')
+  // 1. Zod Validation (Type & Structure)
+  const parseResult = EventsDataSchema.safeParse(eventsData)
+
+  if (!parseResult.success) {
+    const error = parseResult.error as ZodError
+    error.issues.forEach((err) => {
+      const path = err.path.join('.') || 'root'
+      result.errors.push(`${path}: ${err.message}`)
+    })
+    // If structure is invalid, we can't reliably run business logic checks
     return result
   }
 
+  const data = parseResult.data
   const seenIds = new Set<string>()
 
-  for (const event of eventsData.events as Record<string, unknown>[]) {
-    const eventId = String(event.id || 'unknown')
+  // 2. Business Logic Validation (Warnings & Logical Constraints)
+  for (const event of data.events) {
+    const eventId = event.id
 
-    // Check required fields
-    if (!event.id) result.errors.push(`Event missing "id" field`)
-    if (!event.title) result.errors.push(`${eventId}: Missing "title"`)
-    if (!event.date) result.errors.push(`${eventId}: Missing "date"`)
-    if (!event.type) result.errors.push(`${eventId}: Missing "type"`)
-    if (!event.category) result.errors.push(`${eventId}: Missing "category"`)
-    if (!event.description) result.errors.push(`${eventId}: Missing "description"`)
-    if (typeof event.requiresTicket !== 'boolean') {
-      result.errors.push(
-        `${eventId}: "requiresTicket" must be a boolean, got ${typeof event.requiresTicket}`
-      )
+    // Check ID uniqueness
+    if (seenIds.has(eventId)) {
+      result.errors.push(`${eventId}: Duplicate ID`)
     }
-
-    // Check ID uniqueness and format
-    if (event.id) {
-      if (seenIds.has(String(event.id))) {
-        result.errors.push(`${eventId}: Duplicate ID`)
-      }
-      seenIds.add(String(event.id))
-
-      if (!/^[a-z0-9-]+$/.test(String(event.id))) {
-        result.errors.push(`${eventId}: ID must be lowercase with hyphens only`)
-      }
-    }
-
-    // Check date format
-    if (event.date && !/^\d{4}-\d{2}-\d{2}$/.test(String(event.date))) {
-      result.errors.push(`${eventId}: Date must be YYYY-MM-DD format`)
-    }
-
-    // Check type enum
-    if (event.type && !VALID_TYPES.includes(String(event.type))) {
-      result.errors.push(
-        `${eventId}: Invalid type "${event.type}". Must be one of: ${VALID_TYPES.join(', ')}`
-      )
-    }
-
-    // Check category enum
-    if (event.category && !VALID_CATEGORIES.includes(String(event.category))) {
-      result.errors.push(
-        `${eventId}: Invalid category "${event.category}". Must be one of: ${VALID_CATEGORIES.join(', ')}`
-      )
-    }
+    seenIds.add(eventId)
 
     // Check day of week (single-day events only)
     if (event.date && !event.endDate && event.category !== 'digital') {
-      const date = new Date(String(event.date) + 'T12:00:00')
+      const date = new Date(event.date + 'T12:00:00')
       const dayOfWeek = date.getDay()
 
       if (CLOSED_DAYS.includes(dayOfWeek)) {
@@ -133,7 +90,7 @@ function validateEvents(eventsData: {
 
     // Check season boundaries
     if (event.date) {
-      const eventDate = new Date(String(event.date) + 'T12:00:00')
+      const eventDate = new Date(event.date + 'T12:00:00')
       if (eventDate < SEASON_START) {
         result.warnings.push(`${eventId}: Before season opening (March 4)`)
       }
@@ -150,44 +107,17 @@ function validateEvents(eventsData: {
     if (event.requiresTicket === false && event.ticketUrl) {
       result.warnings.push(`${eventId}: Free event has ticketUrl set (should be null)`)
     }
-
-    // Check description length
-    if (event.description) {
-      const descLength = String(event.description).length
-      if (descLength < 50) {
-        result.warnings.push(`${eventId}: Description is very short (${descLength} chars)`)
-      }
-      if (descLength > 300) {
-        result.warnings.push(
-          `${eventId}: Description is long (${descLength} chars) - consider trimming`
-        )
-      }
-    }
-
-    // Check lecture-specific fields
-    if (event.category === 'lecture') {
-      if (!event.speaker) {
-        result.warnings.push(`${eventId}: Lecture missing "speaker" field`)
-      }
-    }
   }
 
-  // Validate recurring programs
-  if (eventsData.recurringPrograms) {
-    for (const [key, program] of Object.entries(eventsData.recurringPrograms)) {
-      const prog = program as Record<string, unknown>
-      const progId = String(prog.id || key)
-
-      if (!prog.id) result.warnings.push(`recurringPrograms.${key}: Missing "id"`)
-      if (!prog.title) result.errors.push(`recurringPrograms.${key}: Missing "title"`)
-      if (!prog.dates && progId !== 'behind-the-scenes') {
-        result.warnings.push(`recurringPrograms.${key}: Missing "dates" array`)
-      }
-
-      // Check dates are on valid days
-      if (Array.isArray(prog.dates)) {
-        for (const dateStr of prog.dates) {
-          const date = new Date(String(dateStr) + 'T12:00:00')
+  // Recurring programs logic
+  if (data.recurringPrograms) {
+    for (const [key, program] of Object.entries(data.recurringPrograms)) {
+      const progId = program.id || key
+      // Zod checks structure, here we check specific logic if any
+      // e.g. date checks if needed
+      if (Array.isArray(program.dates)) {
+        for (const dateStr of program.dates) {
+          const date = new Date(dateStr + 'T12:00:00')
           if (date < SEASON_START) {
             result.warnings.push(`${progId}: Date ${dateStr} is before season opening`)
           }
@@ -312,10 +242,14 @@ async function main() {
     eventsResult.info.forEach((i) => log(i, 'info'))
 
     if (eventsResult.errors.length === 0) {
-      log(`${eventsData.events.length} events validated`, 'success')
+      log(`${(eventsData as any).events?.length || 0} events validated`, 'success')
     }
   } catch (error) {
     log(`Failed to parse events.json: ${error instanceof Error ? error.message : error}`, 'error')
+    // Log stack trace
+    if (error instanceof Error && error.stack) {
+        console.log(error.stack)
+    }
     hasErrors = true
   }
 

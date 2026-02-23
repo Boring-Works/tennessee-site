@@ -1,11 +1,9 @@
-'use client'
-
-import { useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import type { Document } from '@/lib/evidence/types'
 import { VerificationBadge } from './VerificationBadge'
+import { DocumentScrollHandler } from './DocumentScrollHandler'
 
 interface DocumentViewerProps {
   document: Document
@@ -22,24 +20,6 @@ const sanitizeSchema = {
 }
 
 export function DocumentViewer({ document: doc, highlightId }: DocumentViewerProps) {
-  // Derive announcement from highlightId (screen readers read once on change)
-  const highlightAnnouncement = useMemo(
-    () => (highlightId ? `Highlighted passage: ${highlightId}` : ''),
-    [highlightId]
-  )
-
-  // Handle scroll-to-highlight effect separately
-  useEffect(() => {
-    if (highlightId) {
-      const element = globalThis.document.getElementById(highlightId)
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }, 100)
-      }
-    }
-  }, [highlightId])
-
   // Transform content: convert <passage> tags to spans with IDs
   const transformedContent = doc.content.replace(
     /<passage id="([^"]+)">([\s\S]*?)<\/passage>/g,
@@ -61,9 +41,8 @@ export function DocumentViewer({ document: doc, highlightId }: DocumentViewerPro
         </a>
       </nav>
 
-      <div role="status" aria-live="polite" className="sr-only">
-        {highlightAnnouncement}
-      </div>
+      {/* Handle scrolling behavior on client */}
+      <DocumentScrollHandler highlightId={highlightId} />
 
       <header className="mb-8 pb-6 border-b border-white/10">
         <div className="flex items-start justify-between gap-4 mb-4">

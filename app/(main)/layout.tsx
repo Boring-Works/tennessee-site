@@ -41,6 +41,20 @@ export default function MainLayout({
         src="https://fareharbor.com/embeds/script/calendar/rockymountmuseum/?fallback=simple"
         strategy="lazyOnload"
       />
+
+      {/* GiveButter Widget Script */}
+      <Script id="givebutter-init" strategy="lazyOnload">
+        {`
+          window.givebutter = window.givebutter || function () { (window.givebutter.q = window.givebutter.q || []).push(arguments) };
+          window.givebutter.l = +new Date;
+          // Only initialize if ID is present
+          const givebutterId = '${process.env.NEXT_PUBLIC_GIVEBUTTER_ID || ''}';
+          if (givebutterId) {
+            window.givebutter('set', 'id', givebutterId);
+          }
+        `}
+      </Script>
+      <Script src="https://js.givebutter.com/js/widget.js" strategy="lazyOnload" />
     </>
   )
 }

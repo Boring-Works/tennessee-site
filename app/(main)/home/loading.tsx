@@ -222,7 +222,7 @@ export default function HomeLoading() {
       </section>
 
       {/* Events Showcase Section */}
-      <section style={{ background: '#0a1628', padding: '5rem 1rem', minHeight: '600px' }}>
+      <section style={{ background: 'var(--primary)', padding: '5rem 1rem', minHeight: '600px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>

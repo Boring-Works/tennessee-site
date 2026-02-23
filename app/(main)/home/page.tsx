@@ -9,7 +9,7 @@ import { MYSTERY_NARRATIVE, HOOKS, BUTTONS, FIRST_250_CAMPAIGN } from '@/lib/cop
 import siteInfo from '@/data/siteInfo.json'
 import testimonials from '@/data/testimonials.json'
 import eventsData from '@/data/events.json'
-import { Event } from '@/lib/schemas/events'
+import type { Event } from '@/lib/schemas/events'
 
 export const metadata: Metadata = {
   title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
@@ -28,15 +28,16 @@ export default function HomePage() {
   today.setHours(0, 0, 0, 0)
 
   // Use type assertion or simple logic since we're in server component
-  const nextEvent = (eventsData.events as unknown as Event[])
-    .filter((event) => {
-      // Ensure date is treated as local date or consistent
-      // The JSON dates are YYYY-MM-DD.
-      // We want to find the first event where date >= today.
-      const eventDate = new Date(event.date + 'T12:00:00') // Force noon to avoid timezone shift issues
-      return eventDate >= today
-    })
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] || null
+  const nextEvent =
+    (eventsData.events
+      .filter((event) => {
+        // Ensure date is treated as local date or consistent
+        // The JSON dates are YYYY-MM-DD.
+        // We want to find the first event where date >= today.
+        const eventDate = new Date(event.date + 'T12:00:00') // Force noon to avoid timezone shift issues
+        return eventDate >= today
+      })
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] as Event) || null
 
   return (
     <main className="min-h-screen">

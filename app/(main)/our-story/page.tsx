@@ -137,10 +137,10 @@ export default function OurStoryPage() {
           <p className="text-[10px] uppercase tracking-[0.3em] text-accent/80 mb-4 font-semibold">
             Est. 1770 · Site of Tennessee&apos;s Government
           </p>
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+          <h1 className="type-display text-white mb-6">
             Where Tennessee&apos;s Government Began
           </h1>
-          <p className="font-serif text-xl sm:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
+          <p className="type-h3 text-white/90 max-w-3xl mx-auto">
             From frontier settlement to territorial capital—the story of one family&apos;s homestead
             that became the birthplace of Tennessee government.
           </p>
@@ -189,7 +189,7 @@ export default function OurStoryPage() {
               <p className="text-[10px] uppercase tracking-[0.4em] text-accent/80 mb-4 font-semibold">
                 The Full Story
               </p>
-              <h2 className="font-serif text-4xl md:text-5xl text-primary font-bold mb-6">
+              <h2 className="type-h2 text-primary mb-6">
                 From Settlement to Capital
               </h2>
             </div>
@@ -546,14 +546,14 @@ export default function OurStoryPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/visit"
-                className="inline-flex items-center justify-center gap-2 bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-wider rounded transition-all hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-xl"
+                className="btn-primary"
               >
                 <Calendar className="w-5 h-5" />
                 Plan Your Visit
               </Link>
               <Link
                 href="/evidence"
-                className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-wider rounded transition-all hover:bg-white/20"
+                className="btn-secondary"
               >
                 <FileText className="w-5 h-5" />
                 Explore the Evidence

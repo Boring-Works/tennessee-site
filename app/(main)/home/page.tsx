@@ -68,7 +68,7 @@ export default function HomePage() {
 
         {/* Hero Content */}
         <div className="relative z-10 flex-1 flex items-center pt-28 pb-16 px-6 lg:px-20">
-          <div className="w-full max-w-7xl mx-auto">
+          <div className="w-full max-w-6xl mx-auto">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               {/* First 250 Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-accent/30 rounded-sm animate-fade-in">
@@ -84,12 +84,12 @@ export default function HomePage() {
               </p>
 
               {/* Main Headline - Updated per spec */}
-              <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight animate-fade-in animation-delay-200">
+              <h1 className="type-display text-white animate-fade-in animation-delay-200">
                 Where Tennessee&apos;s Government Began
               </h1>
 
               {/* Subhead */}
-              <p className="font-serif text-xl sm:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto animate-fade-in animation-delay-300">
+              <p className="type-h3 text-white/90 max-w-2xl mx-auto animate-fade-in animation-delay-300">
                 In 1790, Governor Blount made this ground the first capital of the Southwest
                 Territory. Stand where they stood.
               </p>
@@ -108,7 +108,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in animation-delay-400">
                 <Link
                   href="/visit"
-                  className="group inline-flex items-center justify-center gap-2.5 bg-accent text-primary px-10 py-5 text-[15px] font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-accent/35"
+                  className="btn-primary"
                 >
                   {BUTTONS.primary}
                 </Link>
@@ -146,13 +146,13 @@ export default function HomePage() {
       <ScrollReveal>
         <section className="relative bg-primary py-12 md:py-16">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <p className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed mb-6">
+            <p className="type-h3 text-white/90 mb-6">
               In 1787, William Blount signed the U.S. Constitution in Philadelphia.
             </p>
-            <p className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed mb-6">
+            <p className="type-h3 text-white/90 mb-6">
               In 1790, President Washington appointed him Governor of the Southwest Territory.
             </p>
-            <p className="font-serif text-2xl md:text-3xl text-white font-bold">
+            <p className="type-h2 text-white">
               From this ground, he governed the territory that would become Tennessee.
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function HomePage() {
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2
                 id="paths-heading"
-                className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-6 font-bold"
+                className="type-h2 text-primary mb-6"
               >
                 Choose Your Experience
               </h2>
@@ -186,10 +186,10 @@ export default function HomePage() {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
                   <Calendar className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="font-serif text-2xl text-primary text-center mb-4 group-hover:text-accent transition-colors">
+                <h3 className="type-h3 text-primary text-center mb-4 group-hover:text-accent transition-colors">
                   Visit in Person
                 </h3>
-                <p className="text-base text-text-light leading-relaxed text-center mb-6">
+                <p className="type-body text-text-light text-center mb-6">
                   Tours start at 10am Wed–Sat. Book online or walk in. See the room where Governor
                   Blount governed.
                 </p>
@@ -221,10 +221,10 @@ export default function HomePage() {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
                   <FileText className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="font-serif text-2xl text-white text-center mb-4 group-hover:text-accent transition-colors">
+                <h3 className="type-h3 text-white text-center mb-4 group-hover:text-accent transition-colors">
                   Enter the Evidence Room
                 </h3>
-                <p className="text-base text-white/70 leading-relaxed text-center mb-6">
+                <p className="type-body text-white/70 text-center mb-6">
                   Original letters, treaties, and documents. See Blount&apos;s words. Read Cherokee
                   diplomatic correspondence.
                 </p>
@@ -249,10 +249,10 @@ export default function HomePage() {
                 <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
                   <Users2 className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="font-serif text-2xl text-primary text-center mb-4 group-hover:text-accent transition-colors">
+                <h3 className="type-h3 text-primary text-center mb-4 group-hover:text-accent transition-colors">
                   Join the First 250
                 </h3>
-                <p className="text-base text-text-light leading-relaxed text-center mb-4">
+                <p className="type-body text-text-light text-center mb-4">
                   {FIRST_250_CAMPAIGN.promise}
                 </p>
                 <p className="text-sm text-text-light/60 text-center mb-6 italic">
@@ -280,10 +280,10 @@ export default function HomePage() {
         <section className="relative bg-primary py-20 md:py-28">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 font-bold">
+              <h2 className="type-h2 text-white mb-6">
                 Federal Authority on the Frontier
               </h2>
-              <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+              <p className="type-body text-white/80 max-w-3xl mx-auto">
                 From 1790–1792, this site served as the seat of government for the Southwest
                 Territory.
               </p>
@@ -292,10 +292,10 @@ export default function HomePage() {
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white/5 border border-white/10 p-8 rounded-sm">
                 <div className="text-4xl mb-4 text-accent">📜</div>
-                <h3 className="font-serif text-xl text-white mb-3 font-semibold">
+                <h3 className="type-h3 text-white mb-3">
                   Constitution Signer
                 </h3>
-                <p className="text-white/70 leading-relaxed">
+                <p className="type-body text-white/70">
                   William Blount signed the U.S. Constitution, was appointed by George Washington,
                   and made this his headquarters.
                 </p>
@@ -303,8 +303,8 @@ export default function HomePage() {
 
               <div className="bg-white/5 border border-white/10 p-8 rounded-sm">
                 <div className="text-4xl mb-4 text-accent">🏛️</div>
-                <h3 className="font-serif text-xl text-white mb-3 font-semibold">First Capital</h3>
-                <p className="text-white/70 leading-relaxed">
+                <h3 className="type-h3 text-white mb-3">First Capital</h3>
+                <p className="type-body text-white/70">
                   The first seat of government for the Southwest Territory. Not a replica. The
                   actual buildings where it happened.
                 </p>
@@ -312,10 +312,10 @@ export default function HomePage() {
 
               <div className="bg-white/5 border border-white/10 p-8 rounded-sm">
                 <div className="text-4xl mb-4 text-accent">📚</div>
-                <h3 className="font-serif text-xl text-white mb-3 font-semibold">
+                <h3 className="type-h3 text-white mb-3">
                   Original Documents
                 </h3>
-                <p className="text-white/70 leading-relaxed">
+                <p className="type-body text-white/70">
                   Read Blount&apos;s actual letters. See Cherokee treaties. Touch history through
                   primary sources.
                 </p>
@@ -333,10 +333,10 @@ export default function HomePage() {
         <section className="relative bg-cream py-20 md:py-28">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary mb-4 font-bold">
+              <h2 className="type-h2 text-primary mb-4">
                 Experience America 250 at Rocky Mount
               </h2>
-              <p className="text-lg md:text-xl text-text-light max-w-3xl mx-auto">
+              <p className="type-body text-text-light max-w-3xl mx-auto">
                 Three signature programs in 2026—the year Tennessee turns 230 and America turns 250.
               </p>
             </div>
@@ -349,10 +349,10 @@ export default function HomePage() {
                 <div className="text-sm uppercase tracking-wider text-accent mb-2 font-semibold">
                   July 4, 2026
                 </div>
-                <h3 className="font-serif text-2xl text-primary mb-4 group-hover:text-accent transition-colors">
+                <h3 className="type-h3 text-primary mb-4 group-hover:text-accent transition-colors">
                   Colonial Independence Day
                 </h3>
-                <p className="text-text-light leading-relaxed mb-4">
+                <p className="type-body text-text-light mb-4">
                   First 250 founding ceremony. Living history. Period music. The way 1776 was
                   celebrated on the frontier.
                 </p>
@@ -368,10 +368,10 @@ export default function HomePage() {
                 <div className="text-sm uppercase tracking-wider text-accent mb-2 font-semibold">
                   August 22-24, 2026
                 </div>
-                <h3 className="font-serif text-2xl text-primary mb-4 group-hover:text-accent transition-colors">
+                <h3 className="type-h3 text-primary mb-4 group-hover:text-accent transition-colors">
                   First Families Reunion
                 </h3>
-                <p className="text-text-light leading-relaxed mb-4">
+                <p className="type-body text-text-light mb-4">
                   If your ancestors were here before 1796, this is your homecoming. Genealogy
                   research. Heritage celebration.
                 </p>
@@ -387,10 +387,10 @@ export default function HomePage() {
                 <div className="text-sm uppercase tracking-wider text-accent mb-2 font-semibold">
                   October 11-12, 2026
                 </div>
-                <h3 className="font-serif text-2xl text-primary mb-4 group-hover:text-accent transition-colors">
+                <h3 className="type-h3 text-primary mb-4 group-hover:text-accent transition-colors">
                   Harvest Fest
                 </h3>
-                <p className="text-text-light leading-relaxed mb-4">
+                <p className="type-body text-text-light mb-4">
                   1790s harvest traditions. Demonstrations. Craft sales. Apple butter stirring. The
                   whole frontier experience.
                 </p>
@@ -419,14 +419,14 @@ export default function HomePage() {
       <ScrollReveal>
         <section className="relative bg-white py-16 md:py-24 border-t border-b border-secondary/10">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="font-serif text-2xl md:text-3xl text-primary mb-6 font-bold">
+            <h2 className="type-h2 text-primary mb-6">
               Where Tennessee&apos;s Government Began
             </h2>
-            <p className="text-lg text-text-light leading-relaxed mb-6">
+            <p className="type-body text-text-light mb-6">
               This is where Blount established territorial authority. Where courts were organized.
               Where Cherokee leaders came for preliminary peace talks in December 1790.
             </p>
-            <p className="font-serif text-xl text-primary">
+            <p className="type-h3 text-primary">
               The seat of government for the territory that became Tennessee.
             </p>
           </div>
@@ -455,7 +455,7 @@ export default function HomePage() {
               </p>
               <h2
                 id="testimonials-heading"
-                className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 font-bold"
+                className="type-h2 text-white mb-6"
               >
                 What Visitors Say
               </h2>
@@ -524,7 +524,7 @@ export default function HomePage() {
                 ════════════════════════════════════════════════════════════════ */}
             <div className="bg-white/5 border border-white/10 rounded-sm p-12 mb-16">
               <div className="max-w-3xl mx-auto">
-                <h3 className="font-serif text-2xl md:text-3xl text-white mb-8 text-center font-bold">
+                <h3 className="type-h2 text-white mb-8 text-center">
                   Before and After
                 </h3>
 
@@ -533,7 +533,7 @@ export default function HomePage() {
                     <div className="text-accent mb-3 text-sm uppercase tracking-wider font-semibold">
                       Before Your Visit
                     </div>
-                    <p className="text-white/70 leading-relaxed">
+                    <p className="type-body text-white/70">
                       You know Tennessee has a founding story. But it feels distant. Abstract.
                       Something that happened &ldquo;somewhere out there&rdquo; in the past.
                     </p>
@@ -543,7 +543,7 @@ export default function HomePage() {
                     <div className="text-accent mb-3 text-sm uppercase tracking-wider font-semibold">
                       After Your Visit
                     </div>
-                    <p className="text-white/90 leading-relaxed font-medium">
+                    <p className="type-body text-white/90">
                       You&apos;ll know where you&apos;re from. You&apos;ll have walked the same
                       ground where Blount governed. You&apos;ll have stood in the room where it
                       happened.
@@ -563,12 +563,12 @@ export default function HomePage() {
 
             {/* Final CTA */}
             <div className="text-center">
-              <p className="font-serif text-2xl md:text-3xl text-white/90 mb-6 italic">
+              <p className="type-h3 text-white/90 mb-6 italic">
                 {HOOKS.primaryCTA}
               </p>
               <Link
                 href="/visit"
-                className="group inline-flex items-center justify-center gap-3 bg-accent text-primary px-12 py-6 text-lg font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-accent-light hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/50"
+                className="btn-primary"
               >
                 <span className="text-2xl transition-transform duration-300 group-hover:scale-110">
                   ★

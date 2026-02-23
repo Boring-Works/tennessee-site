@@ -5,6 +5,8 @@ import {
   Great_Vibes,
   Cinzel,
   EB_Garamond,
+  Inter,
+  Merriweather,
 } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -46,6 +48,19 @@ const cinzel = Cinzel({
   display: 'swap',
   variable: '--font-cinzel',
   weight: ['400', '700'], // Reduced from 3 weights to 2
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-merriweather',
+  weight: ['300', '400', '700', '900'],
 })
 
 export const metadata: Metadata = {
@@ -92,7 +107,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} ${ebGaramond.variable} antialiased`}
+      className={`${playfair.variable} ${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} ${ebGaramond.variable} ${inter.variable} ${merriweather.variable} antialiased`}
     >
       <head>
         {/* DNS prefetch for FareHarbor booking modal - reduces connection latency */}

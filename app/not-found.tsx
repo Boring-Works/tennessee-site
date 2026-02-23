@@ -16,7 +16,7 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className="btn-primary inline-block bg-primary text-white font-semibold px-8 py-3 rounded-sm hover:bg-primary/90 transition-colors uppercase tracking-wider text-sm"
+            className="btn-primary"
           >
             Return Home
           </Link>

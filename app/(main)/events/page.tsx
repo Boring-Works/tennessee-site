@@ -3,6 +3,7 @@ import eventsData from '@/data/events.json'
 import siteInfo from '@/data/siteInfo.json'
 import { JsonLd } from '@/components/JsonLd'
 import { generateEventsListSchema, generateBreadcrumbSchema } from '@/lib/seo'
+import { Event } from '@/lib/schemas/events'
 import { EventsToursBanner } from '@/components/events/EventsToursBanner'
 import { EventsHoursCTA } from '@/components/events/EventsHoursCTA'
 import { EventsCalendarClient } from '@/components/events/EventsCalendarClient'
@@ -90,9 +91,10 @@ function getUpcomingEvents(count: number = 3) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const upcoming: { event: (typeof eventsData.events)[0]; daysAway: number }[] = []
+  const upcoming: { event: Event; daysAway: number }[] = []
+  const events = eventsData.events as unknown as Event[]
 
-  for (const event of eventsData.events) {
+  for (const event of events) {
     const eventDate = new Date(event.date + 'T12:00:00')
     if (eventDate >= today) {
       const diffTime = eventDate.getTime() - today.getTime()
@@ -203,7 +205,7 @@ export default function EventsPage() {
               href="https://fareharbor.com/embeds/book/rockymountmuseum/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg"
+              className="btn-primary"
             >
               Reserve Your Spot for 2026 Events
               <span aria-hidden="true">→</span>

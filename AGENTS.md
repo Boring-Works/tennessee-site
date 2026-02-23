@@ -1,49 +1,79 @@
 # AGENTS.md
 
-## Project
-Tennessee Starts Here — Rocky Mount State Historic Site commemorative website.
-
-## Commands
+## Build & Test
 - Install: `npm ci`
 - Dev: `npm run dev`
 - Build: `npm run build`
 - Lint: `npm run lint`
-- Format: `npm run format`
-- Validate data: `npm run validate:data`
-- Check facts: `npm run check:facts`
+- Test: `npm test` (if configured)
 
 ## Package Manager
 npm (use package-lock.json, NOT pnpm-lock.yaml)
 
 ## Deploy
-Vercel (auto-deploy from GitHub). Config in vercel.json.
+Vercel (auto-deploy from main branch). No manual deploy commands needed.
 
 ## Tech Stack
 - Next.js 16 (App Router)
-- React 19, TypeScript strict
+- React 19
+- TypeScript strict mode
 - Tailwind CSS v4
-- Framer Motion for animations
-- ESLint + Prettier + Husky pre-commit hooks
+- ESLint 9
+- shadcn/ui + Radix UI (where needed)
+- Lucide React (icons)
 
-## Architecture
-- `app/` — Next.js App Router pages and layouts
-- `components/` — React components
-- `lib/` — Business logic, utilities
-- `lib/copy/` — Centralized brand copy (single source of truth)
-- `lib/dredge/reference-library.ts` — 136 verified historical facts
-- `data/` — JSON data files (events, navigation, etc.)
-- `content/` — Markdown content files
-
-## CRITICAL: Historical Accuracy
-- ALL facts must be verified against lib/dredge/reference-library.ts
-- Run `npm run check:facts` before any content changes
-- Never add unverified historical claims
-- The building dates to 1820s. The SITE was settled ~1770.
-- First SOUTHWEST TERRITORY capital (1790-92). NOT first US territorial capital.
+## Conventions
+- App Router file conventions (page.tsx, layout.tsx, loading.tsx, error.tsx)
+- Server Components by default, `"use client"` only when needed
+- API routes in `app/api/` directory
+- Environment variables in `.env.local` (never commit)
+- Money as integer cents (avoid floating point)
+- IDs as UUIDs
+- Dates as ISO 8601 strings
 
 ## Do NOT
 - Generate pnpm-lock.yaml (this project uses npm)
-- Modify reference-library.ts without external source verification
-- Skip fact checking on content changes
-- Use `any` type
-- Add console.log (use lib/logger.ts instead)
+- Use Pages Router patterns (use App Router)
+- Use `any` type without justification
+- Skip TypeScript strict checks
+- Commit .env files
+- Install packages without checking if equivalent exists
+- Modify Vercel project settings without asking
+
+
+## Project
+Tennessee Starts Here — Official website for Rocky Mount State Historic Site. Heritage tourism, event promotion, and historical education.
+
+## Additional Tech
+- Framer Motion (animations)
+- Vercel Analytics + Speed Insights
+- Google Analytics 4
+- Zod (validation)
+- react-markdown + rehype (content rendering)
+- suncalc (moon phase calculations)
+- Husky + lint-staged (pre-commit hooks)
+
+## External APIs
+- Open-Meteo (weather data)
+- National Weather Service (alerts)
+- RainViewer (precipitation radar)
+- AQICN (air quality)
+- USGS (stream levels)
+- FareHarbor (booking integration)
+
+## Deploy
+Auto-deploy from main via Vercel.
+Live: https://tennesseestartshere.com
+
+## Key Features
+- Almanac system (weather, lunar, agricultural calculations)
+- Evidence system (primary historical documents)
+- FareHarbor booking integration
+- Visitor guide generator
+- Event calendar
+
+## Historical Content Rules
+- All claims must be verified against reference library
+- AI-generated content must be labeled
+- Building dates to 1820s, site settled ~1770
+- First SOUTHWEST TERRITORY capital (1790-92), NOT first US territorial capital

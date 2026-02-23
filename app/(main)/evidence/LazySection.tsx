@@ -27,18 +27,17 @@ export function LazySection({
   fallback,
   className,
 }: LazySectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const [hasLoaded, setHasLoaded] = useState(false)
+  const noObserver = typeof window !== 'undefined' && typeof IntersectionObserver === 'undefined'
+  const [isVisible, setIsVisible] = useState(noObserver)
+  const [hasLoaded, setHasLoaded] = useState(noObserver)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const element = ref.current
     if (!element) return
 
-    // If no IntersectionObserver support, render immediately
+    // If no IntersectionObserver support, already initialized as visible
     if (typeof IntersectionObserver === 'undefined') {
-      setIsVisible(true)
-      setHasLoaded(true)
       return
     }
 
@@ -91,7 +90,8 @@ export function SectionSkeleton({ height = '400px' }: { height?: string }) {
     <div
       style={{
         height,
-        background: 'linear-gradient(180deg, rgba(250, 247, 240, 0.5) 0%, rgba(245, 240, 230, 0.5) 100%)',
+        background:
+          'linear-gradient(180deg, rgba(250, 247, 240, 0.5) 0%, rgba(245, 240, 230, 0.5) 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

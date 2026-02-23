@@ -165,7 +165,7 @@ async function scanResearchDocuments(): Promise<string[]> {
  */
 function checkAgainstReferenceLibrary(claim: HistoricalClaim): {
   verified: boolean
-  fact?: any
+  fact?: (typeof REFERENCE_LIBRARY)[number]
   conflict?: boolean
 } {
   // Check for direct matches
@@ -287,7 +287,9 @@ async function main() {
   console.log(`  Generated ${result.suggestions.length} suggestions\n`)
 
   // OUTPUT REPORT
-  console.log(`${colors.bold}${colors.cyan}═══════════════════════════════════════════${colors.reset}`)
+  console.log(
+    `${colors.bold}${colors.cyan}═══════════════════════════════════════════${colors.reset}`
+  )
   console.log(`${colors.bold}SCAN RESULTS${colors.reset}\n`)
 
   console.log(`${colors.bold}📚 Content Inventory:${colors.reset}`)

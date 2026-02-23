@@ -103,9 +103,7 @@ function validateFrontmatter(filePath: string): SchemaError | null {
       if (!result.success) {
         return {
           file: filePath,
-          errors: result.error.issues.map(
-            (issue) => `${issue.path.join('.')}: ${issue.message}`
-          ),
+          errors: result.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`),
         }
       }
     }
@@ -132,7 +130,7 @@ async function main() {
   console.log(`Found ${allFiles.length} document(s) to check\n`)
 
   let factErrors: FactError[] = []
-  let schemaErrors: SchemaError[] = []
+  const schemaErrors: SchemaError[] = []
   let checkedFiles = 0
 
   // Check each file
@@ -176,9 +174,7 @@ async function main() {
 
   // Report fact errors
   if (factErrors.length > 0) {
-    console.log(
-      `${colors.bold}${colors.red}❌ FACT ERRORS (${factErrors.length})${colors.reset}\n`
-    )
+    console.log(`${colors.bold}${colors.red}❌ FACT ERRORS (${factErrors.length})${colors.reset}\n`)
 
     factErrors.forEach((error, index) => {
       console.log(`${colors.bold}Error ${index + 1}:${colors.reset}`)

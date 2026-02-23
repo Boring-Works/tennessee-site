@@ -1,5 +1,5 @@
 #!/usr/bin/env npx tsx
-/* eslint-disable no-console */
+
 /**
  * Data Validation Script
  *
@@ -242,13 +242,16 @@ async function main() {
     eventsResult.info.forEach((i) => log(i, 'info'))
 
     if (eventsResult.errors.length === 0) {
-      log(`${(eventsData as any).events?.length || 0} events validated`, 'success')
+      log(
+        `${(eventsData as Record<string, unknown>).events ? (eventsData as { events: unknown[] }).events.length : 0} events validated`,
+        'success'
+      )
     }
   } catch (error) {
     log(`Failed to parse events.json: ${error instanceof Error ? error.message : error}`, 'error')
     // Log stack trace
     if (error instanceof Error && error.stack) {
-        console.log(error.stack)
+      console.log(error.stack)
     }
     hasErrors = true
   }

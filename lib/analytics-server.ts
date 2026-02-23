@@ -38,6 +38,11 @@ async function sendToGA4(eventName: string, params: Record<string, unknown>): Pr
     // Silent fail in development, log in production
     if (process.env.NODE_ENV === 'production') {
       // eslint-disable-next-line no-console
+      console.error(
+        '[Analytics] GA4 credentials not configured - skipping server-side tracking (CRITICAL: Revenue data loss)'
+      )
+    } else {
+      // eslint-disable-next-line no-console
       console.warn('[Analytics] GA4 credentials not configured - skipping server-side tracking')
     }
     return false

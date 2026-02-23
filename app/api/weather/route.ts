@@ -107,7 +107,7 @@ export async function GET(request: Request) {
     })
 
     if (!res.ok) {
-      throw new Error('Weather API error')
+      throw new Error(`Weather API error: ${res.status} ${res.statusText}`)
     }
 
     const data = await res.json()
@@ -118,6 +118,10 @@ export async function GET(request: Request) {
     })
   } catch (error) {
     logger.error('Weather fetch error:', error)
-    return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 })
+    // Return 503 Service Unavailable with JSON error structure
+    return NextResponse.json(
+      { error: 'Failed to fetch weather data', details: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 503 }
+    )
   }
 }

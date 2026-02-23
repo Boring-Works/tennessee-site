@@ -415,10 +415,15 @@ export async function POST(request: NextRequest) {
       isValid = true
     }
 
-    // In development, allow unverified webhooks for testing
+    // In development, allow unverified webhooks for testing but warn
     const isDev = process.env.NODE_ENV === 'development'
-    if (!isValid && !isDev) {
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
+    if (!isValid) {
+      if (isDev) {
+        // eslint-disable-next-line no-console
+        console.warn('[FareHarbor] Webhook signature invalid - bypassing in development mode')
+      } else {
+        return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
+      }
     }
 
     // Parse payload

@@ -2,7 +2,17 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState, useMemo, useSyncExternalStore } from 'react'
-import eventsData from '@/data/events.json'
+import type { Event } from '@/lib/schemas/events'
+
+interface Commemorative2026Props {
+  stats: {
+    lectures: number
+    festivals: number
+    seasonal: number
+    total: number
+  }
+  nextEvent: Event
+}
 
 /**
  * Commemorative2026 Section
@@ -16,17 +26,6 @@ import eventsData from '@/data/events.json'
  * - Dramatic timeline visualization
  * - Colonial ledger aesthetic
  */
-
-// Get categorized events
-const lectures = eventsData.events.filter((e) => e.category === 'lecture')
-const festivals = eventsData.events.filter(
-  (e) => e.category === 'festival' || e.category === 'signature'
-)
-const seasonal = eventsData.events.filter((e) => e.category === 'seasonal')
-
-function getNextEvent() {
-  return eventsData.events[0]
-}
 
 // Client-only rendering hook (prevents hydration mismatch)
 function useIsClient() {
@@ -111,16 +110,13 @@ const CalendarIcon = () => (
   </svg>
 )
 
-export function Commemorative2026() {
+export function Commemorative2026({ stats, nextEvent }: Commemorative2026Props) {
   const sectionRef = useRef<HTMLElement>(null)
   const ledgerRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [ledgerVisible, setLedgerVisible] = useState(false)
   const [hoveredStar, setHoveredStar] = useState<number | null>(null)
   const isClient = useIsClient()
-
-  const nextEvent = getNextEvent()
-  const eventCount = eventsData.events.length
 
   // Generate 16 stars for the 16 states - use deterministic positions to avoid hydration mismatch
   // Seeded pseudo-random values for star positions (pre-calculated)
@@ -195,13 +191,16 @@ export function Commemorative2026() {
   }, [])
 
   // Parse event date using UTC to avoid hydration mismatch between server/client
+  // Use optional chaining just in case nextEvent is null (though logic should prevent it)
+  if (!nextEvent) return null
+
   const eventDate = new Date(nextEvent.date + 'T12:00:00Z')
   const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
   const dayNum = eventDate.getUTCDate()
   const year = eventDate.getUTCFullYear()
 
   // Animated counters
-  const animatedEventCount = useCountUp(eventCount, 1500, isVisible)
+  const animatedEventCount = useCountUp(stats.total, 1500, isVisible)
   const animatedMiles = useCountUp(600, 1500, ledgerVisible)
   const animatedYears = useCountUp(14, 1200, ledgerVisible)
 
@@ -403,7 +402,7 @@ export function Commemorative2026() {
                 </p>
               </div>
               <p className="text-white/60 text-sm">
-                <span className="text-accent font-semibold">{eventCount}</span> events celebrating
+                <span className="text-accent font-semibold">{stats.total}</span> events celebrating
                 America&apos;s 250th and Tennessee&apos;s 230th
               </p>
             </div>
@@ -455,19 +454,19 @@ export function Commemorative2026() {
               {/* Category cards */}
               {[
                 {
-                  count: lectures.length,
+                  count: stats.lectures,
                   label: 'Lecture Series',
                   desc: 'Historians explore the founding era',
                   icon: '📜',
                 },
                 {
-                  count: festivals.length,
+                  count: stats.festivals,
                   label: 'Festivals & Events',
                   desc: 'Living history, colonial trade fairs',
                   icon: '🎭',
                 },
                 {
-                  count: seasonal.length,
+                  count: stats.seasonal,
                   label: 'Seasonal Programs',
                   desc: 'Haunting tales, candlelit holidays',
                   icon: '🕯️',

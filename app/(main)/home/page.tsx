@@ -8,6 +8,7 @@ import { WeatherBadge } from '@/components/home/WeatherBadge'
 import { MYSTERY_NARRATIVE, HOOKS, BUTTONS, FIRST_250_CAMPAIGN } from '@/lib/copy'
 import siteInfo from '@/data/siteInfo.json'
 import testimonials from '@/data/testimonials.json'
+import eventsData from '@/data/events.json'
 
 export const metadata: Metadata = {
   title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
@@ -20,6 +21,21 @@ const FEATURED_TESTIMONIALS = testimonials.featured.slice(0, 3)
 
 export default function HomePage() {
   const { hero } = MYSTERY_NARRATIVE
+
+  // Calculate next event for the badge
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  // Use type assertion or simple logic since we're in server component
+  const nextEvent = eventsData.events
+    .filter((event) => {
+      // Ensure date is treated as local date or consistent
+      // The JSON dates are YYYY-MM-DD.
+      // We want to find the first event where date >= today.
+      const eventDate = new Date(event.date + 'T12:00:00') // Force noon to avoid timezone shift issues
+      return eventDate >= today
+    })
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] || null
 
   return (
     <main className="min-h-screen">
@@ -211,7 +227,7 @@ export default function HomePage() {
                   diplomatic correspondence.
                 </p>
                 <div className="text-center mb-6">
-                  <NextEventBadge />
+                  <NextEventBadge nextEvent={nextEvent} />
                 </div>
                 <div className="text-center">
                   <span className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-accent font-semibold">

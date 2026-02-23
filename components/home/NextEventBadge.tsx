@@ -2,41 +2,37 @@
 
 import { Calendar } from 'lucide-react'
 import Link from 'next/link'
-import eventsData from '@/data/events.json'
+import type { Event } from '@/lib/schemas/events'
+
+interface NextEventBadgeProps {
+  nextEvent: Event | null
+}
 
 /**
  * NextEventBadge - Shows the next upcoming event
  *
- * Automatically pulls from events.json and displays the soonest event
- * that hasn't passed yet.
+ * Displays the event passed via props. logic moved to parent server component.
  */
-export function NextEventBadge() {
-  // Get today's date at midnight for comparison
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-
-  // Find next upcoming event (date >= today)
-  const nextEvent = eventsData.events
-    .filter((event) => {
-      const eventDate = new Date(event.date)
-      eventDate.setHours(0, 0, 0, 0)
-      return eventDate >= today
-    })
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0]
-
+export function NextEventBadge({ nextEvent }: NextEventBadgeProps) {
   if (!nextEvent) {
     return null
   }
 
   // Format date as "May 22" or "May 22-24" for multi-day
   const formatEventDate = () => {
+    // Parse date safely
     const start = new Date(nextEvent.date)
-    const month = start.toLocaleDateString('en-US', { month: 'short' })
-    const day = start.getDate()
+    // Adjust for UTC if needed, but assuming date string YYYY-MM-DD is parsed correctly by new Date() in browser usually as UTC or local?
+    // Actually, "YYYY-MM-DD" is parsed as UTC in ES5, but inconsistent in some browsers.
+    // However, if we assume the input string is just a date, we should handle timezone carefully.
+    // Given the previous code didn't handle timezone explicitly beyond `toLocaleDateString`, let's stick to simple parsing.
+    // Better yet, let's use the same logic as Commemorative2026 if we want consistency, but here we just need month/day.
+    const month = start.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
+    const day = start.getUTCDate()
 
     if (nextEvent.endDate) {
       const end = new Date(nextEvent.endDate)
-      const endDay = end.getDate()
+      const endDay = end.getUTCDate()
       return `${month} ${day}–${endDay}`
     }
 

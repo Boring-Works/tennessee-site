@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+/* eslint-disable no-console */
 /**
  * Pre-Commit Fact-Checker
  *
@@ -14,7 +15,6 @@
 
 import { execSync } from 'child_process'
 import fs from 'fs'
-import path from 'path'
 import matter from 'gray-matter'
 import { REFERENCE_LIBRARY } from '../lib/dredge/reference-library'
 import { DocumentFrontmatterSchema } from '../lib/schemas/document'
@@ -55,7 +55,7 @@ function getStagedMarkdownFiles(): string[] {
       .split('\n')
       .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
       .filter((file) => file.length > 0)
-  } catch (error) {
+  } catch {
     // If not in a git repo or no staged files, return empty array
     return []
   }
@@ -101,8 +101,7 @@ function validateFrontmatter(filePath: string): SchemaError | null {
 
     // Only validate documents in content/documents/ and content/people/
     const shouldValidate =
-      filePath.includes('content/documents/') ||
-      filePath.includes('content/people/')
+      filePath.includes('content/documents/') || filePath.includes('content/people/')
 
     if (!shouldValidate) return null
 
@@ -112,9 +111,7 @@ function validateFrontmatter(filePath: string): SchemaError | null {
       if (!result.success) {
         return {
           file: filePath,
-          errors: result.error.issues.map(
-            (issue) => `${issue.path.join('.')}: ${issue.message}`
-          ),
+          errors: result.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`),
         }
       }
     }
@@ -144,7 +141,7 @@ async function main() {
   console.log(`Checking ${stagedFiles.length} file(s):\n`)
 
   let factErrors: FactError[] = []
-  let schemaErrors: SchemaError[] = []
+  const schemaErrors: SchemaError[] = []
 
   // Check each staged file
   for (const file of stagedFiles) {

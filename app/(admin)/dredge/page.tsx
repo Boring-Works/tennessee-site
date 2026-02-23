@@ -45,6 +45,7 @@ export default function DredgePage() {
       alert(`Queued: ${url}`)
       setUrl('')
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Failed to queue job:', error)
       alert('Failed to queue job')
     } finally {
@@ -112,7 +113,9 @@ export default function DredgePage() {
               onChange={(e) => setSourceType(e.target.value as typeof sourceType)}
               className="w-full rounded border border-stone-600 bg-stone-700 px-3 py-2 text-stone-100 focus:border-amber-500 focus:outline-none"
             >
-              <option value="primary">Tier 1: Primary (Government Archives, Founders Online)</option>
+              <option value="primary">
+                Tier 1: Primary (Government Archives, Founders Online)
+              </option>
               <option value="secondary">Tier 2: Secondary (Academic, Encyclopedia)</option>
               <option value="tertiary">Tier 3: Tertiary (Find A Grave, Ancestry)</option>
             </select>
@@ -175,7 +178,10 @@ export default function DredgePage() {
                       <button className="text-amber-500 hover:text-amber-400">Retry</button>
                     )}
                     {job.status === 'complete' && (
-                      <a href={`/dredge/review/${job.id}`} className="text-amber-500 hover:text-amber-400">
+                      <a
+                        href={`/dredge/review/${job.id}`}
+                        className="text-amber-500 hover:text-amber-400"
+                      >
                         Review
                       </a>
                     )}

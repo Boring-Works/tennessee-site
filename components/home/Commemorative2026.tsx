@@ -190,6 +190,11 @@ export function Commemorative2026({ stats, nextEvent }: Commemorative2026Props) 
     return () => observer.disconnect()
   }, [])
 
+  // Animated counters — must be called unconditionally (React hooks rule)
+  const animatedEventCount = useCountUp(stats.total, 1500, isVisible)
+  const animatedMiles = useCountUp(600, 1500, ledgerVisible)
+  const animatedYears = useCountUp(14, 1200, ledgerVisible)
+
   // Parse event date using UTC to avoid hydration mismatch between server/client
   // Use optional chaining just in case nextEvent is null (though logic should prevent it)
   if (!nextEvent) return null
@@ -198,11 +203,6 @@ export function Commemorative2026({ stats, nextEvent }: Commemorative2026Props) 
   const monthShort = eventDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })
   const dayNum = eventDate.getUTCDate()
   const year = eventDate.getUTCFullYear()
-
-  // Animated counters
-  const animatedEventCount = useCountUp(stats.total, 1500, isVisible)
-  const animatedMiles = useCountUp(600, 1500, ledgerVisible)
-  const animatedYears = useCountUp(14, 1200, ledgerVisible)
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">

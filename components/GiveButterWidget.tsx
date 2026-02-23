@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
-
 /**
  * GiveButter Widget Component
  *
@@ -10,9 +8,9 @@ import { useEffect } from 'react'
  */
 export function GiveButterWidget() {
   const openWidget = () => {
-    // @ts-ignore - GiveButter adds this to window
+    // @ts-expect-error - GiveButter adds this to window
     if (typeof window !== 'undefined' && window.givebutter) {
-      // @ts-ignore
+      // @ts-expect-error - GiveButter adds this to window
       window.givebutter('open')
     }
   }

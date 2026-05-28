@@ -29,9 +29,9 @@ const evidenceRoot: MetadataRoute.Sitemap = [
 ];
 
 const eventPages: MetadataRoute.Sitemap = eventsData.events
-  .filter((e: { slug?: string }) => e.slug)
-  .map((e: { slug: string; date: string }) => ({
-    url: `${baseUrl}/events/${e.slug}`,
+  .filter((e) => 'slug' in e && e.slug)
+  .map((e) => ({
+    url: `${baseUrl}/events/${String(e.slug)}`,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));

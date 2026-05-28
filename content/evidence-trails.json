@@ -1,0 +1,55 @@
+{
+  "trails": [
+    {
+      "id": "founding",
+      "title": "Where Tennessee Began",
+      "subtitle": "1790–1792",
+      "description": "The Southwest Territory was born at Rocky Mount. Follow the documents that trace this founding moment.",
+      "icon": "landmark",
+      "documents": [
+        {
+          "id": "southwest-territory-act-1790",
+          "title": "Southwest Territory Act",
+          "date": "1790-05-26",
+          "type": "legal",
+          "excerpt": "Congress establishes the Territory South of the River Ohio..."
+        }
+      ],
+      "cta": "Explore the Founding Trail"
+    },
+    {
+      "id": "blount-letters",
+      "title": "Governor Blount's Dispatches",
+      "subtitle": "1790–1795",
+      "description": "The official correspondence of Governor William Blount from his office at Rocky Mount.",
+      "icon": "mail",
+      "documents": [
+        {
+          "id": "blount-commission-1790",
+          "title": "Blount's Commission",
+          "date": "1790-06-08",
+          "type": "legal",
+          "excerpt": "Thomas Jefferson commissions William Blount as Governor..."
+        }
+      ],
+      "cta": "Read the Letters"
+    },
+    {
+      "id": "cherokee-treaty",
+      "title": "The Treaty Trail",
+      "subtitle": "1791–1798",
+      "description": "From the Treaty of Holston to the additional articles, the path of Cherokee-U.S. relations.",
+      "icon": "handshake",
+      "documents": [
+        {
+          "id": "treaty-holston-1791",
+          "title": "Treaty of Holston",
+          "date": "1791-07-02",
+          "type": "treaty",
+          "excerpt": "Perpetual peace and friendship between the United States and the Cherokee Nation..."
+        }
+      ],
+      "cta": "Walk the Treaty Trail"
+    }
+  ]
+}

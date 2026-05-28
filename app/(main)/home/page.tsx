@@ -9,7 +9,6 @@ import { MYSTERY_NARRATIVE, HOOKS, BUTTONS, FIRST_250_CAMPAIGN } from '@/lib/cop
 import siteInfo from '@/data/siteInfo.json'
 import testimonials from '@/data/testimonials.json'
 import eventsData from '@/data/events.json'
-import type { Event } from '@/lib/schemas/events'
 
 export const metadata: Metadata = {
   title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
@@ -27,9 +26,9 @@ export default function HomePage() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const nextEvent: Event | null =
+  const nextEvent =
     eventsData.events
-      .filter((event: Event) => {
+      .filter((event) => {
         const eventDate = new Date(event.date + 'T12:00:00')
         return eventDate >= today
       })

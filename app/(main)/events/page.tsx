@@ -21,33 +21,42 @@ export const metadata: Metadata = {
   },
 }
 
-// Month character lines - the personality of each month
+// Month character lines — evergreen, year-independent
 const monthCharacters: Record<string, string> = {
-  'March 2026': 'The journey begins',
-  'April 2026': 'Stories come alive',
-  'May 2026': 'The frontier awakens',
-  'June 2026': 'Tennessee celebrates 230',
-  'July 2026': 'America turns 250',
-  'August 2026': 'Honoring all who shaped this land',
-  'September 2026': 'Descendants gather',
-  'October 2026': 'Harvest and haunting',
-  'November 2026': 'Traditions begin',
-  'December 2026': 'The year closes by candlelight',
+  'March': 'The journey begins',
+  'April': 'Stories come alive',
+  'May': 'The frontier awakens',
+  'June': 'Tennessee celebrates statehood',
+  'July': 'America celebrates independence',
+  'August': 'Honoring all who shaped this land',
+  'September': 'Descendants gather',
+  'October': 'Harvest and haunting',
+  'November': 'Traditions begin',
+  'December': 'The year closes by candlelight',
 }
 
-// All months in order for the progress bar
-const allMonths = [
-  'March 2026',
-  'April 2026',
-  'May 2026',
-  'June 2026',
-  'July 2026',
-  'August 2026',
-  'September 2026',
-  'October 2026',
-  'November 2026',
-  'December 2026',
-]
+function getAllMonthsForYear(events: typeof eventsData.events): string[] {
+  const years = new Set<number>()
+  for (const e of events) {
+    const d = new Date(e.date + 'T12:00:00')
+    years.add(d.getUTCFullYear())
+  }
+  const year = years.size === 1 ? [...years][0] : new Date().getFullYear()
+  return [
+    `January ${year}`,
+    `February ${year}`,
+    `March ${year}`,
+    `April ${year}`,
+    `May ${year}`,
+    `June ${year}`,
+    `July ${year}`,
+    `August ${year}`,
+    `September ${year}`,
+    `October ${year}`,
+    `November ${year}`,
+    `December ${year}`,
+  ]
+}
 
 function groupEventsByMonth(
   events: typeof eventsData.events
@@ -114,6 +123,7 @@ const eventsBreadcrumbs = [
 
 export default function EventsPage() {
   const groupedEvents = groupEventsByMonth(eventsData.events)
+  const allMonths = getAllMonthsForYear(eventsData.events)
   const upcomingEvents = getUpcomingEvents(3)
 
   return (

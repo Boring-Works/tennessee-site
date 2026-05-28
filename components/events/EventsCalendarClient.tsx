@@ -155,7 +155,8 @@ export function EventsCalendarClient({
 
         {Object.entries(groupedEvents).map(([month, events]) => {
           const monthId = month.toLowerCase().replace(/\s+/g, '-')
-          const character = monthCharacters[month] || ''
+          const monthNameOnly = month.split(' ')[0] // e.g. "March 2026" → "March"
+          const character = monthCharacters[monthNameOnly] || ''
           const visibleEvents = events.filter((e) => filteredIds.has(e.id))
 
           // Skip months with no matching events

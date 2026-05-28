@@ -9,7 +9,6 @@ import { MYSTERY_NARRATIVE, HOOKS, BUTTONS, FIRST_250_CAMPAIGN } from '@/lib/cop
 import siteInfo from '@/data/siteInfo.json'
 import testimonials from '@/data/testimonials.json'
 import eventsData from '@/data/events.json'
-import type { Event } from '@/lib/schemas/events'
 
 export const metadata: Metadata = {
   title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
@@ -97,7 +96,7 @@ export default function HomePage() {
                   <span className="text-white/50 text-xs">TripAdvisor</span>
                 </div>
                 <span className="text-white/20">·</span>
-                <span className="text-white/60 text-xs">50,000+ visitors annually</span>
+                <span className="text-white/60 text-xs">{siteInfo.site.visitorsAnnual} visitors annually</span>
               </div>
 
               {/* CTA */}
@@ -109,7 +108,7 @@ export default function HomePage() {
                   {BUTTONS.primary}
                 </Link>
                 <span className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-medium">
-                  Opens March 4
+                  {siteInfo.hours.seasonNote}
                 </span>
               </div>
             </div>

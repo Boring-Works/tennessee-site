@@ -28,10 +28,11 @@ const evidenceRoot: MetadataRoute.Sitemap = [
   { url: `${baseUrl}/evidence/timeline`, changeFrequency: "monthly", priority: 0.7 },
 ];
 
-const eventPages: MetadataRoute.Sitemap = eventsData.events
-  .filter((e) => 'slug' in e && e.slug)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const eventPages: MetadataRoute.Sitemap = (eventsData.events as any[])
+  .filter((e) => e.slug)
   .map((e) => ({
-    url: `${baseUrl}/events/${String(e.slug)}`,
+    url: `${baseUrl}/events/${e.slug}`,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));

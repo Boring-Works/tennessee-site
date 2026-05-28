@@ -242,10 +242,10 @@
 
   /* Typography */
   --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: var(--font-merriweather), var(--font-eb-garamond), var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-serif: var(--font-playfair), Georgia, 'Times New Roman', serif;
   --font-serif-elegant: var(--font-cormorant), Georgia, 'Times New Roman', serif;
-  --font-display: var(--font-eb-garamond), var(--font-playfair), Georgia, 'Times New Roman', serif;
-  --font-script: var(--font-script), 'Brush Script MT', cursive;
+  --font-display: var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-script: 'Brush Script MT', 'Edwardian Script ITC', cursive;
 
   /* Almanac theme colors */
   --color-midnight: var(--midnight);

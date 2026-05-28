@@ -29,7 +29,7 @@ interface Trail {
   cta: string
 }
 
-const TRAILS: Trail[] = trailsData as Trail[]
+const TRAILS: Trail[] = (trailsData as unknown as { trails: Trail[] }).trails
 
 /**
  * Get CSS class for document type

@@ -27,17 +27,13 @@ export default function HomePage() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  // Use type assertion or simple logic since we're in server component
-  const nextEvent =
-    (eventsData.events
-      .filter((event) => {
-        // Ensure date is treated as local date or consistent
-        // The JSON dates are YYYY-MM-DD.
-        // We want to find the first event where date >= today.
-        const eventDate = new Date(event.date + 'T12:00:00') // Force noon to avoid timezone shift issues
+  const nextEvent: Event | null =
+    eventsData.events
+      .filter((event: Event) => {
+        const eventDate = new Date(event.date + 'T12:00:00')
         return eventDate >= today
       })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] as Event) || null
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] ?? null
 
   return (
     <main className="min-h-screen">

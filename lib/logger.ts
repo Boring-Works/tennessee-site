@@ -50,17 +50,13 @@ class Logger {
   }
 
   /**
-   * Error level logging - errors and failures
-   * Note: In production, this could be extended to send to error tracking service
+   * Error level logging — always logs to stderr. Never swallows production errors.
    */
   error(message: string, error?: unknown): void {
-    if (this.isDev) {
-      console.error(`[ERROR] ${message}`, error ?? '')
-    }
-    // Future: Send to error tracking service (e.g., Sentry)
-    // if (!this.isDev && error) {
-    //   captureException(error)
-    // }
+    // Always log errors (production → vercel logs, dev → terminal)
+    console.error(`[ERROR] ${message}`, error ?? '')
+
+    // Future: if (!this.isDev) sendToSentry(error)
   }
 }
 

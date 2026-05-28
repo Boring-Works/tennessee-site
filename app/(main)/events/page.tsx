@@ -183,7 +183,7 @@ export default function EventsPage() {
                           ? 'Free'
                           : 'pricing' in item.event &&
                               item.event.pricing &&
-                              item.event.pricing.adult
+                              item.event.pricing.adult != null
                             ? `From ${formatPrice(item.event.pricing.adult)}`
                             : 'Ticketed'}
                       </span>

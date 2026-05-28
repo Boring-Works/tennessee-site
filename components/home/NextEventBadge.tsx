@@ -2,10 +2,9 @@
 
 import { Calendar } from 'lucide-react'
 import Link from 'next/link'
-import type { Event } from '@/lib/schemas/events'
 
 interface NextEventBadgeProps {
-  nextEvent: Event | null
+  nextEvent: { id: string; title: string; date: string; endDate: string | null } | null
 }
 
 /**

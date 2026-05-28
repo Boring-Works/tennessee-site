@@ -9,6 +9,7 @@ import { MYSTERY_NARRATIVE, HOOKS, BUTTONS, FIRST_250_CAMPAIGN } from '@/lib/cop
 import siteInfo from '@/data/siteInfo.json'
 import testimonials from '@/data/testimonials.json'
 import eventsData from '@/data/events.json'
+import type { Event } from '@/lib/schemas/events'
 
 export const metadata: Metadata = {
   title: "Where Tennessee's Government Began | Rocky Mount State Historic Site",
